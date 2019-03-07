@@ -9,13 +9,15 @@ import { UserModel } from '../../models/UserModel';
 import { AuthService } from '../../services/auth.service';
 import { MyLocalStorageService } from '../../services/my-local-storage.service';
 import { Constants } from '../../Constants/Constants';
+import { CanComponentDeactivate } from '../../guards/login-guard.guard';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit, ApiResponseCallback {
+export class LoginComponent implements OnInit, ApiResponseCallback, CanComponentDeactivate {
+
 
   loginForm: FormGroup;
   username: string = "";
@@ -40,6 +42,12 @@ export class LoginComponent implements OnInit, ApiResponseCallback {
 
   checkValue(event) {
     this.commonFunctions.printLog(event, true);
+  }
+  canDeactivate() {
+    if (this.myLocalStorage.getValue(this.constants.EMAIL)) {
+      return true;
+    }
+    return false;
   }
 
   onSubmit() {

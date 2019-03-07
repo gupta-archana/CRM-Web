@@ -7,6 +7,8 @@ import { Subscription } from 'rxjs';
 import { CommonFunctionsService } from '../../../utils/common-functions.service';
 import { Constants } from '../../../Constants/Constants';
 import * as paths from '../../../Constants/paths';
+import { CanComponentDeactivate } from '../../../guards/login-guard.guard';
+import { MyLocalStorageService } from '../../../services/my-local-storage.service';
 
 @Component({
   selector: 'app-navigation-drawer',
@@ -15,6 +17,7 @@ import * as paths from '../../../Constants/paths';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavigationDrawerComponent implements OnInit, OnDestroy {
+
 
   sideNavArray = [];
   headerTitle: string = "";
@@ -25,6 +28,7 @@ export class NavigationDrawerComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private commonFunctions: CommonFunctionsService,
     public router: Router,
+    private myLocalStorage: MyLocalStorageService,
     public constants: Constants) { }
 
   ngOnInit() {
@@ -53,7 +57,7 @@ export class NavigationDrawerComponent implements OnInit, OnDestroy {
     if (this.activatedRouteSubscription && !this.activatedRouteSubscription.closed)
       this.activatedRouteSubscription.unsubscribe();
   }
-
+  
 }
 function getSideNavData(self: NavigationDrawerComponent) {
   self.apiHandler.getSideNavJson({

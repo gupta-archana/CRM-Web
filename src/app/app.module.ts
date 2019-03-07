@@ -5,6 +5,7 @@ import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule, ToastNoAnimation, ToastNoAnimationModule } from 'ngx-toastr';
+import { LoginGuardGuard } from './guards/login-guard.guard';
 import { SidebarModule } from 'ng-sidebar';
 import { UrlSerializer } from '@angular/router';
 import { LowerCaseUrlSerializer } from './utils/LowerCaseUrlSerializer';
@@ -55,7 +56,7 @@ import { ForgotPasswordComponent } from './views/forgot-password/forgot-password
   providers: [Constants, ApiService, {
     provide: UrlSerializer,
     useClass: LowerCaseUrlSerializer
-  }],
+  }, LoginGuardGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
