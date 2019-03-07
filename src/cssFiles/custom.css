@@ -1,0 +1,26 @@
+.blue-snackbar {
+  background: black;
+  color: white;
+}
+
+.red-snackbar {
+  background: red;
+  color: white;
+}
+
+#toast-container>div {
+  opacity: 1;
+}
+
+.bottom-wrapper {
+  width: 100%;
+  padding-top: 60px;
+  z-index: 5;
+  overflow: auto;
+}
+
+.wrapper {
+  width: 100%;
+  position: fixed;
+  z-index: 10;
+}

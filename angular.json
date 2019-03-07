@@ -23,18 +23,25 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "./src/cssFiles/bootstrap.css",
+              "./node_modules/ngx-toastr/toastr.css",
+              "./src/cssFiles/style.css",
+              "./src/cssFiles/custom.css",
+              "./src/cssFiles/google_fonts.css",
+              "./src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "./src/js/jquery-3.2.1.min.js",
+              "node_modules/popper.js/dist/umd/popper.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
           },
           "configurations": {
             "production": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
+              "fileReplacements": [{
+                "replace": "src/environments/environment.ts",
+                "with": "src/environments/environment.prod.ts"
+              }],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -77,7 +84,8 @@
             "scripts": [],
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/images"
             ]
           }
         },

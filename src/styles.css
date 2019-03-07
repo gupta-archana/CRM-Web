@@ -1,1 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: glyphicons;
+  src: url(./assets/fonts/glyphicons-halflings-regular.woff) format('woff'),
+    url(./assets/fonts/glyphicons-halflings-regular.woff2) format('woff2');
+}

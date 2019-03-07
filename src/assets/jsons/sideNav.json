@@ -1,0 +1,37 @@
+[{
+    "title": "Top Agents",
+    "class": "top-agent"
+  },
+  {
+    "title": "Agents Under Plan",
+    "class": "agent-plan"
+  },
+  {
+    "title": "Agents with Alerts",
+    "class": "agent-alert"
+  },
+  {
+    "title": "Agents Performance",
+    "class": "agent-performance"
+  },
+  {
+    "title": "News",
+    "class": "agent-news"
+  },
+  {
+    "title": "Anniversary",
+    "class": "agent-anniversary"
+  },
+  {
+    "title": "Favourite",
+    "class": "agent-fav"
+  },
+  {
+    "title": "Search",
+    "class": "agent-search"
+  },
+  {
+    "title": "Recent Profiles",
+    "class": "agent-profile"
+  }
+]

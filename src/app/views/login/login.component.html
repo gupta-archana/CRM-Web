@@ -1,0 +1,47 @@
+<div class="bg">
+  <div class="container-fluid">
+    <div class="container">
+      <header>
+        <div class="row">
+          <div class="col-md-4 col-xs-12 text-center">
+            <h1 class="logo"><img src="/src/images/logo.png" class="img-reponsive" alt="" /><br><img src="/src/images/Compass.png"
+                class="img-reponsive" alt="" /></h1>
+          </div>
+        </div>
+      </header>
+    </div>
+
+    <div class="container app-bg">
+      <div class="row">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+          <div class="col-md-4 col-xs-12 box1">
+            <label for="Username">Username</label>
+            <div class="input-group">
+              <input type="email" placeholder="Email Address" formControlName="email" class="form-control" id="username">
+            </div>
+          </div>
+
+          <div class="col-md-4 col-xs-12 box1">
+            <label for="Password">Password</label>
+            <div class="input-group">
+              <input type="password" placeholder="Password" class="form-control" formControlName="password" id="password">
+            </div>
+          </div>
+
+          <div class="col-md-4 col-xs-12 box1">
+            <div class="form-check remember">
+              <input type="checkbox" class="form-check-input" id="rememberme" formControlName="isChecked" (change)="checkValue(isChecked)">
+              <label class="form-check-label" for="rememberme">Remember me</label>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg btn-login">Login</button>
+            <div class="clearfix"></div>
+            <div class="divider"></div>
+            <div class="forgotpass text-center"><a href="../forgot-password">Forgot your password?</a></div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

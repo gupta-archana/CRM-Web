@@ -1,0 +1,39 @@
+<div class="container-fluid nospace">
+  <div class="container nav-bg wrapper">
+    <div class="row">
+      <div class="col-xs-2 toppad"> <span class="menu-icon" (click)="openNav()">&#9776;</span></div>
+      <div class="col-xs-8 text-center">
+        <h1 class="t-agent">{{headerTitle}}</h1>
+      </div>
+      <div class="col-xs-2 text-right toppad"><img src="/src/images/refresh.svg" alt=""></div>
+    </div>
+
+    <div id="mySidenav" class="sidenav">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-5"> <a href="javascript:void(0)" class="closebtn" (click)="closeNav()"><img src="/src/images/close.svg"
+                alt=""></a></div>
+          <div class="col-xs-7 pro-n-setting"><a href="#"><img src="/src/images/dp2.png" class="img-circle" width="24"
+                height="24" alt="" /> Profile & Settings</a></div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-1"></div>
+          <div class="col-xs-10 divider"></div>
+          <div class="col-xs-1"></div>
+        </div>
+      </div>
+
+      <ul class="slide-menu">
+        <div *ngFor="let item of sideNavArray" (click)="onNavigationItemClick(item.title)">
+          <li class="{{item.class}}"><a>{{item.title}}</a></li>
+        </div>
+      </ul>
+    </div>
+
+  </div>
+  <div class="bottom-wrapper">
+    <router-outlet></router-outlet>
+  </div>
