@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { AgentInfoModel } from 'src/app/models/TopAgentsModel';
+import { CommonFunctionsService } from 'src/app/utils/common-functions.service';
+import { Router } from '@angular/router';
+import { MyLocalStorageService } from 'src/app/services/my-local-storage.service';
+import { Constants } from 'src/app/Constants/Constants';
 
 @Component({
   selector: 'app-top-agents',
@@ -7,9 +12,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopAgentsComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private commonFunctions: CommonFunctionsService,
+    private router: Router,
+    private myLocalStorage: MyLocalStorageService,
+    private constants: Constants) { }
+  topAgents: Array<AgentInfoModel> = [];
   ngOnInit() {
+
+    this.addAgents();
   }
 
+  onAgentClick(agent: AgentInfoModel) {
+    this.commonFunctions.printLog(agent, true);
+    this.router.navigate(["agentDetail"]);
+    this.myLocalStorage.setValue(this.constants.AGENT_INFO, JSON.stringify(agent));
+  
+  }
+
+
+  private addAgents() {
+    for (let index = 0; index < 10; index++) {
+      var topagentModel: AgentInfoModel = new AgentInfoModel();
+      topagentModel.agentImg = "/src/images/placeholder.png";
+      topagentModel.agentAddress = "Las Vegas, NV";
+      topagentModel.agentName = "NETCO. Inc";
+      topagentModel.agentNetPremium = "$15,595 (93%)";
+      this.topAgents.push(topagentModel);
+    }
+  }
 }

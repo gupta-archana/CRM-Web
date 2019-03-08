@@ -13,6 +13,7 @@ import { CommonFunctionsService } from './common-functions.service';
 export class UtilService {
   exit: boolean = false;
   called: boolean = false;
+  functionCalled: any;
   constructor(private location: PlatformLocation,
     private activeRoute: ActivatedRoute,
     private commonFunctions: CommonFunctionsService) { }
@@ -20,25 +21,36 @@ export class UtilService {
   handleBackpressEvent() {
     history.pushState(null, null, location.href);
     var self = this;
-    window.addEventListener("popstate", function () {
-      if (self.activeRoute.firstChild.component == NavigationDrawerComponent || self.activeRoute.firstChild.component == LoginComponent) {
-        if (!self.called) {
-          self.called = true;
-          if (self.exit) {
-            self.exit = !self.exit;
-            for (let i = 0; i < history.length; i++) {
-              self.location.back();
-            }
-          }
-          else {
-            self.onFirstBackClick(self);
+    this.functionCalled = this.onPopState.bind(this);
+    window.addEventListener("popstate", this.functionCalled, true);
+  }
+
+  removeBackpressEventListener() {
+    window.removeEventListener("popstate", this.functionCalled, true);
+  }
+
+  private onPopState(ev: PopStateEvent) {
+    var self = this;
+    ev.preventDefault();
+    //if (ev.state) {
+    if (self.activeRoute.firstChild.component == NavigationDrawerComponent || self.activeRoute.firstChild.component == LoginComponent) {
+      if (!self.called) {
+        self.called = true;
+        if (self.exit) {
+          self.exit = !self.exit;
+          for (let i = 0; i < history.length; i++) {
+            self.location.back();
           }
         }
         else {
-          self.called = false;
+          self.onFirstBackClick(self);
         }
       }
-    }, true);
+      else {
+        self.called = false;
+      }
+    }
+    //  }
   }
 
   private onFirstBackClick(self: this) {

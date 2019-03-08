@@ -5,14 +5,16 @@ import { PageNotFoundComponent } from './views/page-not-found/page-not-found.com
 import { LoginComponent } from './views/login/login.component';
 import { ForgotPasswordComponent } from './views/forgot-password/forgot-password.component';
 import { LoginGuardGuard } from './guards/login-guard.guard';
+import * as paths from './Constants/paths';
+import { AgentDetailComponent } from './views/agent/agent-detail/agent-detail.component';
 
 
 const appRoutesArray: Routes =
     [
         { path: '', component: AppComponent },
-        { path: 'login', component: LoginComponent, canDeactivate: [LoginGuardGuard] },
+        { path: paths.PATH_LOGIN, component: LoginComponent, canDeactivate: [LoginGuardGuard] },
         { path: '', redirectTo: '', pathMatch: 'full' },
-        { path: 'forgot-password', component: ForgotPasswordComponent },
+        { path: paths.PATH_FORGOT_PASSWORD, component: ForgotPasswordComponent },
         { path: '**', component: PageNotFoundComponent }
 
     ];

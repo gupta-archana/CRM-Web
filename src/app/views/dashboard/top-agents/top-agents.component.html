@@ -1,6 +1,21 @@
 <div class="container app-bg2">
   <div class="row">
-    <div class="col-xs-12 col-md-6 cell-bg">
+    <ul>
+      <li *ngFor="let item of topAgents" (click)="onAgentClick(item)">
+        <div class="col-xs-12 col-md-6 cell-bg">
+          <div class="agent-detail">
+            <div class="dp"><img src={{item.agentImg}} alt="" /></div>
+            <h4>{{item.agentName}}</h4> <span>{{item.agentAddress}}</span>
+            <div class="clearfix"></div>
+            <div class="amount"><span>Net Premium</span><br>{{item.agentNetPremium}}</div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- <div class="col-xs-12 col-md-6 cell-bg">
       <div class="agent-detail">
         <div class="dp"><img src="/src/images/placeholder.png" alt="" /></div>
         <h4>NETCO. Inc</h4> <span>Las Vegas, NV</span>
@@ -40,4 +55,4 @@
         <div class="amount"><span>Net Premium</span><br>$15,595 (93%)</div>
       </div>
     </div>
-  </div>
+  </div> -->

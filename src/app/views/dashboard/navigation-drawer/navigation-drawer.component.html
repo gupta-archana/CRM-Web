@@ -35,5 +35,5 @@
 
   </div>
   <div class="bottom-wrapper">
-    <router-outlet></router-outlet>
+    <router-outlet (pageNameEvent)="receivePageName($event)"></router-outlet>
   </div>

@@ -1,14 +1,12 @@
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { ApiHandlerService } from '../../../utils/api-handler.service';
-import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
-import { TopAgentsComponent } from '../top-agents/top-agents.component';
-import { AgentWithAlertComponent } from '../agent-with-alert/agent-with-alert.component';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CommonFunctionsService } from '../../../utils/common-functions.service';
 import { Constants } from '../../../Constants/Constants';
 import * as paths from '../../../Constants/paths';
-import { CanComponentDeactivate } from '../../../guards/login-guard.guard';
 import { MyLocalStorageService } from '../../../services/my-local-storage.service';
+import { DataServiceService } from 'src/app/services/data-service.service';
 
 @Component({
   selector: 'app-navigation-drawer',
@@ -22,6 +20,7 @@ export class NavigationDrawerComponent implements OnInit, OnDestroy {
   sideNavArray = [];
   headerTitle: string = "";
   activatedRouteSubscription: Subscription = null;
+  currentPagePathSubscription: Subscription = null;
 
   constructor(public apiHandler: ApiHandlerService,
     public changeDetector: ChangeDetectorRef,
@@ -29,13 +28,17 @@ export class NavigationDrawerComponent implements OnInit, OnDestroy {
     private commonFunctions: CommonFunctionsService,
     public router: Router,
     private myLocalStorage: MyLocalStorageService,
-    public constants: Constants) { }
+    public constants: Constants,
+    private dataService: DataServiceService) { }
 
   ngOnInit() {
     let self = this;
     getSideNavData(self);
     this.activatedRouteSubscription = this.activatedRoute.paramMap.subscribe(url => {
       changeHeaderTitle(this.activatedRoute.firstChild.routeConfig.path, this);
+    });
+    this.currentPagePathSubscription = this.dataService.currentPagePathObservable.subscribe(path => {
+      changeHeaderTitle(path, this);
     });
 
   }
@@ -57,7 +60,7 @@ export class NavigationDrawerComponent implements OnInit, OnDestroy {
     if (this.activatedRouteSubscription && !this.activatedRouteSubscription.closed)
       this.activatedRouteSubscription.unsubscribe();
   }
-  
+
 }
 function getSideNavData(self: NavigationDrawerComponent) {
   self.apiHandler.getSideNavJson({
@@ -70,7 +73,6 @@ function getSideNavData(self: NavigationDrawerComponent) {
 }
 
 function navigateToSelectedPage(title: string, context: NavigationDrawerComponent) {
-  //changeHeaderTitle(title, context);
   let selectedNavBarItemPath = "";
   switch (title) {
     case context.constants.TOP_AGENTS:
@@ -83,7 +85,6 @@ function navigateToSelectedPage(title: string, context: NavigationDrawerComponen
       break;
     case context.constants.AGENTS_WITH_PERFORMANCE:
       selectedNavBarItemPath = paths.PATH_AGENTS_WITH_PERFORMANCE;
-
       break;
     default:
       break;
@@ -104,6 +105,9 @@ function changeHeaderTitle(path: string, context: NavigationDrawerComponent) {
         break;
       case paths.PATH_AGENTS_WITH_PERFORMANCE:
         context.headerTitle = context.constants.AGENTS_WITH_PERFORMANCE;
+        break;
+      case paths.PATH_AGENT_DETAIL:
+        context.headerTitle = context.constants.AGENT_DETAIL;
         break;
       default:
         break;

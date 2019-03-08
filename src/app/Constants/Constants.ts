@@ -8,8 +8,9 @@ export class Constants {
     EMAIL = "email";
     PASSWORD = "password";
     REMEMBER_ME = "remeberMe";
+    AGENT_INFO = "agentnfo";
     // Error Messages
-   
+
     ERROR_NO_INTERNET_CONNECTON = "Kindly check your internet connection";
 
 
@@ -24,5 +25,8 @@ export class Constants {
     FAVOURITE = "Favourite";
     SEARCH = "Search";
     RECENT_PROFILE = "Recent Profiles";
+
+    // agent pages
+    AGENT_DETAIL = "Agent Details";
 
 }

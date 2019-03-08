@@ -40,6 +40,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.utils.handleBackpressEvent();
+    window.onbeforeunload = ev => {
+      console.log(ev);
+      this.utils.removeBackpressEventListener();
+    }
     registerHideShowLoaderBroadcast(this);
   }
 

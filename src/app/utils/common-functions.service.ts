@@ -18,20 +18,12 @@ export class CommonFunctionsService {
 
   showSnackbar(message: string) {
     this.toastr.success(message);
-    // this.snackBar.open(message, null, {
-    //   duration: 4000,
-    //   panelClass: ['blue-snackbar'],
-    //   verticalPosition: 'top'
-    // });
+
   }
 
   showErrorSnackbar(message: string) {
     this.toastr.error(message);
-    // this.snackBar.open(message, null, {
-    //   duration: 2000,
-    //   panelClass: ['red-snackbar'],
-    //   verticalPosition: 'top'
-    // });
+
   }
   getEncryptedPassword(pUnencrypted: string) {
     //pUnencrypted = "TestingPassword"
@@ -90,6 +82,8 @@ export class CommonFunctionsService {
     return encryptedString;
 
   }
+
+
 }
 function getRandomInt(min, max) {
   min = Math.ceil(min);

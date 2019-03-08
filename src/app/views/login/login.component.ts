@@ -10,6 +10,8 @@ import { AuthService } from '../../services/auth.service';
 import { MyLocalStorageService } from '../../services/my-local-storage.service';
 import { Constants } from '../../Constants/Constants';
 import { CanComponentDeactivate } from '../../guards/login-guard.guard';
+import { Router } from '@angular/router';
+import { RoutingStateService } from 'src/app/services/routing-state.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +19,6 @@ import { CanComponentDeactivate } from '../../guards/login-guard.guard';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit, ApiResponseCallback, CanComponentDeactivate {
-
 
   loginForm: FormGroup;
   username: string = "";
@@ -31,13 +32,22 @@ export class LoginComponent implements OnInit, ApiResponseCallback, CanComponent
     private dataService: DataServiceService,
     private loginParser: LoginParserService,
     private myLocalStorage: MyLocalStorageService,
-    private constants: Constants) {
+    private constants: Constants,
+    private router: Router,
+    private routingState: RoutingStateService) {
 
 
   }
 
   ngOnInit() {
-    this.addValidation();
+    if (this.myLocalStorage.getValue(this.constants.EMAIL)) {
+      this.routingState.loadRouting();
+      console.log(this.routingState.getPreviousUrl());
+
+      this.router.navigate([''], { replaceUrl: true });
+    } else {
+      this.addValidation();
+    }
   }
 
   checkValue(event) {
