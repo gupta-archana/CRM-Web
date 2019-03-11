@@ -25,6 +25,7 @@
     "@ng-bootstrap/ng-bootstrap": "^4.0.4",
     "bootstrap": "^4.3.1",
     "core-js": "^2.5.4",
+    "history": "^4.7.2",
     "jquery": "^3.3.1",
     "ng-sidebar": "^8.0.0",
     "ngx-bootstrap": "^3.3.0",

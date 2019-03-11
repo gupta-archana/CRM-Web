@@ -5,6 +5,8 @@ import { AgentInfoModel } from 'src/app/models/TopAgentsModel';
 import * as paths from 'src/app/Constants/paths';
 import { Constants } from 'src/app/Constants/Constants';
 import { MyLocalStorageService } from 'src/app/services/my-local-storage.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-agent-detail',
@@ -18,7 +20,8 @@ export class AgentDetailComponent implements OnInit, OnDestroy {
 
   constructor(private dataService: DataServiceService,
     private constants: Constants,
-    private myLocalStorage: MyLocalStorageService) {
+    private myLocalStorage: MyLocalStorageService,
+    private router: Router) {
 
 
   }
@@ -27,7 +30,9 @@ export class AgentDetailComponent implements OnInit, OnDestroy {
     this.agentInfo = JSON.parse(this.myLocalStorage.getValue(this.constants.AGENT_INFO));
     this.dataService.sendCurrentPagePath(paths.PATH_AGENT_DETAIL);
   }
-
+  contactDetailClick() {
+    this.router.navigate([paths.PATH_AGENT_CONTACT_DETAIL]);
+  }
   ngOnDestroy(): void {
 
   }

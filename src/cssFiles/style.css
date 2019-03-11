@@ -2,579 +2,629 @@
 /* CSS Document */
 
 * {
-    transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
 }
 
 body {
-    font-family: 'Open Sans', sans-serif;
-    padding: 0;
-    margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  padding: 0;
+  margin: 0;
 }
 
 .bg {
-    padding: 0;
-    margin: 0;
-    background: #045395 url(../images/bg-art.png) no-repeat left bottom;
+  padding: 0;
+  margin: 0;
+  background: #045395 url(../images/bg-art.png) no-repeat left bottom;
 }
 
 h1 a:link,
 a:link {
-    color: #fff;
-    text-decoration: none;
+  color: #fff;
+  text-decoration: none;
 }
 
 h1.logo {
-    margin: 49px 0px 43px 0px;
+  margin: 49px 0px 43px 0px;
 }
 
 label {
-    color: #fff;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 16px;
-    font-weight: bold;
+  color: #fff;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 input {
-    font-size: 12px;
-    color: #000;
+  font-size: 12px;
+  color: #000;
 }
 
 .app-bg {
-    min-height: 470px;
+  min-height: 470px;
 }
 
 .box1 input[type="email"] {
-    background: #fff url(../images/username.svg) no-repeat left;
-    background-position: 6px;
-    padding: 20px 0px 20px 35px;
-    min-width: 311px;
-    height: 50px;
-    margin-bottom: 32px;
-    font-size: 12px;
-    color: #000;
+  background: #fff url(../images/username.svg) no-repeat left;
+  background-position: 6px;
+  padding: 20px 0px 20px 35px;
+  min-width: 311px;
+  height: 50px;
+  margin-bottom: 32px;
+  font-size: 12px;
+  color: #000;
 }
 
 .box1 input[type="password"] {
-    background: #fff url(../images/password.svg) no-repeat;
-    background-position: 6px;
-    padding: 20px 0px 20px 35px;
-    min-width: 311px;
-    height: 50px;
-    font-size: 12px;
-    color: #000;
+  background: #fff url(../images/password.svg) no-repeat;
+  background-position: 6px;
+  padding: 20px 0px 20px 35px;
+  min-width: 311px;
+  height: 50px;
+  font-size: 12px;
+  color: #000;
 }
 
 .box2 input[type="email"] {
-    background: #fff url(../images/mail.svg) no-repeat left;
-    background-position: 6px;
-    padding: 20px 0px 20px 35px;
-    min-width: 311px;
-    height: 50px;
-    margin-bottom: 32px;
-    font-size: 12px;
-    color: #000;
+  background: #fff url(../images/mail.svg) no-repeat left;
+  background-position: 6px;
+  padding: 20px 0px 20px 35px;
+  min-width: 311px;
+  height: 50px;
+  margin-bottom: 32px;
+  font-size: 12px;
+  color: #000;
 }
 
 .box2 p {
-    padding: 10px 0px 20px;
-    color: #fff;
-    font-size: 14px;
+  padding: 10px 0px 20px;
+  color: #fff;
+  font-size: 14px;
 }
 
 button.btn-login {
-    width: 311px;
-    text-transform: uppercase;
-    height: 50px;
+  width: 311px;
+  text-transform: uppercase;
+  height: 50px;
 }
 
 .btn-login,
 .btn-login:focus,
 .btn-login:hover {
-    background: #F68933;
-    color: #fff;
-    width: 240px;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 30px;
-    min-width: 311px;
+  background: #F68933;
+  color: #fff;
+  width: 240px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 30px;
+  min-width: 311px;
 }
 
 form input[type="checkbox"] {
-    background: #045395;
+  background: #045395;
 }
 
 .remember label {
-    font-weight: normal;
-    font-size: 14px;
+  font-weight: normal;
+  font-size: 14px;
 }
 
 .divider {
-    background: #045395;
+  background: #045395;
 }
 
 .forgotpass {
-    text-align: left;
-    padding: 10px;
-    color: #fff;
+  text-align: left;
+  padding: 10px;
+  color: #fff;
 }
 
 .app-bg2 {
-    background: #F2F2F2;
-    padding: 25px;
+  background: #F2F2F2;
+  padding: 25px;
 }
 
 .cell-bg {
-    background: #fff;
-    border: 1px solid #ddd;
-    box-shadow: 0px 1px 2px #dadada;
+  background: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0px 1px 2px #dadada;
 }
 
 .agent-detail {
-    background: url(../images/star.svg) no-repeat right top;
+  background: url(../images/star.svg) no-repeat right top;
 }
 
 .agent-detail h4 {
-    font-size: 14px;
-    font-weight: bold;
-    color: #000;
-    padding: 0px;
-    margin: 5px 0px 0px 0px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #000;
+  padding: 0px;
+  margin: 5px 0px 0px 0px;
 }
 
 .agent-detail span {
-    font-size: 12px;
-    font-weight: normal;
-    color: #000;
+  font-size: 12px;
+  font-weight: normal;
+  color: #000;
 }
 
 .dp {
-    border: 1px solid #e4e4e4;
-    background: #eee;
-    border-radius: 30px;
-    width: 46px;
-    height: 46px;
-    text-align: center;
-    float: left;
-    padding-top: 7px;
-    margin-right: 10px;
+  border: 1px solid #e4e4e4;
+  background: #eee;
+  border-radius: 30px;
+  width: 46px;
+  height: 46px;
+  text-align: center;
+  float: left;
+  padding-top: 7px;
+  margin-right: 10px;
 }
 
 .amount {
-    margin-top: 10px;
-    color: #36B700;
-    font-weight: bold;
+  margin-top: 10px;
+  color: #36B700;
+  font-weight: bold;
 }
 
 .amount span {
-    font-size: 12px;
-    color: #000;
+  font-size: 12px;
+  color: #000;
 }
 
 .nav-bg {
-    margin-bottom: 0px;
-    background: #045395;
-    height: 64px;
+  margin-bottom: 0px;
+  background: #045395;
+  height: 64px;
 }
 
 .sidenav {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #F2F2F2;
-    overflow-x: hidden;
-    transition: 0.3s;
-    padding-top: 60px;
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #F2F2F2;
+  overflow-x: hidden;
+  transition: 0.3s;
+  padding-top: 60px;
 }
 
 .sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #000;
-    display: block;
-    transition: 0.3s;
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #000;
+  display: block;
+  transition: 0.3s;
 }
 
 .sidenav a:hover {
-    color: #000;
+  color: #000;
 }
 
 .menu-icon {
-    font-size: 20px;
-    cursor: pointer;
-    color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  color: #fff;
 }
 
 .sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    left: 5px;
+  position: absolute;
+  top: 0;
+  left: 5px;
 }
 
 ul.slide-menu {
-    list-type: none;
-    padding-top: 40px;
+  list-type: none;
+  padding-top: 40px;
 }
 
 ul.slide-menu li {
-    list-type: none;
-    list-style-type: none;
-    line-height: 26px;
+  list-type: none;
+  list-style-type: none;
+  line-height: 26px;
 }
 
 ul.slide-menu li a {
-    font-size: 15px;
-    color: #000;
+  font-size: 15px;
+  color: #000;
 }
 
 ul.slide-menu li.top-agent a {
-    background: url(../images/top-agents.svg) no-repeat left;
-    padding-left: 45px;
+  background: url(../images/top-agents.svg) no-repeat left;
+  padding-left: 45px;
 }
 
 ul.slide-menu li.agent-plan a {
-    background: url(../images/agent-plan.svg) no-repeat left;
-    padding-left: 45px;
+  background: url(../images/agent-plan.svg) no-repeat left;
+  padding-left: 45px;
 }
 
 ul.slide-menu li.agent-alert a {
-    background: url(../images/agent-alert.svg) no-repeat left;
-    padding-left: 45px;
+  background: url(../images/agent-alert.svg) no-repeat left;
+  padding-left: 45px;
 }
 
 ul.slide-menu li.agent-performance a {
-    background: url(../images/agent-performanace.svg) no-repeat left;
-    padding-left: 45px;
+  background: url(../images/agent-performanace.svg) no-repeat left;
+  padding-left: 45px;
 }
 
 ul.slide-menu li.agent-news a {
-    background: url(../images/news.svg) no-repeat left;
-    padding-left: 45px;
+  background: url(../images/news.svg) no-repeat left;
+  padding-left: 45px;
 }
 
 ul.slide-menu li.agent-anniversary a {
-    background: url(../images/anniversary.svg) no-repeat left;
-    padding-left: 45px;
+  background: url(../images/anniversary.svg) no-repeat left;
+  padding-left: 45px;
 }
 
 ul.slide-menu li.agent-fav a {
-    background: url(../images/fav.svg) no-repeat left;
-    padding-left: 45px;
+  background: url(../images/fav.svg) no-repeat left;
+  padding-left: 45px;
 }
 
 ul.slide-menu li.agent-search a {
-    background: url(../images/search.svg) no-repeat left;
-    padding-left: 45px;
+  background: url(../images/search.svg) no-repeat left;
+  padding-left: 45px;
 }
 
 ul.slide-menu li.agent-profile a {
-    background: url(../images/recent-profiles.svg) no-repeat left;
-    padding-left: 45px;
+  background: url(../images/recent-profiles.svg) no-repeat left;
+  padding-left: 45px;
 }
 
 .pro-n-setting a {
-    font-size: 14px;
-    white-space: nowrap;
-    text-align: left;
-    padding-left: 0px;
+  font-size: 14px;
+  white-space: nowrap;
+  text-align: left;
+  padding-left: 0px;
 }
 
 .divider {
-    height: 1px;
-    background: #c2c2c2;
+  height: 1px;
+  background: #c2c2c2;
 }
 
 .toppad {
-    padding-top: 18px;
+  padding-top: 18px;
+}
+
+.tpad {
+  padding-top: 9px;
 }
 
 h1.t-agent {
-    font-size: 18px;
-    font-weight: bold;
-    color: #fff;
-    white-space: nowrap;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  white-space: nowrap;
 }
 
 .ag-alert .amount,
 .ag-perform .amount {
-    width: 50%;
-    float: left;
+  width: 50%;
+  float: left;
 }
 
 .ag-alert .alerts,
 .ag-perform .alerts {
-    width: 50%;
-    float: left;
-    margin-top: 10px;
+  width: 50%;
+  float: left;
+  margin-top: 10px;
 }
 
 .ag-alert .amount span,
 .ag-alert .alerts span {
-    color: #7f7f7f;
+  color: #7f7f7f;
 }
 
 .alerts span.red {
-    font-size: 14px;
-    font-weight: bold;
-    color: #FF2E16;
+  font-size: 14px;
+  font-weight: bold;
+  color: #FF2E16;
 }
 
 .alerts span.orange {
-    font-size: 14px;
-    font-weight: bold;
-    color: #FFAA16;
+  font-size: 14px;
+  font-weight: bold;
+  color: #FFAA16;
 }
 
 .ag-perform .amount .year,
 .ag-perform .alerts .month {
-    font-size: 12px;
-    color: #707070;
+  font-size: 12px;
+  color: #707070;
 }
 
 .ag-perform .amount .price,
 .ag-perform .alerts .price {
-    font-size: 14px;
-    font-weight: bold;
-    color: #626364;
+  font-size: 14px;
+  font-weight: bold;
+  color: #626364;
 }
 
 .last24 {
-    margin-top: 10px;
-    font-size: 12px;
-    color: #000;
+  margin-top: 10px;
+  font-size: 12px;
+  color: #000;
 }
 
 ul.agent-details {
-    list-style: none;
-    list-style-type: none;
-    padding: 20px 10px 0px 30px;
+  list-style: none;
+  list-style-type: none;
+  padding: 20px 10px 0px 30px;
 }
 
 ul.agent-details li {
-    list-style: none;
-    list-style-type: none;
-    background: url(../images/arrow.svg) no-repeat right;
+  list-style: none;
+  list-style-type: none;
+  background: url(../images/arrow.svg) no-repeat right;
 }
 
 ul.agent-details li a {
-    color: #000;
-    line-height: 40px;
-    font-size: 13px;
+  color: #000;
+  line-height: 40px;
+  font-size: 13px;
 }
 
 ul.agent-details li.agent-contact a {
-    background: url(../images/contact.svg) no-repeat left;
-    padding-left: 35px;
+  background: url(../images/contact.svg) no-repeat left;
+  padding-left: 35px;
 }
 
 ul.agent-details li.objectives a {
-    background: url(../images/objectives.svg) no-repeat left;
-    padding-left: 35px;
+  background: url(../images/objectives.svg) no-repeat left;
+  padding-left: 35px;
 }
 
 ul.agent-details li.notes a {
-    background: url(../images/note.svg) no-repeat left;
-    padding-left: 35px;
+  background: url(../images/note.svg) no-repeat left;
+  padding-left: 35px;
 }
 
 ul.agent-details li.events a {
-    background: url(../images/events.svg) no-repeat left;
-    padding-left: 35px;
+  background: url(../images/events.svg) no-repeat left;
+  padding-left: 35px;
 }
 
 ul.agent-details li.agent-tags a {
-    background: url(../images/tags.svg) no-repeat left;
-    padding-left: 35px;
+  background: url(../images/tags.svg) no-repeat left;
+  padding-left: 35px;
 }
 
 ul.agent-details li.associates a {
-    background: url(../images/associate.svg) no-repeat left;
-    padding-left: 35px;
+  background: url(../images/associate.svg) no-repeat left;
+  padding-left: 35px;
 }
 
 .building-icon {
-    background: url(../images/building-icon.svg) left no-repeat;
-    background-position: 6px;
-    padding: 20px 0px 20px 35px;
+  background: url(../images/building-icon.svg) left no-repeat;
 }
 
 .agent-detail .bx1 {
-    width: 50%;
-    float: left;
+  width: 50%;
+  float: left;
 }
 
 .agent-detail .bx2 {
-    width: 25%;
-    float: left;
-    padding-top: 10px;
+  width: 25%;
+  float: left;
+  padding-top: 10px;
 }
 
 .agent-detail .bx3 {
-    width: 25%;
-    float: left;
-    padding-top: 10px;
+  width: 25%;
+  float: left;
+  padding-top: 10px;
 }
 
 .bd-col {
-    background: #36B700;
-    color: #fff;
-    padding: 5px 6px;
-    position: absolute;
-    left: 16px;
-    top: 11px;
+  background: #36B700;
+  color: #fff;
+  padding: 5px 6px;
+  position: absolute;
+  left: 16px;
+  top: 11px;
 }
 
 .agent-contact h4 {
-    color: #707070;
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 0px;
+  color: #707070;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 0px;
 }
 
 .agent-contact .ag-add,
 .agent-contact a {
-    color: #000;
-    font-size: 13px;
+  color: #000;
+  font-size: 13px;
 }
 
 .agent-contact .state {
-    color: #707070;
-    font-size: 14px;
-    font-weight: bold;
-    width: 50%;
-    float: left;
-    margin-top: 10px;
+  color: #707070;
+  font-size: 14px;
+  font-weight: bold;
+  width: 50%;
+  float: left;
+  margin-top: 10px;
 }
 
 .agent-contact .state span:first-child {
-    color: #707070;
-    font-size: 14px;
-    font-weight: bold;
+  color: #707070;
+  font-size: 14px;
+  font-weight: bold;
 }
 
 .agent-contact .state span.st2 {
-    color: #000;
-    font-size: 13px;
-    font-weight: normal;
+  color: #000;
+  font-size: 13px;
+  font-weight: normal;
 }
 
 .ag-detail ul {
-    list-style-type: none;
-    padding: 0px;
-    margin-top: 20px;
+  list-style-type: none;
+  padding: 0px;
+  margin-top: 20px;
 }
 
 .ag-detail ul li {
-    list-style-type: none;
-    width: 33%;
-    float: left;
-    color: #F68933;
-    font-size: 14px;
+  list-style-type: none;
+  width: 33%;
+  float: left;
+  color: #F68933;
+  font-size: 14px;
 }
 
 .ag-detail ul li.call {
-    background: url(../images/call.svg) no-repeat left;
-    padding-left: 25px;
+  background: url(../images/call.svg) no-repeat left;
+  padding-left: 25px;
 }
 
 .ag-detail ul li.sms {
-    background: url(../images/sms.svg) no-repeat left;
-    padding-left: 25px;
+  background: url(../images/sms.svg) no-repeat left;
+  padding-left: 25px;
 }
 
 .ag-detail ul li.copy {
-    background: url(../images/copy.svg) no-repeat left;
-    padding-left: 25px;
+  background: url(../images/copy.svg) no-repeat left;
+  padding-left: 25px;
 }
 
 .ag-detail ul li.mail {
-    background: url(../images/email.svg) no-repeat left;
-    padding-left: 25px;
-    width: 50%;
+  background: url(../images/email.svg) no-repeat left;
+  padding-left: 25px;
+  width: 50%;
 }
 
 .edit-detail {
-    font-size: 11px;
-    color: #fff;
-    white-space: nowrap;
+  font-size: 11px;
+  color: #fff;
+  white-space: nowrap;
 }
 
 #myBtn {
-    display: none;
-    position: fixed;
-    bottom: 40px;
-    right: 30px;
-    z-index: 99;
-    font-size: 18px;
-    border: none;
-    outline: none;
-    background-color: #005295;
-    color: white;
-    cursor: pointer;
-    padding: 10px;
-    border-radius: 4px;
+  display: none;
+  position: fixed;
+  bottom: 40px;
+  right: 30px;
+  z-index: 99;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-color: #005295;
+  color: white;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.news {
+  width: 80%;
+  float: left;
+}
+
+.pic {
+  width: 20%;
+  float: left;
+}
+
+.news h4 {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.news p {
+  font-size: 12px;
+}
+
+.pic p {
+  border: 1px solid #707070;
+  width: 64px;
+  height: 64px;
 }
 
 @media (max-width: 1200px) {}
 
+
 @media (max-width: 1024px) {
-    .cell-bg {
-        margin-right: 10px;
-    }
+  .cell-bg {
+    margin-right: 10px;
+  }
 }
 
 @media (max-width: 992px) {
-    .cell-bg {
-        margin-right: 10px;
-    }
+  .cell-bg {
+    margin-right: 10px;
+  }
+
 }
 
+
 @media (max-width: 768px) {
-    .cell-bg {
-        margin-right: 10px;
-    }
+
+  .cell-bg {
+    margin-right: 10px;
+  }
 }
+
 
 @media (max-width: 736px) {}
 
+
 @media (max-width: 478px) {
-    .remember {
-        margin: 22px 0px 40px 0px;
-    }
-    .remember label {
-        font-weight: normal;
-    }
-    .box2 {
-        padding-top: 50px;
-    }
-    .forgotpass {
-        color: #fff;
-        text-align: center;
-    }
-    .mb-menu {
-        float: left;
-        margin-left: 10px;
-    }
-    .nospace {
-        padding: 0px;
-        margin: 0px;
-    }
-    .cell-bg {
-        padding: 10px 25px;
-        margin-bottom: 5px;
-    }
-    s.sidenav {
-        padding-top: 15px;
-    }
-    .sidenav a {
-        font-size: 18px;
-    }
+  .remember {
+    margin: 22px 0px 40px 0px;
+  }
+
+  .remember label {
+    font-weight: normal;
+  }
+
+  .box2 {
+    padding-top: 50px;
+  }
+
+  .forgotpass {
+    color: #fff;
+    text-align: center;
+  }
+
+  .mb-menu {
+    float: left;
+    margin-left: 10px;
+  }
+
+  .nospace {
+    padding: 0px;
+    margin: 0px;
+  }
+
+  .cell-bg {
+    padding: 10px 25px;
+    margin-bottom: 5px;
+  }
+
+  s.sidenav {
+    padding-top: 15px;
+  }
+
+  .sidenav a {
+    font-size: 18px;
+  }
+
+
+
+
+
+
+
 }
 
+
 @media (max-width: 375px) {}
+
 
 @media (max-width: 320px) {}

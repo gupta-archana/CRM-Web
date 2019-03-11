@@ -7,6 +7,7 @@ import { ForgotPasswordComponent } from './views/forgot-password/forgot-password
 import { LoginGuardGuard } from './guards/login-guard.guard';
 import * as paths from './Constants/paths';
 import { AgentDetailComponent } from './views/agent/agent-detail/agent-detail.component';
+import { ContactDetailComponent } from './views/agent/contact-detail/contact-detail.component';
 
 
 const appRoutesArray: Routes =
@@ -15,6 +16,7 @@ const appRoutesArray: Routes =
         { path: paths.PATH_LOGIN, component: LoginComponent, canDeactivate: [LoginGuardGuard] },
         { path: '', redirectTo: '', pathMatch: 'full' },
         { path: paths.PATH_FORGOT_PASSWORD, component: ForgotPasswordComponent },
+        { path: paths.PATH_AGENT_CONTACT_DETAIL, component: ContactDetailComponent },
         { path: '**', component: PageNotFoundComponent }
 
     ];

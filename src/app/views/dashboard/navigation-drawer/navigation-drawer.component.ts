@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy, HostListener } from '@angular/core';
 import { ApiHandlerService } from '../../../utils/api-handler.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -7,6 +7,10 @@ import { Constants } from '../../../Constants/Constants';
 import * as paths from '../../../Constants/paths';
 import { MyLocalStorageService } from '../../../services/my-local-storage.service';
 import { DataServiceService } from 'src/app/services/data-service.service';
+import { UtilService } from '../../../utils/util.service';
+import { PlatformLocation } from '@angular/common';
+import { LoginComponent } from '../../login/login.component';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-navigation-drawer',
@@ -21,7 +25,13 @@ export class NavigationDrawerComponent implements OnInit, OnDestroy {
   headerTitle: string = "";
   activatedRouteSubscription: Subscription = null;
   currentPagePathSubscription: Subscription = null;
-
+  exit: boolean = false;
+  called: boolean = false;
+  functionCalled: any;
+  @HostListener('window:beforeunload', ['$event'])
+  beforeUnloadHander(event) {
+    alert("leaving message");
+  }
   constructor(public apiHandler: ApiHandlerService,
     public changeDetector: ChangeDetectorRef,
     private activatedRoute: ActivatedRoute,
@@ -29,11 +39,20 @@ export class NavigationDrawerComponent implements OnInit, OnDestroy {
     public router: Router,
     private myLocalStorage: MyLocalStorageService,
     public constants: Constants,
-    private dataService: DataServiceService) { }
+    private dataService: DataServiceService,
+    private activeRoute: ActivatedRoute,
+    private location: PlatformLocation) { }
 
   ngOnInit() {
     let self = this;
     getSideNavData(self);
+    console.log($);
+
+    // this.handleBackpressEvent();
+    // window.onbeforeunload = ev => {
+    //   console.log(ev);
+    //   this.removeBackpressEventListener();
+    // }
     this.activatedRouteSubscription = this.activatedRoute.paramMap.subscribe(url => {
       changeHeaderTitle(this.activatedRoute.firstChild.routeConfig.path, this);
     });
@@ -60,7 +79,54 @@ export class NavigationDrawerComponent implements OnInit, OnDestroy {
     if (this.activatedRouteSubscription && !this.activatedRouteSubscription.closed)
       this.activatedRouteSubscription.unsubscribe();
   }
+  handleBackpressEvent() {
+    history.pushState(null, null, location.href);
+    var self = this;
+    this.functionCalled = this.onPopState.bind(this);
+    window.addEventListener("popstate", this.functionCalled, true);
+  }
 
+  removeBackpressEventListener() {
+    window.removeEventListener("popstate", this.functionCalled, true);
+  }
+
+  private onPopState(ev: PopStateEvent) {
+    var self = this;
+    ev.preventDefault();
+    //if (ev.state) {
+    if (self.activeRoute.firstChild.component == NavigationDrawerComponent || self.activeRoute.firstChild.component == LoginComponent) {
+      if (!self.called) {
+        self.called = true;
+        if (self.exit) {
+          self.exit = !self.exit;
+          for (let i = 0; i < history.length; i++) {
+            self.location.back();
+          }
+        }
+        else {
+          self.onFirstBackClick(self);
+        }
+      }
+      else {
+        self.called = false;
+      }
+    }
+    //  }
+  }
+
+  private onFirstBackClick(self: this) {
+    self.exit = !self.exit;
+    self.commonFunctions.showSnackbar("Press back again to exit");
+    self.setDefault();
+    history.go(1);
+  }
+
+  private setDefault() {
+    setTimeout(() => {
+      this.called = false;
+      this.exit = false;
+    }, 5000);
+  }
 }
 function getSideNavData(self: NavigationDrawerComponent) {
   self.apiHandler.getSideNavJson({
@@ -70,6 +136,8 @@ function getSideNavData(self: NavigationDrawerComponent) {
     }, onError(errCode, errMsg) {
     }
   });
+
+
 }
 
 function navigateToSelectedPage(title: string, context: NavigationDrawerComponent) {

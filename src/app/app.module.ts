@@ -20,13 +20,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Constants } from './Constants/Constants';
 import { ForgotPasswordComponent } from './views/forgot-password/forgot-password.component';
 import { AgentDetailComponent } from './views/agent/agent-detail/agent-detail.component';
+import { ContactDetailComponent } from './views/agent/contact-detail/contact-detail.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     PageNotFoundComponent,
     ForgotPasswordComponent,
-    AgentDetailComponent
+    AgentDetailComponent,
+    ContactDetailComponent
   ],
   imports: [
     BrowserModule,
