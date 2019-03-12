@@ -47,12 +47,6 @@ export class NavigationDrawerComponent implements OnInit, OnDestroy {
     let self = this;
     getSideNavData(self);
     console.log($);
-
-    // this.handleBackpressEvent();
-    // window.onbeforeunload = ev => {
-    //   console.log(ev);
-    //   this.removeBackpressEventListener();
-    // }
     this.activatedRouteSubscription = this.activatedRoute.paramMap.subscribe(url => {
       changeHeaderTitle(this.activatedRoute.firstChild.routeConfig.path, this);
     });
@@ -78,54 +72,6 @@ export class NavigationDrawerComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.activatedRouteSubscription && !this.activatedRouteSubscription.closed)
       this.activatedRouteSubscription.unsubscribe();
-  }
-  handleBackpressEvent() {
-    history.pushState(null, null, location.href);
-    var self = this;
-    this.functionCalled = this.onPopState.bind(this);
-    window.addEventListener("popstate", this.functionCalled, true);
-  }
-
-  removeBackpressEventListener() {
-    window.removeEventListener("popstate", this.functionCalled, true);
-  }
-
-  private onPopState(ev: PopStateEvent) {
-    var self = this;
-    ev.preventDefault();
-    //if (ev.state) {
-    if (self.activeRoute.firstChild.component == NavigationDrawerComponent || self.activeRoute.firstChild.component == LoginComponent) {
-      if (!self.called) {
-        self.called = true;
-        if (self.exit) {
-          self.exit = !self.exit;
-          for (let i = 0; i < history.length; i++) {
-            self.location.back();
-          }
-        }
-        else {
-          self.onFirstBackClick(self);
-        }
-      }
-      else {
-        self.called = false;
-      }
-    }
-    //  }
-  }
-
-  private onFirstBackClick(self: this) {
-    self.exit = !self.exit;
-    self.commonFunctions.showSnackbar("Press back again to exit");
-    self.setDefault();
-    history.go(1);
-  }
-
-  private setDefault() {
-    setTimeout(() => {
-      this.called = false;
-      this.exit = false;
-    }, 5000);
   }
 }
 function getSideNavData(self: NavigationDrawerComponent) {

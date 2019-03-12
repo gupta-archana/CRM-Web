@@ -6,6 +6,7 @@ import * as paths from 'src/app/Constants/paths';
 import { Constants } from 'src/app/Constants/Constants';
 import { MyLocalStorageService } from 'src/app/services/my-local-storage.service';
 import { Router } from '@angular/router';
+import { CommonFunctionsService } from '../../../utils/common-functions.service';
 
 
 @Component({
@@ -21,6 +22,7 @@ export class AgentDetailComponent implements OnInit, OnDestroy {
   constructor(private dataService: DataServiceService,
     private constants: Constants,
     private myLocalStorage: MyLocalStorageService,
+    private commonFunctions: CommonFunctionsService,
     private router: Router) {
 
 
@@ -31,7 +33,7 @@ export class AgentDetailComponent implements OnInit, OnDestroy {
     this.dataService.sendCurrentPagePath(paths.PATH_AGENT_DETAIL);
   }
   contactDetailClick() {
-    this.router.navigate([paths.PATH_AGENT_CONTACT_DETAIL]);
+    this.commonFunctions.navigateWithoutReplaceUrl(paths.PATH_AGENT_CONTACT_DETAIL);
   }
   ngOnDestroy(): void {
 

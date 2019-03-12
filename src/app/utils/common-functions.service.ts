@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
@@ -8,7 +9,8 @@ export class CommonFunctionsService {
 
   constructor(
     private snackBar: MatSnackBar,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService,
+    private router: Router) { }
   printLog(message: any, show: boolean) {
 
     if (show)
@@ -24,6 +26,13 @@ export class CommonFunctionsService {
   showErrorSnackbar(message: string) {
     this.toastr.error(message);
 
+  }
+
+  navigateWithReplaceUrl(path: string) {
+    this.router.navigate([path], { replaceUrl: true });
+  }
+  navigateWithoutReplaceUrl(path: string) {
+    this.router.navigate([path]);
   }
   getEncryptedPassword(pUnencrypted: string) {
     //pUnencrypted = "TestingPassword"

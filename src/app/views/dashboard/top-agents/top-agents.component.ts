@@ -4,6 +4,7 @@ import { CommonFunctionsService } from 'src/app/utils/common-functions.service';
 import { Router } from '@angular/router';
 import { MyLocalStorageService } from 'src/app/services/my-local-storage.service';
 import { Constants } from 'src/app/Constants/Constants';
+import * as paths from 'src/app/Constants/paths';
 
 @Component({
   selector: 'app-top-agents',
@@ -24,9 +25,9 @@ export class TopAgentsComponent implements OnInit {
 
   onAgentClick(agent: AgentInfoModel) {
     this.commonFunctions.printLog(agent, true);
-    this.router.navigate(["agentDetail"]);
     this.myLocalStorage.setValue(this.constants.AGENT_INFO, JSON.stringify(agent));
-  
+    this.commonFunctions.navigateWithoutReplaceUrl(paths.PATH_AGENT_DETAIL);
+
   }
 
 
