@@ -17,6 +17,9 @@ export class DataServiceService {
 
   private currentPagePathSubject = new BehaviorSubject<string>("");
   currentPagePathObservable = this.currentPagePathSubject.asObservable();
+
+  private pageTitleSubject = new BehaviorSubject<string>("");
+  pageTitleObservable = this.pageTitleSubject.asObservable();
   constructor() { }
 
   onHideShowLoader(showLoader: boolean) {
@@ -29,5 +32,9 @@ export class DataServiceService {
 
   sendCurrentPagePath(pagePath: string) {
     this.currentPagePathSubject.next(pagePath);
+  }
+
+  setCurrentPageTitle(path: string) {
+    this.pageTitleSubject.next(path);
   }
 }

@@ -7,13 +7,14 @@ import { dashboardRoutes } from './dashboard.routes';
 import { AuthGuardService } from '../../guards/auth-guard.service';
 import { AgentWithAlertComponent } from './agent-with-alert/agent-with-alert.component';
 import { AgentWithPerformanceComponent } from './agent-with-performance/agent-with-performance.component';
+import { CanDeactivateGuard } from "../../guards/can-deactivate/can-deactivate.guard";
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(dashboardRoutes)
   ],
-  providers: [AuthGuardService],
+  providers: [AuthGuardService, CanDeactivateGuard],
   declarations: [NavigationDrawerComponent, TopAgentsComponent, AgentWithAlertComponent, AgentWithPerformanceComponent]
 })
 export class DashboardModule { }

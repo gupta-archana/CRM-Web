@@ -30,7 +30,7 @@ export class AgentDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.agentInfo = JSON.parse(this.myLocalStorage.getValue(this.constants.AGENT_INFO));
-    this.dataService.sendCurrentPagePath(paths.PATH_AGENT_DETAIL);
+    //this.dataService.sendCurrentPagePath(paths.PATH_AGENT_DETAIL);
   }
   contactDetailClick() {
     this.commonFunctions.navigateWithoutReplaceUrl(paths.PATH_AGENT_CONTACT_DETAIL);

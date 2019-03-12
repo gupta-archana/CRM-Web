@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationStart, Event as NavigationEvent } from '@angular/router';
 
 import { PlatformLocation, LocationStrategy } from '@angular/common';
 import { MatSnackBar } from '@angular/material';
@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
 import { DataServiceService } from './services/data-service.service';
 import { LoginComponent } from './views/login/login.component';
 import { UtilService } from './utils/util.service';
+import { filter } from 'rxjs/operators';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -27,12 +28,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private _toggleSidebar() {
     this._opened = !this._opened;
   }
-  constructor(private _route: ActivatedRoute,
-    private router: Router,
-    private location: PlatformLocation,
-    private activeRoute: ActivatedRoute,
-    private commonFunctions: CommonFunctionsService,
-    private snackBar: MatSnackBar,
+  constructor(private router: Router,
     public dataService: DataServiceService,
     private utils: UtilService) {
 
@@ -40,6 +36,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.utils.handleBackpressEvent();
+    sendCurrentPagePath(this, this.router);
     window.onbeforeunload = ev => {
       console.log(ev);
       this.utils.removeBackpressEventListener();
@@ -60,4 +57,17 @@ function registerHideShowLoaderBroadcast(context: AppComponent) {
       context.loading = showLoader;
     }
   );
+}
+function sendCurrentPagePath(context: AppComponent, router: Router) {
+  router.events
+    .pipe(filter((event: NavigationEvent) => {
+      return (event instanceof NavigationStart);
+    })
+    ).subscribe(
+      (event: NavigationStart) => {
+        let newUrl = event.url.substring(1, event.url.length);
+        if (newUrl) {
+          context.dataService.sendCurrentPagePath(newUrl);
+        }
+      });
 }

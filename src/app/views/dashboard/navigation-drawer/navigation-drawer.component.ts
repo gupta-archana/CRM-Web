@@ -11,6 +11,7 @@ import { UtilService } from '../../../utils/util.service';
 import { PlatformLocation } from '@angular/common';
 import { LoginComponent } from '../../login/login.component';
 import * as $ from 'jquery';
+import { FormCanDeactivate } from '../../../guards/form-can-deactivate/form-can-deactivate';
 
 @Component({
   selector: 'app-navigation-drawer',
@@ -25,21 +26,19 @@ export class NavigationDrawerComponent implements OnInit, OnDestroy {
   headerTitle: string = "";
   activatedRouteSubscription: Subscription = null;
   currentPagePathSubscription: Subscription = null;
+  
   exit: boolean = false;
   called: boolean = false;
   functionCalled: any;
-  @HostListener('window:beforeunload', ['$event'])
-  beforeUnloadHander(event) {
-    alert("leaving message");
-  }
+
   constructor(public apiHandler: ApiHandlerService,
     public changeDetector: ChangeDetectorRef,
     private activatedRoute: ActivatedRoute,
-    private commonFunctions: CommonFunctionsService,
+    public commonFunctions: CommonFunctionsService,
     public router: Router,
     private myLocalStorage: MyLocalStorageService,
     public constants: Constants,
-    private dataService: DataServiceService,
+    public dataService: DataServiceService,
     private activeRoute: ActivatedRoute,
     private location: PlatformLocation) { }
 
@@ -103,10 +102,12 @@ function navigateToSelectedPage(title: string, context: NavigationDrawerComponen
     default:
       break;
   }
-  context.router.navigate([selectedNavBarItemPath], { replaceUrl: true });
+  context.commonFunctions.navigateWithReplaceUrl(selectedNavBarItemPath);
+
   changeHeaderTitle(selectedNavBarItemPath, context);
   context.closeNav();
 }
+
 
 function changeHeaderTitle(path: string, context: NavigationDrawerComponent) {
   if (path) {

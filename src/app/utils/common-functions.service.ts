@@ -30,6 +30,7 @@ export class CommonFunctionsService {
 
   navigateWithReplaceUrl(path: string) {
     this.router.navigate([path], { replaceUrl: true });
+    window.location.reload(true);
   }
   navigateWithoutReplaceUrl(path: string) {
     this.router.navigate([path]);

@@ -6,6 +6,7 @@ import { AgentWithAlertComponent } from './agent-with-alert/agent-with-alert.com
 import * as path from '../../Constants/paths';
 import { AgentWithPerformanceComponent } from './agent-with-performance/agent-with-performance.component';
 import { AgentDetailComponent } from '../agent/agent-detail/agent-detail.component';
+import { CanDeactivateGuard } from '../../guards/can-deactivate/can-deactivate.guard';
 
 export const dashboardRoutes: Routes = [
     {
