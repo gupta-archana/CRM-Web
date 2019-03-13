@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonFunctionsService } from '../../../utils/common-functions.service';
 
 @Component({
   selector: 'app-contact-detail',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactDetailComponent implements OnInit {
 
-  constructor() { }
+  constructor(private commonFunctions:CommonFunctionsService) { }
 
   ngOnInit() {
   }
-
+  goBack() {
+    this.commonFunctions.backPress();
+  }
 }

@@ -534,6 +534,7 @@ ul.agent-details li.associates a {
 .news h4 {
   font-size: 14px;
   font-weight: bold;
+  color: #000;
 }
 
 .news p {
@@ -544,6 +545,66 @@ ul.agent-details li.associates a {
   border: 1px solid #707070;
   width: 64px;
   height: 64px;
+  margin-top: 10px;
+}
+
+.ag-objective ul {
+  list-style-type: none;
+  padding: 0px;
+  margin-top: 0px;
+}
+
+.ag-objective ul li {
+  list-style-type: none;
+  width: 33%;
+  float: left;
+  color: #F68933;
+  font-size: 14px;
+}
+
+.ag-objective ul li.complete {
+  background: url(../images/check.svg) no-repeat left;
+  padding-left: 25px;
+}
+
+.ag-objective ul li.cancel {
+  background: url(../images/close-btn.svg) no-repeat left;
+  padding-left: 25px;
+}
+
+.ag-objective ul li.edit {
+  background: url(../images/edit-btn.svg) no-repeat left;
+  padding-left: 25px;
+  width: 23%;
+  margin-left: 32px;
+}
+
+.ag-obj-active .status,
+.ag-obj-active .d-date,
+.ag-obj-complete .status,
+.ag-obj-complete .d-date {
+  font-size: 11px;
+  color: #707070;
+  width: 50%;
+  float: left;
+}
+
+.ag-obj-active .status span {
+  color: #00B118;
+  font-weight: bold;
+}
+
+.ag-obj-active p {
+  padding: 10px 0px 10px 0px;
+}
+
+.ag-obj-complete p {
+  padding: 10px 0px 10px 0px;
+  font-size: 11px;
+}
+
+.ag-obj-complete .status span {
+  font-weight: bold;
 }
 
 @media (max-width: 1200px) {}

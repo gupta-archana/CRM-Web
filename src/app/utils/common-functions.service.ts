@@ -93,6 +93,9 @@ export class CommonFunctionsService {
 
   }
 
+  backPress() {
+    window.history.back();
+  }
 
 }
 function getRandomInt(min, max) {

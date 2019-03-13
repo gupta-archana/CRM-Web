@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="Group_354" data-name="Group 354" transform="translate(-2800 -7607)">
+    <rect id="Rectangle_143" data-name="Rectangle 143" width="24" height="24" transform="translate(2800 7607)" fill="none"/>
+    <path id="speedometer" d="M12,16a3.008,3.008,0,0,1-1.5-5.61l9.71-5.62-5.53,9.58A3.006,3.006,0,0,1,12,16M12,3a10.181,10.181,0,0,1,4.97,1.32l-2.1,1.21A8,8,0,0,0,6.34,18.65h.01a1,1,0,0,1,0,1.41,1.017,1.017,0,0,1-1.42.01h0A10,10,0,0,1,12,3M22,13a9.969,9.969,0,0,1-2.93,7.07h0a1,1,0,0,1-1.41-1.42h0A7.949,7.949,0,0,0,20,13a8.071,8.071,0,0,0-.54-2.9L20.67,8A10.254,10.254,0,0,1,22,13Z" transform="translate(2800 7607)" fill="#f68933"/>
+  </g>
+</svg>

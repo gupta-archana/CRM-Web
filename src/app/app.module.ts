@@ -21,6 +21,7 @@ import { Constants } from './Constants/Constants';
 import { ForgotPasswordComponent } from './views/forgot-password/forgot-password.component';
 import { AgentDetailComponent } from './views/agent/agent-detail/agent-detail.component';
 import { ContactDetailComponent } from './views/agent/contact-detail/contact-detail.component';
+import { AgentObjectiveComponent } from './views/agent/agent-objective/agent-objective.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +29,8 @@ import { ContactDetailComponent } from './views/agent/contact-detail/contact-det
     PageNotFoundComponent,
     ForgotPasswordComponent,
     AgentDetailComponent,
-    ContactDetailComponent
+    ContactDetailComponent,
+    AgentObjectiveComponent
   ],
   imports: [
     BrowserModule,

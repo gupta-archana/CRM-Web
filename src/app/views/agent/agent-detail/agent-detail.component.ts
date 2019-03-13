@@ -35,6 +35,9 @@ export class AgentDetailComponent implements OnInit, OnDestroy {
   contactDetailClick() {
     this.commonFunctions.navigateWithoutReplaceUrl(paths.PATH_AGENT_CONTACT_DETAIL);
   }
+  objectiveClick() {
+    this.commonFunctions.navigateWithoutReplaceUrl(paths.PATH_AGENT_OBJECTIVE);
+  }
   ngOnDestroy(): void {
 
   }

@@ -34,7 +34,7 @@ export class TopAgentsComponent implements OnInit {
   private addAgents() {
     for (let index = 0; index < 10; index++) {
       var topagentModel: AgentInfoModel = new AgentInfoModel();
-      topagentModel.agentImg = "/src/images/placeholder.png";
+      topagentModel.agentImg = "../../../../images/placeholder.png";
       topagentModel.agentAddress = "Las Vegas, NV";
       topagentModel.agentName = "NETCO. Inc";
       topagentModel.agentNetPremium = "$15,595 (93%)";
