@@ -18,6 +18,12 @@
   z-index: 5;
   overflow: auto;
 }
+.bottom-wrapper-for-back{
+  width: 100%;
+  padding-top: 70px;
+  z-index: 5;
+  overflow: auto;
+}
 
 .wrapper {
   width: 100%;
