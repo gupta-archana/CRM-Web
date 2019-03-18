@@ -19,4 +19,10 @@ export class MyLocalStorageService {
   public clearValue(key) {
     localStorage.removeItem(key);
   }
+  /**
+   * clearAll
+   */
+  public clearAll() {
+    localStorage.clear();
+  }
 }

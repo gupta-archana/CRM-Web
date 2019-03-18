@@ -12,6 +12,8 @@ import { PlatformLocation } from '@angular/common';
 import { LoginComponent } from '../../login/login.component';
 import * as $ from 'jquery';
 import { FormCanDeactivate } from '../../../guards/form-can-deactivate/form-can-deactivate';
+import { MatDialog } from '@angular/material';
+import { ConfirmationDialogComponent } from '../../../customUI/dialogs/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-navigation-drawer',
@@ -26,7 +28,7 @@ export class NavigationDrawerComponent implements OnInit, OnDestroy {
   headerTitle: string = "";
   activatedRouteSubscription: Subscription = null;
   currentPagePathSubscription: Subscription = null;
-  
+
   exit: boolean = false;
   called: boolean = false;
   functionCalled: any;
@@ -40,7 +42,8 @@ export class NavigationDrawerComponent implements OnInit, OnDestroy {
     public constants: Constants,
     public dataService: DataServiceService,
     private activeRoute: ActivatedRoute,
-    private location: PlatformLocation) { }
+    private location: PlatformLocation,
+    private dialog: MatDialog) { }
 
   ngOnInit() {
     let self = this;
@@ -66,6 +69,19 @@ export class NavigationDrawerComponent implements OnInit, OnDestroy {
 
   closeNav() {
     document.getElementById("mySidenav").style.width = "0";
+  }
+
+  logout() {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: { alertTitle: this.constants.LOGOUT, message: this.constants.ALERT_LOGIUT_CONFIRMATION }
+    });
+
+    dialogRef.afterClosed().subscribe(callback => {
+      if (callback) {
+        this.myLocalStorage.clearAll();
+        this.commonFunctions.navigateWithReplaceUrl(paths.PATH_LOGIN);
+      }
+    });
   }
 
   ngOnDestroy(): void {

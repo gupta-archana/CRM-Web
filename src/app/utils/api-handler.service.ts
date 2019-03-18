@@ -8,9 +8,9 @@ import { API } from '../Constants/API';
 })
 export class ApiHandlerService implements ApiResponseCallback {
 
-  APP_MODE: Array<string> = ["dev", "beta", "prod"];
-  ENABLE_APP_MODE = 0;
-  apiResponseCallback: ApiResponseCallback = null;
+  private APP_MODE: Array<string> = ["dev", "beta", "prod"];
+  private ENABLE_APP_MODE = 0;
+  private apiResponseCallback: ApiResponseCallback = null;
   constructor(private apiService: ApiService,
     private api: API) { }
 
@@ -18,9 +18,14 @@ export class ApiHandlerService implements ApiResponseCallback {
     this.apiService.hitGetApi(this.api.SIDE_NAV_JSON, apiResponseCallback);
   }
 
-  public performLogin(username: string, encryptedPassword: string, apiResponseCallback: ApiResponseCallback) {
+  public performLogin(email: string, encryptedPassword: string, apiResponseCallback: ApiResponseCallback) {
     this.apiResponseCallback = apiResponseCallback;
-    this.apiService.hitGetApi(this.api.getValidateCredentialUrl(username, encryptedPassword, this.APP_MODE[this.ENABLE_APP_MODE]), this);
+    this.apiService.hitGetApi(this.api.getValidateCredentialUrl(email, encryptedPassword, this.APP_MODE[this.ENABLE_APP_MODE]), this);
+  }
+
+  public forgotPassword(email: string, apiResponseCallback: ApiResponseCallback) {
+    this.apiResponseCallback = apiResponseCallback;
+    this.apiService.hitGetApi(this.api.getForgotPasswordUrl(email, this.APP_MODE[this.ENABLE_APP_MODE]), this.apiResponseCallback);
   }
 
 

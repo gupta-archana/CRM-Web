@@ -9,4 +9,8 @@ export class API {
     getValidateCredentialUrl(username: string, password: string, app_mode: string) {
         return this.API_BASE_URL + app_mode + "/get?I0=JSON&I1=" + username + "&I2=" + password + "&I3=systemIdentity";
     }
+
+    getForgotPasswordUrl(email: string, app_mode: string) {
+        return this.API_BASE_URL + app_mode + "/get?I0=JSON&I3=systemEmailPassword&User=" + email;
+    }
 }

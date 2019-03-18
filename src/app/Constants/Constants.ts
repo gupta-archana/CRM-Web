@@ -9,11 +9,15 @@ export class Constants {
     PASSWORD = "password";
     REMEMBER_ME = "remeberMe";
     AGENT_INFO = "agentnfo";
+    LOGOUT = "LOGOUT";
+
+
     // Error Messages
-
     ERROR_NO_INTERNET_CONNECTON = "Kindly check your internet connection";
+    ERROR_INVALID_EMAIL = "Please enter a valid email address";
 
-
+    //Alert messages
+    ALERT_LOGIUT_CONFIRMATION = "Are you sure want to exit from app?";
 
     //Side Nav Drawer pages name
     TOP_AGENTS = "Top Agents";
