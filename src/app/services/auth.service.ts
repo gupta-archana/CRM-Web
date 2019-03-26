@@ -46,13 +46,8 @@ export class AuthService {
 
   onLoginSuccess(emailAddress: string, password: string, rememberMe: boolean): void {
     this.myLocalStorage.setValue(this.constants.EMAIL, emailAddress);
-    if (rememberMe) {
-      this.myLocalStorage.setValue(this.constants.PASSWORD, password);
-      this.myLocalStorage.setValue(this.constants.REMEMBER_ME, "1");
-    }
-    else {
-      this.myLocalStorage.setValue(this.constants.REMEMBER_ME, "0");
-    }
+    this.myLocalStorage.setValue(this.constants.PASSWORD, password);
+    this.myLocalStorage.setValue(this.constants.REMEMBER_ME, rememberMe ? "1" : "0");
     this._router.navigate([''], { replaceUrl: true });
   }
 

@@ -28,6 +28,11 @@ export class ApiHandlerService implements ApiResponseCallback {
     this.apiService.hitGetApi(this.api.getForgotPasswordUrl(email, this.APP_MODE[this.ENABLE_APP_MODE]), this.apiResponseCallback);
   }
 
+  public getTopAgents(email: string, encryptedPassword: string, page_no: number, apiResponseCallback: ApiResponseCallback) {
+    this.apiResponseCallback = apiResponseCallback;
+    this.apiService.hitGetApi(this.api.getTopAgentsUrl(email, encryptedPassword, page_no, this.APP_MODE[this.ENABLE_APP_MODE]), this);
+  }
+
 
 
   onSuccess(response: any) {
