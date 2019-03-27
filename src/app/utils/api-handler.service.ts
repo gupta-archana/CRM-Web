@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { ApiResponseCallback } from '../Interfaces/ApiResponseCallback';
 import { API } from '../Constants/API';
+import { DataServiceService } from '../services/data-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class ApiHandlerService implements ApiResponseCallback {
   private APP_MODE: Array<string> = ["dev", "beta", "prod"];
   private ENABLE_APP_MODE = 0;
   private apiResponseCallback: ApiResponseCallback = null;
-  constructor(private apiService: ApiService,
+  constructor(private apiService: ApiService, private dataService: DataServiceService,
     private api: API) { }
 
   public getSideNavJson(apiResponseCallback: ApiResponseCallback) {
@@ -29,6 +30,7 @@ export class ApiHandlerService implements ApiResponseCallback {
   }
 
   public getTopAgents(email: string, encryptedPassword: string, page_no: number, apiResponseCallback: ApiResponseCallback) {
+    this.dataService.onHideShowLoader(true);
     this.apiResponseCallback = apiResponseCallback;
     this.apiService.hitGetApi(this.api.getTopAgentsUrl(email, encryptedPassword, page_no, this.APP_MODE[this.ENABLE_APP_MODE]), this);
   }
@@ -36,6 +38,7 @@ export class ApiHandlerService implements ApiResponseCallback {
 
 
   onSuccess(response: any) {
+    this.dataService.onHideShowLoader(false);
     let responseBody = response.Envelope.Body;
     if (responseBody.hasOwnProperty('Fault')) {
       let errorCode = responseBody.Fault.code;
@@ -43,11 +46,12 @@ export class ApiHandlerService implements ApiResponseCallback {
       this.apiResponseCallback.onError(errorCode, msg);
     }
     else {
-      let data: Object[] = responseBody.dataset[0].parameter;
+      let data: Object[] = responseBody.dataset[0];
       this.apiResponseCallback.onSuccess(data);
     }
   }
   onError(errorCode: number, errorMsg: string) {
+    this.dataService.onHideShowLoader(false);
     this.apiResponseCallback.onError(errorCode, errorMsg);
   }
 }

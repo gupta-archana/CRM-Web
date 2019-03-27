@@ -10,7 +10,8 @@ export class Constants {
     REMEMBER_ME = "remeberMe";
     AGENT_INFO = "agentnfo";
     LOGOUT = "LOGOUT";
-
+    TOP_AGENT_CURRENT_PAGE_NO = "top_agent_page_no";
+    TOP_AGENT_DATA = "top_agent_data";
 
     // Error Messages
     ERROR_NO_INTERNET_CONNECTON = "Kindly check your internet connection";

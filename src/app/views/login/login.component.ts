@@ -74,7 +74,7 @@ export class LoginComponent implements OnInit, ApiResponseCallback, CanComponent
 
   onSuccess(response: any) {
     this.dataService.onHideShowLoader(false);
-    let userModel: UserModel = this.loginParser.parseLogin(response);
+    let userModel: UserModel = this.loginParser.parseLogin(response.parameter);
     this.commonFunctions.showSnackbar("Successfully logged in " + userModel.currentUserName);
     this.authservice.onLoginSuccess(userModel.currentUserEmail, this.loginForm.value.password, this.loginForm.value.isChecked);
 

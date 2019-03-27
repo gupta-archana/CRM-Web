@@ -5,54 +5,18 @@
         <div class="col-xs-12 col-md-6 cell-bg">
           <div class="agent-detail">
             <div class="dp"><img src={{item.agentImg}} alt="" /></div>
-            <h4>{{item.agentName}}</h4> <span>{{item.agentAddress}}</span>
+            <h4>{{item.name}}</h4> <span>{{item.city+','+item.state}}</span>
             <div class="clearfix"></div>
-            <div class="amount"><span>Net Premium</span><br>{{item.agentNetPremium}}</div>
+            <div class="amount"><span>Net Premium</span><br>$ {{item.netPermium}}</div>
           </div>
         </div>
       </li>
     </ul>
+    <div class="load-more-div" *ngIf="moreDataAvailable">
+      <span class="straight-line"></span>
+      <span class="load-more-text" (click)="onLoadMoreClick()">Load More</span>
+      <span class="straight-line"></span>
+
+    </div>
   </div>
 </div>
-
-<!-- <div class="col-xs-12 col-md-6 cell-bg">
-      <div class="agent-detail">
-        <div class="dp"><img src="../../../../images/placeholder.png" alt="" /></div>
-        <h4>NETCO. Inc</h4> <span>Las Vegas, NV</span>
-        <div class="clearfix"></div>
-        <div class="amount"><span>Net Premium</span><br>$15,595 (93%)</div>
-      </div>
-    </div>
-    <div class="col-xs-12 col-md-6 cell-bg">
-      <div class="agent-detail">
-        <div class="dp"><img src="../../../../images/placeholder.png" alt="" /></div>
-        <h4>DisneyWorld</h4> <span>Orlando, FL</span>
-        <div class="clearfix"></div>
-        <div class="amount"><span>Net Premium</span><br>$15,595 (93%)</div>
-      </div>
-    </div>
-    <div class="col-xs-12 col-md-6 cell-bg">
-      <div class="agent-detail">
-        <div class="dp"><img src="../../../../images/placeholder.png" alt="" /></div>
-        <h4>DisneyWorld</h4> <span>Orlando, FL</span>
-        <div class="clearfix"></div>
-        <div class="amount"><span>Net Premium</span><br>$15,595 (93%)</div>
-      </div>
-    </div>
-    <div class="col-xs-12 col-md-6 cell-bg">
-      <div class="agent-detail">
-        <div class="dp"><img src="../../../../images/placeholder.png" alt="" /></div>
-        <h4>DisneyWorld</h4> <span>Orlando, FL</span>
-        <div class="clearfix"></div>
-        <div class="amount"><span>Net Premium</span><br>$15,595 (93%)</div>
-      </div>
-    </div>
-    <div class="col-xs-12 col-md-6 cell-bg">
-      <div class="agent-detail">
-        <div class="dp"><img src="../../../../images/placeholder.png" alt="" /></div>
-        <h4>DisneyWorld</h4> <span>Orlando, FL</span>
-        <div class="clearfix"></div>
-        <div class="amount"><span>Net Premium</span><br>$15,595 (93%)</div>
-      </div>
-    </div>
-  </div> -->
