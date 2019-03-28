@@ -8,6 +8,7 @@ import { AuthGuardService } from '../../guards/auth-guard.service';
 import { AgentWithAlertComponent } from './agent-with-alert/agent-with-alert.component';
 import { AgentWithPerformanceComponent } from './agent-with-performance/agent-with-performance.component';
 import { CanDeactivateGuard } from "../../guards/can-deactivate/can-deactivate.guard";
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { CanDeactivateGuard } from "../../guards/can-deactivate/can-deactivate.g
     RouterModule.forChild(dashboardRoutes)
   ],
   providers: [AuthGuardService, CanDeactivateGuard],
-  declarations: [NavigationDrawerComponent, TopAgentsComponent, AgentWithAlertComponent, AgentWithPerformanceComponent]
+  declarations: [NavigationDrawerComponent, TopAgentsComponent, AgentWithAlertComponent, AgentWithPerformanceComponent, SearchComponent]
 })
 export class DashboardModule { }

@@ -9,6 +9,7 @@ import { ApiResponseCallback } from '../../../Interfaces/ApiResponseCallback';
 import { ApiHandlerService } from '../../../utils/api-handler.service';
 import { UserModel } from 'src/app/models/UserModel';
 import { DataServiceService } from 'src/app/services/data-service.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-top-agents',
@@ -22,13 +23,15 @@ export class TopAgentsComponent implements OnInit, ApiResponseCallback, OnDestro
   emailId: string;
   encryptedPassword: string;
   moreDataAvailable: boolean = true;
+  pageRefreshSubscription: Subscription = null;
 
   constructor(private commonFunctions: CommonFunctionsService,
-    private router: Router,
+
     private myLocalStorage: MyLocalStorageService,
     private constants: Constants,
     public apiHandler: ApiHandlerService,
     private cdr: ChangeDetectorRef,
+    private dataService: DataServiceService
   ) {
     this.pageNumber = 0;
 
@@ -36,8 +39,12 @@ export class TopAgentsComponent implements OnInit, ApiResponseCallback, OnDestro
   topAgents: Array<any> = [];
 
   ngOnInit() {
-
     this.getTopAgents();
+    this.commonFunctions.hideShowTopScrollButton();
+    this.pageRefreshSubscription = this.dataService.pageRefreshObservable.subscribe(called => {
+      if (called)
+        refreshData(this);
+    });
   }
 
 
@@ -62,12 +69,10 @@ export class TopAgentsComponent implements OnInit, ApiResponseCallback, OnDestro
 
   onAgentClick(agent: AgentInfoModel) {
     this.commonFunctions.printLog(agent, true);
-    this.myLocalStorage.setValue(this.constants.AGENT_INFO, JSON.stringify(agent));
+    sessionStorage.setItem(this.constants.AGENT_INFO, JSON.stringify(agent));
     this.commonFunctions.navigateWithoutReplaceUrl(paths.PATH_AGENT_DETAIL);
 
   }
-
-
 
   onSuccess(response: any) {
     this.commonFunctions.printLog(response, true);
@@ -82,11 +87,19 @@ export class TopAgentsComponent implements OnInit, ApiResponseCallback, OnDestro
     console.log(this.topAgents[0].name);
   }
   onError(errorCode: number, errorMsg: string) {
-
   }
+
+  topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+
   ngOnDestroy(): void {
     sessionStorage.setItem(this.constants.TOP_AGENT_CURRENT_PAGE_NO, this.pageNumber.toString());
     sessionStorage.setItem(this.constants.TOP_AGENT_DATA, JSON.stringify(this.topAgents));
+    if (this.pageRefreshSubscription && !this.pageRefreshSubscription.closed) {
+      this.pageRefreshSubscription.unsubscribe();
+    }
   }
 
 }
@@ -94,4 +107,10 @@ export class TopAgentsComponent implements OnInit, ApiResponseCallback, OnDestro
 function getTopAgents(context: TopAgentsComponent) {
   context.pageNumber++;
   context.apiHandler.getTopAgents(context.emailId, context.encryptedPassword, context.pageNumber, context);
+}
+
+function refreshData(context: TopAgentsComponent) {
+  context.pageNumber = 0;
+  context.topAgents = [];
+  getTopAgents(context);
 }

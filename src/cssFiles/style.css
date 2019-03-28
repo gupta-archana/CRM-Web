@@ -177,6 +177,10 @@ form input[type="checkbox"] {
   height: 64px;
 }
 
+.nav-bg a {
+  color: #fff;
+}
+
 .sidenav {
   height: 100%;
   width: 0;
@@ -606,6 +610,97 @@ ul.agent-details li.associates a {
 .ag-obj-complete .status span {
   font-weight: bold;
 }
+
+.change-dp img {
+  width: 132px;
+  background-color: #C1E3FF;
+  border: 2px solid #90CCFE;
+  border-radius: 70px;
+}
+
+.btn-orange {
+  background: #F68933;
+  border-radius: 33px;
+  margin: 20px 0px 10px 0px;
+  padding: 7px 32px;
+  border: none;
+  font-weight: bold;
+}
+
+.btn-orange:hover,
+.btn-orange:focus {
+  background: #F68933;
+}
+
+.nobord {
+  border: none;
+}
+
+.boxshape {
+  border-radius: 0px;
+}
+
+.search-btn,
+.search-btn:hover,
+.search-btn a:active {
+  background-color: none;
+  box-shadow: 0px;
+  border: none;
+  background: url(../images/orange-search.svg) left no-repeat;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 4px;
+  right: 25px;
+}
+
+.search-box .form-group input[type="text"] {
+  border: 2px solid #F68933;
+  border-radius: 20px;
+  color: #000;
+  padding-right: 50px;
+}
+
+.bottom-bord {
+  border-bottom: 1px solid #A5A5A5;
+}
+
+.serach-emp {
+  background: #F2F2F2 url(../images/empty-page.svg) top no-repeat;
+  background-position: 160px 85px;
+  padding-top: 50px;
+  text-align: center;
+  min-height: 470px;
+}
+
+.serach-emp {
+  padding-top: 180px;
+}
+
+.serach-emp h2 {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0px;
+  color: #b1b1b1;
+}
+
+.serach-emp p {
+  font-size: 14px;
+  padding: 10px 50px;
+  color: #b1b1b1;
+}
+
+.serach-result {
+  background: #F2F2F2;
+  min-height: 470px;
+}
+
+.green {}
+
+
+
+
+
 
 @media (max-width: 1200px) {}
 

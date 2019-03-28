@@ -28,7 +28,8 @@ export class NavigationDrawerComponent implements OnInit, OnDestroy {
   headerTitle: string = "";
   activatedRouteSubscription: Subscription = null;
   currentPagePathSubscription: Subscription = null;
-
+  showRefreshButton: boolean = false;
+  showFilterButton: boolean = false;
   exit: boolean = false;
   called: boolean = false;
   functionCalled: any;
@@ -78,10 +79,18 @@ export class NavigationDrawerComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe(callback => {
       if (callback) {
-        this.myLocalStorage.clearAll();
+        this.myLocalStorage.clearValue(this.constants.LOGGED_IN);
         this.commonFunctions.navigateWithReplaceUrl(paths.PATH_LOGIN);
       }
     });
+  }
+
+  onRefreshClick() {
+    this.dataService.onHeaderRefreshClick();
+  }
+
+  onFilterClick() {
+    this.dataService.onHeaderFilterClick();
   }
 
   ngOnDestroy(): void {
@@ -115,6 +124,9 @@ function navigateToSelectedPage(title: string, context: NavigationDrawerComponen
     case context.constants.AGENTS_WITH_PERFORMANCE:
       selectedNavBarItemPath = paths.PATH_AGENTS_WITH_PERFORMANCE;
       break;
+    case context.constants.SEARCH:
+      selectedNavBarItemPath = paths.PATH_SEARCH;
+      break;
     default:
       break;
   }
@@ -130,18 +142,35 @@ function changeHeaderTitle(path: string, context: NavigationDrawerComponent) {
     switch (path) {
       case paths.PATH_TOP_AGENTS:
         context.headerTitle = context.constants.TOP_AGENTS;
+        showRefreshButton(true, context);
         break;
       case paths.PATH_AGENTS_WITH_ALERT:
         context.headerTitle = context.constants.AGENTS_WITH_ALERT;
+        showRefreshButton(true, context);
         break;
       case paths.PATH_AGENTS_WITH_PERFORMANCE:
+        showRefreshButton(true, context);
         context.headerTitle = context.constants.AGENTS_WITH_PERFORMANCE;
         break;
       case paths.PATH_AGENT_DETAIL:
         context.headerTitle = context.constants.AGENT_DETAIL;
         break;
+      case paths.PATH_SEARCH:
+        context.headerTitle = context.constants.SEARCH;
+        showRefreshButton(false, context);
+        break;
       default:
         break;
     }
+  }
+}
+function showRefreshButton(show: boolean, context: NavigationDrawerComponent) {
+  if (show) {
+    context.showRefreshButton = true;
+    context.showFilterButton = false;
+  }
+  else {
+    context.showRefreshButton = false;
+    context.showFilterButton = true;
   }
 }

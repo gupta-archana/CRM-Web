@@ -7,6 +7,7 @@ import * as path from '../../Constants/paths';
 import { AgentWithPerformanceComponent } from './agent-with-performance/agent-with-performance.component';
 import { AgentDetailComponent } from '../agent/agent-detail/agent-detail.component';
 import { CanDeactivateGuard } from '../../guards/can-deactivate/can-deactivate.guard';
+import { SearchComponent } from './search/search.component';
 
 export const dashboardRoutes: Routes = [
     {
@@ -18,7 +19,8 @@ export const dashboardRoutes: Routes = [
             { path: path.PATH_TOP_AGENTS, component: TopAgentsComponent },
             { path: path.PATH_AGENTS_WITH_ALERT, component: AgentWithAlertComponent },
             { path: path.PATH_AGENTS_WITH_PERFORMANCE, component: AgentWithPerformanceComponent },
-            { path: path.PATH_AGENT_DETAIL, component: AgentDetailComponent }
+            { path: path.PATH_AGENT_DETAIL, component: AgentDetailComponent },
+            { path: path.PATH_SEARCH, component: SearchComponent }
 
 
         ]

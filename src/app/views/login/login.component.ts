@@ -40,10 +40,7 @@ export class LoginComponent implements OnInit, ApiResponseCallback, CanComponent
   }
 
   ngOnInit() {
-    if (this.myLocalStorage.getValue(this.constants.EMAIL)) {
-      this.routingState.loadRouting();
-      console.log(this.routingState.getPreviousUrl());
-
+    if (this.myLocalStorage.getValue(this.constants.LOGGED_IN)) {
       this.router.navigate([''], { replaceUrl: true });
     } else {
       this.addValidation();
@@ -54,7 +51,7 @@ export class LoginComponent implements OnInit, ApiResponseCallback, CanComponent
     this.commonFunctions.printLog(event, true);
   }
   canDeactivate() {
-    if (this.myLocalStorage.getValue(this.constants.EMAIL)) {
+    if (this.myLocalStorage.getValue(this.constants.LOGGED_IN)) {
       return true;
     }
     return false;

@@ -30,8 +30,12 @@ export class CommonFunctionsService {
 
   navigateWithReplaceUrl(path: string) {
     this.router.navigate([path], { replaceUrl: true });
-    window.location.reload(true);
+    setTimeout(() => {
+      window.location.reload(true);
+    }, 200);
+    //
   }
+
   navigateWithoutReplaceUrl(path: string) {
     this.router.navigate([path]);
   }
@@ -97,6 +101,21 @@ export class CommonFunctionsService {
     window.history.back();
   }
 
+  hideShowTopScrollButton() {
+    let self = this;
+    window.onscroll = function () { self.scrollFunction() };
+  }
+  private scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      document.getElementById("myBtn").style.display = "block";
+    } else {
+      document.getElementById("myBtn").style.display = "none";
+    }
+  }
+  topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
 }
 function getRandomInt(min, max) {
   min = Math.ceil(min);

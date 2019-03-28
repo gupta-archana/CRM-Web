@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-  <g id="Group_13" data-name="Group 13" transform="translate(-23 -24)">
-    <rect id="Rectangle_16" data-name="Rectangle 16" width="24" height="24" transform="translate(23 24)" fill="none"/>
-    <g id="Group_11" data-name="Group 11">
-      <line id="Line_9" data-name="Line 9" x2="23" transform="translate(26.868 43.632) rotate(-45)" fill="none" stroke="#f68933" stroke-width="2.5"/>
-      <line id="Line_10" data-name="Line 10" x2="23" transform="translate(26.868 27.368) rotate(45)" fill="none" stroke="#f68933" stroke-width="2.5"/>
-    </g>
-  </g>
-</svg>

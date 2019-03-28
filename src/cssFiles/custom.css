@@ -1,72 +1,73 @@
 .blue-snackbar {
-    background: black;
-    color: white;
+  background: black;
+  color: white;
 }
 
 .red-snackbar {
-    background: red;
-    color: white;
+  background: red;
+  color: white;
 }
 
 #toast-container>div {
-    opacity: 1;
+  opacity: 1;
 }
 
 .bottom-wrapper {
-    width: 100%;
-    padding-top: 60px;
-    z-index: 5;
-    overflow: auto;
+  width: 100%;
+  padding-top: 60px;
+  z-index: 5;
+  overflow: auto;
 }
 
 .bottom-wrapper-for-back {
-    width: 100%;
-    padding-top: 70px;
-    z-index: 5;
-    overflow: auto;
+  width: 100%;
+  padding-top: 70px;
+  z-index: 5;
+  overflow: auto;
 }
 
 .bottom-wrapper-margin-110 {
-    width: 100%;
-    padding-top: 110px;
-    z-index: 5;
-    overflow: auto;
+  width: 100%;
+  padding-top: 110px;
+  z-index: 5;
+  overflow: auto;
 }
 
 .wrapper {
-    width: 100%;
-    position: fixed;
-    z-index: 10;
+  width: 100%;
+  position: fixed;
+  z-index: 10;
+  overflow: auto;
 }
 
 ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
 .padding-left-twenty-five {
-    padding-left: 25px;
+  padding-left: 25px;
 }
 
 .load-more-div {
-    text-align: center;
-    width: 100%;
-    padding: 10px;
+  text-align: center;
+  width: 100%;
+  padding: 10px;
 }
 
 .load-more-text {
-    color: #F68933;
-    font-weight: 16px;
-    font-family: 'Open Sans', sans-serif;
-    font-style: italic;
-    display: inline-block;
-    width: 33%;
+  color: #F68933;
+  font-weight: 16px;
+  font-family: 'Open Sans', sans-serif;
+  font-style: italic;
+  display: inline-block;
+  width: 33%;
 }
 
 .straight-line {
-    font-weight: 16px;
-    border: 1px solid #F68933;
-    display: inline-block;
-    width: 33%;
+  font-weight: 16px;
+  border: 1px solid #F68933;
+  display: inline-block;
+  width: 33%;
 }

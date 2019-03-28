@@ -10,6 +10,7 @@ export class Constants {
     REMEMBER_ME = "remeberMe";
     AGENT_INFO = "agentnfo";
     LOGOUT = "LOGOUT";
+    LOGGED_IN = "logged_in";
     TOP_AGENT_CURRENT_PAGE_NO = "top_agent_page_no";
     TOP_AGENT_DATA = "top_agent_data";
 

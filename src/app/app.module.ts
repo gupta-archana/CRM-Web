@@ -24,6 +24,7 @@ import { ContactDetailComponent } from './views/agent/contact-detail/contact-det
 import { AgentObjectiveComponent } from './views/agent/agent-objective/agent-objective.component';
 import { AlertDialogComponent } from './customUI/dialogs/alert-dialog/alert-dialog.component';
 import { ConfirmationDialogComponent } from './customUI/dialogs/confirmation-dialog/confirmation-dialog.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +36,7 @@ import { ConfirmationDialogComponent } from './customUI/dialogs/confirmation-dia
     AgentObjectiveComponent,
     AlertDialogComponent,
     ConfirmationDialogComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -51,8 +53,8 @@ import { ConfirmationDialogComponent } from './customUI/dialogs/confirmation-dia
     ToastrModule,
     SidebarModule.forRoot(),
     ToastNoAnimationModule.forRoot({
-      timeOut: 5000,
-      positionClass: 'toast-top-center',
+      timeOut: 2500,
+      positionClass: 'toast-bottom-center',
       preventDuplicates: true,
     }),
     NgxLoadingModule.forRoot({
