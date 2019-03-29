@@ -9,11 +9,12 @@ import { AgentWithAlertComponent } from './agent-with-alert/agent-with-alert.com
 import { AgentWithPerformanceComponent } from './agent-with-performance/agent-with-performance.component';
 import { CanDeactivateGuard } from "../../guards/can-deactivate/can-deactivate.guard";
 import { SearchComponent } from './search/search.component';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(dashboardRoutes)
+    RouterModule.forChild(dashboardRoutes),
+    FormsModule, ReactiveFormsModule
   ],
   providers: [AuthGuardService, CanDeactivateGuard],
   declarations: [NavigationDrawerComponent, TopAgentsComponent, AgentWithAlertComponent, AgentWithPerformanceComponent, SearchComponent]

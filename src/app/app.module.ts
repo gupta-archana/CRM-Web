@@ -36,9 +36,11 @@ import { ConfirmationDialogComponent } from './customUI/dialogs/confirmation-dia
     AgentObjectiveComponent,
     AlertDialogComponent,
     ConfirmationDialogComponent
-    
+
   ],
   imports: [
+    FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
     appRoutes,
     DashboardModule,
@@ -48,8 +50,7 @@ import { ConfirmationDialogComponent } from './customUI/dialogs/confirmation-dia
     MatButtonModule,
     BrowserAnimationsModule,
     HttpModule,
-    FormsModule,
-    ReactiveFormsModule,
+
     ToastrModule,
     SidebarModule.forRoot(),
     ToastNoAnimationModule.forRoot({

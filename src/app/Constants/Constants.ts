@@ -17,6 +17,7 @@ export class Constants {
     // Error Messages
     ERROR_NO_INTERNET_CONNECTON = "Kindly check your internet connection";
     ERROR_INVALID_EMAIL = "Please enter a valid email address";
+    ERROR_NO_DATA_FOUND_FOR_SEARCH_CRITERIA = "No Data Available for the searched criteria";
 
     //Alert messages
     ALERT_LOGIUT_CONFIRMATION = "Are you sure want to exit from app?";

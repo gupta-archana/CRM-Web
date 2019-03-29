@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { zip } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 @Injectable({
     providedIn: 'root'
 })
@@ -17,6 +19,19 @@ export class API {
     getTopAgentsUrl(email: string, encryptedPassword: string, page_no: number, app_mode: string) {
         return this.getBaseUrl(app_mode) + "I1=" + email + "&I2=" + encryptedPassword + "&I3=topagentsget&PageNum=" + page_no + "&NoOfPages=5";
     }
+
+    getAgentSearchedUrl(email: string, encryptedPassword: string, app_mode: string, stateId: string, searchString: string) {
+        return this.getBaseUrl(app_mode) + "I1=" + email + "&I2=" + encryptedPassword + "&I3=agentssearch&stateId=" + stateId + "&searchString=" + searchString;
+    }
+
+    getPersonSearchedUrl(email: string, encryptedPassword: string, app_mode: string, stateId: string, agentId: string, searchString: string) {
+        return this.getBaseUrl(app_mode) + "I1=" + email + "&I2=" + encryptedPassword + "&I3=personsSearch&stateId=" + stateId + "&agentId=" + agentId + "&searchString=" + searchString + "&active=&inactive";
+    }
+    getAttorneySearchedUrl(email: string, encryptedPassword: string, app_mode: string, stateId: string, searchString: string) {
+        return this.getBaseUrl(app_mode) + "I1=" + email + "&I2=" + encryptedPassword + "&I3=attorneysSearch&stateId=" + stateId + "&searchString=" + searchString;
+
+    }
+
 
     private getBaseUrl(app_mode: string) {
         return this.API_BASE_URL + app_mode + "/get?I0=JSON&I4=rcm&";

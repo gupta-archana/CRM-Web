@@ -30,9 +30,9 @@ export class CommonFunctionsService {
 
   navigateWithReplaceUrl(path: string) {
     this.router.navigate([path], { replaceUrl: true });
-    setTimeout(() => {
-      window.location.reload(true);
-    }, 200);
+    // setTimeout(() => {
+    //   window.location.reload(true);
+    // }, 200);
     //
   }
 

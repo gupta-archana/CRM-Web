@@ -1,22 +1,43 @@
 <div class="container-fluid nospace">
-  
+
   <div class="container app-bg2">
 
     <div class="row">
-      <div class="col-xs-12 search-box">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Searching in All">
+      <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+        <div class="col-xs-12 search-box">
+          <div class="form-group">
+            <input type="text" class="form-control" formControlName="search" placeholder="Searching in All">
+          </div>
+          <button type="submit" class="btn btn-default search-btn"></button>
         </div>
-        <button type="submit" class="btn btn-default search-btn"></button>
-      </div>
+      </form>
     </div>
 
   </div>
   <div class="bottom-bord"></div>
+  <div class="serach-result app-bg2">
 
-  <div class="serach-emp">
-    <h2><em>It is Empty Here!</em></h2>
-    <p><em>Please use the search bar to search for Agents and People or use the filter button to alter search
-        attributes</em></p>
+    <div class="row" *ngIf="hideNoDataDiv">
+      <ul>
+        <li *ngFor="let item of searchedUsers" (click)="onItemClick(item)">
+          <div class="col-xs-12 col-md-6 cell-bg">
+            <div class="agent-detail ag-perform">
+              <div class="dp"><img src="../../../../images/placeholder.png" alt="" /></div>
+              <h4>{{getName(item)}}</h4> <span>{{getAddress(item)}}</span>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+
+        </li>
+      </ul>
+      <button (click)="topFunction()" id="myBtn" title="Go to top"><span
+          class="glyphicon glyphicon-arrow-up"></span></button>
+
+
+    </div>
+    <div class="serach-emp" *ngIf="!hideNoDataDiv">
+      <h2><em>It is Empty Here!</em></h2>
+      <p><em>Please use the search bar to search for Agents and People or use the filter button to alter search
+          attributes</em></p>
+    </div>
   </div>
-</div>

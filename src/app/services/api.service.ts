@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions, ResponseContentType } from '@angular/http';
+import { Http, Headers, RequestOptions, ResponseContentType, Response } from '@angular/http';
 import { ApiResponseCallback } from '../Interfaces/ApiResponseCallback';
 import { Constants } from '../Constants/Constants';
+import { Observable, forkJoin } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -58,5 +59,24 @@ export class ApiService {
       }, error => {
         apiResponseCallback.onError(400, error.toString());
       });
+  }
+
+  getHttpRequestObservable(url): Observable<Response> {
+    var headers = new Headers();
+    headers.set('Accept', 'text/json');
+    headers.set('Content-Type', 'text/json');
+    const options = new RequestOptions({
+      headers: headers,
+      responseType: ResponseContentType.Text
+    });
+    return this.http.get(url, options);
+  }
+
+  hitMultipleRequest(observables: Array<Observable<Response>>, apiResponseCallback: ApiResponseCallback) {
+    forkJoin(observables).subscribe(responses => {
+      apiResponseCallback.onSuccess(responses);
+    }, err => {
+      apiResponseCallback.onError(err.status, err.statusText);
+    });
   }
 }
