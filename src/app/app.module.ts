@@ -24,6 +24,7 @@ import { ContactDetailComponent } from './views/agent/contact-detail/contact-det
 import { AgentObjectiveComponent } from './views/agent/agent-objective/agent-objective.component';
 import { AlertDialogComponent } from './customUI/dialogs/alert-dialog/alert-dialog.component';
 import { ConfirmationDialogComponent } from './customUI/dialogs/confirmation-dialog/confirmation-dialog.component';
+import { ForgotPasswordAlertComponent } from './customUI/dialogs/forgot-password/forgot-password-alert.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { ConfirmationDialogComponent } from './customUI/dialogs/confirmation-dia
     LoginComponent,
     PageNotFoundComponent,
     ForgotPasswordComponent,
+    ForgotPasswordAlertComponent,
     AgentDetailComponent,
     ContactDetailComponent,
     AgentObjectiveComponent,
@@ -71,7 +73,8 @@ import { ConfirmationDialogComponent } from './customUI/dialogs/confirmation-dia
   entryComponents: [
     // See https://material.angular.io/components/dialog/overview#configuring-dialog-content-via-code-entrycomponents-code- for more info
     AlertDialogComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    ForgotPasswordAlertComponent
   ],
   providers: [Constants, ApiService, {
     provide: UrlSerializer,

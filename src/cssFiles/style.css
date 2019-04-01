@@ -43,6 +43,11 @@ input {
   min-height: 470px;
 }
 
+.nospace {
+  padding: 0px;
+  margin: 0px;
+}
+
 .box1 input[type="email"] {
   background: #fff url(../images/username.svg) no-repeat left;
   background-position: 6px;
@@ -99,6 +104,46 @@ button.btn-login {
   border-radius: 30px;
   min-width: 311px;
 }
+
+.btn-cancel,
+.btn-cancel:focus,
+.btn-cancel:hover {
+  background: none;
+  color: #F68933;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 10px;
+  font-weight: bold;
+  border-radius: 30px;
+  border: 2px solid #F68933;
+}
+
+button.btn-cancel {
+  width: 92px;
+  border: 2px solid #F68933;
+  height: 26px;
+  text-transform: uppercase;
+  padding: 0px;
+}
+
+.btn-logout,
+.btn-logout:focus,
+.btn-logout:hover {
+  background: #F68933;
+  color: #fff;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 10px;
+  font-weight: bold;
+  border-radius: 30px;
+}
+
+button.btn-logout {
+  width: 92px;
+  border: none;
+  height: 26px;
+  text-transform: uppercase;
+  padding: 0px;
+}
+
 
 form input[type="checkbox"] {
   background: #045395;
@@ -695,8 +740,62 @@ ul.agent-details li.associates a {
   min-height: 470px;
 }
 
-.green {}
+.serach-result .green {
+  color: #36B700;
+}
 
+ul.recent {
+  padding: 0px;
+  margin: 0px;
+}
+
+ul.recent li {
+  line-height: 20px;
+}
+
+ul.recent li a {
+  padding: 0px;
+  margin: 0px;
+  color: #707070;
+}
+
+.password-sent p {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0px;
+  padding: 0px;
+}
+
+p.pass-sent {
+  font-weight: normal;
+  margin-bottom: 20px;
+}
+
+.password-sent .divider {
+  height: 1px;
+  background: #1D8BD8;
+  margin: 100px 0px 70px 0px;
+}
+
+.pass-sent-box {
+  margin-top: 30px;
+}
+
+.logout-hr {
+  padding: 0px;
+  margin: 0px;
+}
+
+.logout h5 {
+  color: #707070;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.btns-log {
+  margin-top: 40px;
+}
 
 
 

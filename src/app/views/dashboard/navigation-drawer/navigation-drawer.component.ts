@@ -127,6 +127,9 @@ function navigateToSelectedPage(title: string, context: NavigationDrawerComponen
     case context.constants.SEARCH:
       selectedNavBarItemPath = paths.PATH_SEARCH;
       break;
+    case context.constants.NEWS:
+      selectedNavBarItemPath = paths.PATH_NEWS;
+      break;
     default:
       break;
   }
@@ -155,10 +158,15 @@ function changeHeaderTitle(path: string, context: NavigationDrawerComponent) {
       case paths.PATH_AGENT_DETAIL:
         context.headerTitle = context.constants.AGENT_DETAIL;
         break;
+      case paths.PATH_NEWS:
+        context.headerTitle = context.constants.NEWS;
+        showRefreshButton(true, context);
+        break;
       case paths.PATH_SEARCH:
         context.headerTitle = context.constants.SEARCH;
         showRefreshButton(false, context);
         break;
+
       default:
         break;
     }

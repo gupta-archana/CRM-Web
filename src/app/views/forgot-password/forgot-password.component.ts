@@ -7,6 +7,7 @@ import { ApiResponseCallback } from '../../Interfaces/ApiResponseCallback';
 import { ApiHandlerService } from '../../utils/api-handler.service';
 import { MatDialog } from '@angular/material';
 import { AlertDialogComponent } from '../../customUI/dialogs/alert-dialog/alert-dialog.component';
+import { ForgotPasswordAlertComponent } from '../../customUI/dialogs/forgot-password/forgot-password-alert.component';
 
 @Component({
   selector: 'app-forgot-password',
@@ -48,9 +49,7 @@ export class ForgotPasswordComponent implements OnInit, ApiResponseCallback {
     }
     else {
       let successMsg = responseBody.Success.message;
-      const dialogRef = this.dialog.open(AlertDialogComponent, {
-        data: successMsg
-      });
+      const dialogRef = this.dialog.open(ForgotPasswordAlertComponent);
       dialogRef.afterClosed().subscribe(closed => {
         this.commonFunctions.backPress();
         this.commonFunctions.backPress();
