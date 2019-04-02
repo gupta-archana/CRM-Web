@@ -74,7 +74,7 @@ export class NavigationDrawerComponent implements OnInit, OnDestroy {
 
   logout() {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      data: { alertTitle: this.constants.LOGOUT, message: this.constants.ALERT_LOGIUT_CONFIRMATION }
+      data: { alertTitle: this.constants.LOGOUT, message: this.constants.ALERT_LOGOUT_CONFIRMATION }
     });
 
     dialogRef.afterClosed().subscribe(callback => {

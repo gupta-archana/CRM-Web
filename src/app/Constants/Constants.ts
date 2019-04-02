@@ -8,8 +8,10 @@ export class Constants {
     EMAIL = "email";
     PASSWORD = "password";
     REMEMBER_ME = "remeberMe";
+    LOGOUT_CONFIRMATION = "Logout Confirmation";
     AGENT_INFO = "agentnfo";
-    LOGOUT = "LOGOUT";
+    LOGOUT = "Logout";
+    CANCEL = "Cancel";
     LOGGED_IN = "logged_in";
     TOP_AGENT_CURRENT_PAGE_NO = "top_agent_page_no";
     TOP_AGENT_DATA = "top_agent_data";
@@ -20,7 +22,9 @@ export class Constants {
     ERROR_NO_DATA_FOUND_FOR_SEARCH_CRITERIA = "No Data Available for the searched criteria";
 
     //Alert messages
-    ALERT_LOGIUT_CONFIRMATION = "Are you sure want to exit from app?";
+    ALERT_LOGOUT_CONFIRMATION = "Do you want to logout from the Application";
+    PASSWORD_SENT = "Password Sent";
+    PASSWORD_SENT_ALERT_MSG = "Your Password has been sent to the registered email ID that you provided. Press OK Button to go login screen";
 
     //Side Nav Drawer pages name
     TOP_AGENTS = "Top Agents";

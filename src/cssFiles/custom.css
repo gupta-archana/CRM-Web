@@ -71,3 +71,55 @@ ul {
   display: inline-block;
   width: 33%;
 }
+
+#changePicButtonGroup button {
+  color: #F68933;
+  border-radius: 50px;
+  width: 100%;
+  padding: 7px;
+  margin: 10px 30px 10px 30px;
+  font-weight: bold;
+  background: none;
+
+}
+
+
+.primary {
+  border: 2px solid #F68933;
+}
+
+.secondary {
+  border: none;
+}
+
+#DialogButtonGroup {
+  text-align: right;
+}
+
+#DialogButtonGroup button {
+  border-radius: 50px;
+  font-weight: bold;
+
+  border: 2px solid #F68933;
+  padding: 2px 20px 2px 20px;
+  margin: 0px 5px 20px;
+}
+
+.dialogYes {
+  background-color: #F68933;
+  color: white;
+}
+
+.dialogNo {
+  background: none;
+  color: #F68933;
+}
+
+
+.change-dp {
+  text-align: center;
+}
+
+.bottom-line {
+  border-bottom: 2px solid #F68933;
+}

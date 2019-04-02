@@ -1,8 +1,16 @@
-<h2 matDialogTitle style="color:red;font-weight: bold">{{data.alertTitle}}</h2>
+
 <mat-dialog-content>
-  <p>{{data.message}}</p>
+  <div class="modal-header nobord">
+    <h5 class="modal-title" id="exampleModalLabel">{{data.alertTitle}}</h5>
+  </div>
+  <hr class="logout-hr">
+  <div class="modal-body">
+    <p>{{data.message}}</p>
+  </div>
 </mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-button matDialogClose="confirm" color="Warn" (click)="onYesClick()" [mat-dialog-close]="yes">YES</button>
-  <button mat-button matDialogClose="cancel" color="Accent" (click)="onNoClick()" [mat-dialog-close]="no">NO</button>
+<mat-dialog-actions id="DialogButtonGroup" align="end">
+  <button matDialogClose="cancel" class="dialogNo" (click)="onNoClick()"
+    [mat-dialog-close]="no">{{data.noText}}</button>
+  <button matDialogClose="confirm" class="dialogYes" (click)="onYesClick()"
+    [mat-dialog-close]="yes">{{data.yesText}}</button>
 </mat-dialog-actions>

@@ -15,7 +15,7 @@ import { DashboardModule } from './views/dashboard/dashboard.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './views/login/login.component';
 import { PageNotFoundComponent } from './views/page-not-found/page-not-found.component';
-import { MatSnackBarModule, MatDialogModule, MatButtonModule, MatDialogActions, MatDialogTitle, MatDialogContent, MatDialogClose } from '@angular/material';
+import { MatSnackBarModule, MatDialogModule, MatButtonModule, MatFormFieldModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Constants } from './Constants/Constants';
 import { ForgotPasswordComponent } from './views/forgot-password/forgot-password.component';
@@ -25,6 +25,7 @@ import { AgentObjectiveComponent } from './views/agent/agent-objective/agent-obj
 import { AlertDialogComponent } from './customUI/dialogs/alert-dialog/alert-dialog.component';
 import { ConfirmationDialogComponent } from './customUI/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { ForgotPasswordAlertComponent } from './customUI/dialogs/forgot-password/forgot-password-alert.component';
+import { ChangeProfileDialogComponent } from './customUI/dialogs/change-profile-dialog/change-profile-dialog.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ForgotPasswordAlertComponent } from './customUI/dialogs/forgot-password
     ContactDetailComponent,
     AgentObjectiveComponent,
     AlertDialogComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    ChangeProfileDialogComponent
 
   ],
   imports: [
@@ -50,6 +52,7 @@ import { ForgotPasswordAlertComponent } from './customUI/dialogs/forgot-password
     MatSnackBarModule,
     MatDialogModule,
     MatButtonModule,
+    MatFormFieldModule,
     BrowserAnimationsModule,
     HttpModule,
 

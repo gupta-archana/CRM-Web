@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injector } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DataServiceService } from '../../services/data-service.service';
 import { CommonFunctionsService } from '../../utils/common-functions.service';
@@ -8,20 +8,21 @@ import { ApiHandlerService } from '../../utils/api-handler.service';
 import { MatDialog } from '@angular/material';
 import { AlertDialogComponent } from '../../customUI/dialogs/alert-dialog/alert-dialog.component';
 import { ForgotPasswordAlertComponent } from '../../customUI/dialogs/forgot-password/forgot-password-alert.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmationDialogComponent } from '../../customUI/dialogs/confirmation-dialog/confirmation-dialog.component';
+import { BaseClass } from '../../global/base-class';
 
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.css']
 })
-export class ForgotPasswordComponent implements OnInit, ApiResponseCallback {
+export class ForgotPasswordComponent extends BaseClass implements OnInit, ApiResponseCallback {
 
   forgotPasswordForm: FormGroup;
-  constructor(private dataService: DataServiceService,
-    private commonFunctions: CommonFunctionsService,
-    private constants: Constants,
-    private apiHandler: ApiHandlerService,
-    private dialog: MatDialog) { }
+  constructor(private injector: Injector) {
+    super(injector);
+  }
 
   ngOnInit() {
     this.addValidation();
@@ -29,6 +30,7 @@ export class ForgotPasswordComponent implements OnInit, ApiResponseCallback {
 
 
   onSubmit() {
+
     if (this.forgotPasswordForm.valid) {
       this.dataService.onHideShowLoader(true);
       this.apiHandler.forgotPassword(this.forgotPasswordForm.value.email, this);
@@ -48,9 +50,9 @@ export class ForgotPasswordComponent implements OnInit, ApiResponseCallback {
       this.onError(errorCode, msg);
     }
     else {
-      let successMsg = responseBody.Success.message;
-      const dialogRef = this.dialog.open(ForgotPasswordAlertComponent);
-      dialogRef.afterClosed().subscribe(closed => {
+
+      const modalRef = this.openDialogService.showAlertDialog(this.constants.PASSWORD_SENT, this.constants.PASSWORD_SENT_ALERT_MSG);
+      modalRef.afterClosed().subscribe(closed => {
         this.commonFunctions.backPress();
         this.commonFunctions.backPress();
       });

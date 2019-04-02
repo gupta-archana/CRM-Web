@@ -5,6 +5,7 @@ import { MyLocalStorageService } from "../services/my-local-storage.service";
 import * as paths from 'src/app/Constants/paths';
 import { Constants } from "../Constants/Constants";
 import { ApiHandlerService } from "../utils/api-handler.service";
+import { OpenDialogsService } from "../utils/open-dialogs.service";
 
 export abstract class BaseClass {
     protected dataService: DataServiceService;
@@ -13,6 +14,7 @@ export abstract class BaseClass {
     protected constants: Constants;
     protected apiHandler: ApiHandlerService;
     protected cdr: ChangeDetectorRef;
+    protected openDialogService: OpenDialogsService;
     protected paths: any = paths;
     constructor(injector: Injector) {
 
@@ -22,6 +24,7 @@ export abstract class BaseClass {
         this.constants = injector.get(Constants);
         this.apiHandler = injector.get(ApiHandlerService);
         this.cdr = injector.get(ChangeDetectorRef);
+        this.openDialogService = injector.get(OpenDialogsService);
 
     }
 

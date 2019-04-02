@@ -1,0 +1,11 @@
+<mat-dialog-content>
+  <div class="modal-header nobord">
+    <h5 class="modal-title text-center" id="exampleModalLabel">Change profile Picture</h5>
+  </div>
+  <div class="change-dp"><img src="../../../../images/placeholder.png" alt="" /></div>
+</mat-dialog-content>
+
+<mat-dialog-actions id="changePicButtonGroup">
+  <button matDialogClose="confirm" (click)="onChangeClick()" class="primary">Change Image</button>
+  <button matDialogClose="confirm" (click)="onDeleteClick()" class="secondary">Delete Image</button>
+</mat-dialog-actions>

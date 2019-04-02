@@ -13,7 +13,7 @@ import { DialogData } from '../../../Interfaces/DialogData';
 export class ConfirmationDialogComponent implements OnInit {
 
   constructor(
-    public dialogRef: MatDialogRef<AlertDialogComponent>,
+    public dialogRef: MatDialogRef<ConfirmationDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   onNoClick(): void {
