@@ -8,14 +8,14 @@ import { ApiHandlerService } from "../utils/api-handler.service";
 import { OpenDialogsService } from "../utils/open-dialogs.service";
 
 export abstract class BaseClass {
-    protected dataService: DataServiceService;
-    protected commonFunctions: CommonFunctionsService;
-    protected myLocalStorage: MyLocalStorageService;
-    protected constants: Constants;
-    protected apiHandler: ApiHandlerService;
-    protected cdr: ChangeDetectorRef;
-    protected openDialogService: OpenDialogsService;
-    protected paths: any = paths;
+    public dataService: DataServiceService;
+    public commonFunctions: CommonFunctionsService;
+    public myLocalStorage: MyLocalStorageService;
+    public constants: Constants;
+    public apiHandler: ApiHandlerService;
+    public cdr: ChangeDetectorRef;
+    public openDialogService: OpenDialogsService;
+    public paths: any = paths;
     constructor(injector: Injector) {
 
         this.dataService = injector.get(DataServiceService);

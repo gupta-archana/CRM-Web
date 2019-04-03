@@ -42,44 +42,10 @@ export class ApiHandlerService implements ApiResponseCallback {
   /**
    * GetSearchedData
    */
-  public GetSearchedData(email: string, encryptedPassword: string, agentId: string, stateId: string, searchString: string, apiResponseCallback: ApiResponseCallback, typeArray: Array<number>) {
+  public GetSearchedData(email: string, encryptedPassword: string, type: string, stateId: string, searchString: string, pageNum: number, apiResponseCallback: ApiResponseCallback) {
     this.apiResponseCallback = apiResponseCallback;
-    let apiObservables: Array<Observable<Response>> = [];
-    let url;
-
-    typeArray.forEach(element => {
-      switch (element) {
-        case 1:
-          url = this.api.getAgentSearchedUrl(email, encryptedPassword, this.APP_MODE[this.ENABLE_APP_MODE], stateId, searchString);
-          apiObservables.push(this.apiService.getHttpRequestObservable(url));
-          break;
-        case 2:
-          url = this.api.getPersonSearchedUrl(email, encryptedPassword, this.APP_MODE[this.ENABLE_APP_MODE], stateId, agentId, searchString);
-          apiObservables.push(this.apiService.getHttpRequestObservable(url));
-          break;
-        case 3:
-          url = this.api.getAttorneySearchedUrl(email, encryptedPassword, this.APP_MODE[this.ENABLE_APP_MODE], stateId, searchString);
-          apiObservables.push(this.apiService.getHttpRequestObservable(url));
-          break;
-
-        default:
-          break;
-      }
-    });
-    let self = this;
-    this.apiService.hitMultipleRequest(apiObservables, {
-      onSuccess(responses: any) {
-        var searchedDataArray = handleMultipleCall(responses);
-        if (searchedDataArray && searchedDataArray.length > 0) {
-          apiResponseCallback.onSuccess(searchedDataArray)
-        }
-        else {
-          apiResponseCallback.onError(200, self.constants.ERROR_NO_DATA_FOUND_FOR_SEARCH_CRITERIA);
-        }
-      }, onError(errorCode, errorMsg) {
-        apiResponseCallback.onError(errorCode, errorMsg);
-      }
-    });
+    let url = this.api.getSearchedProfileUrl(email, encryptedPassword, this.APP_MODE[this.ENABLE_APP_MODE], stateId, type, pageNum, searchString);
+    this.apiService.hitGetApi(url, this);
   }
 
 
@@ -93,8 +59,11 @@ export class ApiHandlerService implements ApiResponseCallback {
       this.apiResponseCallback.onError(errorCode, msg);
     }
     else {
-      let data: Object[] = responseBody.dataset[0];
-      this.apiResponseCallback.onSuccess(data);
+      let data: Object[] = responseBody.dataset;
+      if (data && data.length > 0)
+        this.apiResponseCallback.onSuccess(data[0]);
+      else
+        this.onError(200, this.constants.ERROR_NO_DATA_AVAILABLE);
     }
   }
   onError(errorCode: number, errorMsg: string) {

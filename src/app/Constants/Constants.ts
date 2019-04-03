@@ -15,10 +15,12 @@ export class Constants {
     LOGGED_IN = "logged_in";
     TOP_AGENT_CURRENT_PAGE_NO = "top_agent_page_no";
     TOP_AGENT_DATA = "top_agent_data";
+    NUMBER_OF_ROWS = "number_of_rows";
 
     // Error Messages
     ERROR_NO_INTERNET_CONNECTON = "Kindly check your internet connection";
     ERROR_INVALID_EMAIL = "Please enter a valid email address";
+    ERROR_NO_DATA_AVAILABLE = "No Data Available";
     ERROR_NO_DATA_FOUND_FOR_SEARCH_CRITERIA = "No Data Available for the searched criteria";
 
     //Alert messages

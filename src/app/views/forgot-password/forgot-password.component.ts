@@ -50,14 +50,12 @@ export class ForgotPasswordComponent extends BaseClass implements OnInit, ApiRes
       this.onError(errorCode, msg);
     }
     else {
-
       const modalRef = this.openDialogService.showAlertDialog(this.constants.PASSWORD_SENT, this.constants.PASSWORD_SENT_ALERT_MSG);
       modalRef.afterClosed().subscribe(closed => {
         this.commonFunctions.backPress();
         this.commonFunctions.backPress();
       });
     }
-
 
   }
   onError(errorCode: number, errorMsg: string) {

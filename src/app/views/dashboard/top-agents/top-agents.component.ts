@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, HostListener, OnDestroy } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, HostListener, OnDestroy, Injector } from '@angular/core';
 import { AgentInfoModel } from 'src/app/models/TopAgentsModel';
 import { CommonFunctionsService } from 'src/app/utils/common-functions.service';
 import { Router } from '@angular/router';
@@ -10,13 +10,14 @@ import { ApiHandlerService } from '../../../utils/api-handler.service';
 import { UserModel } from 'src/app/models/UserModel';
 import { DataServiceService } from 'src/app/services/data-service.service';
 import { Subscription } from 'rxjs';
+import { BaseClass } from '../../../global/base-class';
 
 @Component({
   selector: 'app-top-agents',
   templateUrl: './top-agents.component.html',
   styleUrls: ['./top-agents.component.css']
 })
-export class TopAgentsComponent implements OnInit, ApiResponseCallback, OnDestroy {
+export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponseCallback, OnDestroy {
 
 
   pageNumber: number = 0;
@@ -25,28 +26,23 @@ export class TopAgentsComponent implements OnInit, ApiResponseCallback, OnDestro
   moreDataAvailable: boolean = true;
   pageRefreshSubscription: Subscription = null;
 
-  constructor(private commonFunctions: CommonFunctionsService,
-
-    private myLocalStorage: MyLocalStorageService,
-    private constants: Constants,
-    public apiHandler: ApiHandlerService,
-    private cdr: ChangeDetectorRef,
-    private dataService: DataServiceService
-  ) {
+  constructor(private injector: Injector) {
+    super(injector);
     this.pageNumber = 0;
-
   }
   topAgents: Array<any> = [];
 
   ngOnInit() {
-    this.getTopAgents();
+
     this.commonFunctions.hideShowTopScrollButton();
     this.pageRefreshSubscription = this.dataService.pageRefreshObservable.subscribe(called => {
       if (called)
         refreshData(this);
     });
   }
-
+  ngAfterContentInit() {
+    this.getTopAgents();
+  }
 
   onLoadMoreClick() {
     getTopAgents(this);
@@ -80,6 +76,7 @@ export class TopAgentsComponent implements OnInit, ApiResponseCallback, OnDestro
     if (newTopAgents) {
       this.topAgents = this.topAgents.concat(response.ttTopAgent);
       this.cdr.markForCheck();
+      this.moreDataAvailable = true;
     }
     else {
       this.moreDataAvailable = false;
@@ -87,6 +84,9 @@ export class TopAgentsComponent implements OnInit, ApiResponseCallback, OnDestro
     console.log(this.topAgents[0].name);
   }
   onError(errorCode: number, errorMsg: string) {
+    this.moreDataAvailable = false;
+    this.commonFunctions.showErrorSnackbar(errorMsg);
+    this.cdr.markForCheck();
   }
 
   topFunction() {
