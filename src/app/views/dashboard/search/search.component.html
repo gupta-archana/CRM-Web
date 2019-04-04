@@ -22,16 +22,16 @@
         <li *ngFor="let item of searchedUsers" (click)="onItemClick(item)">
           <div class="col-xs-12 col-md-6 cell-bg">
             <div class="agent-detail ag-perform">
-              <div class="dp"><img src="../../../../images/placeholder.png" alt="" /></div>
+              <div class="dp"><img src="{{item.type=='Agent'?'../../../../../../images/building-icon.svg':'../../../../../../images/username.svg'}}" alt="" /></div>
               <h4>{{item.name}}</h4> <span>{{getAddress(item)}}</span>
-              <div class="clearfix"></div>
+              <div class="
+                  clearfix"></div>
             </div>
           </div>
 
         </li>
       </ul>
-      <button (click)="topFunction()" id="myBtn" title="Go to top"><span
-          class="glyphicon glyphicon-arrow-up"></span></button>
+      <button (click)="topFunction()" id="myBtn" title="Go to top"><span class="glyphicon glyphicon-arrow-up"></span></button>
       <div class="load-more-div" *ngIf="moreDataAvailable">
         <span class="straight-line"></span>
         <span class="load-more-text" (click)="onLoadMoreClick()">Load More</span>

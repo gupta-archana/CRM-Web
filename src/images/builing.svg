@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="37.25" height="24.5" viewBox="0 0 37.25 24.5">
+  <g id="Group_429" data-name="Group 429" transform="translate(-37 -121)">
+    <line id="Line_47" data-name="Line 47" y2="24" transform="translate(73.75 121.5)" fill="none" stroke="#707070" stroke-width="1" opacity="0.2"/>
+    <g id="baseline-business-24px" transform="translate(37 121)" opacity="0.5">
+      <path id="Path_99" data-name="Path 99" d="M0,0H24V24H0Z" fill="none"/>
+      <path id="Path_100" data-name="Path 100" d="M12,7V3H2V21H22V7ZM6,19H4V17H6Zm0-4H4V13H6Zm0-4H4V9H6ZM6,7H4V5H6Zm4,12H8V17h2Zm0-4H8V13h2Zm0-4H8V9h2Zm0-4H8V5h2ZM20,19H12V17h2V15H12V13h2V11H12V9h8Zm-2-8H16v2h2Zm0,4H16v2h2Z"/>
+    </g>
+  </g>
+</svg>

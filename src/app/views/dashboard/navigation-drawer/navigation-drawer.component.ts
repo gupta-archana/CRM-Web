@@ -73,16 +73,16 @@ export class NavigationDrawerComponent implements OnInit, OnDestroy {
   }
 
   logout() {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      data: { alertTitle: this.constants.LOGOUT, message: this.constants.ALERT_LOGOUT_CONFIRMATION }
-    });
+    // const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+    //   data: { alertTitle: this.constants.LOGOUT, message: this.constants.ALERT_LOGOUT_CONFIRMATION }
+    // });
 
-    dialogRef.afterClosed().subscribe(callback => {
-      if (callback) {
-        this.myLocalStorage.clearValue(this.constants.LOGGED_IN);
-        this.commonFunctions.navigateWithReplaceUrl(paths.PATH_LOGIN);
-      }
-    });
+    // dialogRef.afterClosed().subscribe(callback => {
+    //   if (callback) {
+    //     this.myLocalStorage.clearValue(this.constants.LOGGED_IN);
+    //     this.commonFunctions.navigateWithReplaceUrl(paths.PATH_LOGIN);
+    //   }
+    // });
   }
 
   onRefreshClick() {

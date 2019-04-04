@@ -27,6 +27,7 @@ import { ConfirmationDialogComponent } from './customUI/dialogs/confirmation-dia
 import { ForgotPasswordAlertComponent } from './customUI/dialogs/forgot-password/forgot-password-alert.component';
 import { ChangeProfileDialogComponent } from './customUI/dialogs/change-profile-dialog/change-profile-dialog.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
