@@ -19,7 +19,7 @@ export class SearchComponent extends BaseClass implements OnInit, ApiResponseCal
   hideNoDataDiv: boolean = false;
   emailId;
   encryptedPassword;
-  searchString: string = "Dav";
+  searchString: string = "";
   searchFor: string = "All";
   pageNum: number = 0;
   moreDataAvailable: boolean = false;
