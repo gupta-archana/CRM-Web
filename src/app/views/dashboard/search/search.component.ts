@@ -4,6 +4,7 @@ import { BaseClass } from '../../../global/base-class';
 import { ApiResponseCallback } from '../../../Interfaces/ApiResponseCallback';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { SearchModel } from '../../../models/search-model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -22,19 +23,24 @@ export class SearchComponent extends BaseClass implements OnInit, ApiResponseCal
   searchFor: string = "All";
   pageNum: number = 0;
   moreDataAvailable: boolean = false;
-  constructor(injector: Injector) {
+  private AGENT: string = "Agent";
+  private PERSON: string = "Person";
+
+  constructor(injector: Injector, private router: Router) {
     super(injector);
-    resetData(this);
+    this.commonFunctions.printLog(router, true);
+
   }
 
   ngOnInit() {
     this.emailId = this.myLocalStorage.getValue(this.constants.EMAIL);
     this.encryptedPassword = this.commonFunctions.getEncryptedPassword(this.myLocalStorage.getValue(this.constants.PASSWORD));
     this.addValidation();
+    getData(this);
+    checkAndSetUi(this);
   }
 
   onSubmit() {
-
     if (!this.searchForm.valid) {
       this.commonFunctions.showErrorSnackbar("Search field must contain atleast 3 characters");
     }
@@ -69,6 +75,31 @@ export class SearchComponent extends BaseClass implements OnInit, ApiResponseCal
     return address;
   }
 
+  onItemClick(item: SearchModel) {
+    let navigatingPath: string = "";
+    switch (item.type) {
+      case this.AGENT:
+        navigatingPath = this.paths.PATH_AGENT_DETAIL;
+        sessionStorage.setItem(this.constants.AGENT_INFO, JSON.stringify(item));
+        break;
+      case this.PERSON:
+
+        break;
+      default:
+        break;
+    }
+
+    this.saveAndNavigate(navigatingPath);
+  }
+
+
+  private saveAndNavigate(navigatingPath: string) {
+    sessionStorage.setItem(this.constants.SEARCH_CURRENT_PAGE_NO, this.pageNum.toString());
+    sessionStorage.setItem(this.constants.SEARCHED_ENTITY_ARRAY, JSON.stringify(this.searchedUsers));
+    sessionStorage.setItem(this.constants.SEARCHED_STRING, JSON.stringify(this.searchForm.value.search));
+    sessionStorage.setItem(this.constants.SEARCH_MORE_DATA_AVAILABLE_FLAG, JSON.stringify(this.moreDataAvailable));
+    this.commonFunctions.navigateWithoutReplaceUrl(navigatingPath);
+  }
 
   private addValidation() {
     this.searchForm = new FormGroup({
@@ -93,10 +124,29 @@ function onApiResponse(newUsers: any, hideNoDataDiv: boolean, context: SearchCom
   context.cdr.markForCheck();
 }
 
+function checkAndSetUi(context: SearchComponent) {
+  if (!context.searchedUsers) {
+    resetData(context);
+  }
+  else {
+    context.hideNoDataDiv = true;
+  }
+  context.cdr.markForCheck();
+}
+
 function resetData(context: SearchComponent) {
   context.pageNum = 0;
   context.searchedUsers = [];
   context.hideNoDataDiv = false;
   context.moreDataAvailable = false;
-  context.cdr.markForCheck();
+}
+
+function getData(context: SearchComponent) {
+  context.searchedUsers = JSON.parse(sessionStorage.getItem(context.constants.SEARCHED_ENTITY_ARRAY));
+  if (context.searchedUsers && context.searchedUsers.length > 0) {
+    context.pageNum = Number(sessionStorage.getItem(context.constants.SEARCH_CURRENT_PAGE_NO));
+    context.searchString = sessionStorage.getItem(context.constants.SEARCHED_STRING);
+    context.moreDataAvailable = JSON.parse(sessionStorage.getItem(context.constants.SEARCH_MORE_DATA_AVAILABLE_FLAG));
+    context.cdr.markForCheck();
+  }
 }

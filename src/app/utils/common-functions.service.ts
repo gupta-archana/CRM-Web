@@ -89,7 +89,7 @@ export class CommonFunctionsService {
       }
 
     }
-    this.printLog(encryptedPass, true);
+    //this.printLog(encryptedPass, true);
     let encryptedString = btoa(String.fromCharCode.apply(null, new Uint8Array(encryptedPass)));
     let decryptedPass = atob(encryptedString);
     decryptedPass = decryptedPass.charCodeAt.call(decryptedPass, 0);

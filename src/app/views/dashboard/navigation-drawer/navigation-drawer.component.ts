@@ -111,6 +111,7 @@ function getSideNavData(self: NavigationDrawerComponent) {
 }
 
 function navigateToSelectedPage(title: string, context: NavigationDrawerComponent) {
+  sessionStorage.clear();
   let selectedNavBarItemPath = "";
   switch (title) {
     case context.constants.TOP_AGENTS:
@@ -141,6 +142,7 @@ function navigateToSelectedPage(title: string, context: NavigationDrawerComponen
 
 
 function changeHeaderTitle(path: string, context: NavigationDrawerComponent) {
+
   if (path) {
     switch (path) {
       case paths.PATH_TOP_AGENTS:
@@ -173,6 +175,7 @@ function changeHeaderTitle(path: string, context: NavigationDrawerComponent) {
   }
 }
 function showRefreshButton(show: boolean, context: NavigationDrawerComponent) {
+  
   if (show) {
     context.showRefreshButton = true;
     context.showFilterButton = false;

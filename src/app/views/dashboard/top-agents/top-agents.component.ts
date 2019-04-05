@@ -64,7 +64,9 @@ export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponse
   }
 
   onAgentClick(agent: AgentInfoModel) {
-    this.commonFunctions.printLog(agent, true);
+    //this.commonFunctions.printLog(agent, true);
+    sessionStorage.setItem(this.constants.TOP_AGENT_CURRENT_PAGE_NO, this.pageNumber.toString());
+    sessionStorage.setItem(this.constants.TOP_AGENT_DATA, JSON.stringify(this.topAgents));
     sessionStorage.setItem(this.constants.AGENT_INFO, JSON.stringify(agent));
     this.commonFunctions.navigateWithoutReplaceUrl(paths.PATH_AGENT_DETAIL);
 
@@ -95,8 +97,7 @@ export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponse
   }
 
   ngOnDestroy(): void {
-    sessionStorage.setItem(this.constants.TOP_AGENT_CURRENT_PAGE_NO, this.pageNumber.toString());
-    sessionStorage.setItem(this.constants.TOP_AGENT_DATA, JSON.stringify(this.topAgents));
+
     if (this.pageRefreshSubscription && !this.pageRefreshSubscription.closed) {
       this.pageRefreshSubscription.unsubscribe();
     }

@@ -16,6 +16,11 @@ export class Constants {
     TOP_AGENT_CURRENT_PAGE_NO = "top_agent_page_no";
     TOP_AGENT_DATA = "top_agent_data";
     NUMBER_OF_ROWS = "number_of_rows";
+    ENTITY_ARRAY = "entity_array";
+    SEARCHED_ENTITY_ARRAY = "searched_entntiy_array";
+    SEARCH_CURRENT_PAGE_NO = "search_current_page_no";
+    SEARCHED_STRING = "searched_string";
+    SEARCH_MORE_DATA_AVAILABLE_FLAG = "search_more_data_available_flag";
 
     // Error Messages
     ERROR_NO_INTERNET_CONNECTON = "Kindly check your internet connection";

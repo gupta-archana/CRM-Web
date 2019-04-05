@@ -1,8 +1,7 @@
 import { Component, OnInit, OnDestroy, Injector } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AgentInfoModel } from 'src/app/models/TopAgentsModel';
-
-import { BaseClass } from '../../../global/base-class';
+import { EntityDetailBaseClass } from '../../../global/entity-detail-base-class';
 
 
 @Component({
@@ -10,7 +9,7 @@ import { BaseClass } from '../../../global/base-class';
   templateUrl: './agent-detail.component.html',
   styleUrls: ['./agent-detail.component.css']
 })
-export class AgentDetailComponent extends BaseClass implements OnInit, OnDestroy {
+export class AgentDetailComponent extends EntityDetailBaseClass implements OnInit, OnDestroy {
 
   agentInfoSubscription: Subscription = null;
   agentInfo: AgentInfoModel;
@@ -22,7 +21,7 @@ export class AgentDetailComponent extends BaseClass implements OnInit, OnDestroy
 
   ngOnInit() {
     this.agentInfo = JSON.parse(sessionStorage.getItem(this.constants.AGENT_INFO));
-    //this.dataService.sendCurrentPagePath(paths.PATH_AGENT_DETAIL);
+    this.addNewHistoryEntity(this.agentInfo);
   }
   contactDetailClick() {
     this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_AGENT_CONTACT_DETAIL);

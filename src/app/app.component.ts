@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Injector } from '@angular/core';
 import { Router, ActivatedRoute, NavigationStart, Event as NavigationEvent } from '@angular/router';
 
 import { PlatformLocation, LocationStrategy } from '@angular/common';
@@ -10,12 +10,13 @@ import { DataServiceService } from './services/data-service.service';
 import { LoginComponent } from './views/login/login.component';
 import { UtilService } from './utils/util.service';
 import { filter } from 'rxjs/operators';
+import { BaseClass } from './global/base-class';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent extends BaseClass implements OnInit, OnDestroy {
 
 
   title = 'AlliantCRM';
@@ -29,16 +30,16 @@ export class AppComponent implements OnInit, OnDestroy {
     this._opened = !this._opened;
   }
   constructor(private router: Router,
-    public dataService: DataServiceService,
-    private utils: UtilService) {
-
+    private utils: UtilService,
+    private injector: Injector) {
+    super(injector);
   }
 
   ngOnInit(): void {
     this.utils.handleBackpressEvent();
     sendCurrentPagePath(this, this.router);
     window.onbeforeunload = ev => {
-      console.log(ev);
+      
       this.utils.removeBackpressEventListener();
     }
     registerHideShowLoaderBroadcast(this);
@@ -49,7 +50,10 @@ export class AppComponent implements OnInit, OnDestroy {
       this.loaderSubscription.unsubscribe();
     }
   }
-
+  ngAfterViewChecked() {
+    
+    this.cdr.detectChanges();
+  }
 }
 function registerHideShowLoaderBroadcast(context: AppComponent) {
   context.loaderSubscription = context.dataService.hideShowLoaderObservable.subscribe(
