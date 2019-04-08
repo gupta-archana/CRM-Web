@@ -22,4 +22,4 @@ const appRoutesArray: Routes =
 
     ];
 
-export const appRoutes: ModuleWithProviders = RouterModule.forRoot(appRoutesArray, { useHash: false });
+export const appRoutes: ModuleWithProviders = RouterModule.forRoot(appRoutesArray, { useHash: false, onSameUrlNavigation: 'reload' });

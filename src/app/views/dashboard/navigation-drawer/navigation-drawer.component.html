@@ -5,10 +5,13 @@
       <div class="col-xs-8 text-center">
         <h1 class="t-agent">{{headerTitle}}</h1>
       </div>
-      <div class="col-xs-2 text-right toppad" *ngIf="showRefreshButton" data-toggle="modal" data-target="#changepic"><img src="../../../../images/refresh.svg" alt=""
-          (click)="logout()"></div>
+      <div class="col-xs-2 text-right toppad" *ngIf="showRefreshButton">
+        <img src="../../../../images/refresh.svg" alt="" (click)="logout()"></div>
       <div class="col-xs-2 text-right toppad" *ngIf="showFilterButton"><img src="../../../../images/filter.svg" alt=""
           (click)="onFilterClick()"><br><span class="edit-detail"><a href="#">Filter</a></span></div>
+      <div class="col-xs-2 text-right toppad" *ngIf="showRecentProfileButton" data-toggle="modal"
+        data-target="#changepic"><img src="../../../../images/recent-profile-white.svg" alt=""
+          (click)="onRecentProfileClick()"><br><span class="edit-detail"><a href="#"></a></span></div>
     </div>
 
     <div id="mySidenav" class="sidenav">
@@ -38,5 +41,6 @@
 
   </div>
   <div class="bottom-wrapper">
+    <app-recent-profiles></app-recent-profiles>
     <router-outlet (pageNameEvent)="receivePageName($event)"></router-outlet>
   </div>

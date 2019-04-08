@@ -88,8 +88,10 @@ export class SearchComponent extends BaseClass implements OnInit, ApiResponseCal
       default:
         break;
     }
-
-    this.saveAndNavigate(navigatingPath);
+    if (navigatingPath)
+      this.saveAndNavigate(navigatingPath);
+    else
+      this.commonFunctions.showErrorSnackbar("We are working on person ui");
   }
 
 

@@ -1,19 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy, HostListener } from '@angular/core';
-import { ApiHandlerService } from '../../../utils/api-handler.service';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, Injector } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { CommonFunctionsService } from '../../../utils/common-functions.service';
-import { Constants } from '../../../Constants/Constants';
-import * as paths from '../../../Constants/paths';
-import { MyLocalStorageService } from '../../../services/my-local-storage.service';
-import { DataServiceService } from 'src/app/services/data-service.service';
-import { UtilService } from '../../../utils/util.service';
-import { PlatformLocation } from '@angular/common';
-import { LoginComponent } from '../../login/login.component';
-import * as $ from 'jquery';
-import { FormCanDeactivate } from '../../../guards/form-can-deactivate/form-can-deactivate';
-import { MatDialog } from '@angular/material';
-import { ConfirmationDialogComponent } from '../../../customUI/dialogs/confirmation-dialog/confirmation-dialog.component';
+
+import { BaseClass } from '../../../global/base-class';
 
 @Component({
   selector: 'app-navigation-drawer',
@@ -21,35 +10,29 @@ import { ConfirmationDialogComponent } from '../../../customUI/dialogs/confirmat
   styleUrls: ['./navigation-drawer.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NavigationDrawerComponent implements OnInit, OnDestroy {
+export class NavigationDrawerComponent extends BaseClass implements OnInit, OnDestroy {
 
 
   sideNavArray = [];
   headerTitle: string = "";
   activatedRouteSubscription: Subscription = null;
   currentPagePathSubscription: Subscription = null;
-  showRefreshButton: boolean = false;
+  showRefreshButton: boolean = true;
   showFilterButton: boolean = false;
+  showRecentProfileButton: boolean = false;
   exit: boolean = false;
   called: boolean = false;
   functionCalled: any;
 
-  constructor(public apiHandler: ApiHandlerService,
-    public changeDetector: ChangeDetectorRef,
+  constructor(
     private activatedRoute: ActivatedRoute,
-    public commonFunctions: CommonFunctionsService,
-    public router: Router,
-    private myLocalStorage: MyLocalStorageService,
-    public constants: Constants,
-    public dataService: DataServiceService,
-    private activeRoute: ActivatedRoute,
-    private location: PlatformLocation,
-    private dialog: MatDialog) { }
+    private injector: Injector,
+    public router: Router) { super(injector) }
 
   ngOnInit() {
     let self = this;
     getSideNavData(self);
-    console.log($);
+
     this.activatedRouteSubscription = this.activatedRoute.paramMap.subscribe(url => {
       changeHeaderTitle(this.activatedRoute.firstChild.routeConfig.path, this);
     });
@@ -80,7 +63,7 @@ export class NavigationDrawerComponent implements OnInit, OnDestroy {
     // dialogRef.afterClosed().subscribe(callback => {
     //   if (callback) {
     //     this.myLocalStorage.clearValue(this.constants.LOGGED_IN);
-    //     this.commonFunctions.navigateWithReplaceUrl(paths.PATH_LOGIN);
+    //     this.commonFunctions.navigateWithReplaceUrl(context.paths.PATH_LOGIN);
     //   }
     // });
   }
@@ -93,6 +76,10 @@ export class NavigationDrawerComponent implements OnInit, OnDestroy {
     this.dataService.onHeaderFilterClick();
   }
 
+  onRecentProfileClick() {
+    this.dataService.onRecentProfileClick();
+  }
+
   ngOnDestroy(): void {
     if (this.activatedRouteSubscription && !this.activatedRouteSubscription.closed)
       this.activatedRouteSubscription.unsubscribe();
@@ -102,7 +89,7 @@ function getSideNavData(self: NavigationDrawerComponent) {
   self.apiHandler.getSideNavJson({
     onSuccess(success) {
       self.sideNavArray = success;
-      self.changeDetector.markForCheck();
+      self.cdr.markForCheck();
     }, onError(errCode, errMsg) {
     }
   });
@@ -111,25 +98,25 @@ function getSideNavData(self: NavigationDrawerComponent) {
 }
 
 function navigateToSelectedPage(title: string, context: NavigationDrawerComponent) {
-  sessionStorage.clear();
+  clearSearch(context);
   let selectedNavBarItemPath = "";
   switch (title) {
     case context.constants.TOP_AGENTS:
-      selectedNavBarItemPath = paths.PATH_TOP_AGENTS;
+      selectedNavBarItemPath = context.paths.PATH_TOP_AGENTS;
 
       break;
     case context.constants.AGENTS_WITH_ALERT:
-      selectedNavBarItemPath = paths.PATH_AGENTS_WITH_ALERT;
+      selectedNavBarItemPath = context.paths.PATH_AGENTS_WITH_ALERT;
 
       break;
     case context.constants.AGENTS_WITH_PERFORMANCE:
-      selectedNavBarItemPath = paths.PATH_AGENTS_WITH_PERFORMANCE;
+      selectedNavBarItemPath = context.paths.PATH_AGENTS_WITH_PERFORMANCE;
       break;
     case context.constants.SEARCH:
-      selectedNavBarItemPath = paths.PATH_SEARCH;
+      selectedNavBarItemPath = context.paths.PATH_SEARCH;
       break;
     case context.constants.NEWS:
-      selectedNavBarItemPath = paths.PATH_NEWS;
+      selectedNavBarItemPath = context.paths.PATH_NEWS;
       break;
     default:
       break;
@@ -143,45 +130,58 @@ function navigateToSelectedPage(title: string, context: NavigationDrawerComponen
 
 function changeHeaderTitle(path: string, context: NavigationDrawerComponent) {
 
+  reasetHeaderButtons(context);
   if (path) {
     switch (path) {
-      case paths.PATH_TOP_AGENTS:
+      case context.paths.PATH_TOP_AGENTS:
         context.headerTitle = context.constants.TOP_AGENTS;
-        showRefreshButton(true, context);
+        context.showRefreshButton = true;
         break;
-      case paths.PATH_AGENTS_WITH_ALERT:
+      case context.paths.PATH_AGENTS_WITH_ALERT:
         context.headerTitle = context.constants.AGENTS_WITH_ALERT;
-        showRefreshButton(true, context);
+        context.showRefreshButton = true;
         break;
-      case paths.PATH_AGENTS_WITH_PERFORMANCE:
-        showRefreshButton(true, context);
+      case context.paths.PATH_AGENTS_WITH_PERFORMANCE:
         context.headerTitle = context.constants.AGENTS_WITH_PERFORMANCE;
+        context.showRefreshButton = true;
         break;
-      case paths.PATH_AGENT_DETAIL:
+      case context.paths.PATH_AGENT_DETAIL:
+        context.showRecentProfileButton = true;
         context.headerTitle = context.constants.AGENT_DETAIL;
         break;
-      case paths.PATH_NEWS:
+      case context.paths.PATH_NEWS:
         context.headerTitle = context.constants.NEWS;
-        showRefreshButton(true, context);
+        context.showRefreshButton = true;
         break;
-      case paths.PATH_SEARCH:
+      case context.paths.PATH_SEARCH:
         context.headerTitle = context.constants.SEARCH;
-        showRefreshButton(false, context);
+        context.showFilterButton = true;
         break;
 
       default:
         break;
     }
+
+    context.cdr.markForCheck();
   }
 }
-function showRefreshButton(show: boolean, context: NavigationDrawerComponent) {
-  
-  if (show) {
-    context.showRefreshButton = true;
-    context.showFilterButton = false;
-  }
-  else {
-    context.showRefreshButton = false;
-    context.showFilterButton = true;
-  }
+function showButtonOnHeader(showThisButton: boolean) {
+  showThisButton = true;
+
+}
+
+function reasetHeaderButtons(context: NavigationDrawerComponent) {
+  context.showRefreshButton = false;
+  context.showFilterButton = false;
+  context.showRecentProfileButton = false;
+}
+
+
+
+function clearSearch(context: NavigationDrawerComponent) {
+  sessionStorage.removeItem(context.constants.SEARCH_CURRENT_PAGE_NO);
+  sessionStorage.removeItem(context.constants.SEARCHED_ENTITY_ARRAY);
+  sessionStorage.removeItem(context.constants.SEARCHED_STRING);
+  sessionStorage.removeItem(context.constants.SEARCH_MORE_DATA_AVAILABLE_FLAG);
+
 }

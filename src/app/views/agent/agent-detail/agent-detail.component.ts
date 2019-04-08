@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, Injector } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AgentInfoModel } from 'src/app/models/TopAgentsModel';
 import { EntityDetailBaseClass } from '../../../global/entity-detail-base-class';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,9 +15,10 @@ export class AgentDetailComponent extends EntityDetailBaseClass implements OnIni
   agentInfoSubscription: Subscription = null;
   agentInfo: AgentInfoModel;
 
-  constructor(injector: Injector) {
+  constructor(injector: Injector,
+    private router: Router) {
     super(injector);
-
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
   ngOnInit() {

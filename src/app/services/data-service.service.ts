@@ -27,6 +27,9 @@ export class DataServiceService {
   private filterSubject = new Subject<any>();;
   filterObservable = this.filterSubject.asObservable();
 
+  private recentProfileSubject = new Subject<any>();
+  recentProfileObservable = this.recentProfileSubject.asObservable();
+
   private injectorSubject = new Subject<any>();;
   injectorObservable = this.injectorSubject.asObservable();
 
@@ -54,6 +57,10 @@ export class DataServiceService {
 
   onHeaderFilterClick() {
     this.filterSubject.next(true);
+  }
+
+  onRecentProfileClick() {
+    this.recentProfileSubject.next();
   }
 
   onInjectorCreated() {

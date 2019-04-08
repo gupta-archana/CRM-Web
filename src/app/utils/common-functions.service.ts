@@ -11,9 +11,8 @@ export class CommonFunctionsService {
     private snackBar: MatSnackBar,
     private toastr: ToastrService,
     private router: Router) { }
-  printLog(message: any, show: boolean) {
-
-    if (show)
+  printLog(message: any, show?: boolean) {
+    if (show == undefined || show == true)
       console.log(message);
 
   }
