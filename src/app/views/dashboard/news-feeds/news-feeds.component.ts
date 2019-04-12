@@ -19,9 +19,12 @@ export class NewsFeedsComponent extends BaseClass implements OnInit, ApiResponse
   }
 
   ngOnInit() {
+   
     this.doRequest();
     registerRefreshNewsEvent(this);
   }
+
+ 
   public doRequest() {
     this.dataService.onHideShowLoader(true);
     this.newsFeeds = [];
@@ -51,7 +54,7 @@ export class NewsFeedsComponent extends BaseClass implements OnInit, ApiResponse
 }
 
 function registerRefreshNewsEvent(context: NewsFeedsComponent) {
-  this.refreshPageSubscription = context.dataService.pageRefreshObservable.subscribe(data => {
+  context.refreshPageSubscription = context.dataService.pageRefreshObservable.subscribe(data => {
     context.doRequest();
   });
 }
