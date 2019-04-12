@@ -19,7 +19,12 @@ export class OpenDialogsService {
     });
   }
 
-  showConfirmationDialog(alertTitle, alertMsg, noText, yesText) {
+  showConfirmationDialog(alertTitle, alertMsg, noText?, yesText?) {
+    if (!noText)
+      noText = "NO";
+
+    if (!yesText)
+      yesText = "YES";
     return this.dialog.open(ConfirmationDialogComponent, {
       data: {
         alertTitle: alertTitle, message: alertMsg, noText: noText, yesText: yesText

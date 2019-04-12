@@ -52,8 +52,7 @@ export class ForgotPasswordComponent extends BaseClass implements OnInit, ApiRes
     else {
       const modalRef = this.openDialogService.showAlertDialog(this.constants.PASSWORD_SENT, this.constants.PASSWORD_SENT_ALERT_MSG);
       modalRef.afterClosed().subscribe(closed => {
-        this.commonFunctions.backPress();
-        this.commonFunctions.backPress();
+        this.commonFunctions.navigateWithReplaceUrl(this.paths.PATH_LOGIN);
       });
     }
 

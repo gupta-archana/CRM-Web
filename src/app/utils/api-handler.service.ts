@@ -49,6 +49,14 @@ export class ApiHandlerService implements ApiResponseCallback {
   }
 
 
+  /**
+   * getNews
+   */
+  public getNews(apiResponseCallback: ApiResponseCallback) {
+    let url = this.api.getGoogleTopTenNewsUrl();
+    this.apiService.hitGetApi(url, apiResponseCallback);
+  }
+
 
   onSuccess(response: any) {
     this.dataService.onHideShowLoader(false);

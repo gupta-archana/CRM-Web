@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { BaseClass } from '../../../global/base-class';
+import { ConfirmationDialogComponent } from '../../../customUI/dialogs/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-navigation-drawer',
@@ -27,7 +28,8 @@ export class NavigationDrawerComponent extends BaseClass implements OnInit, OnDe
   constructor(
     private activatedRoute: ActivatedRoute,
     private injector: Injector,
-    public router: Router) { super(injector) }
+    public router: Router,
+  ) { super(injector) }
 
   ngOnInit() {
     let self = this;
@@ -56,16 +58,14 @@ export class NavigationDrawerComponent extends BaseClass implements OnInit, OnDe
   }
 
   logout() {
-    // const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-    //   data: { alertTitle: this.constants.LOGOUT, message: this.constants.ALERT_LOGOUT_CONFIRMATION }
-    // });
+    const dialogRef = this.openDialogService.showConfirmationDialog(this.constants.LOGOUT, this.constants.ALERT_LOGOUT_CONFIRMATION, this.constants.CANCEL, this.constants.LOGOUT);
 
-    // dialogRef.afterClosed().subscribe(callback => {
-    //   if (callback) {
-    //     this.myLocalStorage.clearValue(this.constants.LOGGED_IN);
-    //     this.commonFunctions.navigateWithReplaceUrl(context.paths.PATH_LOGIN);
-    //   }
-    // });
+    dialogRef.afterClosed().subscribe(callback => {
+      if (callback) {
+        this.myLocalStorage.clearValue(this.constants.LOGGED_IN);
+        this.commonFunctions.navigateWithReplaceUrl(this.paths.PATH_LOGIN);
+      }
+    });
   }
 
   onRefreshClick() {
@@ -165,10 +165,7 @@ function changeHeaderTitle(path: string, context: NavigationDrawerComponent) {
     context.cdr.markForCheck();
   }
 }
-function showButtonOnHeader(showThisButton: boolean) {
-  showThisButton = true;
 
-}
 
 function reasetHeaderButtons(context: NavigationDrawerComponent) {
   context.showRefreshButton = false;
