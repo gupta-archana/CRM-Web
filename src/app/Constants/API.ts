@@ -49,6 +49,6 @@ export class API {
 
 
   private getBaseUrl(app_mode: string) {
-    return this.API_BASE_URL + app_mode + "/get?I0=JSON&I4=rcm&";
+    return this.API_BASE_URL + app_mode + "/get?I0=JSON&I4=CRM&";
   }
 }

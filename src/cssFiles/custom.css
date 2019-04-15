@@ -129,6 +129,12 @@ ul {
   color: #3498DB;
 }
 
-.divider{
+.divider {
   margin-top: 20px;
 }
+
+input:-webkit-autofill {
+  transition: background-color 5s ease-in-out 0s;
+}
+
+

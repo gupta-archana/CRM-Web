@@ -8,11 +8,16 @@ import { CommonFunctionsService } from '../../../utils/common-functions.service'
 })
 export class ContactDetailComponent implements OnInit {
 
-  constructor(private commonFunctions:CommonFunctionsService) { }
+  constructor(private commonFunctions: CommonFunctionsService) { }
 
   ngOnInit() {
   }
   goBack() {
     this.commonFunctions.backPress();
+  }
+
+  private doEmail() {
+    var mailContent = "mailto:adam.millendorf@outlook.com?cc=divyanshu@jklm.com&bcc=div@jkm.com&subject=subject&body=" + encodeURIComponent("<b>Hello I am body</b>");
+    window.location.href = mailContent;
   }
 }

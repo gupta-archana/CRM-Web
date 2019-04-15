@@ -33,5 +33,9 @@
   {
     "title": "Recent Profiles",
     "class": "agent-profile"
+  },
+  {
+    "title": "Logout",
+    "class": "logout"
   }
 ]

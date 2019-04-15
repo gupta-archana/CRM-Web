@@ -325,6 +325,11 @@ ul.slide-menu li.agent-profile a {
   padding-left: 45px;
 }
 
+ul.slide-menu li.logout a {
+  background: url(../images/ic-logout.svg) no-repeat left;
+  padding-left: 45px;
+}
+
 .pro-n-setting a {
   font-size: 14px;
   white-space: nowrap;

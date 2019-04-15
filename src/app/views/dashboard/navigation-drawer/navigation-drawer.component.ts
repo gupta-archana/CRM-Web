@@ -1,9 +1,10 @@
-import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, Injector } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, Injector, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { BaseClass } from '../../../global/base-class';
 import { ConfirmationDialogComponent } from '../../../customUI/dialogs/confirmation-dialog/confirmation-dialog.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-navigation-drawer',
@@ -25,7 +26,9 @@ export class NavigationDrawerComponent extends BaseClass implements OnInit, OnDe
   called: boolean = false;
   functionCalled: any;
 
-  constructor(
+  @ViewChild("recentProfile")
+  recentProfile: ElementRef;
+  constructor(private modalService: NgbModal,
     private activatedRoute: ActivatedRoute,
     private injector: Injector,
     public router: Router,
@@ -98,7 +101,7 @@ function getSideNavData(self: NavigationDrawerComponent) {
 }
 
 function navigateToSelectedPage(title: string, context: NavigationDrawerComponent) {
-  clearSearch(context);
+
   let selectedNavBarItemPath = "";
   switch (title) {
     case context.constants.TOP_AGENTS:
@@ -118,13 +121,22 @@ function navigateToSelectedPage(title: string, context: NavigationDrawerComponen
     case context.constants.NEWS:
       selectedNavBarItemPath = context.paths.PATH_NEWS;
       break;
+    case context.constants.RECENT_PROFILE:
+      context.dataService.onRecentProfileClick();
+      break;
+    case context.constants.LOGOUT:
+      context.logout();
+      break;
+
     default:
       break;
   }
-  context.commonFunctions.navigateWithReplaceUrl(selectedNavBarItemPath);
-
-  changeHeaderTitle(selectedNavBarItemPath, context);
   context.closeNav();
+  if (selectedNavBarItemPath) {
+    clearSearch(context);
+    context.commonFunctions.navigateWithReplaceUrl(selectedNavBarItemPath);
+    changeHeaderTitle(selectedNavBarItemPath, context);
+  }
 }
 
 

@@ -11,10 +11,12 @@ export class OpenDialogsService {
 
   constructor(private dialog: MatDialog) {
   }
-  showAlertDialog(alertTitle, alertMsg) {
+  showAlertDialog(alertTitle, alertMsg, okText?) {
+    if (!okText)
+      okText = "OK";
     return this.dialog.open(AlertDialogComponent, {
       data: {
-        alertTitle: alertTitle, message: alertMsg
+        alertTitle: alertTitle, message: alertMsg, okText: okText
       }
     });
   }

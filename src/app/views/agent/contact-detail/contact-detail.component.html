@@ -2,12 +2,12 @@
   <div class="container nav-bg">
     <div class="row">
 
-      <div class="col-xs-2 toppad"><img src="../../../../images/back-btn.svg" alt="" (click)="goBack()" ></div>
+      <div class="col-xs-2 toppad"><img src="../../../../images/back-btn.svg" alt="" (click)="goBack()"></div>
       <div class="col-xs-7 text-center">
         <h1 class="t-agent">Contact</h1>
       </div>
-      <div class="col-xs-3 text-center tpad"><img src="../../../../images/edit.svg" alt=""><br><span class="edit-detail"><a
-            href="#">Edit Details</a></span></div>
+      <div class="col-xs-3 text-center tpad"><img src="../../../../images/edit.svg" alt=""><br><span
+          class="edit-detail"><a href="#">Edit Details</a></span></div>
     </div>
 
   </div>
@@ -43,7 +43,7 @@
           <div class="clearfix"></div>
           <div class="ag-detail">
             <ul>
-              <li class="call">Call</li>
+              <li class="call" href='tel:' +"720-434-1417">Call</li>
               <li class="sms">SMS</li>
               <li class="copy">Copy</li>
             </ul>
@@ -52,17 +52,18 @@
       </div>
       <div class="col-xs-12 col-md-6 cell-bg">
         <div class="agent-contact">
-          <h4>E-mail ID</h4> <span><a href="mailto">adam.millendorf@outlook.com</a></span>
+          <h4>E-mail ID</h4> <span><a>adam.millendorf@outlook.com</a></span>
           <div class="clearfix"></div>
           <div class="ag-detail">
             <ul>
-              <li class="mail">E-mail this ID</li>
+              <li class="mail" (click)="doEmail()">E-mail this ID</li>
             </ul>
           </div>
         </div>
       </div>
 
-      <button (click)="topFunction()" id="myBtn" title="Go to top"><span class="glyphicon glyphicon-arrow-up"></span></button>
+      <button (click)="topFunction()" id="myBtn" title="Go to top"><span
+          class="glyphicon glyphicon-arrow-up"></span></button>
     </div>
   </div>
 </div>
