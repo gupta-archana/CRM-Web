@@ -29,9 +29,9 @@
           <div class="clearfix"></div>
           <div class="ag-detail">
             <ul>
-              <li class="call">Call</li>
-              <li class="sms">SMS</li>
-              <li class="copy">Copy</li>
+              <li class="call" (click)="doCall()">Call</li>
+              <li class="sms" (click)="doSMS()">SMS</li>
+              <li class="copy" (click)="copyText('7204341417')">Copy</li>
             </ul>
           </div>
         </div>
@@ -43,9 +43,9 @@
           <div class="clearfix"></div>
           <div class="ag-detail">
             <ul>
-              <li class="call" href='tel:' +"720-434-1417">Call</li>
-              <li class="sms">SMS</li>
-              <li class="copy">Copy</li>
+              <li class="call" (click)="doCall()">Call</li>
+              <li class="sms" (click)="doSMS()">SMS</li>
+              <li class="copy" (click)="copyText(720-434-1417)">Copy</li>
             </ul>
           </div>
         </div>

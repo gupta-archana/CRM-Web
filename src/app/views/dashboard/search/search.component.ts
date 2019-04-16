@@ -4,7 +4,8 @@ import { BaseClass } from '../../../global/base-class';
 import { ApiResponseCallback } from '../../../Interfaces/ApiResponseCallback';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { SearchModel } from '../../../models/search-model';
-import { Router } from '@angular/router';
+import { DeviceDetectorService } from 'ngx-device-detector';
+
 
 @Component({
   selector: 'app-search',
@@ -25,10 +26,11 @@ export class SearchComponent extends BaseClass implements OnInit, ApiResponseCal
   moreDataAvailable: boolean = false;
   private AGENT: string = "Agent";
   private PERSON: string = "Person";
+  deviceInfo = null;
 
-  constructor(injector: Injector, private router: Router) {
+  constructor(injector: Injector, private deviceService: DeviceDetectorService) {
     super(injector);
-    this.commonFunctions.printLog(router, true);
+    this.epicFunction();
 
   }
 
@@ -109,6 +111,17 @@ export class SearchComponent extends BaseClass implements OnInit, ApiResponseCal
 
     });
   }
+  epicFunction() {
+    console.log('hello `Home` component');
+    this.deviceInfo = this.deviceService.getDeviceInfo();
+    const isMobile = this.deviceService.isMobile();
+    const isTablet = this.deviceService.isTablet();
+    const isDesktopDevice = this.deviceService.isDesktop();
+    console.log(this.deviceInfo);
+    console.log(isMobile);  // returns if the device is a mobile device (android / iPhone / windows-phone etc)
+    console.log(isTablet);  // returns if the device us a tablet (iPad etc)
+    console.log(isDesktopDevice); // returns if the app is running on a Desktop browser.
+  }
 }
 
 function onApiResponse(newUsers: any, hideNoDataDiv: boolean, context: SearchComponent) {
@@ -151,4 +164,6 @@ function getData(context: SearchComponent) {
     context.moreDataAvailable = JSON.parse(sessionStorage.getItem(context.constants.SEARCH_MORE_DATA_AVAILABLE_FLAG));
     context.cdr.markForCheck();
   }
+
+
 }

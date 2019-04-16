@@ -26,6 +26,7 @@ import { AlertDialogComponent } from './customUI/dialogs/alert-dialog/alert-dial
 import { ConfirmationDialogComponent } from './customUI/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { ForgotPasswordAlertComponent } from './customUI/dialogs/forgot-password/forgot-password-alert.component';
 import { ChangeProfileDialogComponent } from './customUI/dialogs/change-profile-dialog/change-profile-dialog.component';
+import { DeviceDetectorModule } from 'ngx-device-detector';
 
 
 @NgModule({
@@ -56,7 +57,7 @@ import { ChangeProfileDialogComponent } from './customUI/dialogs/change-profile-
     MatFormFieldModule,
     BrowserAnimationsModule,
     HttpModule,
-
+    DeviceDetectorModule.forRoot(),
     ToastrModule,
     SidebarModule.forRoot(),
     ToastNoAnimationModule.forRoot({
