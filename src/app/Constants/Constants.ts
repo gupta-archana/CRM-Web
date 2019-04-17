@@ -22,6 +22,7 @@ export class Constants {
   SEARCHED_STRING = "searched_string";
   SEARCH_MORE_DATA_AVAILABLE_FLAG = "search_more_data_available_flag";
   LOGIN = "Login";
+  TOP_AGENT_TOTAL_ROWS = "top_agent_total_rows";
 
   // Error Messages
   ERROR_NO_INTERNET_CONNECTON = "Kindly check your internet connection";

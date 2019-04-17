@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { BaseClass } from '../../../global/base-class';
 import { ApiResponseCallback } from '../../../Interfaces/ApiResponseCallback';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { SearchModel } from '../../../models/search-model';
+import { EntityModel } from '../../../models/entity-model';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
 
@@ -16,7 +16,7 @@ export class SearchComponent extends BaseClass implements OnInit, ApiResponseCal
 
   filterSubscription: Subscription = null;
   searchForm: FormGroup;
-  searchedUsers: Array<SearchModel> = [];
+  searchedUsers: Array<EntityModel> = [];
   hideNoDataDiv: boolean = false;
   emailId;
   encryptedPassword;
@@ -30,7 +30,7 @@ export class SearchComponent extends BaseClass implements OnInit, ApiResponseCal
 
   constructor(injector: Injector, private deviceService: DeviceDetectorService) {
     super(injector);
-    this.epicFunction();
+    
 
   }
 
@@ -63,21 +63,21 @@ export class SearchComponent extends BaseClass implements OnInit, ApiResponseCal
   }
 
   onSuccess(response: any) {
-    onApiResponse(response.ttresult, true, this);
+    onApiResponse(response.profile, this);
   }
 
   onError(errorCode: number, errorMsg: string) {
-    onApiResponse([], false, this);
+    onApiResponse([], this);
     this.commonFunctions.showErrorSnackbar(errorMsg);
   }
 
-  getAddress(item: SearchModel) {
+  getAddress(item: EntityModel) {
     let address: string = "";
     address = item.addr1 + " " + item.addr2 + " " + item.addr3 + " " + item.addr4 + " " + item.city + " " + item.state + " " + item.zip;
     return address;
   }
 
-  onItemClick(item: SearchModel) {
+  onItemClick(item: EntityModel) {
     let navigatingPath: string = "";
     switch (item.type) {
       case this.AGENT:
@@ -111,20 +111,10 @@ export class SearchComponent extends BaseClass implements OnInit, ApiResponseCal
 
     });
   }
-  epicFunction() {
-    console.log('hello `Home` component');
-    this.deviceInfo = this.deviceService.getDeviceInfo();
-    const isMobile = this.deviceService.isMobile();
-    const isTablet = this.deviceService.isTablet();
-    const isDesktopDevice = this.deviceService.isDesktop();
-    console.log(this.deviceInfo);
-    console.log(isMobile);  // returns if the device is a mobile device (android / iPhone / windows-phone etc)
-    console.log(isTablet);  // returns if the device us a tablet (iPad etc)
-    console.log(isDesktopDevice); // returns if the app is running on a Desktop browser.
-  }
+  
 }
 
-function onApiResponse(newUsers: any, hideNoDataDiv: boolean, context: SearchComponent) {
+function onApiResponse(newUsers: any, context: SearchComponent) {
   context.dataService.onHideShowLoader(false);
   context.searchedUsers = context.searchedUsers.concat(newUsers);
   if (context.searchedUsers && context.searchedUsers.length > 0) {

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
-import { ToastrService } from 'ngx-toastr';
+import { ToastrService, ActiveToast } from 'ngx-toastr';
 import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
 export class CommonFunctionsService {
+  private activeToast: any = null;
 
   constructor(
     private snackBar: MatSnackBar,
@@ -25,6 +26,18 @@ export class CommonFunctionsService {
   showErrorSnackbar(message: string) {
     this.toastr.error(message);
 
+  }
+
+  showPermanentSnackbar(message: string) {
+    if (!this.activeToast) {
+      this.activeToast = this.toastr.warning(message, null, {
+        disableTimeOut: true,
+        positionClass:"toast-bottom-right"
+      });
+    }
+    else {
+      this.activeToast.message = message;
+    }
   }
 
   navigateWithReplaceUrl(path: string) {
@@ -102,7 +115,7 @@ export class CommonFunctionsService {
 
   hideShowTopScrollButton() {
     let self = this;
-    window.onscroll = function () { self.scrollFunction() };
+    window.onscroll = function() { self.scrollFunction() };
   }
   private scrollFunction() {
     if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {

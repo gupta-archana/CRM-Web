@@ -3,9 +3,9 @@
     <div class="col-xs-12 col-md-12 cell-bg">
       <div class="agent-detail ">
         <div class="dp">
-          <div class="badge bd-col">A</div><img src={{agentInfo.agentImg}} alt="" />
+          <div class="badge bd-col">A</div><img src={{agentInfo.agentImg}} onerror="this.src='../../../../images/placeholder.png'" alt="" />
         </div>
-        <h4>{{agentInfo.name}}</h4> <span class="building-icon padding-left-twenty-five">{{agentInfo.agentId}}</span>
+        <h4>{{agentInfo.name}}</h4> <span class="building-icon padding-left-twenty-five">{{agentInfo.entityId}}</span>
         <div class="clearfix"></div>
         <div class="amount bx1"><span>Net Premium</span><br>$ {{agentInfo.netPermium}}</div>
         <div class="amount bx2"><span><img src="../../../../images/share.svg" alt="" /></span></div>

@@ -1,16 +1,11 @@
 import { Component, OnInit, ChangeDetectorRef, HostListener, OnDestroy, Injector } from '@angular/core';
 import { AgentInfoModel } from 'src/app/models/TopAgentsModel';
-import { CommonFunctionsService } from 'src/app/utils/common-functions.service';
-import { Router } from '@angular/router';
-import { MyLocalStorageService } from 'src/app/services/my-local-storage.service';
-import { Constants } from 'src/app/Constants/Constants';
-import * as paths from 'src/app/Constants/paths';
+
 import { ApiResponseCallback } from '../../../Interfaces/ApiResponseCallback';
-import { ApiHandlerService } from '../../../utils/api-handler.service';
-import { UserModel } from 'src/app/models/UserModel';
-import { DataServiceService } from 'src/app/services/data-service.service';
+
 import { Subscription } from 'rxjs';
 import { BaseClass } from '../../../global/base-class';
+import { EntityModel } from '../../../models/entity-model';
 
 @Component({
   selector: 'app-top-agents',
@@ -25,12 +20,15 @@ export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponse
   encryptedPassword: string;
   moreDataAvailable: boolean = true;
   pageRefreshSubscription: Subscription = null;
+  totalRows: number = 0;
+  totalAndCurrentRowsRatio: string = "";
 
   constructor(private injector: Injector) {
     super(injector);
     this.pageNumber = 0;
+    this.totalRows = 0;
   }
-  topAgents: Array<any> = [];
+  topAgents: Array<EntityModel> = [];
 
   ngOnInit() {
 
@@ -59,6 +57,8 @@ export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponse
     }
     else {
       this.pageNumber = Number(sessionStorage.getItem(this.constants.TOP_AGENT_CURRENT_PAGE_NO));
+      this.totalRows = Number(sessionStorage.getItem(this.constants.TOP_AGENT_TOTAL_ROWS));
+      this.updateRatioUI();
       this.cdr.markForCheck();
     }
   }
@@ -68,23 +68,39 @@ export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponse
     sessionStorage.setItem(this.constants.TOP_AGENT_CURRENT_PAGE_NO, this.pageNumber.toString());
     sessionStorage.setItem(this.constants.TOP_AGENT_DATA, JSON.stringify(this.topAgents));
     sessionStorage.setItem(this.constants.AGENT_INFO, JSON.stringify(agent));
-    this.commonFunctions.navigateWithoutReplaceUrl(paths.PATH_AGENT_DETAIL);
+    sessionStorage.setItem(this.constants.TOP_AGENT_TOTAL_ROWS, JSON.stringify(this.totalRows));
+    this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_AGENT_DETAIL);
 
   }
 
   onSuccess(response: any) {
-    this.commonFunctions.printLog(response, true);
-    let newTopAgents = response.ttTopAgent;
+    this.parseAndShowDataOnUi(response);
+    this.cdr.markForCheck();
+  }
+
+
+  private parseAndShowDataOnUi(response: any) {
+    let newTopAgents = response.profile;
     if (newTopAgents) {
-      this.topAgents = this.topAgents.concat(response.ttTopAgent);
-      this.cdr.markForCheck();
+      this.totalRows = Number((newTopAgents.splice(newTopAgents.length - 1, 1))[0].rowNum);
+      this.topAgents = this.topAgents.concat(newTopAgents);
       this.moreDataAvailable = true;
     }
     else {
       this.moreDataAvailable = false;
     }
-    console.log(this.topAgents[0].name);
+    this.updateRatioUI();
   }
+
+  private updateRatioUI() {
+    if (this.topAgents && this.topAgents.length > 0) {
+      this.totalAndCurrentRowsRatio = this.topAgents.length + " out of " + this.totalRows + " top agents";
+    }
+    else {
+      this.totalAndCurrentRowsRatio = "No top agents available";
+    }
+  }
+
   onError(errorCode: number, errorMsg: string) {
     this.moreDataAvailable = false;
     this.commonFunctions.showErrorSnackbar(errorMsg);

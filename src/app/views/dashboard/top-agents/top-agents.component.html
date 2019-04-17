@@ -1,10 +1,11 @@
-<div class="container app-bg2">
+<div class="wrapper entityCount">{{totalAndCurrentRowsRatio}}</div>
+<div class="container app-bg2 bottom-wrapper">
   <div class="row">
     <ul>
       <li *ngFor="let item of topAgents" (click)="onAgentClick(item)">
         <div class="col-xs-12 col-md-6 cell-bg">
           <div class="agent-detail">
-            <div class="dp"><img src={{item.agentImg}} alt="" /></div>
+            <div class="dp"><img src={{item.agentImg}} alt="" onerror="this.src='../../../../images/placeholder.png'"/></div>
             <h4>{{item.name}}</h4> <span>{{item.city+','+item.state}}</span>
             <div class="clearfix"></div>
             <div class="amount"><span>Net Premium</span><br>$ {{item.netPermium}}</div>
@@ -18,7 +19,8 @@
       <span class="straight-line"></span>
 
     </div>
-    <button (click)="topFunction()" id="myBtn" title="Go to top"><span class="glyphicon glyphicon-arrow-up"></span></button>
+    <button (click)="topFunction()" id="myBtn" title="Go to top"><span
+        class="glyphicon glyphicon-arrow-up"></span></button>
   </div>
-  
+
 </div>

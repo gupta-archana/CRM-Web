@@ -25,7 +25,7 @@ export class API {
   }
 
   getTopAgentsUrl(email: string, encryptedPassword: string, page_no: number, app_mode: string) {
-    return this.getBaseUrl(app_mode) + "I1=" + email + "&I2=" + encryptedPassword + "&I3=topagentsget&PageNum=" + page_no + "&NoOfPages=" + this.numberOfRows;
+    return this.getBaseUrl(app_mode) + "I1=" + email + "&I2=" + encryptedPassword + "&I3=topagentsget&PageNum=" + page_no + "&NoOfRows=" + this.numberOfRows;
   }
 
 

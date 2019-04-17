@@ -40,6 +40,15 @@
   overflow: auto;
 }
 
+.entityCount {
+  height: 30px;
+  width: 100%;
+  padding: 5px;
+  background-color: #F68933;
+  text-align: center;
+  color: white;
+}
+
 ul {
   list-style-type: none;
   padding: 0;
@@ -137,4 +146,12 @@ input:-webkit-autofill {
   transition: background-color 5s ease-in-out 0s;
 }
 
+.toast-top-center {
+  top: 0;
+  right: 0;
+  width: 20%;
+}
 
+.toast-warning {
+  background-image: none;
+}
