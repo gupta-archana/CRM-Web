@@ -46,6 +46,7 @@ input {
 .nospace {
   padding: 0px;
   margin: 0px;
+  z-index:1;
 }
 
 .box1 input[type="email"] {

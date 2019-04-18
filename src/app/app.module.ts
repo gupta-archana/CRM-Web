@@ -27,7 +27,7 @@ import { ConfirmationDialogComponent } from './customUI/dialogs/confirmation-dia
 import { ForgotPasswordAlertComponent } from './customUI/dialogs/forgot-password/forgot-password-alert.component';
 import { ChangeProfileDialogComponent } from './customUI/dialogs/change-profile-dialog/change-profile-dialog.component';
 import { DeviceDetectorModule } from 'ngx-device-detector';
-
+import { NgxVcardModule } from 'ngx-vcard';
 
 @NgModule({
   declarations: [
@@ -59,6 +59,7 @@ import { DeviceDetectorModule } from 'ngx-device-detector';
     HttpModule,
     DeviceDetectorModule.forRoot(),
     ToastrModule,
+    NgxVcardModule,
     SidebarModule.forRoot(),
     ToastNoAnimationModule.forRoot({
       timeOut: 2500,

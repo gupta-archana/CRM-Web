@@ -30,8 +30,6 @@ export class SearchComponent extends BaseClass implements OnInit, ApiResponseCal
 
   constructor(injector: Injector, private deviceService: DeviceDetectorService) {
     super(injector);
-    
-
   }
 
   ngOnInit() {
@@ -111,7 +109,8 @@ export class SearchComponent extends BaseClass implements OnInit, ApiResponseCal
 
     });
   }
-  
+
+
 }
 
 function onApiResponse(newUsers: any, context: SearchComponent) {
