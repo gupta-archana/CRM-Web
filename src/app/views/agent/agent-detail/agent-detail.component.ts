@@ -48,11 +48,22 @@ export class AgentDetailComponent extends EntityDetailBaseClass implements OnIni
         this.commonFunctions.printLog(latitude + "," + longitude);
         if ((navigator.platform.indexOf("iPhone") != -1)
           || (navigator.platform.indexOf("iPod") != -1)
-          || (navigator.platform.indexOf("iPad") != -1))
+          || (navigator.platform.indexOf("iPad") != -1)) {
+          this.commonFunctions.showSnackbar("from ipad");
+
           window.open("maps://maps.google.com/maps?daddr=" + latitude + "," + longitude);
-        else
-          window.open("http://maps.google.com/maps?daddr=" + latitude + "," + longitude);
-      });
+        }
+        else {
+          this.commonFunctions.showSnackbar("from android");
+          window.open("https://maps.google.com/maps?daddr=" + latitude + "," + longitude);
+        }
+      },
+        function(error) {
+          alert(error.message);
+        }, {
+          enableHighAccuracy: true
+          , timeout: 5000
+        });
     } else {
       console.log("No support for geolocation")
     }
