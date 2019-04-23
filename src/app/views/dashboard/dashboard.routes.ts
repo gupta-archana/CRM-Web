@@ -10,18 +10,18 @@ import { SearchComponent } from './search/search.component';
 import { NewsFeedsComponent } from './news-feeds/news-feeds.component';
 
 export const dashboardRoutes: Routes = [
-    {
-        path: '',
-        component: NavigationDrawerComponent,
-        canActivate: [AuthGuardService],
-        children: [
-            { path: '', redirectTo: 'topAgents', pathMatch: 'full' },
-            { path: path.PATH_TOP_AGENTS, component: TopAgentsComponent },
-            { path: path.PATH_AGENTS_WITH_ALERT, component: AgentWithAlertComponent },
-            { path: path.PATH_AGENTS_WITH_PERFORMANCE, component: AgentWithPerformanceComponent },
-            { path: path.PATH_AGENT_DETAIL, component: AgentDetailComponent },
-            { path: path.PATH_SEARCH, component: SearchComponent },
-            { path: path.PATH_NEWS, component: NewsFeedsComponent }
-        ]
-    }
+  {
+    path: '',
+    component: NavigationDrawerComponent,
+    canActivate: [AuthGuardService],
+    children: [
+      { path: '', redirectTo: path.PATH_SEARCH, pathMatch: 'full' },
+      { path: path.PATH_TOP_AGENTS, component: TopAgentsComponent },
+      { path: path.PATH_AGENTS_WITH_ALERT, component: AgentWithAlertComponent },
+      { path: path.PATH_AGENTS_WITH_PERFORMANCE, component: AgentWithPerformanceComponent },
+      { path: path.PATH_AGENT_DETAIL, component: AgentDetailComponent },
+      { path: path.PATH_SEARCH, component: SearchComponent },
+      { path: path.PATH_NEWS, component: NewsFeedsComponent }
+    ]
+  }
 ];

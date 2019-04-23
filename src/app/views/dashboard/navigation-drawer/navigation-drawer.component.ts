@@ -19,7 +19,7 @@ export class NavigationDrawerComponent extends BaseClass implements OnInit, OnDe
   headerTitle: string = "";
   activatedRouteSubscription: Subscription = null;
   currentPagePathSubscription: Subscription = null;
-  showRefreshButton: boolean = true;
+  showRefreshButton: boolean = false;
   showFilterButton: boolean = false;
   showRecentProfileButton: boolean = false;
   exit: boolean = false;
@@ -28,8 +28,7 @@ export class NavigationDrawerComponent extends BaseClass implements OnInit, OnDe
 
   @ViewChild("recentProfile")
   recentProfile: ElementRef;
-  constructor(private modalService: NgbModal,
-    private activatedRoute: ActivatedRoute,
+  constructor(private activatedRoute: ActivatedRoute,
     private injector: Injector,
     public router: Router,
   ) { super(injector) }
@@ -173,7 +172,7 @@ function changeHeaderTitle(path: string, context: NavigationDrawerComponent) {
       default:
         break;
     }
-
+    printButtonStatus(context, "change Header " + path);
     context.cdr.markForCheck();
   }
 }
@@ -183,8 +182,13 @@ function reasetHeaderButtons(context: NavigationDrawerComponent) {
   context.showRefreshButton = false;
   context.showFilterButton = false;
   context.showRecentProfileButton = false;
+  printButtonStatus(context, "reset");
+
 }
 
+function printButtonStatus(context: NavigationDrawerComponent, from: any) {
+  context.commonFunctions.printLog("from " + from + " refresh button " + context.showRefreshButton + ", Filter Button " + context.showFilterButton + " ,recent profile " + context.showRecentProfileButton);
+}
 
 
 function clearSearch(context: NavigationDrawerComponent) {

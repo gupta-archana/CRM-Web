@@ -156,3 +156,7 @@ input:-webkit-autofill {
 .toast-warning {
   background-image: none;
 }
+
+.remember label {
+ margin-left:5px;
+}

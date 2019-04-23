@@ -22,7 +22,7 @@ export class RecentProfilesComponent extends BaseClass implements OnInit {
   ngOnInit() {
     var self = this;
     this.recentProfileSubscription = this.dataService.recentProfileObservable.subscribe(data => {
-      this.recentProfileArray = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_ARRAY));
+      this.recentProfileArray = JSON.parse(this.myLocalStorage.getValue(this.constants.ENTITY_ARRAY));
       this.openModal(true);
       this.cdr.markForCheck();
     });

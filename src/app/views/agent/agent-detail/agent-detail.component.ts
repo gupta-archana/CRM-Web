@@ -4,7 +4,7 @@ import { AgentInfoModel } from 'src/app/models/TopAgentsModel';
 import { EntityDetailBaseClass } from '../../../global/entity-detail-base-class';
 import { Router } from '@angular/router';
 import { VCard } from 'ngx-vcard';
-
+import { DeviceDetectorService } from 'ngx-device-detector';
 @Component({
   selector: 'app-agent-detail',
   templateUrl: './agent-detail.component.html',
@@ -16,7 +16,8 @@ export class AgentDetailComponent extends EntityDetailBaseClass implements OnIni
   agentInfo: AgentInfoModel;
   public vCard: VCard;
   constructor(injector: Injector,
-    private router: Router) {
+    private router: Router,
+    private deviceDetector: DeviceDetectorService) {
     super(injector);
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
@@ -40,32 +41,23 @@ export class AgentDetailComponent extends EntityDetailBaseClass implements OnIni
     this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_AGENT_OBJECTIVE);
   }
 
-  openLocationOnMap(): void {
-    if (navigator.geolocation) {
-      let ref = navigator.geolocation.getCurrentPosition((position) => {
-        const longitude = position.coords.longitude;
-        const latitude = position.coords.latitude;
-        this.commonFunctions.printLog(latitude + "," + longitude);
-        if ((navigator.platform.indexOf("iPhone") != -1)
-          || (navigator.platform.indexOf("iPod") != -1)
-          || (navigator.platform.indexOf("iPad") != -1)) {
-          this.commonFunctions.showSnackbar("from ipad");
+  downloadVCard() {
+  }
 
-          window.open("maps://maps.google.com/maps?daddr=" + latitude + "," + longitude);
-        }
-        else {
-          this.commonFunctions.showSnackbar("from android");
-          window.open("https://maps.google.com/maps?daddr=" + latitude + "," + longitude);
-        }
-      },
-        function(error) {
-          alert(error.message);
-        }, {
-          enableHighAccuracy: true
-          , timeout: 5000
-        });
-    } else {
-      console.log("No support for geolocation")
+  openLocationOnMap(): void {
+    let os = this.deviceDetector.os;
+    switch (os) {
+      case "Windows":
+        window.open("https://maps.google.com/maps/place?q=" + this.agentInfo.city + "+" + this.agentInfo.state);
+        break;
+      case "Android":
+        window.open("geo:0,0?q=" + this.agentInfo.city + "+" + this.agentInfo.state);
+        break;
+      case "Ios":
+        window.open("maps://maps.google.com/maps/place?q=" + this.agentInfo.city + "+" + this.agentInfo.state);
+        break;
+      default:
+        break;
     }
   }
 

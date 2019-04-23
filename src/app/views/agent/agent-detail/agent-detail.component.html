@@ -9,7 +9,7 @@
         <h4>{{agentInfo.name}}</h4> <span class="building-icon padding-left-twenty-five">{{agentInfo.entityId}}</span>
         <div class="clearfix"></div>
         <div class="amount bx1"><span>Net Premium</span><br>$ {{agentInfo.netPermium}}</div>
-        <div class="amount bx2"><span><img src="../../../../images/share.svg" alt=""  [vcdDownloadVCard]="vCard"/></span></div>
+        <div class="amount bx2"><span><img src="../../../../images/share.svg" alt=""  (click)="downloadVCard()" /></span></div>
         <div class="amount bx3"><span><img src="../../../../images/doc.svg" alt="" (click)="openLocationOnMap()" /></span></div>
       </div>
     </div>
@@ -17,12 +17,12 @@
     <div class="col-xs-12 col-md-12">
       <ul class="agent-details">
         <li class="agent-contact" (click)="contactDetailClick()"><a>Contact </a></li>
-        <li class="objectives" (click)="objectiveClick()"><a>Objective</a></li>
         <li class="notes"><a>Notes</a></li>
-        <li class="events"><a>Events</a></li>
-        <li class="agent-tags"><a>Tags</a></li>
         <li class="associates"><a>Associates</a></li>
         <li class="associates"><a>13 Month Activity</a></li>
+        <li class="objectives" (click)="objectiveClick()"><a>Objective</a></li>
+        <li class="events"><a>Events</a></li>
+        <li class="agent-tags"><a>Tags</a></li>
         <li class="associates"><a>Compliance</a></li>
         <li class="associates"><a>Alerts</a></li>
         <li class="associates"><a>Claims</a></li>
