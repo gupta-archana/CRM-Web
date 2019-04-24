@@ -35,8 +35,8 @@ export class SearchComponent extends BaseClass implements OnInit, ApiResponseCal
   ngOnInit() {
     this.emailId = this.myLocalStorage.getValue(this.constants.EMAIL);
     this.encryptedPassword = this.commonFunctions.getEncryptedPassword(this.myLocalStorage.getValue(this.constants.PASSWORD));
-    this.addValidation();
     getData(this);
+    this.addValidation();
     checkAndSetUi(this);
   }
 
@@ -62,6 +62,7 @@ export class SearchComponent extends BaseClass implements OnInit, ApiResponseCal
 
   onSuccess(response: any) {
     onApiResponse(response.profile, this);
+    this.saveSearchedData();
   }
 
   onError(errorCode: number, errorMsg: string) {
@@ -88,19 +89,23 @@ export class SearchComponent extends BaseClass implements OnInit, ApiResponseCal
       default:
         break;
     }
-    if (navigatingPath)
-      this.saveAndNavigate(navigatingPath);
+    if (navigatingPath) {
+      //this.saveSearchedData();
+      this.commonFunctions.navigateWithoutReplaceUrl(navigatingPath);
+    }
     else
       this.commonFunctions.showErrorSnackbar("We are working on person ui");
   }
 
 
-  private saveAndNavigate(navigatingPath: string) {
-    sessionStorage.setItem(this.constants.SEARCH_CURRENT_PAGE_NO, this.pageNum.toString());
-    sessionStorage.setItem(this.constants.SEARCHED_ENTITY_ARRAY, JSON.stringify(this.searchedUsers));
-    sessionStorage.setItem(this.constants.SEARCHED_STRING, JSON.stringify(this.searchForm.value.search));
-    sessionStorage.setItem(this.constants.SEARCH_MORE_DATA_AVAILABLE_FLAG, JSON.stringify(this.moreDataAvailable));
-    this.commonFunctions.navigateWithoutReplaceUrl(navigatingPath);
+  private saveSearchedData() {
+    if (this.searchedUsers && this.searchedUsers.length > 0) {
+      sessionStorage.setItem(this.constants.SEARCH_CURRENT_PAGE_NO, this.pageNum.toString());
+      sessionStorage.setItem(this.constants.SEARCHED_ENTITY_ARRAY, JSON.stringify(this.searchedUsers));
+      sessionStorage.setItem(this.constants.SEARCHED_STRING, this.searchForm.value.search);
+      sessionStorage.setItem(this.constants.SEARCH_MORE_DATA_AVAILABLE_FLAG, JSON.stringify(this.moreDataAvailable));
+    }
+
   }
 
   private addValidation() {

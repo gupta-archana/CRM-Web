@@ -1,10 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, Injector, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-
 import { BaseClass } from '../../../global/base-class';
-import { ConfirmationDialogComponent } from '../../../customUI/dialogs/confirmation-dialog/confirmation-dialog.component';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-navigation-drawer',
@@ -132,7 +129,7 @@ function navigateToSelectedPage(title: string, context: NavigationDrawerComponen
   }
   context.closeNav();
   if (selectedNavBarItemPath) {
-    clearSearch(context);
+    //clearSearch(context);
     context.commonFunctions.navigateWithReplaceUrl(selectedNavBarItemPath);
     changeHeaderTitle(selectedNavBarItemPath, context);
   }
@@ -140,40 +137,41 @@ function navigateToSelectedPage(title: string, context: NavigationDrawerComponen
 
 
 function changeHeaderTitle(path: string, context: NavigationDrawerComponent) {
-
-  reasetHeaderButtons(context);
   if (path) {
-    switch (path) {
-      case context.paths.PATH_TOP_AGENTS:
-        context.headerTitle = context.constants.TOP_AGENTS;
-        context.showRefreshButton = true;
-        break;
-      case context.paths.PATH_AGENTS_WITH_ALERT:
-        context.headerTitle = context.constants.AGENTS_WITH_ALERT;
-        context.showRefreshButton = true;
-        break;
-      case context.paths.PATH_AGENTS_WITH_PERFORMANCE:
-        context.headerTitle = context.constants.AGENTS_WITH_PERFORMANCE;
-        context.showRefreshButton = true;
-        break;
-      case context.paths.PATH_AGENT_DETAIL:
-        context.showRecentProfileButton = true;
-        context.headerTitle = context.constants.AGENT_DETAIL;
-        break;
-      case context.paths.PATH_NEWS:
-        context.headerTitle = context.constants.NEWS;
-        context.showRefreshButton = true;
-        break;
-      case context.paths.PATH_SEARCH:
-        context.headerTitle = context.constants.SEARCH;
-        context.showFilterButton = true;
-        break;
+    reasetHeaderButtons(context);
+    if (path) {
+      switch (path) {
+        case context.paths.PATH_TOP_AGENTS:
+          context.headerTitle = context.constants.TOP_AGENTS;
+          context.showRefreshButton = true;
+          break;
+        case context.paths.PATH_AGENTS_WITH_ALERT:
+          context.headerTitle = context.constants.AGENTS_WITH_ALERT;
+          context.showRefreshButton = true;
+          break;
+        case context.paths.PATH_AGENTS_WITH_PERFORMANCE:
+          context.headerTitle = context.constants.AGENTS_WITH_PERFORMANCE;
+          context.showRefreshButton = true;
+          break;
+        case context.paths.PATH_AGENT_DETAIL:
+          context.showRecentProfileButton = true;
+          context.headerTitle = context.constants.AGENT_DETAIL;
+          break;
+        case context.paths.PATH_NEWS:
+          context.headerTitle = context.constants.NEWS;
+          context.showRefreshButton = true;
+          break;
+        case context.paths.PATH_SEARCH:
+          context.headerTitle = context.constants.SEARCH;
+          context.showFilterButton = true;
+          break;
 
-      default:
-        break;
+        default:
+          break;
+      }
+
+      context.cdr.markForCheck();
     }
-    printButtonStatus(context, "change Header " + path);
-    context.cdr.markForCheck();
   }
 }
 
@@ -182,7 +180,7 @@ function reasetHeaderButtons(context: NavigationDrawerComponent) {
   context.showRefreshButton = false;
   context.showFilterButton = false;
   context.showRecentProfileButton = false;
-  printButtonStatus(context, "reset");
+
 
 }
 

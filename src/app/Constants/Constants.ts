@@ -23,6 +23,7 @@ export class Constants {
   SEARCH_MORE_DATA_AVAILABLE_FLAG = "search_more_data_available_flag";
   LOGIN = "Login";
   TOP_AGENT_TOTAL_ROWS = "top_agent_total_rows";
+  AGENT_DETAIL_MENUES = "agent_detail_menues";
 
   // Error Messages
   ERROR_NO_INTERNET_CONNECTON = "Kindly check your internet connection";
@@ -45,6 +46,21 @@ export class Constants {
   FAVOURITE = "Favourite";
   SEARCH = "Search";
   RECENT_PROFILE = "Recent Profiles";
+
+  //Agnet Detail Menues
+  AGENT_DETAIL_CONTACT = "Contact";
+  AGENT_DETAIL_NOTES = "Notes";
+  AGENT_DETAIL_ASSOCIATES = "Associates";
+  AGENT_DETAIL_THIRTEEN_MONTH_ACTIVITY = "13 Month Activity";
+  AGENT_DETAIL_OBJECTIVE = "Objective";
+  AGENT_DETAIL_EVENTS = "Events";
+  AGENT_DETAIL_TAGS = "Tags";
+  AGENT_DETAIL_COMPLIANCE = "Compliance";
+  AGENT_DETAIL_ALERTS = "Alerts";
+  AGENT_DETAIL_CLAIMS = "Claims";
+  AGENT_DETAIL_SOCIAL = "Social";
+  AGENT_DETAIL_EMAILS = "E-mail";
+  AGENT_DETAIL_AUDITS = "Audits";
 
   // agent pages
   AGENT_DETAIL = "Agent Details";

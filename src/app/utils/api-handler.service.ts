@@ -48,12 +48,19 @@ export class ApiHandlerService implements ApiResponseCallback {
     this.apiService.hitGetApi(url, this);
   }
 
-
   /**
    * getNews
    */
   public getNews(apiResponseCallback: ApiResponseCallback) {
     let url = this.api.getGoogleTopTenNewsUrl();
+    this.apiService.hitGetApi(url, apiResponseCallback);
+  }
+
+  /**
+   * getAgentDetailMenus
+   */
+  public getAgentDetailMenus(apiResponseCallback: ApiResponseCallback) {
+    let url = this.api.AGENT_DETAIL_MENU;
     this.apiService.hitGetApi(url, apiResponseCallback);
   }
 
@@ -87,22 +94,9 @@ function handleMultipleCall(responses): Array<any> {
     let responseBody = response.Envelope.Body;
     if (!responseBody.hasOwnProperty('Fault')) {
       let dataset: any = responseBody.dataset[0];
-      if (dataset) {
-        dataArray = addUserTypeInSearchData(dataset, dataArray);
-      }
     }
   });
 
   return dataArray;
 }
 
-function addUserTypeInSearchData(dataset, userArray) {
-
-  let userType = dataset.name;
-  let data = dataset[userType];
-  data.forEach(element => {
-    element['type'] = userType;
-    userArray.push(element);
-  });
-  return userArray;
-}

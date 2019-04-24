@@ -27,6 +27,7 @@ import { ConfirmationDialogComponent } from './customUI/dialogs/confirmation-dia
 import { ForgotPasswordAlertComponent } from './customUI/dialogs/forgot-password/forgot-password-alert.component';
 import { ChangeProfileDialogComponent } from './customUI/dialogs/change-profile-dialog/change-profile-dialog.component';
 import { DeviceDetectorModule } from 'ngx-device-detector';
+import { DraggableModule } from '../../source/draggable.module';
 import { NgxVcardModule } from 'ngx-vcard';
 
 @NgModule({
@@ -75,6 +76,7 @@ import { NgxVcardModule } from 'ngx-vcard';
       tertiaryColour: '#ffffff',
       fullScreenBackdrop: true
     }),
+    DraggableModule
   ],
   entryComponents: [
     // See https://material.angular.io/components/dialog/overview#configuring-dialog-content-via-code-entrycomponents-code- for more info

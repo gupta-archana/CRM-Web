@@ -8,6 +8,7 @@ import { Constants } from './Constants';
 })
 export class API {
   SIDE_NAV_JSON = "../assets/jsons/sideNav.json";
+  AGENT_DETAIL_MENU = "../assets/jsons/agent_detail_menu.json";
   private API_BASE_URL = "https://compass.alliantnational.com:8118/do/action/WService=";
   private numberOfRows: number;
   constructor(private myLocalStorage: MyLocalStorageService, private constants: Constants) {
@@ -28,14 +29,12 @@ export class API {
     return this.getBaseUrl(app_mode) + "I1=" + email + "&I2=" + encryptedPassword + "&I3=topagentsget&PageNum=" + page_no + "&NoOfRows=" + this.numberOfRows;
   }
 
-
   getSearchedProfileUrl(email: string, encryptedPassword: string, app_mode: string, stateId: string, type: string, pageNum: number, searchString: string) {
     return this.getBaseUrl(app_mode) + "I1=" + email + "&I2=" + encryptedPassword + "&I3=profilesSearch&stateId=" + stateId + "&Type=" + type + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows + "&searchString=" + searchString;
   }
   getAgentSearchedUrl(email: string, encryptedPassword: string, app_mode: string, stateId: string, searchString: string) {
     return this.getBaseUrl(app_mode) + "I1=" + email + "&I2=" + encryptedPassword + "&I3=agentssearch&stateId=" + stateId + "&searchString=" + searchString;
   }
-
   getPersonSearchedUrl(email: string, encryptedPassword: string, app_mode: string, stateId: string, agentId: string, searchString: string) {
     return this.getBaseUrl(app_mode) + "I1=" + email + "&I2=" + encryptedPassword + "&I3=personsSearch&stateId=" + stateId + "&agentId=" + agentId + "&searchString=" + searchString + "&active=&inactive";
   }
