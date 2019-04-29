@@ -29,6 +29,7 @@ import { ChangeProfileDialogComponent } from './customUI/dialogs/change-profile-
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import { DraggableModule } from '../../source/draggable.module';
 import { NgxVcardModule } from 'ngx-vcard';
+import { UpdateAgentProfileComponent } from './customUI/dialogs/update-agent-profile/update-agent-profile.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { NgxVcardModule } from 'ngx-vcard';
     AgentObjectiveComponent,
     AlertDialogComponent,
     ConfirmationDialogComponent,
-    ChangeProfileDialogComponent
+    ChangeProfileDialogComponent,
+    UpdateAgentProfileComponent
 
   ],
   imports: [

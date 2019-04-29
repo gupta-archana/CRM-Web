@@ -6,13 +6,26 @@
       <div class="col-xs-7 text-center">
         <h1 class="t-agent">Contact</h1>
       </div>
-      <div class="col-xs-3 text-center tpad"><img src="../../../../images/edit.svg" alt=""><br><span
-          class="edit-detail"><a href="#">Edit Details</a></span></div>
+      <div class="col-xs-3 text-center tpad"><img src="../../../../images/edit.svg" alt=""
+          (click)="onEditProfileClick()"><br><span class="edit-detail"><a>Edit Details</a></span></div>
     </div>
 
   </div>
   <div class="container app-bg2">
     <div class="row">
+      <div class="col-xs-12 col-md-6 cell-bg">
+        <div class="col-xs-6 col-md-6 noPadding">
+          <div class="ag-detail-icons">
+            <a href="#" alt=""><img src="../../../../images/ic_share_contact.svg" alt=""> Share vCard</a>
+          </div>
+        </div>
+
+        <div class="col-xs-6 col-md-6 noPadding">
+          <div class="ag-detail-icons">
+            <a href="#" alt=""><img src="../../../../images/ic_share_location.svg" alt=""> Share Location</a>
+          </div>
+        </div>
+      </div>
       <div class="col-xs-12 col-md-6 cell-bg">
         <div class="agent-contact">
           <h4>Address</h4> <span class="ag-add">7345 S. Pechos Rd.</span>
@@ -67,3 +80,4 @@
     </div>
   </div>
 </div>
+<app-update-agent-profile></app-update-agent-profile>

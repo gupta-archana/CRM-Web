@@ -1,4 +1,4 @@
-import { Component, OnInit, Injector, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Injector, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { BaseClass } from '../../../global/base-class';
 import { Subscription } from 'rxjs';
 
@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './recent-profiles.component.html',
   styleUrls: ['./recent-profiles.component.css']
 })
-export class RecentProfilesComponent extends BaseClass implements OnInit {
+export class RecentProfilesComponent extends BaseClass implements OnInit, OnDestroy {
 
   recentProfileArray: Array<any> = [];
   recentProfileSubscription: Subscription = null;
@@ -36,4 +36,12 @@ export class RecentProfilesComponent extends BaseClass implements OnInit {
   private openModal(open: boolean): void {
     this.mdlSampleIsOpen = open;
   }
+
+  ngOnDestroy(): void {
+    if (this.recentProfileSubscription && !this.recentProfileSubscription.closed) {
+      this.recentProfileSubscription.unsubscribe();
+
+    }
+  }
+
 }

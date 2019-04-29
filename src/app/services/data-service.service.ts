@@ -33,6 +33,9 @@ export class DataServiceService {
   private injectorSubject = new Subject<any>();;
   injectorObservable = this.injectorSubject.asObservable();
 
+  private editAgentProfileDialogSubject = new Subject<any>();
+  editAgentProfileDialogObservable = this.editAgentProfileDialogSubject.asObservable();
+
   constructor() { }
 
   onHideShowLoader(showLoader: boolean) {
@@ -65,5 +68,9 @@ export class DataServiceService {
 
   onInjectorCreated() {
     this.injectorSubject.next();
+  }
+
+  onAgentProfileEditClick(openDialog: boolean) {
+    this.editAgentProfileDialogSubject.next(openDialog);
   }
 }
