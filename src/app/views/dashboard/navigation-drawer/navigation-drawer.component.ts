@@ -19,6 +19,7 @@ export class NavigationDrawerComponent extends BaseClass implements OnInit, OnDe
   showRefreshButton: boolean = false;
   showFilterButton: boolean = false;
   showRecentProfileButton: boolean = false;
+  showLogoutButton: boolean = false;
   exit: boolean = false;
   called: boolean = false;
   functionCalled: any;
@@ -56,7 +57,7 @@ export class NavigationDrawerComponent extends BaseClass implements OnInit, OnDe
     document.getElementById("mySidenav").style.width = "0";
   }
 
-  logout() {
+  onLogoutClick() {
     const dialogRef = this.openDialogService.showConfirmationDialog(this.constants.LOGOUT, this.constants.ALERT_LOGOUT_CONFIRMATION, this.constants.CANCEL, this.constants.LOGOUT);
 
     dialogRef.afterClosed().subscribe(callback => {
@@ -121,7 +122,7 @@ function navigateToSelectedPage(title: string, context: NavigationDrawerComponen
       context.dataService.onRecentProfileClick();
       break;
     case context.constants.LOGOUT:
-      context.logout();
+      context.onLogoutClick();
       break;
 
     default:
@@ -165,6 +166,10 @@ function changeHeaderTitle(path: string, context: NavigationDrawerComponent) {
           context.headerTitle = context.constants.SEARCH;
           context.showFilterButton = true;
           break;
+        case context.paths.PATH_SETTING:
+          context.headerTitle = context.constants.SETTINGS;
+          context.showLogoutButton = true;
+          break;
 
         default:
           break;
@@ -180,6 +185,7 @@ function reasetHeaderButtons(context: NavigationDrawerComponent) {
   context.showRefreshButton = false;
   context.showFilterButton = false;
   context.showRecentProfileButton = false;
+  context.showLogoutButton = false;
 
 
 }

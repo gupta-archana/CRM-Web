@@ -7,10 +7,16 @@
       </div>
       <div class="col-xs-2 text-right toppad" *ngIf="showRefreshButton">
         <img src="../../../../images/refresh.svg" alt="" (click)="onRefreshClick()"></div>
+
       <div class="col-xs-2 text-right toppad" *ngIf="showFilterButton"><img src="../../../../images/filter.svg" alt=""
           (click)="onFilterClick()"><br><span class="edit-detail"><a href="#">Filter</a></span></div>
+
       <div class="col-xs-2 text-right toppad" *ngIf="showRecentProfileButton"><img
           src="../../../../images/recent-profile-white.svg" alt="" (click)="onRecentProfileClick()"><br><span
+          class="edit-detail"><a href="#"></a></span></div>
+
+      <div class="col-xs-2 text-right toppad" *ngIf="showLogoutButton"><img
+          src="../../../../images/ic_logout.svg" alt="" (click)="onLogoutClick()"><br><span
           class="edit-detail"><a href="#"></a></span></div>
     </div>
 

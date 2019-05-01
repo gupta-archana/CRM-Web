@@ -46,6 +46,7 @@ export class Constants {
   FAVOURITE = "Favourite";
   SEARCH = "Search";
   RECENT_PROFILE = "Recent Profiles";
+  SETTINGS = "Settings";
 
   //Agnet Detail Menues
   AGENT_DETAIL_CONTACT = "Contact";

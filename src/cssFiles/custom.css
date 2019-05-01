@@ -47,7 +47,7 @@
   background-color: #F68933;
   text-align: center;
   color: white;
-  z-index:1;
+  z-index: 1;
 }
 
 ul {
@@ -158,5 +158,43 @@ input:-webkit-autofill {
 }
 
 .remember label {
- margin-left:5px;
+  margin-left: 5px;
+}
+
+mat-ink-bar.mat-ink-bar {
+  background-color: #F68933 !important;
+  height: 4px;
+}
+
+.mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination {
+  display: none;
+}
+
+.mat-tab-labels,
+.mat-tab-label,
+.mat-tab-link {
+  color: #f68933 !important;
+  font-weight: bold !important;
+  border: 0px;
+  font-size: 16px !important;
+  background: none;
+}
+
+.mat-tab-group.mat-primary .mat-ink-bar,
+.mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background: white;
+  height: 5px;
+}
+
+.mat-tab-label-active {
+  opacity: 1 !important;
+}
+
+.edit-but-orange {
+  background: transparent !important;
+}
+
+.mat-tab-header,
+.mat-tab-nav-bar {
+  border-bottom: 1px solid #f4c39c !important;
 }

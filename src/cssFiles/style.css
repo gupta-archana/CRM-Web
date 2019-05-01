@@ -49,13 +49,27 @@ input {
   z-index: 1;
 }
 
+.clear,
+.clearfix {
+  clear: both;
+}
+
 .noPadding {
   padding: 0px;
 }
 
-.paddintTop15 {
+.paddingTop5 {
+  padding-top: 5px;
+}
+
+.paddingTop10 {
+  padding-top: 10px;
+}
+
+.paddingTop15 {
   padding-top: 15px;
 }
+
 
 .box1 input[type="email"] {
   background: #fff url(../images/username.svg) no-repeat left;
@@ -178,6 +192,16 @@ form input[type="checkbox"] {
   padding: 25px;
 }
 
+.app-bg4 {
+  background: #F2F2F2;
+  padding: 25px 40px 25px 40px;
+}
+
+.app-bg3 {
+  background: #F2F2F2;
+  padding: 0px 25px 25px 25px;
+}
+
 .cell-bg {
   background: #fff;
   border: 1px solid #ddd;
@@ -259,7 +283,7 @@ form input[type="checkbox"] {
 .amount span {
   font-size: 14px;
   font-weight: normal;
-  color: #626364;
+  color: ##626364;
 }
 
 .amount span.fonSize {
@@ -573,7 +597,6 @@ ul.agent-details li.associates a {
 
 .ag-detail-icons a {
   color: #F68933;
-
 }
 
 .ag-detail ul {
@@ -980,8 +1003,231 @@ ul.recent li.recent2 a {
 
 
 
+.nav-tabs>li {
+  width: 50%;
+  text-align: center;
+}
+
+.nav-tabs>li a {
+  color: #f4c39c;
+  border: 0px;
+}
+
+.nav-tabs>li a:hover {
+  background: none;
+}
+
+.nav-tabs>li.active>a,
+.nav-tabs>li.active>a:hover,
+.nav-tabs>li.active>a:focus {
+  color: #f68933;
+  font-weight: bold;
+  border: 0px;
+  border-bottom: solid 4px #f68933;
+  background: none;
+  transition: all 0.0s ease 0s;
+}
+
+.profile-pic-wp {
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 5px 5px 25px 0 rgba(46, 61, 73, .2);
+  float: left;
+  height: 90px;
+  overflow: hidden;
+  width: 90px;
+  margin: 20px 15px 20px 0px;
+}
+
+.profileWp h4 {
+  font-size: 14px;
+  color: #000000;
+  text-align: left;
+  margin: 20px 0px 5px 0px;
+}
+
+.profileWp span {
+  font-size: 12px;
+  color: #a3a3a3;
+  text-align: left;
+  display: block;
+  line-height: 18px;
+}
+
+.edit-but-orange {
+  border: 1px solid #F68933;
+  border-radius: 20px;
+  color: #F68933;
+  font-size: 12px;
+  background: #fff;
+  padding: 2px 20px;
+  margin-top: 10px;
+}
+
+.edit-but-orange:hover,
+.edit-but-orange:focus {
+  border: 1px solid #F68933;
+  background: #fff;
+  color: #F68933;
+}
+
+.phone_wp {
+  line-height: 14px;
+}
+
+.phone_wp img {
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 24px;
+}
+
+.phone_wp h4 {
+  float: left;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  color: #626364;
+  font-weight: normal;
+  padding-bottom: 6px;
+}
+
+.phone_wp span {
+  font-size: 10px;
+  color: #a3a3a3;
+  font-weight: bold;
+}
+
+.phone_wp span a {
+  font-size: 14px;
+  color: #F68933;
+  font-weight: normal;
+}
+
+.visibleWp h4 {
+  font-size: 14px;
+  color: #000000;
+  font-weight: normal;
+  margin: 0px;
+  padding: 0px;
+}
 
 
+.visibleBtnWp span.onOffTxt {
+  font-size: 14px;
+  color: #000;
+  font-weight: normal;
+  margin-left: 5px;
+  margin-right: 5px;
+  float: left;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 42px;
+  height: 16px;
+  float: left;
+  margin-top: 3px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #a4a4a4;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 12px;
+  width: 12px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked+.slider {
+  background-color: #d48342;
+}
+
+input:focus+.slider {
+  box-shadow: 0 0 1px #d48342;
+}
+
+input:checked+.slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+
+.form-group label {
+  font-size: 14px;
+  font-weight: normal;
+  color: #000;
+}
+
+.form-group select.form-control {
+  border-radius: 0;
+  padding: 6px 6px;
+  font-weight: bold;
+  color: #000;
+}
+
+
+.form-group button.btn-light {
+  background: #fff;
+  width: 100%;
+  text-align: left;
+  border: solid 1px #ccc;
+  border-radius: 0;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 20px;
+}
+
+.form-group button.btn-light img {
+  padding-top: 5px;
+}
+
+.opacity {
+  opacity: 0.5;
+}
+
+.modules-layout {
+  font-size: 16px;
+  color: #000;
+  font-weight: normal;
+  margin: 0px;
+  padding: 0px;
+}
+
+.modules-layout a {
+  color: #000;
+}
 
 
 
@@ -1057,13 +1303,6 @@ ul.recent li.recent2 a {
   .sidenav a {
     font-size: 18px;
   }
-
-
-
-
-
-
-
 }
 
 

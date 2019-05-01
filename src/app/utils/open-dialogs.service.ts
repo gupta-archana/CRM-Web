@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material';
 import { AlertDialogComponent } from '../customUI/dialogs/alert-dialog/alert-dialog.component';
 import { Constants } from '../Constants/Constants';
 import { ConfirmationDialogComponent } from '../customUI/dialogs/confirmation-dialog/confirmation-dialog.component';
+import { ChangeProfileDialogComponent } from '../customUI/dialogs/change-profile-dialog/change-profile-dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -32,5 +33,9 @@ export class OpenDialogsService {
         alertTitle: alertTitle, message: alertMsg, noText: noText, yesText: yesText
       }
     });
+  }
+
+  showChangePicDialog() {
+    return this.dialog.open(ChangeProfileDialogComponent, { disableClose: true });
   }
 }

@@ -8,6 +8,7 @@ import { AgentWithPerformanceComponent } from './agent-with-performance/agent-wi
 import { AgentDetailComponent } from '../agent/agent-detail/agent-detail.component';
 import { SearchComponent } from './search/search.component';
 import { NewsFeedsComponent } from './news-feeds/news-feeds.component';
+import { TabComponent } from './ProfileAndSetting/tab/tab.component';
 
 export const dashboardRoutes: Routes = [
   {
@@ -21,7 +22,8 @@ export const dashboardRoutes: Routes = [
       { path: path.PATH_AGENTS_WITH_PERFORMANCE, component: AgentWithPerformanceComponent },
       { path: path.PATH_AGENT_DETAIL, component: AgentDetailComponent },
       { path: path.PATH_SEARCH, component: SearchComponent },
-      { path: path.PATH_NEWS, component: NewsFeedsComponent }
+      { path: path.PATH_NEWS, component: NewsFeedsComponent },
+      { path: path.PATH_SETTING, component: TabComponent }
     ]
   }
 ];

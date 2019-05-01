@@ -29,7 +29,9 @@ import { ChangeProfileDialogComponent } from './customUI/dialogs/change-profile-
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import { DraggableModule } from '../../source/draggable.module';
 import { NgxVcardModule } from 'ngx-vcard';
-import { UpdateAgentProfileComponent } from './customUI/dialogs/update-agent-profile/update-agent-profile.component';
+import { ModulesModule } from './shared/modules/modules.module';
+
+
 
 @NgModule({
   declarations: [
@@ -43,8 +45,7 @@ import { UpdateAgentProfileComponent } from './customUI/dialogs/update-agent-pro
     AgentObjectiveComponent,
     AlertDialogComponent,
     ConfirmationDialogComponent,
-    ChangeProfileDialogComponent,
-    UpdateAgentProfileComponent
+    ChangeProfileDialogComponent
 
   ],
   imports: [
@@ -78,13 +79,15 @@ import { UpdateAgentProfileComponent } from './customUI/dialogs/update-agent-pro
       tertiaryColour: '#ffffff',
       fullScreenBackdrop: true
     }),
-    DraggableModule
+    DraggableModule,
+    ModulesModule
   ],
   entryComponents: [
     // See https://material.angular.io/components/dialog/overview#configuring-dialog-content-via-code-entrycomponents-code- for more info
     AlertDialogComponent,
     ConfirmationDialogComponent,
-    ForgotPasswordAlertComponent
+    ForgotPasswordAlertComponent,
+    ChangeProfileDialogComponent
   ],
   providers: [Constants, ApiService, {
     provide: UrlSerializer,
