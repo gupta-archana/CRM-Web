@@ -8,18 +8,20 @@ import { LoginGuardGuard } from './guards/login-guard.guard';
 import * as paths from './Constants/paths';
 import { ContactDetailComponent } from './views/agent/contact-detail/contact-detail.component';
 import { AgentObjectiveComponent } from './views/agent/agent-objective/agent-objective.component';
+import { DrawerItemsRearrangeComponent } from './views/rearrange-items-layouts/drawer-items-rearrange/drawer-items-rearrange.component';
 
 
 const appRoutesArray: Routes =
-    [
-        { path: '', component: AppComponent },
-        { path: paths.PATH_LOGIN, component: LoginComponent, canDeactivate: [LoginGuardGuard] },
-        { path: '', redirectTo: '', pathMatch: 'full' },
-        { path: paths.PATH_FORGOT_PASSWORD, component: ForgotPasswordComponent },
-        { path: paths.PATH_AGENT_CONTACT_DETAIL, component: ContactDetailComponent },
-        { path: paths.PATH_AGENT_OBJECTIVE, component: AgentObjectiveComponent },
-        { path: '**', component: PageNotFoundComponent }
+  [
+    { path: '', component: AppComponent },
+    { path: paths.PATH_LOGIN, component: LoginComponent, canDeactivate: [LoginGuardGuard] },
+    { path: '', redirectTo: '', pathMatch: 'full' },
+    { path: paths.PATH_FORGOT_PASSWORD, component: ForgotPasswordComponent },
+    { path: paths.PATH_AGENT_CONTACT_DETAIL, component: ContactDetailComponent },
+    { path: paths.PATH_AGENT_OBJECTIVE, component: AgentObjectiveComponent },
+    { path: paths.PATH_REARRANGE_DRAWER_ITEM, component: DrawerItemsRearrangeComponent },
+    { path: '**', component: PageNotFoundComponent }
 
-    ];
+  ];
 
 export const appRoutes: ModuleWithProviders = RouterModule.forRoot(appRoutesArray, { useHash: false, onSameUrlNavigation: 'reload' });

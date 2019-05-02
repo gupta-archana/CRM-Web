@@ -18,6 +18,7 @@ import { ProfileSettingComponent } from './ProfileAndSetting/profile-setting/pro
 import { AppSettingComponent } from './ProfileAndSetting/app-setting/app-setting.component';
 import { ModulesModule } from '../../shared/modules/modules.module';
 
+
 @NgModule({
   imports: [
     CommonModule,

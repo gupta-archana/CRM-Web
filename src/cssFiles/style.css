@@ -283,7 +283,7 @@ form input[type="checkbox"] {
 .amount span {
   font-size: 14px;
   font-weight: normal;
-  color: ##626364;
+  color: #626364;
 }
 
 .amount span.fonSize {
@@ -1252,13 +1252,11 @@ input:checked+.slider:before {
 
 
 @media (max-width: 768px) {
-
   .cell-bg {
     padding: 14px 25px;
     margin-bottom: 5px;
   }
 }
-
 
 @media (max-width: 736px) {}
 
@@ -1303,6 +1301,13 @@ input:checked+.slider:before {
   .sidenav a {
     font-size: 18px;
   }
+
+
+
+
+
+
+
 }
 
 

@@ -24,6 +24,7 @@ export class Constants {
   LOGIN = "Login";
   TOP_AGENT_TOTAL_ROWS = "top_agent_total_rows";
   AGENT_DETAIL_MENUES = "agent_detail_menues";
+  SIDE_NAV_ITEMS = "side_nav_items";
 
   // Error Messages
   ERROR_NO_INTERNET_CONNECTON = "Kindly check your internet connection";

@@ -23,6 +23,10 @@ export class UpdateAgentProfileComponent extends BaseClass implements OnInit, On
     this.showAgentProfileDialog = open;
   }
 
+  onCancelClick() {
+    this.openModal(false);
+  }
+
   ngOnDestroy(): void {
     if (this.agentProfileEditSubscription && !this.agentProfileEditSubscription.closed) {
       this.agentProfileEditSubscription.unsubscribe();

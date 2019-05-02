@@ -15,9 +15,8 @@
           src="../../../../images/recent-profile-white.svg" alt="" (click)="onRecentProfileClick()"><br><span
           class="edit-detail"><a href="#"></a></span></div>
 
-      <div class="col-xs-2 text-right toppad" *ngIf="showLogoutButton"><img
-          src="../../../../images/ic_logout.svg" alt="" (click)="onLogoutClick()"><br><span
-          class="edit-detail"><a href="#"></a></span></div>
+      <div class="col-xs-2 text-right toppad" *ngIf="showLogoutButton"><img src="../../../../images/ic_logout.svg"
+          alt="" (click)="onLogoutClick()"><br><span class="edit-detail"><a href="#"></a></span></div>
     </div>
 
     <div id="mySidenav" class="sidenav">
@@ -25,8 +24,9 @@
         <div class="row">
           <div class="col-xs-5"> <a href="javascript:void(0)" class="closebtn" (click)="closeNav()"><img
                 src="../../../../images/close.svg" alt=""></a></div>
-          <div class="col-xs-7 pro-n-setting"><a href="#"><img src="../../../../images/dp2.png" class="img-circle"
-                width="24" height="24" alt="" /> Profile & Settings</a></div>
+          <div class="col-xs-7 pro-n-setting" (click)="onSettingClick()"><a><img
+                src="../../../../images/dp2.png" class="img-circle" width="24" height="24" alt="" /> Profile &
+              Settings</a></div>
         </div>
       </div>
 

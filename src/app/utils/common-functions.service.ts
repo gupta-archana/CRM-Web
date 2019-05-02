@@ -2,6 +2,11 @@ import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { ToastrService, ActiveToast } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { Constants } from '../Constants/Constants';
+import { ApiHandlerService } from './api-handler.service';
+import { API } from '../Constants/API';
+import { MyLocalStorageService } from '../services/my-local-storage.service';
+import { DataServiceService } from '../services/data-service.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,7 +16,11 @@ export class CommonFunctionsService {
   constructor(
     private snackBar: MatSnackBar,
     private toastr: ToastrService,
-    private router: Router) { }
+    private router: Router,
+    private constants: Constants,
+    private apiHandler: ApiHandlerService,
+    private dataService: DataServiceService,
+    private myLocalStorage: MyLocalStorageService) { }
   printLog(message: any, show?: boolean) {
     if (show == undefined || show == true)
       console.log(message);
@@ -32,7 +41,7 @@ export class CommonFunctionsService {
     if (!this.activeToast) {
       this.activeToast = this.toastr.warning(message, null, {
         disableTimeOut: true,
-        positionClass:"toast-bottom-right"
+        positionClass: "toast-bottom-right"
       });
     }
     else {
@@ -128,6 +137,26 @@ export class CommonFunctionsService {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
   }
+
+  getSideNavItems() {
+    let sideNavItems = JSON.parse(this.myLocalStorage.getValue(this.constants.SIDE_NAV_ITEMS));
+    let self = this;
+    if (!sideNavItems) {
+      this.apiHandler.getSideNavJson({
+        onSuccess(success) {
+          self.myLocalStorage.setValue(self.constants.SIDE_NAV_ITEMS, JSON.stringify(success));
+          self.dataService.sendSideNavData(success);
+        }, onError(errCode, errMsg) {
+        }
+      });
+    }
+    else {
+      this.dataService.sendSideNavData(sideNavItems);
+    }
+
+    return this.dataService.sideNavItemsSubjectObservable;
+  }
+
 }
 function getRandomInt(min, max) {
   min = Math.ceil(min);

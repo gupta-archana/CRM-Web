@@ -1,0 +1,26 @@
+<div class="container-fluid nospace">
+  <div class="container nav-bg">
+    <div class="row">
+      <div class="col-xs-2 toppad"><img src="../../../../images/back-btn.svg" alt=""></div>
+      <div class="col-xs-7 text-center">
+        <h1 class="t-agent">Module Layout</h1>
+      </div>
+      <div class="col-xs-3 text-right tpad"><a class="opacity" (click)="Save()"><img
+            src="../../../../images/save-icon.svg" alt=""><br><span class="edit-detail">Save</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="container app-bg4">
+    <div class="row">
+      <ul class="example-list" cdkDropList (cdkDropListDropped)="onSort($event)">
+        <li class="example-box" *ngFor="let item of sideNavArray" cdkDrag>
+          <div class="col-xs-12 col-md-6 cell-bg">
+            <div class="modules-layout">
+              <a href="#" alt=""><img src="{{item.img}}" alt=""> &nbsp; {{item.title}}</a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

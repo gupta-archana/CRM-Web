@@ -16,6 +16,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './views/login/login.component';
 import { PageNotFoundComponent } from './views/page-not-found/page-not-found.component';
 import { MatSnackBarModule, MatDialogModule, MatButtonModule, MatFormFieldModule } from '@angular/material';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Constants } from './Constants/Constants';
 import { ForgotPasswordComponent } from './views/forgot-password/forgot-password.component';
@@ -30,6 +31,7 @@ import { DeviceDetectorModule } from 'ngx-device-detector';
 import { DraggableModule } from '../../source/draggable.module';
 import { NgxVcardModule } from 'ngx-vcard';
 import { ModulesModule } from './shared/modules/modules.module';
+import { DrawerItemsRearrangeComponent } from './views/rearrange-items-layouts/drawer-items-rearrange/drawer-items-rearrange.component';
 
 
 
@@ -45,7 +47,8 @@ import { ModulesModule } from './shared/modules/modules.module';
     AgentObjectiveComponent,
     AlertDialogComponent,
     ConfirmationDialogComponent,
-    ChangeProfileDialogComponent
+    ChangeProfileDialogComponent,
+    DrawerItemsRearrangeComponent
 
   ],
   imports: [
@@ -80,7 +83,8 @@ import { ModulesModule } from './shared/modules/modules.module';
       fullScreenBackdrop: true
     }),
     DraggableModule,
-    ModulesModule
+    ModulesModule,
+    DragDropModule
   ],
   entryComponents: [
     // See https://material.angular.io/components/dialog/overview#configuring-dialog-content-via-code-entrycomponents-code- for more info

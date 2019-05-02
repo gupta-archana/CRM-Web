@@ -14,6 +14,7 @@ export const PATH_SETTING = "setting";
 export const PATH_AGENT_DETAIL = "agentDetail";
 export const PATH_AGENT_CONTACT_DETAIL = "contactDetail";
 export const PATH_AGENT_OBJECTIVE = "agentObjective";
+export const PATH_REARRANGE_DRAWER_ITEM = "rearrangeHomeModules";
 
 // add side navigation path for hanlde back navigation
 export const sideNavRoutePaths = [PATH_TOP_AGENTS, PATH_AGENTS_WITH_ALERT, PATH_AGENTS_WITH_PERFORMANCE, PATH_SEARCH, PATH_NEWS, PATH_SETTING];

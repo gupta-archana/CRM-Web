@@ -1,41 +1,52 @@
 [{
     "title": "Search",
-    "class": "agent-search"
-  }, {
+    "class": "agent-search",
+    "img": "../../../../images/search-icon.svg"
+  },
+  {
     "title": "Top Agents",
-    "class": "top-agent"
+    "class": "top-agent",
+    "img": "../../../../images/top-agents.svg"
   },
   {
     "title": "Agents Performance",
-    "class": "agent-performance"
+    "class": "agent-performance",
+    "img": "../../../../images/agent-performance.svg"
   },
   {
     "title": "Favourite",
-    "class": "agent-fav"
+    "class": "agent-fav",
+    "img": "../../../../images/favourite-icon.svg"
   },
   {
     "title": "Agents Under Plan",
-    "class": "agent-plan"
+    "class": "agent-plan",
+    "img": "../../../../images/agent-under-plan.svg"
   },
 
   {
     "title": "Agents with Alerts",
-    "class": "agent-alert"
+    "class": "agent-alert",
+    "img": "../../../../images/agent-with-alerts.svg"
   },
   {
     "title": "News",
-    "class": "agent-news"
+    "class": "agent-news",
+    "img": "../../../../images/ic-news.svg"
   },
   {
     "title": "Anniversary",
-    "class": "agent-anniversary"
+    "class": "agent-anniversary",
+    "img": "../../../../images/anniversary-icon.svg"
   },
   {
     "title": "Recent Profiles",
-    "class": "agent-profile"
+    "class": "agent-profile",
+    "img": "../../../../images/module-recentprofile.svg"
   },
   {
     "title": "Logout",
-    "class": "logout"
+    "class": "logout",
+    "img": "../../../../images/top-agents.svg"
   }
 ]

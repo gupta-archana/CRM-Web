@@ -68,6 +68,11 @@ export class NavigationDrawerComponent extends BaseClass implements OnInit, OnDe
     });
   }
 
+  onSettingClick() {
+    navigateToSelectedItem(this, this.paths.PATH_SETTING);
+
+  }
+
   onRefreshClick() {
     this.dataService.onHeaderRefreshClick();
   }
@@ -86,15 +91,13 @@ export class NavigationDrawerComponent extends BaseClass implements OnInit, OnDe
   }
 }
 function getSideNavData(self: NavigationDrawerComponent) {
-  self.apiHandler.getSideNavJson({
-    onSuccess(success) {
-      self.sideNavArray = success;
-      self.cdr.markForCheck();
-    }, onError(errCode, errMsg) {
-    }
+
+  self.commonFunctions.getSideNavItems().subscribe(data => {
+    console.log("data " + JSON.stringify(data));
+    if (data)
+      self.sideNavArray = data;
+    self.cdr.markForCheck();
   });
-
-
 }
 
 function navigateToSelectedPage(title: string, context: NavigationDrawerComponent) {
@@ -128,14 +131,17 @@ function navigateToSelectedPage(title: string, context: NavigationDrawerComponen
     default:
       break;
   }
+  navigateToSelectedItem(context, selectedNavBarItemPath);
+}
+
+
+function navigateToSelectedItem(context: NavigationDrawerComponent, selectedNavBarItemPath: string) {
   context.closeNav();
   if (selectedNavBarItemPath) {
-    //clearSearch(context);
     context.commonFunctions.navigateWithReplaceUrl(selectedNavBarItemPath);
     changeHeaderTitle(selectedNavBarItemPath, context);
   }
 }
-
 
 function changeHeaderTitle(path: string, context: NavigationDrawerComponent) {
   if (path) {

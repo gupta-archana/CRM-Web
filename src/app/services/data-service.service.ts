@@ -36,6 +36,9 @@ export class DataServiceService {
   private editAgentProfileDialogSubject = new Subject<any>();
   editAgentProfileDialogObservable = this.editAgentProfileDialogSubject.asObservable();
 
+  private sideNavItemsSubject = new BehaviorSubject<any>("");
+  sideNavItemsSubjectObservable = this.sideNavItemsSubject.asObservable();
+
   constructor() { }
 
   onHideShowLoader(showLoader: boolean) {
@@ -72,5 +75,9 @@ export class DataServiceService {
 
   onAgentProfileEditClick(openDialog: boolean) {
     this.editAgentProfileDialogSubject.next(openDialog);
+  }
+
+  sendSideNavData(data: Array<any>) {
+    this.sideNavItemsSubject.next(data);
   }
 }

@@ -1,5 +1,4 @@
-<div class="modal fade" id="myModal" role="dialog"
-  [ngStyle]="{'display': showAgentProfileDialog ? 'block' : 'none', 'opacity': 1}">
+<div class="modal fade" id="myModal" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
@@ -52,8 +51,8 @@
           </div>
         </div>
         <div class="modal-footer">
-          <a href="#" data-dismiss="modal" alt="Cancel"><span>Cancel</span></a>
-          <a href="#" data-dismiss="modal" alt="Save Changes">Save Changes</a>
+          <a data-dismiss="modal" alt="Cancel" (click)="onCancelClick()"><span>Cancel</span></a>
+          <a data-dismiss="modal" alt="Save Changes">Save Changes</a>
         </div>
       </form>
     </div>
