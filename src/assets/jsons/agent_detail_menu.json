@@ -1,54 +1,67 @@
 [
 {
 "class":"agent-contact",
-"title":"Contact"
+"title":"Contact",
+"img": "../../../../images/contact.svg"
 },
 {
 "class":"notes",
-"title":"Notes"
+"title":"Notes",
+"img": "../../../../images/note.svg"
 },
 {
 "class":"associates",
-"title":"Associates"
+"title":"Associates",
+"img": "../../../../images/associate.svg"
 },
 {
 "class":"associates",
-"title":"13 Month Activity"
+"title":"13 Month Activity",
+"img": "../../../../images/associate.svg"
 },
 {
 "class":"objectives",
-"title":"Objective"
+"title":"Objective",
+"img": "../../../../images/objectives.svg"
 },
 {
 "class":"events",
-"title":"Events"
+"title":"Events",
+"img": "../../../../images/events.svg"
 },
 {
 "class":"agent-tags",
-"title":"Tags"
+"title":"Tags",
+"img": "../../../../images/tags.svg"
 },
 {
 "class":"associates",
-"title":"Compliance"
+"title":"Compliance",
+"img": "../../../../images/associate.svg"
 },
 {
 "class":"associates",
-"title":"Alerts"
+"title":"Alerts",
+"img": "../../../../images/associate.svg"
 },
 {
 "class":"associates",
-"title":"Claims"
+"title":"Claims",
+"img": "../../../../images/associate.svg"
 },
 {
 "class":"associates",
-"title":"Social"
+"title":"Social",
+"img": "../../../../images/associate.svg"
 },
 {
 "class":"associates",
-"title":"E-mail"
+"title":"E-mail",
+"img": "../../../../images/associate.svg"
 },
 {
 "class":"associates",
-"title":"Audits"
+"title":"Audits",
+"img": "../../../../images/associate.svg"
 }
 ]

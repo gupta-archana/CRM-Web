@@ -124,7 +124,7 @@ export class CommonFunctionsService {
 
   hideShowTopScrollButton() {
     let self = this;
-    window.onscroll = function() { self.scrollFunction() };
+    window.onscroll = function () { self.scrollFunction() };
   }
   private scrollFunction() {
     if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
@@ -155,6 +155,28 @@ export class CommonFunctionsService {
     }
 
     return this.dataService.sideNavItemsSubjectObservable;
+  }
+
+  getAgentDetailItems() {
+    let agnetDetailItems = JSON.parse(this.myLocalStorage.getValue(this.constants.AGENT_DETAIL_ITEMS));
+
+    let self = this;
+    if (!agnetDetailItems || agnetDetailItems.length == 0) {
+      this.apiHandler.getAgentDetailMenus({
+        onSuccess(success) {
+          self.myLocalStorage.setValue(self.constants.AGENT_DETAIL_ITEMS, JSON.stringify(success));
+          self.dataService.sendAgentDetailItems(success);
+        }, onError(errCode, errMsg) {
+        }
+      });
+    }
+    else {
+
+      this.dataService.sendAgentDetailItems(agnetDetailItems);
+
+    }
+
+    return this.dataService.agentDetailItemsObservable;
   }
 
 }

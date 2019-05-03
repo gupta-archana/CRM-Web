@@ -16,6 +16,7 @@ export class NavigationDrawerComponent extends BaseClass implements OnInit, OnDe
   headerTitle: string = "";
   activatedRouteSubscription: Subscription = null;
   currentPagePathSubscription: Subscription = null;
+  sideNavSub: Subscription = null;
   showRefreshButton: boolean = false;
   showFilterButton: boolean = false;
   showRecentProfileButton: boolean = false;
@@ -88,11 +89,12 @@ export class NavigationDrawerComponent extends BaseClass implements OnInit, OnDe
   ngOnDestroy(): void {
     if (this.activatedRouteSubscription && !this.activatedRouteSubscription.closed)
       this.activatedRouteSubscription.unsubscribe();
+    if (this.sideNavSub && !this.sideNavSub.closed)
+      this.sideNavSub.unsubscribe();
   }
 }
 function getSideNavData(self: NavigationDrawerComponent) {
-
-  self.commonFunctions.getSideNavItems().subscribe(data => {
+  self.sideNavSub = self.commonFunctions.getSideNavItems().subscribe(data => {
     console.log("data " + JSON.stringify(data));
     if (data)
       self.sideNavArray = data;

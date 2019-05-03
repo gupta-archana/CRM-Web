@@ -32,6 +32,7 @@ import { DraggableModule } from '../../source/draggable.module';
 import { NgxVcardModule } from 'ngx-vcard';
 import { ModulesModule } from './shared/modules/modules.module';
 import { DrawerItemsRearrangeComponent } from './views/rearrange-items-layouts/drawer-items-rearrange/drawer-items-rearrange.component';
+import { AgentDetailItemRearrangeComponent } from './views/rearrange-items-layouts/agent-detail-item-rearrange/agent-detail-item-rearrange.component';
 
 
 
@@ -48,7 +49,8 @@ import { DrawerItemsRearrangeComponent } from './views/rearrange-items-layouts/d
     AlertDialogComponent,
     ConfirmationDialogComponent,
     ChangeProfileDialogComponent,
-    DrawerItemsRearrangeComponent
+    DrawerItemsRearrangeComponent,
+    AgentDetailItemRearrangeComponent
 
   ],
   imports: [

@@ -15,4 +15,8 @@ export class AppSettingComponent extends BaseClass implements OnInit {
   rearrangeHomeModules() {
     this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_REARRANGE_DRAWER_ITEM);
   }
+
+  rearrangeAgentDetailModules() {
+    this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_REARRANGE_AGENT_DETAIL_ITEM);
+  }
 }

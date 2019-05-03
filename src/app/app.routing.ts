@@ -9,6 +9,7 @@ import * as paths from './Constants/paths';
 import { ContactDetailComponent } from './views/agent/contact-detail/contact-detail.component';
 import { AgentObjectiveComponent } from './views/agent/agent-objective/agent-objective.component';
 import { DrawerItemsRearrangeComponent } from './views/rearrange-items-layouts/drawer-items-rearrange/drawer-items-rearrange.component';
+import { AgentDetailItemRearrangeComponent } from './views/rearrange-items-layouts/agent-detail-item-rearrange/agent-detail-item-rearrange.component';
 
 
 const appRoutesArray: Routes =
@@ -20,6 +21,7 @@ const appRoutesArray: Routes =
     { path: paths.PATH_AGENT_CONTACT_DETAIL, component: ContactDetailComponent },
     { path: paths.PATH_AGENT_OBJECTIVE, component: AgentObjectiveComponent },
     { path: paths.PATH_REARRANGE_DRAWER_ITEM, component: DrawerItemsRearrangeComponent },
+    { path: paths.PATH_REARRANGE_AGENT_DETAIL_ITEM, component: AgentDetailItemRearrangeComponent },
     { path: '**', component: PageNotFoundComponent }
 
   ];

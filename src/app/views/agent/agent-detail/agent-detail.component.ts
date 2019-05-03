@@ -16,6 +16,7 @@ export class AgentDetailComponent extends EntityDetailBaseClass implements OnIni
 
 
   agentInfoSubscription: Subscription = null;
+  agentMenuSub: Subscription = null;
   agentInfo: EntityModel;
   agentMenues: any[];
 
@@ -116,8 +117,15 @@ export class AgentDetailComponent extends EntityDetailBaseClass implements OnIni
   }
 
   ngOnDestroy(): void {
+    if (this.agentMenuSub && !this.agentMenuSub.closed) {
+      this.agentMenuSub.unsubscribe();
+    }
 
+    if (this.agentInfoSubscription && !this.agentInfoSubscription.closed) {
+      this.agentInfoSubscription.unsubscribe();
+    }
   }
+
   onSuccess(response: any) {
     this.agentMenues = response;
     this.Save();
@@ -134,12 +142,9 @@ export class AgentDetailComponent extends EntityDetailBaseClass implements OnIni
 }
 
 function getMenues(context: AgentDetailComponent) {
-  let menues = context.myLocalStorage.getValue(context.constants.AGENT_DETAIL_MENUES);
-  if (!menues)
-    context.apiHandler.getAgentDetailMenus(context);
-  else {
-    context.agentMenues = JSON.parse(menues);
+  context.agentMenuSub = context.commonFunctions.getAgentDetailItems().subscribe(success => {
+    context.agentMenues = success;
     context.cdr.markForCheck();
-  }
+  });
 
 }

@@ -39,6 +39,9 @@ export class DataServiceService {
   private sideNavItemsSubject = new BehaviorSubject<any>("");
   sideNavItemsSubjectObservable = this.sideNavItemsSubject.asObservable();
 
+  private agentDetailItemsSubject = new BehaviorSubject<any>("");
+  agentDetailItemsObservable = this.agentDetailItemsSubject.asObservable();
+
   constructor() { }
 
   onHideShowLoader(showLoader: boolean) {
@@ -79,5 +82,9 @@ export class DataServiceService {
 
   sendSideNavData(data: Array<any>) {
     this.sideNavItemsSubject.next(data);
+  }
+
+  sendAgentDetailItems(data:Array<any>){
+    this.agentDetailItemsSubject.next(data)
   }
 }
