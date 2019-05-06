@@ -26,6 +26,7 @@
             "styles": [
               "./src/cssFiles/bootstrap.css",
               "./node_modules/ngx-toastr/toastr.css",
+              "./src/cssFiles/font-awesome.min.css",
               "./src/cssFiles/style.css",
               "./src/cssFiles/custom.css",
               "./src/cssFiles/google_fonts.css",

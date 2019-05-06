@@ -33,6 +33,10 @@ import { NgxVcardModule } from 'ngx-vcard';
 import { ModulesModule } from './shared/modules/modules.module';
 import { DrawerItemsRearrangeComponent } from './views/rearrange-items-layouts/drawer-items-rearrange/drawer-items-rearrange.component';
 import { AgentDetailItemRearrangeComponent } from './views/rearrange-items-layouts/agent-detail-item-rearrange/agent-detail-item-rearrange.component';
+import { AgentNotesComponent } from './views/agent/agent-notes/agent-notes.component';
+import { AllNotesComponent } from './views/agent/agent-notes/all-notes/all-notes.component';
+import { MyNotesComponent } from './views/agent/agent-notes/my-notes/my-notes.component';
+import { AddNoteComponent } from './customUI/dialogs/add-note/add-note.component';
 
 
 
@@ -50,7 +54,11 @@ import { AgentDetailItemRearrangeComponent } from './views/rearrange-items-layou
     ConfirmationDialogComponent,
     ChangeProfileDialogComponent,
     DrawerItemsRearrangeComponent,
-    AgentDetailItemRearrangeComponent
+    AgentDetailItemRearrangeComponent,
+    AgentNotesComponent,
+    AllNotesComponent,
+    MyNotesComponent,
+    AddNoteComponent
 
   ],
   imports: [

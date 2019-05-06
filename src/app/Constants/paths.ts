@@ -10,10 +10,13 @@ export const PATH_SEARCH = "search";
 export const PATH_NEWS = "news";
 export const PATH_SETTING = "setting";
 
-//others
+//agent detail
 export const PATH_AGENT_DETAIL = "agentDetail";
 export const PATH_AGENT_CONTACT_DETAIL = "contactDetail";
 export const PATH_AGENT_OBJECTIVE = "agentObjective";
+export const PATH_NOTES = "notes";
+
+//others
 export const PATH_REARRANGE_DRAWER_ITEM = "rearrangeHomeModules";
 export const PATH_REARRANGE_AGENT_DETAIL_ITEM = "rearrangeAgentDetailModules";
 

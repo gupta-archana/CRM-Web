@@ -13,7 +13,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RecentProfilesComponent } from '../../customUI/dialogs/recent-profiles/recent-profiles.component';
 import { NewsFeedsComponent } from './news-feeds/news-feeds.component';
 import { TabComponent } from './ProfileAndSetting/tab/tab.component';
-import { MatTabsModule } from '@angular/material';
 import { ProfileSettingComponent } from './ProfileAndSetting/profile-setting/profile-setting.component';
 import { AppSettingComponent } from './ProfileAndSetting/app-setting/app-setting.component';
 import { ModulesModule } from '../../shared/modules/modules.module';
@@ -23,7 +22,7 @@ import { ModulesModule } from '../../shared/modules/modules.module';
   imports: [
     CommonModule,
     RouterModule.forChild(dashboardRoutes),
-    FormsModule, ReactiveFormsModule, MatTabsModule, ModulesModule
+    FormsModule, ReactiveFormsModule, ModulesModule
   ],
   providers: [AuthGuardService, CanDeactivateGuard],
   declarations: [NavigationDrawerComponent, TopAgentsComponent, AgentWithAlertComponent, AgentWithPerformanceComponent, SearchComponent, NewsFeedsComponent, RecentProfilesComponent, TabComponent, ProfileSettingComponent, AppSettingComponent]

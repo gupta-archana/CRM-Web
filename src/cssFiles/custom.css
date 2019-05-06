@@ -170,7 +170,15 @@ mat-ink-bar.mat-ink-bar {
   display: none;
 }
 
-.mat-tab-labels,
+.mat-tab-labels {
+  color: #f68933 !important;
+  font-weight: bold !important;
+  border: 0px;
+  font-size: 16px !important;
+  background: none;
+}
+
+
 .mat-tab-label,
 .mat-tab-link {
   color: #f68933 !important;
@@ -178,6 +186,7 @@ mat-ink-bar.mat-ink-bar {
   border: 0px;
   font-size: 16px !important;
   background: none;
+  width: 150px !important;
 }
 
 .mat-tab-group.mat-primary .mat-ink-bar,
@@ -218,8 +227,8 @@ mat-ink-bar.mat-ink-bar {
 .cdk-drag-preview {
   box-sizing: border-box;
   border-radius: 4px;
-  box-shadow:  0px 0px 8px 2px #f68933;
-  
+  box-shadow: 0px 0px 8px 2px #f68933;
+
 }
 
 .cdk-drag-placeholder {

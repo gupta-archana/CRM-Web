@@ -43,7 +43,7 @@ export class AgentDetailComponent extends EntityDetailBaseClass implements OnIni
         navigatingUrl = this.paths.PATH_AGENT_CONTACT_DETAIL;
         break;
       case this.constants.AGENT_DETAIL_NOTES:
-
+        navigatingUrl = this.paths.PATH_NOTES;
         break;
       case this.constants.AGENT_DETAIL_ASSOCIATES:
 

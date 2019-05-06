@@ -7,20 +7,20 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
   styleUrls: ['./agent-detail-item-rearrange.component.css']
 })
 export class AgentDetailItemRearrangeComponent extends BaseClass implements OnInit {
-  sideNavArray = [];
+  agentDetailItems = [];
   constructor(private injector: Injector) { super(injector) }
 
   ngOnInit() {
     getAgentDetailItems(this);
   }
   onSort(event: CdkDragDrop<any[]>) {
-    moveItemInArray(this.sideNavArray, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.agentDetailItems, event.previousIndex, event.currentIndex);
 
   }
 
   private Save() {
-    this.myLocalStorage.setValue(this.constants.SIDE_NAV_ITEMS, JSON.stringify(this.sideNavArray));
-    this.commonFunctions.getSideNavItems();
+    this.myLocalStorage.setValue(this.constants.AGENT_DETAIL_ITEMS, JSON.stringify(this.agentDetailItems));
+    this.commonFunctions.getAgentDetailItems();
     this.commonFunctions.showSnackbar("Saved Successfull");
     this.commonFunctions.backPress();
   }
@@ -30,7 +30,7 @@ function getAgentDetailItems(self: AgentDetailItemRearrangeComponent) {
   self.commonFunctions.getAgentDetailItems().subscribe(data => {
     console.log("data " + JSON.stringify(data));
     if (data)
-      self.sideNavArray = data;
+      self.agentDetailItems = data;
     self.cdr.markForCheck();
   });
 }

@@ -1,0 +1,28 @@
+<div class="container-fluid nospace">
+  <div class="container nav-bg">
+    <div class="row">
+
+      <div class="col-xs-2 toppad"><img src="../../../../images/back-btn.svg" alt="" (click)="goBack()"></div>
+      <div class="col-xs-7 text-center">
+        <h1 class="t-agent">Notes</h1>
+      </div>
+      <div class="col-xs-3 text-center tpad"><img src="../../../../images/add_new.svg" alt=""><br><span
+          class="edit-detail"><a data-toggle="modal" data-target="#addNewNotes">Add New</a></span></div>
+    </div>
+
+  </div>
+
+  <div style="background: #F2F2F2">
+
+    <mat-tab-group mat-align-tabs="center" animationDuration="500ms">
+      <mat-tab label="All Notes">
+        <app-all-notes></app-all-notes>
+      </mat-tab>
+      <mat-tab label="My Notes">
+        <app-my-notes></app-my-notes>
+      </mat-tab>
+
+    </mat-tab-group>
+  </div>
+</div>
+<app-add-note></app-add-note>
