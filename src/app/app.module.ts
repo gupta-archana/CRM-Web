@@ -37,6 +37,7 @@ import { AgentNotesComponent } from './views/agent/agent-notes/agent-notes.compo
 import { AllNotesComponent } from './views/agent/agent-notes/all-notes/all-notes.component';
 import { MyNotesComponent } from './views/agent/agent-notes/my-notes/my-notes.component';
 import { AddNoteComponent } from './customUI/dialogs/add-note/add-note.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 
 
@@ -75,6 +76,7 @@ import { AddNoteComponent } from './customUI/dialogs/add-note/add-note.component
     BrowserAnimationsModule,
     HttpModule,
     DeviceDetectorModule.forRoot(),
+    ImageCropperModule,
     ToastrModule,
     NgxVcardModule,
     SidebarModule.forRoot(),

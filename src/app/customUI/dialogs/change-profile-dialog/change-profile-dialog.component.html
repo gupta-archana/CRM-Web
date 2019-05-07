@@ -2,10 +2,15 @@
   <div class="modal-header nobord">
     <h5 class="modal-title text-center" id="exampleModalLabel">Change profile Picture</h5>
   </div>
-  <div class="change-dp"><img src="../../../../images/placeholder.png" alt="" /></div>
+  <div class="change-dp"><img [src]="croppedImage" alt="" (click)="file.click()" /></div>
+  <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="3 / 3"
+    [resizeToWidth]="250" format="png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()"
+    (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()">
+  </image-cropper>
+  <input type='file' (change)="fileChangeEvent($event)" #file style="display:none">
 </mat-dialog-content>
 
-<mat-dialog-actions id="changePicButtonGroup">
+<mat-dialog-actions id="changePicButtonGroup" *ngIf="imageChangedEvent">
   <button matDialogClose="confirm" (click)="onChangeClick()" class="primary">Change Image</button>
   <button matDialogClose="confirm" (click)="onDeleteClick()" class="secondary">Delete Image</button>
 </mat-dialog-actions>
