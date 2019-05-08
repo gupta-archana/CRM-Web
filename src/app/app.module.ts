@@ -38,7 +38,7 @@ import { AllNotesComponent } from './views/agent/agent-notes/all-notes/all-notes
 import { MyNotesComponent } from './views/agent/agent-notes/my-notes/my-notes.component';
 import { AddNoteComponent } from './customUI/dialogs/add-note/add-note.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
-
+import { Ng2ImgMaxModule } from 'ng2-img-max';
 
 
 @NgModule({
@@ -96,7 +96,8 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     }),
     DraggableModule,
     ModulesModule,
-    DragDropModule
+    DragDropModule,
+    Ng2ImgMaxModule
   ],
   entryComponents: [
     // See https://material.angular.io/components/dialog/overview#configuring-dialog-content-via-code-entrycomponents-code- for more info

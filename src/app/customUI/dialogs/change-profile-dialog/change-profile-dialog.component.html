@@ -11,6 +11,6 @@
 </mat-dialog-content>
 
 <mat-dialog-actions id="changePicButtonGroup" *ngIf="imageChangedEvent">
-  <button matDialogClose="confirm" (click)="onChangeClick()" class="primary">Change Image</button>
+  <button (click)="onChangeClick()" class="primary">Change Image</button>
   <button matDialogClose="confirm" (click)="onDeleteClick()" class="secondary">Delete Image</button>
 </mat-dialog-actions>
