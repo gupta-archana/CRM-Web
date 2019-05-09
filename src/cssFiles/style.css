@@ -220,6 +220,43 @@ form input[type="checkbox"] {
   color: #626364;
 }
 
+
+.agent-detail-associates {
+  background:#fff;
+}
+
+.agent-detail-associates h4 {
+  font-size: 14px;
+  font-weight: bold;
+  color: #F68933;
+  padding: 0px;
+  margin: 5px 0px 0px 0px;
+}
+
+.agent-detail-associates span {
+  font-size: 12px;
+  font-weight: normal;
+  color: #626364;
+}
+
+.agent-detail-associates span.date {
+  font-size: 12px;
+  font-weight: normal;
+  color: #626364;
+  float:right;
+}
+
+.associatAgentName{  
+  margin-top: 10px;
+  text-align: center;
+}
+
+.associatAgentName span{
+  font-size: 12px;
+  font-weight:normal;
+  color: #626364;  
+}
+
 .dp {
   border: 1px solid #e4e4e4;
   background: #eee;
@@ -261,7 +298,7 @@ form input[type="checkbox"] {
 .amount span {
   font-size: 14px;
   font-weight:normal;
-  color: ##626364;
+  color: #626364;
 }
 
 .amount span.fonSize {
@@ -1299,9 +1336,37 @@ input:checked + .slider:before {
 
 /* checkbox css end here */
 
+.recent-wp .icon-wp { 
+	width: 40px;
+	height: 30px;
+	float:left;
+	border-right:solid 1px #e4e4e4;
+	padding:2px 15px 2px 0px;
+	margin:8px 10px 8px 0px;
+}
 
+.recent-wp span{
+	float: left;
+	padding-top: 8px;	
+}
 
+.calendar-head {
+	background:#dfe0e0;  
+	box-shadow: 0px 1px 2px #dadada;
+  	border-radius:3px 3px 0px 0px;
+	padding: 14px 25px;
+	margin: 10px 0px 0px 0px;
+}
 
+.calendar-head img {
+	margin:-5px 7px 0px 0px;
+}
+
+.calendar-head span{
+	font-size:18px;
+	font-weight:bold;
+	color:#005295;
+}
 
 
 

@@ -1,21 +1,27 @@
-<div class="modal fade" id="changepic" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true" [ngStyle]="{'display': mdlSampleIsOpen ? 'block' : 'none', 'opacity': 1}">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content boxshape">
+<div class="modal fade" id="recentAssociatesl" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Recent</h5>
-        <div class="close orange-close-btn" data-dismiss="modal" aria-label="Close" #closeRecentProfileModal>
-          <span aria-hidden="true" (click)="openModal(false)" ><img src="../../../../images/orange-close-btn.svg" alt=""></span>
+        <button type="button" class="close" data-dismiss="modal"><img src="../../../../images/ic_menu_close.svg" alt=""></button>
+        <h4 class="modal-title">Recent</h4>
+      </div>
+      <form role="form">
+        <div class="modal-body">
+          <ul class="recent">
+            <li [ngClass]="{'recent1':item.type=='Agent','recent2':item.type=='Person'}"
+              *ngFor="let item of recentProfileArray" (click)="onProfileClick(item)">
+              <a>{{item.name}}</a>
+            </li>
+          </ul>
         </div>
-      </div>
-      <div class="modal-body">
-        <ul class="recent">
-          <li [ngClass]="{'recent1':item.type=='Agent','recent2':item.type=='Person'}"
-            *ngFor="let item of recentProfileArray" (click)="onProfileClick(item)">
-            <a>{{item.name}}</a>
-          </li>
-        </ul>
-      </div>
+        <!-- <div class="modal-footer">
+      <a href="#" data-dismiss="modal" alt="Cancel"><span>Cancel</span></a>
+      <a href="#" data-dismiss="modal" alt="Save Changes">Save Changes</a>
+      </div> -->
+      </form>
     </div>
+
   </div>
 </div>
