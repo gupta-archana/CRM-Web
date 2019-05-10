@@ -10,7 +10,7 @@ import { AgentWithPerformanceComponent } from './agent-with-performance/agent-wi
 import { CanDeactivateGuard } from "../../guards/can-deactivate/can-deactivate.guard";
 import { SearchComponent } from './search/search.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RecentProfilesComponent } from '../../customUI/dialogs/recent-profiles/recent-profiles.component';
+
 import { NewsFeedsComponent } from './news-feeds/news-feeds.component';
 import { TabComponent } from './ProfileAndSetting/tab/tab.component';
 import { ProfileSettingComponent } from './ProfileAndSetting/profile-setting/profile-setting.component';
@@ -25,6 +25,6 @@ import { ModulesModule } from '../../shared/modules/modules.module';
     FormsModule, ReactiveFormsModule, ModulesModule
   ],
   providers: [AuthGuardService, CanDeactivateGuard],
-  declarations: [NavigationDrawerComponent, TopAgentsComponent, AgentWithAlertComponent, AgentWithPerformanceComponent, SearchComponent, NewsFeedsComponent, RecentProfilesComponent, TabComponent, ProfileSettingComponent, AppSettingComponent]
+  declarations: [NavigationDrawerComponent, TopAgentsComponent, AgentWithAlertComponent, AgentWithPerformanceComponent, SearchComponent, NewsFeedsComponent, TabComponent, ProfileSettingComponent, AppSettingComponent]
 })
 export class DashboardModule { }

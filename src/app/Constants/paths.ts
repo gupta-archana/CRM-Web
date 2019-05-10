@@ -15,6 +15,8 @@ export const PATH_AGENT_DETAIL = "agentDetail";
 export const PATH_AGENT_CONTACT_DETAIL = "contactDetail";
 export const PATH_AGENT_OBJECTIVE = "agentObjective";
 export const PATH_NOTES = "notes";
+export const PATH_THIRTEEN_MONTH_ACTIVITY = "thirteenMonthActivity";
+export const PATH_AGENT_ASSOCIATES = "agentAssociates";
 
 //others
 export const PATH_REARRANGE_DRAWER_ITEM = "rearrangeHomeModules";

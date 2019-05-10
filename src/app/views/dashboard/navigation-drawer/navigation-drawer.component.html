@@ -12,8 +12,8 @@
           (click)="onFilterClick()"><br><span class="edit-detail"><a href="#">Filter</a></span></div>
 
       <div class="col-xs-2 text-right toppad" *ngIf="showRecentProfileButton"><img
-          src="../../../../images/recent-profile-white.svg" alt="" data-toggle="modal" data-target="#recentAssociatesl" (click)="onRecentProfileClick()"><br><span
-          class="edit-detail"><a href="#"></a></span></div>
+          src="../../../../images/recent-profile-white.svg" alt="" data-toggle="modal" data-target="#recentAssociatesl"
+          (click)="onRecentProfileClick()"><br><span class="edit-detail"><a href="#"></a></span></div>
 
       <div class="col-xs-2 text-right toppad" *ngIf="showLogoutButton"><img src="../../../../images/ic_logout.svg"
           alt="" (click)="onLogoutClick()"><br><span class="edit-detail"><a href="#"></a></span></div>
@@ -24,8 +24,8 @@
         <div class="row">
           <div class="col-xs-5"> <a href="javascript:void(0)" class="closebtn" (click)="closeNav()"><img
                 src="../../../../images/close.svg" alt=""></a></div>
-          <div class="col-xs-7 pro-n-setting" (click)="onSettingClick()"><a><img
-                src="../../../../images/dp2.png" class="img-circle" width="24" height="24" alt="" /> Profile &
+          <div class="col-xs-7 pro-n-setting" (click)="onSettingClick()"><a><img src="../../../../images/dp2.png"
+                class="img-circle" width="24" height="24" alt="" /> Profile &
               Settings</a></div>
         </div>
       </div>
@@ -47,6 +47,8 @@
 
   </div>
   <div class="bottom-wrapper">
+
     <app-recent-profiles></app-recent-profiles>
+
     <router-outlet (pageNameEvent)="receivePageName($event)"></router-outlet>
   </div>

@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, Injector, ViewCh
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { BaseClass } from '../../../global/base-class';
+import { NgxSmartModalService } from 'ngx-smart-modal';
 
 @Component({
   selector: 'app-navigation-drawer',
@@ -30,6 +31,7 @@ export class NavigationDrawerComponent extends BaseClass implements OnInit, OnDe
   constructor(private activatedRoute: ActivatedRoute,
     private injector: Injector,
     public router: Router,
+    public ngxSmartModel: NgxSmartModalService
   ) { super(injector) }
 
   ngOnInit() {
@@ -124,6 +126,7 @@ function navigateToSelectedPage(title: string, context: NavigationDrawerComponen
       selectedNavBarItemPath = context.paths.PATH_NEWS;
       break;
     case context.constants.RECENT_PROFILE:
+      //context.ngxSmartModel.getModal('recentAssociatesl').open(true);
       context.dataService.onRecentProfileClick();
       break;
     case context.constants.LOGOUT:

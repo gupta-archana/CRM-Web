@@ -11,6 +11,8 @@ import { AgentObjectiveComponent } from './views/agent/agent-objective/agent-obj
 import { DrawerItemsRearrangeComponent } from './views/rearrange-items-layouts/drawer-items-rearrange/drawer-items-rearrange.component';
 import { AgentDetailItemRearrangeComponent } from './views/rearrange-items-layouts/agent-detail-item-rearrange/agent-detail-item-rearrange.component';
 import { AgentNotesComponent } from './views/agent/agent-notes/agent-notes.component';
+import { AgentThirteenMonthActivityComponent } from './views/agent/agent-thirteen-month-activity/agent-thirteen-month-activity.component';
+import { AgentAssociatesComponent } from './views/agent/agent-associates/agent-associates.component';
 
 
 const appRoutesArray: Routes =
@@ -24,6 +26,8 @@ const appRoutesArray: Routes =
     { path: paths.PATH_REARRANGE_DRAWER_ITEM, component: DrawerItemsRearrangeComponent },
     { path: paths.PATH_REARRANGE_AGENT_DETAIL_ITEM, component: AgentDetailItemRearrangeComponent },
     { path: paths.PATH_NOTES, component: AgentNotesComponent },
+    { path: paths.PATH_THIRTEEN_MONTH_ACTIVITY, component: AgentThirteenMonthActivityComponent },
+    { path: paths.PATH_AGENT_ASSOCIATES, component: AgentAssociatesComponent },
     { path: '**', component: PageNotFoundComponent }
 
   ];

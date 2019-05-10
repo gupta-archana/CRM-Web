@@ -37,7 +37,7 @@ export class AgentDetailComponent extends EntityDetailBaseClass implements OnIni
   onAgentMenuClick(item) {
 
     let navigatingUrl = "";
-
+    let value = item.title == this.paths.AGENT_DETAIL_THIRTEEN_MONTH_ACTIVITY
     switch (item.title) {
       case this.constants.AGENT_DETAIL_CONTACT:
         navigatingUrl = this.paths.PATH_AGENT_CONTACT_DETAIL;
@@ -46,10 +46,10 @@ export class AgentDetailComponent extends EntityDetailBaseClass implements OnIni
         navigatingUrl = this.paths.PATH_NOTES;
         break;
       case this.constants.AGENT_DETAIL_ASSOCIATES:
-
+        navigatingUrl = this.paths.PATH_AGENT_ASSOCIATES;
         break;
       case this.constants.AGENT_DETAIL_THIRTEEN_MONTH_ACTIVITY:
-
+        navigatingUrl = this.paths.PATH_THIRTEEN_MONTH_ACTIVITY;
         break;
       case this.constants.AGENT_DETAIL_OBJECTIVE:
         navigatingUrl = this.paths.PATH_AGENT_OBJECTIVE;

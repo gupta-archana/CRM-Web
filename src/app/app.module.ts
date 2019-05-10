@@ -39,6 +39,8 @@ import { MyNotesComponent } from './views/agent/agent-notes/my-notes/my-notes.co
 import { AddNoteComponent } from './customUI/dialogs/add-note/add-note.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { Ng2ImgMaxModule } from 'ng2-img-max';
+import { AgentThirteenMonthActivityComponent } from './views/agent/agent-thirteen-month-activity/agent-thirteen-month-activity.component';
+import { AgentAssociatesComponent } from './views/agent/agent-associates/agent-associates.component';
 
 
 @NgModule({
@@ -59,7 +61,9 @@ import { Ng2ImgMaxModule } from 'ng2-img-max';
     AgentNotesComponent,
     AllNotesComponent,
     MyNotesComponent,
-    AddNoteComponent
+    AddNoteComponent,
+    AgentThirteenMonthActivityComponent,
+    AgentAssociatesComponent
 
   ],
   imports: [
