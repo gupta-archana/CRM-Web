@@ -18,5 +18,7 @@ export class AgentAssociatesComponent extends BaseClass implements OnInit {
   goBack() {
     this.commonFunctions.backPress();
   }
-
+  onRecentProfileClick(){
+    this.dataService.onRecentProfileClick();
+  }
 }

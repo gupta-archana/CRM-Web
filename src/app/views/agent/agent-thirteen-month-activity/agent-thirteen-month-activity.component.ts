@@ -18,4 +18,8 @@ export class AgentThirteenMonthActivityComponent extends BaseClass implements On
   goBack() {
     this.commonFunctions.backPress();
   }
+
+  onRecentProfileClick(){
+    this.dataService.onRecentProfileClick();
+  }
 }
