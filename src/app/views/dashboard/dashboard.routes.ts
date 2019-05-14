@@ -9,6 +9,8 @@ import { AgentDetailComponent } from '../agent/agent-detail/agent-detail.compone
 import { SearchComponent } from './search/search.component';
 import { NewsFeedsComponent } from './news-feeds/news-feeds.component';
 import { TabComponent } from './ProfileAndSetting/tab/tab.component';
+import { RecentProfilesComponent } from './recent-profiles/recent-profiles.component';
+import { FavoritesComponent } from './favorites/favorites.component';
 
 export const dashboardRoutes: Routes = [
   {
@@ -23,7 +25,9 @@ export const dashboardRoutes: Routes = [
       { path: path.PATH_AGENT_DETAIL, component: AgentDetailComponent },
       { path: path.PATH_SEARCH, component: SearchComponent },
       { path: path.PATH_NEWS, component: NewsFeedsComponent },
-      { path: path.PATH_SETTING, component: TabComponent }
+      { path: path.PATH_SETTING, component: TabComponent },
+      { path: path.PATH_RECENT_RPOFILES, component: RecentProfilesComponent },
+      { path: path.PATH_FAVORITES, component: FavoritesComponent }
     ]
   }
 ];

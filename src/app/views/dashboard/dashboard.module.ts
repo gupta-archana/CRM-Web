@@ -16,6 +16,10 @@ import { TabComponent } from './ProfileAndSetting/tab/tab.component';
 import { ProfileSettingComponent } from './ProfileAndSetting/profile-setting/profile-setting.component';
 import { AppSettingComponent } from './ProfileAndSetting/app-setting/app-setting.component';
 import { ModulesModule } from '../../shared/modules/modules.module';
+import { RecentProfilesComponent } from './recent-profiles/recent-profiles.component';
+import { AgentsProfileComponent } from './recent-profiles/agents-profile/agents-profile.component';
+import { PersonsProfileComponent } from './recent-profiles/persons-profile/persons-profile.component';
+import { FavoritesComponent } from './favorites/favorites.component';
 
 
 @NgModule({
@@ -25,6 +29,6 @@ import { ModulesModule } from '../../shared/modules/modules.module';
     FormsModule, ReactiveFormsModule, ModulesModule
   ],
   providers: [AuthGuardService, CanDeactivateGuard],
-  declarations: [NavigationDrawerComponent, TopAgentsComponent, AgentWithAlertComponent, AgentWithPerformanceComponent, SearchComponent, NewsFeedsComponent, TabComponent, ProfileSettingComponent, AppSettingComponent]
+  declarations: [NavigationDrawerComponent, TopAgentsComponent, AgentWithAlertComponent, AgentWithPerformanceComponent, SearchComponent, NewsFeedsComponent, TabComponent, ProfileSettingComponent, AppSettingComponent, RecentProfilesComponent, AgentsProfileComponent, PersonsProfileComponent, FavoritesComponent]
 })
 export class DashboardModule { }

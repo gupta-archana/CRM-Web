@@ -8,7 +8,9 @@ export const PATH_AGENTS_WITH_ALERT = "agentWithAlerts";
 export const PATH_AGENTS_WITH_PERFORMANCE = "agentWithPerformance";
 export const PATH_SEARCH = "search";
 export const PATH_NEWS = "news";
+export const PATH_RECENT_RPOFILES = "recentProfiles";
 export const PATH_SETTING = "setting";
+export const PATH_FAVORITES ="favorites";
 
 //agent detail
 export const PATH_AGENT_DETAIL = "agentDetail";
@@ -23,6 +25,6 @@ export const PATH_REARRANGE_DRAWER_ITEM = "rearrangeHomeModules";
 export const PATH_REARRANGE_AGENT_DETAIL_ITEM = "rearrangeAgentDetailModules";
 
 // add side navigation path for hanlde back navigation
-export const sideNavRoutePaths = [PATH_TOP_AGENTS, PATH_AGENTS_WITH_ALERT, PATH_AGENTS_WITH_PERFORMANCE, PATH_SEARCH, PATH_NEWS, PATH_SETTING];
+export const sideNavRoutePaths = [PATH_TOP_AGENTS, PATH_AGENTS_WITH_ALERT, PATH_AGENTS_WITH_PERFORMANCE, PATH_SEARCH, PATH_NEWS, PATH_SETTING, PATH_RECENT_RPOFILES];
 
 

@@ -85,7 +85,8 @@ export class NavigationDrawerComponent extends BaseClass implements OnInit, OnDe
   }
 
   onRecentProfileClick() {
-    this.dataService.onRecentProfileClick();
+    navigateToSelectedItem(this, this.paths.PATH_RECENT_PROFILES);
+    //this.dataService.onRecentProfileClick();
   }
 
   ngOnDestroy(): void {
@@ -126,8 +127,10 @@ function navigateToSelectedPage(title: string, context: NavigationDrawerComponen
       selectedNavBarItemPath = context.paths.PATH_NEWS;
       break;
     case context.constants.RECENT_PROFILE:
-      //context.ngxSmartModel.getModal('recentAssociatesl').open(true);
-      context.dataService.onRecentProfileClick();
+      selectedNavBarItemPath = context.paths.PATH_RECENT_RPOFILES;
+      break;
+      case context.constants.FAVOURITE:
+      selectedNavBarItemPath = context.paths.PATH_FAVORITES;
       break;
     case context.constants.LOGOUT:
       context.onLogoutClick();
@@ -180,6 +183,16 @@ function changeHeaderTitle(path: string, context: NavigationDrawerComponent) {
         case context.paths.PATH_SETTING:
           context.headerTitle = context.constants.SETTINGS;
           context.showLogoutButton = true;
+          break;
+
+        case context.paths.PATH_RECENT_RPOFILES:
+          context.headerTitle = context.constants.RECENT_PROFILE;
+          context.showRefreshButton = true;
+          break;
+
+        case context.paths.PATH_FAVORITES:
+          context.headerTitle = context.constants.FAVOURITE;
+          context.showRefreshButton = true;
           break;
 
         default:

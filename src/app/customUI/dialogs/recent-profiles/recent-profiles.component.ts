@@ -3,7 +3,7 @@ import { BaseClass } from '../../../global/base-class';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-recent-profiles',
+  selector: 'app-recent-profile-dialog',
   templateUrl: './recent-profiles.component.html',
   styleUrls: ['./recent-profiles.component.css']
 })
