@@ -6,42 +6,45 @@ import * as paths from 'src/app/Constants/paths';
 import { Constants } from "../Constants/Constants";
 import { ApiHandlerService } from "../utils/api-handler.service";
 import { OpenDialogsService } from "../utils/open-dialogs.service";
+import { UtilService } from "../utils/util.service";
 
 export abstract class BaseClass {
-    public dataService: DataServiceService;
-    public commonFunctions: CommonFunctionsService;
-    public myLocalStorage: MyLocalStorageService;
-    public constants: Constants;
-    public apiHandler: ApiHandlerService;
-    public cdr: ChangeDetectorRef;
-    public openDialogService: OpenDialogsService;
-    public paths: any = paths;
-    constructor(injector: Injector) {
+  public dataService: DataServiceService;
+  public commonFunctions: CommonFunctionsService;
+  public myLocalStorage: MyLocalStorageService;
+  public constants: Constants;
+  public apiHandler: ApiHandlerService;
+  public cdr: ChangeDetectorRef;
+  public openDialogService: OpenDialogsService;
+  public utils: UtilService;
+  public paths: any = paths;
+  constructor(injector: Injector) {
 
-        this.dataService = injector.get(DataServiceService);
-        this.commonFunctions = injector.get(CommonFunctionsService);
-        this.myLocalStorage = injector.get(MyLocalStorageService);
-        this.constants = injector.get(Constants);
-        this.apiHandler = injector.get(ApiHandlerService);
-        this.cdr = injector.get(ChangeDetectorRef);
-        this.openDialogService = injector.get(OpenDialogsService);
+    this.dataService = injector.get(DataServiceService);
+    this.commonFunctions = injector.get(CommonFunctionsService);
+    this.myLocalStorage = injector.get(MyLocalStorageService);
+    this.constants = injector.get(Constants);
+    this.apiHandler = injector.get(ApiHandlerService);
+    this.cdr = injector.get(ChangeDetectorRef);
+    this.openDialogService = injector.get(OpenDialogsService);
+    this.utils = injector.get(UtilService);
 
-    }
+  }
 
-    topFunction() {
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
+  topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+  hideShowTopScrollButton() {
+    let self = this;
+    window.onscroll = function() { self.scrollFunction() };
+  }
+  private scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      document.getElementById("myBtn").style.display = "block";
+    } else {
+      document.getElementById("myBtn").style.display = "none";
     }
-    hideShowTopScrollButton() {
-        let self = this;
-        window.onscroll = function () { self.scrollFunction() };
-    }
-    private scrollFunction() {
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            document.getElementById("myBtn").style.display = "block";
-        } else {
-            document.getElementById("myBtn").style.display = "none";
-        }
-    }
+  }
 
 }

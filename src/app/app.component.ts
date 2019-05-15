@@ -30,7 +30,6 @@ export class AppComponent extends BaseClass implements OnInit, OnDestroy {
     this._opened = !this._opened;
   }
   constructor(private router: Router,
-    private utils: UtilService,
     private injector: Injector) {
     super(injector);
   }

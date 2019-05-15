@@ -97,7 +97,7 @@ export class NavigationDrawerComponent extends BaseClass implements OnInit, OnDe
   }
 }
 function getSideNavData(self: NavigationDrawerComponent) {
-  self.sideNavSub = self.commonFunctions.getSideNavItems().subscribe(data => {
+  self.sideNavSub = self.utils.getSideNavItems().subscribe(data => {
     console.log("data " + JSON.stringify(data));
     if (data)
       self.sideNavArray = data;

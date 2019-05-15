@@ -21,14 +21,14 @@ export class DrawerItemsRearrangeComponent extends BaseClass implements OnInit {
 
   private Save() {
     this.myLocalStorage.setValue(this.constants.SIDE_NAV_ITEMS, JSON.stringify(this.sideNavArray));
-    this.commonFunctions.getSideNavItems();
+    this.utils.getSideNavItems();
     this.commonFunctions.showSnackbar("Saved Successfull");
     this.commonFunctions.backPress();
   }
 }
 function getSideNavData(self: DrawerItemsRearrangeComponent) {
 
-  self.commonFunctions.getSideNavItems().subscribe(data => {
+  self.utils.getSideNavItems().subscribe(data => {
     console.log("data " + JSON.stringify(data));
     if (data)
       self.sideNavArray = data;

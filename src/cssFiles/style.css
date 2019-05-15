@@ -203,7 +203,9 @@ form input[type="checkbox"] {
 }
 
 .agent-detail {
-  background: url(../images/star.svg) no-repeat right top;
+  background-image: url(../images/star.svg);
+  background-repeat: no-repeat;
+  background-position: right top;
 }
 
 .agent-detail h4 {

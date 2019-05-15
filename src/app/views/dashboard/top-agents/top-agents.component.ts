@@ -43,7 +43,7 @@ export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponse
   }
 
   onLoadMoreClick() {
-    getTopAgents(this);
+    hitApi(this);
   }
 
   private getTopAgents() {
@@ -53,7 +53,7 @@ export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponse
     if (!this.topAgents) {
       this.topAgents = [];
 
-      getTopAgents(this);
+      hitApi(this);
     }
     else {
       this.pageNumber = Number(sessionStorage.getItem(this.constants.TOP_AGENT_CURRENT_PAGE_NO));
@@ -64,7 +64,6 @@ export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponse
   }
 
   onAgentClick(agent: AgentInfoModel) {
-    //this.commonFunctions.printLog(agent, true);
     sessionStorage.setItem(this.constants.TOP_AGENT_CURRENT_PAGE_NO, this.pageNumber.toString());
     sessionStorage.setItem(this.constants.TOP_AGENT_DATA, JSON.stringify(this.topAgents));
     sessionStorage.setItem(this.constants.AGENT_INFO, JSON.stringify(agent));
@@ -121,13 +120,13 @@ export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponse
 
 }
 
-function getTopAgents(context: TopAgentsComponent) {
+function hitApi(context: TopAgentsComponent) {
   context.pageNumber++;
-  context.apiHandler.getTopAgents(context.emailId, context.encryptedPassword, context.pageNumber, context);
+  context.apiHandler.getTopAgents(context.pageNumber, context);
 }
 
 function refreshData(context: TopAgentsComponent) {
   context.pageNumber = 0;
   context.topAgents = [];
-  getTopAgents(context);
+  hitApi(context);
 }

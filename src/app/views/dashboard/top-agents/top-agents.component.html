@@ -5,20 +5,32 @@
       <li *ngFor="let item of topAgents" (click)="onAgentClick(item)">
         <div class="col-xs-12 col-md-6 cell-bg">
           <div class="agent-detail">
-            <div class="dp"><img src={{item.agentImg}} alt="" onerror="this.src='../../../../images/placeholder.png'"/></div>
-            <h4>{{item.name}}</h4> <span>{{item.city+','+item.state}}</span>
+            <div class="dp"><img src="../../../../images/baseline-business-24px.svg"
+                onerror="this.src='../../../../images/placeholder.png'" />
+            </div>
+            <h4>{{item.name}} <span>({{item.entityId}})</span></h4> <span>{{item.city+','+item.state}}</span>
             <div class="clearfix"></div>
-            <div class="amount"><span>Net Premium</span><br>$ {{item.netPermium}}</div>
+            <div class="row">
+              <div class="col-md-6 col-xs-6">
+                <div class="amount">NPR YTD<br><span>$ {{item.netPermium}}</span></div>
+              </div>
+              <div class="col-md-6 col-xs-6">
+                <div class="amount">CPL Issued YTD<br><span>$ {{item.cpl}}</span></div>
+              </div>
+            </div>
           </div>
         </div>
       </li>
     </ul>
-    <div class="load-more-div" *ngIf="moreDataAvailable">
-      <span class="straight-line"></span>
-      <span class="load-more-text" (click)="onLoadMoreClick()">Load More</span>
-      <span class="straight-line"></span>
 
+
+    <div class="row" *ngIf="moreDataAvailable">
+      <div class="col-xs-12 col-md-12 loadMoreWp">
+        <hr />
+        <div class="loadMore"><a (click)="onLoadMoreClick()" alt="Load More">Load More</a></div>
+      </div>
     </div>
+
     <button (click)="topFunction()" id="myBtn" title="Go to top"><span
         class="glyphicon glyphicon-arrow-up"></span></button>
   </div>

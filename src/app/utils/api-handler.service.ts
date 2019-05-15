@@ -33,18 +33,18 @@ export class ApiHandlerService implements ApiResponseCallback {
     this.apiService.hitGetApi(this.api.getForgotPasswordUrl(email, this.APP_MODE[this.ENABLE_APP_MODE]), this.apiResponseCallback);
   }
 
-  public getTopAgents(email: string, encryptedPassword: string, page_no: number, apiResponseCallback: ApiResponseCallback) {
+  public getTopAgents(page_no: number, apiResponseCallback: ApiResponseCallback) {
     this.dataService.onHideShowLoader(true);
     this.apiResponseCallback = apiResponseCallback;
-    this.apiService.hitGetApi(this.api.getTopAgentsUrl(email, encryptedPassword, page_no, this.APP_MODE[this.ENABLE_APP_MODE]), this);
+    this.apiService.hitGetApi(this.api.getTopAgentsUrl(page_no, this.APP_MODE[this.ENABLE_APP_MODE]), this);
   }
 
   /**
    * GetSearchedData
    */
-  public GetSearchedData(email: string, encryptedPassword: string, type: string, stateId: string, searchString: string, pageNum: number, apiResponseCallback: ApiResponseCallback) {
+  public GetSearchedData(type: string, stateId: string, searchString: string, pageNum: number, apiResponseCallback: ApiResponseCallback) {
     this.apiResponseCallback = apiResponseCallback;
-    let url = this.api.getSearchedProfileUrl(email, encryptedPassword, this.APP_MODE[this.ENABLE_APP_MODE], stateId, type, pageNum, searchString);
+    let url = this.api.getSearchedProfileUrl(this.APP_MODE[this.ENABLE_APP_MODE], stateId, type, pageNum, searchString);
     this.apiService.hitGetApi(url, this);
   }
 
@@ -56,11 +56,51 @@ export class ApiHandlerService implements ApiResponseCallback {
     this.apiService.hitGetApi(url, apiResponseCallback);
   }
 
+
   /**
    * getAgentDetailMenus
    */
   public getAgentDetailMenus(apiResponseCallback: ApiResponseCallback) {
     let url = this.api.AGENT_DETAIL_MENU;
+    this.apiService.hitGetApi(url, apiResponseCallback);
+  }
+
+  /**
+   * getUserProfile
+   */
+  public getUserProfile(apiResponseCallback: ApiResponseCallback) {
+    this.dataService.onHideShowLoader(true);
+    this.apiResponseCallback = apiResponseCallback;
+    let url = this.api.getUserProfileUrl(this.APP_MODE[this.ENABLE_APP_MODE]);
+    this.apiService.hitGetApi(url, this);
+  }
+
+  /**
+   * getUserPicture
+   */
+  public getUserPicture(apiResponseCallback: ApiResponseCallback) {
+    this.dataService.onHideShowLoader(true);
+    this.apiResponseCallback = apiResponseCallback;
+    let url = this.api.getUserPictureUrl(this.APP_MODE[this.ENABLE_APP_MODE]);
+    this.apiService.hitGetApi(url, this);
+  }
+
+  /**
+   * ChangeShareableStatus
+   */
+  public ChangeShareableStatus(status: string, apiResponseCallback: ApiResponseCallback) {
+    this.dataService.onHideShowLoader(true);
+    //this.apiResponseCallback = apiResponseCallback;
+    let url = this.api.getChangeShareableStatusUrl(this.APP_MODE[this.ENABLE_APP_MODE], status);
+    this.apiService.hitGetApi(url, apiResponseCallback);
+  }
+
+  /**
+   * AddFavorite
+   */
+  public AddFavorite(entityType: string, entityId: string, apiResponseCallback: ApiResponseCallback) {
+    this.dataService.onHideShowLoader(true);
+    let url = this.api.getAddFavoriteUrl(this.APP_MODE[this.ENABLE_APP_MODE], entityType, entityId);
     this.apiService.hitGetApi(url, apiResponseCallback);
   }
 

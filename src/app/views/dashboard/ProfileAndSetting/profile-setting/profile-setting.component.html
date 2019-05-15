@@ -3,12 +3,13 @@
     <div class="row">
       <div class="col-xs-12 col-md-12 profileWp">
         <div class="profile-pic-wp">
-          <img src="../../../../../images/profile-pic.jpg" alt="" (click)="onEditProfilePicClick()">
+          <img src="{{userImg}}" placeholder="../../../../../images/placeholder.png" alt=""
+            (click)="onEditProfilePicClick()">
         </div>
-        <h4>Bradley K. Johnson</h4>
+        <h4>{{userProfileModel.name}}</h4>
         <span>
-          Senior Sales Excutive <br>
-          7345 S. Pechos Rd. Nevada
+          {{userProfileModel.jobTitle}} <br>
+          {{userProfileModel.address1+' '+userProfileModel.address2+' '+userProfileModel.city+' '+userProfileModel.state}}
         </span>
         <a>
           <button type="button" class="btn btn-primary edit-but-orange" (click)="onEditProfileClick()"
@@ -28,7 +29,7 @@
           <img src="../../../../../images/phone-icon-1.svg" alt=""> &nbsp;
           <h4>Phone 1</h4>
           <span>
-            <a href="tel:7204341417">720-434-1417</a> <br />
+            <a (click)="doCall(userProfileModel.phone)">{{userProfileModel.phone}}</a> <br />
             Mobile
           </span>
         </div>
@@ -39,7 +40,7 @@
           <img src="../../../../../images/phone-icon-2.svg" alt=""> &nbsp;
           <h4>Phone 2</h4>
           <span>
-            <a href="tel:7204341417">720-434-1417</a> <br />
+            <a (click)="doCall(userProfileModel.phone2)">{{userProfileModel.phone2}}</a> <br />
             Fax
           </span>
         </div>
@@ -52,7 +53,7 @@
       <div class="col-xs-12 col-md-12">
         <div class="ag-detail-icons">
           <a href="mailto:bradleykjohnson@abc.com" alt=""><img src="../../../../../images/mail-icon.svg" alt=""> &nbsp;
-            bradleykjohnson@abc.com</a>
+            {{userProfileModel.email}}</a>
         </div>
       </div>
     </div>
@@ -62,7 +63,7 @@
     <div class="clearfix paddingTop15"></div>
 
     <div class="row">
-      <div class="col-xs-12 col-md-12">
+      <div class="col-xs-12 col-md-12" *ngIf="userProfileModel.shareable">
         <div class="ag-detail-icons">
           <a href="#" alt=""><img src="../../../../../images/ic_share_contact.svg" alt=""> &nbsp; Share my vCard</a>
         </div>
@@ -86,7 +87,7 @@
       <div class="col-xs-4 col-md-6 visibleBtnWp noPadding">
         <span class="onOffTxt">Off</span>
         <label class="switch">
-          <input type="checkbox">
+          <input type="checkbox" [(ngModel)]="userProfileModel.shareable" (ngModelChange)="onShareableStatusChange($event)">
           <span class="slider round"></span>
         </label>
         <span class="onOffTxt">On</span>

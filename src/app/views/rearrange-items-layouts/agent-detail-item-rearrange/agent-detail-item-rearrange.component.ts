@@ -20,14 +20,14 @@ export class AgentDetailItemRearrangeComponent extends BaseClass implements OnIn
 
   private Save() {
     this.myLocalStorage.setValue(this.constants.AGENT_DETAIL_ITEMS, JSON.stringify(this.agentDetailItems));
-    this.commonFunctions.getAgentDetailItems();
+    this.utils.getAgentDetailItems();
     this.commonFunctions.showSnackbar("Saved Successfull");
     this.commonFunctions.backPress();
   }
 }
 function getAgentDetailItems(self: AgentDetailItemRearrangeComponent) {
 
-  self.commonFunctions.getAgentDetailItems().subscribe(data => {
+  self.utils.getAgentDetailItems().subscribe(data => {
     console.log("data " + JSON.stringify(data));
     if (data)
       self.agentDetailItems = data;

@@ -68,4 +68,9 @@ export class Constants {
   // agent pages
   AGENT_DETAIL = "Agent Details";
 
+
+  // Entities
+  ENTITY_AGENT = "agent";
+  ENTITY_PERSON = "person";
+  ENTITY_ATTORNEY = "attorney";
 }

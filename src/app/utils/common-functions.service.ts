@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import { MatSnackBar } from '@angular/material';
-import { ToastrService, ActiveToast } from 'ngx-toastr';
+
+import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { Constants } from '../Constants/Constants';
-import { ApiHandlerService } from './api-handler.service';
-import { API } from '../Constants/API';
+
 import { MyLocalStorageService } from '../services/my-local-storage.service';
-import { DataServiceService } from '../services/data-service.service';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,12 +13,10 @@ export class CommonFunctionsService {
   private activeToast: any = null;
 
   constructor(
-    private snackBar: MatSnackBar,
     private toastr: ToastrService,
     private router: Router,
     private constants: Constants,
-    private apiHandler: ApiHandlerService,
-    private dataService: DataServiceService,
+  
     private myLocalStorage: MyLocalStorageService) { }
   printLog(message: any, show?: boolean) {
     if (show == undefined || show == true)
@@ -124,7 +121,7 @@ export class CommonFunctionsService {
 
   hideShowTopScrollButton() {
     let self = this;
-    window.onscroll = function () { self.scrollFunction() };
+    window.onscroll = function() { self.scrollFunction() };
   }
   private scrollFunction() {
     if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
@@ -138,45 +135,17 @@ export class CommonFunctionsService {
     document.documentElement.scrollTop = 0;
   }
 
-  getSideNavItems() {
-    let sideNavItems = JSON.parse(this.myLocalStorage.getValue(this.constants.SIDE_NAV_ITEMS));
-    let self = this;
-    if (!sideNavItems) {
-      this.apiHandler.getSideNavJson({
-        onSuccess(success) {
-          self.myLocalStorage.setValue(self.constants.SIDE_NAV_ITEMS, JSON.stringify(success));
-          self.dataService.sendSideNavData(success);
-        }, onError(errCode, errMsg) {
-        }
-      });
+  
+
+  getLoginCredentials() {
+    let emailId = this.myLocalStorage.getValue(this.constants.EMAIL);
+    let encryptedPassword = this.getEncryptedPassword(this.myLocalStorage.getValue(this.constants.PASSWORD));
+
+    let credentialsObject = {
+      "email": emailId,
+      "password": encryptedPassword
     }
-    else {
-      this.dataService.sendSideNavData(sideNavItems);
-    }
-
-    return this.dataService.sideNavItemsSubjectObservable;
-  }
-
-  getAgentDetailItems() {
-    let agnetDetailItems = JSON.parse(this.myLocalStorage.getValue(this.constants.AGENT_DETAIL_ITEMS));
-
-    let self = this;
-    if (!agnetDetailItems || agnetDetailItems.length == 0) {
-      this.apiHandler.getAgentDetailMenus({
-        onSuccess(success) {
-          self.myLocalStorage.setValue(self.constants.AGENT_DETAIL_ITEMS, JSON.stringify(success));
-          self.dataService.sendAgentDetailItems(success);
-        }, onError(errCode, errMsg) {
-        }
-      });
-    }
-    else {
-
-      this.dataService.sendAgentDetailItems(agnetDetailItems);
-
-    }
-
-    return this.dataService.agentDetailItemsObservable;
+    return credentialsObject;
   }
 
 }

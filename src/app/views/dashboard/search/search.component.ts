@@ -57,7 +57,7 @@ export class SearchComponent extends BaseClass implements OnInit, ApiResponseCal
   private makeServerRequest() {
     this.pageNum++;
     this.dataService.onHideShowLoader(true);
-    this.apiHandler.GetSearchedData(this.emailId, this.encryptedPassword, this.searchFor, "All", this.searchForm.value.search, this.pageNum, this);
+    this.apiHandler.GetSearchedData(this.searchFor, "All", this.searchForm.value.search, this.pageNum, this);
   }
 
   onSuccess(response: any) {

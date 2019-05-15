@@ -11,4 +11,5 @@ export class EntityModel {
   zip: string;
   stat: string;
   netPermium: number;
+  cpl: string;
 }

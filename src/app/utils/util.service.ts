@@ -5,6 +5,10 @@ import { PlatformLocation, LocationStrategy } from '@angular/common';
 import { CommonFunctionsService } from './common-functions.service';
 import { RoutingStateService } from '../services/routing-state.service';
 import * as paths from 'src/app/Constants/paths';
+import { ApiHandlerService } from './api-handler.service';
+import { DataServiceService } from '../services/data-service.service';
+import { Constants } from '../Constants/Constants';
+import { MyLocalStorageService } from '../services/my-local-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +22,11 @@ export class UtilService {
     private activeRoute: ActivatedRoute,
     private commonFunctions: CommonFunctionsService,
     private routingState: RoutingStateService,
-    private router: Router, ) { }
+    private router: Router,
+    private apiHandler: ApiHandlerService,
+    private dataService: DataServiceService,
+    private constants: Constants,
+    private myLocalStorage: MyLocalStorageService) { }
 
   handleBackpressEvent() {
     history.pushState(null, null, location.href);
@@ -72,7 +80,46 @@ export class UtilService {
       this.exit = false;
     }, 5000);
   }
+  getSideNavItems() {
+    let sideNavItems = JSON.parse(this.myLocalStorage.getValue(this.constants.SIDE_NAV_ITEMS));
+    let self = this;
+    if (!sideNavItems) {
+      this.apiHandler.getSideNavJson({
+        onSuccess(success) {
+          self.myLocalStorage.setValue(self.constants.SIDE_NAV_ITEMS, JSON.stringify(success));
+          self.dataService.sendSideNavData(success);
+        }, onError(errCode, errMsg) {
+        }
+      });
+    }
+    else {
+      this.dataService.sendSideNavData(sideNavItems);
+    }
 
+    return this.dataService.sideNavItemsSubjectObservable;
+  }
+
+  getAgentDetailItems() {
+    let agnetDetailItems = JSON.parse(this.myLocalStorage.getValue(this.constants.AGENT_DETAIL_ITEMS));
+
+    let self = this;
+    if (!agnetDetailItems || agnetDetailItems.length == 0) {
+      this.apiHandler.getAgentDetailMenus({
+        onSuccess(success) {
+          self.myLocalStorage.setValue(self.constants.AGENT_DETAIL_ITEMS, JSON.stringify(success));
+          self.dataService.sendAgentDetailItems(success);
+        }, onError(errCode, errMsg) {
+        }
+      });
+    }
+    else {
+
+      this.dataService.sendAgentDetailItems(agnetDetailItems);
+
+    }
+
+    return this.dataService.agentDetailItemsObservable;
+  }
 
 
 }

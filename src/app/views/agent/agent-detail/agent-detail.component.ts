@@ -142,7 +142,7 @@ export class AgentDetailComponent extends EntityDetailBaseClass implements OnIni
 }
 
 function getMenues(context: AgentDetailComponent) {
-  context.agentMenuSub = context.commonFunctions.getAgentDetailItems().subscribe(success => {
+  context.agentMenuSub = context.utils.getAgentDetailItems().subscribe(success => {
     context.agentMenues = success;
     context.cdr.markForCheck();
   });
