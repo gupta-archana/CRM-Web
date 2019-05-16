@@ -4,22 +4,33 @@ import { UpdateAgentProfileComponent } from '../../customUI/dialogs/update-agent
 import { MatTabsModule } from '@angular/material';
 import { NgxSmartModalModule } from 'ngx-smart-modal';
 import { RecentProfilesComponent } from '../../customUI/dialogs/recent-profiles/recent-profiles.component';
+import { ShareVCardComponent } from '../../customUI/dialogs/share-v-card/share-v-card.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UpdateUserProfileComponent } from '../../customUI/dialogs/update-user-profile/update-user-profile.component';
 //import { ModalService } from '../../services/modal.service';
 @NgModule({
   imports: [
+    FormsModule,
+    ReactiveFormsModule,
     CommonModule,
     MatTabsModule,
     NgxSmartModalModule.forRoot()
   ],
   declarations: [
     UpdateAgentProfileComponent,
-    RecentProfilesComponent
+    RecentProfilesComponent,
+    ShareVCardComponent,
+    UpdateUserProfileComponent
   ],
   exports: [
     UpdateAgentProfileComponent,
     RecentProfilesComponent,
     MatTabsModule,
-    NgxSmartModalModule
+    NgxSmartModalModule,
+    ShareVCardComponent,
+    UpdateUserProfileComponent,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class ModulesModule { }

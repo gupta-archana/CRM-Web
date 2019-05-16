@@ -70,7 +70,7 @@ export class Constants {
 
 
   // Entities
-  ENTITY_AGENT = "agent";
-  ENTITY_PERSON = "person";
-  ENTITY_ATTORNEY = "attorney";
+  ENTITY_AGENT = "Agent";
+  ENTITY_PERSON = "Person";
+  ENTITY_ATTORNEY = "Attorney";
 }

@@ -120,8 +120,7 @@ export class UtilService {
 
     return this.dataService.agentDetailItemsObservable;
   }
-
-
+  
 }
 
 

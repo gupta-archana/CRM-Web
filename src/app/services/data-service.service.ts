@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject, BehaviorSubject } from 'rxjs';
 import { AgentInfoModel } from '../models/TopAgentsModel';
+import { UserProfileModel } from '../models/user-profile-model';
 
 
 @Injectable({
@@ -41,6 +42,12 @@ export class DataServiceService {
 
   private agentDetailItemsSubject = new BehaviorSubject<any>("");
   agentDetailItemsObservable = this.agentDetailItemsSubject.asObservable();
+
+  private shareEntityIdAndTypeSubject = new BehaviorSubject<any>("");
+  shareEntityIdAndTypeObservable = this.shareEntityIdAndTypeSubject.asObservable();
+
+  private shareUserProfileSubject = new BehaviorSubject<UserProfileModel>(null);
+  shareUserProfileObservable = this.shareUserProfileSubject.asObservable();
 
   constructor() { }
 
@@ -84,7 +91,14 @@ export class DataServiceService {
     this.sideNavItemsSubject.next(data);
   }
 
-  sendAgentDetailItems(data:Array<any>){
+  sendAgentDetailItems(data: Array<any>) {
     this.agentDetailItemsSubject.next(data)
+  }
+  onShareEntityIdAndType(data: any) {
+    this.shareEntityIdAndTypeSubject.next(data);
+  }
+
+  shareUserProfile(data: UserProfileModel) {
+    this.shareUserProfileSubject.next(data);
   }
 }

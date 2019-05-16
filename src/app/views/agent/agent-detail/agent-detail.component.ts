@@ -82,8 +82,10 @@ export class AgentDetailComponent extends EntityDetailBaseClass implements OnIni
         break;
     }
 
-    if (navigatingUrl)
+    if (navigatingUrl) {
       this.commonFunctions.navigateWithoutReplaceUrl(navigatingUrl);
+      
+    }
 
     else
       this.commonFunctions.showErrorSnackbar("We are working on it");
@@ -148,3 +150,4 @@ function getMenues(context: AgentDetailComponent) {
   });
 
 }
+

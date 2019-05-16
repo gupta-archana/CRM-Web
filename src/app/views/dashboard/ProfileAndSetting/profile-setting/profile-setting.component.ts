@@ -28,11 +28,20 @@ export class ProfileSettingComponent extends BaseClass implements OnInit, ApiRes
     this.dataService.onAgentProfileEditClick(true);
   }
 
+  shareVCard() {
+    let userInfo = {
+      "type": this.constants.ENTITY_AGENT,
+      "id": this.userProfileModel.uid
+    }
+    this.dataService.onShareEntityIdAndType(userInfo);
+  }
+
   onSuccess(response: any) {
     this.userProfileModel = response.UserProfile[0];
     this.commonFunctions.printLog(this.userProfileModel.name);
     this.userProfileModel.shareable = response.UserProfile[0].shareable == "yes";
     this.userImg = "data:image/png;base64," + this.userProfileModel.picture;
+    this.cdr.markForCheck();
     //getUserProfilePic(this)
   }
   onError(errorCode: number, errorMsg: string) {

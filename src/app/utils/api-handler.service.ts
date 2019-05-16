@@ -3,10 +3,9 @@ import { ApiService } from '../services/api.service';
 import { ApiResponseCallback } from '../Interfaces/ApiResponseCallback';
 import { API } from '../Constants/API';
 import { DataServiceService } from '../services/data-service.service';
-import { zip, Observable, forkJoin } from 'rxjs';
-import { Response } from '@angular/http';
-import { BaseClass } from '../global/base-class';
 import { Constants } from '../Constants/Constants';
+declare var require: any;
+var json2xml = require('json2xml');
 
 @Injectable({
   providedIn: 'root'
@@ -104,6 +103,38 @@ export class ApiHandlerService implements ApiResponseCallback {
     this.apiService.hitGetApi(url, apiResponseCallback);
   }
 
+  /**
+   * shareVCard
+   */
+  public shareVCard(to: string, entityType: string, entityId: string, apiResponseCallback: ApiResponseCallback) {
+    this.dataService.onHideShowLoader(true);
+    let url = this.api.getShareVCardUrl(this.getAppMode(), to, entityType, entityId);
+    this.apiService.hitGetApi(url, apiResponseCallback);
+  }
+
+  /**
+   * getUserFavorites
+   */
+  public getUserFavorites(apiResponseCallback: ApiResponseCallback) {
+    this.apiResponseCallback = apiResponseCallback;
+    this.dataService.onHideShowLoader(true);
+    let url = this.api.getFavoritesUrl(this.getAppMode());
+    this.apiService.hitGetApi(url, this);
+  }
+
+  /**
+   * createNote
+   */
+  public createNote(requestJson: any, apiResponseCallback: ApiResponseCallback) {
+    this.dataService.onHideShowLoader(true);
+    let url = this.api.getCreateNoteUrl(this.getAppMode());
+    this.apiService.hitPostApi(url, json2xml(requestJson, { attributes_key: 'attr' }), apiResponseCallback);
+  }
+
+
+  private getAppMode(): string {
+    return this.APP_MODE[this.ENABLE_APP_MODE];
+  }
 
   onSuccess(response: any) {
     this.dataService.onHideShowLoader(false);
@@ -127,16 +158,5 @@ export class ApiHandlerService implements ApiResponseCallback {
   }
 }
 
-function handleMultipleCall(responses): Array<any> {
-  let dataArray: Array<any> = [];
-  responses.forEach(element => {
-    var response = element.json();
-    let responseBody = response.Envelope.Body;
-    if (!responseBody.hasOwnProperty('Fault')) {
-      let dataset: any = responseBody.dataset[0];
-    }
-  });
 
-  return dataArray;
-}
 

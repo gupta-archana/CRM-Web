@@ -16,7 +16,7 @@ export class CommonFunctionsService {
     private toastr: ToastrService,
     private router: Router,
     private constants: Constants,
-  
+
     private myLocalStorage: MyLocalStorageService) { }
   printLog(message: any, show?: boolean) {
     if (show == undefined || show == true)
@@ -135,7 +135,7 @@ export class CommonFunctionsService {
     document.documentElement.scrollTop = 0;
   }
 
-  
+
 
   getLoginCredentials() {
     let emailId = this.myLocalStorage.getValue(this.constants.EMAIL);
@@ -147,6 +147,8 @@ export class CommonFunctionsService {
     }
     return credentialsObject;
   }
+
+  
 
 }
 function getRandomInt(min, max) {

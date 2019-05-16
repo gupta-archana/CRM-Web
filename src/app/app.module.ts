@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { HttpModule } from '@angular/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { ToastrModule, ToastNoAnimation, ToastNoAnimationModule } from 'ngx-toastr';
 import { LoginGuardGuard } from './guards/login-guard.guard';
 import { SidebarModule } from 'ng-sidebar';
@@ -16,7 +16,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './views/login/login.component';
 import { PageNotFoundComponent } from './views/page-not-found/page-not-found.component';
 import { MatSnackBarModule, MatDialogModule, MatButtonModule, MatFormFieldModule } from '@angular/material';
-import {DragDropModule} from '@angular/cdk/drag-drop';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Constants } from './Constants/Constants';
 import { ForgotPasswordComponent } from './views/forgot-password/forgot-password.component';
@@ -43,6 +43,8 @@ import { AgentThirteenMonthActivityComponent } from './views/agent/agent-thirtee
 import { AgentAssociatesComponent } from './views/agent/agent-associates/agent-associates.component';
 
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,11 +66,10 @@ import { AgentAssociatesComponent } from './views/agent/agent-associates/agent-a
     AddNoteComponent,
     AgentThirteenMonthActivityComponent,
     AgentAssociatesComponent
+    
 
   ],
   imports: [
-    FormsModule,
-    ReactiveFormsModule,
     BrowserModule,
     appRoutes,
     DashboardModule,
