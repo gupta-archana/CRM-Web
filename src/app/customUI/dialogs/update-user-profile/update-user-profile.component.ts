@@ -1,4 +1,4 @@
-import { Component, OnInit, Injector, OnDestroy } from '@angular/core';
+import { Component, OnInit, Injector, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { UserProfileModel } from '../../../models/user-profile-model';
 import { ApiResponseCallback } from '../../../Interfaces/ApiResponseCallback';
@@ -15,6 +15,10 @@ export class UpdateUserProfileComponent extends BaseClass implements OnInit, OnD
   constructor(injector: Injector) {
     super(injector);
   }
+
+  @ViewChild("closeUpdateUserProfileModal")
+  closeUpdateUserProfileModal: ElementRef;
+
   userInfoForm: FormGroup;
   userProfileSubscription: Subscription = null;
   userProfileModel: UserProfileModel = null;
@@ -22,12 +26,13 @@ export class UpdateUserProfileComponent extends BaseClass implements OnInit, OnD
   states: Array<string> = ["Nevada", "AL"];
   selectedNumberOneType: string = "";
   selectedNumberTwoType: string = "";
+  submitClicked: boolean = false;
 
   ngOnInit() {
     this.selectedNumberOneType = this.numberTypeArray[2];
     this.selectedNumberTwoType = this.numberTypeArray[3];
-    getUserProfile(this);
     addValidation(this);
+    getUserProfile(this);
   }
 
   onNumberOneTypeChange(event) {
@@ -36,29 +41,39 @@ export class UpdateUserProfileComponent extends BaseClass implements OnInit, OnD
   }
   onNumberTwoTypeChange(event) {
     this.selectedNumberTwoType = this.numberTypeArray.find(n => n == event.target.value);
-    this.userInfoForm.get("phoneType2").setValue(this.selectedNumberTwoType);
+    this.userInfoForm.get("phone2Type").setValue(this.selectedNumberTwoType);
   }
   onStateChanged(event) {
     this.userInfoForm.get("state").setValue(this.states.find(n => n == event.target.value));
   }
   onSaveChangeClick() {
-    if (!this.userInfoForm.valid) {
-      this.getFormValidationErrors();
+    this.submitClicked = true;
+    if (this.userInfoForm.valid) {
+      this.apiHandler.updateUserInfo(createRequestJson(this), this);
     }
-    else {
 
-    }
-    //this.commonFunctions.printLog(this.selectedNumberOneType + "," + this.selectedNumberTwoType);
   }
 
 
 
 
   onSuccess(response: any) {
-
+    this.dataService.onHideShowLoader(false);
+    let responseBody = response.Envelope.Body;
+    if (responseBody.hasOwnProperty('Fault')) {
+      let errorCode = responseBody.Fault.code;
+      let msg = responseBody.Fault.message;
+      this.onError(errorCode, msg);
+    }
+    else {
+      let msg = response.Success.message;
+      this.commonFunctions.showSnackbar(msg);
+      this.closeUpdateUserProfileModal.nativeElement.click();
+    }
   }
   onError(errorCode: number, errorMsg: string) {
-
+    this.dataService.onHideShowLoader(false);
+    this.commonFunctions.showErrorSnackbar(errorMsg);
   }
 
 
@@ -84,7 +99,10 @@ export class UpdateUserProfileComponent extends BaseClass implements OnInit, OnD
 }
 function getUserProfile(context: UpdateUserProfileComponent) {
   context.userProfileSubscription = context.dataService.shareUserProfileObservable.subscribe(data => {
-    context.userProfileModel = data;
+    if (data != null) {
+      context.userProfileModel = data;
+      setValueInFormControls(context);
+    }
   })
 
 }
@@ -104,3 +122,25 @@ function addValidation(context: UpdateUserProfileComponent) {
   })
 }
 
+function setValueInFormControls(context: UpdateUserProfileComponent) {
+  Object.keys(context.userInfoForm.controls).forEach(key => {
+    let value = context.userProfileModel[key];
+    context.userInfoForm.get(key).setValue(value);
+
+  });
+}
+
+function createRequestJson(context: UpdateUserProfileComponent) {
+  let requestJson = {};
+  Object.keys(context.userInfoForm.controls).forEach(key => {
+    let value = context.userInfoForm.get(key).value;
+    requestJson[key] = value;
+
+  });
+  let finalJson = {
+    "SystemProfile": "",
+    "attr": requestJson
+  }
+  //context.commonFunctions.printLog(JSON.stringify(finalJson));
+  return finalJson;
+}

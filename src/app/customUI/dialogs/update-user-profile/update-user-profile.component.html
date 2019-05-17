@@ -4,7 +4,7 @@
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close" data-dismiss="modal" #closeUpdateUserProfileModal>&times;</button>
         <h4 class="modal-title">Profile Contact Information</h4>
       </div>
       <form role="form" [formGroup]="userInfoForm">
@@ -14,10 +14,10 @@
             <label for="usr">Name</label>
             <input type="text" class="form-control" id="name" formControlName="name" placeholder="Bradley K. Johnson">
             <!-- Error View -->
-            <div id="errorDiv" *ngIf="userInfoForm.get('name').hasError('required')">
+            <div id="errorDiv" *ngIf="userInfoForm.get('name').hasError('required') && submitClicked">
               You entered not valid input.
             </div>
-            <div id="errorDiv" *ngIf="userInfoForm.get('name').hasError('minlength')">
+            <div id="errorDiv" *ngIf="userInfoForm.get('name').hasError('minlength') && submitClicked">
               Name must be at least 2 characters long.
             </div>
             <!-- Error View End -->
@@ -28,10 +28,10 @@
             <input type="text" class="form-control" id="address" formControlName="jobTitle"
               placeholder="Senior Sales Executive">
             <!-- Error View -->
-            <div id="errorDiv" *ngIf="userInfoForm.get('jobTitle').hasError('required')">
+            <div id="errorDiv" *ngIf="userInfoForm.get('jobTitle').hasError('required') && submitClicked">
               You entered not valid input.
             </div>
-            <div id="errorDiv" *ngIf="userInfoForm.get('jobTitle').hasError('minlength')">
+            <div id="errorDiv" *ngIf="userInfoForm.get('jobTitle').hasError('minlength') && submitClicked">
               JobTitle must be at least 2 characters long.
             </div>
             <!-- Error View End -->
@@ -42,10 +42,10 @@
             <input type="text" class="form-control" id="address" formControlName="address1"
               placeholder="7345 S. Pechos Rd.">
             <!-- Error View -->
-            <div id="errorDiv" *ngIf="userInfoForm.get('address1').hasError('required')">
+            <div id="errorDiv" *ngIf="userInfoForm.get('address1').hasError('required') && submitClicked">
               You entered not valid input.
             </div>
-            <div id="errorDiv" *ngIf="userInfoForm.get('address1').hasError('minlength')">
+            <div id="errorDiv" *ngIf="userInfoForm.get('address1').hasError('minlength') && submitClicked">
               Address must be at least 2 characters long.
             </div>
             <!-- Error View End -->
@@ -56,6 +56,14 @@
             <select class="form-control" id="sel1" formControlName="state" (change)="onStateChanged($event)">
               <option [value]="i" *ngFor="let i of states">{{i}}</option>
             </select>
+            <!-- Error View -->
+            <div id="errorDiv" *ngIf="userInfoForm.get('state').hasError('required') && submitClicked">
+              You entered not valid input.
+            </div>
+            <div id="errorDiv" *ngIf="userInfoForm.get('state').hasError('minlength') && submitClicked">
+              state must be at least 2 characters long.
+            </div>
+            <!-- Error View End -->
           </div>
 
 
@@ -68,7 +76,14 @@
                   <option [value]="i" *ngFor="let i of numberTypeArray">{{i}}</option>
                 </select>
               </div>
-
+              <!-- Error View -->
+              <div id="errorDiv" *ngIf="userInfoForm.get('phoneType').hasError('required') && submitClicked">
+                You entered not valid input.
+              </div>
+              <div id="errorDiv" *ngIf="userInfoForm.get('phoneType').hasError('minlength') && submitClicked">
+                phone type must be at least 2 characters long.
+              </div>
+              <!-- Error View End -->
             </div>
             <div class="col-xs-6 col-md-6">
 
@@ -77,10 +92,12 @@
                 <input type="number" class="form-control" id="pinCode" formControlName="phone"
                   placeholder="720-434-1417">
                 <!-- Error View -->
-                <div id="errorDiv" id="errorDiv" *ngIf="userInfoForm.get('phone').hasError('required')">
+                <div id="errorDiv" id="errorDiv"
+                  *ngIf="userInfoForm.get('phone').hasError('required') && submitClicked">
                   You entered not valid input.
                 </div>
-                <div id="errorDiv" id="errorDiv" *ngIf="userInfoForm.get('phone').hasError('minlength')">
+                <div id="errorDiv" id="errorDiv"
+                  *ngIf="userInfoForm.get('phone').hasError('minlength') && submitClicked">
                   Number must be at least 2 characters long.
                 </div>
                 <!-- Error View End -->
@@ -97,6 +114,14 @@
                   <option [value]="i" *ngFor="let i of numberTypeArray">{{i}}</option>
                 </select>
               </div>
+              <!-- Error View -->
+              <div id="errorDiv" *ngIf="userInfoForm.get('phone2Type').hasError('required') && submitClicked">
+                You entered not valid input.
+              </div>
+              <div id="errorDiv" *ngIf="userInfoForm.get('phone2Type').hasError('minlength') && submitClicked">
+                phone type must be at least 2 characters long.
+              </div>
+              <!-- Error View End -->
             </div>
             <div class="col-xs-6 col-md-6">
               <div class="form-group">
@@ -104,10 +129,10 @@
                 <input type="number" class="form-control" id="pinCode" formControlName="phone2"
                   placeholder="720-434-1417">
                 <!-- Error View -->
-                <div id="errorDiv" *ngIf="userInfoForm.get('phone2').hasError('required')">
+                <div id="errorDiv" *ngIf="userInfoForm.get('phone2').hasError('required') && submitClicked">
                   You entered not valid input.
                 </div>
-                <div id="errorDiv" *ngIf="userInfoForm.get('phone2').hasError('minlength')">
+                <div id="errorDiv" *ngIf="userInfoForm.get('phone2').hasError('minlength') && submitClicked">
                   Number must be at least 2 characters long.
                 </div>
                 <!-- Error View End -->
@@ -120,10 +145,10 @@
             <input type="email" class="form-control" id="email" formControlName="email"
               placeholder="bradleykjohnson@abc.com">
             <!-- Error View -->
-            <div id="errorDiv" *ngIf="userInfoForm.get('email').hasError('required')">
+            <div id="errorDiv" *ngIf="userInfoForm.get('email').hasError('required') && submitClicked">
               You entered not valid input.
             </div>
-            <div id="errorDiv" *ngIf="userInfoForm.get('email').hasError('pattern')">
+            <div id="errorDiv" *ngIf="userInfoForm.get('email').hasError('pattern') && submitClicked">
               Invalid Email Address
             </div>
             <!-- Error View End -->

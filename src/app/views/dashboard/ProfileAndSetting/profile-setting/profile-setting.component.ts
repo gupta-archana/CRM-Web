@@ -25,7 +25,8 @@ export class ProfileSettingComponent extends BaseClass implements OnInit, ApiRes
   }
 
   onEditProfileClick() {
-    this.dataService.onAgentProfileEditClick(true);
+    this.dataService.shareUserProfile(this.userProfileModel);
+    //this.dataService.onAgentProfileEditClick(true);
   }
 
   shareVCard() {

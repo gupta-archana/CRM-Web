@@ -128,14 +128,26 @@ export class ApiHandlerService implements ApiResponseCallback {
   public createNote(requestJson: any, apiResponseCallback: ApiResponseCallback) {
     this.dataService.onHideShowLoader(true);
     let url = this.api.getCreateNoteUrl(this.getAppMode());
-    this.apiService.hitPostApi(url, json2xml(requestJson, { attributes_key: 'attr' }), apiResponseCallback);
+    this.apiService.hitPostApi(url, this.getRequestXml(requestJson), apiResponseCallback);
   }
 
+
+
+  /**
+   * updateUserInfo
+   */
+  public updateUserInfo(requestJson: any, apiResponseCallback: ApiResponseCallback) {
+    this.dataService.onHideShowLoader(true);
+    let url = this.api.getUpdateUserProfileUrl(this.getAppMode());
+    this.apiService.hitPostApi(url, this.getRequestXml(requestJson), apiResponseCallback);
+  }
 
   private getAppMode(): string {
     return this.APP_MODE[this.ENABLE_APP_MODE];
   }
-
+  private getRequestXml(requestJson: any): any {
+    return json2xml(requestJson, { attributes_key: 'attr' });
+  }
   onSuccess(response: any) {
     this.dataService.onHideShowLoader(false);
     let responseBody = response.Envelope.Body;
