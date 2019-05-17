@@ -35,20 +35,10 @@ export class ShareVCardComponent extends BaseClass implements OnInit, OnDestroy,
   }
 
   onSuccess(response: any) {
-    this.dataService.onHideShowLoader(false);
-    let responseBody = response.Envelope.Body;
-    if (responseBody.hasOwnProperty('Fault')) {
-      let errorCode = responseBody.Fault.code;
-      let msg = responseBody.Fault.message;
-      this.onError(errorCode, msg);
-    }
-    else {
-      this.commonFunctions.showSnackbar("VCard Shared Successfully");
-      this.closeShareVCard.nativeElement.click();
-    }
+    this.commonFunctions.showSnackbar(response);
   }
   onError(errorCode: number, errorMsg: string) {
-    this.dataService.onHideShowLoader(false);
+
     this.commonFunctions.showErrorSnackbar(errorMsg);
   }
   ngOnDestroy(): void {

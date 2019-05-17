@@ -12,4 +12,5 @@ export class EntityModel {
   stat: string;
   netPermium: number;
   cpl: string;
+  favorite: boolean = true;
 }

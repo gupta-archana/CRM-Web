@@ -10,7 +10,10 @@
                 alt="" />
               <div class="dpProfile_wp proActiBg">A</div>
             </div>
-            <h4>{{item.entityName}}<span>({{item.entityID}})</span></h4> <span>{{item.city+','+item.state}}</span>
+            <h4><a (click)="onAgentClick(item)">{{item.entityName}}</a> <span
+                (click)="onAgentClick(item)">({{item.entityID}})</span><a><img
+                  src="../../../../images/favourite-icon.svg" alt="" (click)="onStarClick(item)"></a></h4>
+            <span>{{item.city+','+item.state}}</span>
           </div>
         </div>
       </li>

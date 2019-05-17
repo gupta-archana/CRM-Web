@@ -2,6 +2,7 @@ import { Component, OnInit, Injector } from '@angular/core';
 import { BaseClass } from '../../../../global/base-class';
 import { ApiResponseCallback } from '../../../../Interfaces/ApiResponseCallback';
 import { UserProfileModel } from '../../../../models/user-profile-model';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-profile-setting',
@@ -10,17 +11,20 @@ import { UserProfileModel } from '../../../../models/user-profile-model';
 })
 export class ProfileSettingComponent extends BaseClass implements OnInit, ApiResponseCallback {
   private userProfileModel: UserProfileModel = new UserProfileModel();
-  userImg: string = "";
+  userImg: any = "";
 
-  constructor(private injector: Injector) { super(injector); }
+  constructor(private injector: Injector, public domSanitizer: DomSanitizer) { super(injector); }
 
   ngOnInit() {
     getUserProfileData(this);
   }
   onEditProfilePicClick() {
+    this.dataService.shareUserProfile(this.userProfileModel);
     const dialogRef = this.openDialogService.showChangePicDialog();
     dialogRef.afterClosed().subscribe(callback => {
-
+      if (callback) {
+        getUserProfileData(this);
+      }
     });
   }
 
@@ -41,7 +45,7 @@ export class ProfileSettingComponent extends BaseClass implements OnInit, ApiRes
     this.userProfileModel = response.UserProfile[0];
     this.commonFunctions.printLog(this.userProfileModel.name);
     this.userProfileModel.shareable = response.UserProfile[0].shareable == "yes";
-    this.userImg = "data:image/png;base64," + this.userProfileModel.picture;
+    this.userImg = this.domSanitizer.bypassSecurityTrustResourceUrl(this.userProfileModel.picture);
     this.cdr.markForCheck();
     //getUserProfilePic(this)
   }
@@ -86,17 +90,7 @@ function getUserProfileData(context: ProfileSettingComponent) {
 function changeShareableStatus(context: ProfileSettingComponent, status: string) {
   context.apiHandler.ChangeShareableStatus(status, {
     onSuccess(response: any) {
-      context.dataService.onHideShowLoader(false);
-      let responseBody = response.Envelope.Body;
-      if (responseBody.hasOwnProperty('Fault')) {
-        let errorCode = responseBody.Fault.code;
-        let msg = responseBody.Fault.message;
-        this.apiResponseCallback.onError(errorCode, msg);
-      }
-      else {
-        let msg = responseBody.Success.message;
-        context.commonFunctions.showSnackbar(msg);
-      }
+      context.commonFunctions.showSnackbar(response);
     },
     onError(errorCode: number, errorMsg: string) {
       context.commonFunctions.showErrorSnackbar(errorMsg);

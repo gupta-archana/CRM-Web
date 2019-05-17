@@ -2,15 +2,19 @@
 <div class="container app-bg2 bottom-wrapper">
   <div class="row">
     <ul>
-      <li *ngFor="let item of topAgents" (click)="onAgentClick(item)">
+      <li *ngFor="let item of topAgents">
         <div class="col-xs-12 col-md-6 cell-bg">
           <div class="agent-detail">
             <div class="dp"><img src="../../../../images/baseline-business-24px.svg"
-                onerror="this.src='../../../../images/placeholder.png'" />
+                onerror="this.src='../../../../images/placeholder.png'" (click)="onAgentClick(item)" />
             </div>
-            <h4>{{item.name}} <span>({{item.entityId}})</span></h4> <span>{{item.city+','+item.state}}</span>
+            <h4><a (click)="onAgentClick(item)">{{item.name}}</a> <span
+                (click)="onAgentClick(item)">({{item.entityId}})</span><a><img
+                  src="{{item.favorite?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}" alt=""
+                  (click)="onStarClick(item)"></a></h4>
+            <span>{{item.city+','+item.state}}</span>
             <div class="clearfix"></div>
-            <div class="row">
+            <div class="row" (click)="onAgentClick(item)">
               <div class="col-md-6 col-xs-6">
                 <div class="amount">NPR YTD<br><span>$ {{item.netPermium}}</span></div>
               </div>

@@ -58,21 +58,9 @@ export class UpdateUserProfileComponent extends BaseClass implements OnInit, OnD
 
 
   onSuccess(response: any) {
-    this.dataService.onHideShowLoader(false);
-    let responseBody = response.Envelope.Body;
-    if (responseBody.hasOwnProperty('Fault')) {
-      let errorCode = responseBody.Fault.code;
-      let msg = responseBody.Fault.message;
-      this.onError(errorCode, msg);
-    }
-    else {
-      let msg = response.Success.message;
-      this.commonFunctions.showSnackbar(msg);
-      this.closeUpdateUserProfileModal.nativeElement.click();
-    }
+    this.commonFunctions.showSnackbar(response);
   }
   onError(errorCode: number, errorMsg: string) {
-    this.dataService.onHideShowLoader(false);
     this.commonFunctions.showErrorSnackbar(errorMsg);
   }
 

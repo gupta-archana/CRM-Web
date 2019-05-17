@@ -25,7 +25,9 @@
               <div class="dp"><img
                   src="{{item.type=='Agent'?'../../../../../../images/building-icon.svg':'../../../../../../images/username.svg'}}"
                   alt="" /></div>
-              <h4>{{item.name}}</h4> <span>{{getAddress(item)}}</span>
+              <h4>{{item.name}}<a><img
+                    src="{{item.favorite?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}" alt=""
+                    (click)="onStarClick(item)"></a></h4> <span>{{getAddress(item)}}</span>
               <div class="clearfix"></div>
               <div class="amount"><span class="year">Net Premium</span><br>
                 <span class="price green">$ {{item.netPermium}}</span></div>

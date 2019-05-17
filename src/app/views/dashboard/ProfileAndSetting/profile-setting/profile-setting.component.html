@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-xs-12 col-md-12 profileWp">
         <div class="profile-pic-wp">
-          <img src="{{userImg}}" placeholder="../../../../../images/placeholder.png" onerror="this.src='../../../../../images/placeholder.png'" alt=""
+          <img [src]="userImg" placeholder="../../../../../images/placeholder.png" onerror="this.src='../../../../../images/placeholder.png'" alt=""
             (click)="onEditProfilePicClick()">
         </div>
         <h4>{{userProfileModel.name}}</h4>

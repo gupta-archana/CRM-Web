@@ -36,6 +36,6 @@ export class OpenDialogsService {
   }
 
   showChangePicDialog() {
-    return this.dialog.open(ChangeProfileDialogComponent, { disableClose: true });
+    return this.dialog.open(ChangeProfileDialogComponent, { disableClose: false });
   }
 }

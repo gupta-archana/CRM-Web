@@ -4,8 +4,7 @@
   </div>
   <div class="change-dp"><img [src]="croppedImage" alt="" (click)="file.click()" /></div>
   <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="3 / 3"
-    [resizeToWidth]="250" format="png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()"
-    (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()">
+    [resizeToWidth]="150" format="png" (imageCropped)="imageCropped($event)" (loadImageFailed)="loadImageFailed()">
   </image-cropper>
   <input type='file' (change)="fileChangeEvent($event)" #file style="display:none">
 </mat-dialog-content>

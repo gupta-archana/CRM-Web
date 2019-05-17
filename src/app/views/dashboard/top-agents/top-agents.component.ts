@@ -63,13 +63,27 @@ export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponse
     }
   }
 
-  onAgentClick(agent: AgentInfoModel) {
+  onAgentClick(agent: EntityModel) {
     sessionStorage.setItem(this.constants.TOP_AGENT_CURRENT_PAGE_NO, this.pageNumber.toString());
     sessionStorage.setItem(this.constants.TOP_AGENT_DATA, JSON.stringify(this.topAgents));
     sessionStorage.setItem(this.constants.AGENT_INFO, JSON.stringify(agent));
     sessionStorage.setItem(this.constants.TOP_AGENT_TOTAL_ROWS, JSON.stringify(this.totalRows));
     this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_AGENT_DETAIL);
 
+  }
+
+
+  onStarClick(item: EntityModel) {
+    var self = this;
+    this.apiHandler.updateFavoriteStatus(item.type, item.entityId, {
+      onSuccess(response: any) {
+        item.favorite = true;
+        self.cdr.markForCheck();
+      }, onError(errorCode, errorMsg) {
+
+      }
+    })
+    //this.commonFunctions.printLog(item.name);
   }
 
   onSuccess(response: any) {
@@ -81,8 +95,15 @@ export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponse
   private parseAndShowDataOnUi(response: any) {
     let newTopAgents = response.profile;
     if (newTopAgents) {
-      this.totalRows = Number((newTopAgents.splice(newTopAgents.length - 1, 1))[0].rowNum);
-      this.topAgents = this.topAgents.concat(newTopAgents);
+      newTopAgents.forEach(element => {
+        if (element.type == this.constants.ENTITY_AGENT) {
+          element.favorite = false;
+          this.topAgents.push(element);
+        } else {
+          this.totalRows = element.rowNum;
+        }
+      });
+      // = Number((newTopAgents.splice(newTopAgents.length - 1, 1))[0].rowNum);
       this.moreDataAvailable = true;
     }
     else {

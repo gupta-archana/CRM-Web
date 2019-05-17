@@ -15,7 +15,7 @@ export class ApiHandlerService implements ApiResponseCallback {
   private APP_MODE: Array<string> = ["dev", "beta", "prod"];
   private ENABLE_APP_MODE = 0;
   private apiResponseCallback: ApiResponseCallback = null;
-  constructor(private apiService: ApiService, private dataService: DataServiceService, private constants: Constants,
+  constructor(private apiService: ApiService, public dataService: DataServiceService, private constants: Constants,
     private api: API) { }
 
   public getSideNavJson(apiResponseCallback: ApiResponseCallback) {
@@ -91,16 +91,7 @@ export class ApiHandlerService implements ApiResponseCallback {
     this.dataService.onHideShowLoader(true);
     //this.apiResponseCallback = apiResponseCallback;
     let url = this.api.getChangeShareableStatusUrl(this.APP_MODE[this.ENABLE_APP_MODE], status);
-    this.apiService.hitGetApi(url, apiResponseCallback);
-  }
-
-  /**
-   * AddFavorite
-   */
-  public AddFavorite(entityType: string, entityId: string, apiResponseCallback: ApiResponseCallback) {
-    this.dataService.onHideShowLoader(true);
-    let url = this.api.getAddFavoriteUrl(this.APP_MODE[this.ENABLE_APP_MODE], entityType, entityId);
-    this.apiService.hitGetApi(url, apiResponseCallback);
+    this.apiService.hitGetApi(url, handleAddAndUpdateApiResponse(this, apiResponseCallback));
   }
 
   /**
@@ -109,7 +100,7 @@ export class ApiHandlerService implements ApiResponseCallback {
   public shareVCard(to: string, entityType: string, entityId: string, apiResponseCallback: ApiResponseCallback) {
     this.dataService.onHideShowLoader(true);
     let url = this.api.getShareVCardUrl(this.getAppMode(), to, entityType, entityId);
-    this.apiService.hitGetApi(url, apiResponseCallback);
+    this.apiService.hitGetApi(url, handleAddAndUpdateApiResponse(this, apiResponseCallback));
   }
 
   /**
@@ -128,7 +119,7 @@ export class ApiHandlerService implements ApiResponseCallback {
   public createNote(requestJson: any, apiResponseCallback: ApiResponseCallback) {
     this.dataService.onHideShowLoader(true);
     let url = this.api.getCreateNoteUrl(this.getAppMode());
-    this.apiService.hitPostApi(url, this.getRequestXml(requestJson), apiResponseCallback);
+    this.apiService.hitPostApi(url, this.getRequestXml(requestJson), handleAddAndUpdateApiResponse(this, apiResponseCallback));
   }
 
 
@@ -139,7 +130,25 @@ export class ApiHandlerService implements ApiResponseCallback {
   public updateUserInfo(requestJson: any, apiResponseCallback: ApiResponseCallback) {
     this.dataService.onHideShowLoader(true);
     let url = this.api.getUpdateUserProfileUrl(this.getAppMode());
-    this.apiService.hitPostApi(url, this.getRequestXml(requestJson), apiResponseCallback);
+    this.apiService.hitPostApi(url, this.getRequestXml(requestJson), handleAddAndUpdateApiResponse(this, apiResponseCallback));
+  }
+
+  /**
+   * updateFavoriteStatus
+   */
+  public updateFavoriteStatus(entityType, entityId, apiResponseCallback: ApiResponseCallback) {
+    this.dataService.onHideShowLoader(true);
+    let url = this.api.getSetFavoriteStatus(this.getAppMode(), entityType, entityId);
+    this.apiService.hitGetApi(url, handleAddAndUpdateApiResponse(this, apiResponseCallback));
+  }
+
+  /**
+   * updateUserProfilePic
+   */
+  public updateUserProfilePic(requestJson: any, apiResponseCallback: ApiResponseCallback) {
+    this.dataService.onHideShowLoader(true);
+    let url = this.api.getUpdateProfilePicture(this.getAppMode());
+    this.apiService.hitPostApi(url, this.getRequestXml(requestJson), handleAddAndUpdateApiResponse(this, apiResponseCallback));
   }
 
   private getAppMode(): string {
@@ -167,6 +176,28 @@ export class ApiHandlerService implements ApiResponseCallback {
   onError(errorCode: number, errorMsg: string) {
     this.dataService.onHideShowLoader(false);
     this.apiResponseCallback.onError(errorCode, errorMsg);
+  }
+}
+function handleAddAndUpdateApiResponse(context: ApiHandlerService, apiResponseCallback: ApiResponseCallback) {
+  return {
+    onSuccess(response: any) {
+      context.dataService.onHideShowLoader(false);
+      let responseBody = response.Envelope.Body;
+      if (responseBody.hasOwnProperty('Fault')) {
+        let errorCode = responseBody.Fault.code;
+        let msg = responseBody.Fault.message;
+        context.onError(errorCode, msg);
+      }
+      else {
+        let msg = responseBody.Success.message;
+        apiResponseCallback.onSuccess(msg);
+
+      }
+    },
+    onError(errorCode: number, errorMsg: string) {
+      context.dataService.onHideShowLoader(false);
+      apiResponseCallback.onError(errorCode, errorMsg);
+    }
   }
 }
 
