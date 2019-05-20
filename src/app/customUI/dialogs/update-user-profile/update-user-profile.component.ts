@@ -59,6 +59,8 @@ export class UpdateUserProfileComponent extends BaseClass implements OnInit, OnD
 
   onSuccess(response: any) {
     this.commonFunctions.showSnackbar(response);
+    this.dataService.onDataUpdated();
+    this.closeUpdateUserProfileModal.nativeElement.click();
   }
   onError(errorCode: number, errorMsg: string) {
     this.commonFunctions.showErrorSnackbar(errorMsg);
@@ -125,6 +127,8 @@ function createRequestJson(context: UpdateUserProfileComponent) {
     requestJson[key] = value;
 
   });
+
+  requestJson["uid"] = requestJson["email"];
   let finalJson = {
     "SystemProfile": "",
     "attr": requestJson

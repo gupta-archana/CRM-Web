@@ -1,8 +1,9 @@
-import { Component, OnInit, Injector } from '@angular/core';
+import { Component, OnInit, Injector, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked } from '@angular/core';
 import { BaseClass } from '../../../../global/base-class';
 import { ApiResponseCallback } from '../../../../Interfaces/ApiResponseCallback';
 import { UserProfileModel } from '../../../../models/user-profile-model';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-profile-setting',
@@ -10,13 +11,16 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./profile-setting.component.css']
 })
 export class ProfileSettingComponent extends BaseClass implements OnInit, ApiResponseCallback {
+
   private userProfileModel: UserProfileModel = new UserProfileModel();
   userImg: any = "";
+  dataUpdatedSubscription: Subscription = null;
 
   constructor(private injector: Injector, public domSanitizer: DomSanitizer) { super(injector); }
 
   ngOnInit() {
     getUserProfileData(this);
+    registerDataUpdatedObservable(this);
   }
   onEditProfilePicClick() {
     this.dataService.shareUserProfile(this.userProfileModel);
@@ -62,6 +66,14 @@ export class ProfileSettingComponent extends BaseClass implements OnInit, ApiRes
     changeShareableStatus(this, status);
 
   }
+}
+
+function registerDataUpdatedObservable(context: ProfileSettingComponent) {
+  context.dataUpdatedSubscription = context.dataService.dataUpdatedObservable.subscribe(isUpdated => {
+    if (isUpdated) {
+      getUserProfileData(context);
+    }
+  });
 }
 
 function getUserProfileData(context: ProfileSettingComponent) {

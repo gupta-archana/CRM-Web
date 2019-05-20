@@ -49,6 +49,9 @@ export class DataServiceService {
   private shareUserProfileSubject = new BehaviorSubject<UserProfileModel>(null);
   shareUserProfileObservable = this.shareUserProfileSubject.asObservable();
 
+  private dataUpdatedSubject = new BehaviorSubject<boolean>(false);
+  dataUpdatedObservable = this.dataUpdatedSubject.asObservable();
+
   constructor() { }
 
   onHideShowLoader(showLoader: boolean) {
@@ -100,5 +103,9 @@ export class DataServiceService {
 
   shareUserProfile(data: UserProfileModel) {
     this.shareUserProfileSubject.next(data);
+  }
+
+  onDataUpdated() {
+    this.dataUpdatedSubject.next(true);
   }
 }

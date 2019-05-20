@@ -89,7 +89,7 @@ export class API {
 
 
   getUpdateUserProfileUrl(app_mode: string) {
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userProfileModify&uid=" + this.email;
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userProfileModify";
   }
 
   getSetFavoriteStatus(app_mode: string, entityType: string, entityId: string) {
