@@ -54,7 +54,7 @@
           <div class="form-group">
             <label for="state">State</label>
             <select class="form-control" id="sel1" formControlName="state" (change)="onStateChanged($event)">
-              <option [value]="i" *ngFor="let i of states">{{i}}</option>
+              <option [value]="i.description" *ngFor="let i of states">{{i.description}}</option>
             </select>
             <!-- Error View -->
             <div id="errorDiv" *ngIf="userInfoForm.get('state').hasError('required') && submitClicked">

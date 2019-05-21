@@ -36,6 +36,7 @@ export class ShareVCardComponent extends BaseClass implements OnInit, OnDestroy,
 
   onSuccess(response: any) {
     this.commonFunctions.showSnackbar(response);
+    this.closeShareVCard.nativeElement.click();
   }
   onError(errorCode: number, errorMsg: string) {
 

@@ -52,6 +52,9 @@ export class DataServiceService {
   private dataUpdatedSubject = new BehaviorSubject<boolean>(false);
   dataUpdatedObservable = this.dataUpdatedSubject.asObservable();
 
+  private shareDataSubject = new BehaviorSubject<any>("");
+  shareDataObservable = this.shareDataSubject.asObservable();
+
   constructor() { }
 
   onHideShowLoader(showLoader: boolean) {
@@ -107,5 +110,9 @@ export class DataServiceService {
 
   onDataUpdated() {
     this.dataUpdatedSubject.next(true);
+  }
+
+  onDataShare(data: any) {
+    this.shareDataSubject.next(data);
   }
 }

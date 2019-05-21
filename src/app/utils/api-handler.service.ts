@@ -122,6 +122,15 @@ export class ApiHandlerService implements ApiResponseCallback {
     this.apiService.hitPostApi(url, this.getRequestXml(requestJson), handleAddAndUpdateApiResponse(this, apiResponseCallback));
   }
 
+  /**
+   * getNotes
+   */
+  public getNotes(entityType, entityId, apiResponseCallback: ApiResponseCallback) {
+    this.apiResponseCallback = apiResponseCallback;
+    this.dataService.onHideShowLoader(true);
+    let url = this.api.getNotesUrl(this.getAppMode(), entityType, entityId);
+    this.apiService.hitGetApi(url, this);
+  }
 
 
   /**
@@ -149,6 +158,15 @@ export class ApiHandlerService implements ApiResponseCallback {
     this.dataService.onHideShowLoader(true);
     let url = this.api.getUpdateProfilePicture(this.getAppMode());
     this.apiService.hitPostApi(url, this.getRequestXml(requestJson), handleAddAndUpdateApiResponse(this, apiResponseCallback));
+  }
+
+  /**
+   * getStates
+   */
+  public getStates(apiResponseCallback: ApiResponseCallback) {
+
+    let url = this.api.getStates();
+    this.apiService.hitGetApi(url, apiResponseCallback);
   }
 
   private getAppMode(): string {

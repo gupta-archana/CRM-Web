@@ -1,4 +1,4 @@
-import { Component, OnInit, Injector, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, Injector, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy } from '@angular/core';
 import { BaseClass } from '../../../../global/base-class';
 import { ApiResponseCallback } from '../../../../Interfaces/ApiResponseCallback';
 import { UserProfileModel } from '../../../../models/user-profile-model';
@@ -10,7 +10,8 @@ import { Subscription } from 'rxjs';
   templateUrl: './profile-setting.component.html',
   styleUrls: ['./profile-setting.component.css']
 })
-export class ProfileSettingComponent extends BaseClass implements OnInit, ApiResponseCallback {
+export class ProfileSettingComponent extends BaseClass implements OnInit, ApiResponseCallback, OnDestroy {
+
 
   private userProfileModel: UserProfileModel = new UserProfileModel();
   userImg: any = "";
@@ -65,6 +66,11 @@ export class ProfileSettingComponent extends BaseClass implements OnInit, ApiRes
     let status = event ? "Yes" : "No";
     changeShareableStatus(this, status);
 
+  }
+
+  ngOnDestroy(): void {
+    if (this.dataUpdatedSubscription && !this.dataUpdatedSubscription.closed)
+      this.dataUpdatedSubscription.unsubscribe();
   }
 }
 

@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { ApiResponseCallback } from '../../../Interfaces/ApiResponseCallback';
 import { EntityModel } from '../../../models/entity-model';
+import { CommonApisService } from '../../../utils/common-apis.service';
 @Component({
   selector: 'app-agent-detail',
   templateUrl: './agent-detail.component.html',
@@ -22,13 +23,14 @@ export class AgentDetailComponent extends EntityDetailBaseClass implements OnIni
 
   constructor(injector: Injector,
     private router: Router,
-    private deviceDetector: DeviceDetectorService) {
+    private commonApis: CommonApisService) {
     super(injector);
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
   ngOnInit() {
     this.agentInfo = JSON.parse(sessionStorage.getItem(this.constants.AGENT_INFO));
+    this.agentInfo.favorite = false;
     this.addNewHistoryEntity(this.agentInfo);
     getMenues(this);
   }
@@ -84,7 +86,7 @@ export class AgentDetailComponent extends EntityDetailBaseClass implements OnIni
 
     if (navigatingUrl) {
       this.commonFunctions.navigateWithoutReplaceUrl(navigatingUrl);
-      
+
     }
 
     else
@@ -99,23 +101,9 @@ export class AgentDetailComponent extends EntityDetailBaseClass implements OnIni
     this.Save();
 
   }
-  openLocationOnMap(): void {
-    let os = this.deviceDetector.os;
-    let mapLocAddress = this.agentInfo.addr1 + "+" + this.agentInfo.addr2 + "+" + this.agentInfo.addr3 + "+" + this.agentInfo.addr4 + "+" + this.agentInfo.city + "+" + this.agentInfo.state;
 
-    switch (os) {
-      case "Windows":
-        window.open("https://maps.google.com/maps/place?q=" + mapLocAddress);
-        break;
-      case "Android":
-        window.open("geo:0,0?q=" + mapLocAddress);
-        break;
-      case "Ios":
-        window.open("maps://maps.google.com/maps/place?q=" + mapLocAddress);
-        break;
-      default:
-        break;
-    }
+  onStarClick(item: EntityModel) {
+    this.commonApis.setFavorite(item, this.apiHandler, this.cdr);
   }
 
   ngOnDestroy(): void {

@@ -23,7 +23,7 @@ export class UpdateUserProfileComponent extends BaseClass implements OnInit, OnD
   userProfileSubscription: Subscription = null;
   userProfileModel: UserProfileModel = null;
   numberTypeArray: Array<string> = ["Home", "Mobile", "Work", "Fax"];
-  states: Array<string> = ["Nevada", "AL"];
+  states: Array<string> = [];
   selectedNumberOneType: string = "";
   selectedNumberTwoType: string = "";
   submitClicked: boolean = false;
@@ -44,7 +44,8 @@ export class UpdateUserProfileComponent extends BaseClass implements OnInit, OnD
     this.userInfoForm.get("phone2Type").setValue(this.selectedNumberTwoType);
   }
   onStateChanged(event) {
-    this.userInfoForm.get("state").setValue(this.states.find(n => n == event.target.value));
+    this.commonFunctions.printLog(JSON.stringify(event.target.value));
+    this.userInfoForm.get("state").setValue(event.target.value);
   }
   onSaveChangeClick() {
     this.submitClicked = true;
@@ -53,9 +54,6 @@ export class UpdateUserProfileComponent extends BaseClass implements OnInit, OnD
     }
 
   }
-
-
-
 
   onSuccess(response: any) {
     this.commonFunctions.showSnackbar(response);
@@ -91,10 +89,22 @@ function getUserProfile(context: UpdateUserProfileComponent) {
   context.userProfileSubscription = context.dataService.shareUserProfileObservable.subscribe(data => {
     if (data != null) {
       context.userProfileModel = data;
-      setValueInFormControls(context);
+      getStates(context);
     }
   })
 
+}
+
+function getStates(context: UpdateUserProfileComponent) {
+  context.apiHandler.getStates({
+    onSuccess(response: any) {
+      context.states = response;
+      setValueInFormControls(context);
+      context.cdr.markForCheck();
+    }, onError(errorCode: number, errorMsg: string) {
+
+    }
+  })
 }
 
 function addValidation(context: UpdateUserProfileComponent) {
@@ -107,7 +117,7 @@ function addValidation(context: UpdateUserProfileComponent) {
     phone2: new FormControl("", Validators.compose([Validators.required, Validators.minLength(2)])),
     phoneType: new FormControl(context.numberTypeArray[2], Validators.compose([Validators.required, Validators.minLength(2)])),
     phone2Type: new FormControl(context.numberTypeArray[3], Validators.compose([Validators.required, Validators.minLength(2)])),
-    state: new FormControl(context.states[0], Validators.compose([Validators.required, Validators.minLength(2)])),
+    state: new FormControl("", Validators.compose([Validators.required, Validators.minLength(2)])),
     email: new FormControl("", Validators.compose([Validators.required, Validators.pattern(re)])),
   })
 }
@@ -128,7 +138,7 @@ function createRequestJson(context: UpdateUserProfileComponent) {
 
   });
 
-  requestJson["uid"] = requestJson["email"];
+  requestJson["uid"] = context.userProfileModel.uid;
   let finalJson = {
     "SystemProfile": "",
     "attr": requestJson

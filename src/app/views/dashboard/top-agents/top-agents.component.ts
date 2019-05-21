@@ -6,6 +6,7 @@ import { ApiResponseCallback } from '../../../Interfaces/ApiResponseCallback';
 import { Subscription } from 'rxjs';
 import { BaseClass } from '../../../global/base-class';
 import { EntityModel } from '../../../models/entity-model';
+import { CommonApisService } from '../../../utils/common-apis.service';
 
 @Component({
   selector: 'app-top-agents',
@@ -23,7 +24,7 @@ export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponse
   totalRows: number = 0;
   totalAndCurrentRowsRatio: string = "";
 
-  constructor(private injector: Injector) {
+  constructor(private injector: Injector, private commonApis: CommonApisService) {
     super(injector);
     this.pageNumber = 0;
     this.totalRows = 0;
@@ -74,16 +75,7 @@ export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponse
 
 
   onStarClick(item: EntityModel) {
-    var self = this;
-    this.apiHandler.updateFavoriteStatus(item.type, item.entityId, {
-      onSuccess(response: any) {
-        item.favorite = true;
-        self.cdr.markForCheck();
-      }, onError(errorCode, errorMsg) {
-
-      }
-    })
-    //this.commonFunctions.printLog(item.name);
+    this.commonApis.setFavorite(item, this.apiHandler, this.cdr);
   }
 
   onSuccess(response: any) {

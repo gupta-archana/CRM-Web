@@ -258,3 +258,9 @@ mat-ink-bar.mat-ink-bar {
   padding: 0px;
   margin: 5px 0px 0px 0px;
 }
+
+.profile-pic-wp img {
+  width: 90px;
+  background-color: #C1E3FF;
+  border-radius: 70px;
+}

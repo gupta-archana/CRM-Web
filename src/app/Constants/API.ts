@@ -11,6 +11,7 @@ import { CommonFunctionsService } from '../utils/common-functions.service';
 export class API {
   SIDE_NAV_JSON = "../assets/jsons/sideNav.json";
   AGENT_DETAIL_MENU = "../assets/jsons/agent_detail_menu.json";
+  STATES_JSON_URL = "../assets/jsons/state.json";
   private API_BASE_URL = "https://compass.alliantnational.com:8118/do/action/WService=";
   private numberOfRows: number;
   email: string = "";
@@ -83,6 +84,11 @@ export class API {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=SYStemFavoritesGet";
   }
 
+
+  getNotesUrl(app_mode: string, entityType: string, entityId: string) {
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=systemNotesGet&entity=" + entityType + "&entityID=" + entityId;
+  }
+
   getCreateNoteUrl(app_mode: string) {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=systemNoteNew";
   }
@@ -99,6 +105,10 @@ export class API {
 
   getUpdateProfilePicture(app_mode: string) {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userPictureSet";
+  }
+
+  getStates() {
+    return this.STATES_JSON_URL;
   }
 
   getGoogleTopTenNewsUrl() {

@@ -1,79 +1,43 @@
 <div class="tab-content">
   <div id="allNotesId" class="tab-pane fade in active" style="overflow: hidden">
     <div class="clearfix paddingTop10"></div>
-    <div class="row">
-      <div class="col-xs-12 col-md-12 cell-bg">
-        <div class="col-xs-6 col-md-6 noPadding">
-          <div class="myNotesWp"><img src="../../../../../images/ic_note_profile.svg" alt=""> My Notes</div>
-        </div>
-        <div class="col-xs-6 col-md-6 noPadding">
-          <div class="myNotesWp textRight">21/02/2019</div>
-        </div>
-        <div class="col-xs-12 col-md-12 noPadding">
-          <div class="myNotesDetails">
-            <p>I need to think more...</p>
-          </div>
-        </div>
+    <ul>
+      <li *ngFor="let item of agentNotes">
+        <div class="row">
+          <div class="col-xs-12 col-md-12 cell-bg">
+            <div class="col-xs-6 col-md-6 noPadding">
+              <div class="myNotesWp"><img src="../../../../../images/ic_note_profile.svg" alt="">{{getNotesType(item)}}
+              </div>
+            </div>
+            <div class="col-xs-6 col-md-6 noPadding">
+              <div class="myNotesWp textRight">{{item.dateCreated}}</div>
+            </div>
+            <div class="col-xs-12 col-md-12 noPadding">
+              <div class="myNotesDetails">
+                <p>{{item.note}}</p>
+              </div>
+            </div>
+            <div *ngIf="getNotesType(item)=='My Notes'">
+              <div class="clearfix paddingTop5"></div>
+              <div class="divider"></div>
+              <div class="clearfix paddingTop5"></div>
 
-        <div class="clearfix paddingTop5"></div>
-        <div class="divider"></div>
-        <div class="clearfix paddingTop5"></div>
-
-        <div class="col-xs-6 col-md-6 noPadding">
-          <div class="ag-detail-icons">
-            <a href="#" alt=""><img src="../../../../../images/ic_delete.svg" alt=""> Delete</a>
+              <div class="col-xs-6 col-md-6 noPadding">
+                <div class="ag-detail-icons">
+                  <a href="#" alt=""><img src="../../../../../images/ic_delete.svg" alt=""> Delete</a>
+                </div>
+              </div>
+              <div class="col-xs-6 col-md-6 noPadding">
+                <div class="ag-detail-icons textRight">
+                  <a href="#" alt=""><img src="../../../../../images/ic_note_edit.svg" alt=""> Edit</a>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="col-xs-6 col-md-6 noPadding">
-          <div class="ag-detail-icons textRight">
-            <a href="#" alt=""><img src="../../../../../images/ic_note_edit.svg" alt=""> Edit</a>
-          </div>
-        </div>
-      </div>
 
-      <div class="col-xs-12 col-md-12 cell-bg">
-        <div class="col-xs-6 col-md-6 noPadding">
-          <div class="myNotesWp"><img src="../../../../../images/ic_note_profile.svg" alt=""> Recheal</div>
         </div>
-        <div class="col-xs-6 col-md-6 noPadding">
-          <div class="myNotesWp textRight">21/02/2019</div>
-        </div>
-        <div class="col-xs-12 col-md-12 noPadding">
-          <div class="myNotesDetails">
-            <p>Understood his goals...</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-xs-12 col-md-12 cell-bg">
-        <div class="col-xs-6 col-md-6 noPadding">
-          <div class="myNotesWp"><img src="../../../../../images/ic_note_profile.svg" alt=""> Micheal</div>
-        </div>
-        <div class="col-xs-6 col-md-6 noPadding">
-          <div class="myNotesWp textRight">21/02/2019</div>
-        </div>
-        <div class="col-xs-12 col-md-12 noPadding">
-          <div class="myNotesDetails">
-            <p>Finding tips for improvement</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-xs-12 col-md-12 cell-bg">
-        <div class="col-xs-6 col-md-6 noPadding">
-          <div class="myNotesWp"><img src="../../../../../images/ic_note_profile.svg" alt=""> David</div>
-        </div>
-        <div class="col-xs-6 col-md-6 noPadding">
-          <div class="myNotesWp textRight">21/02/2019</div>
-        </div>
-        <div class="col-xs-12 col-md-12 noPadding">
-          <div class="myNotesDetails">
-            <p>Doing something better</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
+      </li>
+    </ul>
 
     <div class="clearfix paddingTop15"></div>
 

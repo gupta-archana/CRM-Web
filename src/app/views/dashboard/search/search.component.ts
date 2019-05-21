@@ -5,6 +5,7 @@ import { ApiResponseCallback } from '../../../Interfaces/ApiResponseCallback';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { EntityModel } from '../../../models/entity-model';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { CommonApisService } from '../../../utils/common-apis.service';
 
 
 @Component({
@@ -28,7 +29,7 @@ export class SearchComponent extends BaseClass implements OnInit, ApiResponseCal
   private PERSON: string = "Person";
   deviceInfo = null;
 
-  constructor(injector: Injector, private deviceService: DeviceDetectorService) {
+  constructor(injector: Injector, private deviceService: DeviceDetectorService, private commonApis: CommonApisService) {
     super(injector);
   }
 
@@ -115,7 +116,9 @@ export class SearchComponent extends BaseClass implements OnInit, ApiResponseCal
     });
   }
 
-
+  onStarClick(item: EntityModel) {
+    this.commonApis.setFavorite(item, this.apiHandler, this.cdr);
+  }
 }
 
 function onApiResponse(newUsers: any, context: SearchComponent) {
