@@ -7,6 +7,7 @@ import { RecentProfilesComponent } from '../../customUI/dialogs/recent-profiles/
 import { ShareVCardComponent } from '../../customUI/dialogs/share-v-card/share-v-card.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UpdateUserProfileComponent } from '../../customUI/dialogs/update-user-profile/update-user-profile.component';
+import { SearchFilterComponent } from '../../customUI/dialogs/search-filter/search-filter.component';
 //import { ModalService } from '../../services/modal.service';
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { UpdateUserProfileComponent } from '../../customUI/dialogs/update-user-p
     UpdateAgentProfileComponent,
     RecentProfilesComponent,
     ShareVCardComponent,
-    UpdateUserProfileComponent
+    UpdateUserProfileComponent,
+    SearchFilterComponent
   ],
   exports: [
     UpdateAgentProfileComponent,
@@ -29,6 +31,7 @@ import { UpdateUserProfileComponent } from '../../customUI/dialogs/update-user-p
     NgxSmartModalModule,
     ShareVCardComponent,
     UpdateUserProfileComponent,
+    SearchFilterComponent,
     FormsModule,
     ReactiveFormsModule
   ]

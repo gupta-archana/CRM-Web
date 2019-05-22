@@ -9,14 +9,15 @@
         <img src="../../../../images/refresh.svg" alt="" (click)="onRefreshClick()"></div>
 
       <div class="col-xs-2 text-right toppad" *ngIf="showFilterButton"><img src="../../../../images/filter.svg" alt=""
-          (click)="onFilterClick()"><br><span class="edit-detail"><a href="#">Filter</a></span></div>
+          (click)="onFilterClick()" data-toggle="modal" data-target="#filterPopup"><br><span
+          class="edit-detail"><a>Filter</a></span></div>
 
       <div class="col-xs-2 text-right toppad" *ngIf="showRecentProfileButton"><img
           src="../../../../images/recent-profile-white.svg" alt="" data-toggle="modal" data-target="#recentAssociatesl"
-          (click)="onRecentProfileClick()"><br><span class="edit-detail"><a href="#"></a></span></div>
+          (click)="onRecentProfileClick()"><br><span class="edit-detail"><a></a></span></div>
 
       <div class="col-xs-2 text-right toppad" *ngIf="showLogoutButton"><img src="../../../../images/ic_logout.svg"
-          alt="" (click)="onLogoutClick()"><br><span class="edit-detail"><a href="#"></a></span></div>
+          alt="" (click)="onLogoutClick()"><br><span class="edit-detail"><a></a></span></div>
     </div>
 
     <div id="mySidenav" class="sidenav">
@@ -49,6 +50,6 @@
   <div class="bottom-wrapper">
 
     <app-recent-profile-dialog></app-recent-profile-dialog>
-
+    <app-search-filter></app-search-filter>
     <router-outlet (pageNameEvent)="receivePageName($event)"></router-outlet>
   </div>

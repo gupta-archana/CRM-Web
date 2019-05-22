@@ -20,7 +20,8 @@ export class API {
   constructor(private commonFunctions: CommonFunctionsService, private myLocalStorage: MyLocalStorageService, private constants: Constants) {
 
     this.getNumberOfRows();
-    this.getCredentials();
+    if (myLocalStorage.getValue(constants.LOGGED_IN))
+      this.getCredentials();
   }
 
   private getCredentials() {

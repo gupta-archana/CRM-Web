@@ -1,0 +1,86 @@
+<div class="modal fade" id="filterPopup" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" #closeSearchFilter>&times;</button>
+        <h4 class="modal-title">Filter</h4>
+      </div>
+      <form role="form" [formGroup]="filterForm">
+        <div class="modal-body">
+
+          <div class="form-group" style="margin-bottom:0px;">
+            <label for="SearchIn">Search In:</label>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 col-xs-6">
+              <div class="checkbox">
+                <input id="checkbox1" type="checkbox" formControlName="allCheck" name="all"
+                  (change)="onAllCheckChange($event)">
+                <label class="rememberM" for="checkbox1">All</label>
+              </div>
+            </div>
+            <div class="col-md-6 col-xs-6">
+              <div class="checkbox">
+                <input id="checkbox2" type="checkbox" formControlName="agentCheck" name="agent"
+                  (change)="onAgentCheckChange($event)">
+                <label class="rememberM" for="checkbox2">Agent</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 col-xs-6">
+              <div class="checkbox">
+                <input id="checkbox3" type="checkbox" formControlName="peopleCheck" name="people"
+                  (change)="onPeopleCheckChange($event)">
+                <label class="rememberM" for="checkbox3">People</label>
+              </div>
+            </div>
+            <div class="col-md-6 col-xs-6">
+              <div class="checkbox">
+                <input id="checkbox4" type="checkbox" name="employee" formControlName="employeeCheck"
+                  (change)="onEmployeeCheckChange($event)">
+                <label class="rememberM" for="checkbox4">Employee</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="clearfix paddingTop10"></div>
+
+          <div class="form-group">
+            <label for="state">Search in State</label>
+            <select class="form-control" id="sel1" formControlName="selectedState" (change)="onStateChanged($event)">
+              <option [value]="i.description" *ngFor="let i of states">{{i.description}}</option>
+            </select>
+          </div>
+
+          <div class="form-group" style="margin-bottom:0px;">
+            <label for="SearchIn">Sort By:</label>
+          </div>
+
+          <div class="row">
+            <div id="addRemoveWp">
+              <div class="col-md-6 col-xs-6">
+                <button type="button" class="btn btn-primary btn-a-z activeAz" id="ascendingOrder">A-Z</button>
+              </div>
+              <div class="col-md-6 col-xs-6">
+                <button type="button" class="btn btn-primary btn-a-z" id="descendingOrder">Z-A</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="clearfix paddingTop15"></div>
+
+        </div>
+        <div class="modal-footer">
+          <a data-dismiss="modal" alt="Cancel"><span>Cancel</span></a>
+          <a (click)="onApplyClick()" alt="Save Changes">APPLY</a>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>

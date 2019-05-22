@@ -29,7 +29,8 @@
                     alt="" /></div>
                 <h4><a (click)="onItemClick(item)">{{item.name}}</a><a><img
                       src="{{item.favorite?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}"
-                      alt="" (click)="onStarClick(item)"></a></h4> <span (click)="onItemClick(item)">{{getAddress(item)}}</span>
+                      alt="" (click)="onStarClick(item)"></a></h4> <span
+                  (click)="onItemClick(item)">{{getAddress(item)}}</span>
                 <div class="clearfix"></div>
                 <div class="amount" (click)="onItemClick(item)">
                   <span class="year">Net Premium</span><br>
@@ -58,3 +59,4 @@
       </div>
     </div>
   </div>
+  

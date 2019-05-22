@@ -817,7 +817,8 @@ ul.agent-details li.associates a {
 
 .serach-emp {
   background: #F2F2F2 url(../images/empty-page.svg) top no-repeat;
-  background-position: 160px 85px;
+  /* background-position: 160px 85px; */
+  background-position-y:85px;
   padding-top: 50px;
   text-align: center;
   min-height: 470px;
@@ -1387,7 +1388,52 @@ input:checked + .slider:before {
 	margin-bottom:40px;
 }
 
+.modal-body label.rememberM{
+	color:#000;
+}
 
+.modal-body .checkbox {
+    position: relative;
+    display: block;
+    margin-top:0px;
+    margin-bottom:10px;
+}
+
+
+.btn-a-z {
+  background: #Fff;
+  color: #000;  
+  font-family: 'Open Sans', sans-serif;
+  font-size: 18px;
+  font-weight: normal;
+  border-radius:2px;
+  width: 100%;
+  border:solid 1px #cecece;
+}
+
+
+.btn-a-z:focus,
+.btn-a-z:hover {
+  background: #F68933;
+  color: #fff;  
+  font-family: 'Open Sans', sans-serif;
+  font-size: 18px;
+  font-weight: normal;
+  border-radius:2px;
+  width: 100%;
+  border:solid 1px #cccccc;
+}
+
+.activeAz {
+  background: #F68933;
+  color: #fff;  
+  font-family: 'Open Sans', sans-serif;
+  font-size: 18px;
+  font-weight: normal;
+  border-radius:2px;
+  width: 100%;
+  border:solid 1px #cccccc;
+}
 
 
 
@@ -1461,7 +1507,8 @@ button.btn-login {
 }
 
 #shareMyVcard{margin-top:40%;}
-#changePassword{margin-top:10%;}  
+#changePassword{margin-top:10%;}
+#filterPopup{margin-top:20%;} 
   
 }
 

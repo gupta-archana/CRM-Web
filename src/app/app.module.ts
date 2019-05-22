@@ -45,6 +45,7 @@ import { AgentAssociatesComponent } from './views/agent/agent-associates/agent-a
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,7 +66,8 @@ import { AgentAssociatesComponent } from './views/agent/agent-associates/agent-a
     MyNotesComponent,
     AddNoteComponent,
     AgentThirteenMonthActivityComponent,
-    AgentAssociatesComponent
+    AgentAssociatesComponent,
+    
     
 
   ],
