@@ -1,6 +1,8 @@
-import { Component, OnInit, Injector } from '@angular/core';
+import { Component, OnInit, Injector, ViewChild, ElementRef } from '@angular/core';
 import { BaseClass } from '../../../global/base-class';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { combineAll } from 'rxjs/operators';
+import { SearchFilterModel } from '../../../models/search-filter-model';
 
 @Component({
   selector: 'app-search-filter',
@@ -10,35 +12,39 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class SearchFilterComponent extends BaseClass implements OnInit {
 
   constructor(inject: Injector) { super(inject); }
-  allCheck = false;
-  agentCheck = false;
-  peopleCheck = false;
-  employeeCheck = true;
 
-  selectedState: any;
+  searchFilterModel: SearchFilterModel;
+  ascendingOrder: any;
+  descendingOrder: any;
   states: Array<any> = [];
   filterForm: FormGroup;
+  selectedState: any;
 
   ngOnInit() {
+    this.searchFilterModel = new SearchFilterModel();
+    this.ascendingOrder = document.getElementById("ascendingOrder");
+    this.descendingOrder = document.getElementById("descendingOrder");
+
     addValidation(this);
     getStates(this);
     this.registerBtnClicks();
   }
 
   onAllCheckChange(event) {
-    this.allCheck = event.target.value;
+    this.searchFilterModel.allCheck = event.target.checked;
+    setValueToChecks(this, this.searchFilterModel.allCheck);
   }
 
   onAgentCheckChange(event) {
-    this.agentCheck = event.target.value;
+    this.searchFilterModel.agentCheck = event.target.checked;
   }
 
   onPeopleCheckChange(event) {
-    this.peopleCheck = event.target.value;
+    this.searchFilterModel.peopleCheck = event.target.checked;
   }
 
   onEmployeeCheckChange(event) {
-    this.employeeCheck = event.target.value;
+    this.searchFilterModel.employeeCheck = event.target.checked;
   }
 
   onStateChanged(event) {
@@ -46,7 +52,8 @@ export class SearchFilterComponent extends BaseClass implements OnInit {
   }
 
   onApplyClick() {
-    this.commonFunctions.printLog(this.allCheck + "," + this.agentCheck + "," + this.peopleCheck + "," + this.employeeCheck);
+    this.searchFilterModel.selectedState = this.selectedState;
+    this.dataService.onSearchFilterApply(this.searchFilterModel);
   }
 
 
@@ -57,7 +64,11 @@ export class SearchFilterComponent extends BaseClass implements OnInit {
     for (var i = 0; i < btns.length; i++) {
       btns[i].addEventListener("click", function() {
         var current = document.getElementsByClassName("activeAz");
-        self.commonFunctions.printLog(current.item);
+        if (current[0] == self.ascendingOrder) {
+          self.searchFilterModel.ascendingOrder = false;
+        } else {
+          self.searchFilterModel.ascendingOrder = true;
+        }
         current[0].className = current[0].className.replace(" activeAz", "");
         this.className += " activeAz";
       });
@@ -68,11 +79,11 @@ export class SearchFilterComponent extends BaseClass implements OnInit {
 
 function addValidation(context: SearchFilterComponent) {
   context.filterForm = new FormGroup({
-    allCheck: new FormControl(context.allCheck),
-    agentCheck: new FormControl(context.agentCheck),
-    peopleCheck: new FormControl(context.peopleCheck),
-    employeeCheck: new FormControl(context.employeeCheck),
-    selectedState: new FormControl(context.selectedState),
+    allCheck: new FormControl(context.searchFilterModel.allCheck),
+    agentCheck: new FormControl(context.searchFilterModel.agentCheck),
+    peopleCheck: new FormControl(context.searchFilterModel.peopleCheck),
+    employeeCheck: new FormControl(context.searchFilterModel.employeeCheck),
+    selectedState: new FormControl(context.searchFilterModel.selectedState),
   })
 }
 
@@ -81,7 +92,7 @@ function getStates(context: SearchFilterComponent) {
   context.apiHandler.getStates({
     onSuccess(response: any) {
       context.states = response;
-      context.selectedState = context.states[0];
+      context.searchFilterModel.selectedState = context.states[0];
       setValueInForm(context, "selectedState", context.selectedState.description);
       context.cdr.markForCheck();
     }, onError(errorCode: number, errorMsg: string) {
@@ -92,4 +103,12 @@ function getStates(context: SearchFilterComponent) {
 
 function setValueInForm(context: SearchFilterComponent, key, value) {
   context.filterForm.get(key).setValue(value);
+}
+
+function setValueToChecks(context: SearchFilterComponent, value: boolean) {
+  context.filterForm.get("allCheck").setValue(value);
+  context.filterForm.get("agentCheck").setValue(value);
+  context.filterForm.get("peopleCheck").setValue(value);
+  context.filterForm.get("employeeCheck").setValue(value);
+
 }

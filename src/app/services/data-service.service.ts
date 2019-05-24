@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject, BehaviorSubject } from 'rxjs';
 import { AgentInfoModel } from '../models/TopAgentsModel';
 import { UserProfileModel } from '../models/user-profile-model';
+import { SearchFilterModel } from '../models/search-filter-model';
 
 
 @Injectable({
@@ -54,6 +55,9 @@ export class DataServiceService {
 
   private shareDataSubject = new BehaviorSubject<any>("");
   shareDataObservable = this.shareDataSubject.asObservable();
+
+  private searchFiltersSubject = new BehaviorSubject<SearchFilterModel>(null);
+  searchFiltersObservable = this.searchFiltersSubject.asObservable();
 
   constructor() { }
 
@@ -114,5 +118,9 @@ export class DataServiceService {
 
   onDataShare(data: any) {
     this.shareDataSubject.next(data);
+  }
+
+  onSearchFilterApply(filterModel: SearchFilterModel) {
+    this.searchFiltersSubject.next(filterModel);
   }
 }

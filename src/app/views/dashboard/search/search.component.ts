@@ -1,4 +1,4 @@
-import { Component, OnInit, Injector } from '@angular/core';
+import { Component, OnInit, Injector, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { BaseClass } from '../../../global/base-class';
 import { ApiResponseCallback } from '../../../Interfaces/ApiResponseCallback';
@@ -6,6 +6,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { EntityModel } from '../../../models/entity-model';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { CommonApisService } from '../../../utils/common-apis.service';
+import { SearchFilterModel } from '../../../models/search-filter-model';
 
 
 @Component({
@@ -13,11 +14,13 @@ import { CommonApisService } from '../../../utils/common-apis.service';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
-export class SearchComponent extends BaseClass implements OnInit, ApiResponseCallback {
+export class SearchComponent extends BaseClass implements OnInit, OnDestroy, ApiResponseCallback {
 
-  filterSubscription: Subscription = null;
+
+  searchFilterModelSub: Subscription = null;
   searchForm: FormGroup;
   searchedUsers: Array<EntityModel> = [];
+  searchedUsersTempArray: Array<EntityModel> = [];
   hideNoDataDiv: boolean = false;
   emailId;
   encryptedPassword;
@@ -39,6 +42,7 @@ export class SearchComponent extends BaseClass implements OnInit, ApiResponseCal
     getData(this);
     this.addValidation();
     checkAndSetUi(this);
+    getSearchFilter(this);
   }
 
   onSubmit() {
@@ -119,11 +123,18 @@ export class SearchComponent extends BaseClass implements OnInit, ApiResponseCal
   onStarClick(item: EntityModel) {
     this.commonApis.setFavorite(item, this.apiHandler, this.cdr);
   }
+
+  ngOnDestroy(): void {
+    if (this.searchFilterModelSub && !this.searchFilterModelSub.closed) {
+      this.searchFilterModelSub.unsubscribe();
+    }
+  }
 }
 
 function onApiResponse(newUsers: any, context: SearchComponent) {
   context.dataService.onHideShowLoader(false);
-  context.searchedUsers = context.searchedUsers.concat(newUsers);
+  context.searchedUsersTempArray = context.searchedUsers.concat(newUsers);
+  context.searchedUsers = context.searchedUsersTempArray;
   if (context.searchedUsers && context.searchedUsers.length > 0) {
     context.hideNoDataDiv = true;
   } else {
@@ -146,6 +157,14 @@ function checkAndSetUi(context: SearchComponent) {
   context.cdr.markForCheck();
 }
 
+function getSearchFilter(context: SearchComponent) {
+  context.searchFilterModelSub = context.dataService.searchFiltersObservable.subscribe(data => {
+    if (data) {
+      filterData(context, data);
+    }
+  });
+}
+
 function resetData(context: SearchComponent) {
   context.pageNum = 0;
   context.searchedUsers = [];
@@ -163,4 +182,96 @@ function getData(context: SearchComponent) {
   }
 
 
+}
+
+function filterData(context: SearchComponent, filters: SearchFilterModel) {
+  let searchUser = context.searchedUsersTempArray;
+  let typeArray = [];
+  if (filters.allCheck) {
+    searchUser = furtherFiltering(filters, searchUser);
+  }
+  else {
+    searchUser = filterArrayAccordingToType(filters, typeArray, context, searchUser);
+  }
+
+
+}
+
+function filterArrayAccordingToType(filters: SearchFilterModel, typeArray: any[], context: SearchComponent, searchUser: EntityModel[]) {
+  if (filters.agentCheck)
+    typeArray.push(context.constants.ENTITY_AGENT);
+  if (filters.peopleCheck)
+    typeArray.push(context.constants.ENTITY_PERSON);
+  if (filters.employeeCheck)
+    typeArray.push(context.constants.ENTITIY_EMPLOYEE);
+  searchUser = sortDataTypeWise(searchUser, typeArray);
+  searchUser = furtherFiltering(filters, searchUser);
+  return searchUser;
+}
+
+function furtherFiltering(filters: SearchFilterModel, searchUser: EntityModel[]) {
+  if (!filters.selectedState) {
+    searchUser = sortArrayInGivenOrder(searchUser, filters.ascendingOrder);
+  }
+  else {
+    searchUser = getEntitiesOfSelectedState(searchUser, filters.selectedState);
+    searchUser = sortArrayInGivenOrder(searchUser, filters.ascendingOrder);
+  }
+  return searchUser;
+}
+
+function sortDataTypeWise(searchedUsers: Array<EntityModel>, typesArray: Array<string>) {
+  let filterArray = [];
+  searchedUsers.forEach(element => {
+    if (typesArray.indexOf(element.type) != -1) {
+      filterArray.push(element);
+    }
+  });
+  return filterArray;
+}
+
+
+function getEntitiesOfSelectedState(searchDataArray: Array<EntityModel>, selectedState: string) {
+  let filterArray = [];
+  searchDataArray.forEach(element => {
+    if (element.state.localeCompare(selectedState)) {
+      filterArray.push(element);
+    }
+  });
+
+  return filterArray;
+}
+
+
+function sortArrayInGivenOrder(searchDataArray: Array<EntityModel>, ascendingOrder: boolean) {
+  if (ascendingOrder)
+    return searchDataArray.sort(ascending);
+  else
+    return searchDataArray.sort(descending)
+}
+
+function ascending(a: EntityModel, b: EntityModel) {
+  const genreA = a.name.toUpperCase();
+  const genreB = b.name.toUpperCase();
+
+  let comparison = 0;
+  if (genreA > genreB) {
+    comparison = 1;
+  } else if (genreA < genreB) {
+    comparison = -1;
+  }
+  return comparison;
+}
+
+function descending(a: EntityModel, b: EntityModel) {
+  const genreA = a.name.toUpperCase();
+  const genreB = b.name.toUpperCase();
+
+  let comparison = 0;
+  if (genreA > genreB) {
+    comparison = 1;
+  } else if (genreA < genreB) {
+    comparison = -1;
+  }
+  return comparison * -1;
 }

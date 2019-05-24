@@ -73,4 +73,5 @@ export class Constants {
   ENTITY_AGENT = "Agent";
   ENTITY_PERSON = "Person";
   ENTITY_ATTORNEY = "Attorney";
+  ENTITIY_EMPLOYEE = "Employee";
 }
