@@ -89,7 +89,6 @@ export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponse
     if (newTopAgents) {
       newTopAgents.forEach(element => {
         if (element.type == this.constants.ENTITY_AGENT) {
-          element.favorite = false;
           this.topAgents.push(element);
         } else {
           this.totalRows = element.rowNum;

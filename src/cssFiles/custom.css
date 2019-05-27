@@ -264,3 +264,7 @@ mat-ink-bar.mat-ink-bar {
   background-color: #C1E3FF;
   border-radius: 70px;
 }
+
+.marginTop20{
+  margin-top: 20px;
+}

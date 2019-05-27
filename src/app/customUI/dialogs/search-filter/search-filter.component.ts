@@ -13,6 +13,8 @@ export class SearchFilterComponent extends BaseClass implements OnInit {
 
   constructor(inject: Injector) { super(inject); }
 
+  @ViewChild("closeSearchFilter")
+  closeSearchFilter: ElementRef;
   searchFilterModel: SearchFilterModel;
   ascendingOrder: any;
   descendingOrder: any;
@@ -48,12 +50,12 @@ export class SearchFilterComponent extends BaseClass implements OnInit {
   }
 
   onStateChanged(event) {
-    this.selectedState = event.target.value;
+    this.searchFilterModel.selectedState = event.target.value;
   }
 
   onApplyClick() {
-    this.searchFilterModel.selectedState = this.selectedState;
     this.dataService.onSearchFilterApply(this.searchFilterModel);
+    this.closeSearchFilter.nativeElement.click();
   }
 
 

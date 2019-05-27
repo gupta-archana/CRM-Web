@@ -53,7 +53,7 @@
           <div class="form-group">
             <label for="state">Search in State</label>
             <select class="form-control" id="sel1" formControlName="selectedState" (change)="onStateChanged($event)">
-              <option [value]="i.description" *ngFor="let i of states">{{i.description}}</option>
+              <option [value]="i.stateID" *ngFor="let i of states">{{i.description}}</option>
             </select>
           </div>
 

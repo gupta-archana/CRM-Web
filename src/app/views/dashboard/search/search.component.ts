@@ -20,7 +20,7 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Api
   searchFilterModelSub: Subscription = null;
   searchForm: FormGroup;
   searchedUsers: Array<EntityModel> = [];
-  searchedUsersTempArray: Array<EntityModel> = [];
+
   hideNoDataDiv: boolean = false;
   emailId;
   encryptedPassword;
@@ -30,9 +30,15 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Api
   moreDataAvailable: boolean = false;
   private AGENT: string = "Agent";
   private PERSON: string = "Person";
-  deviceInfo = null;
+  public TOTAL_MATCH: string = "TotalMatch";
 
-  constructor(injector: Injector, private deviceService: DeviceDetectorService, private commonApis: CommonApisService) {
+  public filterChanged: boolean = false;
+
+  totalRows: any = 0;
+  deviceInfo = null;
+  totalAndCurrentRowsRatio: string = "";
+  filters: SearchFilterModel = null;
+  constructor(injector: Injector, private commonApis: CommonApisService) {
     super(injector);
   }
 
@@ -43,6 +49,7 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Api
     this.addValidation();
     checkAndSetUi(this);
     getSearchFilter(this);
+    this.updateRatioUI();
   }
 
   onSubmit() {
@@ -59,10 +66,16 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Api
     this.makeServerRequest();
   }
 
-  private makeServerRequest() {
+  public makeServerRequest() {
     this.pageNum++;
     this.dataService.onHideShowLoader(true);
-    this.apiHandler.GetSearchedData(this.searchFor, "All", this.searchForm.value.search, this.pageNum, this);
+    let selectedState = "All";
+    let type = "All";
+    if (this.filters) {
+      selectedState = this.filters.selectedState;
+
+    }
+    this.apiHandler.GetSearchedData(type, selectedState, this.searchForm.value.search, this.pageNum, this);
   }
 
   onSuccess(response: any) {
@@ -77,7 +90,7 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Api
 
   getAddress(item: EntityModel) {
     let address: string = "";
-    address = item.addr1 + " " + item.addr2 + " " + item.addr3 + " " + item.addr4 + " " + item.city + " " + item.state + " " + item.zip;
+    address = item.city + " " + item.state + " " + item.zip;
     return address;
   }
 
@@ -109,6 +122,7 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Api
       sessionStorage.setItem(this.constants.SEARCHED_ENTITY_ARRAY, JSON.stringify(this.searchedUsers));
       sessionStorage.setItem(this.constants.SEARCHED_STRING, this.searchForm.value.search);
       sessionStorage.setItem(this.constants.SEARCH_MORE_DATA_AVAILABLE_FLAG, JSON.stringify(this.moreDataAvailable));
+      sessionStorage.setItem(this.constants.SEARCH_TOTAL_ROWS, this.totalRows);
     }
 
   }
@@ -124,6 +138,15 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Api
     this.commonApis.setFavorite(item, this.apiHandler, this.cdr);
   }
 
+  updateRatioUI() {
+    if (this.searchedUsers && this.searchedUsers.length > 0) {
+      this.totalAndCurrentRowsRatio = this.searchedUsers.length + " out of " + this.totalRows + " top agents";
+    }
+    else {
+      this.totalAndCurrentRowsRatio = "No Data available";
+    }
+  }
+
   ngOnDestroy(): void {
     if (this.searchFilterModelSub && !this.searchFilterModelSub.closed) {
       this.searchFilterModelSub.unsubscribe();
@@ -131,20 +154,43 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Api
   }
 }
 
-function onApiResponse(newUsers: any, context: SearchComponent) {
+function onApiResponse(newUsers: EntityModel[], context: SearchComponent) {
   context.dataService.onHideShowLoader(false);
-  context.searchedUsersTempArray = context.searchedUsers.concat(newUsers);
-  context.searchedUsers = context.searchedUsersTempArray;
+  checkFilterChanged(context);
+  if (newUsers) {
+    newUsers.forEach(element => {
+      if (element.type != context.TOTAL_MATCH) {
+        context.searchedUsers.push(element);
+      }
+      else {
+        context.totalRows = element.rowNum;
+      }
+    });
+
+    checkMoreDataAvailable(context);
+    context.updateRatioUI();
+    context.cdr.markForCheck();
+  }
+}
+
+function checkFilterChanged(context: SearchComponent) {
+  if (context.filterChanged) {
+    context.searchedUsers = [];
+    context.filterChanged = false;
+  }
+}
+
+function checkMoreDataAvailable(context: SearchComponent) {
   if (context.searchedUsers && context.searchedUsers.length > 0) {
     context.hideNoDataDiv = true;
-  } else {
+  }
+  else {
     context.hideNoDataDiv = false;
   }
-  if (!newUsers || newUsers.length == 0)
+  if (!context.searchedUsers || context.searchedUsers.length == context.totalRows)
     context.moreDataAvailable = false;
   else
     context.moreDataAvailable = true;
-  context.cdr.markForCheck();
 }
 
 function checkAndSetUi(context: SearchComponent) {
@@ -160,7 +206,11 @@ function checkAndSetUi(context: SearchComponent) {
 function getSearchFilter(context: SearchComponent) {
   context.searchFilterModelSub = context.dataService.searchFiltersObservable.subscribe(data => {
     if (data) {
-      filterData(context, data);
+      context.filters = data;
+      context.filterChanged = true;
+      context.pageNum = 0;
+      context.makeServerRequest();
+      //filterData(context, data);
     }
   });
 }
@@ -178,100 +228,7 @@ function getData(context: SearchComponent) {
     context.pageNum = Number(sessionStorage.getItem(context.constants.SEARCH_CURRENT_PAGE_NO));
     context.searchString = sessionStorage.getItem(context.constants.SEARCHED_STRING);
     context.moreDataAvailable = JSON.parse(sessionStorage.getItem(context.constants.SEARCH_MORE_DATA_AVAILABLE_FLAG));
+    context.totalRows = Number(sessionStorage.getItem(context.constants.SEARCH_TOTAL_ROWS));
     context.cdr.markForCheck();
   }
-
-
-}
-
-function filterData(context: SearchComponent, filters: SearchFilterModel) {
-  let searchUser = context.searchedUsersTempArray;
-  let typeArray = [];
-  if (filters.allCheck) {
-    searchUser = furtherFiltering(filters, searchUser);
-  }
-  else {
-    searchUser = filterArrayAccordingToType(filters, typeArray, context, searchUser);
-  }
-
-
-}
-
-function filterArrayAccordingToType(filters: SearchFilterModel, typeArray: any[], context: SearchComponent, searchUser: EntityModel[]) {
-  if (filters.agentCheck)
-    typeArray.push(context.constants.ENTITY_AGENT);
-  if (filters.peopleCheck)
-    typeArray.push(context.constants.ENTITY_PERSON);
-  if (filters.employeeCheck)
-    typeArray.push(context.constants.ENTITIY_EMPLOYEE);
-  searchUser = sortDataTypeWise(searchUser, typeArray);
-  searchUser = furtherFiltering(filters, searchUser);
-  return searchUser;
-}
-
-function furtherFiltering(filters: SearchFilterModel, searchUser: EntityModel[]) {
-  if (!filters.selectedState) {
-    searchUser = sortArrayInGivenOrder(searchUser, filters.ascendingOrder);
-  }
-  else {
-    searchUser = getEntitiesOfSelectedState(searchUser, filters.selectedState);
-    searchUser = sortArrayInGivenOrder(searchUser, filters.ascendingOrder);
-  }
-  return searchUser;
-}
-
-function sortDataTypeWise(searchedUsers: Array<EntityModel>, typesArray: Array<string>) {
-  let filterArray = [];
-  searchedUsers.forEach(element => {
-    if (typesArray.indexOf(element.type) != -1) {
-      filterArray.push(element);
-    }
-  });
-  return filterArray;
-}
-
-
-function getEntitiesOfSelectedState(searchDataArray: Array<EntityModel>, selectedState: string) {
-  let filterArray = [];
-  searchDataArray.forEach(element => {
-    if (element.state.localeCompare(selectedState)) {
-      filterArray.push(element);
-    }
-  });
-
-  return filterArray;
-}
-
-
-function sortArrayInGivenOrder(searchDataArray: Array<EntityModel>, ascendingOrder: boolean) {
-  if (ascendingOrder)
-    return searchDataArray.sort(ascending);
-  else
-    return searchDataArray.sort(descending)
-}
-
-function ascending(a: EntityModel, b: EntityModel) {
-  const genreA = a.name.toUpperCase();
-  const genreB = b.name.toUpperCase();
-
-  let comparison = 0;
-  if (genreA > genreB) {
-    comparison = 1;
-  } else if (genreA < genreB) {
-    comparison = -1;
-  }
-  return comparison;
-}
-
-function descending(a: EntityModel, b: EntityModel) {
-  const genreA = a.name.toUpperCase();
-  const genreB = b.name.toUpperCase();
-
-  let comparison = 0;
-  if (genreA > genreB) {
-    comparison = 1;
-  } else if (genreA < genreB) {
-    comparison = -1;
-  }
-  return comparison * -1;
 }

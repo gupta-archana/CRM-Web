@@ -23,6 +23,7 @@ export class Constants {
   SEARCH_MORE_DATA_AVAILABLE_FLAG = "search_more_data_available_flag";
   LOGIN = "Login";
   TOP_AGENT_TOTAL_ROWS = "top_agent_total_rows";
+  SEARCH_TOTAL_ROWS = "top_agent_total_rows";
   AGENT_DETAIL_MENUES = "agent_detail_menues";
   SIDE_NAV_ITEMS = "side_nav_items";
   AGENT_DETAIL_ITEMS = "agent_detail_items";

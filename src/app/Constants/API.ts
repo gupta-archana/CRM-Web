@@ -49,7 +49,7 @@ export class API {
   }
 
   getSearchedProfileUrl(app_mode: string, stateId: string, type: string, pageNum: number, searchString: string) {
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=profilesSearch&stateId=" + stateId + "&Type=" + type + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows + "&searchString=" + searchString;
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=entityProfileSearch&stateId=" + stateId + "&Type=" + type + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows + "&searchString=" + searchString;
   }
   getAgentSearchedUrl(app_mode: string, stateId: string, searchString: string) {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=agentssearch&stateId=" + stateId + "&searchString=" + searchString;
@@ -70,11 +70,11 @@ export class API {
   }
 
   getShareVCardUrl(app_mode: string, to: string, entityType: string, entityId: string) {
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=vCardShare&to=" + to + "&entity=" + entityType + "&entityID=" + entityId;
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userCardShare&to=" + to + "&entity=" + entityType + "&entityID=" + entityId;
   }
 
   getChangeShareableStatusUrl(app_mode, status: string) {
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userShareableStatusSet&ShareableStatus=" + status;
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userCardShareable&ShareableStatus=" + status;
   }
 
   getAddFavoriteUrl(app_mode: string, entityType: string, entityId: string) {

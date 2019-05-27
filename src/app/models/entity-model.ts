@@ -13,4 +13,5 @@ export class EntityModel {
   netPermium: number;
   cpl: string;
   favorite: boolean = true;
+  rowNum: string;
 }

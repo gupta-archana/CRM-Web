@@ -1,7 +1,6 @@
-<div class="container-fluid nospace">
-
+<div class="container wrapper entityCount">{{totalAndCurrentRowsRatio}}</div>
+<div class="container-fluid nospace marginTop20">
   <div class="container app-bg2">
-
     <div class="row">
       <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
         <div class="col-xs-12 search-box">
@@ -28,14 +27,14 @@
                     src="{{item.type=='Agent'?'../../../../../../images/building-icon.svg':'../../../../../../images/username.svg'}}"
                     alt="" /></div>
                 <h4><a (click)="onItemClick(item)">{{item.name}}</a><a><img
-                      src="{{item.favorite?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}"
+                      src="{{item.favorite =='yes'?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}"
                       alt="" (click)="onStarClick(item)"></a></h4> <span
                   (click)="onItemClick(item)">{{getAddress(item)}}</span>
-                <div class="clearfix"></div>
+                <!-- <div class="clearfix"></div>
                 <div class="amount" (click)="onItemClick(item)">
                   <span class="year">Net Premium</span><br>
                   <span class="price green">$ {{item.netPermium}}</span>
-                </div>
+                </div> -->
                 <div class="clearfix"></div>
               </div>
             </div>
@@ -59,4 +58,3 @@
       </div>
     </div>
   </div>
-  
