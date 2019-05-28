@@ -104,12 +104,7 @@ export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponse
   }
 
   private updateRatioUI() {
-    if (this.topAgents && this.topAgents.length > 0) {
-      this.totalAndCurrentRowsRatio = this.topAgents.length + " out of " + this.totalRows + " top agents";
-    }
-    else {
-      this.totalAndCurrentRowsRatio = "No top agents available";
-    }
+    this.commonFunctions.showMoreDataSnackbar(this.topAgents, this.totalRows);
   }
 
   onError(errorCode: number, errorMsg: string) {

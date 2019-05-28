@@ -8,6 +8,8 @@ import { ShareVCardComponent } from '../../customUI/dialogs/share-v-card/share-v
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UpdateUserProfileComponent } from '../../customUI/dialogs/update-user-profile/update-user-profile.component';
 import { SearchFilterComponent } from '../../customUI/dialogs/search-filter/search-filter.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatSnackBarModule, MatDialogModule, MatButtonModule, MatFormFieldModule } from '@angular/material';
 //import { ModalService } from '../../services/modal.service';
 @NgModule({
   imports: [
@@ -15,7 +17,12 @@ import { SearchFilterComponent } from '../../customUI/dialogs/search-filter/sear
     ReactiveFormsModule,
     CommonModule,
     MatTabsModule,
-    NgxSmartModalModule.forRoot()
+    NgxSmartModalModule.forRoot(),
+    NgbModule.forRoot(),
+    MatSnackBarModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatFormFieldModule
   ],
   declarations: [
     UpdateAgentProfileComponent,
@@ -33,7 +40,13 @@ import { SearchFilterComponent } from '../../customUI/dialogs/search-filter/sear
     UpdateUserProfileComponent,
     SearchFilterComponent,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule,
+    MatSnackBarModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatFormFieldModule
+
   ]
 })
 export class ModulesModule { }

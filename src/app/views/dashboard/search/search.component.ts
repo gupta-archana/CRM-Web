@@ -1,4 +1,4 @@
-import { Component, OnInit, Injector, OnDestroy } from '@angular/core';
+import { Component, OnInit, Injector, OnDestroy, AfterViewInit, AfterContentInit, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { BaseClass } from '../../../global/base-class';
 import { ApiResponseCallback } from '../../../Interfaces/ApiResponseCallback';
@@ -12,9 +12,12 @@ import { SearchFilterModel } from '../../../models/search-filter-model';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
+  styleUrls: ['./search.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
-export class SearchComponent extends BaseClass implements OnInit, OnDestroy, ApiResponseCallback {
+export class SearchComponent extends BaseClass implements OnInit, OnDestroy, AfterViewInit, ApiResponseCallback {
+
+
 
 
   searchFilterModelSub: Subscription = null;
@@ -34,8 +37,8 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Api
 
   public filterChanged: boolean = false;
 
-  totalRows: any = 0;
   deviceInfo = null;
+  totalRows: any = 0;
   totalAndCurrentRowsRatio: string = "";
   filters: SearchFilterModel = null;
   constructor(injector: Injector, private commonApis: CommonApisService) {
@@ -43,14 +46,20 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Api
   }
 
   ngOnInit() {
+    this.addValidation();
+  }
+
+  ngAfterViewInit(): void {
     this.emailId = this.myLocalStorage.getValue(this.constants.EMAIL);
     this.encryptedPassword = this.commonFunctions.getEncryptedPassword(this.myLocalStorage.getValue(this.constants.PASSWORD));
     getData(this);
-    this.addValidation();
+
     checkAndSetUi(this);
     getSearchFilter(this);
     this.updateRatioUI();
+    this.cdr.detectChanges();
   }
+
 
   onSubmit() {
     if (!this.searchForm.valid) {
@@ -139,12 +148,9 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Api
   }
 
   updateRatioUI() {
-    if (this.searchedUsers && this.searchedUsers.length > 0) {
-      this.totalAndCurrentRowsRatio = this.searchedUsers.length + " out of " + this.totalRows + " top agents";
-    }
-    else {
-      this.totalAndCurrentRowsRatio = "No Data available";
-    }
+    setTimeout(() => {
+      this.commonFunctions.showMoreDataSnackbar(this.searchedUsers, this.totalRows);
+    }, 0);
   }
 
   ngOnDestroy(): void {

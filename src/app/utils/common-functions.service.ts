@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { Constants } from '../Constants/Constants';
-
+import { MatSnackBar, MatSnackBarConfig, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material';
 import { MyLocalStorageService } from '../services/my-local-storage.service';
 
 @Injectable({
@@ -11,13 +11,18 @@ import { MyLocalStorageService } from '../services/my-local-storage.service';
 })
 export class CommonFunctionsService {
   private activeToast: any = null;
-
+  public static config: MatSnackBarConfig;
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   constructor(
     private toastr: ToastrService,
     private router: Router,
     private constants: Constants,
+    private myLocalStorage: MyLocalStorageService,
+    public snackBar: MatSnackBar) {
+    createSnackbarConfig(this);
 
-    private myLocalStorage: MyLocalStorageService) { }
+  }
   printLog(message: any, show?: boolean) {
     if (show == undefined || show == true)
       console.log(message);
@@ -36,12 +41,12 @@ export class CommonFunctionsService {
 
   showPermanentSnackbar(message: string) {
     if (!this.activeToast) {
-      this.activeToast = this.toastr.warning(message, null, {
+      this.activeToast = this.toastr.info(message, null, {
         disableTimeOut: true,
-        positionClass: "toast-bottom-right"
+        positionClass: "toast-bottom-center",
+        
       });
-    }
-    else {
+    } else {
       this.activeToast.message = message;
     }
   }
@@ -148,11 +153,33 @@ export class CommonFunctionsService {
     return credentialsObject;
   }
 
-  
+  showMoreDataSnackbar(data: any[], currentAvailable: any) {
+    let totalAndCurrentRowsRatio: string = "";
+    if (data && data.length > 0) {
+      totalAndCurrentRowsRatio = "showing " + data.length + " out of " + currentAvailable;
+    }
+    else {
+      totalAndCurrentRowsRatio = "No Data available";
+    }
+    //this.snackBar.open(totalAndCurrentRowsRatio, null, CommonFunctionsService.config);
+    this.showPermanentSnackbar(totalAndCurrentRowsRatio);
+  }
 
 }
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function createSnackbarConfig(context: CommonFunctionsService) {
+  if (!CommonFunctionsService.config) {
+    let config = new MatSnackBarConfig();
+    config.verticalPosition = context.verticalPosition;
+    config.horizontalPosition = context.horizontalPosition;
+    CommonFunctionsService.config = config;
+  }
+function getConfigForPermanent(context:CommonFunctionsService) {
+  
+}
 }

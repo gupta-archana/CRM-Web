@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { HttpModule } from '@angular/http';
 
@@ -15,7 +15,7 @@ import { DashboardModule } from './views/dashboard/dashboard.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './views/login/login.component';
 import { PageNotFoundComponent } from './views/page-not-found/page-not-found.component';
-import { MatSnackBarModule, MatDialogModule, MatButtonModule, MatFormFieldModule } from '@angular/material';
+
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Constants } from './Constants/Constants';
@@ -67,19 +67,11 @@ import { AgentAssociatesComponent } from './views/agent/agent-associates/agent-a
     AddNoteComponent,
     AgentThirteenMonthActivityComponent,
     AgentAssociatesComponent,
-    
-    
-
   ],
   imports: [
     BrowserModule,
     appRoutes,
     DashboardModule,
-    NgbModule.forRoot(),
-    MatSnackBarModule,
-    MatDialogModule,
-    MatButtonModule,
-    MatFormFieldModule,
     BrowserAnimationsModule,
     HttpModule,
     DeviceDetectorModule.forRoot(),

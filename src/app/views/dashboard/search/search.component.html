@@ -1,5 +1,4 @@
-<div class="container wrapper entityCount">{{totalAndCurrentRowsRatio}}</div>
-<div class="container-fluid nospace marginTop20">
+<div class="container-fluid nospace  marginBottom40">
   <div class="container app-bg2">
     <div class="row">
       <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
@@ -30,11 +29,7 @@
                       src="{{item.favorite =='yes'?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}"
                       alt="" (click)="onStarClick(item)"></a></h4> <span
                   (click)="onItemClick(item)">{{getAddress(item)}}</span>
-                <!-- <div class="clearfix"></div>
-                <div class="amount" (click)="onItemClick(item)">
-                  <span class="year">Net Premium</span><br>
-                  <span class="price green">$ {{item.netPermium}}</span>
-                </div> -->
+                
                 <div class="clearfix"></div>
               </div>
             </div>
@@ -51,7 +46,7 @@
         </div>
 
       </div>
-      <div class="serach-emp" *ngIf="!hideNoDataDiv">
+      <div class="serach-emp " *ngIf="!hideNoDataDiv">
         <h2><em>It is Empty Here!</em></h2>
         <p><em>Please use the search bar to search for Agents and People or use the filter button to alter search
             attributes</em></p>

@@ -9,8 +9,10 @@ import { UserFavoriteModel } from '../../../models/user-favorite-model';
   styleUrls: ['./favorites.component.css']
 })
 export class FavoritesComponent extends BaseClass implements OnInit, ApiResponseCallback {
-
+  totalRows: any = 0;
+  totalAndCurrentRowsRatio: string = "";
   favorites: Array<UserFavoriteModel> = new Array();
+  moreDataAvailable: boolean = true;
   constructor(private injector: Injector) { super(injector); }
 
   ngOnInit() {
@@ -18,10 +20,33 @@ export class FavoritesComponent extends BaseClass implements OnInit, ApiResponse
     this.apiHandler.getUserFavorites(this);
   }
   onSuccess(response: any) {
-    this.favorites = response.sysfavorite;
+    parserResponse(response, this);
+    checkMoreDataAvailable(this);
+    this.commonFunctions.showMoreDataSnackbar(this.favorites, this.totalRows);
     this.cdr.markForCheck();
   }
   onError(errorCode: number, errorMsg: string) {
 
   }
 }
+
+function parserResponse(response: any, context: FavoritesComponent) {
+  let favorites = response.sysfavorite;
+  favorites.forEach(element => {
+    if (element.type != "TotalFavorite") {
+      context.favorites.push(element);
+    }
+    else {
+      context.totalRows = element.rowNum;
+    }
+  });
+}
+
+function checkMoreDataAvailable(context: FavoritesComponent) {
+  if (!context.favorites || context.favorites.length == context.totalRows)
+    context.moreDataAvailable = false;
+  else
+    context.moreDataAvailable = true;
+}
+
+

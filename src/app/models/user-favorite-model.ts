@@ -7,4 +7,5 @@ export class UserFavoriteModel {
   city: string = "";
   state: string = "";
   stat: string = "";
+  type:string="";
 }
