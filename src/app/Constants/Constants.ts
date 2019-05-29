@@ -27,6 +27,15 @@ export class Constants {
   AGENT_DETAIL_MENUES = "agent_detail_menues";
   SIDE_NAV_ITEMS = "side_nav_items";
   AGENT_DETAIL_ITEMS = "agent_detail_items";
+  SEARCH_FILTERS = "search_filters";
+  FAVORITE_ARRAY = "favorite_array";
+  FAVORITE_PAGE_NUMBER = "favorite_page_num";
+  FAVORITE_TOTAL_ROWS = "favorite_total_rows";
+
+  ASSOCIATES_ARRAY = "associates_array";
+  ASSOCIATES_PAGE_NUMBER = "associates_page_num";
+  ASSOCIATES_TOTAL_ROWS = "associates_total_rows";
+  ASSOCIATES_CURRENT_ENTITY_ID="associates_current_entity_id";
 
   // Error Messages
   ERROR_NO_INTERNET_CONNECTON = "Kindly check your internet connection";
@@ -75,4 +84,16 @@ export class Constants {
   ENTITY_PERSON = "Person";
   ENTITY_ATTORNEY = "Attorney";
   ENTITIY_EMPLOYEE = "Employee";
+
+  //Entities Type presenter
+  ENTITY_AGENT_PRESENTER = "a";
+  ENTITY_PEOPLE_PRESENTER = "p";
+  ENTITY_EMPLOYEE_PRESENTER = "e";
+  ENTITY_ALL_PRESENTER = "all";
+
+  public entityArrayObject = {
+    Agent: this.ENTITY_AGENT_PRESENTER,
+    Person: this.ENTITY_PEOPLE_PRESENTER,
+    Employee: this.ENTITY_EMPLOYEE_PRESENTER
+  }
 }

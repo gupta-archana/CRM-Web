@@ -1,5 +1,5 @@
-<div class="wrapper entityCount">{{totalAndCurrentRowsRatio}}</div>
-<div class="container app-bg2 bottom-wrapper">
+
+<div class="container app-bg2">
   <div class="row">
     <ul>
       <li *ngFor="let item of topAgents">
@@ -26,17 +26,18 @@
         </div>
       </li>
     </ul>
+   
 
-
-    <div class="row" *ngIf="moreDataAvailable">
+    <div class="row  marginBottom20" *ngIf="moreDataAvailable">
       <div class="col-xs-12 col-md-12 loadMoreWp">
         <hr />
         <div class="loadMore"><a (click)="onLoadMoreClick()" alt="Load More">Load More</a></div>
       </div>
     </div>
+    <div id="ratioView">{{totalAndCurrentRowsRatio}}</div>
 
     <button (click)="topFunction()" id="myBtn" title="Go to top"><span
         class="glyphicon glyphicon-arrow-up"></span></button>
   </div>
-
 </div>
+

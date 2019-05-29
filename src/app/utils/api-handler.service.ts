@@ -106,10 +106,10 @@ export class ApiHandlerService implements ApiResponseCallback {
   /**
    * getUserFavorites
    */
-  public getUserFavorites(apiResponseCallback: ApiResponseCallback) {
+  public getUserFavorites(apiResponseCallback: ApiResponseCallback, pageNum: any) {
     this.apiResponseCallback = apiResponseCallback;
     this.dataService.onHideShowLoader(true);
-    let url = this.api.getFavoritesUrl(this.getAppMode());
+    let url = this.api.getFavoritesUrl(this.getAppMode(), pageNum);
     this.apiService.hitGetApi(url, this);
   }
 
@@ -158,6 +158,16 @@ export class ApiHandlerService implements ApiResponseCallback {
     this.dataService.onHideShowLoader(true);
     let url = this.api.getUpdateProfilePicture(this.getAppMode());
     this.apiService.hitPostApi(url, this.getRequestXml(requestJson), handleAddAndUpdateApiResponse(this, apiResponseCallback));
+  }
+
+  /**
+   * getAssociates
+   */
+  public getAssociates(entityId: string, entitiyType: string, pageNum: number, apiResponseCallback: ApiResponseCallback) {
+    this.dataService.onHideShowLoader(true);
+    this.apiResponseCallback = apiResponseCallback;
+    let url = this.api.getAssociatesUrl(this.getAppMode(), entitiyType, entityId, pageNum);
+    this.apiService.hitGetApi(url, this);
   }
 
   /**

@@ -1,4 +1,4 @@
-import { Component, OnInit, Injector, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Injector, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { BaseClass } from '../../../global/base-class';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { combineAll } from 'rxjs/operators';
@@ -9,7 +9,8 @@ import { SearchFilterModel } from '../../../models/search-filter-model';
   templateUrl: './search-filter.component.html',
   styleUrls: ['./search-filter.component.css']
 })
-export class SearchFilterComponent extends BaseClass implements OnInit {
+export class SearchFilterComponent extends BaseClass implements OnInit, OnDestroy {
+
 
   constructor(inject: Injector) { super(inject); }
 
@@ -24,6 +25,7 @@ export class SearchFilterComponent extends BaseClass implements OnInit {
 
   ngOnInit() {
     this.searchFilterModel = new SearchFilterModel();
+    getFilters(this);
     this.ascendingOrder = document.getElementById("ascendingOrder");
     this.descendingOrder = document.getElementById("descendingOrder");
 
@@ -55,6 +57,7 @@ export class SearchFilterComponent extends BaseClass implements OnInit {
 
   onApplyClick() {
     this.dataService.onSearchFilterApply(this.searchFilterModel);
+    this.saveFilters();
     this.closeSearchFilter.nativeElement.click();
   }
 
@@ -76,8 +79,22 @@ export class SearchFilterComponent extends BaseClass implements OnInit {
       });
     }
   }
+
+  ngOnDestroy(): void {
+    
+  }
+
+  private saveFilters() {
+    sessionStorage.setItem(this.constants.SEARCH_FILTERS, JSON.stringify(this.searchFilterModel));
+  }
 }
 
+function getFilters(context: SearchFilterComponent) {
+
+  context.searchFilterModel = JSON.parse(sessionStorage.getItem(context.constants.SEARCH_FILTERS));
+  if (!context.searchFilterModel)
+    context.searchFilterModel = new SearchFilterModel();
+}
 
 function addValidation(context: SearchFilterComponent) {
   context.filterForm = new FormGroup({
@@ -85,7 +102,7 @@ function addValidation(context: SearchFilterComponent) {
     agentCheck: new FormControl(context.searchFilterModel.agentCheck),
     peopleCheck: new FormControl(context.searchFilterModel.peopleCheck),
     employeeCheck: new FormControl(context.searchFilterModel.employeeCheck),
-    selectedState: new FormControl(context.searchFilterModel.selectedState),
+    selectedState: new FormControl(context.searchFilterModel.selectedState)
   })
 }
 
@@ -94,8 +111,9 @@ function getStates(context: SearchFilterComponent) {
   context.apiHandler.getStates({
     onSuccess(response: any) {
       context.states = response;
-      context.searchFilterModel.selectedState = context.states[0];
-      setValueInForm(context, "selectedState", context.selectedState.description);
+      if (!context.searchFilterModel.selectedState)
+        context.searchFilterModel.selectedState = context.states[0].stateID;
+      setValueInForm(context);
       context.cdr.markForCheck();
     }, onError(errorCode: number, errorMsg: string) {
 
@@ -103,8 +121,12 @@ function getStates(context: SearchFilterComponent) {
   })
 }
 
-function setValueInForm(context: SearchFilterComponent, key, value) {
-  context.filterForm.get(key).setValue(value);
+function setValueInForm(context: SearchFilterComponent) {
+  Object.keys(context.filterForm.controls).forEach(key => {
+    let value = context.searchFilterModel[key];
+    context.filterForm.get(key).setValue(value);
+
+  });
 }
 
 function setValueToChecks(context: SearchFilterComponent, value: boolean) {
@@ -112,5 +134,4 @@ function setValueToChecks(context: SearchFilterComponent, value: boolean) {
   context.filterForm.get("agentCheck").setValue(value);
   context.filterForm.get("peopleCheck").setValue(value);
   context.filterForm.get("employeeCheck").setValue(value);
-
 }

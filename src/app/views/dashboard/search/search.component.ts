@@ -4,7 +4,6 @@ import { BaseClass } from '../../../global/base-class';
 import { ApiResponseCallback } from '../../../Interfaces/ApiResponseCallback';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { EntityModel } from '../../../models/entity-model';
-import { DeviceDetectorService } from 'ngx-device-detector';
 import { CommonApisService } from '../../../utils/common-apis.service';
 import { SearchFilterModel } from '../../../models/search-filter-model';
 
@@ -16,10 +15,6 @@ import { SearchFilterModel } from '../../../models/search-filter-model';
   encapsulation: ViewEncapsulation.None,
 })
 export class SearchComponent extends BaseClass implements OnInit, OnDestroy, AfterViewInit, ApiResponseCallback {
-
-
-
-
   searchFilterModelSub: Subscription = null;
   searchForm: FormGroup;
   searchedUsers: Array<EntityModel> = [];
@@ -30,15 +25,15 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Aft
   searchString: string = "";
   searchFor: string = "All";
   pageNum: number = 0;
-  moreDataAvailable: boolean = false;
   private AGENT: string = "Agent";
   private PERSON: string = "Person";
   public TOTAL_MATCH: string = "TotalMatch";
-
+  
   public filterChanged: boolean = false;
-
+  lastScrollPosition = 0;
   deviceInfo = null;
   totalRows: any = 0;
+  moreDataAvailable: boolean = false;
   totalAndCurrentRowsRatio: string = "";
   filters: SearchFilterModel = null;
   constructor(injector: Injector, private commonApis: CommonApisService) {
@@ -47,6 +42,14 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Aft
 
   ngOnInit() {
     this.addValidation();
+    let self = this;
+
+    // window.onscroll = function onScroll(event) {
+    //   if (document.body.scrollTop > self.lastScrollPosition) {
+    //     self.commonFunctions.showSnackbar("scrolling");
+    //     self.lastScrollPosition = document.body.scrollTop;
+    //   }
+    // }
   }
 
   ngAfterViewInit(): void {
@@ -72,7 +75,16 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Aft
   }
 
   onLoadMoreClick() {
-    this.makeServerRequest();
+    this.hitApi();
+  }
+
+  public hitApi() {
+    if (!this.searchForm.valid) {
+      this.commonFunctions.showErrorSnackbar("Search field must contain atleast 3 characters");
+    }
+    else {
+      this.makeServerRequest();
+    }
   }
 
   public makeServerRequest() {
@@ -80,11 +92,27 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Aft
     this.dataService.onHideShowLoader(true);
     let selectedState = "All";
     let type = "All";
-    if (this.filters) {
-      selectedState = this.filters.selectedState;
-
-    }
+    ({ selectedState, type } = this.setFilterForApiRequest(selectedState, type));
     this.apiHandler.GetSearchedData(type, selectedState, this.searchForm.value.search, this.pageNum, this);
+  }
+
+  private setFilterForApiRequest(selectedState: string, type: string) {
+    if (this.filters) {
+      if (this.filters.selectedState)
+        selectedState = this.filters.selectedState;
+      let typeArray = [];
+      if (this.filters.agentCheck)
+        typeArray.push(this.constants.ENTITY_AGENT_PRESENTER);
+      if (this.filters.peopleCheck)
+        typeArray.push(this.constants.ENTITY_PEOPLE_PRESENTER);
+      if (this.filters.employeeCheck)
+        typeArray.push(this.constants.ENTITY_EMPLOYEE_PRESENTER);
+      if (this.filters.allCheck)
+        typeArray.push(this.constants.ENTITY_ALL_PRESENTER);
+      if (typeArray && typeArray.length > 0)
+        type = typeArray.join(",");
+    }
+    return { selectedState, type };
   }
 
   onSuccess(response: any) {
@@ -148,9 +176,8 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Aft
   }
 
   updateRatioUI() {
-    setTimeout(() => {
-      this.commonFunctions.showMoreDataSnackbar(this.searchedUsers, this.totalRows);
-    }, 0);
+    this.totalAndCurrentRowsRatio = this.commonFunctions.showMoreDataSnackbar(this.searchedUsers, this.totalRows);
+    this.cdr.markForCheck();
   }
 
   ngOnDestroy(): void {
@@ -215,8 +242,7 @@ function getSearchFilter(context: SearchComponent) {
       context.filters = data;
       context.filterChanged = true;
       context.pageNum = 0;
-      context.makeServerRequest();
-      //filterData(context, data);
+      context.hitApi();
     }
   });
 }
@@ -235,6 +261,8 @@ function getData(context: SearchComponent) {
     context.searchString = sessionStorage.getItem(context.constants.SEARCHED_STRING);
     context.moreDataAvailable = JSON.parse(sessionStorage.getItem(context.constants.SEARCH_MORE_DATA_AVAILABLE_FLAG));
     context.totalRows = Number(sessionStorage.getItem(context.constants.SEARCH_TOTAL_ROWS));
+    context.searchForm.get("search").setValue(context.searchString);
+
     context.cdr.markForCheck();
   }
 }

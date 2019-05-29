@@ -45,7 +45,7 @@ export class API {
   }
 
   getTopAgentsUrl(page_no: number, app_mode: string) {
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=topagentsget&PageNum=" + page_no + "&NoOfRows=" + this.numberOfRows;
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=agentsNprActualToPlanGet&PageNum=" + page_no + "&NoOfRows=" + this.numberOfRows + "&NprSortOrder=T";
   }
 
   getSearchedProfileUrl(app_mode: string, stateId: string, type: string, pageNum: number, searchString: string) {
@@ -81,8 +81,8 @@ export class API {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=systemFavoriteAdd&entity=" + entityType + "&entityID=" + entityId;
   }
 
-  getFavoritesUrl(app_mode: string) {
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=SYStemFavoritesGet";
+  getFavoritesUrl(app_mode: string, pageNum: any) {
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=SystemFavoritesGet" + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows;
   }
 
 
@@ -106,6 +106,10 @@ export class API {
 
   getUpdateProfilePicture(app_mode: string) {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userPictureSet";
+  }
+
+  getAssociatesUrl(app_mode: string, entityType: string, entityId: string, pageNum: number) {
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=associatesGet&entity=" + entityType + "&entityID=" + entityId + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows;
   }
 
   getStates() {

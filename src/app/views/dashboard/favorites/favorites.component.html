@@ -6,12 +6,12 @@
           <div class="agent-detail">
             <div class="dp">
               <img
-                src="{{item.entity=='Agent'?'../../../../images/baseline-business-24px.svg':'../../../../images/ic_note_profile.svg'}}"
+                src="{{item.type=='Agent'?'../../../../images/baseline-business-24px.svg':'../../../../images/ic_note_profile.svg'}}"
                 alt="" />
-              <div class="dpProfile_wp proActiBg">A</div>
+              <div class="dpProfile_wp proActiBg">{{getTypeAnnotation(item)}}</div>
             </div>
-            <h4><a (click)="onAgentClick(item)">{{item.entityName}}</a> <span
-                (click)="onAgentClick(item)">({{item.entityID}})</span><a><img
+            <h4><a (click)="onAgentClick(item)">{{item.name}}</a> <span
+                (click)="onAgentClick(item)">({{item.entityId}})</span><a><img
                   src="../../../../images/favourite-icon.svg" alt="" (click)="onStarClick(item)"></a></h4>
             <span>{{item.city+','+item.state}}</span>
           </div>
@@ -19,4 +19,13 @@
       </li>
     </ul>
   </div>
+  <div class="row marginBottom20" *ngIf="moreDataAvailable">
+    <div class="col-xs-12 col-md-12 loadMoreWp">
+      <hr />
+      <div class="loadMore"><a (click)="onLoadMoreClick()" alt="Load More">Load More</a></div>
+    </div>
+  </div>
+  <div id="ratioView">{{totalAndCurrentRowsRatio}}</div>
+  <button (click)="topFunction()" id="myBtn" title="Go to top"><span
+      class="glyphicon glyphicon-arrow-up"></span></button>
 </div>

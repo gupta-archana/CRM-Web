@@ -14,14 +14,12 @@ import { CommonApisService } from '../../../utils/common-apis.service';
   styleUrls: ['./top-agents.component.css']
 })
 export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponseCallback, OnDestroy {
-
-
   pageNumber: number = 0;
   emailId: string;
   encryptedPassword: string;
-  moreDataAvailable: boolean = true;
   pageRefreshSubscription: Subscription = null;
-  totalRows: number = 0;
+  totalRows: any = 0;
+  moreDataAvailable: boolean = false;
   totalAndCurrentRowsRatio: string = "";
 
   constructor(private injector: Injector, private commonApis: CommonApisService) {
@@ -68,7 +66,7 @@ export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponse
     sessionStorage.setItem(this.constants.TOP_AGENT_CURRENT_PAGE_NO, this.pageNumber.toString());
     sessionStorage.setItem(this.constants.TOP_AGENT_DATA, JSON.stringify(this.topAgents));
     sessionStorage.setItem(this.constants.AGENT_INFO, JSON.stringify(agent));
-    sessionStorage.setItem(this.constants.TOP_AGENT_TOTAL_ROWS, JSON.stringify(this.totalRows));
+    sessionStorage.setItem(this.constants.TOP_AGENT_TOTAL_ROWS, this.totalRows);
     this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_AGENT_DETAIL);
 
   }
@@ -84,6 +82,13 @@ export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponse
   }
 
 
+
+
+  onError(errorCode: number, errorMsg: string) {
+    this.moreDataAvailable = false;
+    this.commonFunctions.showErrorSnackbar(errorMsg);
+    this.cdr.markForCheck();
+  }
   private parseAndShowDataOnUi(response: any) {
     let newTopAgents = response.profile;
     if (newTopAgents) {
@@ -94,23 +99,21 @@ export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponse
           this.totalRows = element.rowNum;
         }
       });
-      // = Number((newTopAgents.splice(newTopAgents.length - 1, 1))[0].rowNum);
-      this.moreDataAvailable = true;
-    }
-    else {
-      this.moreDataAvailable = false;
     }
     this.updateRatioUI();
+    this.checkMoreDataAvailable();
   }
 
-  private updateRatioUI() {
-    this.commonFunctions.showMoreDataSnackbar(this.topAgents, this.totalRows);
-  }
-
-  onError(errorCode: number, errorMsg: string) {
-    this.moreDataAvailable = false;
-    this.commonFunctions.showErrorSnackbar(errorMsg);
+  updateRatioUI() {
+    this.totalAndCurrentRowsRatio = this.commonFunctions.showMoreDataSnackbar(this.topAgents, this.totalRows);
     this.cdr.markForCheck();
+  }
+
+  checkMoreDataAvailable() {
+    if (!this.topAgents || this.topAgents.length == this.totalRows)
+      this.moreDataAvailable = false;
+    else
+      this.moreDataAvailable = true;
   }
 
   topFunction() {

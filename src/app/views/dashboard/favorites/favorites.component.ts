@@ -2,6 +2,7 @@ import { Component, OnInit, Injector } from '@angular/core';
 import { BaseClass } from '../../../global/base-class';
 import { ApiResponseCallback } from '../../../Interfaces/ApiResponseCallback';
 import { UserFavoriteModel } from '../../../models/user-favorite-model';
+import { EntityModel } from '../../../models/entity-model';
 
 @Component({
   selector: 'app-favorites',
@@ -9,25 +10,44 @@ import { UserFavoriteModel } from '../../../models/user-favorite-model';
   styleUrls: ['./favorites.component.css']
 })
 export class FavoritesComponent extends BaseClass implements OnInit, ApiResponseCallback {
+  pageNumber: number = 0;
   totalRows: any = 0;
   totalAndCurrentRowsRatio: string = "";
-  favorites: Array<UserFavoriteModel> = new Array();
+  favorites: Array<EntityModel> = new Array();
   moreDataAvailable: boolean = true;
+
   constructor(private injector: Injector) { super(injector); }
 
   ngOnInit() {
-
-    this.apiHandler.getUserFavorites(this);
+    getData(this);
+    this.updateRatioUI();
   }
+  onLoadMoreClick() {
+    makeServerRequest(this);
+  }
+
+  getTypeAnnotation(item: EntityModel) {
+    return this.constants.entityArrayObject[item.type].toLocaleUpperCase();
+  }
+  
   onSuccess(response: any) {
     parserResponse(response, this);
     checkMoreDataAvailable(this);
-    this.commonFunctions.showMoreDataSnackbar(this.favorites, this.totalRows);
+    saveData(this);
+    this.updateRatioUI();
     this.cdr.markForCheck();
   }
   onError(errorCode: number, errorMsg: string) {
 
   }
+  private updateRatioUI() {
+    this.totalAndCurrentRowsRatio = this.commonFunctions.showMoreDataSnackbar(this.favorites, this.totalRows);
+    this.cdr.markForCheck();
+  }
+}
+function makeServerRequest(context: FavoritesComponent) {
+  context.pageNumber++;
+  context.apiHandler.getUserFavorites(context, context.pageNumber);
 }
 
 function parserResponse(response: any, context: FavoritesComponent) {
@@ -40,6 +60,24 @@ function parserResponse(response: any, context: FavoritesComponent) {
       context.totalRows = element.rowNum;
     }
   });
+}
+
+function saveData(context: FavoritesComponent) {
+  sessionStorage.setItem(context.constants.FAVORITE_ARRAY, JSON.stringify(context.favorites));
+  sessionStorage.setItem(context.constants.FAVORITE_PAGE_NUMBER, JSON.stringify(context.pageNumber));
+  sessionStorage.setItem(context.constants.FAVORITE_TOTAL_ROWS, context.totalRows);
+}
+
+function getData(context: FavoritesComponent) {
+  let favArray = JSON.parse(sessionStorage.getItem(context.constants.FAVORITE_ARRAY));
+  if (favArray) {
+    context.favorites = favArray;
+    context.pageNumber = Number(sessionStorage.getItem(context.constants.FAVORITE_PAGE_NUMBER));
+    context.totalRows = Number(sessionStorage.getItem(context.constants.FAVORITE_TOTAL_ROWS));
+  }
+  else {
+    makeServerRequest(context);
+  }
 }
 
 function checkMoreDataAvailable(context: FavoritesComponent) {

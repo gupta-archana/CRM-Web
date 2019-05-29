@@ -56,7 +56,7 @@ export class DataServiceService {
   private shareDataSubject = new BehaviorSubject<any>("");
   shareDataObservable = this.shareDataSubject.asObservable();
 
-  private searchFiltersSubject = new BehaviorSubject<SearchFilterModel>(null);
+  private searchFiltersSubject = new Subject<SearchFilterModel>();
   searchFiltersObservable = this.searchFiltersSubject.asObservable();
 
   constructor() { }

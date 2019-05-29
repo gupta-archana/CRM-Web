@@ -1,4 +1,4 @@
-<div class="container-fluid nospace  marginBottom40">
+<div class="container-fluid nospace">
   <div class="container app-bg2">
     <div class="row">
       <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
@@ -29,7 +29,7 @@
                       src="{{item.favorite =='yes'?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}"
                       alt="" (click)="onStarClick(item)"></a></h4> <span
                   (click)="onItemClick(item)">{{getAddress(item)}}</span>
-                
+
                 <div class="clearfix"></div>
               </div>
             </div>
@@ -38,13 +38,13 @@
         </ul>
         <button (click)="topFunction()" id="myBtn" title="Go to top"><span
             class="glyphicon glyphicon-arrow-up"></span></button>
-        <div class="load-more-div" *ngIf="moreDataAvailable">
-          <span class="straight-line"></span>
-          <span class="load-more-text" (click)="onLoadMoreClick()">Load More</span>
-          <span class="straight-line"></span>
-
+        <div class="row marginBottom20" *ngIf="moreDataAvailable">
+          <div class="col-xs-12 col-md-12 loadMoreWp">
+            <hr />
+            <div class="loadMore"><a (click)="onLoadMoreClick()" alt="Load More">Load More</a></div>
+          </div>
         </div>
-
+        <div id="ratioView">{{totalAndCurrentRowsRatio}}</div>
       </div>
       <div class="serach-emp " *ngIf="!hideNoDataDiv">
         <h2><em>It is Empty Here!</em></h2>

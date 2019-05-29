@@ -272,6 +272,9 @@ mat-ink-bar.mat-ink-bar {
 .marginBottom40 {
   margin-bottom: 40px;
 }
+.marginBottom20{
+  margin-bottom: 20px;
+}
 
 .cdk-overlay-pane {
   display: contents !important;
@@ -281,4 +284,19 @@ mat-ink-bar.mat-ink-bar {
   max-width: 40% !important;
   background: #F68933 !important;
   color: white !important;
+}
+
+#ratioView {
+  position: fixed;
+  bottom: 5px;
+  left: 30%;
+  z-index: 2;
+  font-size: 12px;
+  border: none;
+  outline: none;
+  background-color: #005295;
+  color: white;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 4px;
 }

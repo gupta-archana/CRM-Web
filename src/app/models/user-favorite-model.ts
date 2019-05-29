@@ -1,11 +1,12 @@
 export class UserFavoriteModel {
-  sysFavoriteID: string = "";
-  UID: string = "";
-  entity: string = "";
-  entityID: string = "";
-  entityName: string = "";
-  city: string = "";
-  state: string = "";
-  stat: string = "";
-  type:string="";
+  type: string;
+  entityId: string;
+  favorite: string;
+  name: string;
+  stat: string;
+  city: string;
+  state: string;
+  zip: string;
+  rowNum: string;
+  sysfavoriteID: string;
 }

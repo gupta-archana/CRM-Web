@@ -85,8 +85,8 @@ export class NavigationDrawerComponent extends BaseClass implements OnInit, OnDe
   }
 
   onRecentProfileClick() {
-    navigateToSelectedItem(this, this.paths.PATH_RECENT_PROFILES);
-    //this.dataService.onRecentProfileClick();
+    //navigateToSelectedItem(this, this.paths.PATH_RECENT_PROFILES);
+    this.dataService.onRecentProfileClick();
   }
 
   ngOnDestroy(): void {

@@ -44,7 +44,7 @@ export class CommonFunctionsService {
       this.activeToast = this.toastr.info(message, null, {
         disableTimeOut: true,
         positionClass: "toast-bottom-center",
-        
+
       });
     } else {
       this.activeToast.message = message;
@@ -161,8 +161,10 @@ export class CommonFunctionsService {
     else {
       totalAndCurrentRowsRatio = "No Data available";
     }
+    return totalAndCurrentRowsRatio;
+
     //this.snackBar.open(totalAndCurrentRowsRatio, null, CommonFunctionsService.config);
-    this.showPermanentSnackbar(totalAndCurrentRowsRatio);
+    //this.showPermanentSnackbar(totalAndCurrentRowsRatio);
   }
 
 }
@@ -172,6 +174,7 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+
 function createSnackbarConfig(context: CommonFunctionsService) {
   if (!CommonFunctionsService.config) {
     let config = new MatSnackBarConfig();
@@ -179,7 +182,8 @@ function createSnackbarConfig(context: CommonFunctionsService) {
     config.horizontalPosition = context.horizontalPosition;
     CommonFunctionsService.config = config;
   }
-function getConfigForPermanent(context:CommonFunctionsService) {
-  
 }
+
+function showSnackbarOnScroll(text: string) {
+
 }
