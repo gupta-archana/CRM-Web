@@ -28,7 +28,7 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Aft
   private AGENT: string = "Agent";
   private PERSON: string = "Person";
   public TOTAL_MATCH: string = "TotalMatch";
-  
+
   public filterChanged: boolean = false;
   lastScrollPosition = 0;
   deviceInfo = null;
@@ -145,7 +145,7 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Aft
         break;
     }
     if (navigatingPath) {
-      //this.saveSearchedData();
+      this.saveSearchedData();
       this.commonFunctions.navigateWithoutReplaceUrl(navigatingPath);
     }
     else
@@ -171,7 +171,7 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Aft
     });
   }
 
-  onStarClick(item: EntityModel) {
+  onStarClick(item: EntityModel, index: number) {
     this.commonApis.setFavorite(item, this.apiHandler, this.cdr);
   }
 
@@ -239,10 +239,12 @@ function checkAndSetUi(context: SearchComponent) {
 function getSearchFilter(context: SearchComponent) {
   context.searchFilterModelSub = context.dataService.searchFiltersObservable.subscribe(data => {
     if (data) {
-      context.filters = data;
-      context.filterChanged = true;
-      context.pageNum = 0;
-      context.hitApi();
+      if (this.searchForm.valid) {
+        context.filters = data;
+        context.filterChanged = true;
+        context.pageNum = 0;
+        context.hitApi();
+      }
     }
   });
 }

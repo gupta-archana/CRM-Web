@@ -2,7 +2,7 @@
   <div class="row">
     <ul>
       <li *ngFor="let item of favorites">
-        <div class="col-xs-12 col-md-6 cell-bg">
+        <div class="col-xs-12 col-md-6 cell-bg" *ngIf="item.favorite=='yes'">
           <div class="agent-detail">
             <div class="dp">
               <img
@@ -10,8 +10,8 @@
                 alt="" />
               <div class="dpProfile_wp proActiBg">{{getTypeAnnotation(item)}}</div>
             </div>
-            <h4><a (click)="onAgentClick(item)">{{item.name}}</a> <span
-                (click)="onAgentClick(item)">({{item.entityId}})</span><a><img
+            <h4><a (click)="onItemClick(item)">{{item.name}}</a> <span
+                (click)="onItemClick(item)">({{item.entityId}})</span><a><img
                   src="../../../../images/favourite-icon.svg" alt="" (click)="onStarClick(item)"></a></h4>
             <span>{{item.city+','+item.state}}</span>
           </div>

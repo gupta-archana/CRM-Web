@@ -30,7 +30,6 @@ export class AgentDetailComponent extends EntityDetailBaseClass implements OnIni
 
   ngOnInit() {
     this.agentInfo = JSON.parse(sessionStorage.getItem(this.constants.AGENT_INFO));
-    this.agentInfo.favorite = false;
     this.addNewHistoryEntity(this.agentInfo);
     getMenues(this);
   }

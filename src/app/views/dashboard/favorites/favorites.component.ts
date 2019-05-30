@@ -3,6 +3,7 @@ import { BaseClass } from '../../../global/base-class';
 import { ApiResponseCallback } from '../../../Interfaces/ApiResponseCallback';
 import { UserFavoriteModel } from '../../../models/user-favorite-model';
 import { EntityModel } from '../../../models/entity-model';
+import { CommonApisService } from 'src/app/utils/common-apis.service';
 
 @Component({
   selector: 'app-favorites',
@@ -16,7 +17,7 @@ export class FavoritesComponent extends BaseClass implements OnInit, ApiResponse
   favorites: Array<EntityModel> = new Array();
   moreDataAvailable: boolean = true;
 
-  constructor(private injector: Injector) { super(injector); }
+  constructor(private injector: Injector, private commonApis: CommonApisService) { super(injector); }
 
   ngOnInit() {
     getData(this);
@@ -29,7 +30,7 @@ export class FavoritesComponent extends BaseClass implements OnInit, ApiResponse
   getTypeAnnotation(item: EntityModel) {
     return this.constants.entityArrayObject[item.type].toLocaleUpperCase();
   }
-  
+
   onSuccess(response: any) {
     parserResponse(response, this);
     checkMoreDataAvailable(this);
@@ -43,6 +44,31 @@ export class FavoritesComponent extends BaseClass implements OnInit, ApiResponse
   private updateRatioUI() {
     this.totalAndCurrentRowsRatio = this.commonFunctions.showMoreDataSnackbar(this.favorites, this.totalRows);
     this.cdr.markForCheck();
+  }
+
+  onStarClick(item: EntityModel) {
+    this.commonApis.setFavorite(item, this.apiHandler, this.cdr);
+  }
+
+  onItemClick(item: EntityModel) {
+    let navigatingPath: string = "";
+    switch (item.type) {
+      case this.constants.ENTITY_AGENT:
+        navigatingPath = this.paths.PATH_AGENT_DETAIL;
+        sessionStorage.setItem(this.constants.AGENT_INFO, JSON.stringify(item));
+        break;
+      case this.constants.ENTITY_PERSON:
+
+        break;
+      default:
+        break;
+    }
+    if (navigatingPath) {
+      saveData(this);
+      this.commonFunctions.navigateWithoutReplaceUrl(navigatingPath);
+    }
+    else
+      this.commonFunctions.showErrorSnackbar("We are working on person ui");
   }
 }
 function makeServerRequest(context: FavoritesComponent) {

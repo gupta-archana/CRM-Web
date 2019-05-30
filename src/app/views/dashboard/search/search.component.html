@@ -19,16 +19,13 @@
 
       <div class="row" *ngIf="hideNoDataDiv">
         <ul>
-          <li *ngFor="let item of searchedUsers">
+          <li *ngFor="let item of searchedUsers; let i = index;">
             <div class="col-xs-12 col-md-6 cell-bg">
               <div class="agent-detail ag-perform">
-                <div class="dp" (click)="onItemClick(item)"><img
-                    src="{{item.type=='Agent'?'../../../../../../images/building-icon.svg':'../../../../../../images/username.svg'}}"
+                <div class="dp" (click)="onItemClick(item)"><img src="{{item.type=='Agent'?'../../../../../../images/building-icon.svg':'../../../../../../images/username.svg'}}"
                     alt="" /></div>
-                <h4><a (click)="onItemClick(item)">{{item.name}}</a><a><img
-                      src="{{item.favorite =='yes'?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}"
-                      alt="" (click)="onStarClick(item)"></a></h4> <span
-                  (click)="onItemClick(item)">{{getAddress(item)}}</span>
+                <h4><a (click)="onItemClick(item)">{{item.name}}</a><a><img src="{{item.favorite =='yes'?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}"
+                      alt="" (click)="onStarClick(item,i)"></a></h4> <span (click)="onItemClick(item)">{{getAddress(item)}}</span>
 
                 <div class="clearfix"></div>
               </div>
@@ -36,8 +33,7 @@
 
           </li>
         </ul>
-        <button (click)="topFunction()" id="myBtn" title="Go to top"><span
-            class="glyphicon glyphicon-arrow-up"></span></button>
+        <button (click)="topFunction()" id="myBtn" title="Go to top"><span class="glyphicon glyphicon-arrow-up"></span></button>
         <div class="row marginBottom20" *ngIf="moreDataAvailable">
           <div class="col-xs-12 col-md-12 loadMoreWp">
             <hr />

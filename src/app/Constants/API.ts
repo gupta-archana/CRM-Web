@@ -1,10 +1,7 @@
-import { Injectable, Injector } from '@angular/core';
-import { zip } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
 import { MyLocalStorageService } from '../services/my-local-storage.service';
-import { Constants } from './Constants';
-import { BaseClass } from '../global/base-class';
 import { CommonFunctionsService } from '../utils/common-functions.service';
+import { Constants } from './Constants';
 @Injectable({
   providedIn: 'root'
 })
@@ -18,9 +15,12 @@ export class API {
   encryptedPassword: string = "";
 
   constructor(private commonFunctions: CommonFunctionsService, private myLocalStorage: MyLocalStorageService, private constants: Constants) {
-
     this.getNumberOfRows();
-    if (myLocalStorage.getValue(constants.LOGGED_IN))
+
+  }
+
+  public checkAndGetCredentials() {
+    if (this.myLocalStorage.getValue(this.constants.LOGGED_IN))
       this.getCredentials();
   }
 
@@ -45,70 +45,91 @@ export class API {
   }
 
   getTopAgentsUrl(page_no: number, app_mode: string) {
+
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=agentsNprActualToPlanGet&PageNum=" + page_no + "&NoOfRows=" + this.numberOfRows + "&NprSortOrder=T";
   }
 
   getSearchedProfileUrl(app_mode: string, stateId: string, type: string, pageNum: number, searchString: string) {
+
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=entityProfileSearch&stateId=" + stateId + "&Type=" + type + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows + "&searchString=" + searchString;
   }
   getAgentSearchedUrl(app_mode: string, stateId: string, searchString: string) {
+
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=agentssearch&stateId=" + stateId + "&searchString=" + searchString;
   }
   getPersonSearchedUrl(app_mode: string, stateId: string, agentId: string, searchString: string) {
+
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=personsSearch&stateId=" + stateId + "&agentId=" + agentId + "&searchString=" + searchString + "&active=&inactive";
   }
   getAttorneySearchedUrl(app_mode: string, stateId: string, searchString: string) {
+
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=attorneysSearch&stateId=" + stateId + "&searchString=" + searchString;
   }
 
   getUserProfileUrl(app_mode: string) {
+
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userProfileGet&UID=" + this.email;
   }
 
   getUserPictureUrl(app_mode: string) {
+
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userPictureGet";
   }
 
   getShareVCardUrl(app_mode: string, to: string, entityType: string, entityId: string) {
+
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userCardShare&to=" + to + "&entity=" + entityType + "&entityID=" + entityId;
   }
 
   getChangeShareableStatusUrl(app_mode, status: string) {
+
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userCardShareable&ShareableStatus=" + status;
   }
 
   getAddFavoriteUrl(app_mode: string, entityType: string, entityId: string) {
+
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=systemFavoriteAdd&entity=" + entityType + "&entityID=" + entityId;
   }
 
   getFavoritesUrl(app_mode: string, pageNum: any) {
+
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=SystemFavoritesGet" + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows;
   }
 
 
   getNotesUrl(app_mode: string, entityType: string, entityId: string) {
+
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=systemNotesGet&entity=" + entityType + "&entityID=" + entityId;
   }
 
   getCreateNoteUrl(app_mode: string) {
+
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=systemNoteNew";
   }
 
 
   getUpdateUserProfileUrl(app_mode: string) {
+
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userProfileModify";
   }
 
   getSetFavoriteStatus(app_mode: string, entityType: string, entityId: string) {
+
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=systemFavoriteAdd&entity=" + entityType + "&entityID=" + entityId;
 
   }
 
+  getRemoveFavoriteUrl(app_mode, favorite_id: string) {
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=systemFavoriteDelete&SysFavoriteID=" + favorite_id;
+  }
+
   getUpdateProfilePicture(app_mode: string) {
+
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userPictureSet";
   }
 
   getAssociatesUrl(app_mode: string, entityType: string, entityId: string, pageNum: number) {
+
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=associatesGet&entity=" + entityType + "&entityID=" + entityId + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows;
   }
 
@@ -123,6 +144,7 @@ export class API {
 
 
   private getBaseUrl(app_mode: string) {
+    this.checkAndGetCredentials();
     return this.API_BASE_URL + app_mode + "/get?I0=JSON&I4=CRM&";
   }
 }

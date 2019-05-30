@@ -15,13 +15,25 @@ export class CommonApisService {
    */
   public setFavorite(item: EntityModel, apiHandler: ApiHandlerService, cdr: ChangeDetectorRef) {
 
-    apiHandler.updateFavoriteStatus(item.type, item.entityId, {
-      onSuccess(response: any) {
-        item.favorite = true;
-        cdr.markForCheck();
-      }, onError(errorCode, errorMsg) {
+    if (item.favorite == "no") {
+      apiHandler.setFavoriteStatus(item.type, item.entityId, {
+        onSuccess(response: any) {
+          item.favorite = "yes";
+          cdr.markForCheck();
+        }, onError(errorCode, errorMsg) {
 
-      }
-    })
+        }
+      })
+    }
+    else {
+      apiHandler.removeFavorite(item.sysfavoriteID, {
+        onSuccess(response: any) {
+          item.favorite = "no";
+          cdr.markForCheck();
+        }, onError(errorCode, errorMsg) {
+
+        }
+      })
+    }
   }
 }

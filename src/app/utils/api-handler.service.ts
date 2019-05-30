@@ -145,9 +145,18 @@ export class ApiHandlerService implements ApiResponseCallback {
   /**
    * updateFavoriteStatus
    */
-  public updateFavoriteStatus(entityType, entityId, apiResponseCallback: ApiResponseCallback) {
+  public setFavoriteStatus(entityType, entityId, apiResponseCallback: ApiResponseCallback) {
     this.dataService.onHideShowLoader(true);
     let url = this.api.getSetFavoriteStatus(this.getAppMode(), entityType, entityId);
+    this.apiService.hitGetApi(url, handleAddAndUpdateApiResponse(this, apiResponseCallback));
+  }
+
+  /**
+   * removeFavorite
+   */
+  public removeFavorite(favorite_id: string, apiResponseCallback: ApiResponseCallback) {
+    this.dataService.onHideShowLoader(true);
+    let url = this.api.getRemoveFavoriteUrl(this.getAppMode(), favorite_id);
     this.apiService.hitGetApi(url, handleAddAndUpdateApiResponse(this, apiResponseCallback));
   }
 
