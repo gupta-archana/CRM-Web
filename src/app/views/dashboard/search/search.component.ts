@@ -238,13 +238,11 @@ function checkAndSetUi(context: SearchComponent) {
 
 function getSearchFilter(context: SearchComponent) {
   context.searchFilterModelSub = context.dataService.searchFiltersObservable.subscribe(data => {
-    if (data) {
-      if (this.searchForm.valid) {
-        context.filters = data;
-        context.filterChanged = true;
-        context.pageNum = 0;
-        context.hitApi();
-      }
+    if (data && context.searchForm.valid) {
+      context.filters = data;
+      context.filterChanged = true;
+      context.pageNum = 0;
+      context.hitApi();
     }
   });
 }

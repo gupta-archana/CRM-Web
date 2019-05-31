@@ -16,8 +16,8 @@ export class ApiService {
     if (navigator.onLine) {
       var self = this;
       var headers = new Headers();
-      headers.set('Accept', 'text/json');
-      headers.set('Content-Type', 'text/json');
+      // headers.set('Accept', 'text/json');
+      // headers.set('Content-Type', 'text/json');
       const options = new RequestOptions({
         headers: headers,
         responseType: ResponseContentType.Text

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import createHistory from 'history/createBrowserHistory'
+import { createBrowserHistory as createHistory } from 'history'
 import { PlatformLocation, LocationStrategy } from '@angular/common';
 import { CommonFunctionsService } from './common-functions.service';
 import { RoutingStateService } from '../services/routing-state.service';

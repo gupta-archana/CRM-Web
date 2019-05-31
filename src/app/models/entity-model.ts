@@ -15,4 +15,9 @@ export class EntityModel {
   favorite: string = "no";
   rowNum: string;
   sysfavoriteID: string;
+  nprPlanned: string;
+  nprActual: string;
+  nprPercent: string;
+  nprPlannedYTD: string;
+  nprPercentYTD: string;
 }

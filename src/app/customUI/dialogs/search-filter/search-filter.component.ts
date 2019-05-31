@@ -81,7 +81,7 @@ export class SearchFilterComponent extends BaseClass implements OnInit, OnDestro
   }
 
   ngOnDestroy(): void {
-    
+
   }
 
   private saveFilters() {
@@ -111,6 +111,7 @@ function getStates(context: SearchFilterComponent) {
   context.apiHandler.getStates({
     onSuccess(response: any) {
       context.states = response;
+      context.states.splice(0, 0, getStateTypeAll());
       if (!context.searchFilterModel.selectedState)
         context.searchFilterModel.selectedState = context.states[0].stateID;
       setValueInForm(context);
@@ -134,4 +135,7 @@ function setValueToChecks(context: SearchFilterComponent, value: boolean) {
   context.filterForm.get("agentCheck").setValue(value);
   context.filterForm.get("peopleCheck").setValue(value);
   context.filterForm.get("employeeCheck").setValue(value);
+}
+function getStateTypeAll() {
+  return { stateID: "All", description: "All" };
 }
