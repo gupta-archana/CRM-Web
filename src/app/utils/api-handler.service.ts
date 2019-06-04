@@ -64,6 +64,15 @@ export class ApiHandlerService implements ApiResponseCallback {
     this.apiService.hitGetApi(url, apiResponseCallback);
   }
 
+
+  /**
+   * getPersonDetailMenus
+   */
+  public getPersonDetailMenus(apiResponseCallback: ApiResponseCallback) {
+    let url = this.api.PERSON_DETAIL_MENU;
+    this.apiService.hitGetApi(url, apiResponseCallback);
+  }
+
   /**
    * getUserProfile
    */
@@ -146,15 +155,17 @@ export class ApiHandlerService implements ApiResponseCallback {
    * updateFavoriteStatus
    */
   public setFavoriteStatus(entityType, entityId, apiResponseCallback: ApiResponseCallback) {
+    this.apiResponseCallback = apiResponseCallback;
     this.dataService.onHideShowLoader(true);
     let url = this.api.getSetFavoriteStatus(this.getAppMode(), entityType, entityId);
-    this.apiService.hitGetApi(url, handleAddAndUpdateApiResponse(this, apiResponseCallback));
+    this.apiService.hitGetApi(url, this);
   }
 
   /**
    * removeFavorite
    */
   public removeFavorite(favorite_id: string, apiResponseCallback: ApiResponseCallback) {
+    this.apiResponseCallback = apiResponseCallback;
     this.dataService.onHideShowLoader(true);
     let url = this.api.getRemoveFavoriteUrl(this.getAppMode(), favorite_id);
     this.apiService.hitGetApi(url, handleAddAndUpdateApiResponse(this, apiResponseCallback));
@@ -176,6 +187,26 @@ export class ApiHandlerService implements ApiResponseCallback {
     this.dataService.onHideShowLoader(true);
     this.apiResponseCallback = apiResponseCallback;
     let url = this.api.getAssociatesUrl(this.getAppMode(), entitiyType, entityId, pageNum);
+    this.apiService.hitGetApi(url, this);
+  }
+
+  /**
+   * getPersonAffiliations
+   */
+  public getPersonAffiliations(entityId: string, pageNum: number, apiResponseCallback: ApiResponseCallback) {
+    this.dataService.onHideShowLoader(true);
+    this.apiResponseCallback = apiResponseCallback;
+    let url = this.api.getPersonAffiliationsUrl(this.getAppMode(), entityId, pageNum);
+    this.apiService.hitGetApi(url, this);
+  }
+
+  /**
+   * getEntityContactDetail
+   */
+  public getEntityContactDetail(entityId: string, entitiyType: string, apiResponseCallback) {
+    this.dataService.onHideShowLoader(true);
+    this.apiResponseCallback = apiResponseCallback;
+    let url = this.api.getEntityContactDetailUrl(this.getAppMode(), entitiyType, entityId);
     this.apiService.hitGetApi(url, this);
   }
 
@@ -223,7 +254,7 @@ function handleAddAndUpdateApiResponse(context: ApiHandlerService, apiResponseCa
       if (responseBody.hasOwnProperty('Fault')) {
         let errorCode = responseBody.Fault.code;
         let msg = responseBody.Fault.message;
-        context.onError(errorCode, msg);
+        apiResponseCallback.onError(errorCode, msg);
       }
       else {
         let msg = responseBody.Success.message;

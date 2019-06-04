@@ -5,10 +5,12 @@ import { Router } from '@angular/router';
 import { Constants } from '../Constants/Constants';
 import { MatSnackBar, MatSnackBarConfig, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material';
 import { MyLocalStorageService } from '../services/my-local-storage.service';
+import * as paths from '../Constants/paths';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class CommonFunctionsService {
   private activeToast: any = null;
   public static config: MatSnackBarConfig;
@@ -165,6 +167,62 @@ export class CommonFunctionsService {
 
     //this.snackBar.open(totalAndCurrentRowsRatio, null, CommonFunctionsService.config);
     //this.showPermanentSnackbar(totalAndCurrentRowsRatio);
+  }
+
+  onMenuItemClick(item) {
+
+    let navigatingUrl = "";
+    //let value = item.title == paths.AGENT_DETAIL_THIRTEEN_MONTH_ACTIVITY
+    switch (item.title) {
+      case this.constants.AGENT_DETAIL_CONTACT:
+        navigatingUrl = paths.PATH_AGENT_CONTACT_DETAIL;
+        break;
+      case this.constants.AGENT_DETAIL_NOTES:
+        navigatingUrl = paths.PATH_NOTES;
+        break;
+      case this.constants.AGENT_DETAIL_ASSOCIATES:
+        navigatingUrl = paths.PATH_AGENT_ASSOCIATES;
+        break;
+      case this.constants.AGENT_DETAIL_THIRTEEN_MONTH_ACTIVITY:
+        navigatingUrl = paths.PATH_THIRTEEN_MONTH_ACTIVITY;
+        break;
+      case this.constants.AGENT_DETAIL_OBJECTIVE:
+        navigatingUrl = paths.PATH_AGENT_OBJECTIVE;
+        break;
+      case this.constants.AGENT_DETAIL_EVENTS:
+
+        break;
+      case this.constants.AGENT_DETAIL_TAGS:
+
+        break;
+      case this.constants.AGENT_DETAIL_COMPLIANCE:
+
+        break;
+      case this.constants.AGENT_DETAIL_ALERTS:
+        break;
+
+      case this.constants.AGENT_DETAIL_CLAIMS:
+
+        break;
+      case this.constants.AGENT_DETAIL_SOCIAL:
+
+        break;
+      case this.constants.AGENT_DETAIL_EMAILS:
+
+        break;
+      case this.constants.AGENT_DETAIL_AUDITS:
+
+        break;
+      default:
+        break;
+    }
+
+    if (navigatingUrl) {
+      this.navigateWithoutReplaceUrl(navigatingUrl);
+    }
+
+    else
+      this.showErrorSnackbar("We are working on it");
   }
 
 }

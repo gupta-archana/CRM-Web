@@ -9,7 +9,7 @@ export class Constants {
   PASSWORD = "password";
   REMEMBER_ME = "remeberMe";
   LOGOUT_CONFIRMATION = "Logout Confirmation";
-  AGENT_INFO = "agentnfo";
+  ENTITY_INFO = "entityinfo";
   LOGOUT = "Logout";
   CANCEL = "Cancel";
   LOGGED_IN = "logged_in";
@@ -27,6 +27,7 @@ export class Constants {
   AGENT_DETAIL_MENUES = "agent_detail_menues";
   SIDE_NAV_ITEMS = "side_nav_items";
   AGENT_DETAIL_ITEMS = "agent_detail_items";
+  PERSON_DETAIL_ITEMS = "person_detail_items";
   SEARCH_FILTERS = "search_filters";
   FAVORITE_ARRAY = "favorite_array";
   FAVORITE_PAGE_NUMBER = "favorite_page_num";
@@ -77,23 +78,17 @@ export class Constants {
 
   // agent pages
   AGENT_DETAIL = "Agent Details";
-
-
-  // Entities
-  ENTITY_AGENT = "Agent";
-  ENTITY_PERSON = "Person";
-  ENTITY_ATTORNEY = "Attorney";
-  ENTITIY_EMPLOYEE = "Employee";
+  PERSON_DETAIL = "Person Details";
 
   //Entities Type presenter
-  ENTITY_AGENT_PRESENTER = "a";
-  ENTITY_PEOPLE_PRESENTER = "p";
-  ENTITY_EMPLOYEE_PRESENTER = "e";
+  ENTITY_AGENT_PRESENTER = "A";
+  ENTITY_PERSON_PRESENTER = "P";
+  ENTITY_EMPLOYEE_PRESENTER = "E";
   ENTITY_ALL_PRESENTER = "all";
 
   public entityArrayObject = {
     Agent: this.ENTITY_AGENT_PRESENTER,
-    Person: this.ENTITY_PEOPLE_PRESENTER,
+    Person: this.ENTITY_PERSON_PRESENTER,
     Employee: this.ENTITY_EMPLOYEE_PRESENTER
   }
 }

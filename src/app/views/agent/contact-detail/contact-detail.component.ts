@@ -3,40 +3,50 @@ import { CommonFunctionsService } from '../../../utils/common-functions.service'
 import { BaseClass } from '../../../global/base-class';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { EntityModel } from '../../../models/entity-model';
+import { ApiResponseCallback } from '../../../Interfaces/ApiResponseCallback';
+import { EntityContactModel } from '../../../models/entity-contact-model';
 
 @Component({
   selector: 'app-contact-detail',
   templateUrl: './contact-detail.component.html',
   styleUrls: ['./contact-detail.component.css']
 })
-export class ContactDetailComponent extends BaseClass implements OnInit {
+export class ContactDetailComponent extends BaseClass implements OnInit, ApiResponseCallback {
   deviceInfo = null;
-  agentInfo: EntityModel;
+  entityInfo: EntityModel;
+  entityContactModel: EntityContactModel = new EntityContactModel();
   constructor(private injector: Injector,
     private deviceDetector: DeviceDetectorService, ) {
     super(injector);
   }
 
   ngOnInit() {
-    this.agentInfo = JSON.parse(sessionStorage.getItem(this.constants.AGENT_INFO));
+    this.entityInfo = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
+    getContactDetailFromServer(this);
   }
   goBack() {
     this.commonFunctions.backPress();
   }
 
   private doEmail() {
-    var mailContent = "mailto:adam.millendorf@outlook.com?cc=divyanshu@jklm.com&bcc=div@jkm.com&subject=subject&body=" + encodeURIComponent("<b>Hello I am body</b>");
+    var mailContent = "mailto:" + this.entityContactModel.email;
     window.location.href = mailContent;
   }
 
-  private doCall() {
-    var call = "tel:720-434-1417";
+  private doCall(number) {
+    var call = "tel:" + number;
     window.location.href = call;
   }
 
-  private doSMS() {
-    var call = "sms:720-434-1417";
+  private doSMS(number) {
+    var call = "sms:" + number;
     window.location.href = call;
+  }
+
+  getAddress() {
+    let address: string = "";
+    address = this.entityContactModel.addr1 + " " + this.entityContactModel.addr2 + " " + this.entityContactModel.addr3 + " " + this.entityContactModel.addr4 + " " + this.entityContactModel.city;
+    return address;
   }
 
   private onEditProfileClick() {
@@ -45,7 +55,7 @@ export class ContactDetailComponent extends BaseClass implements OnInit {
 
   openLocationOnMap(): void {
     let os = this.deviceDetector.os;
-    let mapLocAddress = this.agentInfo.addr1 + "+" + this.agentInfo.addr2 + "+" + this.agentInfo.addr3 + "+" + this.agentInfo.addr4 + "+" + this.agentInfo.city + "+" + this.agentInfo.state;
+    let mapLocAddress = this.entityInfo.addr1 + "+" + this.entityInfo.addr2 + "+" + this.entityInfo.addr3 + "+" + this.entityInfo.addr4 + "+" + this.entityInfo.city + "+" + this.entityInfo.state;
 
     switch (os) {
       case "Windows":
@@ -63,8 +73,8 @@ export class ContactDetailComponent extends BaseClass implements OnInit {
   }
   shareVCard() {
     let userInfo = {
-      "type": this.agentInfo.type,
-      "id": this.agentInfo.entityId
+      "type": this.entityContactModel.entity,
+      "id": this.entityInfo.entityId
     }
     this.dataService.onShareEntityIdAndType(userInfo);
   }
@@ -83,5 +93,15 @@ export class ContactDetailComponent extends BaseClass implements OnInit {
     document.body.removeChild(selBox);
     this.commonFunctions.showSnackbar("Copied");
   }
+  onSuccess(response: any) {
+    this.entityContactModel = response.entitycontact[0];
+    this.cdr.markForCheck();
+  }
+  onError(errorCode: number, errorMsg: string) {
 
+  }
+}
+
+function getContactDetailFromServer(context: ContactDetailComponent) {
+  context.apiHandler.getEntityContactDetail(context.entityInfo.entityId, context.entityInfo.type, context);
 }

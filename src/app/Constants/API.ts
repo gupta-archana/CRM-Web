@@ -8,6 +8,7 @@ import { Constants } from './Constants';
 export class API {
   SIDE_NAV_JSON = "../assets/jsons/sideNav.json";
   AGENT_DETAIL_MENU = "../assets/jsons/agent_detail_menu.json";
+  PERSON_DETAIL_MENU = "../assets/jsons/person_detail_menu.json";
   STATES_JSON_URL = "../assets/jsons/state.json";
   private API_BASE_URL = "https://compass.alliantnational.com:8118/do/action/WService=";
   private numberOfRows: number;
@@ -132,6 +133,15 @@ export class API {
 
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=associatesGet&entity=" + entityType + "&entityID=" + entityId + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows;
   }
+
+  getPersonAffiliationsUrl(app_mode: string, entityId: string, pageNum: number) {
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=personaffiliationsGet&PersonID=" + entityId + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows;
+  }
+
+  getEntityContactDetailUrl(app_mode: string, entityType: string, entityId: string) {
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=entityContactGet&entity=" + entityType + "&entityID=" + entityId;
+  }
+
 
   getStates() {
     return this.STATES_JSON_URL;

@@ -12,8 +12,9 @@ export const PATH_RECENT_RPOFILES = "recentProfiles";
 export const PATH_SETTING = "setting";
 export const PATH_FAVORITES ="favorites";
 
-//agent detail
+//entity detail
 export const PATH_AGENT_DETAIL = "agentDetail";
+export const PATH_PERSON_DETAIL = "personDetail";
 export const PATH_AGENT_CONTACT_DETAIL = "contactDetail";
 export const PATH_AGENT_OBJECTIVE = "agentObjective";
 export const PATH_NOTES = "notes";

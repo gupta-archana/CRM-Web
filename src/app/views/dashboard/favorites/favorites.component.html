@@ -1,17 +1,17 @@
 <div class="container app-bg2">
   <div class="row">
     <ul>
-      <li *ngFor="let item of favorites">
+      <li *ngFor="let item of favorites;let i = index;">
         <div class="col-xs-12 col-md-6 cell-bg" *ngIf="item.favorite=='yes'">
           <div class="agent-detail">
             <div class="dp">
               <img
-                src="{{item.type=='Agent'?'../../../../images/baseline-business-24px.svg':'../../../../images/ic_note_profile.svg'}}"
+                src="{{item.type=='A'?'../../../../images/baseline-business-24px.svg':'../../../../images/ic_note_profile.svg'}}"
                 alt="" />
               <div class="dpProfile_wp proActiBg">{{getTypeAnnotation(item)}}</div>
             </div>
             <h4><a (click)="onItemClick(item)">{{item.name}}</a> <span
-                (click)="onItemClick(item)">({{item.entityId}})</span><a><img
+                (click)="onItemClick(item,i)">({{item.entityId}})</span><a><img
                   src="../../../../images/favourite-icon.svg" alt="" (click)="onStarClick(item)"></a></h4>
             <span>{{item.city+','+item.state}}</span>
           </div>

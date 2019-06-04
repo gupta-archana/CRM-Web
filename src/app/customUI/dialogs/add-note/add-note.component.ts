@@ -43,7 +43,7 @@ export class AddNoteComponent extends BaseClass implements OnInit, ApiResponseCa
   }
 }
 function getEntityTypeAndId(context: AddNoteComponent) {
-  context.entityInfo = JSON.parse(sessionStorage.getItem(context.constants.AGENT_INFO));;
+  context.entityInfo = JSON.parse(sessionStorage.getItem(context.constants.ENTITY_INFO));;
 }
 
 function getRequest(context: AddNoteComponent) {

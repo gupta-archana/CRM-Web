@@ -29,7 +29,7 @@ export class RecentProfilesComponent extends BaseClass implements OnInit, OnDest
   }
   onProfileClick(item) {
     this.closeRecentProfileModal.nativeElement.click();
-    sessionStorage.setItem(this.constants.AGENT_INFO, JSON.stringify(item));
+    sessionStorage.setItem(this.constants.ENTITY_INFO, JSON.stringify(item));
     this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_AGENT_DETAIL);
   }
 

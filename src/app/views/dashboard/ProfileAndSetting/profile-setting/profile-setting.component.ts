@@ -40,7 +40,7 @@ export class ProfileSettingComponent extends BaseClass implements OnInit, ApiRes
 
   shareVCard() {
     let userInfo = {
-      "type": this.constants.ENTITY_AGENT,
+      "type": this.constants.ENTITY_EMPLOYEE_PRESENTER,
       "id": this.userProfileModel.uid
     }
     this.dataService.onShareEntityIdAndType(userInfo);

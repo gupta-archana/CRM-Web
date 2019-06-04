@@ -63,17 +63,23 @@ export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponse
   }
 
   onAgentClick(agent: EntityModel) {
-    sessionStorage.setItem(this.constants.TOP_AGENT_CURRENT_PAGE_NO, this.pageNumber.toString());
-    sessionStorage.setItem(this.constants.TOP_AGENT_DATA, JSON.stringify(this.topAgents));
-    sessionStorage.setItem(this.constants.AGENT_INFO, JSON.stringify(agent));
-    sessionStorage.setItem(this.constants.TOP_AGENT_TOTAL_ROWS, this.totalRows);
+    sessionStorage.setItem(this.constants.ENTITY_INFO, JSON.stringify(agent));
+    this.setData();
     this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_AGENT_DETAIL);
 
   }
 
 
+  private setData() {
+    sessionStorage.setItem(this.constants.TOP_AGENT_CURRENT_PAGE_NO, this.pageNumber.toString());
+    sessionStorage.setItem(this.constants.TOP_AGENT_DATA, JSON.stringify(this.topAgents));
+    sessionStorage.setItem(this.constants.TOP_AGENT_TOTAL_ROWS, this.totalRows);
+  }
+
   onStarClick(item: EntityModel) {
-    this.commonApis.setFavorite(item, this.apiHandler, this.cdr);
+    this.commonApis.setFavorite(item, this.apiHandler, this.cdr).asObservable().subscribe(data => {
+      this.setData();
+    });;
   }
 
   onSuccess(response: any) {
@@ -93,7 +99,7 @@ export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponse
     let newTopAgents = response.profile;
     if (newTopAgents) {
       newTopAgents.forEach(element => {
-        if (element.type == this.constants.ENTITY_AGENT) {
+        if (element.type == this.constants.ENTITY_AGENT_PRESENTER) {
           this.topAgents.push(element);
         } else {
           this.totalRows = element.rowNum;

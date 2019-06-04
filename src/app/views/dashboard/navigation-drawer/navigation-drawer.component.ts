@@ -129,7 +129,7 @@ function navigateToSelectedPage(title: string, context: NavigationDrawerComponen
     case context.constants.RECENT_PROFILE:
       selectedNavBarItemPath = context.paths.PATH_RECENT_RPOFILES;
       break;
-      case context.constants.FAVOURITE:
+    case context.constants.FAVOURITE:
       selectedNavBarItemPath = context.paths.PATH_FAVORITES;
       break;
     case context.constants.LOGOUT:
@@ -168,10 +168,7 @@ function changeHeaderTitle(path: string, context: NavigationDrawerComponent) {
           context.headerTitle = context.constants.AGENTS_WITH_PERFORMANCE;
           context.showRefreshButton = true;
           break;
-        case context.paths.PATH_AGENT_DETAIL:
-          context.showRecentProfileButton = true;
-          context.headerTitle = context.constants.AGENT_DETAIL;
-          break;
+
         case context.paths.PATH_NEWS:
           context.headerTitle = context.constants.NEWS;
           context.showRefreshButton = true;
@@ -194,7 +191,15 @@ function changeHeaderTitle(path: string, context: NavigationDrawerComponent) {
           context.headerTitle = context.constants.FAVOURITE;
           context.showRefreshButton = true;
           break;
+        case context.paths.PATH_AGENT_DETAIL:
+          context.showRecentProfileButton = true;
+          context.headerTitle = context.constants.AGENT_DETAIL;
+          break;
 
+        case context.paths.PATH_PERSON_DETAIL:
+          context.showRecentProfileButton = true;
+          context.headerTitle = context.constants.PERSON_DETAIL;
+          break;
         default:
           break;
       }

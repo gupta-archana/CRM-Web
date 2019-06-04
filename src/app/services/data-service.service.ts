@@ -44,6 +44,10 @@ export class DataServiceService {
   private agentDetailItemsSubject = new BehaviorSubject<any>("");
   agentDetailItemsObservable = this.agentDetailItemsSubject.asObservable();
 
+   private personDetailItemsSubject = new BehaviorSubject<any>("");
+  personDetailItemsObservable = this.personDetailItemsSubject.asObservable();
+
+
   private shareEntityIdAndTypeSubject = new BehaviorSubject<any>("");
   shareEntityIdAndTypeObservable = this.shareEntityIdAndTypeSubject.asObservable();
 
@@ -104,6 +108,11 @@ export class DataServiceService {
   sendAgentDetailItems(data: Array<any>) {
     this.agentDetailItemsSubject.next(data)
   }
+
+  sendPersonDetailItems(data: Array<any>) {
+    this.personDetailItemsSubject.next(data)
+  }
+
   onShareEntityIdAndType(data: any) {
     this.shareEntityIdAndTypeSubject.next(data);
   }

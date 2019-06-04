@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-xs-2 toppad"><img src="../../../../images/back-btn.svg" alt="" (click)="goBack()"></div>
       <div class="col-xs-8 text-center">
-        <h1 class="t-agent">13 Month Activity</h1>
+        <h1 class="t-agent">Associates</h1>
       </div>
       <div class="col-xs-2 text-right toppad"><a (click)="onRecentProfileClick()" alt="" data-toggle="modal"
           data-target="#recentAssociatesl"><img src="../../../..//images/baseline-history.svg" alt=""></a></div>
@@ -20,13 +20,13 @@
                 <img src="../../../../images/ic_note_profile.svg" alt="" />
                 <div class="dpProfile_wp proActiBg">A</div>
               </div>
-              <h4>{{item.dispName}} <span>({{item.personID}})</span></h4> <span>{{getAddress(item)}}</span> <span
-                class="date">4-4-2018</span>
+              <h4>{{item.dispname}} <span>({{item.personID}})</span></h4> <span>{{getAddress(item)}}</span> <span
+                class="date">{{item.effectiveDate}}</span>
               <div class="clearfix"></div>
               <div class="row">
-                <div class="col-md-12 col-xs-12">
+                <div class="col-md-12 col-xs-12" *ngIf="entityInfo.type == P">
                   <div class="associatAgentName"><img src="../../../../images/baseline-business-24px.svg" alt="" />
-                    <span>{{item.agentName}}</span></div>
+                    <span>{{item.agentname}}</span></div>
                 </div>
               </div>
 
@@ -37,9 +37,10 @@
       <div class="row" *ngIf="moreDataAvailable">
         <div class="col-xs-12 col-md-12 loadMoreWp">
           <hr />
-          <div class="loadMore"><a alt="Load More" (click)="onLoadMoreClick()" >Load More</a></div>
+          <div class="loadMore"><a alt="Load More" (click)="onLoadMoreClick()">Load More</a></div>
         </div>
       </div>
+      <div id="ratioView">{{totalAndCurrentRowsRatio}}</div>
     </div>
   </div>
 </div>

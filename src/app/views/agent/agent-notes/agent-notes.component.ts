@@ -20,7 +20,7 @@ export class AgentNotesComponent extends BaseClass implements OnInit, ApiRespons
   agentNotes: Array<NotesModel> = new Array;
 
   ngOnInit() {
-    this.agentInfo = JSON.parse(sessionStorage.getItem(this.constants.AGENT_INFO));
+    this.agentInfo = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
     getNotes(this);
   }
   onSuccess(response: any) {

@@ -31,23 +31,23 @@
       </div>
       <div class="col-xs-12 col-md-6 cell-bg">
         <div class="agent-contact">
-          <h4>Address</h4> <span class="ag-add">7345 S. Pechos Rd.</span>
+          <h4>Address</h4> <span class="ag-add">{{getAddress()}}</span>
           <div class="clearfix"></div>
-          <div class="state"><span>State</span><br> <span class="st2">Nevada</span></div>
-          <div class="state"><span>Pin Code</span><br><span class="st2">89120</span></div>
+          <div class="state"><span>State</span><br> <span class="st2">{{entityContactModel.state}}</span></div>
+          <div class="state"><span>Pin Code</span><br><span class="st2">{{entityContactModel.zip}}</span></div>
 
         </div>
       </div>
 
       <div class="col-xs-12 col-md-6 cell-bg">
         <div class="agent-contact">
-          <h4>Contact Number 1</h4> <span>720-434-1417</span>
+          <h4>Contact Number 1</h4> <span>{{entityContactModel.phone1}}</span>
           <div class="clearfix"></div>
           <div class="ag-detail">
             <ul>
-              <li class="call" (click)="doCall()">Call</li>
-              <li class="sms" (click)="doSMS()">SMS</li>
-              <li class="copy" (click)="copyText('7204341417')">Copy</li>
+              <li class="call" (click)="doCall(entityContactModel.phone1)">Call</li>
+              <li class="sms" (click)="doSMS(entityContactModel.phone1)">SMS</li>
+              <li class="copy" (click)="copyText(entityContactModel.phone1)">Copy</li>
             </ul>
           </div>
         </div>
@@ -55,20 +55,20 @@
       <div class="clearfix"></div>
       <div class="col-xs-12 col-md-6 cell-bg">
         <div class="agent-contact">
-          <h4>Contact Number 1</h4> <span>720-434-1417</span>
+          <h4>Contact Number 1</h4> <span>{{entityContactModel.phone2}}</span>
           <div class="clearfix"></div>
           <div class="ag-detail">
             <ul>
-              <li class="call" (click)="doCall()">Call</li>
-              <li class="sms" (click)="doSMS()">SMS</li>
-              <li class="copy" (click)="copyText(720-434-1417)">Copy</li>
+              <li class="call" (click)="doCall(entityContactModel.phone2)">Call</li>
+              <li class="sms" (click)="doSMS(entityContactModel.phone2)">SMS</li>
+              <li class="copy" (click)="copyText(entityContactModel.phone2)">Copy</li>
             </ul>
           </div>
         </div>
       </div>
       <div class="col-xs-12 col-md-6 cell-bg">
         <div class="agent-contact">
-          <h4>E-mail ID</h4> <span><a>adam.millendorf@outlook.com</a></span>
+          <h4>E-mail ID</h4> <span><a>{{entityContactModel.email}}</a></span>
           <div class="clearfix"></div>
           <div class="ag-detail">
             <ul>

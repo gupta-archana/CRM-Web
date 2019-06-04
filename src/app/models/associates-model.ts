@@ -3,12 +3,14 @@ export class AssociatesModel {
   agentID: string;
   NPN: string;
   altaUID: string;
-  dispName: string;
-  agentName: string;
+  dispname: string;
+  agentname: string;
   address1: string;
   address2: string;
   city: string;
   state: string;
   county: string;
   zip: string;
+  effectiveDate: string;
+  rowNum: string;
 }

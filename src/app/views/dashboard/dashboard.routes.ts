@@ -11,6 +11,7 @@ import { NewsFeedsComponent } from './news-feeds/news-feeds.component';
 import { TabComponent } from './ProfileAndSetting/tab/tab.component';
 import { RecentProfilesComponent } from './recent-profiles/recent-profiles.component';
 import { FavoritesComponent } from './favorites/favorites.component';
+import { PersonDetailComponent } from '../person/person-detail/person-detail.component';
 
 export const dashboardRoutes: Routes = [
   {
@@ -23,6 +24,7 @@ export const dashboardRoutes: Routes = [
       { path: path.PATH_AGENTS_WITH_ALERT, component: AgentWithAlertComponent },
       { path: path.PATH_AGENTS_WITH_PERFORMANCE, component: AgentWithPerformanceComponent },
       { path: path.PATH_AGENT_DETAIL, component: AgentDetailComponent },
+      { path: path.PATH_PERSON_DETAIL, component: PersonDetailComponent },
       { path: path.PATH_SEARCH, component: SearchComponent },
       { path: path.PATH_NEWS, component: NewsFeedsComponent },
       { path: path.PATH_SETTING, component: TabComponent },

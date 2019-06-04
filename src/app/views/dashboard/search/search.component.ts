@@ -1,4 +1,4 @@
-import { Component, OnInit, Injector, OnDestroy, AfterViewInit, AfterContentInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Injector, OnDestroy, AfterViewInit, AfterContentInit, ViewEncapsulation, OnChanges, AfterContentChecked } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { BaseClass } from '../../../global/base-class';
 import { ApiResponseCallback } from '../../../Interfaces/ApiResponseCallback';
@@ -15,6 +15,7 @@ import { SearchFilterModel } from '../../../models/search-filter-model';
   encapsulation: ViewEncapsulation.None,
 })
 export class SearchComponent extends BaseClass implements OnInit, OnDestroy, AfterViewInit, ApiResponseCallback {
+
   searchFilterModelSub: Subscription = null;
   searchForm: FormGroup;
   searchedUsers: Array<EntityModel> = [];
@@ -25,8 +26,7 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Aft
   searchString: string = "";
   searchFor: string = "All";
   pageNum: number = 0;
-  private AGENT: string = "Agent";
-  private PERSON: string = "Person";
+
   public TOTAL_MATCH: string = "TotalMatch";
 
   public filterChanged: boolean = false;
@@ -42,14 +42,6 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Aft
 
   ngOnInit() {
     this.addValidation();
-    let self = this;
-
-    // window.onscroll = function onScroll(event) {
-    //   if (document.body.scrollTop > self.lastScrollPosition) {
-    //     self.commonFunctions.showSnackbar("scrolling");
-    //     self.lastScrollPosition = document.body.scrollTop;
-    //   }
-    // }
   }
 
   ngAfterViewInit(): void {
@@ -104,7 +96,7 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Aft
       if (this.filters.agentCheck)
         typeArray.push(this.constants.ENTITY_AGENT_PRESENTER);
       if (this.filters.peopleCheck)
-        typeArray.push(this.constants.ENTITY_PEOPLE_PRESENTER);
+        typeArray.push(this.constants.ENTITY_PERSON_PRESENTER);
       if (this.filters.employeeCheck)
         typeArray.push(this.constants.ENTITY_EMPLOYEE_PRESENTER);
       if (this.filters.allCheck)
@@ -117,7 +109,7 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Aft
 
   onSuccess(response: any) {
     onApiResponse(response.profile, this);
-    this.saveSearchedData();
+    this.setData();
   }
 
   onError(errorCode: number, errorMsg: string) {
@@ -133,19 +125,21 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Aft
 
   onItemClick(item: EntityModel) {
     let navigatingPath: string = "";
+    sessionStorage.setItem(this.constants.ENTITY_INFO, JSON.stringify(item));
     switch (item.type) {
-      case this.AGENT:
+      case this.constants.ENTITY_AGENT_PRESENTER:
         navigatingPath = this.paths.PATH_AGENT_DETAIL;
-        sessionStorage.setItem(this.constants.AGENT_INFO, JSON.stringify(item));
+
         break;
-      case this.PERSON:
+      case this.constants.ENTITY_PERSON_PRESENTER:
+        navigatingPath = this.paths.PATH_PERSON_DETAIL;
 
         break;
       default:
         break;
     }
     if (navigatingPath) {
-      this.saveSearchedData();
+      this.setData();
       this.commonFunctions.navigateWithoutReplaceUrl(navigatingPath);
     }
     else
@@ -153,7 +147,7 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Aft
   }
 
 
-  private saveSearchedData() {
+  private setData() {
     if (this.searchedUsers && this.searchedUsers.length > 0) {
       sessionStorage.setItem(this.constants.SEARCH_CURRENT_PAGE_NO, this.pageNum.toString());
       sessionStorage.setItem(this.constants.SEARCHED_ENTITY_ARRAY, JSON.stringify(this.searchedUsers));
@@ -172,7 +166,9 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Aft
   }
 
   onStarClick(item: EntityModel, index: number) {
-    this.commonApis.setFavorite(item, this.apiHandler, this.cdr);
+    this.commonApis.setFavorite(item, this.apiHandler, this.cdr).asObservable().subscribe(data => {
+      this.setData();
+    });
   }
 
   updateRatioUI() {
@@ -238,10 +234,10 @@ function checkAndSetUi(context: SearchComponent) {
 
 function getSearchFilter(context: SearchComponent) {
   context.searchFilterModelSub = context.dataService.searchFiltersObservable.subscribe(data => {
+    context.filters = data;
+    context.filterChanged = true;
+    context.pageNum = 0;
     if (data && context.searchForm.valid) {
-      context.filters = data;
-      context.filterChanged = true;
-      context.pageNum = 0;
       context.hitApi();
     }
   });

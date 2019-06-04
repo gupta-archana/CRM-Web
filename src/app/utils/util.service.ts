@@ -113,12 +113,30 @@ export class UtilService {
       });
     }
     else {
-
       this.dataService.sendAgentDetailItems(agnetDetailItems);
-
     }
 
     return this.dataService.agentDetailItemsObservable;
+  }
+
+  getPersonDetailItems() {
+    let personDetailItems = JSON.parse(this.myLocalStorage.getValue(this.constants.PERSON_DETAIL_ITEMS));
+
+    let self = this;
+    if (!personDetailItems || personDetailItems.length == 0) {
+      this.apiHandler.getPersonDetailMenus({
+        onSuccess(success) {
+          self.myLocalStorage.setValue(self.constants.PERSON_DETAIL_ITEMS, JSON.stringify(success));
+          self.dataService.sendPersonDetailItems(success);
+        }, onError(errCode, errMsg) {
+        }
+      });
+    }
+    else {
+      this.dataService.sendPersonDetailItems(personDetailItems);
+    }
+
+    return this.dataService.personDetailItemsObservable;
   }
   
 }
