@@ -130,7 +130,6 @@ export class API {
   }
 
   getAssociatesUrl(app_mode: string, entityType: string, entityId: string, pageNum: number) {
-
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=associatesGet&entity=" + entityType + "&entityID=" + entityId + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows;
   }
 
@@ -142,6 +141,9 @@ export class API {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=entityContactGet&entity=" + entityType + "&entityID=" + entityId;
   }
 
+  getAgentPerformanceUrl(app_mode: string, pageNum: number) {
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=agentsPerformanceGet&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows;
+  }
 
   getStates() {
     return this.STATES_JSON_URL;

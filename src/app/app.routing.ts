@@ -13,6 +13,8 @@ import { AgentDetailItemRearrangeComponent } from './views/rearrange-items-layou
 import { AgentNotesComponent } from './views/agent/agent-notes/agent-notes.component';
 import { AgentThirteenMonthActivityComponent } from './views/agent/agent-thirteen-month-activity/agent-thirteen-month-activity.component';
 import { AgentAssociatesComponent } from './views/agent/agent-associates/agent-associates.component';
+import { PersonAgentsComponent } from './views/person/person-agents/person-agents.component';
+
 
 
 const appRoutesArray: Routes =
@@ -28,6 +30,7 @@ const appRoutesArray: Routes =
     { path: paths.PATH_NOTES, component: AgentNotesComponent },
     { path: paths.PATH_THIRTEEN_MONTH_ACTIVITY, component: AgentThirteenMonthActivityComponent },
     { path: paths.PATH_AGENT_ASSOCIATES, component: AgentAssociatesComponent },
+    { path: paths.PATH_PERSON_AGENTS, component: PersonAgentsComponent },
     { path: '**', component: PageNotFoundComponent }
 
   ];

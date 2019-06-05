@@ -29,14 +29,25 @@ export class Constants {
   AGENT_DETAIL_ITEMS = "agent_detail_items";
   PERSON_DETAIL_ITEMS = "person_detail_items";
   SEARCH_FILTERS = "search_filters";
+  //favorite constants
   FAVORITE_ARRAY = "favorite_array";
   FAVORITE_PAGE_NUMBER = "favorite_page_num";
   FAVORITE_TOTAL_ROWS = "favorite_total_rows";
 
+  //Agent performance constants
+  AGENT_PERFORMANCE_DATA = "agent_performance_data";
+  AGENT_PERFORMANCE_CURRENT_PAGE_NO = "agent_performance_current_page_no";
+  AGENT_PERFORMANCE_TOTAL_ROWS = "agent_performance_total_rows";
+
+  //Agent under plan constants
+  AGENT_UNDER_PLAN_DATA = "agent_under_plan_data";
+  AGENT_UNDER_PLAN_CURRENT_PAGE_NO = "agent_under_plan_current_page_no";
+  AGENT_UNDER_PLAN_TOTAL_ROWS = "agent_under_plan_total_rows";
+
   ASSOCIATES_ARRAY = "associates_array";
   ASSOCIATES_PAGE_NUMBER = "associates_page_num";
   ASSOCIATES_TOTAL_ROWS = "associates_total_rows";
-  ASSOCIATES_CURRENT_ENTITY_ID="associates_current_entity_id";
+  ASSOCIATES_CURRENT_ENTITY_ID = "associates_current_entity_id";
 
   // Error Messages
   ERROR_NO_INTERNET_CONNECTON = "Kindly check your internet connection";
@@ -54,6 +65,7 @@ export class Constants {
   AGENTS_UNDER_PLAN = "Agents Under Plan";
   AGENTS_WITH_ALERT = "Agents with Alerts";
   AGENTS_WITH_PERFORMANCE = "Agents Performance";
+  AGENT_UNDER_PLAN = "Agents Under Plan";
   NEWS = "News";
   ANNIVERSARY = "Anniversary";
   FAVOURITE = "Favourite";
@@ -79,6 +91,9 @@ export class Constants {
   // agent pages
   AGENT_DETAIL = "Agent Details";
   PERSON_DETAIL = "Person Details";
+
+  // person detail menu
+  PERSON_AGENT = "Agents";
 
   //Entities Type presenter
   ENTITY_AGENT_PRESENTER = "A";

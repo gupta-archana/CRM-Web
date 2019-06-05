@@ -1,0 +1,35 @@
+<div class="container app-bg2">
+  <ul>
+    <li *ngFor="let item of agentsUnderPlan">
+      <div class="row">
+        <div class="col-xs-12 col-md-6 cell-bg">
+          <div class="agent-detail">
+            <div class="dp">
+              <img src="images/baseline-business-24px.svg" alt="" />
+              <div class="dpProfile_wp proActiBg">A</div>
+            </div>
+            <h4>{{item.name}}<span>({{item.entityId}})</span><a href=""><img src="images/star.svg" alt=""></a></h4>
+            <span>{{item.city+','+item.state}}</span>
+            <div class="clearfix"></div>
+            <div class="row">
+
+              <div class="col-md-6 col-xs-6">
+                <div class="amount">NPR YTD<br><span>$ {{item.netPermium}}</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <div class="row  marginBottom20" *ngIf="moreDataAvailable">
+    <div class="col-xs-12 col-md-12 loadMoreWp">
+      <hr />
+      <div class="loadMore"><a (click)="onLoadMoreClick()" alt="Load More">Load More</a></div>
+    </div>
+  </div>
+  <div id="ratioView">{{totalAndCurrentRowsRatio}}</div>
+
+  <button (click)="topFunction()" id="myBtn" title="Go to top"><span
+      class="glyphicon glyphicon-arrow-up"></span></button>
+</div>

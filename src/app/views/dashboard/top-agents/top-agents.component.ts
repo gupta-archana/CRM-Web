@@ -14,10 +14,10 @@ import { CommonApisService } from '../../../utils/common-apis.service';
   styleUrls: ['./top-agents.component.css']
 })
 export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponseCallback, OnDestroy {
-  pageNumber: number = 0;
   emailId: string;
   encryptedPassword: string;
   pageRefreshSubscription: Subscription = null;
+  pageNumber: number = 0;
   totalRows: any = 0;
   moreDataAvailable: boolean = false;
   totalAndCurrentRowsRatio: string = "";
@@ -30,7 +30,6 @@ export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponse
   topAgents: Array<EntityModel> = [];
 
   ngOnInit() {
-
     this.commonFunctions.hideShowTopScrollButton();
     this.pageRefreshSubscription = this.dataService.pageRefreshObservable.subscribe(called => {
       if (called)
@@ -45,13 +44,24 @@ export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponse
     hitApi(this);
   }
 
+  onAgentClick(agent: EntityModel) {
+    sessionStorage.setItem(this.constants.ENTITY_INFO, JSON.stringify(agent));
+    this.setData();
+    this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_AGENT_DETAIL);
+  }
+
+  private setData() {
+    sessionStorage.setItem(this.constants.TOP_AGENT_CURRENT_PAGE_NO, this.pageNumber.toString());
+    sessionStorage.setItem(this.constants.TOP_AGENT_DATA, JSON.stringify(this.topAgents));
+    sessionStorage.setItem(this.constants.TOP_AGENT_TOTAL_ROWS, this.totalRows);
+  }
+
   private getTopAgents() {
     this.emailId = this.myLocalStorage.getValue(this.constants.EMAIL);
     this.encryptedPassword = this.commonFunctions.getEncryptedPassword(this.myLocalStorage.getValue(this.constants.PASSWORD));
     this.topAgents = JSON.parse(sessionStorage.getItem(this.constants.TOP_AGENT_DATA));
     if (!this.topAgents) {
       this.topAgents = [];
-
       hitApi(this);
     }
     else {
@@ -60,20 +70,6 @@ export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponse
       this.updateRatioUI();
       this.cdr.markForCheck();
     }
-  }
-
-  onAgentClick(agent: EntityModel) {
-    sessionStorage.setItem(this.constants.ENTITY_INFO, JSON.stringify(agent));
-    this.setData();
-    this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_AGENT_DETAIL);
-
-  }
-
-
-  private setData() {
-    sessionStorage.setItem(this.constants.TOP_AGENT_CURRENT_PAGE_NO, this.pageNumber.toString());
-    sessionStorage.setItem(this.constants.TOP_AGENT_DATA, JSON.stringify(this.topAgents));
-    sessionStorage.setItem(this.constants.TOP_AGENT_TOTAL_ROWS, this.totalRows);
   }
 
   onStarClick(item: EntityModel) {

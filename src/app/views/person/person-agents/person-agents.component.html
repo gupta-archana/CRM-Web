@@ -1,0 +1,45 @@
+<div class="container-fluid nospace">
+  <div class="container nav-bg">
+    <div class="row">
+      <div class="col-xs-2 toppad"><img src="../../../../images/back-btn.svg" alt="" (click)="goBack()"></div>
+      <div class="col-xs-8 text-center">
+        <h1 class="t-agent">Agents</h1>
+      </div>
+      <div class="col-xs-2 text-right toppad"><a (click)="onRecentProfileClick()" alt="" data-toggle="modal"
+          data-target="#recentAssociatesl"><img src="../../../..//images/baseline-history.svg" alt=""></a></div>
+    </div>
+  </div>
+
+  <div class="container app-bg2">
+    <div class="row">
+      <ul>
+        <li *ngFor="let item of topAgents">
+          <div class="col-xs-12 col-md-6 cell-bg">
+            <div class="agent-detail">
+              <div class="dp"><img src="../../../../images/baseline-business-24px.svg"
+                  onerror="this.src='../../../../images/placeholder.png'" (click)="onAgentClick(item)" />
+              </div>
+              <h4><a (click)="onAgentClick(item)">{{item.name}}</a> <span
+                  (click)="onAgentClick(item)">({{item.entityId}})</span><a><img
+                    src="{{item.favorite?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}" alt=""
+                    (click)="onStarClick(item)"></a></h4>
+              <span>{{item.city+','+item.state}}</span>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+
+      <div class="row  marginBottom20" *ngIf="moreDataAvailable">
+        <div class="col-xs-12 col-md-12 loadMoreWp">
+          <hr />
+          <div class="loadMore"><a (click)="onLoadMoreClick()" alt="Load More">Load More</a></div>
+        </div>
+      </div>
+      <div id="ratioView">{{totalAndCurrentRowsRatio}}</div>
+
+      <button (click)="topFunction()" id="myBtn" title="Go to top"><span
+          class="glyphicon glyphicon-arrow-up"></span></button>
+    </div>
+  </div>
+</div>

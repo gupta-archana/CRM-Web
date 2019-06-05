@@ -12,6 +12,8 @@ import { TabComponent } from './ProfileAndSetting/tab/tab.component';
 import { RecentProfilesComponent } from './recent-profiles/recent-profiles.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { PersonDetailComponent } from '../person/person-detail/person-detail.component';
+import { AgentUnderPlanComponent } from './agent-under-plan/agent-under-plan.component';
+
 
 export const dashboardRoutes: Routes = [
   {
@@ -23,6 +25,7 @@ export const dashboardRoutes: Routes = [
       { path: path.PATH_TOP_AGENTS, component: TopAgentsComponent },
       { path: path.PATH_AGENTS_WITH_ALERT, component: AgentWithAlertComponent },
       { path: path.PATH_AGENTS_WITH_PERFORMANCE, component: AgentWithPerformanceComponent },
+      { path: path.PATH_AGENTS_UNDER_PLAN, component: AgentUnderPlanComponent },
       { path: path.PATH_AGENT_DETAIL, component: AgentDetailComponent },
       { path: path.PATH_PERSON_DETAIL, component: PersonDetailComponent },
       { path: path.PATH_SEARCH, component: SearchComponent },

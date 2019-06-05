@@ -42,6 +42,7 @@ import { Ng2ImgMaxModule } from 'ng2-img-max';
 import { AgentThirteenMonthActivityComponent } from './views/agent/agent-thirteen-month-activity/agent-thirteen-month-activity.component';
 import { AgentAssociatesComponent } from './views/agent/agent-associates/agent-associates.component';
 import { PersonDetailComponent } from './views/person/person-detail/person-detail.component';
+import { PersonAgentsComponent } from './views/person/person-agents/person-agents.component';
 
 
 
@@ -69,6 +70,7 @@ import { PersonDetailComponent } from './views/person/person-detail/person-detai
     AgentThirteenMonthActivityComponent,
     AgentAssociatesComponent,
     PersonDetailComponent,
+    PersonAgentsComponent,
   ],
   imports: [
     BrowserModule,

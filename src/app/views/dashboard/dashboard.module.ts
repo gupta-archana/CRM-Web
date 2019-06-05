@@ -20,6 +20,8 @@ import { RecentProfilesComponent } from './recent-profiles/recent-profiles.compo
 import { AgentsProfileComponent } from './recent-profiles/agents-profile/agents-profile.component';
 import { PersonsProfileComponent } from './recent-profiles/persons-profile/persons-profile.component';
 import { FavoritesComponent } from './favorites/favorites.component';
+import { AgentUnderPlanComponent } from './agent-under-plan/agent-under-plan.component';
+
 
 
 @NgModule({
@@ -29,6 +31,6 @@ import { FavoritesComponent } from './favorites/favorites.component';
     FormsModule, ReactiveFormsModule, ModulesModule
   ],
   providers: [AuthGuardService, CanDeactivateGuard],
-  declarations: [NavigationDrawerComponent, TopAgentsComponent, AgentWithAlertComponent, AgentWithPerformanceComponent, SearchComponent, NewsFeedsComponent, TabComponent, ProfileSettingComponent, AppSettingComponent, RecentProfilesComponent, AgentsProfileComponent, PersonsProfileComponent, FavoritesComponent]
+  declarations: [NavigationDrawerComponent, TopAgentsComponent, AgentWithAlertComponent, AgentWithPerformanceComponent, SearchComponent, NewsFeedsComponent, TabComponent, ProfileSettingComponent, AppSettingComponent, RecentProfilesComponent, AgentsProfileComponent, PersonsProfileComponent, FavoritesComponent, AgentUnderPlanComponent]
 })
 export class DashboardModule { }

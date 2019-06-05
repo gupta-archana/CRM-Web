@@ -120,6 +120,9 @@ function navigateToSelectedPage(title: string, context: NavigationDrawerComponen
     case context.constants.AGENTS_WITH_PERFORMANCE:
       selectedNavBarItemPath = context.paths.PATH_AGENTS_WITH_PERFORMANCE;
       break;
+      case context.constants.AGENTS_UNDER_PLAN:
+      selectedNavBarItemPath = context.paths.PATH_AGENTS_UNDER_PLAN;
+      break;
     case context.constants.SEARCH:
       selectedNavBarItemPath = context.paths.PATH_SEARCH;
       break;
@@ -166,6 +169,10 @@ function changeHeaderTitle(path: string, context: NavigationDrawerComponent) {
           break;
         case context.paths.PATH_AGENTS_WITH_PERFORMANCE:
           context.headerTitle = context.constants.AGENTS_WITH_PERFORMANCE;
+          context.showRefreshButton = true;
+          break;
+        case context.paths.PATH_AGENTS_UNDER_PLAN:
+          context.headerTitle = context.constants.AGENT_UNDER_PLAN;
           context.showRefreshButton = true;
           break;
 

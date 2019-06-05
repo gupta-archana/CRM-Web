@@ -210,9 +210,10 @@ export class CommonFunctionsService {
       case this.constants.AGENT_DETAIL_EMAILS:
 
         break;
-      case this.constants.AGENT_DETAIL_AUDITS:
-
+      case this.constants.PERSON_AGENT:
+        navigatingUrl = paths.PATH_PERSON_AGENTS;
         break;
+
       default:
         break;
     }

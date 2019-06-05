@@ -25,14 +25,12 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Aft
   encryptedPassword;
   searchString: string = "";
   searchFor: string = "All";
-  pageNum: number = 0;
-
   public TOTAL_MATCH: string = "TotalMatch";
-
   public filterChanged: boolean = false;
   lastScrollPosition = 0;
   deviceInfo = null;
   totalRows: any = 0;
+  pageNum: number = 0;
   moreDataAvailable: boolean = false;
   totalAndCurrentRowsRatio: string = "";
   filters: SearchFilterModel = null;

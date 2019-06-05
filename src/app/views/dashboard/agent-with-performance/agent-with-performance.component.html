@@ -1,62 +1,53 @@
 <div class="container app-bg2">
-  <div class="row">
-    <div class="col-xs-12 col-md-6 cell-bg">
-      <div class="agent-detail ag-perform">
-        <div class="dp"><img src="../../../../images/placeholder.png" alt="" /></div>
-        <h4>DisneyWorld</h4> <span>Orlando, FL</span>
-        <div class="clearfix"></div>
-        <div class="amount"><span class="year">Current Year %</span><br> <span class="price">$15,595 (93%)</span></div>
-        <div class="alerts"><span class="month">Current Month %</span><br><span class="price">$15,595 (93%)</span></div>
-        <div class="clearfix"></div>
-        <div class="last24"><span>Last 24</span><br> <span class="">-</span></div>
+  <ul>
+    <li *ngFor="let item of agentPerformance; let i = index;">
+      <div class="row">
+        <div class="col-xs-12 col-md-6 cell-bg">
+          <div class="agent-detail">
+            <div class="dp">
+              <img src="images/baseline-business-24px.svg" alt="" />
+              <div class="dpProfile_wp proActiBg">A</div>
+            </div>
+            <h4>{{item.name}}<span>({{item.entityId}})</span><a><img
+                  src="{{item.favorite =='yes'?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}"
+                  alt="" (click)="onStarClick(item,i)"></a></h4>
+            <span>{{item.city+','+item.state}}</span>
+            <div class="clearfix"></div>
+            <div class="row">
+              <div class="col-md-6 col-xs-6">
+                <div class="amount">NPR Annual Plan<br><span>$15,595 (93%)</span></div>
+              </div>
+              <div class="col-md-6 col-xs-6">
+                <div class="amount">NPR YTD % of Annual<br><span>$15,595 (93%)</span></div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 col-xs-6">
+                <div class="amount">NPR YTD<br><span>$15,595 (93%)</span></div>
+              </div>
+              <div class="col-md-6 col-xs-6">
+                <div class="amount">NPR YTD % YTD Plan<br><span>$15,595 (93%)</span></div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-xs-12">
+                <div class="amount">NPR Plan YTD <span class="fonSize">(Through end of current month)</span>
+                  <br><span>${{item.nprPlannedYTD}} ({{item.nprPercentYTD}}%)</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+    </li>
+  </ul>
+  <div class="row  marginBottom20" *ngIf="moreDataAvailable">
+    <div class="col-xs-12 col-md-12 loadMoreWp">
+      <hr />
+      <div class="loadMore"><a (click)="onLoadMoreClick()" alt="Load More">Load More</a></div>
     </div>
-    <div class="col-xs-12 col-md-6 cell-bg">
-      <div class="agent-detail ag-perform">
-        <div class="dp"><img src="../../../../images/placeholder.png" alt="" /></div>
-        <h4>DisneyWorld</h4> <span>Orlando, FL</span>
-        <div class="clearfix"></div>
-        <div class="amount"><span class="year">Current Year %</span><br> <span class="price">$15,595 (93%)</span></div>
-        <div class="alerts"><span class="month">Current Month %</span><br><span class="price">$15,595 (93%)</span></div>
-        <div class="clearfix"></div>
-        <div class="last24"><span>Last 24</span><br> <span>-</span></div>
-      </div>
-    </div>
-
-    <div class="col-xs-12 col-md-6 cell-bg">
-      <div class="agent-detail ag-perform">
-        <div class="dp"><img src="../../../../images/placeholder.png" alt="" /></div>
-        <h4>DisneyWorld</h4> <span>Orlando, FL</span>
-        <div class="clearfix"></div>
-        <div class="amount"><span class="year">Current Year %</span><br> <span class="price">$15,595 (93%)</span></div>
-        <div class="alerts"><span class="month">Current Month %</span><br><span class="price">$15,595 (93%)</span></div>
-        <div class="clearfix"></div>
-        <div class="last24"><span>Last 24</span><br> <span>-</span></div>
-      </div>
-    </div>
-
-    <div class="col-xs-12 col-md-6 cell-bg">
-      <div class="agent-detail ag-perform">
-        <div class="dp"><img src="../../../../images/placeholder.png" alt="" /></div>
-        <h4>DisneyWorld</h4> <span>Orlando, FL</span>
-        <div class="clearfix"></div>
-        <div class="amount"><span class="year">Current Year %</span><br> <span class="price">$15,595 (93%)</span></div>
-        <div class="alerts"><span class="month">Current Month %</span><br><span class="price">$15,595 (93%)</span></div>
-        <div class="clearfix"></div>
-        <div class="last24"><span>Last 24</span><br> <span>-</span></div>
-      </div>
-    </div>
-
-    <div class="col-xs-12 col-md-6 cell-bg">
-      <div class="agent-detail ag-perform">
-        <div class="dp"><img src="../../../../images/placeholder.png" alt="" /></div>
-        <h4>DisneyWorld</h4> <span>Orlando, FL</span>
-        <div class="clearfix"></div>
-        <div class="amount"><span class="year">Current Year %</span><br> <span class="price">$15,595 (93%)</span></div>
-        <div class="alerts"><span class="month">Current Month %</span><br><span class="price">$15,595 (93%)</span></div>
-        <div class="clearfix"></div>
-        <div class="last24"><span>Last 24</span><br> <span>-</span></div>
-      </div>
-    </div>
-    <button (click)="topFunction()" id="myBtn" title="Go to top"><span class="glyphicon glyphicon-arrow-up"></span></button>
   </div>
+  <div id="ratioView">{{totalAndCurrentRowsRatio}}</div>
+
+  <button (click)="topFunction()" id="myBtn" title="Go to top"><span
+      class="glyphicon glyphicon-arrow-up"></span></button>
+</div>
