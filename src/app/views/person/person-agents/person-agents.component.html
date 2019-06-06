@@ -13,14 +13,14 @@
   <div class="container app-bg2">
     <div class="row">
       <ul>
-        <li *ngFor="let item of topAgents">
+        <li *ngFor="let item of personAgentsModels">
           <div class="col-xs-12 col-md-6 cell-bg">
             <div class="agent-detail">
               <div class="dp"><img src="../../../../images/baseline-business-24px.svg"
                   onerror="this.src='../../../../images/placeholder.png'" (click)="onAgentClick(item)" />
               </div>
               <h4><a (click)="onAgentClick(item)">{{item.name}}</a> <span
-                  (click)="onAgentClick(item)">({{item.entityId}})</span><a><img
+                  (click)="onAgentClick(item)">({{item.agentId}})</span><a><img
                     src="{{item.favorite?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}" alt=""
                     (click)="onStarClick(item)"></a></h4>
               <span>{{item.city+','+item.state}}</span>

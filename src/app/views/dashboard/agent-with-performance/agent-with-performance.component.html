@@ -5,34 +5,34 @@
         <div class="col-xs-12 col-md-6 cell-bg">
           <div class="agent-detail">
             <div class="dp">
-              <img src="images/baseline-business-24px.svg" alt="" />
+              <img src="images/baseline-business-24px.svg" alt=""  (click)="onAgentClick(item)"/>
               <div class="dpProfile_wp proActiBg">A</div>
             </div>
-            <h4>{{item.name}}<span>({{item.entityId}})</span><a><img
-                  src="{{item.favorite =='yes'?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}"
+            <h4><a (click)="onAgentClick(item)">{{item.name}}</a><span (click)="onAgentClick(item)">({{item.entityId}})</span><a><img
+                  src="{{checkEntityFavorite(item)?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}"
                   alt="" (click)="onStarClick(item,i)"></a></h4>
             <span>{{item.city+','+item.state}}</span>
             <div class="clearfix"></div>
             <div class="row">
               <div class="col-md-6 col-xs-6">
-                <div class="amount">NPR Annual Plan<br><span>$15,595 (93%)</span></div>
+                <div class="amount">NPR Annual Plan<br><span>$ {{item.nprPlanned}}</span></div>
               </div>
               <div class="col-md-6 col-xs-6">
-                <div class="amount">NPR YTD % of Annual<br><span>$15,595 (93%)</span></div>
+                <div class="amount">NPR YTD % of Annual<br><span>{{item.nprPercent}}%</span></div>
               </div>
             </div>
             <div class="row">
               <div class="col-md-6 col-xs-6">
-                <div class="amount">NPR YTD<br><span>$15,595 (93%)</span></div>
+                <div class="amount">NPR YTD<br><span>$ {{item.nprActual}}</span></div>
               </div>
               <div class="col-md-6 col-xs-6">
-                <div class="amount">NPR YTD % YTD Plan<br><span>$15,595 (93%)</span></div>
+                <div class="amount">NPR YTD % YTD Plan<br><span>{{item.nprPercentYTD}}%</span></div>
               </div>
             </div>
             <div class="row">
               <div class="col-md-12 col-xs-12">
                 <div class="amount">NPR Plan YTD <span class="fonSize">(Through end of current month)</span>
-                  <br><span>${{item.nprPlannedYTD}} ({{item.nprPercentYTD}}%)</span></div>
+                  <br><span>$ {{item.nprPlannedYTD}}</span></div>
               </div>
             </div>
           </div>

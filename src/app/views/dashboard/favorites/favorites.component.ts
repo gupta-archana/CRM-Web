@@ -20,11 +20,11 @@ export class FavoritesComponent extends BaseClass implements OnInit, ApiResponse
   moreDataAvailable: boolean = true;
   pageRefreshSubscription: Subscription;
 
-  constructor(private injector: Injector, private commonApis: CommonApisService) { super(injector); }
+  constructor(private injector: Injector) { super(injector); }
 
   ngOnInit() {
     getData(this);
-    this.updateRatioUI();
+    updateRatioUI(this);
     this.pageRefreshSubscription = this.dataService.pageRefreshObservable.subscribe(called => {
       if (called)
         refreshData(this);
@@ -40,26 +40,21 @@ export class FavoritesComponent extends BaseClass implements OnInit, ApiResponse
 
   onSuccess(response: any) {
     parserResponse(response, this);
-    checkMoreDataAvailable(this);
-    setData(this);
-    this.updateRatioUI();
-    this.cdr.markForCheck();
+    this.renderUI();
   }
-  onError(errorCode: number, errorMsg: string) {
 
+
+  onError(errorCode: number, errorMsg: string) {
+    this.renderUI();
   }
-  private updateRatioUI() {
-    this.totalAndCurrentRowsRatio = this.commonFunctions.showMoreDataSnackbar(this.favorites, this.totalRows);
-    this.cdr.markForCheck();
-  }
+
 
   onStarClick(item: EntityModel, index: number) {
     var self = this;
     this.commonApis.setFavorite(item, this.apiHandler, this.cdr).asObservable().subscribe(data => {
       self.favorites.splice(index, 1);
-      this.totalRows--;
-      this.updateRatioUI();
-      setData(this);
+      self.totalRows--;
+      self.renderUI();
     });;
   }
 
@@ -84,12 +79,24 @@ export class FavoritesComponent extends BaseClass implements OnInit, ApiResponse
       this.commonFunctions.showErrorSnackbar("We are working on person ui");
   }
 
+
+  public renderUI() {
+    checkMoreDataAvailable(this);
+    setData(this);
+    updateRatioUI(this);
+    this.cdr.markForCheck();
+  }
+
+
   ngOnDestroy(): void {
     if (this.pageRefreshSubscription && !this.pageRefreshSubscription.closed) {
       this.pageRefreshSubscription.unsubscribe();
     }
   }
 }
+
+
+
 function makeServerRequest(context: FavoritesComponent) {
   context.pageNumber++;
   context.apiHandler.getUserFavorites(context, context.pageNumber);
@@ -99,6 +106,7 @@ function parserResponse(response: any, context: FavoritesComponent) {
   let favorites = response.sysfavorite;
   favorites.forEach(element => {
     if (element.type != "TotalFavorite") {
+      context.commonFunctions.setFavoriteOnApisResponse(element);
       context.favorites.push(element);
     }
     else {
@@ -119,7 +127,7 @@ function getData(context: FavoritesComponent) {
     context.favorites = favArray;
     context.pageNumber = Number(sessionStorage.getItem(context.constants.FAVORITE_PAGE_NUMBER));
     context.totalRows = Number(sessionStorage.getItem(context.constants.FAVORITE_TOTAL_ROWS));
-    checkMoreDataAvailable(context);
+    context.renderUI();
   }
   else {
     makeServerRequest(context);
@@ -127,15 +135,19 @@ function getData(context: FavoritesComponent) {
 }
 
 function checkMoreDataAvailable(context: FavoritesComponent) {
-  if (!context.favorites || context.favorites.length == context.totalRows)
+  if ((!context.favorites && context.favorites.length == 0) || context.favorites.length == context.totalRows)
     context.moreDataAvailable = false;
   else
     context.moreDataAvailable = true;
 }
-
+function updateRatioUI(context: FavoritesComponent) {
+  context.totalAndCurrentRowsRatio = context.commonFunctions.showMoreDataSnackbar(context.favorites, context.totalRows);
+  context.cdr.markForCheck();
+}
 function refreshData(context: FavoritesComponent) {
   context.pageNumber = 0;
   context.favorites = [];
+  context.totalRows = 0;
   makeServerRequest(context);
 }
 

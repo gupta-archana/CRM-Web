@@ -18,32 +18,42 @@ export class CommonApisService {
    */
   public setFavorite(item: EntityModel, apiHandler: ApiHandlerService, cdr: ChangeDetectorRef) {
     var self = this;
-    if (item.favorite == "no") {
-      apiHandler.setFavoriteStatus(item.type, item.entityId, {
-        onSuccess(response: any) {
-          item.favorite = "yes";
-          item.sysfavoriteID = response.parameter[0].sysfavoriteID;
-          self.onApiResoponseSubject.next();
-          cdr.markForCheck();
-        }, onError(errorCode, errorMsg) {
-          self.commonFunctions.showErrorSnackbar(errorMsg);
-        }
-      })
+    if (!this.commonFunctions.checkFavorite(item.entityId)) {
+      this.removeFavorite(apiHandler, item, self, cdr);
     }
     else {
-      apiHandler.removeFavorite(item.sysfavoriteID, {
-        onSuccess(response: any) {
-          item.favorite = "no";
-          item.sysfavoriteID = '0';
-          self.onApiResoponseSubject.next();
-          cdr.markForCheck();
-        }, onError(errorCode, errorMsg) {
-          self.commonFunctions.showErrorSnackbar(errorMsg);
-        }
-      })
+      this.addFavorite(apiHandler, item, self, cdr);
     }
     return this.onApiResoponseSubject;
   }
 
 
+
+  private addFavorite(apiHandler: ApiHandlerService, item: EntityModel, self: this, cdr: ChangeDetectorRef) {
+    apiHandler.setFavoriteStatus(item.type, item.entityId, {
+      onSuccess(response: any) {
+        item.favorite = "yes";
+        item.sysfavoriteID = response.parameter[0].sysfavoriteID;
+        self.commonFunctions.setFavoriteToSessionArray(item.entityId);
+        self.onApiResoponseSubject.next();
+        cdr.markForCheck();
+      }, onError(errorCode, errorMsg) {
+        self.commonFunctions.showErrorSnackbar(errorMsg);
+      }
+    });
+  }
+
+  private removeFavorite(apiHandler: ApiHandlerService, item: EntityModel, self: this, cdr: ChangeDetectorRef) {
+    apiHandler.removeFavorite(item.sysfavoriteID, {
+      onSuccess(response: any) {
+        self.commonFunctions.setFavoriteToSessionArray(item.entityId);
+        item.favorite = "no";
+        item.sysfavoriteID = '0';
+        self.onApiResoponseSubject.next();
+        cdr.markForCheck();
+      }, onError(errorCode, errorMsg) {
+        self.commonFunctions.showErrorSnackbar(errorMsg);
+      }
+    });
+  }
 }

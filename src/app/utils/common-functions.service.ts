@@ -6,6 +6,7 @@ import { Constants } from '../Constants/Constants';
 import { MatSnackBar, MatSnackBarConfig, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material';
 import { MyLocalStorageService } from '../services/my-local-storage.service';
 import * as paths from '../Constants/paths';
+import { EntityModel } from '../models/entity-model';
 
 @Injectable({
   providedIn: 'root'
@@ -142,8 +143,6 @@ export class CommonFunctionsService {
     document.documentElement.scrollTop = 0;
   }
 
-
-
   getLoginCredentials() {
     let emailId = this.myLocalStorage.getValue(this.constants.EMAIL);
     let encryptedPassword = this.getEncryptedPassword(this.myLocalStorage.getValue(this.constants.PASSWORD));
@@ -226,6 +225,33 @@ export class CommonFunctionsService {
       this.showErrorSnackbar("We are working on it");
   }
 
+  setFavoriteOnApisResponse(item: EntityModel) {
+    if (item.favorite == "yes") {
+      let favAgents: string[] = JSON.parse(sessionStorage.getItem(this.constants.SESSION_FAV_ARRAY));
+      if (!favAgents) favAgents = new Array<string>();
+      if (favAgents.indexOf(item.entityId) == -1) {
+        favAgents.push(item.entityId)
+        sessionStorage.setItem(this.constants.SESSION_FAV_ARRAY, JSON.stringify(favAgents));
+      }
+    }
+  }
+
+  setFavoriteToSessionArray(entityId) {
+    let favAgents: string[] = JSON.parse(sessionStorage.getItem(this.constants.SESSION_FAV_ARRAY));
+    if (!favAgents) favAgents = new Array<string>();
+    if (this.checkFavorite(entityId))
+      favAgents.push(entityId)
+    else
+      favAgents.splice(favAgents.indexOf(entityId), 1);
+    sessionStorage.setItem(this.constants.SESSION_FAV_ARRAY, JSON.stringify(favAgents));
+  }
+
+  checkFavorite(entityId) {
+    let favAgents: string[] = JSON.parse(sessionStorage.getItem(this.constants.SESSION_FAV_ARRAY));
+    if (favAgents)
+      return favAgents.indexOf(entityId) == -1;
+    return true;
+  }
 }
 function getRandomInt(min, max) {
   min = Math.ceil(min);

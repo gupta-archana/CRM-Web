@@ -7,8 +7,8 @@
             onerror="this.src='../../../../images/placeholder.png'" alt="" />
         </div>
         <h4>{{agentInfo.name}}<a><img
-              src="{{agentInfo.favorite =='yes'?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}" alt=""
-              (click)="onStarClick()"></a></h4> <span
+              src="{{checkEntityFavorite()?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}"
+              alt="" (click)="onStarClick()"></a></h4> <span
           class="building-icon padding-left-twenty-five">{{agentInfo.entityId}}</span>
         <div class="clearfix"></div>
         <!-- <div class="amount bx1"><span>Net Premium</span><br>$ {{agentInfo.netPermium}}</div>
@@ -21,7 +21,8 @@
 
     <div class="col-xs-12 col-md-12">
       <ul class="agent-details">
-        <li *ngFor="let item of agentMenues" class="{{item.class}}" (click)="onAgentMenuClick(item)"><a>{{item.title}}</a></li>
+        <li *ngFor="let item of agentMenues" class="{{item.class}}" (click)="onAgentMenuClick(item)">
+          <a>{{item.title}}</a></li>
       </ul>
     </div>
   </div>

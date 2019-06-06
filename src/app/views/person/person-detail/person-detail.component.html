@@ -7,7 +7,7 @@
             onerror="this.src='../../../../images/placeholder.png'" alt="" />
         </div>
         <h4>{{personInfo.name}}<a><img
-              src="{{personInfo.favorite =='yes'?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}"
+              src="{{checkEntityFavorite()?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}"
               alt="" (click)="onStarClick(item)"></a></h4> <span
           class="building-icon padding-left-twenty-five">{{personInfo.entityId}}</span>
         <div class="clearfix"></div>

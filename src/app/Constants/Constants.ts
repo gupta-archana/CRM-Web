@@ -13,33 +13,42 @@ export class Constants {
   LOGOUT = "Logout";
   CANCEL = "Cancel";
   LOGGED_IN = "logged_in";
-  TOP_AGENT_CURRENT_PAGE_NO = "top_agent_page_no";
-  TOP_AGENT_DATA = "top_agent_data";
-  NUMBER_OF_ROWS = "number_of_rows";
+
   ENTITY_ARRAY = "entity_array";
-  SEARCHED_ENTITY_ARRAY = "searched_entntiy_array";
-  SEARCH_CURRENT_PAGE_NO = "search_current_page_no";
-  SEARCHED_STRING = "searched_string";
-  SEARCH_MORE_DATA_AVAILABLE_FLAG = "search_more_data_available_flag";
+
   LOGIN = "Login";
-  TOP_AGENT_TOTAL_ROWS = "top_agent_total_rows";
-  SEARCH_TOTAL_ROWS = "top_agent_total_rows";
+
+  NUMBER_OF_ROWS = "number_of_rows";
   AGENT_DETAIL_MENUES = "agent_detail_menues";
   SIDE_NAV_ITEMS = "side_nav_items";
   AGENT_DETAIL_ITEMS = "agent_detail_items";
   PERSON_DETAIL_ITEMS = "person_detail_items";
   SEARCH_FILTERS = "search_filters";
-  //favorite constants
+  SESSION_FAV_ARRAY = "session_fav_array";
+
+  //top agents session constants
+  TOP_AGENT_CURRENT_PAGE_NO = "top_agent_page_no";
+  TOP_AGENT_DATA = "top_agent_data";
+  TOP_AGENT_TOTAL_ROWS = "top_agent_total_rows";
+
+  // search session constants
+  SEARCHED_ENTITY_ARRAY = "searched_entntiy_array";
+  SEARCH_CURRENT_PAGE_NO = "search_current_page_no";
+  SEARCHED_STRING = "searched_string";
+  SEARCH_MORE_DATA_AVAILABLE_FLAG = "search_more_data_available_flag";
+  SEARCH_TOTAL_ROWS = "search_total_rows";
+
+  //favorite session constants
   FAVORITE_ARRAY = "favorite_array";
   FAVORITE_PAGE_NUMBER = "favorite_page_num";
   FAVORITE_TOTAL_ROWS = "favorite_total_rows";
 
-  //Agent performance constants
+  //Agent performance session constants
   AGENT_PERFORMANCE_DATA = "agent_performance_data";
   AGENT_PERFORMANCE_CURRENT_PAGE_NO = "agent_performance_current_page_no";
   AGENT_PERFORMANCE_TOTAL_ROWS = "agent_performance_total_rows";
 
-  //Agent under plan constants
+  //Agent under plan session constants
   AGENT_UNDER_PLAN_DATA = "agent_under_plan_data";
   AGENT_UNDER_PLAN_CURRENT_PAGE_NO = "agent_under_plan_current_page_no";
   AGENT_UNDER_PLAN_TOTAL_ROWS = "agent_under_plan_total_rows";
@@ -101,9 +110,30 @@ export class Constants {
   ENTITY_EMPLOYEE_PRESENTER = "E";
   ENTITY_ALL_PRESENTER = "all";
 
+
+
   public entityArrayObject = {
     Agent: this.ENTITY_AGENT_PRESENTER,
     Person: this.ENTITY_PERSON_PRESENTER,
     Employee: this.ENTITY_EMPLOYEE_PRESENTER
   }
+
+  public sessionConstants =
+    [this.TOP_AGENT_CURRENT_PAGE_NO,
+    this.TOP_AGENT_DATA,
+    this.TOP_AGENT_TOTAL_ROWS,
+    this.SEARCHED_ENTITY_ARRAY,
+    this.SEARCH_CURRENT_PAGE_NO,
+    this.SEARCHED_STRING,
+    this.SEARCH_MORE_DATA_AVAILABLE_FLAG,
+    this.SEARCH_TOTAL_ROWS,
+    this.FAVORITE_ARRAY,
+    this.FAVORITE_PAGE_NUMBER,
+    this.FAVORITE_TOTAL_ROWS,
+    this.AGENT_PERFORMANCE_DATA,
+    this.AGENT_PERFORMANCE_CURRENT_PAGE_NO,
+    this.AGENT_PERFORMANCE_TOTAL_ROWS,
+    this.AGENT_UNDER_PLAN_DATA,
+    this.AGENT_UNDER_PLAN_CURRENT_PAGE_NO,
+    this.AGENT_UNDER_PLAN_TOTAL_ROWS];
 }

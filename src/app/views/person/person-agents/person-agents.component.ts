@@ -18,7 +18,7 @@ export class PersonAgentsComponent extends BaseClass implements OnInit, OnDestro
   totalAndCurrentRowsRatio: string = "";
   entityModel: EntityModel;
   totalRows: any = 0;
-  personAgentsModels: PersonAgentsModel[];
+  personAgentsModels: Array<PersonAgentsModel> = new Array();
 
   ngOnInit() {
     this.entityModel = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
@@ -63,6 +63,7 @@ export class PersonAgentsComponent extends BaseClass implements OnInit, OnDestro
 }
 function makeApiRequest(context: PersonAgentsComponent) {
   context.pageNum++;
+  context.entityModel.entityId = "1";
   context.apiHandler.getPersonAffiliations(context.entityModel.entityId, context.pageNum, context);
 }
 function checkMoreDataAvailable(context: PersonAgentsComponent) {

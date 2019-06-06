@@ -17,8 +17,7 @@ export class PersonDetailComponent extends EntityDetailBaseClass implements OnIn
   personInfo: EntityModel;
   personMenues: any[];
   constructor(injector: Injector,
-    private router: Router,
-    private commonApis: CommonApisService) {
+    private router: Router) {
     super(injector);
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
@@ -30,6 +29,10 @@ export class PersonDetailComponent extends EntityDetailBaseClass implements OnIn
   }
   onPersonMenuClick(item) {
     this.commonFunctions.onMenuItemClick(item);
+  }
+
+  checkEntityFavorite() {
+    return !this.commonFunctions.checkFavorite(this.personInfo.entityId);
   }
   onStarClick(item: EntityModel) {
     this.commonApis.setFavorite(item, this.apiHandler, this.cdr);

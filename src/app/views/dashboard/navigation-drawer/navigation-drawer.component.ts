@@ -120,7 +120,7 @@ function navigateToSelectedPage(title: string, context: NavigationDrawerComponen
     case context.constants.AGENTS_WITH_PERFORMANCE:
       selectedNavBarItemPath = context.paths.PATH_AGENTS_WITH_PERFORMANCE;
       break;
-      case context.constants.AGENTS_UNDER_PLAN:
+    case context.constants.AGENTS_UNDER_PLAN:
       selectedNavBarItemPath = context.paths.PATH_AGENTS_UNDER_PLAN;
       break;
     case context.constants.SEARCH:
@@ -157,6 +157,7 @@ function navigateToSelectedItem(context: NavigationDrawerComponent, selectedNavB
 function changeHeaderTitle(path: string, context: NavigationDrawerComponent) {
   if (path) {
     reasetHeaderButtons(context);
+    //clearSession(context);
     if (path) {
       switch (path) {
         case context.paths.PATH_TOP_AGENTS:
@@ -231,10 +232,10 @@ function printButtonStatus(context: NavigationDrawerComponent, from: any) {
 }
 
 
-function clearSearch(context: NavigationDrawerComponent) {
-  sessionStorage.removeItem(context.constants.SEARCH_CURRENT_PAGE_NO);
-  sessionStorage.removeItem(context.constants.SEARCHED_ENTITY_ARRAY);
-  sessionStorage.removeItem(context.constants.SEARCHED_STRING);
-  sessionStorage.removeItem(context.constants.SEARCH_MORE_DATA_AVAILABLE_FLAG);
+function clearSession(context: NavigationDrawerComponent) {
 
+  let sessionKeys: string[] = context.constants.sessionConstants;
+  sessionKeys.forEach(element => {
+    sessionStorage.removeItem(element);
+  });
 }

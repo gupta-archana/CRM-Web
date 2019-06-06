@@ -19,14 +19,14 @@ export class AgentWithPerformanceComponent extends BaseClass implements OnInit, 
   moreDataAvailable: boolean = false;
   totalAndCurrentRowsRatio: string = "";
   agentPerformance: EntityModel[];
-  constructor(injector: Injector, private commonApis: CommonApisService) { super(injector) }
+  constructor(injector: Injector) { super(injector) }
 
   ngOnInit() {
     this.commonFunctions.hideShowTopScrollButton();
     this.pageRefreshSubscription = this.dataService.pageRefreshObservable.subscribe(data => {
       refreshData(this);
     });
-    this.getData();
+    getData(this);
   }
 
   topFunction() {
@@ -38,21 +38,28 @@ export class AgentWithPerformanceComponent extends BaseClass implements OnInit, 
     let data: EntityModel[] = response.profile;
     data.forEach(element => {
       if (element.type == "A") {
+        this.commonFunctions.setFavoriteOnApisResponse(element);
         this.agentPerformance.push(element);
       } else {
         this.totalRows = element.rowNum;
       }
     });
-    this.setData();
+
     this.renderUI();
   }
   onError(errorCode: number, errorMsg: string) {
 
   }
+  onAgentClick(agent: EntityModel) {
+    sessionStorage.setItem(this.constants.ENTITY_INFO, JSON.stringify(agent));
+    setData(this);
+    this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_AGENT_DETAIL);
+  }
 
-  private renderUI() {
-    this.updateRatioUI();
-    this.checkMoreDataAvailable();
+  public renderUI() {
+    setData(this);
+    updateRatioUI(this);
+    checkMoreDataAvailable(this);
     this.cdr.markForCheck();
   }
 
@@ -60,43 +67,17 @@ export class AgentWithPerformanceComponent extends BaseClass implements OnInit, 
     makeServerRequest(this);
   }
 
+  checkEntityFavorite(item: EntityModel) {
+    return !this.commonFunctions.checkFavorite(item.entityId);
+  }
+
   onStarClick(item: EntityModel, index: number) {
     this.commonApis.setFavorite(item, this.apiHandler, this.cdr).asObservable().subscribe(data => {
-      this.setData();
+      this.renderUI();
     });
   }
 
-  private setData() {
-    sessionStorage.setItem(this.constants.AGENT_PERFORMANCE_CURRENT_PAGE_NO, this.pageNumber.toString());
-    sessionStorage.setItem(this.constants.AGENT_PERFORMANCE_DATA, JSON.stringify(this.agentPerformance));
-    sessionStorage.setItem(this.constants.AGENT_PERFORMANCE_TOTAL_ROWS, this.totalRows);
 
-  }
-
-  private getData() {
-    this.agentPerformance = JSON.parse(sessionStorage.getItem(this.constants.AGENT_PERFORMANCE_DATA));
-    if (!this.agentPerformance) {
-      this.agentPerformance = [];
-      makeServerRequest(this);
-    }
-    else {
-      this.pageNumber = Number(sessionStorage.getItem(this.constants.AGENT_PERFORMANCE_CURRENT_PAGE_NO));
-      this.totalRows = Number(sessionStorage.getItem(this.constants.AGENT_PERFORMANCE_TOTAL_ROWS));
-      this.renderUI();
-    }
-  }
-
-  updateRatioUI() {
-    this.totalAndCurrentRowsRatio = this.commonFunctions.showMoreDataSnackbar(this.agentPerformance, this.totalRows);
-    this.cdr.markForCheck();
-  }
-
-  checkMoreDataAvailable() {
-    if (!this.agentPerformance || this.agentPerformance.length == this.totalRows)
-      this.moreDataAvailable = false;
-    else
-      this.moreDataAvailable = true;
-  }
   ngOnDestroy(): void {
     if (this.pageRefreshSubscription && !this.pageRefreshSubscription.closed) {
       this.pageRefreshSubscription.unsubscribe();
@@ -109,8 +90,42 @@ function makeServerRequest(context: AgentWithPerformanceComponent) {
   context.apiHandler.getAgentPerformance(context.pageNumber, context);
 }
 
+function setData(context: AgentWithPerformanceComponent) {
+  sessionStorage.setItem(context.constants.AGENT_PERFORMANCE_CURRENT_PAGE_NO, context.pageNumber.toString());
+  sessionStorage.setItem(context.constants.AGENT_PERFORMANCE_DATA, JSON.stringify(context.agentPerformance));
+  sessionStorage.setItem(context.constants.AGENT_PERFORMANCE_TOTAL_ROWS, context.totalRows);
+
+}
+
+function getData(context: AgentWithPerformanceComponent) {
+  context.agentPerformance = JSON.parse(sessionStorage.getItem(context.constants.AGENT_PERFORMANCE_DATA));
+  if (!context.agentPerformance) {
+    context.agentPerformance = [];
+    makeServerRequest(context);
+  }
+  else {
+    context.pageNumber = Number(sessionStorage.getItem(context.constants.AGENT_PERFORMANCE_CURRENT_PAGE_NO));
+    context.totalRows = Number(sessionStorage.getItem(context.constants.AGENT_PERFORMANCE_TOTAL_ROWS));
+    context.renderUI();
+  }
+}
+
+function updateRatioUI(context: AgentWithPerformanceComponent) {
+  context.totalAndCurrentRowsRatio = context.commonFunctions.showMoreDataSnackbar(context.agentPerformance, context.totalRows);
+  context.cdr.markForCheck();
+}
+
+function checkMoreDataAvailable(context: AgentWithPerformanceComponent) {
+  if ((!context.agentPerformance && context.agentPerformance.length == 0) || context.agentPerformance.length == context.totalRows)
+    context.moreDataAvailable = false;
+  else
+    context.moreDataAvailable = true;
+}
+
+
 function refreshData(context: AgentWithPerformanceComponent) {
   context.pageNumber = 0;
   context.agentPerformance = [];
+  context.totalRows = 0;
   makeServerRequest(context);
 }

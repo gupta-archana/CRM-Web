@@ -10,7 +10,7 @@
             </div>
             <h4><a (click)="onAgentClick(item)">{{item.name}}</a> <span
                 (click)="onAgentClick(item)">({{item.entityId}})</span><a><img
-                  src="{{item.favorite?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}" alt=""
+                  src="{{checkEntityFavorite(item)?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}" alt=""
                   (click)="onStarClick(item)"></a></h4>
             <span>{{item.city+','+item.state}}</span>
             <div class="clearfix"></div>

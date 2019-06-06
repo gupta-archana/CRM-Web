@@ -7,6 +7,7 @@ import { Constants } from "../Constants/Constants";
 import { ApiHandlerService } from "../utils/api-handler.service";
 import { OpenDialogsService } from "../utils/open-dialogs.service";
 import { UtilService } from "../utils/util.service";
+import { CommonApisService } from "../utils/common-apis.service";
 
 export abstract class BaseClass {
   public dataService: DataServiceService;
@@ -18,6 +19,7 @@ export abstract class BaseClass {
   public openDialogService: OpenDialogsService;
   public utils: UtilService;
   public paths: any = paths;
+  public commonApis: CommonApisService;
   constructor(injector: Injector) {
 
     this.dataService = injector.get(DataServiceService);
@@ -28,6 +30,7 @@ export abstract class BaseClass {
     this.cdr = injector.get(ChangeDetectorRef);
     this.openDialogService = injector.get(OpenDialogsService);
     this.utils = injector.get(UtilService);
+    this.commonApis = injector.get(CommonApisService);
 
   }
 

@@ -22,7 +22,7 @@ export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponse
   moreDataAvailable: boolean = false;
   totalAndCurrentRowsRatio: string = "";
 
-  constructor(private injector: Injector, private commonApis: CommonApisService) {
+  constructor(private injector: Injector) {
     super(injector);
     this.pageNumber = 0;
     this.totalRows = 0;
@@ -46,15 +46,11 @@ export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponse
 
   onAgentClick(agent: EntityModel) {
     sessionStorage.setItem(this.constants.ENTITY_INFO, JSON.stringify(agent));
-    this.setData();
+    setData(this);
     this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_AGENT_DETAIL);
   }
 
-  private setData() {
-    sessionStorage.setItem(this.constants.TOP_AGENT_CURRENT_PAGE_NO, this.pageNumber.toString());
-    sessionStorage.setItem(this.constants.TOP_AGENT_DATA, JSON.stringify(this.topAgents));
-    sessionStorage.setItem(this.constants.TOP_AGENT_TOTAL_ROWS, this.totalRows);
-  }
+
 
   private getTopAgents() {
     this.emailId = this.myLocalStorage.getValue(this.constants.EMAIL);
@@ -65,16 +61,18 @@ export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponse
       hitApi(this);
     }
     else {
-      this.pageNumber = Number(sessionStorage.getItem(this.constants.TOP_AGENT_CURRENT_PAGE_NO));
-      this.totalRows = Number(sessionStorage.getItem(this.constants.TOP_AGENT_TOTAL_ROWS));
-      this.updateRatioUI();
-      this.cdr.markForCheck();
+      getData(this);
     }
+  }
+
+
+  checkEntityFavorite(item: EntityModel) {
+    return !this.commonFunctions.checkFavorite(item.entityId);
   }
 
   onStarClick(item: EntityModel) {
     this.commonApis.setFavorite(item, this.apiHandler, this.cdr).asObservable().subscribe(data => {
-      this.setData();
+      this.renderUI();
     });;
   }
 
@@ -83,40 +81,32 @@ export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponse
     this.cdr.markForCheck();
   }
 
-
-
-
   onError(errorCode: number, errorMsg: string) {
-    this.moreDataAvailable = false;
-    this.commonFunctions.showErrorSnackbar(errorMsg);
-    this.cdr.markForCheck();
+    this.renderUI();
   }
+
   private parseAndShowDataOnUi(response: any) {
     let newTopAgents = response.profile;
     if (newTopAgents) {
       newTopAgents.forEach(element => {
         if (element.type == this.constants.ENTITY_AGENT_PRESENTER) {
+          this.commonFunctions.setFavoriteOnApisResponse(element);
           this.topAgents.push(element);
         } else {
           this.totalRows = element.rowNum;
         }
       });
     }
-    this.updateRatioUI();
-    this.checkMoreDataAvailable();
+    this.renderUI();
   }
 
-  updateRatioUI() {
-    this.totalAndCurrentRowsRatio = this.commonFunctions.showMoreDataSnackbar(this.topAgents, this.totalRows);
+  public renderUI() {
+    setData(this);
+    updateRatioUI(this);
+    checkMoreDataAvailable(this);
     this.cdr.markForCheck();
   }
 
-  checkMoreDataAvailable() {
-    if (!this.topAgents || this.topAgents.length == this.totalRows)
-      this.moreDataAvailable = false;
-    else
-      this.moreDataAvailable = true;
-  }
 
   topFunction() {
     document.body.scrollTop = 0;
@@ -135,6 +125,32 @@ export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponse
 function hitApi(context: TopAgentsComponent) {
   context.pageNumber++;
   context.apiHandler.getTopAgents(context.pageNumber, context);
+}
+
+
+function setData(context: TopAgentsComponent) {
+  sessionStorage.setItem(context.constants.TOP_AGENT_CURRENT_PAGE_NO, context.pageNumber.toString());
+  sessionStorage.setItem(context.constants.TOP_AGENT_DATA, JSON.stringify(context.topAgents));
+  sessionStorage.setItem(context.constants.TOP_AGENT_TOTAL_ROWS, context.totalRows);
+}
+
+function getData(context: TopAgentsComponent) {
+  context.pageNumber = Number(sessionStorage.getItem(context.constants.TOP_AGENT_CURRENT_PAGE_NO));
+  context.totalRows = Number(sessionStorage.getItem(context.constants.TOP_AGENT_TOTAL_ROWS));
+  context.renderUI();
+  
+}
+
+function checkMoreDataAvailable(context: TopAgentsComponent) {
+  if ((!context.topAgents && context.topAgents.length == 0) || context.topAgents.length == context.totalRows)
+    context.moreDataAvailable = false;
+  else
+    context.moreDataAvailable = true;
+}
+
+function updateRatioUI(context: TopAgentsComponent) {
+  context.totalAndCurrentRowsRatio = context.commonFunctions.showMoreDataSnackbar(context.topAgents, context.totalRows);
+  context.cdr.markForCheck();
 }
 
 function refreshData(context: TopAgentsComponent) {

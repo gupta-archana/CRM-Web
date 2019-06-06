@@ -12,7 +12,7 @@
             </div>
             <h4><a (click)="onItemClick(item)">{{item.name}}</a> <span
                 (click)="onItemClick(item,i)">({{item.entityId}})</span><a><img
-                  src="../../../../images/favourite-icon.svg" alt="" (click)="onStarClick(item)"></a></h4>
+                  src="../../../../images/favourite-icon.svg" alt="" (click)="onStarClick(item,i)"></a></h4>
             <span>{{item.city+','+item.state}}</span>
           </div>
         </div>

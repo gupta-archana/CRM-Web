@@ -12,7 +12,7 @@ import { CommonApisService } from '../../../utils/common-apis.service';
   styleUrls: ['./agent-detail.component.css']
 })
 export class AgentDetailComponent extends EntityDetailBaseClass implements OnInit, OnDestroy {
- 
+
 
 
   agentInfoSubscription: Subscription = null;
@@ -21,8 +21,7 @@ export class AgentDetailComponent extends EntityDetailBaseClass implements OnIni
   agentMenues: any[];
 
   constructor(injector: Injector,
-    private router: Router,
-    private commonApis: CommonApisService) {
+    private router: Router) {
     super(injector);
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
@@ -39,6 +38,10 @@ export class AgentDetailComponent extends EntityDetailBaseClass implements OnIni
   }
 
   sendVCard() {
+  }
+
+  checkEntityFavorite() {
+    return !this.commonFunctions.checkFavorite(this.agentInfo.entityId);
   }
 
   onStarClick() {
