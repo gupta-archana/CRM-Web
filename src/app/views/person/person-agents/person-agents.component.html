@@ -20,9 +20,7 @@
                   onerror="this.src='../../../../images/placeholder.png'" (click)="onAgentClick(item)" />
               </div>
               <h4><a (click)="onAgentClick(item)">{{item.name}}</a> <span
-                  (click)="onAgentClick(item)">({{item.agentId}})</span><a><img
-                    src="{{item.favorite?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}" alt=""
-                    (click)="onStarClick(item)"></a></h4>
+                  (click)="onAgentClick(item)">({{item.agentId}})</span></h4>
               <span>{{item.city+','+item.state}}</span>
             </div>
           </div>

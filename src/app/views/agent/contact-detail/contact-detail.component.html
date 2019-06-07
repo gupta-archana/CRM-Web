@@ -6,8 +6,8 @@
       <div class="col-xs-7 text-center">
         <h1 class="t-agent">Contact</h1>
       </div>
-      <div class="col-xs-3 text-center tpad"><img src="../../../../images/edit.svg" alt=""><br><span
-          class="edit-detail"><a data-toggle="modal" data-target="#myModal">Edit Details</a></span></div>
+      <div class="col-xs-3 text-center tpad" data-toggle="modal" data-target="#myModal" (click)="onEditProfileClick()">
+        <img src="../../../../images/edit.svg" alt=""><br><span class="edit-detail"><a>Edit Details</a></span></div>
     </div>
 
   </div>
@@ -16,8 +16,8 @@
       <div class="col-xs-12 col-md-6 cell-bg">
         <div class="col-xs-6 col-md-6 noPadding">
           <div class="ag-detail-icons">
-            <a alt="" (click)="shareVCard()" data-toggle="modal" data-target="#shareMyVcard"><img src="../../../../images/ic_share_contact.svg" alt=""
-                > Share
+            <a alt="" (click)="shareVCard()" data-toggle="modal" data-target="#shareMyVcard"><img
+                src="../../../../images/ic_share_contact.svg" alt=""> Share
               vCard</a>
           </div>
         </div>

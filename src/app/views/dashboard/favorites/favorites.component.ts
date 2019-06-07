@@ -24,7 +24,7 @@ export class FavoritesComponent extends BaseClass implements OnInit, ApiResponse
 
   ngOnInit() {
     getData(this);
-    updateRatioUI(this);
+    this.renderUI();
     this.pageRefreshSubscription = this.dataService.pageRefreshObservable.subscribe(called => {
       if (called)
         refreshData(this);
@@ -135,7 +135,7 @@ function getData(context: FavoritesComponent) {
 }
 
 function checkMoreDataAvailable(context: FavoritesComponent) {
-  if ((!context.favorites && context.favorites.length == 0) || context.favorites.length == context.totalRows)
+  if ((!context.favorites && context.favorites.length == 0) || context.favorites.length >= context.totalRows)
     context.moreDataAvailable = false;
   else
     context.moreDataAvailable = true;

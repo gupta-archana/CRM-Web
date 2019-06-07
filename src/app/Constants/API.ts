@@ -125,7 +125,6 @@ export class API {
   }
 
   getUpdateProfilePicture(app_mode: string) {
-
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userPictureSet";
   }
 
@@ -143,6 +142,14 @@ export class API {
 
   getAgentPerformanceUrl(app_mode: string, pageNum: number) {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=agentsPerformanceGet&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows;
+  }
+
+  getUpdateEntityProfileUrl(app_mode: string) {
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=entitycontactModify";
+  }
+
+  getThirteenMonthActivityUrl(app_mode: string, agentId: string) {
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=Activity13MonthsGet&agentId=" + agentId;
   }
 
   getStates() {

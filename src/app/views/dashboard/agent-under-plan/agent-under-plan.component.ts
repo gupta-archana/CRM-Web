@@ -110,7 +110,7 @@ function updateRatioUI(context: AgentUnderPlanComponent) {
 }
 
 function checkMoreDataAvailable(context: AgentUnderPlanComponent) {
-  if ((!context.agentsUnderPlan && context.agentsUnderPlan.length == 0) || context.agentsUnderPlan.length == context.totalRows)
+  if ((!context.agentsUnderPlan && context.agentsUnderPlan.length == 0) || context.agentsUnderPlan.length >= context.totalRows)
     context.moreDataAvailable = false;
   else
     context.moreDataAvailable = true;

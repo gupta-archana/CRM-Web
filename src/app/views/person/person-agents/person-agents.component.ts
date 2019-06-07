@@ -19,17 +19,18 @@ export class PersonAgentsComponent extends BaseClass implements OnInit, OnDestro
   entityModel: EntityModel;
   totalRows: any = 0;
   personAgentsModels: Array<PersonAgentsModel> = new Array();
+  clickedEntity: EntityModel = new EntityModel();
+  currentEntityID: any;
 
   ngOnInit() {
-    this.entityModel = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
-    makeApiRequest(this);
+    this.entityModel = JSON.parse(sessionStorage.getItem(this.constants.INTERNAL_ENTITY_MODEL));
+    getData(this);
   }
 
   onSuccess(response: any) {
     let agents: PersonAgentsModel[] = response.agentperson;
     this.parseResponse(agents);
-    this.updateRatioUI();
-    checkMoreDataAvailable(this);
+    this.renderUI();
   }
   private parseResponse(agents: PersonAgentsModel[]) {
     agents.forEach(element => {
@@ -43,32 +44,79 @@ export class PersonAgentsComponent extends BaseClass implements OnInit, OnDestro
   }
 
   onError(errorCode: number, errorMsg: string) {
-    this.updateRatioUI();
+    this.renderUI();
   }
 
   onLoadMoreClick() {
-    makeApiRequest(this);
+    makeServerRequest(this);
+  }
+
+  onAgentClick(item: PersonAgentsModel) {
+    this.getEntityModel(item);
+    sessionStorage.setItem(this.constants.ENTITY_INFO, JSON.stringify(this.clickedEntity));
+    let navigatingPath = this.paths.PATH_AGENT_DETAIL;
+    this.commonFunctions.navigateWithoutReplaceUrl(navigatingPath);
+  }
+  public renderUI() {
+    setData(this);
+    updateRatioUI(this);
+    checkMoreDataAvailable(this);
+    this.cdr.markForCheck();
+  }
+
+  private getEntityModel(item: PersonAgentsModel) {
+    this.clickedEntity.name = item.name;
+    this.clickedEntity.entityId = item.agentId;
+    this.clickedEntity.city = item.city;
+    this.clickedEntity.stat = item.stat;
+    this.clickedEntity.state = item.state;
   }
 
   goBack() {
     this.commonFunctions.backPress();
   }
-  private updateRatioUI() {
-    this.totalAndCurrentRowsRatio = this.commonFunctions.showMoreDataSnackbar(this.personAgentsModels, this.totalRows);
-    this.cdr.markForCheck();
-  }
   ngOnDestroy(): void {
 
   }
 }
-function makeApiRequest(context: PersonAgentsComponent) {
+function makeServerRequest(context: PersonAgentsComponent) {
   context.pageNum++;
-  context.entityModel.entityId = "1";
+  //context.entityModel.entityId = "1";
   context.apiHandler.getPersonAffiliations(context.entityModel.entityId, context.pageNum, context);
 }
+
+function setData(context: PersonAgentsComponent) {
+  sessionStorage.setItem(context.constants.PERSON_AGENTS_ARRAY, JSON.stringify(context.personAgentsModels));
+  sessionStorage.setItem(context.constants.PERSON_AGENTS_PAGE_NUMBER, JSON.stringify(context.pageNum));
+  sessionStorage.setItem(context.constants.PERSON_AGENTS_TOTAL_ROWS, context.totalRows);
+  sessionStorage.setItem(context.constants.PERSON_AGENTS_CURRENT_ENTITY_ID, context.entityModel.entityId);
+}
+
+function getData(context: PersonAgentsComponent) {
+  let dataArray = JSON.parse(sessionStorage.getItem(context.constants.PERSON_AGENTS_ARRAY));
+  context.currentEntityID = sessionStorage.getItem(context.constants.PERSON_AGENTS_CURRENT_ENTITY_ID);
+  if (dataArray && dataArray.length > 0 && context.currentEntityID === context.entityModel.entityId) {
+    context.personAgentsModels = dataArray;
+    context.pageNum = Number(sessionStorage.getItem(context.constants.PERSON_AGENTS_PAGE_NUMBER));
+    context.totalRows = sessionStorage.getItem(context.constants.PERSON_AGENTS_TOTAL_ROWS);
+    updateRatioUI(context);
+  }
+  else {
+    makeServerRequest(context);
+  }
+
+}
 function checkMoreDataAvailable(context: PersonAgentsComponent) {
-  if (!context.personAgentsModels || context.personAgentsModels.length == context.totalRows)
+  if (!context.personAgentsModels || context.personAgentsModels.length >= context.totalRows)
     context.moreDataAvailable = false;
   else
     context.moreDataAvailable = true;
 }
+
+function updateRatioUI(context: PersonAgentsComponent) {
+  context.totalAndCurrentRowsRatio = context.commonFunctions.showMoreDataSnackbar(context.personAgentsModels, context.totalRows);
+  context.cdr.markForCheck();
+}
+
+
+

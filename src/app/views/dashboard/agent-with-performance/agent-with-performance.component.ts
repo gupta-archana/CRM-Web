@@ -116,7 +116,7 @@ function updateRatioUI(context: AgentWithPerformanceComponent) {
 }
 
 function checkMoreDataAvailable(context: AgentWithPerformanceComponent) {
-  if ((!context.agentPerformance && context.agentPerformance.length == 0) || context.agentPerformance.length == context.totalRows)
+  if ((!context.agentPerformance && context.agentPerformance.length == 0) || context.agentPerformance.length >= context.totalRows)
     context.moreDataAvailable = false;
   else
     context.moreDataAvailable = true;

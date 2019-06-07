@@ -1,4 +1,5 @@
 export class EntityContactModel {
+  name: string;
   entity: string;
   entityID: string;
   email: string;

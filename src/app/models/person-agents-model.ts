@@ -8,4 +8,5 @@ export class PersonAgentsModel {
   zip: string;
   email: string;
   rowNum: string;
+  favorite: string;
 }

@@ -142,7 +142,7 @@ function getData(context: TopAgentsComponent) {
 }
 
 function checkMoreDataAvailable(context: TopAgentsComponent) {
-  if ((!context.topAgents && context.topAgents.length == 0) || context.topAgents.length == context.totalRows)
+  if ((!context.topAgents && context.topAgents.length == 0) || context.topAgents.length >= context.totalRows)
     context.moreDataAvailable = false;
   else
     context.moreDataAvailable = true;

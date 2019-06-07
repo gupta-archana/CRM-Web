@@ -248,7 +248,7 @@ function getData(context: SearchComponent) {
 }
 
 function checkMoreDataAvailable(context: SearchComponent) {
-  if ((!context.searchedUsers && context.searchedUsers.length == 0) || context.searchedUsers.length == context.totalRows)
+  if ((!context.searchedUsers && context.searchedUsers.length == 0) || context.searchedUsers.length >= context.totalRows)
     context.moreDataAvailable = false;
   else
     context.moreDataAvailable = true;

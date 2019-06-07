@@ -28,7 +28,7 @@ export class PersonDetailComponent extends EntityDetailBaseClass implements OnIn
     getMenues(this);
   }
   onPersonMenuClick(item) {
-    this.commonFunctions.onMenuItemClick(item);
+    this.commonFunctions.onMenuItemClick(item, this.personInfo);
   }
 
   checkEntityFavorite() {

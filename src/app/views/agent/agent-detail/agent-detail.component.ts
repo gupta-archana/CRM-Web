@@ -34,7 +34,7 @@ export class AgentDetailComponent extends EntityDetailBaseClass implements OnIni
 
 
   onAgentMenuClick(item) {
-    this.commonFunctions.onMenuItemClick(item);
+    this.commonFunctions.onMenuItemClick(item, this.agentInfo);
   }
 
   sendVCard() {

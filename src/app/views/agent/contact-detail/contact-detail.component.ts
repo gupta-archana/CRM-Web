@@ -1,19 +1,21 @@
-import { Component, OnInit, Injector } from '@angular/core';
+import { Component, OnInit, Injector, OnDestroy } from '@angular/core';
 import { CommonFunctionsService } from '../../../utils/common-functions.service';
 import { BaseClass } from '../../../global/base-class';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { EntityModel } from '../../../models/entity-model';
 import { ApiResponseCallback } from '../../../Interfaces/ApiResponseCallback';
 import { EntityContactModel } from '../../../models/entity-contact-model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-contact-detail',
   templateUrl: './contact-detail.component.html',
   styleUrls: ['./contact-detail.component.css']
 })
-export class ContactDetailComponent extends BaseClass implements OnInit, ApiResponseCallback {
+export class ContactDetailComponent extends BaseClass implements OnInit, ApiResponseCallback, OnDestroy {
   deviceInfo = null;
   entityInfo: EntityModel;
+  dataUpdatedSubscription: Subscription;
   entityContactModel: EntityContactModel = new EntityContactModel();
   constructor(private injector: Injector,
     private deviceDetector: DeviceDetectorService, ) {
@@ -23,6 +25,7 @@ export class ContactDetailComponent extends BaseClass implements OnInit, ApiResp
   ngOnInit() {
     this.entityInfo = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
     getContactDetailFromServer(this);
+    registerDataUpdatedObservable(this);
   }
   goBack() {
     this.commonFunctions.backPress();
@@ -49,8 +52,8 @@ export class ContactDetailComponent extends BaseClass implements OnInit, ApiResp
     return address;
   }
 
-  private onEditProfileClick() {
-    this.dataService.onAgentProfileEditClick(true);
+  onEditProfileClick() {
+    this.dataService.onAgentProfileEditClick(this.entityContactModel);
   }
 
   openLocationOnMap(): void {
@@ -95,13 +98,26 @@ export class ContactDetailComponent extends BaseClass implements OnInit, ApiResp
   }
   onSuccess(response: any) {
     this.entityContactModel = response.entitycontact[0];
+    this.entityContactModel.name = this.entityInfo.name;
     this.cdr.markForCheck();
   }
   onError(errorCode: number, errorMsg: string) {
 
   }
+
+  ngOnDestroy(): void {
+    if (this.dataUpdatedSubscription && !this.dataUpdatedSubscription.closed)
+      this.dataUpdatedSubscription.unsubscribe();
+  }
 }
 
 function getContactDetailFromServer(context: ContactDetailComponent) {
   context.apiHandler.getEntityContactDetail(context.entityInfo.entityId, context.entityInfo.type, context);
+}
+function registerDataUpdatedObservable(context: ContactDetailComponent) {
+  context.dataUpdatedSubscription = context.dataService.dataUpdatedObservable.subscribe(isUpdated => {
+    if (isUpdated) {
+      getContactDetailFromServer(context);
+    }
+  });
 }

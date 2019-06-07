@@ -168,7 +168,7 @@ export class CommonFunctionsService {
     //this.showPermanentSnackbar(totalAndCurrentRowsRatio);
   }
 
-  onMenuItemClick(item) {
+  onMenuItemClick(item, entityModel: EntityModel) {
 
     let navigatingUrl = "";
     //let value = item.title == paths.AGENT_DETAIL_THIRTEEN_MONTH_ACTIVITY
@@ -210,6 +210,7 @@ export class CommonFunctionsService {
 
         break;
       case this.constants.PERSON_AGENT:
+        sessionStorage.setItem(this.constants.INTERNAL_ENTITY_MODEL, JSON.stringify(entityModel));
         navigatingUrl = paths.PATH_PERSON_AGENTS;
         break;
 

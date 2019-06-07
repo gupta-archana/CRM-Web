@@ -219,6 +219,26 @@ export class ApiHandlerService implements ApiResponseCallback {
     let url = this.api.getAgentPerformanceUrl(this.getAppMode(), pageNum);
     this.apiService.hitGetApi(url, this);
   }
+
+  /**
+   * updateEntityProfile
+   */
+  public updateEntityProfile(requestJson: any, apiResponseCallback: ApiResponseCallback) {
+    this.dataService.onHideShowLoader(true);
+    let url = this.api.getUpdateEntityProfileUrl(this.getAppMode());
+    this.apiService.hitPostApi(url, this.getRequestXml(requestJson), handleAddAndUpdateApiResponse(this, apiResponseCallback));
+  }
+
+  /**
+   * getThirteenMonthActivity
+   */
+  public getThirteenMonthActivity(entityId: string, apiResponseCallback: ApiResponseCallback) {
+    this.dataService.onHideShowLoader(true);
+    this.apiResponseCallback = apiResponseCallback;
+    let url = this.api.getThirteenMonthActivityUrl(this.getAppMode(), entityId);
+    this.apiService.hitGetApi(url, this);
+  }
+
   /**
    * getStates
    */

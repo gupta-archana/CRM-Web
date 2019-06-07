@@ -26,7 +26,7 @@
                     src="{{item.type=='A'?'../../../../../../images/baseline-business-24px.svg':'../../../../../../images/username.svg'}}"
                     alt="" /></div>
                 <h4><a (click)="onItemClick(item)">{{item.name}}</a> <span
-                    (click)="onAgentClick(item)">({{item.entityId}})</span><a><img
+                    (click)="onItemClick(item)">({{item.entityId}})</span><a><img
                       src="{{checkEntityFavorite(item)?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}"
                       alt="" (click)="onStarClick(item)"></a>
                 </h4>

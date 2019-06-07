@@ -23,6 +23,10 @@ export class AgentNotesComponent extends BaseClass implements OnInit, ApiRespons
     this.agentInfo = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
     getNotes(this);
   }
+
+  goBack(){
+    this.commonFunctions.backPress();
+  }
   onSuccess(response: any) {
     let notes: Array<NotesModel> = response.sysNote;
     notes.forEach(element => {

@@ -97,7 +97,7 @@ export class DataServiceService {
     this.injectorSubject.next();
   }
 
-  onAgentProfileEditClick(openDialog: boolean) {
+  onAgentProfileEditClick(openDialog: any) {
     this.editAgentProfileDialogSubject.next(openDialog);
   }
 

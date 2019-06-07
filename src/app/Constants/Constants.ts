@@ -10,6 +10,7 @@ export class Constants {
   REMEMBER_ME = "remeberMe";
   LOGOUT_CONFIRMATION = "Logout Confirmation";
   ENTITY_INFO = "entityinfo";
+  INTERNAL_ENTITY_MODEL = "internal_entitiy_model";
   LOGOUT = "Logout";
   CANCEL = "Cancel";
   LOGGED_IN = "logged_in";
@@ -53,10 +54,17 @@ export class Constants {
   AGENT_UNDER_PLAN_CURRENT_PAGE_NO = "agent_under_plan_current_page_no";
   AGENT_UNDER_PLAN_TOTAL_ROWS = "agent_under_plan_total_rows";
 
+  // associates session constants
   ASSOCIATES_ARRAY = "associates_array";
   ASSOCIATES_PAGE_NUMBER = "associates_page_num";
   ASSOCIATES_TOTAL_ROWS = "associates_total_rows";
   ASSOCIATES_CURRENT_ENTITY_ID = "associates_current_entity_id";
+
+  //person agents session constants
+  PERSON_AGENTS_ARRAY = "person_agents_array";
+  PERSON_AGENTS_PAGE_NUMBER = "person_agents_page_num";
+  PERSON_AGENTS_TOTAL_ROWS = "person_agents_total_rows";
+  PERSON_AGENTS_CURRENT_ENTITY_ID = "person_agents_current_entity_id";
 
   // Error Messages
   ERROR_NO_INTERNET_CONNECTON = "Kindly check your internet connection";

@@ -155,7 +155,7 @@ function navigateToSelectedItem(context: NavigationDrawerComponent, selectedNavB
 }
 
 function changeHeaderTitle(path: string, context: NavigationDrawerComponent) {
-  if (path) {
+  if (path && path != context.paths.PATH_LOGIN && path != context.paths.PATH_FORGOT_PASSWORD) {
     reasetHeaderButtons(context);
     //clearSession(context);
     if (path) {
