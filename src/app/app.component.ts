@@ -1,16 +1,10 @@
-import { Component, OnInit, OnDestroy, Injector } from '@angular/core';
-import { Router, ActivatedRoute, NavigationStart, Event as NavigationEvent } from '@angular/router';
-
-import { PlatformLocation, LocationStrategy } from '@angular/common';
-import { MatSnackBar } from '@angular/material';
-import { NavigationDrawerComponent } from './views/dashboard/navigation-drawer/navigation-drawer.component';
-import { CommonFunctionsService } from './utils/common-functions.service';
+import { Component, Injector, OnDestroy, OnInit } from '@angular/core';
+import { Event as NavigationEvent, NavigationStart, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { DataServiceService } from './services/data-service.service';
-import { LoginComponent } from './views/login/login.component';
-import { UtilService } from './utils/util.service';
 import { filter } from 'rxjs/operators';
 import { BaseClass } from './global/base-class';
+import { RoutingStateService } from './services/routing-state.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -30,15 +24,17 @@ export class AppComponent extends BaseClass implements OnInit, OnDestroy {
     this._opened = !this._opened;
   }
   constructor(private router: Router,
-    private injector: Injector) {
+    private injector: Injector,
+    private routingState: RoutingStateService) {
     super(injector);
   }
 
   ngOnInit(): void {
     this.utils.handleBackpressEvent();
+    this.routingState.loadRouting();
     sendCurrentPagePath(this, this.router);
     window.onbeforeunload = ev => {
-      
+
       this.utils.removeBackpressEventListener();
     }
     registerHideShowLoaderBroadcast(this);
@@ -50,7 +46,7 @@ export class AppComponent extends BaseClass implements OnInit, OnDestroy {
     }
   }
   ngAfterViewChecked() {
-    
+
     this.cdr.detectChanges();
   }
 }

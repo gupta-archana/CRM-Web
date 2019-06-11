@@ -19,6 +19,7 @@ export class AgentAssociatesComponent extends BaseClass implements OnInit, ApiRe
   totalAndCurrentRowsRatio: string = "";
   currentEntityID = "";
   pageNum = 0;
+  clickedEntity: EntityModel = new EntityModel();
   constructor(private injector: Injector) {
     super(injector);
   }
@@ -70,6 +71,17 @@ export class AgentAssociatesComponent extends BaseClass implements OnInit, ApiRe
   getAddress(item: AssociatesModel) {
     return item.city + " " + item.state;
   }
+  onPersonClick(item: AssociatesModel) {
+    this.getEntityModel(item);
+    sessionStorage.setItem(this.constants.ENTITY_INFO, JSON.stringify(this.clickedEntity));
+    let navigatingPath = this.paths.PATH_PERSON_DETAIL;
+    this.commonFunctions.navigateWithoutReplaceUrl(navigatingPath);
+  }
+  private getEntityModel(item: AssociatesModel) {
+    this.clickedEntity.name = item.dispname;
+    this.clickedEntity.entityId = item.personID;
+
+  }
   updateRatioUI() {
     this.totalAndCurrentRowsRatio = this.commonFunctions.showMoreDataSnackbar(this.associatesModels, this.totalRows);
     this.cdr.markForCheck();
@@ -99,10 +111,10 @@ function setAssociates(context: AgentAssociatesComponent) {
 
 function makeServerRequest(context: AgentAssociatesComponent) {
   context.pageNum++;
-  
-    //context.entityInfo.entityId = "017575";
-    context.apiHandler.getAssociates(context.entityInfo.entityId, context.entityInfo.type, context.pageNum, context);
-  
+
+  //context.entityInfo.entityId = "017575";
+  context.apiHandler.getAssociates(context.entityInfo.entityId, context.entityInfo.type, context.pageNum, context);
+
   // else {
   //   context.apiHandler.getPersonAffiliations(context.entityInfo.entityId, context.pageNum, context)
   // }

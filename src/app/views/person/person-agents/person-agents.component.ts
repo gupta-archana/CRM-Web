@@ -3,6 +3,7 @@ import { BaseClass } from '../../../global/base-class';
 import { EntityModel } from '../../../models/entity-model';
 import { ApiResponseCallback } from '../../../Interfaces/ApiResponseCallback';
 import { PersonAgentsModel } from '../../../models/person-agents-model';
+import { RoutingStateService } from '../../../services/routing-state.service';
 
 @Component({
   selector: 'app-person-agents',
@@ -11,7 +12,7 @@ import { PersonAgentsModel } from '../../../models/person-agents-model';
 })
 export class PersonAgentsComponent extends BaseClass implements OnInit, OnDestroy, ApiResponseCallback {
 
-  constructor(injector: Injector) { super(injector); }
+  constructor(injector: Injector, private routingState: RoutingStateService) { super(injector); }
 
   pageNum: number = 0;
   moreDataAvailable: boolean = false;
@@ -24,6 +25,7 @@ export class PersonAgentsComponent extends BaseClass implements OnInit, OnDestro
 
   ngOnInit() {
     this.entityModel = JSON.parse(sessionStorage.getItem(this.constants.INTERNAL_ENTITY_MODEL));
+    this.commonFunctions.printLog("last url " + this.routingState.getPreviousUrl());
     getData(this);
   }
 
