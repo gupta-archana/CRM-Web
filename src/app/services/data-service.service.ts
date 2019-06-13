@@ -44,7 +44,7 @@ export class DataServiceService {
   private agentDetailItemsSubject = new BehaviorSubject<any>("");
   agentDetailItemsObservable = this.agentDetailItemsSubject.asObservable();
 
-   private personDetailItemsSubject = new BehaviorSubject<any>("");
+  private personDetailItemsSubject = new BehaviorSubject<any>("");
   personDetailItemsObservable = this.personDetailItemsSubject.asObservable();
 
 
@@ -54,7 +54,7 @@ export class DataServiceService {
   private shareUserProfileSubject = new BehaviorSubject<UserProfileModel>(null);
   shareUserProfileObservable = this.shareUserProfileSubject.asObservable();
 
-  private dataUpdatedSubject = new BehaviorSubject<boolean>(false);
+  private dataUpdatedSubject = new Subject<boolean>();
   dataUpdatedObservable = this.dataUpdatedSubject.asObservable();
 
   private shareDataSubject = new BehaviorSubject<any>("");
@@ -63,6 +63,8 @@ export class DataServiceService {
   private searchFiltersSubject = new Subject<SearchFilterModel>();
   searchFiltersObservable = this.searchFiltersSubject.asObservable();
 
+  private tabSelectedSubject = new BehaviorSubject<number>(0);
+  tabSelectedObservable = this.tabSelectedSubject.asObservable();
   constructor() { }
 
   onHideShowLoader(showLoader: boolean) {
@@ -131,5 +133,9 @@ export class DataServiceService {
 
   onSearchFilterApply(filterModel: SearchFilterModel) {
     this.searchFiltersSubject.next(filterModel);
+  }
+
+  onTabSelected(index: number) {
+    this.tabSelectedSubject.next(index);
   }
 }

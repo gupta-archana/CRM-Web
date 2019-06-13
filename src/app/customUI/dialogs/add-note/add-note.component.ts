@@ -28,6 +28,7 @@ export class AddNoteComponent extends BaseClass implements OnInit, ApiResponseCa
   onSaveClick() {
     if (this.note) {
       this.apiHandler.createNote(getRequest(this), this);
+
       //getRequest(this);
     }
   }
@@ -35,6 +36,7 @@ export class AddNoteComponent extends BaseClass implements OnInit, ApiResponseCa
 
   onSuccess(response: any) {
     this.commonFunctions.showSnackbar(response);
+    this.dataService.onDataUpdated();
     this.closeAddNote.nativeElement.click();
   }
   onError(errorCode: number, errorMsg: string) {
@@ -52,7 +54,7 @@ function getRequest(context: AddNoteComponent) {
     "UID": context.commonFunctions.getLoginCredentials().email,
     "entity": context.entityInfo.type,
     "entityID": context.entityInfo.entityId,
-    "note": context.note
+    "notes": context.note
   }
 
   let finalJson = {

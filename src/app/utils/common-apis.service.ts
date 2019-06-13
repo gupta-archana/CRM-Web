@@ -1,9 +1,8 @@
-import { Injectable, Injector, ChangeDetectorRef } from '@angular/core';
-import { BaseClass } from '../global/base-class';
+import { ChangeDetectorRef, Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { EntityModel } from '../models/entity-model';
 import { ApiHandlerService } from './api-handler.service';
 import { CommonFunctionsService } from './common-functions.service';
-import { Subject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -44,7 +43,7 @@ export class CommonApisService {
   }
 
   private removeFavorite(apiHandler: ApiHandlerService, item: EntityModel, self: this, cdr: ChangeDetectorRef) {
-    apiHandler.removeFavorite(item.sysfavoriteID, {
+    apiHandler.removeFavorite(item.type, item.entityId, {
       onSuccess(response: any) {
         self.commonFunctions.setFavoriteToSessionArray(item.entityId);
         item.favorite = "no";

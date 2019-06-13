@@ -3,7 +3,7 @@
   <div id="allNotesId" class="tab-pane fade in active" style="overflow: hidden">
 
     <ul>
-      <li *ngFor="let item of agentNotes">
+      <li *ngFor="let item of agentNotes;let i = index">
         <div class="row">
           <div class="col-xs-12 col-md-12 cell-bg">
             <div class="col-xs-6 col-md-6 noPadding">
@@ -14,7 +14,7 @@
             </div>
             <div class="col-xs-12 col-md-12 noPadding">
               <div class="myNotesDetails">
-                <p>{{item.note}}</p>
+                <p>{{item.notes}}</p>
               </div>
             </div>
 
@@ -24,12 +24,13 @@
 
             <div class="col-xs-6 col-md-6 noPadding">
               <div class="ag-detail-icons">
-                <a href="#" alt=""><img src="../../../../../images/ic_delete.svg" alt=""> Delete</a>
+                <a alt="" (click)="onDeleteClick(item,i)"><img src="../../../../../images/ic_delete.svg" alt="">
+                  Delete</a>
               </div>
             </div>
             <div class="col-xs-6 col-md-6 noPadding">
               <div class="ag-detail-icons textRight">
-                <a href="#" alt=""><img src="../../../../../images/ic_note_edit.svg" alt=""> Edit</a>
+                <a alt=""><img src="../../../../../images/ic_note_edit.svg" alt=""> Edit</a>
               </div>
             </div>
           </div>
@@ -37,5 +38,16 @@
         </div>
       </li>
     </ul>
+    <div class="clearfix paddingTop15"></div>
   </div>
+  <div class="row  marginBottom20" *ngIf="moreDataAvailable">
+    <div class="col-xs-12 col-md-12 loadMoreWp">
+      <hr />
+      <div class="loadMore"><a (click)="onLoadMoreClick()" alt="Load More">Load More</a></div>
+    </div>
+  </div>
+  <div id="ratioView">{{totalAndCurrentRowsRatio}}</div>
+
+  <button (click)="topFunction()" id="myBtn" title="Go to top"><span
+      class="glyphicon glyphicon-arrow-up"></span></button>
 </div>

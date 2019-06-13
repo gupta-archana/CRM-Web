@@ -10,7 +10,7 @@ import { NotesModel } from '../../../models/notes-model';
   templateUrl: './agent-notes.component.html',
   styleUrls: ['./agent-notes.component.css']
 })
-export class AgentNotesComponent extends BaseClass implements OnInit, ApiResponseCallback {
+export class AgentNotesComponent extends BaseClass implements OnInit {
 
   constructor(private injector: Injector) {
     super(injector);
@@ -20,28 +20,21 @@ export class AgentNotesComponent extends BaseClass implements OnInit, ApiRespons
   agentNotes: Array<NotesModel> = new Array;
 
   ngOnInit() {
-    this.agentInfo = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
-    getNotes(this);
+    shareTabIndexToChilds(this, 0);
   }
 
-  goBack(){
+  goBack() {
     this.commonFunctions.backPress();
   }
-  onSuccess(response: any) {
-    let notes: Array<NotesModel> = response.sysNote;
-    notes.forEach(element => {
-      if (element.dateCreated)
-        element.dateCreated = element.dateCreated.split(" ")[0];
-      this.agentNotes.push(element);
-    });
 
-    this.dataService.onDataShare(this.agentNotes);
-  }
-  onError(errorCode: number, errorMsg: string) {
-    this.commonFunctions.showErrorSnackbar(errorMsg);
+
+  onTabSelect(event) {
+    //this.commonFunctions.showSnackbar(event.index);
+    this.commonFunctions.printLog(event);
+    shareTabIndexToChilds(this, event.index);
   }
 }
-
-function getNotes(context: AgentNotesComponent) {
-  context.apiHandler.getNotes(context.agentInfo.type, context.agentInfo.entityId, context);
+function shareTabIndexToChilds(context: AgentNotesComponent, index: number) {
+  context.dataService.onTabSelected(index);
 }
+

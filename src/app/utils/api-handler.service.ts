@@ -134,13 +134,21 @@ export class ApiHandlerService implements ApiResponseCallback {
   /**
    * getNotes
    */
-  public getNotes(entityType, entityId, apiResponseCallback: ApiResponseCallback) {
+  public getNotes(uid, entityType, entityId, pageNum: any, apiResponseCallback: ApiResponseCallback) {
     this.apiResponseCallback = apiResponseCallback;
     this.dataService.onHideShowLoader(true);
-    let url = this.api.getNotesUrl(this.getAppMode(), entityType, entityId);
+    let url = this.api.getNotesUrl(this.getAppMode(), uid, entityType, entityId, pageNum);
     this.apiService.hitGetApi(url, this);
   }
 
+  /**
+   * deleteNote
+   */
+  public deleteNote(noteId: string, apiResponseCallback: ApiResponseCallback) {
+    this.dataService.onHideShowLoader(true);
+    let url = this.api.getDeleteNoteUrl(this.getAppMode(), noteId);
+    this.apiService.hitGetApi(url, handleAddAndUpdateApiResponse(this, apiResponseCallback));
+  }
 
   /**
    * updateUserInfo
@@ -164,10 +172,10 @@ export class ApiHandlerService implements ApiResponseCallback {
   /**
    * removeFavorite
    */
-  public removeFavorite(favorite_id: string, apiResponseCallback: ApiResponseCallback) {
+  public removeFavorite(entity: string, entityId: string, apiResponseCallback: ApiResponseCallback) {
     this.apiResponseCallback = apiResponseCallback;
     this.dataService.onHideShowLoader(true);
-    let url = this.api.getRemoveFavoriteUrl(this.getAppMode(), favorite_id);
+    let url = this.api.getRemoveFavoriteUrl(this.getAppMode(), entity, entityId);
     this.apiService.hitGetApi(url, handleAddAndUpdateApiResponse(this, apiResponseCallback));
   }
 

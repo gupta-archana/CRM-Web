@@ -98,9 +98,9 @@ export class API {
   }
 
 
-  getNotesUrl(app_mode: string, entityType: string, entityId: string) {
+  getNotesUrl(app_mode: string, uid: string, entityType: string, entityId: string, pageNum: any) {
 
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=systemNotesGet&entity=" + entityType + "&entityID=" + entityId;
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=systemNotesGet&UID=" + uid + "&entity=" + entityType + "&entityID=" + entityId + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows;
   }
 
   getCreateNoteUrl(app_mode: string) {
@@ -115,13 +115,11 @@ export class API {
   }
 
   getSetFavoriteStatus(app_mode: string, entityType: string, entityId: string) {
-
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=systemFavoriteAdd&entity=" + entityType + "&entityID=" + entityId;
-
   }
 
-  getRemoveFavoriteUrl(app_mode, favorite_id: string) {
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=systemFavoriteDelete&SysFavoriteID=" + favorite_id;
+  getRemoveFavoriteUrl(app_mode, entity: string, entityId: string) {
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=systemFavoriteDelete&Entity=" + entity + "&EntityId=" + entityId;
   }
 
   getUpdateProfilePicture(app_mode: string) {
@@ -152,6 +150,9 @@ export class API {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=Activity13MonthsGet&agentId=" + agentId;
   }
 
+  getDeleteNoteUrl(app_mode: string, noteId: string) {
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=systemNoteDelete&sysNoteID=" + noteId;
+  }
   getStates() {
     return this.STATES_JSON_URL;
   }
