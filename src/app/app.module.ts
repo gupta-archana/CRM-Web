@@ -43,10 +43,18 @@ import { AgentThirteenMonthActivityComponent } from './views/agent/agent-thirtee
 import { AgentAssociatesComponent } from './views/agent/agent-associates/agent-associates.component';
 import { PersonDetailComponent } from './views/person/person-detail/person-detail.component';
 import { PersonAgentsComponent } from './views/person/person-agents/person-agents.component';
-
-
-
-
+import { UpdateNoteComponent } from './customUI/dialogs/update-note/update-note.component';
+import { CurrencyMaskModule } from "ng2-currency-mask";
+import { CurrencyMaskConfig, CURRENCY_MASK_CONFIG } from 'ng2-currency-mask/src/currency-mask.config';
+export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
+  align: "left",
+  allowNegative: true,
+  decimal: ",",
+  precision: 2,
+  prefix: "",
+  suffix: "",
+  thousands: ","
+};
 
 @NgModule({
   declarations: [
@@ -71,6 +79,7 @@ import { PersonAgentsComponent } from './views/person/person-agents/person-agent
     AgentAssociatesComponent,
     PersonDetailComponent,
     PersonAgentsComponent,
+    UpdateNoteComponent,
   ],
   imports: [
     BrowserModule,
@@ -100,7 +109,8 @@ import { PersonAgentsComponent } from './views/person/person-agents/person-agent
     DraggableModule,
     ModulesModule,
     DragDropModule,
-    Ng2ImgMaxModule
+    Ng2ImgMaxModule,
+    CurrencyMaskModule
   ],
   entryComponents: [
     // See https://material.angular.io/components/dialog/overview#configuring-dialog-content-via-code-entrycomponents-code- for more info
@@ -109,10 +119,11 @@ import { PersonAgentsComponent } from './views/person/person-agents/person-agent
     ForgotPasswordAlertComponent,
     ChangeProfileDialogComponent
   ],
-  providers: [Constants, ApiService, {
-    provide: UrlSerializer,
-    useClass: LowerCaseUrlSerializer
-  }, LoginGuardGuard],
+  providers: [Constants, ApiService,
+    { provide: UrlSerializer, useClass: LowerCaseUrlSerializer },
+    LoginGuardGuard,
+    { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

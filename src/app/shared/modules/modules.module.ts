@@ -10,6 +10,18 @@ import { UpdateUserProfileComponent } from '../../customUI/dialogs/update-user-p
 import { SearchFilterComponent } from '../../customUI/dialogs/search-filter/search-filter.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatSnackBarModule, MatDialogModule, MatButtonModule, MatFormFieldModule } from '@angular/material';
+import { CurrencyMaskModule } from "ng2-currency-mask";
+import { CurrencyMaskConfig, CURRENCY_MASK_CONFIG } from 'ng2-currency-mask/src/currency-mask.config';
+export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
+  align: "left",
+  allowNegative: true,
+  decimal: ",",
+  precision: 2,
+  prefix: "",
+  suffix: "",
+  thousands: ","
+};
+
 //import { ModalService } from '../../services/modal.service';
 @NgModule({
   imports: [
@@ -22,7 +34,8 @@ import { MatSnackBarModule, MatDialogModule, MatButtonModule, MatFormFieldModule
     MatSnackBarModule,
     MatDialogModule,
     MatButtonModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    CurrencyMaskModule
   ],
   declarations: [
     UpdateAgentProfileComponent,
@@ -30,6 +43,7 @@ import { MatSnackBarModule, MatDialogModule, MatButtonModule, MatFormFieldModule
     ShareVCardComponent,
     UpdateUserProfileComponent,
     SearchFilterComponent
+
   ],
   exports: [
     UpdateAgentProfileComponent,
@@ -45,8 +59,9 @@ import { MatSnackBarModule, MatDialogModule, MatButtonModule, MatFormFieldModule
     MatSnackBarModule,
     MatDialogModule,
     MatButtonModule,
-    MatFormFieldModule
+    MatFormFieldModule,
 
-  ]
+  ],
+  providers: [{ provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }],
 })
 export class ModulesModule { }

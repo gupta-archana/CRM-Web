@@ -16,7 +16,7 @@
             <div class="row">
 
               <div class="col-md-6 col-xs-6">
-                <div class="amount">NPR YTD<br><span>$ {{item.netPermium}}</span></div>
+                <div class="amount">NPR YTD<br><span>{{item.netPermium| currency:'USD':"symbol-narrow":'1.0-0'}}</span></div>
               </div>
             </div>
           </div>

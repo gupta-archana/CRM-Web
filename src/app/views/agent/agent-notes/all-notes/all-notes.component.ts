@@ -23,12 +23,16 @@ export class AllNotesComponent extends BaseClass implements OnInit, OnDestroy, A
   uid: string;
   tabIndexSubscription: Subscription;
   newNoteAddedSubscription: Subscription;
+  updatedNoteSubscription: Subscription;
   agentNotes: Array<NotesModel> = new Array<NotesModel>();
-  selectedIndex: number = 0;
+  selectedTabIndex: number = 0;
+  selectedNoteIndex: number = -1;
   ngOnInit() {
     this.uid = this.commonFunctions.getLoginCredentials().email;
+    this.selectedNoteIndex = -1;
     tabSelectedIndexSubscription(this);
     onNewNoteAdded(this);
+    getUpdatedNote(this);
   }
 
   getNotesType(item: NotesModel) {
@@ -41,6 +45,22 @@ export class AllNotesComponent extends BaseClass implements OnInit, OnDestroy, A
   }
   onLoadMoreClick() {
     makeServerRequest(this);
+  }
+
+  onEditClick(item: NotesModel, i: number) {
+    this.dataService.onDataShare(item);
+    this.selectedNoteIndex = i;
+  }
+
+  onDeleteClick(item: NotesModel, i: number) {
+    let self = this;
+    this.apiHandler.deleteNote(item.sysNoteID, {
+      onSuccess(response: any) {
+        self.onDeleteSuccess(i);
+      }, onError(errorCode: number, errorMsg: string) {
+
+      }
+    })
   }
 
   onSuccess(response: any) {
@@ -59,19 +79,17 @@ export class AllNotesComponent extends BaseClass implements OnInit, OnDestroy, A
     this.renderUI();
   }
 
-  onDeleteClick(item: NotesModel, i: number) {
-    let self = this;
-    this.apiHandler.deleteNote(item.sysNoteID, {
-      onSuccess(response: any) {
-        self.agentNotes.splice(i, 1);
-        self.totalRows = self.totalRows - 1;
-        self.dataService.onTabSelected(0);
-        self.dataService.onDataUpdated();
-        self.renderUI();
-      }, onError(errorCode: number, errorMsg: string) {
 
-      }
-    })
+  private onDeleteSuccess(i: number) {
+    this.agentNotes.splice(i, 1);
+    this.totalRows = this.totalRows - 1;
+    this.onDataChanged();
+  }
+
+  onDataChanged() {
+    this.dataService.onTabSelected(0);
+    this.dataService.onDataUpdated();
+    this.renderUI();
   }
 
   public renderUI() {
@@ -90,7 +108,7 @@ export class AllNotesComponent extends BaseClass implements OnInit, OnDestroy, A
 
 function tabSelectedIndexSubscription(context: AllNotesComponent) {
   context.tabIndexSubscription = context.dataService.tabSelectedObservable.subscribe((index: number) => {
-    context.selectedIndex = index;
+    context.selectedTabIndex = index;
     if (index == 0 && context.agentNotes.length <= 0) {
       makeServerRequest(context);
     }
@@ -116,8 +134,18 @@ function checkMoreDataAvailable(context: AllNotesComponent) {
 function onNewNoteAdded(context: AllNotesComponent) {
   context.newNoteAddedSubscription = context.dataService.dataUpdatedObservable.subscribe(data => {
     resetFields(context);
-    if (context.selectedIndex == 0) {
+    if (context.selectedTabIndex == 0) {
       makeServerRequest(context);
+    }
+  });
+}
+
+function getUpdatedNote(context: AllNotesComponent) {
+  context.updatedNoteSubscription = context.dataService.shareUpdateNoteObservable.subscribe(data => {
+    if (context.selectedNoteIndex != -1) {
+      context.agentNotes[context.selectedNoteIndex].notes = data;
+      context.dataService.onTabSelected(0);
+      context.cdr.markForCheck();
     }
   });
 }

@@ -65,6 +65,10 @@ export class DataServiceService {
 
   private tabSelectedSubject = new BehaviorSubject<number>(0);
   tabSelectedObservable = this.tabSelectedSubject.asObservable();
+
+  private shareUpdateNoteSubject = new Subject<string>();
+  shareUpdateNoteObservable = this.shareUpdateNoteSubject.asObservable();
+
   constructor() { }
 
   onHideShowLoader(showLoader: boolean) {
@@ -137,5 +141,9 @@ export class DataServiceService {
 
   onTabSelected(index: number) {
     this.tabSelectedSubject.next(index);
+  }
+
+  onShareUpdatedNote(note: string) {
+    this.shareUpdateNoteSubject.next(note);
   }
 }

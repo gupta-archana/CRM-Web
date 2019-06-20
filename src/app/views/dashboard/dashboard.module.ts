@@ -23,12 +23,12 @@ import { FavoritesComponent } from './favorites/favorites.component';
 import { AgentUnderPlanComponent } from './agent-under-plan/agent-under-plan.component';
 
 
-
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(dashboardRoutes),
     FormsModule, ReactiveFormsModule, ModulesModule
+
   ],
   providers: [AuthGuardService, CanDeactivateGuard],
   declarations: [NavigationDrawerComponent, TopAgentsComponent, AgentWithAlertComponent, AgentWithPerformanceComponent, SearchComponent, NewsFeedsComponent, TabComponent, ProfileSettingComponent, AppSettingComponent, RecentProfilesComponent, AgentsProfileComponent, PersonsProfileComponent, FavoritesComponent, AgentUnderPlanComponent]

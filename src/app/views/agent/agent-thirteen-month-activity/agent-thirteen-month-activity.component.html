@@ -4,8 +4,8 @@
     <div class="col-xs-8 text-center">
       <h1 class="t-agent">13 Month Activity</h1>
     </div>
-    <div class="col-xs-2 text-right toppad"><a (click)="onRecentProfileClick()" alt="" data-toggle="modal"
-        data-target="#recentAssociatesl"><img src="../../../../images/baseline-history.svg" alt=""></a></div>
+    <div class="col-xs-2 text-right toppad"><a (click)="onRecentProfileClick()" alt="" data-toggle="modal" data-target="#recentAssociatesl"><img
+          src="../../../../images/baseline-history.svg" alt=""></a></div>
   </div>
 
   <div class="container bottom-wrapper-for-back">
@@ -32,25 +32,26 @@
                   <div class="clearfix"></div>
                   <div class="row">
                     <div class="col-md-6 col-xs-6">
-                      <div class="amount">NPR Plan Current Month<br><span>${{item.nprPlanned}}</span></div>
+                      <div class="amount">NPR Plan Current Month<br><span>{{item.nprPlanned |
+                          currency:'USD':"symbol-narrow":'1.0-0'}}</span></div>
                     </div>
                     <div class="col-md-6 col-xs-6">
-                      <div class="amount">NPR Actual<br><span>${{item.nprActual}}</span></div>
-                    </div>
-                  </div>
-                  <div class="clear paddingTop10"></div>
-                  <div class="row">
-                    <div class="col-md-6 col-xs-6">
-                      <div class="amount">NPR % of Plan<br><span>{{item.nprPercent}}%</span></div>
-                    </div>
-                    <div class="col-md-6 col-xs-6">
-                      <div class="amount">CPL Actual<br><span>${{item.cplActual}}</span></div>
+                      <div class="amount">NPR Actual<br><span>{{item.nprActual | currency:'USD':"symbol-narrow":'1.0-0'}}</span></div>
                     </div>
                   </div>
                   <div class="clear paddingTop10"></div>
                   <div class="row">
                     <div class="col-md-6 col-xs-6">
-                      <div class="amount">CPL Plan<br><span>${{item.cplPlanned}}</span></div>
+                      <div class="amount">NPR % of Plan<br><span currencyMask>{{item.nprPercent}}%</span></div>
+                    </div>
+                    <div class="col-md-6 col-xs-6">
+                      <div class="amount">CPL Actual<br><span>{{item.cplActual| currency:'USD':"symbol-narrow":'1.0-0'}}</span></div>
+                    </div>
+                  </div>
+                  <div class="clear paddingTop10"></div>
+                  <div class="row">
+                    <div class="col-md-6 col-xs-6">
+                      <div class="amount">CPL Plan<br><span>{{item.cplPlanned| currency:'USD':"symbol-narrow":'1.0-0'}}</span></div>
                     </div>
                     <div class="col-md-6 col-xs-6">
                       <div class="amount">CPL % of Plan<br><span>{{item.cplPercent}}%</span></div>

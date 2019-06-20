@@ -1,32 +1,30 @@
-
 <div class="container app-bg2">
   <div class="row">
     <ul>
       <li *ngFor="let item of topAgents">
         <div class="col-xs-12 col-md-6 cell-bg">
           <div class="agent-detail">
-            <div class="dp"><img src="../../../../images/baseline-business-24px.svg"
-                onerror="this.src='../../../../images/placeholder.png'" (click)="onAgentClick(item)" />
+            <div class="dp"><img src="../../../../images/baseline-business-24px.svg" onerror="this.src='../../../../images/placeholder.png'"
+                (click)="onAgentClick(item)" />
             </div>
-            <h4><a (click)="onAgentClick(item)">{{item.name}}</a> <span
-                (click)="onAgentClick(item)">({{item.entityId}})</span><a><img
-                  src="{{checkEntityFavorite(item)?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}" alt=""
-                  (click)="onStarClick(item)"></a></h4>
+            <h4><a (click)="onAgentClick(item)">{{item.name}}</a> <span (click)="onAgentClick(item)">({{item.entityId}})</span><a><img
+                  src="{{checkEntityFavorite(item)?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}"
+                  alt="" (click)="onStarClick(item)"></a></h4>
             <span>{{item.city+','+item.state}}</span>
             <div class="clearfix"></div>
             <div class="row" (click)="onAgentClick(item)">
               <div class="col-md-6 col-xs-6">
-                <div class="amount">NPR YTD<br><span>$ {{item.netPermium}}</span></div>
+                <div class="amount">NPR YTD<br><span currencyMask>{{item.netPermium | currency:'USD':"symbol-narrow":'1.0-0'}}</span></div>
               </div>
               <div class="col-md-6 col-xs-6">
-                <div class="amount">CPL Issued YTD<br><span>$ {{item.cpl}}</span></div>
+                <div class="amount">CPL Issued YTD<br><span currencyMask>{{item.cpl | currency:'USD':"symbol-narrow":'1.0-0'}}</span></div>
               </div>
             </div>
           </div>
         </div>
       </li>
     </ul>
-   
+
 
     <div class="row  marginBottom20" *ngIf="moreDataAvailable">
       <div class="col-xs-12 col-md-12 loadMoreWp">
@@ -36,8 +34,6 @@
     </div>
     <div id="ratioView">{{totalAndCurrentRowsRatio}}</div>
 
-    <button (click)="topFunction()" id="myBtn" title="Go to top"><span
-        class="glyphicon glyphicon-arrow-up"></span></button>
+    <button (click)="topFunction()" id="myBtn" title="Go to top"><span class="glyphicon glyphicon-arrow-up"></span></button>
   </div>
 </div>
-

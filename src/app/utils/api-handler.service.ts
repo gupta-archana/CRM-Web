@@ -248,6 +248,14 @@ export class ApiHandlerService implements ApiResponseCallback {
   }
 
   /**
+   * updateNote
+   */
+  public updateNote(requestJson: any, apiResponseCallback: ApiResponseCallback) {
+    this.dataService.onHideShowLoader(true);
+    let url = this.api.getUpdateNoteUrl(this.getAppMode());
+    this.apiService.hitPostApi(url, this.getRequestXml(requestJson), handleAddAndUpdateApiResponse(this, apiResponseCallback));
+  }
+  /**
    * getStates
    */
   public getStates(apiResponseCallback: ApiResponseCallback) {

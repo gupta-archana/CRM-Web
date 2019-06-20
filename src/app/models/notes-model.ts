@@ -3,7 +3,7 @@ export class NotesModel {
   UID: string;
   entity: string;
   entityID: string;
-  note: string;
+  notes: string;
   dateCreated: string;
   dateModified: string;
   rowNum: string;

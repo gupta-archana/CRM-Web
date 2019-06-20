@@ -30,7 +30,8 @@
               </div>
               <div class="col-xs-6 col-md-6 noPadding">
                 <div class="ag-detail-icons textRight">
-                  <a alt=""><img src="../../../../../images/ic_note_edit.svg" alt=""> Edit</a>
+                  <a alt=""  data-toggle="modal" data-target="#updateNewNotes" (click)="onEditClick(item,i)"><img src="../../../../../images/ic_note_edit.svg" alt=""
+                      > Edit</a>
                 </div>
               </div>
             </div>
@@ -49,6 +50,5 @@
   </div>
   <div id="ratioView">{{totalAndCurrentRowsRatio}}</div>
 
-  <button (click)="topFunction()" id="myBtn" title="Go to top"><span
-      class="glyphicon glyphicon-arrow-up"></span></button>
+  <button (click)="topFunction()" id="myBtn" title="Go to top"><span class="glyphicon glyphicon-arrow-up"></span></button>
 </div>

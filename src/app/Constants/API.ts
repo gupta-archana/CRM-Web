@@ -153,6 +153,12 @@ export class API {
   getDeleteNoteUrl(app_mode: string, noteId: string) {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=systemNoteDelete&sysNoteID=" + noteId;
   }
+
+
+  getUpdateNoteUrl(app_mode: string) {
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=systemNoteModify";
+  }
+
   getStates() {
     return this.STATES_JSON_URL;
   }

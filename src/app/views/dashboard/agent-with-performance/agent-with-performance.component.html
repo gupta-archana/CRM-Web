@@ -15,7 +15,7 @@
             <div class="clearfix"></div>
             <div class="row">
               <div class="col-md-6 col-xs-6">
-                <div class="amount">NPR Annual Plan<br><span>$ {{item.nprPlanned}}</span></div>
+                <div class="amount">NPR Annual Plan<br><span>{{item.nprPlanned| currency:'USD':"symbol-narrow":'1.0-0'}}</span></div>
               </div>
               <div class="col-md-6 col-xs-6">
                 <div class="amount">NPR YTD % of Annual<br><span>{{item.nprPercent}}%</span></div>
@@ -23,7 +23,7 @@
             </div>
             <div class="row">
               <div class="col-md-6 col-xs-6">
-                <div class="amount">NPR YTD<br><span>$ {{item.nprActual}}</span></div>
+                <div class="amount">NPR YTD<br><span> {{item.nprActual| currency:'USD':"symbol-narrow":'1.0-0'}}</span></div>
               </div>
               <div class="col-md-6 col-xs-6">
                 <div class="amount">NPR YTD % YTD Plan<br><span>{{item.nprPercentYTD}}%</span></div>
@@ -32,7 +32,7 @@
             <div class="row">
               <div class="col-md-12 col-xs-12">
                 <div class="amount">NPR Plan YTD <span class="fonSize">(Through end of current month)</span>
-                  <br><span>$ {{item.nprPlannedYTD}}</span></div>
+                  <br><span> {{item.nprPlannedYTD| currency:'USD':"symbol-narrow":'1.0-0'}}</span></div>
               </div>
             </div>
           </div>
