@@ -132,8 +132,8 @@ function navigateToSelectedPage(title: string, context: NavigationDrawerComponen
     case context.constants.RECENT_PROFILE:
       selectedNavBarItemPath = context.paths.PATH_RECENT_RPOFILES;
       break;
-    case context.constants.FAVOURITE:
-      selectedNavBarItemPath = context.paths.PATH_FAVORITES;
+    case context.constants.FOLLOWING:
+      selectedNavBarItemPath = context.paths.PATH_FOLLOWING;
       break;
     case context.constants.LOGOUT:
       context.onLogoutClick();
@@ -195,8 +195,8 @@ function changeHeaderTitle(path: string, context: NavigationDrawerComponent) {
           context.showRefreshButton = true;
           break;
 
-        case context.paths.PATH_FAVORITES:
-          context.headerTitle = context.constants.FAVOURITE;
+        case context.paths.PATH_FOLLOWING:
+          context.headerTitle = context.constants.FOLLOWING;
           context.showRefreshButton = true;
           break;
         case context.paths.PATH_AGENT_DETAIL:

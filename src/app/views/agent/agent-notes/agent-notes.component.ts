@@ -15,11 +15,12 @@ export class AgentNotesComponent extends BaseClass implements OnInit {
   constructor(private injector: Injector) {
     super(injector);
   }
-  agentInfo: EntityModel;
+  entityModel: EntityModel;
   entityInfo: any;
   agentNotes: Array<NotesModel> = new Array;
 
   ngOnInit() {
+    this.entityModel = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
     shareTabIndexToChilds(this, 0);
   }
 

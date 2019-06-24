@@ -21,7 +21,7 @@
 
 .bottom-wrapper-for-back {
   width: 100%;
-  padding-top: 70px;
+  padding-top: 100px;
   z-index: 5;
   overflow: auto;
 }
@@ -272,7 +272,8 @@ mat-ink-bar.mat-ink-bar {
 .marginBottom40 {
   margin-bottom: 40px;
 }
-.marginBottom20{
+
+.marginBottom20 {
   margin-bottom: 20px;
 }
 
@@ -300,7 +301,36 @@ mat-ink-bar.mat-ink-bar {
   padding: 5px;
   border-radius: 4px;
 }
+
 ul.agent-details li.agents a {
   background: url(../images/building-icon.svg) no-repeat left;
   padding-left: 35px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0px 1px 2px #dadada;
+  height: 36px;
+  line-height: 2.1;
+  padding-left: 5px;
+}
+
+.header-div {
+  margin-left: auto;
+  margin-right: auto;
+  height: auto;
+  width: auto;
+}
+
+.wrapper-back {
+  width: 100%;
+  position: fixed;
+  z-index: 10;
+  overflow: auto;
+  height: 100px !important;
+}
+
+.wrapper-back #detail-page-header {
+  height: 64px;
 }

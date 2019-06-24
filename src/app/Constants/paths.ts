@@ -11,7 +11,7 @@ export const PATH_SEARCH = "search";
 export const PATH_NEWS = "news";
 export const PATH_RECENT_RPOFILES = "recentProfiles";
 export const PATH_SETTING = "setting";
-export const PATH_FAVORITES = "favorites";
+export const PATH_FOLLOWING = "following";
 
 //entity detail
 export const PATH_AGENT_DETAIL = "agentDetail";

@@ -46,6 +46,7 @@ import { PersonAgentsComponent } from './views/person/person-agents/person-agent
 import { UpdateNoteComponent } from './customUI/dialogs/update-note/update-note.component';
 import { CurrencyMaskModule } from "ng2-currency-mask";
 import { CurrencyMaskConfig, CURRENCY_MASK_CONFIG } from 'ng2-currency-mask/src/currency-mask.config';
+import { EntityNameHeaderComponent } from './customUI/entity-name-header/entity-name-header.component';
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "left",
   allowNegative: true,
@@ -80,6 +81,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     PersonDetailComponent,
     PersonAgentsComponent,
     UpdateNoteComponent,
+    EntityNameHeaderComponent,
   ],
   imports: [
     BrowserModule,

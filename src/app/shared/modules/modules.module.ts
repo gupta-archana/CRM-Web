@@ -11,6 +11,7 @@ import { SearchFilterComponent } from '../../customUI/dialogs/search-filter/sear
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatSnackBarModule, MatDialogModule, MatButtonModule, MatFormFieldModule } from '@angular/material';
 import { CurrencyMaskModule } from "ng2-currency-mask";
+import { DecimalPipe } from '@angular/common';
 import { CurrencyMaskConfig, CURRENCY_MASK_CONFIG } from 'ng2-currency-mask/src/currency-mask.config';
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "left",
@@ -62,6 +63,6 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     MatFormFieldModule,
 
   ],
-  providers: [{ provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }],
+  providers: [{ provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }, DecimalPipe],
 })
 export class ModulesModule { }

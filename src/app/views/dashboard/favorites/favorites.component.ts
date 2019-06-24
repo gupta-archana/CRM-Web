@@ -66,7 +66,8 @@ export class FavoritesComponent extends BaseClass implements OnInit, ApiResponse
         sessionStorage.setItem(this.constants.ENTITY_INFO, JSON.stringify(item));
         break;
       case this.constants.ENTITY_PERSON_PRESENTER:
-
+      navigatingPath = this.paths.PATH_PERSON_DETAIL;
+      sessionStorage.setItem(this.constants.ENTITY_INFO, JSON.stringify(item));
         break;
       default:
         break;
@@ -76,7 +77,7 @@ export class FavoritesComponent extends BaseClass implements OnInit, ApiResponse
       this.commonFunctions.navigateWithoutReplaceUrl(navigatingPath);
     }
     else
-      this.commonFunctions.showErrorSnackbar("We are working on person ui");
+      this.commonFunctions.showErrorSnackbar("We are working on employee ui");
   }
 
 

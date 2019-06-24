@@ -32,7 +32,7 @@ export const dashboardRoutes: Routes = [
       { path: path.PATH_NEWS, component: NewsFeedsComponent },
       { path: path.PATH_SETTING, component: TabComponent },
       { path: path.PATH_RECENT_RPOFILES, component: RecentProfilesComponent },
-      { path: path.PATH_FAVORITES, component: FavoritesComponent }
+      { path: path.PATH_FOLLOWING, component: FavoritesComponent }
     ]
   }
 ];

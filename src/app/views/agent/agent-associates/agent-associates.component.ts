@@ -13,7 +13,7 @@ export class AgentAssociatesComponent extends BaseClass implements OnInit, ApiRe
 
 
   associatesModels: AssociatesModel[] = new Array;
-  entityInfo: EntityModel;
+  entityModel: EntityModel;
   totalRows: any = 0;
   moreDataAvailable: boolean = true;
   totalAndCurrentRowsRatio: string = "";
@@ -25,7 +25,7 @@ export class AgentAssociatesComponent extends BaseClass implements OnInit, ApiRe
   }
 
   ngOnInit() {
-    this.entityInfo = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
+    this.entityModel = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
     getAssociates(this);
   }
   goBack() {
@@ -91,7 +91,7 @@ export class AgentAssociatesComponent extends BaseClass implements OnInit, ApiRe
 function getAssociates(context: AgentAssociatesComponent) {
   let dataArray = JSON.parse(sessionStorage.getItem(context.constants.ASSOCIATES_ARRAY));
   context.currentEntityID = sessionStorage.getItem(context.constants.ASSOCIATES_CURRENT_ENTITY_ID);
-  if (dataArray && dataArray.length > 0 && context.currentEntityID === context.entityInfo.entityId) {
+  if (dataArray && dataArray.length > 0 && context.currentEntityID === context.entityModel.entityId) {
     context.associatesModels = dataArray;
     context.pageNum = Number(sessionStorage.getItem(context.constants.ASSOCIATES_PAGE_NUMBER));
     context.totalRows = sessionStorage.getItem(context.constants.ASSOCIATES_TOTAL_ROWS);
@@ -106,14 +106,14 @@ function setAssociates(context: AgentAssociatesComponent) {
   sessionStorage.setItem(context.constants.ASSOCIATES_ARRAY, JSON.stringify(context.associatesModels));
   sessionStorage.setItem(context.constants.ASSOCIATES_PAGE_NUMBER, JSON.stringify(context.pageNum));
   sessionStorage.setItem(context.constants.ASSOCIATES_TOTAL_ROWS, context.totalRows);
-  sessionStorage.setItem(context.constants.ASSOCIATES_CURRENT_ENTITY_ID, context.entityInfo.entityId);
+  sessionStorage.setItem(context.constants.ASSOCIATES_CURRENT_ENTITY_ID, context.entityModel.entityId);
 }
 
 function makeServerRequest(context: AgentAssociatesComponent) {
   context.pageNum++;
 
   //context.entityInfo.entityId = "017575";
-  context.apiHandler.getAssociates(context.entityInfo.entityId, context.entityInfo.type, context.pageNum, context);
+  context.apiHandler.getAssociates(context.entityModel.entityId, context.entityModel.type, context.pageNum, context);
 
   // else {
   //   context.apiHandler.getPersonAffiliations(context.entityInfo.entityId, context.pageNum, context)
