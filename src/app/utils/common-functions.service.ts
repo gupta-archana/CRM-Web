@@ -127,20 +127,20 @@ export class CommonFunctionsService {
     window.history.back();
   }
 
-  hideShowTopScrollButton() {
+  hideShowTopScrollButton(document: Document) {
     let self = this;
-    window.onscroll = function() { self.scrollFunction() };
+    window.onscroll = function() { self.scrollFunction(document) };
   }
-  private scrollFunction() {
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+  private scrollFunction(doc: Document) {
+    if (doc.body.scrollTop > 20 || doc.documentElement.scrollTop > 20) {
       document.getElementById("myBtn").style.display = "block";
     } else {
       document.getElementById("myBtn").style.display = "none";
     }
   }
-  topFunction() {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
+  topFunction(doc: Document) {
+    doc.body.scrollTop = 0;
+    doc.documentElement.scrollTop = 0;
   }
 
   getLoginCredentials() {

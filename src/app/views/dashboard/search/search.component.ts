@@ -174,7 +174,6 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Aft
     });
   }
 
-
   public updateUI() {
     setData(this);
     checkAndSetUi(this);

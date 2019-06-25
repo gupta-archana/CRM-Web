@@ -14,7 +14,7 @@ import { Subscription } from 'rxjs';
 })
 export class ContactDetailComponent extends BaseClass implements OnInit, ApiResponseCallback, OnDestroy {
   deviceInfo = null;
-  entityInfo: EntityModel;
+  entityModel: EntityModel;
   dataUpdatedSubscription: Subscription;
   entityContactModel: EntityContactModel = new EntityContactModel();
   constructor(private injector: Injector,
@@ -23,7 +23,7 @@ export class ContactDetailComponent extends BaseClass implements OnInit, ApiResp
   }
 
   ngOnInit() {
-    this.entityInfo = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
+    this.entityModel = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
     getContactDetailFromServer(this);
     registerDataUpdatedObservable(this);
   }
@@ -58,7 +58,7 @@ export class ContactDetailComponent extends BaseClass implements OnInit, ApiResp
 
   openLocationOnMap(): void {
     let os = this.deviceDetector.os;
-    let mapLocAddress = this.entityInfo.addr1 + "+" + this.entityInfo.addr2 + "+" + this.entityInfo.addr3 + "+" + this.entityInfo.addr4 + "+" + this.entityInfo.city + "+" + this.entityInfo.state;
+    let mapLocAddress = this.entityModel.addr1 + "+" + this.entityModel.addr2 + "+" + this.entityModel.addr3 + "+" + this.entityModel.addr4 + "+" + this.entityModel.city + "+" + this.entityModel.state;
 
     switch (os) {
       case "Windows":
@@ -77,7 +77,7 @@ export class ContactDetailComponent extends BaseClass implements OnInit, ApiResp
   shareVCard() {
     let userInfo = {
       "type": this.entityContactModel.entity,
-      "id": this.entityInfo.entityId
+      "id": this.entityModel.entityId
     }
     this.dataService.onShareEntityIdAndType(userInfo);
   }
@@ -98,7 +98,7 @@ export class ContactDetailComponent extends BaseClass implements OnInit, ApiResp
   }
   onSuccess(response: any) {
     this.entityContactModel = response.entitycontact[0];
-    this.entityContactModel.name = this.entityInfo.name;
+    this.entityContactModel.name = this.entityModel.name;
     this.cdr.markForCheck();
   }
   onError(errorCode: number, errorMsg: string) {
@@ -112,7 +112,7 @@ export class ContactDetailComponent extends BaseClass implements OnInit, ApiResp
 }
 
 function getContactDetailFromServer(context: ContactDetailComponent) {
-  context.apiHandler.getEntityContactDetail(context.entityInfo.entityId, context.entityInfo.type, context);
+  context.apiHandler.getEntityContactDetail(context.entityModel.entityId, context.entityModel.type, context);
 }
 function registerDataUpdatedObservable(context: ContactDetailComponent) {
   context.dataUpdatedSubscription = context.dataService.dataUpdatedObservable.subscribe(isUpdated => {

@@ -14,7 +14,7 @@ export class AgentWithAlertComponent implements OnInit, OnDestroy {
     private commonFunctions: CommonFunctionsService) { }
 
   ngOnInit() {
-    this.commonFunctions.hideShowTopScrollButton();
+    this.commonFunctions.hideShowTopScrollButton(document);
     this.pageRefreshSubscription = this.dataService.pageRefreshObservable.subscribe(data => {
 
     });

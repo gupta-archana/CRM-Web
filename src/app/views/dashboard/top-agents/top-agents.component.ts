@@ -30,7 +30,7 @@ export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponse
   topAgents: Array<EntityModel> = [];
 
   ngOnInit() {
-    this.commonFunctions.hideShowTopScrollButton();
+    this.commonFunctions.hideShowTopScrollButton(document);
     this.pageRefreshSubscription = this.dataService.pageRefreshObservable.subscribe(called => {
       if (called)
         refreshData(this);
@@ -138,7 +138,7 @@ function getData(context: TopAgentsComponent) {
   context.pageNumber = Number(sessionStorage.getItem(context.constants.TOP_AGENT_CURRENT_PAGE_NO));
   context.totalRows = Number(sessionStorage.getItem(context.constants.TOP_AGENT_TOTAL_ROWS));
   context.renderUI();
-  
+
 }
 
 function checkMoreDataAvailable(context: TopAgentsComponent) {

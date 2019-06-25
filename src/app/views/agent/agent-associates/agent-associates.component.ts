@@ -48,24 +48,22 @@ export class AgentAssociatesComponent extends BaseClass implements OnInit, ApiRe
         this.totalRows = element.rowNum;
       }
     });
-
-    this.checkDataAvailable();
-    this.updateRatioUI();
-    this.cdr.markForCheck();
     setAssociates(this);
+    this.renderUI();
   }
 
 
   onError(errorCode: number, errorMsg: string) {
-    this.checkDataAvailable();
+    this.renderUI();
     this.commonFunctions.showErrorSnackbar(errorMsg);
   }
 
-
-  private checkDataAvailable() {
-    if (!this.associatesModels || this.associatesModels.length == this.totalRows)
-      this.moreDataAvailable = false;
+  public renderUI() {
+    updateRatioUI(this);
+    checkMoreDataAvailable(this);
+    this.cdr.markForCheck();
   }
+
 
 
   getAddress(item: AssociatesModel) {
@@ -82,10 +80,7 @@ export class AgentAssociatesComponent extends BaseClass implements OnInit, ApiRe
     this.clickedEntity.entityId = item.personID;
 
   }
-  updateRatioUI() {
-    this.totalAndCurrentRowsRatio = this.commonFunctions.showMoreDataSnackbar(this.associatesModels, this.totalRows);
-    this.cdr.markForCheck();
-  }
+
 }
 
 function getAssociates(context: AgentAssociatesComponent) {
@@ -95,7 +90,7 @@ function getAssociates(context: AgentAssociatesComponent) {
     context.associatesModels = dataArray;
     context.pageNum = Number(sessionStorage.getItem(context.constants.ASSOCIATES_PAGE_NUMBER));
     context.totalRows = sessionStorage.getItem(context.constants.ASSOCIATES_TOTAL_ROWS);
-    context.updateRatioUI();
+    context.renderUI();
   }
   else {
     makeServerRequest(context);
@@ -120,3 +115,12 @@ function makeServerRequest(context: AgentAssociatesComponent) {
   // }
 }
 
+function checkMoreDataAvailable(context: AgentAssociatesComponent) {
+  if (!context.associatesModels || context.associatesModels.length == context.totalRows)
+    context.moreDataAvailable = false;
+}
+
+function updateRatioUI(context: AgentAssociatesComponent) {
+  context.totalAndCurrentRowsRatio = context.commonFunctions.showMoreDataSnackbar(context.associatesModels, context.totalRows);
+  context.cdr.markForCheck();
+}

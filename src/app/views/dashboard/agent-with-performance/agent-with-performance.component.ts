@@ -22,7 +22,7 @@ export class AgentWithPerformanceComponent extends BaseClass implements OnInit, 
   constructor(injector: Injector) { super(injector) }
 
   ngOnInit() {
-    this.commonFunctions.hideShowTopScrollButton();
+    this.commonFunctions.hideShowTopScrollButton(document);
     this.pageRefreshSubscription = this.dataService.pageRefreshObservable.subscribe(data => {
       refreshData(this);
     });
