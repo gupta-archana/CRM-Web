@@ -2,6 +2,7 @@ import { Component, Injector, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { BaseClass } from '../../../../global/base-class';
 import { NotesModel } from '../../../../models/notes-model';
+import { EntityModel } from '../../../../models/entity-model';
 
 @Component({
   selector: 'app-my-notes',
@@ -17,8 +18,8 @@ export class MyNotesComponent extends BaseClass implements OnInit, OnDestroy {
   totalRows: any = 0;
   moreDataAvailable: boolean = false;
   totalAndCurrentRowsRatio: string = "";
-  ALL: string = "ALL";
   uid: string;
+  entityModel:EntityModel;
   tabIndexSubscription: Subscription;
   newNoteAddedSubscription: Subscription;
   updatedNoteSubscription: Subscription;
@@ -27,6 +28,7 @@ export class MyNotesComponent extends BaseClass implements OnInit, OnDestroy {
   selectedNoteIndex: number = -1;
   ngOnInit() {
     this.uid = this.commonFunctions.getLoginCredentials().email;
+    this.entityModel = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
     tabSelectedIndexSubscription(this);
     onNewNoteAdded(this);
     getUpdatedNote(this);
@@ -107,7 +109,7 @@ function tabSelectedIndexSubscription(context: MyNotesComponent) {
 }
 function makeServerRequest(context: MyNotesComponent) {
   context.pageNumber++;
-  context.apiHandler.getNotes(context.uid, context.ALL, context.ALL, context.pageNumber, context);
+  context.apiHandler.getNotes(context.uid, context.entityModel.type, context.entityModel.entityId, context.pageNumber, context);
 }
 
 function updateRatioUI(context: MyNotesComponent) {

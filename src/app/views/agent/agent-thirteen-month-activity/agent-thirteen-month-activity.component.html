@@ -46,7 +46,7 @@
                   <div class="clear paddingTop10"></div>
                   <div class="row">
                     <div class="col-md-6 col-xs-6">
-                      <div class="amount">NPR % of Plan<br><span currencyMask>{{item.nprPercent|number:'1.1-1'}}%</span>
+                      <div class="amount">NPR % of Plan<br><span currencyMask>{{item.nprPercent==''?'0':item.nprPercent|number:'1.1-1'}}%</span>
                       </div>
                     </div>
                     <div class="col-md-6 col-xs-6">
@@ -61,7 +61,7 @@
                         Plan<br><span>{{item.cplPlanned| currency:'USD':"symbol-narrow":'1.0-0'}}</span></div>
                     </div>
                     <div class="col-md-6 col-xs-6">
-                      <div class="amount">CPL % of Plan<br><span>{{item.cplPercent|number:'1.1-1'}}%</span></div>
+                      <div class="amount">CPL % of Plan<br><span>{{item.cplPercent==''?'0':item.cplPercent|number:'1.1-1'}}%</span></div>
                     </div>
                   </div>
                 </div>

@@ -19,6 +19,7 @@ export class FavoritesComponent extends BaseClass implements OnInit, ApiResponse
   favorites: Array<EntityModel> = new Array();
   moreDataAvailable: boolean = true;
   pageRefreshSubscription: Subscription;
+  removeFavSubscription:Subscription;
 
   constructor(private injector: Injector) { super(injector); }
 
@@ -51,7 +52,8 @@ export class FavoritesComponent extends BaseClass implements OnInit, ApiResponse
 
   onStarClick(item: EntityModel, index: number) {
     var self = this;
-    this.commonApis.setFavorite(item, this.apiHandler, this.cdr).asObservable().subscribe(data => {
+  this.removeFavSubscription =  this.commonApis.setFavorite(item, this.apiHandler, this.cdr).asObservable().subscribe(data => {
+    self.unsubscribeRemoveSubscription();
       self.favorites.splice(index, 1);
       self.totalRows--;
       self.renderUI();
@@ -92,6 +94,13 @@ export class FavoritesComponent extends BaseClass implements OnInit, ApiResponse
   ngOnDestroy(): void {
     if (this.pageRefreshSubscription && !this.pageRefreshSubscription.closed) {
       this.pageRefreshSubscription.unsubscribe();
+    }
+    this.unsubscribeRemoveSubscription();
+  }
+
+  private unsubscribeRemoveSubscription() {
+    if (this.removeFavSubscription && !this.removeFavSubscription.closed) {
+      this.removeFavSubscription.unsubscribe();
     }
   }
 }
