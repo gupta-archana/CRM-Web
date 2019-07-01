@@ -57,7 +57,7 @@ export class DataServiceService {
   private dataUpdatedSubject = new Subject<boolean>();
   dataUpdatedObservable = this.dataUpdatedSubject.asObservable();
 
-  private shareDataSubject = new BehaviorSubject<any>("");
+  shareDataSubject = new BehaviorSubject<any>("");
   shareDataObservable = this.shareDataSubject.asObservable();
 
   private searchFiltersSubject = new Subject<SearchFilterModel>();

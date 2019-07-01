@@ -11,7 +11,6 @@ import { ApiResponseCallback } from '../../../Interfaces/ApiResponseCallback';
 })
 export class AgentAssociatesComponent extends BaseClass implements OnInit, ApiResponseCallback {
 
-
   associatesModels: AssociatesModel[] = new Array;
   entityModel: EntityModel;
   totalRows: any = 0;

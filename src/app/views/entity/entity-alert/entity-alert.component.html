@@ -1,0 +1,35 @@
+<div class="container-fluid nospace">
+  <div class="nav-bg wrapper-back">
+    <div id="detail-page-header">
+      <div class="col-xs-2 toppad"><img src="../../../../images/back-btn.svg" alt="" (click)="goBack()"></div>
+      <div class="col-xs-8 text-center">
+        <h1 class="t-agent">Open Alerts</h1>
+      </div>
+    </div>
+    <app-entity-name-header [entityModel]="entityModel"></app-entity-name-header>
+  </div>
+  <div class="container app-bg2 bottom-wrapper-for-back">
+    <div class="row marginTop20">
+      <ul>
+        <li *ngFor="let item of openAlertModels" (click)="onAlertClick(item)">
+          <div class="col-xs-12 col-md-6 cell-bg">
+            <div class="agent-detail openAlert">
+              <div class="statusInd_wp bgRed"
+                [ngClass]="{'bgRed':item.severitydesc=='Red','bgYellow':item.severitydesc!='Red'}">
+                {{item.severitydesc | slice:0:1}}</div>
+              <h4>{{item.alertType}}</h4>
+              <span>{{item.description}}</span>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <div class="row marginBottom20" *ngIf="moreDataAvailable">
+        <div class="col-xs-12 col-md-12 loadMoreWp">
+          <hr />
+          <div class="loadMore"><a alt="Load More" (click)="onLoadMoreClick()">Load More</a></div>
+        </div>
+      </div>
+      <div id="ratioView">{{totalAndCurrentRowsRatio}}</div>
+    </div>
+  </div>
+</div>

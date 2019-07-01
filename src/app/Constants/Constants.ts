@@ -27,6 +27,8 @@ export class Constants {
   SEARCH_FILTERS = "search_filters";
   SESSION_FAV_ARRAY = "session_fav_array";
 
+  ENTITY_ALERTS_ENTITY_ID = "entity_alerts_entity_id";
+
   //top agents session constants
   TOP_AGENT_CURRENT_PAGE_NO = "top_agent_page_no";
   TOP_AGENT_DATA = "top_agent_data";

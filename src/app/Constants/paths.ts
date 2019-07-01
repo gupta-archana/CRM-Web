@@ -22,6 +22,8 @@ export const PATH_NOTES = "notes";
 export const PATH_THIRTEEN_MONTH_ACTIVITY = "thirteenMonthActivity";
 export const PATH_AGENT_ASSOCIATES = "agentAssociates";
 export const PATH_PERSON_AGENTS = "personAgents";
+export const PATH_OPEN_ALERTS = "openAlerts";
+export const PATH_OPEN_ALERT_DETAIL = "openAlertDetail";
 
 //others
 export const PATH_REARRANGE_DRAWER_ITEM = "rearrangeHomeModules";

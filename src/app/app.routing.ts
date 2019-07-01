@@ -14,6 +14,8 @@ import { AgentNotesComponent } from './views/agent/agent-notes/agent-notes.compo
 import { AgentThirteenMonthActivityComponent } from './views/agent/agent-thirteen-month-activity/agent-thirteen-month-activity.component';
 import { AgentAssociatesComponent } from './views/agent/agent-associates/agent-associates.component';
 import { PersonAgentsComponent } from './views/person/person-agents/person-agents.component';
+import { EntityAlertComponent } from './views/entity/entity-alert/entity-alert.component';
+import { EntityAlertDetailComponent } from './views/entity/entity-alert-detail/entity-alert-detail.component';
 
 
 
@@ -31,6 +33,8 @@ const appRoutesArray: Routes =
     { path: paths.PATH_THIRTEEN_MONTH_ACTIVITY, component: AgentThirteenMonthActivityComponent },
     { path: paths.PATH_AGENT_ASSOCIATES, component: AgentAssociatesComponent },
     { path: paths.PATH_PERSON_AGENTS, component: PersonAgentsComponent },
+    { path: paths.PATH_OPEN_ALERTS, component: EntityAlertComponent },
+    { path: paths.PATH_OPEN_ALERT_DETAIL, component: EntityAlertDetailComponent },
     { path: '**', component: PageNotFoundComponent }
 
   ];

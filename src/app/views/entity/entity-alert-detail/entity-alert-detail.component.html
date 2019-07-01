@@ -1,0 +1,122 @@
+<div class="container-fluid nospace">
+  <div class="nav-bg wrapper-back">
+    <div id="detail-page-header">
+      <div class="col-xs-2 toppad"><img src="../../../../images/back-btn.svg" alt="" (click)="goBack()"></div>
+      <div class="col-xs-8 text-center">
+        <h1 class="t-agent">Open Alerts</h1>
+      </div>
+    </div>
+    <app-entity-name-header [entityModel]="entityModel"></app-entity-name-header>
+  </div>
+  <div class="container app-bg2 bottom-wrapper-for-back">
+    <div class="row marginTop20">
+
+      <div class="col-xs-12 col-md-6 cell-bg">
+        <div class="agent-detail">
+          <div class="row">
+            <div class="col-md-12 col-xs-12">
+              <div class="alertType_wp">
+                <h4 class="fontColor">Alert Type</h4>
+                <span>{{openAlertModel.alertType}}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 col-xs-6">
+              <div class="alertType_wp">
+                <h4>Severity</h4>
+                <span class="severityRed">{{openAlertModel.severitydesc}}</span>
+              </div>
+            </div>
+            <div class="col-md-6 col-xs-6">
+              <div class="alertType_wp">
+                <h4>Measure</h4>
+                <span>{{openAlertModel.measure}}%</span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-xs-6">
+              <div class="alertType_wp">
+                <h4>Owner</h4>
+                <span>{{openAlertModel.owner}}</span>
+              </div>
+            </div>
+            <div class="col-md-6 col-xs-6">
+              <div class="alertType_wp">
+                <h4>Date Created</h4>
+                <span>{{openAlertModel.dateCreated| slice:0:9}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="clear"></div>
+          <div class="paddingTop10"></div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-md-6 cell-bg">
+        <div class="agent-detail">
+          <div class="row">
+            <div class="col-md-12 col-xs-12">
+              <div class="alertType_wp">
+                <h4 class="fontColor">Description</h4>
+                <span>{{openAlertModel.description}}</span>
+              </div>
+            </div>
+
+            <!-- <div class="col-md-12 col-xs-12">
+
+              <div class="collapse" id="collapseExample">
+                more text more text more text more text.....
+              </div>
+
+              <div class="clear"></div>
+              <div class="paddingTop10"></div>
+
+              <input type="button" class="showMoreBtn" data-toggle="collapse" href="#collapseExample" title="Show More"
+                value="SHOW MORE" onclick="showLessBtn(this)" />
+            </div> -->
+
+          </div>
+
+          <div class="clear"></div>
+          <div class="paddingTop10"></div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-md-6 cell-bg">
+        <div class="agent-detail">
+          <div class="row">
+            <div class="col-md-6 col-xs-6">
+              <div class="alertType_wp">
+                <h4>Status</h4>
+                <span>{{openAlertModel.stat}}</span>
+              </div>
+            </div>
+            <div class="col-md-6 col-xs-6">
+              <div class="alertType_wp">
+                <h4></h4>
+                <span></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="clear"></div>
+          <div class="paddingTop10"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-12 noPadding">
+        <div class="buttonFooter_wp">
+          <button type="button" class="btn btn-primary footerBtn" data-toggle="modal" data-target="#markAlert">
+            <img src="images/ic_objective_complete.svg" alt=""> Make as Reviewed
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-mark-as-reviewed-dialog></app-mark-as-reviewed-dialog>

@@ -159,6 +159,10 @@ export class API {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=systemNoteModify";
   }
 
+  getOpenAlertsUrl(app_mode:string,agentID:string,pageNum:string){
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=agentalertget&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows+"&agentID="+agentID;
+  }
+
   getStates() {
     return this.STATES_JSON_URL;
   }
