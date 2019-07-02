@@ -259,12 +259,23 @@ export class ApiHandlerService implements ApiResponseCallback {
   /**
    * getAlerts
    */
-  public getAlerts(agentID:string,pageNum:any,apiResponseCallback:ApiResponseCallback) {
+  public getAlerts(agentID: string, pageNum: any, apiResponseCallback: ApiResponseCallback) {
     this.dataService.onHideShowLoader(true);
     this.apiResponseCallback = apiResponseCallback;
-    let url = this.api.getOpenAlertsUrl(this.getAppMode(),agentID,pageNum);
+    let url = this.api.getOpenAlertsUrl(this.getAppMode(), agentID, pageNum);
     this.apiService.hitGetApi(url, this);
   }
+
+  /**
+   * getClaims
+   */
+  public getClaims(agentID: string, pageNum: any, apiResponseCallback: ApiResponseCallback) {
+    this.dataService.onHideShowLoader(true);
+    this.apiResponseCallback = apiResponseCallback;
+    let url = this.api.getClaimsUrl(this.getAppMode(), agentID, pageNum);
+    this.apiService.hitGetApi(url, this);
+  }
+
   /**
    * getStates
    */

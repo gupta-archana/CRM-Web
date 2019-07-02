@@ -1,0 +1,194 @@
+<div class="container-fluid nospace">
+  <div class="nav-bg wrapper-back">
+    <div id="detail-page-header">
+
+      <div class="col-xs-2 toppad"><img src="../../../../images/back-btn.svg" alt="" (click)="goBack()"></div>
+      <div class="col-xs-7 text-center">
+        <h1 class="t-agent">Claims</h1>
+      </div>
+      <div class="col-xs-3 text-center tpad"><img src="../../../../images/filter.svg" alt=""><br><span
+          class="edit-detail"><a data-toggle="modal" data-target="#filterPopupClaims">Filter</a></span></div>
+    </div>
+    <app-entity-name-header [entityModel]="entityModel"></app-entity-name-header>
+  </div>
+
+  <div class="container app-bg5 bottom-wrapper-for-back">
+    <div class="row marginTop20">
+      <div class="col-xs-12 col-md-6 cell-bg">
+        <div class="agent-detail">
+
+          <div class="row">
+            <div class="col-md-6 col-xs-6">
+              <div class="alertType_wp">
+                <h4 class="fontColor">Claim Number</h4>
+                <span>{{claimsModel.claimID}}</span>
+              </div>
+            </div>
+            <div class="col-md-6 col-xs-6">
+              <div class="alertType_wp">
+                <h4>Status</h4>
+                <span>{{claimsModel.stat}}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="clear"></div>
+            <div class="paddingTop10"></div>
+            <div class="col-md-6 col-xs-6">
+              <div class="alertType_wp">
+                <h4>Date Opened</h4>
+                <span>09-19-2013</span>
+              </div>
+            </div>
+            <div class="col-md-6 col-xs-6">
+              <div class="alertType_wp">
+                <h4>Policy Year</h4>
+                <span>06-26-2001</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="clear"></div>
+            <div class="paddingTop10"></div>
+            <div class="col-md-9 col-xs-9">
+              <div class="alertType_wp">
+                <h4>Assigned To <span class="textRight"
+                    style="border-bottom:dashed 1px #000; width:54%; padding-top:9px;"></span></h4>
+                <span>Cynthia Morales</span>
+              </div>
+            </div>
+
+            <div class="col-md-3 col-xs-3" style="padding-left:0;">
+              <button type="button" class="btn btn-primary button" style="width:64px;height:34px; margin-top:15px;"
+                data-toggle="modal" data-target="#assignedToPopup">
+                <img src="images/assigned_icon.svg" alt=""></button>
+            </div>
+
+          </div>
+
+
+
+          <div class="row">
+            <div class="clear"></div>
+            <div class="paddingTop10"></div>
+
+            <div class="col-xs-12 col-md-12">
+              <div class="agent-detail">
+                <div class="row">
+                  <div class="col-md-12 col-xs-12">
+                    <div class="alertType_wp">
+                      <h4>Summary</h4>
+                      <span>{{claimsModel.summary | slice:0:75 }}</span>
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-xs-12">
+
+                    <div class="collapse" id="collapseExample">
+                      {{claimsModel.summary | slice:75:claimsModel.summary.length }}
+                    </div>
+
+                    <div class="clear"></div>
+                    <div class="paddingTop10"></div>
+
+                    <input type="button" class="showMoreBtn" data-toggle="collapse" href="#collapseExample"
+                      title="Show More" value="SHOW MORE" (click)="showLessBtn($event)" onclick="" />
+                  </div>
+
+                </div>
+                <div class="clear"></div>
+                <div class="paddingTop10"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="clear"></div>
+          <div class="paddingTop10"></div>
+        </div>
+      </div>
+
+
+      <div class="col-xs-12 col-md-6 cell-bg">
+        <div class="agentDetailTable">
+          <div class="clear"></div>
+          <div class="paddingTop10"></div>
+
+          <table width="100%" border="0">
+            <tbody>
+              <tr>
+                <th>Posted Cost</th>
+                <th>Amount ($)</th>
+              </tr>
+              <tr>
+                <td>LAE</td>
+                <td>{{claimsModel.LAEAmmount | currency:'USD':"symbol-narrow":'1.0-0' }}</td>
+              </tr>
+              <tr>
+                <td>Loss</td>
+                <td>{{claimsModel.LossAmmount | currency:'USD':"symbol-narrow":'1.0-0' }}</td>
+              </tr>
+              <tr>
+                <td><span>Total</span></td>
+                <td>
+                  <span>{{getAddition() | currency:'USD':"symbol-narrow":'1.0-0'}}</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="clear"></div>
+          <div class="paddingTop10"></div>
+        </div>
+      </div>
+
+
+      <div class="col-xs-12 col-md-6 cell-bg">
+        <div class="agent-detail">
+
+          <div class="row">
+            <div class="col-md-12 col-xs-12">
+              <div class="alertType_wp">
+                <h4>Agent Error</h4>
+                <span style="color:red;">Yes</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 col-xs-12">
+              <div class="alertType_wp">
+                <h4>Description</h4>
+                <span>Marital Rights</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 col-xs-12">
+              <div class="alertType_wp">
+                <h4>Cause</h4>
+                <span>{{claimsModel.causeDesc}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="clear"></div>
+          <div class="paddingTop10"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-12 noPadding">
+        <div class="buttonFooter_wp"><button type="button" class="btn btn-primary footerBtn" data-toggle="modal"
+            data-target="#downLoadPdfPopup">
+            <img src="images/ic_pdf_common.svg" alt=""> DownLoad PDF
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-assigned-to></app-assigned-to>
+<app-download-pdf></app-download-pdf>

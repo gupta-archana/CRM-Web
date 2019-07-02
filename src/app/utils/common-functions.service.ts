@@ -202,7 +202,7 @@ export class CommonFunctionsService {
         break;
 
       case this.constants.AGENT_DETAIL_CLAIMS:
-
+        navigatingUrl = paths.PATH_CLAIMS;
         break;
       case this.constants.AGENT_DETAIL_SOCIAL:
 

@@ -14,6 +14,7 @@ export class Constants {
   LOGOUT = "Logout";
   CANCEL = "Cancel";
   LOGGED_IN = "logged_in";
+  SELECTED_CLAIM = "selected_claim";
 
   ENTITY_ARRAY = "entity_array";
 
@@ -67,6 +68,18 @@ export class Constants {
   PERSON_AGENTS_PAGE_NUMBER = "person_agents_page_num";
   PERSON_AGENTS_TOTAL_ROWS = "person_agents_total_rows";
   PERSON_AGENTS_CURRENT_ENTITY_ID = "person_agents_current_entity_id";
+
+  //entity alert session constants
+  ENTITY_ALERTS_ARRAY = "entity_alerts_array";
+  ENTITY_ALERTS_PAGE_NUMBER = "entity_alerts_page_num";
+  ENTITY_ALERTS_TOTAL_ROWS = "entity_alerts_total_rows";
+  ENTITY_ALERTS_CURRENT_ENTITY_ID = "entity_alerts_current_entity_id";
+
+  //entity claims session constants
+  ENTITY_CLAIMS_ARRAY = "entity_claims_array";
+  ENTITY_CLAIMS_PAGE_NUMBER = "entity_claims_page_num";
+  ENTITY_CLAIMS_TOTAL_ROWS = "entity_claims_total_rows";
+  ENTITY_CLAIMS_CURRENT_ENTITY_ID = "entity_claims_current_entity_id";
 
   // Error Messages
   ERROR_NO_INTERNET_CONNECTON = "Kindly check your internet connection";

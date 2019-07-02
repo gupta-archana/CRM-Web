@@ -20,7 +20,6 @@
 }
 
 .bottom-wrapper-for-back {
-  width: 100%;
   padding-top: 100px;
   z-index: 5;
   overflow: auto;

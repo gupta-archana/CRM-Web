@@ -72,19 +72,19 @@ function makeServerRequest(context: EntityAlertComponent) {
 }
 
 function setData(context: EntityAlertComponent) {
-  sessionStorage.setItem(context.constants.PERSON_AGENTS_ARRAY, JSON.stringify(context.openAlertModels));
-  sessionStorage.setItem(context.constants.PERSON_AGENTS_PAGE_NUMBER, JSON.stringify(context.pageNum));
-  sessionStorage.setItem(context.constants.PERSON_AGENTS_TOTAL_ROWS, context.totalRows);
-  sessionStorage.setItem(context.constants.ENTITY_ALERTS_ENTITY_ID, context.entityModel.entityId);
+  sessionStorage.setItem(context.constants.ENTITY_ALERTS_ARRAY, JSON.stringify(context.openAlertModels));
+  sessionStorage.setItem(context.constants.ENTITY_ALERTS_PAGE_NUMBER, JSON.stringify(context.pageNum));
+  sessionStorage.setItem(context.constants.ENTITY_ALERTS_TOTAL_ROWS, context.totalRows);
+  sessionStorage.setItem(context.constants.ENTITY_ALERTS_CURRENT_ENTITY_ID, context.entityModel.entityId);
 }
 
 function getData(context: EntityAlertComponent) {
-  let dataArray = JSON.parse(sessionStorage.getItem(context.constants.PERSON_AGENTS_ARRAY));
-  context.lastEntityID = sessionStorage.getItem(context.constants.ENTITY_ALERTS_ENTITY_ID);
+  let dataArray = JSON.parse(sessionStorage.getItem(context.constants.ENTITY_ALERTS_ARRAY));
+  context.lastEntityID = sessionStorage.getItem(context.constants.ENTITY_ALERTS_CURRENT_ENTITY_ID);
   if (dataArray && dataArray.length > 0 && context.lastEntityID === context.entityModel.entityId) {
     context.openAlertModels = dataArray;
-    context.pageNum = Number(sessionStorage.getItem(context.constants.PERSON_AGENTS_PAGE_NUMBER));
-    context.totalRows = sessionStorage.getItem(context.constants.PERSON_AGENTS_TOTAL_ROWS);
+    context.pageNum = Number(sessionStorage.getItem(context.constants.ENTITY_ALERTS_PAGE_NUMBER));
+    context.totalRows = sessionStorage.getItem(context.constants.ENTITY_ALERTS_TOTAL_ROWS);
     updateRatioUI(context);
   }
   else {

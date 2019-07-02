@@ -16,6 +16,8 @@ import { AgentAssociatesComponent } from './views/agent/agent-associates/agent-a
 import { PersonAgentsComponent } from './views/person/person-agents/person-agents.component';
 import { EntityAlertComponent } from './views/entity/entity-alert/entity-alert.component';
 import { EntityAlertDetailComponent } from './views/entity/entity-alert-detail/entity-alert-detail.component';
+import { ClaimsComponent } from './views/entity/claims/claims.component';
+import { ClaimsDetailComponent } from './views/entity/claims-detail/claims-detail.component';
 
 
 
@@ -35,6 +37,8 @@ const appRoutesArray: Routes =
     { path: paths.PATH_PERSON_AGENTS, component: PersonAgentsComponent },
     { path: paths.PATH_OPEN_ALERTS, component: EntityAlertComponent },
     { path: paths.PATH_OPEN_ALERT_DETAIL, component: EntityAlertDetailComponent },
+    { path: paths.PATH_CLAIMS, component: ClaimsComponent },
+    { path: paths.PATH_CLAIM_DETAIL, component: ClaimsDetailComponent },
     { path: '**', component: PageNotFoundComponent }
 
   ];

@@ -50,6 +50,10 @@ import { EntityNameHeaderComponent } from './customUI/entity-name-header/entity-
 import { EntityAlertComponent } from './views/entity/entity-alert/entity-alert.component';
 import { EntityAlertDetailComponent } from './views/entity/entity-alert-detail/entity-alert-detail.component';
 import { MarkAsReviewedDialogComponent } from './customUI/dialogs/mark-as-reviewed-dialog/mark-as-reviewed-dialog.component';
+import { ClaimsComponent } from './views/entity/claims/claims.component';
+import { ClaimsDetailComponent } from './views/entity/claims-detail/claims-detail.component';
+import { AssignedToComponent } from './customUI/dialogs/assigned-to/assigned-to.component';
+import { DownloadPdfComponent } from './customUI/dialogs/download-pdf/download-pdf.component';
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "left",
   allowNegative: true,
@@ -88,6 +92,10 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     EntityAlertComponent,
     EntityAlertDetailComponent,
     MarkAsReviewedDialogComponent,
+    ClaimsComponent,
+    ClaimsDetailComponent,
+    AssignedToComponent,
+    DownloadPdfComponent,
   ],
   imports: [
     BrowserModule,
