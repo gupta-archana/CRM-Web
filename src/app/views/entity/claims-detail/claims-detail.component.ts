@@ -28,7 +28,9 @@ export class ClaimsDetailComponent extends BaseClass implements OnInit {
     }
     this.commonFunctions.printLog(button);
   }
-
+  goBack() {
+    this.commonFunctions.backPress();
+  }
   getAddition() {
     let addValues = Number(this.claimsModel.LAEAmmount) + Number(this.claimsModel.LossAmmount);
 

@@ -15,6 +15,7 @@ export class Constants {
   CANCEL = "Cancel";
   LOGGED_IN = "logged_in";
   SELECTED_CLAIM = "selected_claim";
+  SELECTED_ALERT = "selected_alert";
 
   ENTITY_ARRAY = "entity_array";
 

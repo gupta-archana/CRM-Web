@@ -2,6 +2,7 @@ import { Component, OnInit, Injector } from '@angular/core';
 import { EntityModel } from '../../../models/entity-model';
 import { BaseClass } from '../../../global/base-class';
 import { ClaimsModel } from '../../../models/claims-model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-claims',
@@ -18,9 +19,12 @@ export class ClaimsComponent extends BaseClass implements OnInit {
   totalRows: any = 0;
   lastEntityID: any;
   claimsModels: Array<ClaimsModel> = new Array();
+  claimsTypesSubscription: Subscription;
+  filterData: any;
   ngOnInit() {
     this.entityModel = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
     getData(this);
+    getClaimsTypeDataFromFilter(this);
   }
 
 
@@ -50,7 +54,9 @@ export class ClaimsComponent extends BaseClass implements OnInit {
       }
     });
   }
-
+  goBack() {
+    this.commonFunctions.backPress();
+  }
 
   public renderUI() {
     setData(this);
@@ -65,8 +71,8 @@ export class ClaimsComponent extends BaseClass implements OnInit {
 }
 function makeServerRequest(context: ClaimsComponent) {
   context.pageNum++;
-  //context.entityModel.entityId = "436005";
-  context.apiHandler.getClaims(context.entityModel.entityId, context.pageNum, context);
+  context.entityModel.entityId = "436005";
+  context.apiHandler.getClaims(context.entityModel.entityId, getclaimType(context), context.pageNum, context);
 }
 
 function setData(context: ClaimsComponent) {
@@ -100,4 +106,32 @@ function checkMoreDataAvailable(context: ClaimsComponent) {
 function updateRatioUI(context: ClaimsComponent) {
   context.totalAndCurrentRowsRatio = context.commonFunctions.showMoreDataSnackbar(context.claimsModels, context.totalRows);
   context.cdr.markForCheck();
+}
+
+function getClaimsTypeDataFromFilter(context: ClaimsComponent) {
+  context.claimsTypesSubscription = context.dataService.shareDataObservable.subscribe(filterData => {
+    if (filterData.openChecked != undefined) {
+      context.filterData = filterData;
+    }
+  });
+}
+
+function getclaimType(context: ClaimsComponent) {
+  let type = "";
+  if (context.filterData) {
+    if (context.filterData.openChecked) {
+      type = "o";
+    }
+    if (context.filterData.closeChecked) {
+      type = "c";
+    }
+    if (context.filterData.openChecked && context.filterData.closeChecked) {
+      type = "b";
+    }
+  }
+  else {
+    type = "b";
+  }
+
+  return type;
 }

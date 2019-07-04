@@ -269,10 +269,10 @@ export class ApiHandlerService implements ApiResponseCallback {
   /**
    * getClaims
    */
-  public getClaims(agentID: string, pageNum: any, apiResponseCallback: ApiResponseCallback) {
+  public getClaims(agentID: string, type: string, pageNum: any, apiResponseCallback: ApiResponseCallback) {
     this.dataService.onHideShowLoader(true);
     this.apiResponseCallback = apiResponseCallback;
-    let url = this.api.getClaimsUrl(this.getAppMode(), agentID, pageNum);
+    let url = this.api.getClaimsUrl(this.getAppMode(), agentID, type, pageNum);
     this.apiService.hitGetApi(url, this);
   }
 

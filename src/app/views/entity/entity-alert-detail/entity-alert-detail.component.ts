@@ -18,8 +18,11 @@ export class EntityAlertDetailComponent extends BaseClass implements OnInit, OnD
   entityModel: EntityModel;
   ngOnInit() {
     this.entityModel = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
-    getOpenAlertModel(this);
+    this.openAlertModel = JSON.parse(sessionStorage.getItem(this.constants.SELECTED_ALERT));
 
+  }
+  goBack() {
+    this.commonFunctions.backPress();
   }
   ngOnDestroy(): void {
     if (this.openAlertSubscription && !this.openAlertSubscription.closed) {
@@ -28,6 +31,4 @@ export class EntityAlertDetailComponent extends BaseClass implements OnInit, OnD
   }
 }
 
-function getOpenAlertModel(context: EntityAlertDetailComponent) {
-  context.openAlertModel = context.dataService.shareDataSubject.getValue();
-}
+

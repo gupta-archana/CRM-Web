@@ -37,11 +37,6 @@ export class EntityAlertComponent extends BaseClass implements OnInit, ApiRespon
     this.renderUI();
   }
 
-
-  onAlertClick(item: OpenAlertsModel) {
-    this.dataService.onDataShare(item);
-    this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_OPEN_ALERT_DETAIL);
-  }
   private parseResponse(agents: OpenAlertsModel[]) {
     agents.forEach(element => {
       if (element.severitydesc != "Total Alerts") {
@@ -52,8 +47,15 @@ export class EntityAlertComponent extends BaseClass implements OnInit, ApiRespon
       }
     });
   }
+  onAlertClick(item: OpenAlertsModel) {
+    //this.dataService.onDataShare(item);
+    sessionStorage.setItem(this.constants.SELECTED_ALERT, JSON.stringify(item));
+    this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_OPEN_ALERT_DETAIL);
+  }
 
-
+  goBack() {
+    this.commonFunctions.backPress();
+  }
   public renderUI() {
     setData(this);
     updateRatioUI(this);

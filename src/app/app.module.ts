@@ -54,6 +54,7 @@ import { ClaimsComponent } from './views/entity/claims/claims.component';
 import { ClaimsDetailComponent } from './views/entity/claims-detail/claims-detail.component';
 import { AssignedToComponent } from './customUI/dialogs/assigned-to/assigned-to.component';
 import { DownloadPdfComponent } from './customUI/dialogs/download-pdf/download-pdf.component';
+import { ClaimsFilterComponent } from './customUI/dialogs/claims-filter/claims-filter.component';
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "left",
   allowNegative: true,
@@ -96,6 +97,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     ClaimsDetailComponent,
     AssignedToComponent,
     DownloadPdfComponent,
+    ClaimsFilterComponent,
   ],
   imports: [
     BrowserModule,
