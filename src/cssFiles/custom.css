@@ -315,7 +315,7 @@ ul.agent-details li.agents a {
   padding-left: 5px;
 }
 
-.card img{
+.card img {
   height: 20px;
   width: 20px;
 }
@@ -337,4 +337,9 @@ ul.agent-details li.agents a {
 
 .wrapper-back #detail-page-header {
   height: 64px;
+}
+
+.mat-dialog-container {
+  display: inherit !important;
+  background: transparent !important;
 }

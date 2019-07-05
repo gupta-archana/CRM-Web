@@ -210,6 +210,9 @@ export class CommonFunctionsService {
       case this.constants.AGENT_DETAIL_EMAILS:
 
         break;
+        case this.constants.AGENT_DETAIL_AUDITS:
+        navigatingUrl = paths.PATH_AGENT_AUDITS;
+        break;
       case this.constants.PERSON_AGENT:
         sessionStorage.setItem(this.constants.INTERNAL_ENTITY_MODEL, JSON.stringify(entityModel));
         navigatingUrl = paths.PATH_PERSON_AGENTS;

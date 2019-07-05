@@ -16,6 +16,7 @@ export class Constants {
   LOGGED_IN = "logged_in";
   SELECTED_CLAIM = "selected_claim";
   SELECTED_ALERT = "selected_alert";
+  DONT_SHOW_MARK_REVIED_DIALOG = "dont_show_mark_revied_dialog";
 
   ENTITY_ARRAY = "entity_array";
 
@@ -81,6 +82,13 @@ export class Constants {
   ENTITY_CLAIMS_PAGE_NUMBER = "entity_claims_page_num";
   ENTITY_CLAIMS_TOTAL_ROWS = "entity_claims_total_rows";
   ENTITY_CLAIMS_CURRENT_ENTITY_ID = "entity_claims_current_entity_id";
+
+
+  //entity audits session contants
+  ENTITY_AUDITS_ARRAY = "entity_audits_array";
+  ENTITY_AUDITS_PAGE_NUMBER = "entity_audits_page_num";
+  ENTITY_AUDITS_TOTAL_ROWS = "entity_audits_total_rows";
+  ENTITY_AUDITS_CURRENT_ENTITY_ID = "entity_audits_current_entity_id";
 
   // Error Messages
   ERROR_NO_INTERNET_CONNECTON = "Kindly check your internet connection";

@@ -277,6 +277,26 @@ export class ApiHandlerService implements ApiResponseCallback {
   }
 
   /**
+   * MarkAsReviewedAlert
+   */
+  public MarkAsReviewedAlert(claimID: string, apiResponseCallback: ApiResponseCallback) {
+    this.dataService.onHideShowLoader(true);
+    this.apiResponseCallback = apiResponseCallback;
+    let url = this.api.getMarkAsReviewedUrl(this.getAppMode(), claimID);
+    this.apiService.hitGetApi(url, handleAddAndUpdateApiResponse(this, apiResponseCallback));
+  }
+
+  /**
+   * getAgentAudits
+   */
+  public getAgentAudits(agentID: string, pageNum: any, apiResponseCallback: ApiResponseCallback) {
+    this.dataService.onHideShowLoader(true);
+    this.apiResponseCallback = apiResponseCallback;
+    let url = this.api.getAgentAuditsUrl(this.getAppMode(), agentID, pageNum);
+    this.apiService.hitGetApi(url, this);
+  }
+
+  /**
    * getStates
    */
   public getStates(apiResponseCallback: ApiResponseCallback) {

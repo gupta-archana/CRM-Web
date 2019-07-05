@@ -26,6 +26,7 @@ export const PATH_OPEN_ALERTS = "openAlerts";
 export const PATH_OPEN_ALERT_DETAIL = "openAlertDetail";
 export const PATH_CLAIMS = "claims";
 export const PATH_CLAIM_DETAIL = "claimDetail";
+export const PATH_AGENT_AUDITS="agentAudits";
 
 //others
 export const PATH_REARRANGE_DRAWER_ITEM = "rearrangeHomeModules";

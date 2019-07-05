@@ -18,6 +18,7 @@ import { EntityAlertComponent } from './views/entity/entity-alert/entity-alert.c
 import { EntityAlertDetailComponent } from './views/entity/entity-alert-detail/entity-alert-detail.component';
 import { ClaimsComponent } from './views/entity/claims/claims.component';
 import { ClaimsDetailComponent } from './views/entity/claims-detail/claims-detail.component';
+import { AuditsComponent } from './views/entity/audits/audits.component';
 
 
 
@@ -39,6 +40,7 @@ const appRoutesArray: Routes =
     { path: paths.PATH_OPEN_ALERT_DETAIL, component: EntityAlertDetailComponent },
     { path: paths.PATH_CLAIMS, component: ClaimsComponent },
     { path: paths.PATH_CLAIM_DETAIL, component: ClaimsDetailComponent },
+    { path: paths.PATH_AGENT_AUDITS, component: AuditsComponent },
     { path: '**', component: PageNotFoundComponent }
 
   ];

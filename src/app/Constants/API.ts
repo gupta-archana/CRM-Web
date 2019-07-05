@@ -167,6 +167,13 @@ export class API {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=agentClaimsGet&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows + "&agentID=" + agentID + "&status=" + type;
   }
 
+  getMarkAsReviewedUrl(app_mode: string, claimID: string) {
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=agentAlertClosedSet&alertID=" + claimID;
+  }
+
+  getAgentAuditsUrl(app_mode: string, agentID: string, pageNum: string) {
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=agentauditsGet&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows + "&agentID=" + agentID;
+  }
   getStates() {
     return this.STATES_JSON_URL;
   }

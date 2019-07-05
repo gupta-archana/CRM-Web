@@ -4,6 +4,7 @@ import { AlertDialogComponent } from '../customUI/dialogs/alert-dialog/alert-dia
 import { Constants } from '../Constants/Constants';
 import { ConfirmationDialogComponent } from '../customUI/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { ChangeProfileDialogComponent } from '../customUI/dialogs/change-profile-dialog/change-profile-dialog.component';
+import { MarkAsReviewedDialogComponent } from '../customUI/dialogs/mark-as-reviewed-dialog/mark-as-reviewed-dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -37,5 +38,9 @@ export class OpenDialogsService {
 
   showChangePicDialog() {
     return this.dialog.open(ChangeProfileDialogComponent, { disableClose: false });
+  }
+
+  showMarkAsReviewedDialog(){
+    return this.dialog.open(MarkAsReviewedDialogComponent);
   }
 }

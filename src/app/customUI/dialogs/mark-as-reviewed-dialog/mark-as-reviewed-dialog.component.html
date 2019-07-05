@@ -1,8 +1,52 @@
 <!-- Modal beginning here -->
-<div class="modal fade" id="markAlert" role="dialog">
+<mat-dialog-content>
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" (click)="onCancelClick()">&times;</button>
+      <h4 class="modal-title">Mark Alert as Reviewed</h4>
+    </div>
+    <form role="form">
+      <div class="modal-body">
+
+        <div class="clear paddingTop10"></div>
+
+        <div class="form-group">
+          <p class="markAlertMsg">Are you sure want to make this alert as reviewed, it will disappear from the open
+            alert list</p>
+        </div>
+
+        <div class="col-xs-12 col-md-12 noPadding">
+          <div class="checkbox">
+            <input id="checkbox1" type="checkbox" [(ngModel)]="isDontShowChecked" (change)="dontShowAgainChanged($event)" [ngModelOptions]="{standalone: true}">
+            <label class="rememberM" for="checkbox1">Don't show me again</label>
+          </div>
+        </div>
+
+        <div class="clear paddingTop10"></div>
+
+      </div>
+      <div class="modal-footer">
+        <a matDialogClose="confirm" alt="Cancel" (click)="onCancelClick()" ><span>Cancel</span></a>
+        <a matDialogClose="confirm" alt="Save Changes" (click)="onMarkAsReviewClick()">Mark as Reviewed</a>
+      </div>
+    </form>
+  </div>
+</mat-dialog-content>
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="modal fade" id="markAlert" role="dialog">
   <div class="modal-dialog" style="margin-top:20%;">
 
-    <!-- Modal content-->
+   
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -36,5 +80,5 @@
     </div>
 
   </div>
-</div>
+</div> -->
 <!-- Modal End here -->
