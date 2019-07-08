@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material';
+import { SendEmailConfirmationComponent } from '../send-email-confirmation/send-email-confirmation.component';
+import { MyLocalStorageService } from '../../../services/my-local-storage.service';
+import { Constants } from '../../../Constants/Constants';
 
 @Component({
   selector: 'app-download-pdf',
@@ -7,9 +11,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DownloadPdfComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialogRef: MatDialogRef<SendEmailConfirmationComponent>,
+    private myLocalStorage: MyLocalStorageService, private constants: Constants) { }
 
   ngOnInit() {
   }
-
+  onDownloadPdfClick() {
+    this.dialogRef.close(true);
+  }
+  onCancelClick() {
+    this.dialogRef.close(false);
+  }
 }

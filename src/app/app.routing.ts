@@ -19,6 +19,8 @@ import { EntityAlertDetailComponent } from './views/entity/entity-alert-detail/e
 import { ClaimsComponent } from './views/entity/claims/claims.component';
 import { ClaimsDetailComponent } from './views/entity/claims-detail/claims-detail.component';
 import { AuditsComponent } from './views/entity/audits/audits.component';
+import { AuditDetailQueuedComponent } from './views/entity/audit-detail-queued/audit-detail-queued.component';
+import { AuditDetailCompletedComponent } from './views/entity/audit-detail-completed/audit-detail-completed.component';
 
 
 
@@ -41,6 +43,8 @@ const appRoutesArray: Routes =
     { path: paths.PATH_CLAIMS, component: ClaimsComponent },
     { path: paths.PATH_CLAIM_DETAIL, component: ClaimsDetailComponent },
     { path: paths.PATH_AGENT_AUDITS, component: AuditsComponent },
+    { path: paths.PATH_AGENT_AUDIT_QUEUED, component: AuditDetailQueuedComponent },
+    { path: paths.PATH_AGENT_AUDIT_COMPLETED, component: AuditDetailCompletedComponent },
     { path: '**', component: PageNotFoundComponent }
 
   ];

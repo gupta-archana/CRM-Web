@@ -1,0 +1,92 @@
+<div class="container-fluid nospace">
+  <div class="nav-bg wrapper-back">
+    <div id="detail-page-header">
+
+      <div class="col-xs-2 toppad"><img src="../../../../images/back-btn.svg" alt="" (click)="goBack()"></div>
+      <div class="col-xs-7 text-center">
+        <h1 class="t-agent">Audits Details</h1>
+      </div>
+
+    </div>
+    <app-entity-name-header [entityModel]="entityModel"></app-entity-name-header>
+  </div>
+  <div class="container app-bg5 bottom-wrapper-for-back">
+    <div class="row marginTop20">
+
+      <div class="col-xs-12 col-md-6 cell-bg">
+        <div class="agent-detail">
+
+          <div class="row">
+            <div class="clear"></div>
+            <div class="paddingTop10"></div>
+            <div class="col-md-9 col-xs-9">
+              <div class="alertType_wp">
+                <h4 class="fontColor">Auditor <span class="borderDashed"></span></h4>
+                <span>{{auditModel.auditor}}</span>
+              </div>
+            </div>
+
+            <div class="col-md-3 col-xs-3" style="padding-left:0;">
+              <button type="button" class="btn btn-primary button" (click)="onSendEmailConfirmationClick()" style="width:64px;height:34px; margin-top:15px;">
+                <img src="../../../../images/assigned_icon.svg" alt=""></button>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="clear"></div>
+            <div class="paddingTop10"></div>
+            <div class="col-md-6 col-xs-6">
+              <div class="alertType_wp">
+                <h4>Type</h4>
+                <span>{{auditModel.auditType}}</span>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-xs-6">
+              <div class="alertType_wp">
+                <h4>Status</h4>
+                <span>{{auditModel.stat}}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="clear"></div>
+            <div class="paddingTop10"></div>
+            <div class="col-md-6 col-xs-6">
+              <div class="alertType_wp">
+                <h4>Scheduled Start</h4>
+                <span>{{auditModel.schedStartDate | slice:0:10}}</span>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-xs-6">
+              <div class="alertType_wp">
+                <h4>Scheduled Finish</h4>
+                <span>{{auditModel.schedFinishDate | slice:0:10}}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="clear"></div>
+          <div class="paddingTop10"></div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-12 noPadding positionFixed">
+        <div class="buttonFooter_wp">
+          <button type="button" class="btn btn-primary footerBtn btnInactive">
+            <img src="../../../../images/ic_pdf_common-2.svg" alt=""> Download Audit Details PDF
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

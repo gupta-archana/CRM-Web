@@ -297,6 +297,16 @@ export class ApiHandlerService implements ApiResponseCallback {
   }
 
   /**
+   * downloadAuditPdf
+   */
+  public downloadAuditPdf(auditId: string, apiResponseCallback: ApiResponseCallback) {
+    this.dataService.onHideShowLoader(true);
+    this.apiResponseCallback = apiResponseCallback;
+    let url = this.api.getDownloadAuditPdfUrl(this.getAppMode(), auditId);
+    this.apiService.hitGetApi(url, this);
+  }
+
+  /**
    * getStates
    */
   public getStates(apiResponseCallback: ApiResponseCallback) {

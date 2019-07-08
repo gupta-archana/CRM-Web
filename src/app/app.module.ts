@@ -56,6 +56,10 @@ import { AssignedToComponent } from './customUI/dialogs/assigned-to/assigned-to.
 import { DownloadPdfComponent } from './customUI/dialogs/download-pdf/download-pdf.component';
 import { ClaimsFilterComponent } from './customUI/dialogs/claims-filter/claims-filter.component';
 import { AuditsComponent } from './views/entity/audits/audits.component';
+
+import { AuditDetailCompletedComponent } from './views/entity/audit-detail-completed/audit-detail-completed.component';
+import { AuditDetailQueuedComponent } from './views/entity/audit-detail-queued/audit-detail-queued.component';
+import { SendEmailConfirmationComponent } from './customUI/dialogs/send-email-confirmation/send-email-confirmation.component';
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "left",
   allowNegative: true,
@@ -100,6 +104,9 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     DownloadPdfComponent,
     ClaimsFilterComponent,
     AuditsComponent,
+    AuditDetailCompletedComponent,
+    AuditDetailQueuedComponent,
+    SendEmailConfirmationComponent,
   ],
   imports: [
     BrowserModule,
@@ -138,7 +145,9 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     ConfirmationDialogComponent,
     ForgotPasswordAlertComponent,
     ChangeProfileDialogComponent,
-    MarkAsReviewedDialogComponent
+    MarkAsReviewedDialogComponent,
+    SendEmailConfirmationComponent,
+    DownloadPdfComponent
   ],
   providers: [Constants, ApiService,
     { provide: UrlSerializer, useClass: LowerCaseUrlSerializer },

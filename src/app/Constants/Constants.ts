@@ -16,6 +16,7 @@ export class Constants {
   LOGGED_IN = "logged_in";
   SELECTED_CLAIM = "selected_claim";
   SELECTED_ALERT = "selected_alert";
+  SELECTED_AUDIT = "selected_audit";
   DONT_SHOW_MARK_REVIED_DIALOG = "dont_show_mark_revied_dialog";
 
   ENTITY_ARRAY = "entity_array";

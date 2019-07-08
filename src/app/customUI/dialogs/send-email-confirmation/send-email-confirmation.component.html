@@ -1,9 +1,12 @@
+<!-- Modal beginning here -->
 <mat-dialog-content>
+
+
   <!-- Modal content-->
   <div class="modal-content">
     <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal">&times;</button>
-      <h4 class="modal-title">Download the Claim Details PDF</h4>
+      <button type="button" class="close" data-dismiss="modal" (click)="onCancelClick()">&times;</button>
+      <h4 class="modal-title">Email "{{data.name}}"</h4>
     </div>
     <form role="form">
       <div class="modal-body">
@@ -11,7 +14,8 @@
         <div class="clear paddingTop10"></div>
 
         <div class="form-group">
-          <p class="markAlertMsg">This will download a copy of the claims details to your local storage.</p>
+          <p class="markAlertMsg">You'll be emailing the auditor and will be taken to your default mail client. Are
+            you sure you want to email the auditor?</p>
         </div>
 
         <div class="col-xs-12 col-md-12 noPadding">
@@ -26,8 +30,9 @@
       </div>
       <div class="modal-footer">
         <a alt="Cancel" (click)="onCancelClick()"><span>Cancel</span></a>
-        <a alt="Save Changes" (click)="onEmailAuditorClick()">Download PDF</a>
+        <a alt="Save Changes" (click)="onEmailAuditorClick()">Email Auditor</a>
       </div>
     </form>
   </div>
 </mat-dialog-content>
+<!-- Modal End here -->

@@ -37,10 +37,13 @@ export class AuditsComponent extends BaseClass implements OnInit {
   }
 
 
-  onClaimSelected(item: AuditModels) {
+  onAuditSelected(item: AuditModels) {
     //this.dataService.onDataShare(item);
-    sessionStorage.setItem(this.constants.SELECTED_CLAIM, JSON.stringify(item));
-    this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_CLAIM_DETAIL);
+    sessionStorage.setItem(this.constants.SELECTED_AUDIT, JSON.stringify(item));
+    if (item.stat == "Completed")
+      this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_AGENT_AUDIT_COMPLETED);
+    else
+      this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_AGENT_AUDIT_QUEUED);
   }
 
   private parseResponse(agents: AuditModels[]) {
@@ -52,6 +55,10 @@ export class AuditsComponent extends BaseClass implements OnInit {
         this.totalRows = element.rowNum;
       }
     });
+  }
+
+  getFormattedDate(date: string) {
+    return date.substring(0, 10);
   }
   goBack() {
     this.commonFunctions.backPress();

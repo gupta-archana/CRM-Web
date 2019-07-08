@@ -210,7 +210,7 @@ export class CommonFunctionsService {
       case this.constants.AGENT_DETAIL_EMAILS:
 
         break;
-        case this.constants.AGENT_DETAIL_AUDITS:
+      case this.constants.AGENT_DETAIL_AUDITS:
         navigatingUrl = paths.PATH_AGENT_AUDITS;
         break;
       case this.constants.PERSON_AGENT:
@@ -256,6 +256,11 @@ export class CommonFunctionsService {
     if (favAgents)
       return favAgents.indexOf(entityId) == -1;
     return true;
+  }
+
+  public doEmail(emailAddress) {
+    var mailContent = "mailto:" + emailAddress;
+    window.location.href = mailContent;
   }
 }
 function getRandomInt(min, max) {

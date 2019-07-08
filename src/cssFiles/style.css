@@ -9,6 +9,7 @@ body {
   font-family: 'Open Sans', sans-serif;
   padding: 0;
   margin: 0;
+  background: #f2f2f2;
 }
 
 .bg {
@@ -55,6 +56,11 @@ input {
 .paddingTop5{padding-top:5px;}
 .paddingTop10{padding-top:10px;}
 .paddingTop15{padding-top:15px;}
+
+.paddingBottom5{padding-bottom:5px !important;}
+
+
+.fontBold{font-weight: bold !important;}
 
 
 .box1 input[type="email"] {
@@ -1456,11 +1462,17 @@ input:checked + .slider:before {
     color: #000;
 }
 
-.buttonFooter_wp{	
+.buttonFooter_wp{
+	background: #fff;
 	padding:20px 15px;	
 	-webkit-box-shadow: 0 -5px 8px -4px rgba(46,61,73,.2);
 	   -moz-box-shadow: 0 -5px 8px -4px rgba(46,61,73,.2);
 	        box-shadow: 0 -5px 8px -4px rgba(46,61,73,.2);
+}
+
+.positionFixed{
+	position: fixed;
+	bottom:0;
 }
 
 .footerBtn,
@@ -1474,6 +1486,14 @@ input:checked + .slider:before {
 	width:100%;
 	border-radius: 6px;
 	border:0;
+}
+
+.btnInactive,
+.btnInactive:focus,
+.btnInactive:hover {
+	background: #707070;
+	cursor: not-allowed;
+	color: rgba(255, 255, 255, 0.5);
 }
 
 .button,
@@ -1501,7 +1521,7 @@ input:checked + .slider:before {
   	color:#fff;
   	font-weight:bold;
   	float:left;
-  	padding: 2px 0px 0px 7px;
+  	padding:1px 0px 0px 7px;
   	margin-right: 10px;
 	}
 
@@ -1512,6 +1532,14 @@ input:checked + .slider:before {
 .openAlert span {
 	color:#000;
 	opacity: 0.8;
+}
+
+.openAlert span.expDate {
+  font-size: 12px;
+  font-weight: normal;
+  color:#000;
+  opacity:0.5;
+  float:right;
 }
 
 .alertType_wp h4 {
@@ -1558,6 +1586,10 @@ textarea:focus, input:focus, button.edit-but-orange:focus, button:focus {
     outline: none !important;
 }
 
+
+#downLoadPdfPopup .rememberM,
+#auditsDetailsCompletedPopup .rememberM,
+#auditsDetailsQueuedPopup .rememberM,
 #assignedToPopup .rememberM,
 #downLoadPdfPopup .rememberM,
 #markAlert .rememberM{
@@ -1566,12 +1598,20 @@ textarea:focus, input:focus, button.edit-but-orange:focus, button:focus {
   font-weight:normal; 
 }
 
+#downLoadPdfPopup .checkbox label::before,
+#auditsDetailsCompletedPopup .checkbox label::before,
+#auditsDetailsQueuedPopup .checkbox label::before,
+#assignedToPopup .checkbox label::before,
 #filterPopupClaims .checkbox label::before,
 #markAlert .checkbox label::before {  
     border: 1px solid #F68933;
 }
 
 .textRight{float:right;}
+
+.borderDashed {border-bottom:dashed 1px #707070; width:54%; padding-top:9px; float:right;}
+
+
 
 .textDoller {
   color: #000 !important;
@@ -1587,6 +1627,21 @@ textarea:focus, input:focus, button.edit-but-orange:focus, button:focus {
 .agentDetailTable table td:nth-child(2) {text-align: right;}
 .agentDetailTable table td{border-bottom: solid 1px #a3a3a3; padding:5px;}
 .agentDetailTable table td span{font-weight: bold;}
+
+
+.agentTableOther table {width:100%; border:0; font-size: 14px;}
+.agentTableOther table th {color:#000; opacity: 0.5; padding:5px;}
+.agentTableOther table th:nth-child(2) {text-align: left;}
+.agentTableOther table td:first-child{border-right: solid 1px #a3a3a3;}
+.agentTableOther table td:nth-child(2) {text-align: left;}
+.agentTableOther table td{border-bottom: solid 1px #a3a3a3; padding:5px;}
+
+
+.tableFixedHeight {height:60px; overflow:hidden;}
+
+
+
+
 
 
 

@@ -1,0 +1,215 @@
+<div class="container-fluid nospace">
+  <div class="nav-bg wrapper-back">
+    <div id="detail-page-header">
+
+      <div class="col-xs-2 toppad"><img src="../../../../images/back-btn.svg" alt="" (click)="goBack()"></div>
+      <div class="col-xs-7 text-center">
+        <h1 class="t-agent">Audits Details</h1>
+      </div>
+
+    </div>
+    <app-entity-name-header [entityModel]="entityModel"></app-entity-name-header>
+  </div>
+  <div class="container app-bg5 bottom-wrapper-for-back">
+    <div class="row marginTop20">
+      <div class="col-xs-12 col-md-6 cell-bg">
+        <div class="agent-detail">
+
+          <div class="row">
+            <div class="clear"></div>
+            <div class="paddingTop10"></div>
+            <div class="col-md-9 col-xs-9">
+              <div class="alertType_wp">
+                <h4 class="fontColor">Auditor <span class="borderDashed"></span></h4>
+                <span>{{auditModel.auditor}}</span>
+              </div>
+            </div>
+
+            <div class="col-md-3 col-xs-3" style="padding-left:0;">
+              <button type="button" class="btn btn-primary button" style="width:64px;height:34px; margin-top:15px;"
+                (click)="onSendEmailConfirmationClick()">
+                <img src="../../../../images/assigned_icon.svg" alt=""></button>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="clear"></div>
+            <div class="paddingTop10"></div>
+            <div class="col-md-6 col-xs-6">
+              <div class="alertType_wp">
+                <h4>Audit Type</h4>
+                <span>{{auditModel.auditType}}</span>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-xs-6">
+              <div class="alertType_wp">
+                <h4>Audit Status</h4>
+                <span>{{auditModel.stat}}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="clear"></div>
+            <div class="paddingTop10"></div>
+            <div class="col-md-6 col-xs-6">
+              <div class="alertType_wp">
+                <h4>Start Date</h4>
+                <span>{{auditModel.auditStartDate | slice:0:10}}</span>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-xs-6">
+              <div class="alertType_wp">
+                <h4>Finish Date</h4>
+                <span>{{auditModel.auditFinishDate | slice:0:10}}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="clear"></div>
+          <div class="paddingTop10"></div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-md-6 cell-bg">
+        <div class="agent-detail">
+
+          <div class="row">
+            <div class="clear"></div>
+            <div class="paddingTop10"></div>
+            <div class="col-md-6 col-xs-6">
+              <div class="alertType_wp">
+                <h4>Score</h4>
+                <span class="fontBold">{{auditModel.score}}</span>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-xs-6">
+              <div class="alertType_wp">
+                <h4>Major Findings</h4>
+                <span>{{auditModel.majorfinding}}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="collapse" id="collapseExample">
+
+            <div class="row">
+              <div class="clear"></div>
+              <div class="paddingTop10"></div>
+              <div class="col-md-6 col-xs-6">
+                <div class="alertType_wp">
+                  <h4>Intermediate Findings</h4>
+                  <span>{{auditModel.intermediatefinding}}</span>
+                </div>
+              </div>
+
+              <div class="col-md-6 col-xs-6">
+                <div class="alertType_wp">
+                  <h4>Minor Findings</h4>
+                  <span>{{auditModel.minorfinding}}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="clear"></div>
+              <div class="paddingTop10"></div>
+              <div class="col-md-6 col-xs-6">
+                <div class="alertType_wp">
+                  <h4>Best Practices</h4>
+                  <span>{{auditModel.bestpractice}}</span>
+                </div>
+              </div>
+
+              <div class="col-md-6 col-xs-6">
+                <div class="alertType_wp">
+                  <h4>Corrective Actions</h4>
+                  <span>{{auditModel.corrective}}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="clear"></div>
+              <div class="paddingTop10"></div>
+              <div class="col-md-6 col-xs-6">
+                <div class="alertType_wp">
+                  <h4>Recommended Actions</h4>
+                  <span>{{auditModel.recommended}}</span>
+                </div>
+              </div>
+
+              <div class="col-md-6 col-xs-6">
+                <div class="alertType_wp">
+                  <h4>Suggested Actions</h4>
+                  <span>{{auditModel.suggested}}</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="clear"></div>
+          <div class="paddingTop10"></div>
+
+          <input type="button" class="showMoreBtn" data-toggle="collapse" href="#collapseExample" title="Show More"
+            value="SHOW MORE" (click)="showLessBtn($event)" />
+
+          <div class="clear"></div>
+          <div class="paddingTop10"></div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-md-6 cell-bg">
+        <div class="agentTableOther">
+          <div class="clear"></div>
+          <div class="paddingTop10"></div>
+          <div id="tableFixedHeightId" class="tableFixedHeight">
+            <table width="100%" border="0">
+              <tbody>
+                <tr>
+                  <th>Section</th>
+                  <th>Score</th>
+                </tr>
+                <ng-container *ngFor="let item of sectionScoreArray;let i=index">
+                  <tr>
+                    <td>{{i+1}}</td>
+                    <td>{{item}}</td>
+                  </tr>
+                </ng-container>
+
+              </tbody>
+            </table>
+          </div>
+
+          <div class="clear"></div>
+          <div class="paddingTop15"></div>
+
+          <input type="button" class="showMoreBtn" title="Show More" value="SHOW MORE"
+            (click)="showLessBtnOther($event)" />
+
+          <div class="clear"></div>
+          <div class="paddingTop10"></div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-12 noPadding">
+        <div class="buttonFooter_wp">
+          <button type="button" class="btn btn-primary footerBtn" (click)="onGeneratePdfClick()">
+            <img src="../../../../images/ic_pdf_common.svg" alt=""> DownLoad PDF
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

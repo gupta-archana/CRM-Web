@@ -5,6 +5,8 @@ import { Constants } from '../Constants/Constants';
 import { ConfirmationDialogComponent } from '../customUI/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { ChangeProfileDialogComponent } from '../customUI/dialogs/change-profile-dialog/change-profile-dialog.component';
 import { MarkAsReviewedDialogComponent } from '../customUI/dialogs/mark-as-reviewed-dialog/mark-as-reviewed-dialog.component';
+import { SendEmailConfirmationComponent } from '../customUI/dialogs/send-email-confirmation/send-email-confirmation.component';
+import { DownloadPdfComponent } from '../customUI/dialogs/download-pdf/download-pdf.component';
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +42,19 @@ export class OpenDialogsService {
     return this.dialog.open(ChangeProfileDialogComponent, { disableClose: false });
   }
 
-  showMarkAsReviewedDialog(){
+  showMarkAsReviewedDialog() {
     return this.dialog.open(MarkAsReviewedDialogComponent);
+  }
+
+  showDownloadPdfDialog() {
+    return this.dialog.open(DownloadPdfComponent);
+  }
+
+  showSendMailConfirmationDialog(username: string) {
+    return this.dialog.open(SendEmailConfirmationComponent, {
+      data: {
+        name: username
+      }
+    });
   }
 }

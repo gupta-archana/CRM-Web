@@ -174,6 +174,10 @@ export class API {
   getAgentAuditsUrl(app_mode: string, agentID: string, pageNum: string) {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=agentauditsGet&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows + "&agentID=" + agentID;
   }
+
+  getDownloadAuditPdfUrl(app_mode: string, auditId: string) {
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=auditReportGet&auditID=" + auditId;
+  }
   getStates() {
     return this.STATES_JSON_URL;
   }
