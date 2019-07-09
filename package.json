@@ -7,7 +7,9 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build-prod": "ng build --prod",
+    "deploy": "firebase deploy --token AIzaSyB7LH4lx_q5wJD4q5lEESc2hO6pB5UVyCQ --non-interactive"
   },
   "private": true,
   "dependencies": {
@@ -52,6 +54,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "codelyzer": "~4.2.1",
+    "firebase-tools": "^7.0.2",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~1.7.1",
