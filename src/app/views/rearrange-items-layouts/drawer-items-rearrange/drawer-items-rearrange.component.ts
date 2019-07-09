@@ -19,7 +19,7 @@ export class DrawerItemsRearrangeComponent extends BaseClass implements OnInit {
 
   }
 
-  private Save() {
+  Save() {
     this.myLocalStorage.setValue(this.constants.SIDE_NAV_ITEMS, JSON.stringify(this.sideNavArray));
     this.utils.getSideNavItems();
     this.commonFunctions.showSnackbar("Saved Successfull");

@@ -18,7 +18,7 @@ export class AgentDetailItemRearrangeComponent extends BaseClass implements OnIn
 
   }
 
-  private Save() {
+  Save() {
     this.myLocalStorage.setValue(this.constants.AGENT_DETAIL_ITEMS, JSON.stringify(this.agentDetailItems));
     this.utils.getAgentDetailItems();
     this.commonFunctions.showSnackbar("Saved Successfull");

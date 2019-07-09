@@ -17,5 +17,7 @@ export class ForgotPasswordAlertComponent implements OnInit {
   }
   ngOnInit() {
   }
-
+  onNoClick() {
+    this.dialogRef.close();
+  }
 }

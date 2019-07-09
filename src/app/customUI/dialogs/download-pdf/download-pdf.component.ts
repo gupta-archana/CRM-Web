@@ -16,6 +16,9 @@ export class DownloadPdfComponent implements OnInit {
 
   ngOnInit() {
   }
+  onEmailAuditorClick() {
+
+  }
   onDownloadPdfClick() {
     this.dialogRef.close(true);
   }

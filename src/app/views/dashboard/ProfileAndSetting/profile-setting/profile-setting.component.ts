@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
 export class ProfileSettingComponent extends BaseClass implements OnInit, ApiResponseCallback, OnDestroy {
 
 
-  private userProfileModel: UserProfileModel = new UserProfileModel();
+  userProfileModel: UserProfileModel = new UserProfileModel();
   userImg: any = "";
   dataUpdatedSubscription: Subscription = null;
 

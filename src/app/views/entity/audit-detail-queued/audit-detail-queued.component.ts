@@ -24,4 +24,7 @@ export class AuditDetailQueuedComponent extends BaseClass implements OnInit {
       }
     });
   }
+  goBack() {
+    this.commonFunctions.backPress();
+  }
 }

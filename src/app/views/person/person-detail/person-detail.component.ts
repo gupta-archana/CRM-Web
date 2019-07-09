@@ -34,8 +34,8 @@ export class PersonDetailComponent extends EntityDetailBaseClass implements OnIn
   checkEntityFavorite() {
     return !this.commonFunctions.checkFavorite(this.personInfo.entityId);
   }
-  onStarClick(item: EntityModel) {
-    this.commonApis.setFavorite(item, this.apiHandler, this.cdr);
+  onStarClick() {
+    this.commonApis.setFavorite(this.personInfo, this.apiHandler, this.cdr);
   }
   ngOnDestroy(): void {
     if (this.personMenuSub && !this.personMenuSub.closed) {

@@ -15,7 +15,9 @@ export class ConfirmationDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<ConfirmationDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+  onYesClick(): void {
 
+  }
   onNoClick(): void {
     this.dialogRef.close();
   }

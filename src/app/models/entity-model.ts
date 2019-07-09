@@ -20,4 +20,5 @@ export class EntityModel {
   nprPercent: string;
   nprPlannedYTD: string;
   nprPercentYTD: string;
+  agentImg: string;
 }

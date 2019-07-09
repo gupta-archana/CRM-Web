@@ -59,6 +59,12 @@ export class PersonAgentsComponent extends BaseClass implements OnInit, OnDestro
     let navigatingPath = this.paths.PATH_AGENT_DETAIL;
     this.commonFunctions.navigateWithoutReplaceUrl(navigatingPath);
   }
+
+  onRecentProfileClick() {
+    //navigateToSelectedItem(this, this.paths.PATH_RECENT_PROFILES);
+    this.dataService.onRecentProfileClick();
+
+  }
   public renderUI() {
     setData(this);
     updateRatioUI(this);

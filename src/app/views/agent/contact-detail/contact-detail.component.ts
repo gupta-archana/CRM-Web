@@ -31,17 +31,17 @@ export class ContactDetailComponent extends BaseClass implements OnInit, ApiResp
     this.commonFunctions.backPress();
   }
 
-  private doEmail() {
+  doEmail() {
     var mailContent = "mailto:" + this.entityContactModel.email;
     window.location.href = mailContent;
   }
 
-  private doCall(number) {
+  doCall(number) {
     var call = "tel:" + number;
     window.location.href = call;
   }
 
-  private doSMS(number) {
+  doSMS(number) {
     var call = "sms:" + number;
     window.location.href = call;
   }

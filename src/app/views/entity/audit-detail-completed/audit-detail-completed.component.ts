@@ -56,11 +56,13 @@ export class AuditDetailCompletedComponent extends BaseClass implements OnInit {
   onGeneratePdfClick() {
     this.openDialogService.showDownloadPdfDialog().afterClosed().subscribe(downloadPdf => {
       if (downloadPdf) {
-//this.apiHandler.downloadAuditPdf(this.auditModel.)
+        //this.apiHandler.downloadAuditPdf(this.auditModel.)
       }
     });
   }
-
+  goBack() {
+    this.commonFunctions.backPress();
+  }
 }
 function downloadPdf(context: AuditDetailCompletedComponent, pdfInBase64: any, fileName: string) {
   const newBlob = new Blob([pdfInBase64], { type: 'application/pdf' });
