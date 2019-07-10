@@ -60,6 +60,7 @@ import { AuditsComponent } from './views/entity/audits/audits.component';
 import { AuditDetailCompletedComponent } from './views/entity/audit-detail-completed/audit-detail-completed.component';
 import { AuditDetailQueuedComponent } from './views/entity/audit-detail-queued/audit-detail-queued.component';
 import { SendEmailConfirmationComponent } from './customUI/dialogs/send-email-confirmation/send-email-confirmation.component';
+import { ComplianceComponent } from './views/entity/compliance/compliance.component';
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "left",
   allowNegative: true,
@@ -107,6 +108,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     AuditDetailCompletedComponent,
     AuditDetailQueuedComponent,
     SendEmailConfirmationComponent,
+    ComplianceComponent,
   ],
   imports: [
     BrowserModule,

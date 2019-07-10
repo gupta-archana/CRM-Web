@@ -277,6 +277,15 @@ export class ApiHandlerService implements ApiResponseCallback {
   }
 
   /**
+   * downloadClaimPdf
+   */
+  public downloadClaimPdf(claimID: string, apiResponseCallback: ApiResponseCallback) {
+    this.dataService.onHideShowLoader(true);
+    this.apiResponseCallback = apiResponseCallback;
+    let url = this.api.getClaimDownloadPdfUrl(this.getAppMode(), claimID);
+    this.apiService.hitGetApi(url, this);
+  }
+  /**
    * MarkAsReviewedAlert
    */
   public MarkAsReviewedAlert(claimID: string, apiResponseCallback: ApiResponseCallback) {

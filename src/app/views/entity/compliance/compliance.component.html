@@ -1,0 +1,42 @@
+<div class="container-fluid nospace">
+  <div class="nav-bg wrapper-back">
+    <div id="detail-page-header">
+
+      <div class="col-xs-2 toppad"><img src="../../../../images/back-btn.svg" alt="" (click)="goBack()"></div>
+      <div class="col-xs-7 text-center">
+        <h1 class="t-agent">Compliances</h1>
+      </div>
+    </div>
+    <app-entity-name-header [entityModel]="entityModel"></app-entity-name-header>
+  </div>
+
+  <div class="container app-bg5 bottom-wrapper-for-back">
+    <div class="row marginTop20">
+      <ul>
+        <li *ngFor="let item of complianceModels">
+          <div class="col-xs-12 col-md-6 cell-bg">
+            <div class="agent-detail openAlert">
+              <h4>Agent needs to be Appointed <span><img src="images/ic_objective_complete-2.svg" alt=""></span></h4>
+              <div class="clear"></div>
+              <div class="paddingTop10"></div>
+              <div class="statusInd_wp bgGreen">G</div><span>Good Standing</span>
+              <span class="expDate">Expiration Date: 3-31-2020</span>
+              <div class="clear"></div>
+              <div class="paddingTop10"></div>
+            </div>
+          </div>
+
+        </li>
+      </ul>
+
+
+      <div class="row marginBottom20" *ngIf="moreDataAvailable">
+        <div class="col-xs-12 col-md-12 loadMoreWp">
+          <hr />
+          <div class="loadMore"><a alt="Load More" (click)="onLoadMoreClick()">Load More</a></div>
+        </div>
+      </div>
+      <div id="ratioView">{{totalAndCurrentRowsRatio}}</div>
+    </div>
+  </div>
+</div>

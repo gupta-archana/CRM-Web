@@ -167,6 +167,10 @@ export class API {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=agentClaimsGet&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows + "&agentID=" + agentID + "&status=" + type;
   }
 
+  getClaimDownloadPdfUrl(app_mode: string, claimID: string) {
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=claimPdfGet&ClaimID=" + claimID + "&OverView=yes&Coverage=yes&Property=yes&Contact=yes&Account=yes&Recovery=yes&Litigation=yes&LinkedClaims=yes&Activity=yes&Notes=yes";
+  }
+
   getMarkAsReviewedUrl(app_mode: string, claimID: string) {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=agentAlertClosedSet&alertID=" + claimID;
   }

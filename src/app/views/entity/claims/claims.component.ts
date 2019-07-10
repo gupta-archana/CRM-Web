@@ -41,7 +41,7 @@ export class ClaimsComponent extends BaseClass implements OnInit {
   onClaimSelected(item: ClaimsModel) {
     //this.dataService.onDataShare(item);
     sessionStorage.setItem(this.constants.SELECTED_CLAIM, JSON.stringify(item));
-    this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_CLAIM_DETAIL);
+    this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_CLAIM_DETAIL );
   }
 
   private parseResponse(agents: ClaimsModel[]) {

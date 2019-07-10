@@ -1586,7 +1586,7 @@ textarea:focus, input:focus, button.edit-but-orange:focus, button:focus {
     outline: none !important;
 }
 
-
+#emailNocId .rememberM,
 #downLoadPdfPopup .rememberM,
 #auditsDetailsCompletedPopup .rememberM,
 #auditsDetailsQueuedPopup .rememberM,
@@ -1598,6 +1598,7 @@ textarea:focus, input:focus, button.edit-but-orange:focus, button:focus {
   font-weight:normal; 
 }
 
+#emailNocId .checkbox label::before,
 #downLoadPdfPopup .checkbox label::before,
 #auditsDetailsCompletedPopup .checkbox label::before,
 #auditsDetailsQueuedPopup .checkbox label::before,
@@ -1636,10 +1637,21 @@ textarea:focus, input:focus, button.edit-but-orange:focus, button:focus {
 .agentTableOther table td:nth-child(2) {text-align: left;}
 .agentTableOther table td{border-bottom: solid 1px #a3a3a3; padding:5px;}
 
-
 .tableFixedHeight {height:60px; overflow:hidden;}
 
+.topHeadingComp {position:relative;margin:10px 0px;}
+.topHeadingComp hr {height:1px; background:#000; margin:0; opacity:0.3;}
+.topHeadingComp span { position:absolute; left:0; bottom:-7px; font-size:12px; background:#fff; padding-right:6px;}
 
+.greenIcon{
+	width: 14px;
+	height: 14px;
+	background:#06B80C;
+	border-radius: 50%;
+	float: left;
+	margin:3px 5px 0px 0px;
+}
+.colorGreen{color:#06B80C !important;}
 
 
 
