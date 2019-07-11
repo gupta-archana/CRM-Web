@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { HttpModule } from '@angular/http';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule, ToastNoAnimation, ToastNoAnimationModule } from 'ngx-toastr';
 import { LoginGuardGuard } from './guards/login-guard.guard';
 import { SidebarModule } from 'ng-sidebar';
@@ -139,7 +139,9 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     ModulesModule,
     DragDropModule,
     Ng2ImgMaxModule,
-    CurrencyMaskModule
+    CurrencyMaskModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   entryComponents: [
     // See https://material.angular.io/components/dialog/overview#configuring-dialog-content-via-code-entrycomponents-code- for more info
