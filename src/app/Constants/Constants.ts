@@ -91,6 +91,10 @@ export class Constants {
   ENTITY_AUDITS_TOTAL_ROWS = "entity_audits_total_rows";
   ENTITY_AUDITS_CURRENT_ENTITY_ID = "entity_audits_current_entity_id";
 
+  //agent compliance session contants
+  AGENT_COMPLIANCE_ARRAY = "agent_compliance_array";
+  AGENT_COMPLIANCE_CURRENT_ENTITY_ID = "agent_compliance_current_entity_id";
+
   // Error Messages
   ERROR_NO_INTERNET_CONNECTON = "Kindly check your internet connection";
   ERROR_INVALID_EMAIL = "Please enter a valid email address";

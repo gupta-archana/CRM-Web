@@ -16,11 +16,16 @@
         <li *ngFor="let item of complianceModels">
           <div class="col-xs-12 col-md-6 cell-bg">
             <div class="agent-detail openAlert">
-              <h4>Agent needs to be Appointed <span><img src="images/ic_objective_complete-2.svg" alt=""></span></h4>
+              <h4>{{item.reqdesc}}<span><img
+                    src="{{item.reqMet == 'yes'?'../../../../images/ic_objective_complete-2.svg':'../../../../images/ic_objective_complete-3.svg'}}"
+                    alt=""></span></h4>
               <div class="clear"></div>
               <div class="paddingTop10"></div>
-              <div class="statusInd_wp bgGreen">G</div><span>Good Standing</span>
-              <span class="expDate">Expiration Date: 3-31-2020</span>
+              <div class="statusInd_wp"
+                [ngClass]="{'bgGreen':item.comstat=='G','bgYellow':item.comstat=='Y','bgRed':item.comstat=='R'}">
+                {{item.comstat}}</div>
+              <span>{{item.stat}}</span>
+              <span class="expDate">Expiration Date:{{item.expirationDate | slice:0:10}}</span>
               <div class="clear"></div>
               <div class="paddingTop10"></div>
             </div>
@@ -28,15 +33,6 @@
 
         </li>
       </ul>
-
-
-      <div class="row marginBottom20" *ngIf="moreDataAvailable">
-        <div class="col-xs-12 col-md-12 loadMoreWp">
-          <hr />
-          <div class="loadMore"><a alt="Load More" (click)="onLoadMoreClick()">Load More</a></div>
-        </div>
-      </div>
-      <div id="ratioView">{{totalAndCurrentRowsRatio}}</div>
     </div>
   </div>
 </div>

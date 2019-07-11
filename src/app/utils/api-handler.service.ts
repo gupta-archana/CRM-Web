@@ -316,6 +316,16 @@ export class ApiHandlerService implements ApiResponseCallback {
   }
 
   /**
+   * getAgentCompliance
+   */
+  public getAgentCompliance(agentID: string, apiResponseCallback: ApiResponseCallback) {
+    this.dataService.onHideShowLoader(true);
+    this.apiResponseCallback = apiResponseCallback;
+    let url = this.api.getAgentComplianceUrl(this.getAppMode(), agentID);
+    this.apiService.hitGetApi(url, this);
+  }
+
+  /**
    * getStates
    */
   public getStates(apiResponseCallback: ApiResponseCallback) {

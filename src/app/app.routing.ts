@@ -21,6 +21,7 @@ import { ClaimsDetailComponent } from './views/entity/claims-detail/claims-detai
 import { AuditsComponent } from './views/entity/audits/audits.component';
 import { AuditDetailQueuedComponent } from './views/entity/audit-detail-queued/audit-detail-queued.component';
 import { AuditDetailCompletedComponent } from './views/entity/audit-detail-completed/audit-detail-completed.component';
+import { ComplianceComponent } from './views/entity/compliance/compliance.component';
 
 
 
@@ -45,6 +46,7 @@ const appRoutesArray: Routes =
     { path: paths.PATH_AGENT_AUDITS, component: AuditsComponent },
     { path: paths.PATH_AGENT_AUDIT_QUEUED, component: AuditDetailQueuedComponent },
     { path: paths.PATH_AGENT_AUDIT_COMPLETED, component: AuditDetailCompletedComponent },
+    { path: paths.PATH_AGENT_COMPLIANCE, component: ComplianceComponent },
     { path: '**', component: PageNotFoundComponent }
 
   ];

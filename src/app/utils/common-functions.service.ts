@@ -195,7 +195,7 @@ export class CommonFunctionsService {
 
         break;
       case this.constants.AGENT_DETAIL_COMPLIANCE:
-
+        navigatingUrl = paths.PATH_AGENT_COMPLIANCE;
         break;
       case this.constants.AGENT_DETAIL_ALERTS:
         navigatingUrl = paths.PATH_OPEN_ALERTS;

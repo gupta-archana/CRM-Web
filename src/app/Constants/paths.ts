@@ -29,6 +29,7 @@ export const PATH_CLAIM_DETAIL = "claimDetail";
 export const PATH_AGENT_AUDITS = "agentAudits";
 export const PATH_AGENT_AUDIT_QUEUED = "agentAuditQueued";
 export const PATH_AGENT_AUDIT_COMPLETED = "agentAuditCompleted";
+export const PATH_AGENT_COMPLIANCE = "agentCompliance";
 
 //others
 export const PATH_REARRANGE_DRAWER_ITEM = "rearrangeHomeModules";
