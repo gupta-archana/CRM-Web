@@ -1,6 +1,6 @@
 <!-- Modal beginning here -->
-<mat-dialog-content>
-  <div class="modal-content">
+<mat-dialog-content id="materialDialog">
+  <div>
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" (click)="onCancelClick()">&times;</button>
       <h4 class="modal-title">Mark Alert as Reviewed</h4>
@@ -17,7 +17,8 @@
 
         <div class="col-xs-12 col-md-12 noPadding">
           <div class="checkbox">
-            <input id="checkbox1" type="checkbox" [(ngModel)]="isDontShowChecked" (change)="dontShowAgainChanged($event)" [ngModelOptions]="{standalone: true}">
+            <input id="checkbox1" type="checkbox" [(ngModel)]="isDontShowChecked"
+              (change)="dontShowAgainChanged($event)" [ngModelOptions]="{standalone: true}">
             <label class="rememberM" for="checkbox1">Don't show me again</label>
           </div>
         </div>
@@ -25,14 +26,14 @@
         <div class="clear paddingTop10"></div>
 
       </div>
-      <div class="modal-footer">
-        <a matDialogClose="confirm" alt="Cancel" (click)="onCancelClick()" ><span>Cancel</span></a>
-        <a matDialogClose="confirm" alt="Save Changes" (click)="onMarkAsReviewClick()">Mark as Reviewed</a>
-      </div>
+
     </form>
   </div>
 </mat-dialog-content>
-
+<mat-dialog-actions id="MarkAsReviewedDialogButtonGroup" align="end">
+  <button matDialogClose="cancel" (click)="onNoClick()">Cancel</button>
+  <button matDialogClose="confirm" (click)="onYesClick()">Mark as Reviewed</button>
+</mat-dialog-actions>
 
 
 
