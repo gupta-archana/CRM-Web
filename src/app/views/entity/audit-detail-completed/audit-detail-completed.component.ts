@@ -64,14 +64,4 @@ export class AuditDetailCompletedComponent extends BaseClass implements OnInit {
     this.commonFunctions.backPress();
   }
 }
-function downloadPdf(context: AuditDetailCompletedComponent, pdfInBase64: any, fileName: string) {
-  const newBlob = new Blob([pdfInBase64], { type: 'application/pdf' });
-  if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-    window.navigator.msSaveOrOpenBlob(newBlob); // For IE browser
-  }
-  const linkSource = 'data:application/pdf;base64,' + pdfInBase64;
-  const downloadLink = document.createElement("a");
-  downloadLink.href = linkSource;
-  downloadLink.download = fileName;
-  downloadLink.click();
-}
+

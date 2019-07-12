@@ -61,6 +61,8 @@ import { AuditDetailCompletedComponent } from './views/entity/audit-detail-compl
 import { AuditDetailQueuedComponent } from './views/entity/audit-detail-queued/audit-detail-queued.component';
 import { SendEmailConfirmationComponent } from './customUI/dialogs/send-email-confirmation/send-email-confirmation.component';
 import { ComplianceComponent } from './views/entity/compliance/compliance.component';
+import { ComplianceDetailComponent } from './views/entity/compliance-detail/compliance-detail.component';
+import { EmailNocComponent } from './customUI/dialogs/email-noc/email-noc.component';
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "left",
   allowNegative: true,
@@ -109,6 +111,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     AuditDetailQueuedComponent,
     SendEmailConfirmationComponent,
     ComplianceComponent,
+    ComplianceDetailComponent,
+    EmailNocComponent,
   ],
   imports: [
     BrowserModule,
@@ -151,7 +155,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     ChangeProfileDialogComponent,
     MarkAsReviewedDialogComponent,
     SendEmailConfirmationComponent,
-    DownloadPdfComponent
+    DownloadPdfComponent,
+    EmailNocComponent
   ],
   providers: [Constants, ApiService,
     { provide: UrlSerializer, useClass: LowerCaseUrlSerializer },

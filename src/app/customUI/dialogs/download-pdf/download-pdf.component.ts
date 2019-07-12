@@ -13,7 +13,7 @@ export class DownloadPdfComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<SendEmailConfirmationComponent>,
     private myLocalStorage: MyLocalStorageService, private constants: Constants) { }
-
+    isDontShowChecked: boolean = false;
   ngOnInit() {
   }
   onEmailAuditorClick() {
@@ -24,5 +24,8 @@ export class DownloadPdfComponent implements OnInit {
   }
   onCancelClick() {
     this.dialogRef.close(false);
+  }
+  dontShowAgainChanged(event) {
+    this.myLocalStorage.setValue(this.constants.DONT_SHOW_DOWNLOAD_PDF_DIALOG, event.target.checked);
   }
 }

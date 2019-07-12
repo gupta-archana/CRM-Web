@@ -31,13 +31,11 @@ export class ComplianceComponent extends BaseClass implements OnInit {
   }
 
 
-  onComplianceSelected(item: ComplianceModel) {
-    //this.dataService.onDataShare(item);
-    sessionStorage.setItem(this.constants.SELECTED_AUDIT, JSON.stringify(item));
-    if (item.stat == "Completed")
-      this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_AGENT_AUDIT_COMPLETED);
-    else
-      this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_AGENT_AUDIT_QUEUED);
+  onComplianceClick(item: ComplianceModel) {
+
+    sessionStorage.setItem(this.constants.SELECTED_COMPLIANCE, JSON.stringify(item));
+    this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_COMPLIANCE_DETAIL);
+
   }
 
 

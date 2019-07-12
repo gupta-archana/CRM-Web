@@ -7,6 +7,7 @@ import { ChangeProfileDialogComponent } from '../customUI/dialogs/change-profile
 import { MarkAsReviewedDialogComponent } from '../customUI/dialogs/mark-as-reviewed-dialog/mark-as-reviewed-dialog.component';
 import { SendEmailConfirmationComponent } from '../customUI/dialogs/send-email-confirmation/send-email-confirmation.component';
 import { DownloadPdfComponent } from '../customUI/dialogs/download-pdf/download-pdf.component';
+import { EmailNocComponent } from '../customUI/dialogs/email-noc/email-noc.component';
 
 @Injectable({
   providedIn: 'root'
@@ -56,5 +57,8 @@ export class OpenDialogsService {
         name: username
       }
     });
+  }
+  showEmailNocDialog() {
+    return this.dialog.open(EmailNocComponent);
   }
 }

@@ -363,3 +363,29 @@ ul.agent-details li.agents a {
 .mat-dialog-content {
   padding: 0px !important;
 }
+
+.colorRed {
+  color: red !important;
+}
+
+.colorYellow {
+  color: #efbf00 !important;
+}
+
+.redIcon {
+  width: 14px;
+  height: 14px;
+  background: red;
+  border-radius: 50%;
+  float: left;
+  margin: 3px 5px 0px 0px;
+}
+
+.yellowIcon {
+  width: 14px;
+  height: 14px;
+  background: #efbf00;
+  border-radius: 50%;
+  float: left;
+  margin: 3px 5px 0px 0px;
+}

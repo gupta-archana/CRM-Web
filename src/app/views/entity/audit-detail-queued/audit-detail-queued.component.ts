@@ -27,4 +27,13 @@ export class AuditDetailQueuedComponent extends BaseClass implements OnInit {
   goBack() {
     this.commonFunctions.backPress();
   }
+  onDownloadPdfClick() {
+    if (!this.myLocalStorage.getValue(this.constants.DONT_SHOW_DOWNLOAD_PDF_DIALOG)) {
+      this.openDialogService.showDownloadPdfDialog().afterClosed().subscribe(downloadPdf => {
+
+      })
+    } else {
+
+    }
+  }
 }

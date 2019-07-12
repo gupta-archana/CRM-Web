@@ -14,8 +14,12 @@ export class SendEmailConfirmationComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<SendEmailConfirmationComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private myLocalStorage: MyLocalStorageService, private constants: Constants) { }
-
+  isDontShowChecked: boolean = false;
   ngOnInit() {
+  }
+
+  dontShowAgainChanged(event) {
+    this.myLocalStorage.setValue(this.constants.DONT_SHOW_SEND_EMAIL_DIALOG, event.target.checked);
   }
   onEmailAuditorClick() {
     this.dialogRef.close(true);

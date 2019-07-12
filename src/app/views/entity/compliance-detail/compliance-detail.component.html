@@ -1,0 +1,123 @@
+<div class="container-fluid nospace">
+  <div class="nav-bg wrapper-back">
+    <div id="detail-page-header">
+
+      <div class="col-xs-2 toppad"><img src="../../../../images/back-btn.svg" alt="" (click)="goBack()"></div>
+      <div class="col-xs-7 text-center">
+        <h1 class="t-agent">Compliances</h1>
+      </div>
+    </div>
+    <app-entity-name-header [entityModel]="entityModel"></app-entity-name-header>
+  </div>
+  <div class="container app-bg5 bottom-wrapper-for-back">
+    <div class="row marginTop20">
+      <div class="col-xs-12 col-md-6 cell-bg">
+        <div class="agent-detail">
+
+          <div class="row">
+            <div class="col-md-12 col-xs-12">
+              <div class="topHeadingComp">
+                <hr />
+                <span>Requirement</span>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-md-12 col-xs-12">
+              <div class="alertType_wp">
+                <h4 class="fontColor">{{complianceModel.reqdesc}}</h4>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 col-xs-6">
+              <div class="alertType_wp">
+                <h4>Condition</h4>
+                <span><img src="../../../../images/ic_objective_complete-4.svg" alt=""
+                    style="width:14px;">{{complianceModel.reqMet}}</span>
+              </div>
+            </div>
+            <div class="col-md-6 col-xs-6">
+              <div class="alertType_wp">
+                <h4>Compliance Status</h4>
+                <span
+                  [ngClass]="{'greenIcon':complianceModel.comstat=='Green','yellowIcon':complianceModel.comstat=='Yellow','redIcon':complianceModel.comstat=='Red'}">&nbsp;</span>
+                <span
+                  [ngClass]="{'colorGreen':complianceModel.comstat=='Green','colorYellow':complianceModel.comstat=='Yellow','colorRed':complianceModel.comstat=='Red'}">{{complianceModel.comstat}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="clear"></div>
+          <div class="paddingTop10"></div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-md-6 cell-bg">
+        <div class="agent-detail">
+
+          <div class="row">
+            <div class="col-md-12 col-xs-12">
+              <div class="topHeadingComp">
+                <hr />
+                <span>Qualification</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 col-xs-12">
+              <div class="alertType_wp">
+                <h4 class="fontColor">{{complianceModel.qualification}}</h4>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 col-xs-6">
+              <div class="alertType_wp">
+                <h4>Associated to</h4>
+                <span>{{complianceModel.appliesTo == 'Agent'?'':complianceModel.entityname}}</span>
+              </div>
+            </div>
+            <div class="col-md-6 col-xs-6">
+              <div class="alertType_wp">
+                <h4>Status</h4>
+                <span>{{complianceModel.stat}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-xs-6">
+              <div class="alertType_wp">
+                <h4>Effective Date</h4>
+                <span>{{complianceModel.effectiveDate | slice:0:10}}</span>
+              </div>
+            </div>
+            <div class="col-md-6 col-xs-6">
+              <div class="alertType_wp">
+                <h4>Expiration Date</h4>
+                <span>{{complianceModel.expirationDate | slice:0:10}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="clear"></div>
+          <div class="paddingTop10"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-12 noPadding">
+        <div class="buttonFooter_wp"><button type="button" class="btn btn-primary footerBtn"
+            (click)="onNocEmailClick()">
+            <img src="../../../../images/mail-icon-3.svg" alt=""> Email NOC
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

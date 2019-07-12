@@ -36,4 +36,14 @@ export class ClaimsDetailComponent extends BaseClass implements OnInit {
 
     return addValues;
   }
+
+  onDownloadPdfClick() {
+    if (!this.myLocalStorage.getValue(this.constants.DONT_SHOW_DOWNLOAD_PDF_DIALOG)) {
+      this.openDialogService.showDownloadPdfDialog().afterClosed().subscribe(downloadPdf => {
+
+      })
+    }else{
+
+    }
+  }
 }

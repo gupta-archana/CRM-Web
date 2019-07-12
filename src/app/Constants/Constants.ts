@@ -17,7 +17,11 @@ export class Constants {
   SELECTED_CLAIM = "selected_claim";
   SELECTED_ALERT = "selected_alert";
   SELECTED_AUDIT = "selected_audit";
-  DONT_SHOW_MARK_REVIED_DIALOG = "dont_show_mark_revied_dialog";
+  SELECTED_COMPLIANCE = "selected_compliance";
+  DONT_SHOW_MARK_REVIED_DIALOG = "dont_show_mark_reviewed_dialog";
+  DONT_SHOW_EMAIL_NOC_DIALOG = "dont_show_email_noc_dialog";
+  DONT_SHOW_SEND_EMAIL_DIALOG = "dont_show_email_dialog";
+  DONT_SHOW_DOWNLOAD_PDF_DIALOG = "dont_show_download_pdf_dialog";
 
   ENTITY_ARRAY = "entity_array";
 

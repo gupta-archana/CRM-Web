@@ -262,6 +262,18 @@ export class CommonFunctionsService {
     var mailContent = "mailto:" + emailAddress;
     window.location.href = mailContent;
   }
+
+  downloadPdf(pdfInBase64: any, fileName: string) {
+    const newBlob = new Blob([pdfInBase64], { type: 'application/pdf' });
+    if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+      window.navigator.msSaveOrOpenBlob(newBlob); // For IE browser
+    }
+    const linkSource = 'data:application/pdf;base64,' + pdfInBase64;
+    const downloadLink = document.createElement("a");
+    downloadLink.href = linkSource;
+    downloadLink.download = fileName;
+    downloadLink.click();
+  }
 }
 function getRandomInt(min, max) {
   min = Math.ceil(min);
