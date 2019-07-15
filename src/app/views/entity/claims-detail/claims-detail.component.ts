@@ -2,13 +2,16 @@ import { Component, OnInit, Injector } from '@angular/core';
 import { BaseClass } from '../../../global/base-class';
 import { EntityModel } from '../../../models/entity-model';
 import { ClaimsModel } from '../../../models/claims-model';
+import { ApiResponseCallback } from 'src/app/Interfaces/ApiResponseCallback';
+import { DownloadPdfModel } from 'src/app/models/download-pdf-model';
 
 @Component({
   selector: 'app-claims-detail',
   templateUrl: './claims-detail.component.html',
   styleUrls: ['./claims-detail.component.css']
 })
-export class ClaimsDetailComponent extends BaseClass implements OnInit {
+export class ClaimsDetailComponent extends BaseClass implements OnInit, ApiResponseCallback {
+
 
   entityModel: EntityModel;
   claimsModel: ClaimsModel;
@@ -38,12 +41,41 @@ export class ClaimsDetailComponent extends BaseClass implements OnInit {
   }
 
   onDownloadPdfClick() {
+
     if (!this.myLocalStorage.getValue(this.constants.DONT_SHOW_DOWNLOAD_PDF_DIALOG)) {
       this.openDialogService.showDownloadPdfDialog().afterClosed().subscribe(downloadPdf => {
-
+        if (downloadPdf) {
+          this.downloadPdf();
+        }
       })
-    }else{
-
+    } else {
+      this.downloadPdf();
     }
   }
+
+  downloadPdf() {
+    this.apiHandler.downloadClaimPdf(this.claimsModel.claimID, this);
+  }
+
+  onSuccess(response: any) {
+
+    let downloadPdfModel: DownloadPdfModel[] = response.pdf;
+    let base64Pdf = "";
+    let filename: string;
+
+    downloadPdfModel.forEach(element => {
+      base64Pdf = base64Pdf + element.base64;
+      if (!filename) {
+        let splittedName = element.filename.split("\\");
+        filename = splittedName[splittedName.length - 1];
+      }
+    });
+
+
+    this.commonFunctions.downloadPdf(base64Pdf, filename);
+  }
+  onError(errorCode: number, errorMsg: string) {
+
+  }
 }
+

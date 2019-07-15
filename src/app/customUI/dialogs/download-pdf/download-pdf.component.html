@@ -1,8 +1,8 @@
 <mat-dialog-content>
   <!-- Modal content-->
-  <div class="modal-content">
+  <div>
     <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <button type="button" class="close" (click)="onCancelClick()">&times;</button>
       <h4 class="modal-title">Download the Claim Details PDF</h4>
     </div>
     <form role="form">
@@ -24,10 +24,10 @@
         <div class="clear paddingTop10"></div>
 
       </div>
-      <div class="modal-footer">
-        <a alt="Cancel" (click)="onCancelClick()"><span>Cancel</span></a>
-        <a alt="Save Changes" (click)="onEmailAuditorClick()">Download PDF</a>
-      </div>
     </form>
   </div>
 </mat-dialog-content>
+<mat-dialog-actions id="MarkAsReviewedDialogButtonGroup" align="end">
+  <button matDialogClose="cancel" (click)="onCancelClick()">Cancel</button>
+  <button matDialogClose="confirm" (click)="onEmailAuditorClick()">Download PDF</button>
+</mat-dialog-actions>

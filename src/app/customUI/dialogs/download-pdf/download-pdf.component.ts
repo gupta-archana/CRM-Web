@@ -11,9 +11,9 @@ import { Constants } from '../../../Constants/Constants';
 })
 export class DownloadPdfComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<SendEmailConfirmationComponent>,
+  constructor(public dialogRef: MatDialogRef<DownloadPdfComponent>,
     private myLocalStorage: MyLocalStorageService, private constants: Constants) { }
-    isDontShowChecked: boolean = false;
+  isDontShowChecked: boolean = false;
   ngOnInit() {
   }
   onEmailAuditorClick() {
