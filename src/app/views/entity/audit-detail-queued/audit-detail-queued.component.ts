@@ -2,13 +2,16 @@ import { Component, OnInit, Injector } from '@angular/core';
 import { BaseClass } from '../../../global/base-class';
 import { AuditModels } from '../../../models/audit-models';
 import { EntityModel } from '../../../models/entity-model';
+import { ApiResponseCallback } from '../../../Interfaces/ApiResponseCallback';
+import { DownloadPdfModel } from '../../../models/download-pdf-model';
 
 @Component({
   selector: 'app-audit-detail-queued',
   templateUrl: './audit-detail-queued.component.html',
   styleUrls: ['./audit-detail-queued.component.css']
 })
-export class AuditDetailQueuedComponent extends BaseClass implements OnInit {
+export class AuditDetailQueuedComponent extends BaseClass implements OnInit, ApiResponseCallback {
+
 
   constructor(private injector: Injector) { super(injector) }
   auditModel: AuditModels;
@@ -28,12 +31,42 @@ export class AuditDetailQueuedComponent extends BaseClass implements OnInit {
     this.commonFunctions.backPress();
   }
   onDownloadPdfClick() {
-    if (!this.myLocalStorage.getValue(this.constants.DONT_SHOW_DOWNLOAD_PDF_DIALOG)) {
-      this.openDialogService.showDownloadPdfDialog().afterClosed().subscribe(downloadPdf => {
-
-      })
-    } else {
-
+    if (this.auditModel.auditID) {
+      if (!this.myLocalStorage.getValue(this.constants.DONT_SHOW_DOWNLOAD_AUDIT_PDF_DIALOG)) {
+        this.openDialogService.showDownloadPdfDialog(this.constants.DONT_SHOW_DOWNLOAD_AUDIT_PDF_DIALOG).afterClosed().subscribe(downloadPdf => {
+          if (downloadPdf) {
+            this.downloadAuditPdfApiCall();
+          }
+        })
+      } else {
+        this.downloadAuditPdfApiCall();
+      }
     }
+    else {
+      this.commonFunctions.showErrorSnackbar("There is no audit id associated with this");
+    }
+  }
+  private downloadAuditPdfApiCall() {
+    this.apiHandler.downloadAuditPdf(this.auditModel.auditID, this);
+  }
+
+  onSuccess(response: any) {
+    let downloadPdfModel: DownloadPdfModel[] = response.pdf;
+    let base64Pdf = "";
+    let filename: string;
+
+    downloadPdfModel.forEach(element => {
+      base64Pdf = base64Pdf + element.base64;
+      if (!filename) {
+        let splittedName = element.filename.split("\\");
+        filename = splittedName[splittedName.length - 1];
+      }
+    });
+
+
+    this.commonFunctions.downloadPdf(base64Pdf, filename);
+  }
+  onError(errorCode: number, errorMsg: string) {
+
   }
 }

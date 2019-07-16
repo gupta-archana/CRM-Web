@@ -326,6 +326,16 @@ export class ApiHandlerService implements ApiResponseCallback {
   }
 
   /**
+   * getUserConfig
+   */
+  public getUserConfig(apiResponseCallback: ApiResponseCallback) {
+    this.dataService.onHideShowLoader(true);
+    this.apiResponseCallback = apiResponseCallback;
+    let url = this.api.getUserConfigUrl(this.getAppMode());
+    this.apiService.hitGetApi(url, this);
+  }
+
+  /**
    * getStates
    */
   public getStates(apiResponseCallback: ApiResponseCallback) {

@@ -22,12 +22,18 @@ export class Constants {
   DONT_SHOW_EMAIL_NOC_DIALOG = "dont_show_email_noc_dialog";
   DONT_SHOW_SEND_EMAIL_DIALOG = "dont_show_email_dialog";
   DONT_SHOW_DOWNLOAD_PDF_DIALOG = "dont_show_download_pdf_dialog";
+  DONT_SHOW_ASSIGNED_TO_DIALOG = "dont_show_assigned_to_dialog";
+  DONT_SHOW_DOWNLOAD_AUDIT_PDF_DIALOG = "dont_show_download_audit_pdf_dialog";
 
   ENTITY_ARRAY = "entity_array";
 
   LOGIN = "Login";
 
   NUMBER_OF_ROWS = "number_of_rows";
+  SELECTED_HOME_SCREEN = "selected_home_screen";
+  SELECTED_NEWS_FEED = "selected_news_feed";
+  SELECTED_SEARCH_IN = "selected_search_in";
+
   AGENT_DETAIL_MENUES = "agent_detail_menues";
   SIDE_NAV_ITEMS = "side_nav_items";
   AGENT_DETAIL_ITEMS = "agent_detail_items";

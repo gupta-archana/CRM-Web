@@ -1,4 +1,5 @@
 export class AuditModels {
+  auditID: string;
   auditor: string;
   auditType: string;
   stat: string;

@@ -186,6 +186,11 @@ export class API {
   getAgentComplianceUrl(app_mode: string, agentID: string) {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=agentComplianceGet&AgentID=" + agentID;
   }
+
+  getUserConfigUrl(app_mode: string) {
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=sysuserconfigget";
+  }
+
   getStates() {
     return this.STATES_JSON_URL;
   }

@@ -8,6 +8,7 @@ import { MarkAsReviewedDialogComponent } from '../customUI/dialogs/mark-as-revie
 import { SendEmailConfirmationComponent } from '../customUI/dialogs/send-email-confirmation/send-email-confirmation.component';
 import { DownloadPdfComponent } from '../customUI/dialogs/download-pdf/download-pdf.component';
 import { EmailNocComponent } from '../customUI/dialogs/email-noc/email-noc.component';
+import { AssignedToComponent } from '../customUI/dialogs/assigned-to/assigned-to.component';
 
 @Injectable({
   providedIn: 'root'
@@ -47,8 +48,12 @@ export class OpenDialogsService {
     return this.dialog.open(MarkAsReviewedDialogComponent);
   }
 
-  showDownloadPdfDialog() {
-    return this.dialog.open(DownloadPdfComponent);
+  showDownloadPdfDialog(downloadPdfCheckFlag: string) {
+    return this.dialog.open(DownloadPdfComponent, {
+      data: {
+        name: downloadPdfCheckFlag
+      }
+    });
   }
 
   showSendMailConfirmationDialog(username: string) {
@@ -60,5 +65,13 @@ export class OpenDialogsService {
   }
   showEmailNocDialog() {
     return this.dialog.open(EmailNocComponent);
+  }
+
+  showAssignedToDialog(username: string) {
+    return this.dialog.open(AssignedToComponent, {
+      data: {
+        name: username
+      }
+    });
   }
 }

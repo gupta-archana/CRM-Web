@@ -156,7 +156,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     MarkAsReviewedDialogComponent,
     SendEmailConfirmationComponent,
     DownloadPdfComponent,
-    EmailNocComponent
+    EmailNocComponent,
+    AssignedToComponent
   ],
   providers: [Constants, ApiService,
     { provide: UrlSerializer, useClass: LowerCaseUrlSerializer },

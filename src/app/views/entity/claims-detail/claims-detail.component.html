@@ -38,13 +38,13 @@
             <div class="col-md-6 col-xs-6">
               <div class="alertType_wp">
                 <h4>Date Opened</h4>
-                <span>09-19-2013</span>
+                <span>{{claimsModel.dateopened | slice:0:10}}</span>
               </div>
             </div>
             <div class="col-md-6 col-xs-6">
               <div class="alertType_wp">
                 <h4>Policy Year</h4>
-                <span>06-26-2001</span>
+                <span>{{claimsModel.policyYear | slice:0:10}}</span>
               </div>
             </div>
           </div>
@@ -56,14 +56,14 @@
               <div class="alertType_wp">
                 <h4>Assigned To <span class="textRight"
                     style="border-bottom:dashed 1px #000; width:54%; padding-top:9px;"></span></h4>
-                <span>Cynthia Morales</span>
+                <span>{{claimsModel.userName}}</span>
               </div>
             </div>
 
             <div class="col-md-3 col-xs-3" style="padding-left:0;">
               <button type="button" class="btn btn-primary button" style="width:64px;height:34px; margin-top:15px;"
-                data-toggle="modal" data-target="#assignedToPopup">
-                <img src="images/assigned_icon.svg" alt=""></button>
+                (click)="onAssignedToClick()">
+                <img src="../../../../images/assigned_icon.svg" alt=""></button>
             </div>
 
           </div>
@@ -150,7 +150,7 @@
             <div class="col-md-12 col-xs-12">
               <div class="alertType_wp">
                 <h4>Agent Error</h4>
-                <span style="color:red;">Yes</span>
+                <span style="color:red;">{{claimsModel.agentError}}</span>
               </div>
             </div>
           </div>
@@ -159,7 +159,7 @@
             <div class="col-md-12 col-xs-12">
               <div class="alertType_wp">
                 <h4>Description</h4>
-                <span>Marital Rights</span>
+                <span>{{claimsModel.description}}</span>
               </div>
             </div>
           </div>
@@ -190,4 +190,3 @@
     </div>
   </div>
 </div>
-<app-assigned-to></app-assigned-to>
