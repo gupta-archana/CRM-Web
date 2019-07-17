@@ -47,11 +47,13 @@ export class ProfileSettingComponent extends BaseClass implements OnInit, ApiRes
   }
 
   onSuccess(response: any) {
-    this.userProfileModel = response.UserProfile[0];
-    this.commonFunctions.printLog(this.userProfileModel.name);
-    this.userProfileModel.shareable = response.UserProfile[0].shareable == "yes";
-    this.userImg = this.domSanitizer.bypassSecurityTrustResourceUrl(this.userProfileModel.picture);
-    this.cdr.markForCheck();
+    if (response.UserProfile) {
+      this.userProfileModel = response.UserProfile[0];
+      this.commonFunctions.printLog(this.userProfileModel.name);
+      this.userProfileModel.shareable = response.UserProfile[0].shareable == "yes";
+      this.userImg = this.domSanitizer.bypassSecurityTrustResourceUrl(this.userProfileModel.picture);
+      this.cdr.markForCheck();
+    }
     //getUserProfilePic(this)
   }
   onError(errorCode: number, errorMsg: string) {

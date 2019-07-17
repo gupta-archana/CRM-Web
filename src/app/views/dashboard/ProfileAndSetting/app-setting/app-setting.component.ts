@@ -5,6 +5,7 @@ import { ConfigBasicModel } from '../../../../models/config-basic-model';
 import { ConfigReorderModel } from '../../../../models/config-reorder-model';
 import { ConfigNotificationModel } from '../../../../models/config-notification-model';
 import * as configs from '../../../../Constants/ConfigArrays';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-app-setting',
@@ -12,6 +13,9 @@ import * as configs from '../../../../Constants/ConfigArrays';
   styleUrls: ['./app-setting.component.css']
 })
 export class AppSettingComponent extends BaseClass implements OnInit, ApiResponseCallback {
+
+
+  tabSelectedSubscription: Subscription;
 
   configBasicModels: Array<ConfigBasicModel> = [];
   configNotificationModels: Array<ConfigNotificationModel> = [];
@@ -30,7 +34,7 @@ export class AppSettingComponent extends BaseClass implements OnInit, ApiRespons
   constructor(private injector: Injector) { super(injector); }
 
   ngOnInit() {
-    this.apiHandler.getUserConfig(this);
+    TabChanged(this);
   }
   rearrangeHomeModules() {
     this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_REARRANGE_DRAWER_ITEM);
@@ -40,36 +44,38 @@ export class AppSettingComponent extends BaseClass implements OnInit, ApiRespons
     this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_REARRANGE_AGENT_DETAIL_ITEM);
   }
   onSuccess(response: any) {
-    let sysuserconfig: Array<any> = response.sysuserconfig;
-    sysuserconfig.forEach(element => {
-      if (element.configCategory == "Reorder") {
-        this.configReorderModels.push(element);
-      }
-      else if (element.configCategory == "Notification") {
-        this.configNotificationModels.push(element);
-      }
+    if (response.sysuserconfig) {
+      let sysuserconfig: Array<any> = response.sysuserconfig;
+      sysuserconfig.forEach(element => {
+        if (element.configCategory == "Reorder") {
+          this.configReorderModels.push(element);
+        }
+        else if (element.configCategory == "Notification") {
+          this.configNotificationModels.push(element);
+        }
 
-      else if (element.configCategory == "Basic") {
-        this.configBasicModels.push(element);
-      }
-    });
-    setBasicConfigToVariables(this);
+        else if (element.configCategory == "Basic") {
+          this.configBasicModels.push(element);
+        }
+      });
+      setBasicConfigToVariables(this);
+    }
   }
   onError(errorCode: number, errorMsg: string) {
 
   }
 
   onHomeScreenChanged(event) {
-
+    this.selectedHomeScreen = event.target.value;
   }
   onBatchSizeChanged(event) {
-
+    this.selectedBatchSize = event.target.value;
   }
   onSearchInChanged(event) {
-
+    this.selectedSearchIn = event.target.value;
   }
   onNewsFeedChanged(event) {
-
+    this.selectedNewsFeed = event.target.value;
   }
 }
 
@@ -101,6 +107,14 @@ function setBasicConfigToLocalStorage(context: AppSettingComponent) {
   context.myLocalStorage.setValue(context.constants.SELECTED_HOME_SCREEN, context.selectedHomeScreen);
   context.myLocalStorage.setValue(context.constants.SELECTED_NEWS_FEED, context.selectedNewsFeed);
 
+}
+
+function TabChanged(context: AppSettingComponent) {
+  context.tabSelectedSubscription = context.dataService.tabSelectedObservable.subscribe(index => {
+    if (index == 1) {
+      context.apiHandler.getUserConfig(context);
+    }
+  })
 }
 
 
