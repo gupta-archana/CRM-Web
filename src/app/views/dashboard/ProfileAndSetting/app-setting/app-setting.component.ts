@@ -1,4 +1,4 @@
-import { Component, OnInit, Injector } from '@angular/core';
+import { Component, OnInit, Injector, OnDestroy } from '@angular/core';
 import { BaseClass } from '../../../../global/base-class';
 import { ApiResponseCallback } from '../../../../Interfaces/ApiResponseCallback';
 import { ConfigBasicModel } from '../../../../models/config-basic-model';
@@ -12,7 +12,8 @@ import { Subscription } from 'rxjs';
   templateUrl: './app-setting.component.html',
   styleUrls: ['./app-setting.component.css']
 })
-export class AppSettingComponent extends BaseClass implements OnInit, ApiResponseCallback {
+export class AppSettingComponent extends BaseClass implements OnInit, ApiResponseCallback, OnDestroy {
+
 
 
   tabSelectedSubscription: Subscription;
@@ -43,6 +44,11 @@ export class AppSettingComponent extends BaseClass implements OnInit, ApiRespons
   rearrangeAgentDetailModules() {
     this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_REARRANGE_AGENT_DETAIL_ITEM);
   }
+
+  notficationControlClick() {
+    this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_NOTIFICATION_CONTROL);
+  }
+
   onSuccess(response: any) {
     if (response.sysuserconfig) {
       let sysuserconfig: Array<any> = response.sysuserconfig;
@@ -76,6 +82,11 @@ export class AppSettingComponent extends BaseClass implements OnInit, ApiRespons
   }
   onNewsFeedChanged(event) {
     this.selectedNewsFeed = event.target.value;
+  }
+  ngOnDestroy(): void {
+    if (this.tabSelectedSubscription && !this.tabSelectedSubscription.closed) {
+      this.tabSelectedSubscription.unsubscribe();
+    }
   }
 }
 

@@ -1,9 +1,9 @@
-import { Component, OnInit, Injector, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy } from '@angular/core';
+import { Component, Injector, OnDestroy, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Subscription } from 'rxjs';
 import { BaseClass } from '../../../../global/base-class';
 import { ApiResponseCallback } from '../../../../Interfaces/ApiResponseCallback';
 import { UserProfileModel } from '../../../../models/user-profile-model';
-import { DomSanitizer } from '@angular/platform-browser';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-profile-setting',
@@ -16,11 +16,12 @@ export class ProfileSettingComponent extends BaseClass implements OnInit, ApiRes
   userProfileModel: UserProfileModel = new UserProfileModel();
   userImg: any = "";
   dataUpdatedSubscription: Subscription = null;
+  tabSelectedSubscription: Subscription;
 
   constructor(private injector: Injector, public domSanitizer: DomSanitizer) { super(injector); }
 
   ngOnInit() {
-    getUserProfileData(this);
+    TabChanged(this);
     registerDataUpdatedObservable(this);
   }
   onEditProfilePicClick() {
@@ -114,6 +115,13 @@ function changeShareableStatus(context: ProfileSettingComponent, status: string)
     },
     onError(errorCode: number, errorMsg: string) {
       context.commonFunctions.showErrorSnackbar(errorMsg);
+    }
+  })
+}
+function TabChanged(context: ProfileSettingComponent) {
+  context.tabSelectedSubscription = context.dataService.tabSelectedObservable.subscribe(index => {
+    if (index == 0) {
+      getUserProfileData(context);
     }
   })
 }

@@ -23,6 +23,7 @@ import { AuditDetailQueuedComponent } from './views/entity/audit-detail-queued/a
 import { AuditDetailCompletedComponent } from './views/entity/audit-detail-completed/audit-detail-completed.component';
 import { ComplianceComponent } from './views/entity/compliance/compliance.component';
 import { ComplianceDetailComponent } from './views/entity/compliance-detail/compliance-detail.component';
+import { NotificationControlsComponent } from './views/notification-controls/notification-controls.component';
 
 
 
@@ -49,6 +50,7 @@ const appRoutesArray: Routes =
     { path: paths.PATH_AGENT_AUDIT_COMPLETED, component: AuditDetailCompletedComponent },
     { path: paths.PATH_AGENT_COMPLIANCE, component: ComplianceComponent },
     { path: paths.PATH_COMPLIANCE_DETAIL, component: ComplianceDetailComponent },
+    { path: paths.PATH_NOTIFICATION_CONTROL, component: NotificationControlsComponent },
     { path: '**', component: PageNotFoundComponent }
 
   ];

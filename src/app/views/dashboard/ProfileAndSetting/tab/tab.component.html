@@ -1,6 +1,6 @@
 <div style="background: #F2F2F2">
 
-  <mat-tab-group mat-align-tabs="center" animationDuration="500ms" (selectedTabChange)="onTabSelect($event)">
+  <mat-tab-group #tabGroup mat-align-tabs="center" animationDuration="500ms" (selectedTabChange)="onTabSelect($event)">
     <mat-tab label="Profile Settings">
       <app-profile-setting></app-profile-setting>
     </mat-tab>

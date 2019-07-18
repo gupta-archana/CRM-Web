@@ -3,7 +3,7 @@
     <div class="col-xs-12 col-md-6">
       <div class="form-group">
         <label for="sel1">Default Home Screen:</label>
-        <select class="form-control" id="sel1" formControlName="selectedHomeScreen"
+        <select class="form-control" id="sel1" 
           (change)="onHomeScreenChanged($event)">
           <option [value]="i.path" *ngFor="let i of homeScreenArray">{{i.name}}</option>
         </select>
@@ -12,7 +12,7 @@
     <div class="col-xs-12 col-md-6">
       <div class="form-group">
         <label for="sel2">Numberof items to load at once:</label>
-        <select class="form-control" id="sel1" formControlName="selectedBatchSize"
+        <select class="form-control" id="sel1" 
           (change)="onBatchSizeChanged($event)">
           <option [value]="i" *ngFor="let i of batchSizeArray">{{i}}</option>
         </select>
@@ -22,7 +22,7 @@
     <div class="col-xs-12 col-md-6">
       <div class="form-group">
         <label for="sel3">Search by default In:</label>
-        <select class="form-control" id="sel1" formControlName="selectedSearchIn" (change)="onSearchInChanged($event)">
+        <select class="form-control" id="sel1"  (change)="onSearchInChanged($event)">
           <option [value]="i" *ngFor="let i of searchInArray">{{i}}</option>
         </select>
       </div>
@@ -30,7 +30,7 @@
     <div class="col-xs-12 col-md-6">
       <div class="form-group">
         <label for="sel4">Use following feed for news</label>
-        <select class="form-control" id="sel1" formControlName="selectedNewsFeed" (change)="onNewsFeedChanged($event)">
+        <select class="form-control" id="sel1"  (change)="onNewsFeedChanged($event)">
           <option [value]="i" *ngFor="let i of newsArray">{{i}}</option>
         </select>
       </div>
@@ -52,4 +52,25 @@
     </div>
   </div>
 
+  <div class="row paddingTop15">
+    <div class="col-xs-12 col-md-6">
+      <div class="form-group">
+        <label for="sel1">Turn Notification Preferences On/Off</label>
+        <button type="button" class="btn btn-light" (click)="notficationControlClick()">Notification Controls <img
+            src="../../../../../images/arrow-icon.png" align="right" alt=""></button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-md-12">
+      <div class="form-group" style="margin-bottom:5px;">
+        <label for="sel1">Other Settings</label>
+      </div>
+      <div class="ag-detail-icons">
+        <a href="" alt=""><img src="../../../../../images/power.svg" alt=""> &nbsp; Reset Application Settings</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="clear paddingTop15"></div>
 </form>
