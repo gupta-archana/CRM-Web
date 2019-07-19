@@ -3,7 +3,7 @@
 
 
   <!-- Modal content-->
-  <div class="modal-content">
+  <div>
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" (click)="onCancelClick()">&times;</button>
       <h4 class="modal-title">Email "{{data.name}}"</h4>
@@ -28,11 +28,11 @@
         <div class="clear paddingTop10"></div>
 
       </div>
-      <div class="modal-footer">
-        <a alt="Cancel" (click)="onCancelClick()"><span>Cancel</span></a>
-        <a alt="Save Changes" (click)="onEmailAuditorClick()">Email Auditor</a>
-      </div>
     </form>
   </div>
 </mat-dialog-content>
 <!-- Modal End here -->
+<mat-dialog-actions id="MarkAsReviewedDialogButtonGroup" align="end">
+  <button matDialogClose="cancel" (click)="onCancelClick()">Cancel</button>
+  <button matDialogClose="confirm" (click)="onEmailAuditorClick()">Email Auditor</button>
+</mat-dialog-actions>
