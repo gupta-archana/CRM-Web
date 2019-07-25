@@ -35,7 +35,7 @@ export const HOME_SCREEN_ARRAY = [
   }
 ];
 
-export const SEARCH_IN_ARRAY = ["All", "Agents", "Employee", "Person"];
+export const SEARCH_IN_ARRAY = ["ALL", "Agents", "Employee", "Person"];
 
 export const NUMBER_OF_ITEMS_LOAD_ARRAY = ["5", "10", "15", "20"];
 

@@ -31,7 +31,7 @@ export class API {
     this.encryptedPassword = credentials.password;
   }
 
-  private getNumberOfRows() {
+  public getNumberOfRows() {
     this.numberOfRows = Number(this.myLocalStorage.getValue(this.constants.NUMBER_OF_ROWS));
     if (!this.numberOfRows)
       this.numberOfRows = 5;
@@ -203,6 +203,7 @@ export class API {
 
   private getBaseUrl(app_mode: string) {
     this.checkAndGetCredentials();
+    this.getNumberOfRows();
     return this.API_BASE_URL + app_mode + "/get?I0=JSON&I4=CRM&";
   }
 }

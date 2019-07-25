@@ -6,6 +6,7 @@ import { ConfigReorderModel } from '../../../../models/config-reorder-model';
 import { ConfigNotificationModel } from '../../../../models/config-notification-model';
 import * as configs from '../../../../Constants/ConfigArrays';
 import { Subscription } from 'rxjs';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-app-setting',
@@ -28,13 +29,17 @@ export class AppSettingComponent extends BaseClass implements OnInit, ApiRespons
   newsArray: Array<string> = configs.NEWS_CHANNEL_ARRAY;
 
   selectedHomeScreen: string = "";
+  selectedHomeScreenPath: string = "";
   selectedBatchSize: string = "";
   selectedSearchIn: string = "";
   selectedNewsFeed: string = "";
 
+  appSettingForm: FormGroup;
+
   constructor(private injector: Injector) { super(injector); }
 
   ngOnInit() {
+    addValidation(this);
     TabChanged(this);
   }
   rearrangeHomeModules() {
@@ -53,16 +58,7 @@ export class AppSettingComponent extends BaseClass implements OnInit, ApiRespons
     if (response.sysuserconfig) {
       let sysuserconfig: Array<any> = response.sysuserconfig;
       sysuserconfig.forEach(element => {
-        if (element.configCategory == "Reorder") {
-          this.configReorderModels.push(element);
-        }
-        else if (element.configCategory == "Notification") {
-          this.configNotificationModels.push(element);
-        }
-
-        else if (element.configCategory == "Basic") {
-          this.configBasicModels.push(element);
-        }
+        this.parseResponse(element);
       });
       setBasicConfigToVariables(this);
     }
@@ -71,17 +67,35 @@ export class AppSettingComponent extends BaseClass implements OnInit, ApiRespons
 
   }
 
+  private parseResponse(element: any) {
+    if (element.configCategory == "Reorder") {
+      element.configuration = JSON.parse(element.configuration.replace(/'/g, '"'));
+      this.configReorderModels.push(element);
+    }
+    else if (element.configCategory == "Notification") {
+      this.configNotificationModels.push(element);
+    }
+    else if (element.configCategory == "Basic") {
+      this.configBasicModels.push(element);
+    }
+  }
+
   onHomeScreenChanged(event) {
-    this.selectedHomeScreen = event.target.value;
+    this.selectedHomeScreen = this.homeScreenArray[event.target.selectedIndex].name;
+    this.selectedHomeScreenPath = this.homeScreenArray[event.target.selectedIndex].path;
+    setBasicConfigToLocalStorage(this);
   }
   onBatchSizeChanged(event) {
     this.selectedBatchSize = event.target.value;
+    setBasicConfigToLocalStorage(this);
   }
   onSearchInChanged(event) {
     this.selectedSearchIn = event.target.value;
+    setBasicConfigToLocalStorage(this);
   }
   onNewsFeedChanged(event) {
     this.selectedNewsFeed = event.target.value;
+    setBasicConfigToLocalStorage(this);
   }
   ngOnDestroy(): void {
     if (this.tabSelectedSubscription && !this.tabSelectedSubscription.closed) {
@@ -90,32 +104,39 @@ export class AppSettingComponent extends BaseClass implements OnInit, ApiRespons
   }
 }
 
+
 function setBasicConfigToVariables(context: AppSettingComponent) {
+  const HOME_SCREEN = "HomeScreen";
+  const SEARCH_FILTER = "SearchFilter";
+  const BATCH_SIZE = "BatchSize";
+  const NEWS_FEED = "NewsFeed";
   context.configBasicModels.forEach(element => {
     switch (element.configType) {
-      case "HomeScreen":
+      case HOME_SCREEN:
         context.selectedHomeScreen = element.configuration;
         break;
-      case "SearchFilter":
+      case SEARCH_FILTER:
         context.selectedSearchIn = element.configuration;
         break;
-      case "BatchSize":
+      case BATCH_SIZE:
         context.selectedBatchSize = element.configuration;
         break;
-      case "NewsFeed":
+      case NEWS_FEED:
         context.selectedNewsFeed = element.configuration;
         break;
       default:
         break;
     }
   });
+  setValueToDropdowns(context);
+  setBasicConfigToLocalStorage(context);
   context.cdr.markForCheck();
 }
 
 function setBasicConfigToLocalStorage(context: AppSettingComponent) {
   context.myLocalStorage.setValue(context.constants.SELECTED_SEARCH_IN, context.selectedSearchIn);
   context.myLocalStorage.setValue(context.constants.NUMBER_OF_ROWS, context.selectedBatchSize);
-  context.myLocalStorage.setValue(context.constants.SELECTED_HOME_SCREEN, context.selectedHomeScreen);
+  context.myLocalStorage.setValue(context.constants.SELECTED_HOME_SCREEN, context.selectedHomeScreenPath);
   context.myLocalStorage.setValue(context.constants.SELECTED_NEWS_FEED, context.selectedNewsFeed);
 
 }
@@ -127,5 +148,18 @@ function TabChanged(context: AppSettingComponent) {
     }
   })
 }
-
+function addValidation(context: AppSettingComponent) {
+  context.appSettingForm = new FormGroup({
+    selectedHomeScreen: new FormControl(context.selectedHomeScreen),
+    selectedBatchSize: new FormControl(context.selectedBatchSize),
+    selectedNewsFeed: new FormControl(context.selectedNewsFeed),
+    selectedSearchIn: new FormControl(context.selectedSearchIn)
+  })
+}
+function setValueToDropdowns(context: AppSettingComponent) {
+  context.appSettingForm.get("selectedHomeScreen").setValue(context.selectedHomeScreen);
+  context.appSettingForm.get("selectedBatchSize").setValue(context.selectedBatchSize);
+  context.appSettingForm.get("selectedNewsFeed").setValue(context.selectedNewsFeed);
+  context.appSettingForm.get("selectedSearchIn").setValue(context.selectedSearchIn);
+}
 
