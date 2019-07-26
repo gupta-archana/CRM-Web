@@ -16,9 +16,9 @@ export class ApiHandlerService implements ApiResponseCallback {
   private ENABLE_APP_MODE = 0;
   private apiResponseCallback: ApiResponseCallback = null;
   constructor(private apiService: ApiService, public dataService: DataServiceService, private constants: Constants,
-    private api: API) { 
-      
-    }
+    private api: API) {
+
+  }
 
   public getSideNavJson(apiResponseCallback: ApiResponseCallback) {
     this.apiService.hitGetApi(this.api.SIDE_NAV_JSON, apiResponseCallback);
@@ -335,6 +335,15 @@ export class ApiHandlerService implements ApiResponseCallback {
     this.apiResponseCallback = apiResponseCallback;
     let url = this.api.getUserConfigUrl(this.getAppMode());
     this.apiService.hitGetApi(url, this);
+  }
+
+  /**
+   * updateUserConfig
+   */
+  public updateUserConfig(requestJson: any, apiResponseCallback: ApiResponseCallback) {
+    this.dataService.onHideShowLoader(true);
+    let url = this.api.getUpdateUserConfigUrl(this.getAppMode());
+    this.apiService.hitPostApi(url, this.getRequestXml(requestJson), handleAddAndUpdateApiResponse(this, apiResponseCallback));
   }
 
   /**

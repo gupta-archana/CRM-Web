@@ -191,6 +191,10 @@ export class API {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=sysuserconfigget";
   }
 
+  getUpdateUserConfigUrl(app_mode: string) {
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=sysuserconfigset";
+  }
+
   getStates() {
     return this.STATES_JSON_URL;
   }

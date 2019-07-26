@@ -3,6 +3,7 @@ import { Subject } from 'rxjs';
 import { EntityModel } from '../models/entity-model';
 import { ApiHandlerService } from './api-handler.service';
 import { CommonFunctionsService } from './common-functions.service';
+import { ApiResponseCallback } from '../Interfaces/ApiResponseCallback';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,8 @@ import { CommonFunctionsService } from './common-functions.service';
 export class CommonApisService {
 
   onApiResoponseSubject = new Subject();
-  constructor(private commonFunctions: CommonFunctionsService) { }
+  constructor(private commonFunctions: CommonFunctionsService,
+    public apiHandler: ApiHandlerService) { }
 
   /**
    * setFavorite
@@ -55,4 +57,31 @@ export class CommonApisService {
       }
     });
   }
+
+  public updateBasicConfig(configType: string, configuration: any, apiResponseCallback?: ApiResponseCallback) {
+    let self = this;
+    this.apiHandler.updateUserConfig(getRequest(configType, configuration), {
+      onSuccess(response: any) {
+        self.commonFunctions.showSnackbar(response);
+        if (apiResponseCallback)
+          apiResponseCallback.onSuccess(response);
+      },
+      onError(errorCode: number, errorMsg: string) {
+        self.commonFunctions.showErrorSnackbar(errorMsg);
+        if (apiResponseCallback)
+          apiResponseCallback.onError(errorCode, errorMsg);
+      }
+    });
+  }
+}
+function getRequest(configType: string, configuration: any) {
+  let requestJson = {
+    "configType": configType,
+    "configuration": configuration
+  }
+  let finalJson = {
+    "sysuserconfig": "",
+    "attr": requestJson
+  }
+  return finalJson;
 }

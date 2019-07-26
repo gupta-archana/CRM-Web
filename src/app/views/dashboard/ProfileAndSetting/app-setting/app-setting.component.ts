@@ -32,10 +32,14 @@ export class AppSettingComponent extends BaseClass implements OnInit, ApiRespons
   selectedHomeScreenPath: string = "";
   selectedBatchSize: string = "";
   selectedSearchIn: string = "";
+  selectedSearchInPresenter: string = "";
   selectedNewsFeed: string = "";
 
   appSettingForm: FormGroup;
-
+  HOME_SCREEN = "HomeScreen";
+  SEARCH_FILTER = "SearchFilter";
+  BATCH_SIZE = "BatchSize";
+  NEWS_FEED = "NewsFeed";
   constructor(private injector: Injector) { super(injector); }
 
   ngOnInit() {
@@ -43,14 +47,21 @@ export class AppSettingComponent extends BaseClass implements OnInit, ApiRespons
     TabChanged(this);
   }
   rearrangeHomeModules() {
+    this.myLocalStorage.setValue(this.constants.SIDE_NAV_ITEMS, JSON.stringify(getRearrangeItemArray(this, this.constants.HOME_MODULE)));
     this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_REARRANGE_DRAWER_ITEM);
   }
 
   rearrangeAgentDetailModules() {
+    this.myLocalStorage.setValue(this.constants.AGENT_DETAIL_ITEMS, JSON.stringify(getRearrangeItemArray(this, this.constants.AGENT_MODULE)));
     this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_REARRANGE_AGENT_DETAIL_ITEM);
+  }
+  rearrangePersonDetailModules() {
+    this.myLocalStorage.setValue(this.constants.AGENT_DETAIL_ITEMS, JSON.stringify(getRearrangeItemArray(this, this.constants.PERSON_MODULE)));
+    this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_REARRANGE_PERSON_DETAIL_ITEM);
   }
 
   notficationControlClick() {
+    this.myLocalStorage.setValue(this.constants.USER_NOTIFICATIONS_CONTROLS, JSON.stringify(this.configNotificationModels));
     this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_NOTIFICATION_CONTROL);
   }
 
@@ -84,18 +95,24 @@ export class AppSettingComponent extends BaseClass implements OnInit, ApiRespons
     this.selectedHomeScreen = this.homeScreenArray[event.target.selectedIndex].name;
     this.selectedHomeScreenPath = this.homeScreenArray[event.target.selectedIndex].path;
     setBasicConfigToLocalStorage(this);
+    this.commonApis.updateBasicConfig(this.HOME_SCREEN, this.selectedHomeScreen);
   }
   onBatchSizeChanged(event) {
     this.selectedBatchSize = event.target.value;
     setBasicConfigToLocalStorage(this);
+    this.commonApis.updateBasicConfig(this.BATCH_SIZE, this.selectedBatchSize);
   }
   onSearchInChanged(event) {
     this.selectedSearchIn = event.target.value;
+    this.selectedSearchInPresenter = this.constants.searchEntityArrayObjectUserConfig[this.selectedSearchIn];
     setBasicConfigToLocalStorage(this);
+    this.commonApis.updateBasicConfig(this.SEARCH_FILTER, this.selectedSearchIn);
+    clearSearch(this);
   }
   onNewsFeedChanged(event) {
     this.selectedNewsFeed = event.target.value;
     setBasicConfigToLocalStorage(this);
+    this.commonApis.updateBasicConfig(this.NEWS_FEED, this.selectedNewsFeed);
   }
   ngOnDestroy(): void {
     if (this.tabSelectedSubscription && !this.tabSelectedSubscription.closed) {
@@ -106,22 +123,21 @@ export class AppSettingComponent extends BaseClass implements OnInit, ApiRespons
 
 
 function setBasicConfigToVariables(context: AppSettingComponent) {
-  const HOME_SCREEN = "HomeScreen";
-  const SEARCH_FILTER = "SearchFilter";
-  const BATCH_SIZE = "BatchSize";
-  const NEWS_FEED = "NewsFeed";
+
   context.configBasicModels.forEach(element => {
     switch (element.configType) {
-      case HOME_SCREEN:
+      case context.HOME_SCREEN:
         context.selectedHomeScreen = element.configuration;
+        context.selectedHomeScreenPath = context.constants.sideNavItemsWithPath[element.configuration]
         break;
-      case SEARCH_FILTER:
+      case context.SEARCH_FILTER:
         context.selectedSearchIn = element.configuration;
+        context.selectedSearchInPresenter = context.constants.searchEntityArrayObjectUserConfig[context.selectedSearchIn];
         break;
-      case BATCH_SIZE:
+      case context.BATCH_SIZE:
         context.selectedBatchSize = element.configuration;
         break;
-      case NEWS_FEED:
+      case context.NEWS_FEED:
         context.selectedNewsFeed = element.configuration;
         break;
       default:
@@ -134,7 +150,7 @@ function setBasicConfigToVariables(context: AppSettingComponent) {
 }
 
 function setBasicConfigToLocalStorage(context: AppSettingComponent) {
-  context.myLocalStorage.setValue(context.constants.SELECTED_SEARCH_IN, context.selectedSearchIn);
+  context.myLocalStorage.setValue(context.constants.SELECTED_SEARCH_IN, context.selectedSearchInPresenter);
   context.myLocalStorage.setValue(context.constants.NUMBER_OF_ROWS, context.selectedBatchSize);
   context.myLocalStorage.setValue(context.constants.SELECTED_HOME_SCREEN, context.selectedHomeScreenPath);
   context.myLocalStorage.setValue(context.constants.SELECTED_NEWS_FEED, context.selectedNewsFeed);
@@ -162,4 +178,24 @@ function setValueToDropdowns(context: AppSettingComponent) {
   context.appSettingForm.get("selectedNewsFeed").setValue(context.selectedNewsFeed);
   context.appSettingForm.get("selectedSearchIn").setValue(context.selectedSearchIn);
 }
+function getRearrangeItemArray(context: AppSettingComponent, itemsFor: string) {
+  let itemsArray = [];
+  context.configReorderModels.every(function(element, index) {
+    if (element.configType == itemsFor) {
+      itemsArray = element.configuration;
+      return false;
+    }
+    else
+      return true;
+  });
+  return itemsArray;
+}
 
+function clearSearch(context: AppSettingComponent) {
+  sessionStorage.removeItem(context.constants.SEARCHED_ENTITY_ARRAY);
+  sessionStorage.removeItem(context.constants.SEARCH_CURRENT_PAGE_NO);
+  sessionStorage.removeItem(context.constants.SEARCHED_STRING);
+  sessionStorage.removeItem(context.constants.SEARCH_MORE_DATA_AVAILABLE_FLAG);
+  sessionStorage.removeItem(context.constants.SEARCH_TOTAL_ROWS);
+
+}

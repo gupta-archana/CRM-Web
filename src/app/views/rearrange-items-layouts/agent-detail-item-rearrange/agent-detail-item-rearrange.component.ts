@@ -1,12 +1,13 @@
 import { Component, OnInit, Injector } from '@angular/core';
 import { BaseClass } from 'src/app/global/base-class';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { ApiResponseCallback } from '../../../Interfaces/ApiResponseCallback';
 @Component({
   selector: 'app-agent-detail-item-rearrange',
   templateUrl: './agent-detail-item-rearrange.component.html',
   styleUrls: ['./agent-detail-item-rearrange.component.css']
 })
-export class AgentDetailItemRearrangeComponent extends BaseClass implements OnInit {
+export class AgentDetailItemRearrangeComponent extends BaseClass implements OnInit, ApiResponseCallback {
   agentDetailItems = [];
   constructor(private injector: Injector) { super(injector) }
 
@@ -19,10 +20,17 @@ export class AgentDetailItemRearrangeComponent extends BaseClass implements OnIn
   }
 
   Save() {
-    this.myLocalStorage.setValue(this.constants.AGENT_DETAIL_ITEMS, JSON.stringify(this.agentDetailItems));
+    let itemsInString = JSON.stringify(this.agentDetailItems);
+    this.myLocalStorage.setValue(this.constants.AGENT_DETAIL_ITEMS, itemsInString);
+    itemsInString = itemsInString.replace(/"/g, "'");
+    this.commonApis.updateBasicConfig(this.constants.HOME_MODULE, itemsInString, this);
     this.utils.getAgentDetailItems();
-    this.commonFunctions.showSnackbar("Saved Successfull");
+  }
+  onSuccess(response: any) {
     this.commonFunctions.backPress();
+  }
+  onError(errorCode: number, errorMsg: string) {
+
   }
 }
 function getAgentDetailItems(self: AgentDetailItemRearrangeComponent) {

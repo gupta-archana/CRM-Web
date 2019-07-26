@@ -40,7 +40,8 @@
             <div class="col-xs-4 col-md-6 visibleBtnWp noPadding">
               <span class="onOffTxt">Off</span>
               <label class="switch">
-                <input type="checkbox">
+                <input type="checkbox" [(ngModel)]="claimCreated.configuration" (change)="onCheckClick(claimCreated)"
+                  [ngModelOptions]="{standalone: true}">
                 <span class="slider round"></span>
               </label>
               <span class="onOffTxt">On</span>
@@ -56,7 +57,8 @@
             <div class="col-xs-4 col-md-6 visibleBtnWp noPadding">
               <span class="onOffTxt">Off</span>
               <label class="switch">
-                <input type="checkbox">
+                <input type="checkbox" [(ngModel)]="claimClosed.configuration" (change)="onCheckClick(claimClosed)"
+                  [ngModelOptions]="{standalone: true}">
                 <span class="slider round"></span>
               </label>
               <span class="onOffTxt">On</span>
@@ -71,7 +73,8 @@
             <div class="col-xs-4 col-md-6 visibleBtnWp noPadding">
               <span class="onOffTxt">Off</span>
               <label class="switch">
-                <input type="checkbox">
+                <input type="checkbox" [(ngModel)]="claimReserveIncreaded.configuration"
+                  (change)="onCheckClick(claimReserveIncreaded)" [ngModelOptions]="{standalone: true}">
                 <span class="slider round"></span>
               </label>
               <span class="onOffTxt">On</span>
@@ -81,12 +84,13 @@
 
           <div class="row">
             <div class="col-xs-8 col-md-6 visibleWp">
-              <h4>Porential Recovery Posted</h4>
+              <h4>Potential Recovery Posted</h4>
             </div>
             <div class="col-xs-4 col-md-6 visibleBtnWp noPadding">
               <span class="onOffTxt">Off</span>
               <label class="switch">
-                <input type="checkbox">
+                <input type="checkbox" [(ngModel)]="potentialRecoveryPosted.configuration"
+                  (change)="onCheckClick(potentialRecoveryPosted)" [ngModelOptions]="{standalone: true}">
                 <span class="slider round"></span>
               </label>
               <span class="onOffTxt">On</span>
@@ -101,7 +105,8 @@
             <div class="col-xs-4 col-md-6 visibleBtnWp noPadding">
               <span class="onOffTxt">Off</span>
               <label class="switch">
-                <input type="checkbox">
+                <input type="checkbox" [(ngModel)]="recoveryReceived.configuration" (change)="onCheckClick(recoveryReceived)"
+                  [ngModelOptions]="{standalone: true}">
                 <span class="slider round"></span>
               </label>
               <span class="onOffTxt">On</span>
@@ -126,7 +131,8 @@
             <div class="col-xs-4 col-md-6 visibleBtnWp noPadding">
               <span class="onOffTxt">Off</span>
               <label class="switch">
-                <input type="checkbox">
+                <input type="checkbox" [(ngModel)]="newRemittanceBatchCreated.configuration"
+                  (change)="onCheckClick(newRemittanceBatchCreated)" [ngModelOptions]="{standalone: true}">
                 <span class="slider round"></span>
               </label>
               <span class="onOffTxt">On</span>
@@ -141,7 +147,8 @@
             <div class="col-xs-4 col-md-6 visibleBtnWp noPadding">
               <span class="onOffTxt">Off</span>
               <label class="switch">
-                <input type="checkbox">
+                <input type="checkbox" [(ngModel)]="remittanceBatchCompleted.configuration"
+                  (change)="onCheckClick(remittanceBatchCompleted)" [ngModelOptions]="{standalone: true}">
                 <span class="slider round"></span>
               </label>
               <span class="onOffTxt">On</span>
@@ -167,7 +174,8 @@
             <div class="col-xs-4 col-md-6 visibleBtnWp noPadding">
               <span class="onOffTxt">Off</span>
               <label class="switch">
-                <input type="checkbox">
+                <input type="checkbox" [(ngModel)]="newAlertCreated.configuration" (change)="onCheckClick(newAlertCreated)"
+                  [ngModelOptions]="{standalone: true}">
                 <span class="slider round"></span>
               </label>
               <span class="onOffTxt">On</span>
@@ -192,7 +200,8 @@
             <div class="col-xs-4 col-md-6 visibleBtnWp noPadding">
               <span class="onOffTxt">Off</span>
               <label class="switch">
-                <input type="checkbox">
+                <input type="checkbox" [(ngModel)]="accountingPeriodCompleted.configuration"
+                  (change)="onCheckClick(accountingPeriodCompleted)" [ngModelOptions]="{standalone: true}">
                 <span class="slider round"></span>
               </label>
               <span class="onOffTxt">On</span>
@@ -218,7 +227,8 @@
             <div class="col-xs-4 col-md-6 visibleBtnWp noPadding">
               <span class="onOffTxt">Off</span>
               <label class="switch">
-                <input type="checkbox">
+                <input type="checkbox" [(ngModel)]="newAuditCreated.configuration" (change)="onCheckClick(newAuditCreated)"
+                  [ngModelOptions]="{standalone: true}">
                 <span class="slider round"></span>
               </label>
               <span class="onOffTxt">On</span>
@@ -233,7 +243,8 @@
             <div class="col-xs-4 col-md-6 visibleBtnWp noPadding">
               <span class="onOffTxt">Off</span>
               <label class="switch">
-                <input type="checkbox">
+                <input type="checkbox" [(ngModel)]="auditCompleted.configuration" (change)="onCheckClick(auditCompleted)"
+                  [ngModelOptions]="{standalone: true}">
                 <span class="slider round"></span>
               </label>
               <span class="onOffTxt">On</span>
@@ -263,7 +274,8 @@
             <div class="col-xs-4 col-md-6 visibleBtnWp noPadding">
               <span class="onOffTxt">Off</span>
               <label class="switch">
-                <input type="checkbox">
+                <input type="checkbox" [(ngModel)]="auditQueued.configuration" (change)="onCheckClick(auditQueued)"
+                  [ngModelOptions]="{standalone: true}">
                 <span class="slider round"></span>
               </label>
               <span class="onOffTxt">On</span>

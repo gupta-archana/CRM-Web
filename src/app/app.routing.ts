@@ -24,6 +24,7 @@ import { AuditDetailCompletedComponent } from './views/entity/audit-detail-compl
 import { ComplianceComponent } from './views/entity/compliance/compliance.component';
 import { ComplianceDetailComponent } from './views/entity/compliance-detail/compliance-detail.component';
 import { NotificationControlsComponent } from './views/notification-controls/notification-controls.component';
+import { PersonDetailItemsRearrangeComponent } from './views/rearrange-items-layouts/person-detail-items-rearrange/person-detail-items-rearrange.component';
 
 
 
@@ -37,6 +38,7 @@ const appRoutesArray: Routes =
     { path: paths.PATH_AGENT_OBJECTIVE, component: AgentObjectiveComponent },
     { path: paths.PATH_REARRANGE_DRAWER_ITEM, component: DrawerItemsRearrangeComponent },
     { path: paths.PATH_REARRANGE_AGENT_DETAIL_ITEM, component: AgentDetailItemRearrangeComponent },
+    { path: paths.PATH_REARRANGE_PERSON_DETAIL_ITEM, component: PersonDetailItemsRearrangeComponent },
     { path: paths.PATH_NOTES, component: AgentNotesComponent },
     { path: paths.PATH_THIRTEEN_MONTH_ACTIVITY, component: AgentThirteenMonthActivityComponent },
     { path: paths.PATH_AGENT_ASSOCIATES, component: AgentAssociatesComponent },

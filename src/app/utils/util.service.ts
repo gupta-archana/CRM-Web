@@ -138,7 +138,6 @@ export class UtilService {
 
     return this.dataService.personDetailItemsObservable;
   }
-  
 }
 
 

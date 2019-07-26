@@ -27,6 +27,19 @@ export class AppComponent extends BaseClass implements OnInit, OnDestroy {
     private injector: Injector,
     private routingState: RoutingStateService) {
     super(injector);
+
+    this.checkAndSetUserConfig();
+  }
+
+  private checkAndSetUserConfig() {
+    if (!this.myLocalStorage.getValue(this.constants.SELECTED_HOME_SCREEN))
+      this.myLocalStorage.setValue(this.constants.SELECTED_HOME_SCREEN, this.paths.PATH_SEARCH);
+    if (!this.myLocalStorage.getValue(this.constants.SELECTED_SEARCH_IN))
+      this.myLocalStorage.setValue(this.constants.SELECTED_SEARCH_IN, this.constants.ENTITY_ALL_PRESENTER);
+    if (!this.myLocalStorage.getValue(this.constants.NUMBER_OF_ROWS))
+      this.myLocalStorage.setValue(this.constants.NUMBER_OF_ROWS, this.constants.DEFAULT_NUMBER_FO_ROWS);
+    if (!this.myLocalStorage.getValue(this.constants.SELECTED_NEWS_FEED))
+      this.myLocalStorage.setValue(this.constants.SELECTED_NEWS_FEED, this.constants.GOOGLE_NEWS_FEED);
   }
 
   ngOnInit(): void {

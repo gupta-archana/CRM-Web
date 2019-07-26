@@ -64,6 +64,7 @@ import { ComplianceComponent } from './views/entity/compliance/compliance.compon
 import { ComplianceDetailComponent } from './views/entity/compliance-detail/compliance-detail.component';
 import { EmailNocComponent } from './customUI/dialogs/email-noc/email-noc.component';
 import { NotificationControlsComponent } from './views/notification-controls/notification-controls.component';
+import { PersonDetailItemsRearrangeComponent } from './views/rearrange-items-layouts/person-detail-items-rearrange/person-detail-items-rearrange.component';
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "left",
   allowNegative: true,
@@ -115,6 +116,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     ComplianceDetailComponent,
     EmailNocComponent,
     NotificationControlsComponent,
+    PersonDetailItemsRearrangeComponent,
   ],
   imports: [
     BrowserModule,

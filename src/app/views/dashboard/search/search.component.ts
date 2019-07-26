@@ -77,7 +77,7 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Aft
     this.pageNum++;
     this.dataService.onHideShowLoader(true);
     let selectedState = "All";
-    let type = "All";
+    let type = this.myLocalStorage.getValue(this.constants.SELECTED_SEARCH_IN);
     ({ selectedState, type } = this.setFilterForApiRequest(selectedState, type));
     this.apiHandler.GetSearchedData(type, selectedState, this.searchForm.value.search, this.pageNum, this);
   }

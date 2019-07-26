@@ -35,6 +35,8 @@ export const PATH_COMPLIANCE_DETAIL = "complianceDetail";
 export const PATH_REARRANGE_DRAWER_ITEM = "rearrangeHomeModules";
 export const PATH_REARRANGE_AGENT_DETAIL_ITEM = "rearrangeAgentDetailModules";
 export const PATH_NOTIFICATION_CONTROL = "notificationControls";
+export const PATH_REARRANGE_PERSON_DETAIL_ITEM = "rearrangePersonModules";
+
 // add side navigation path for hanlde back navigation
 export const sideNavRoutePaths = [PATH_TOP_AGENTS, PATH_AGENTS_WITH_ALERT, PATH_AGENTS_WITH_PERFORMANCE, PATH_SEARCH, PATH_NEWS, PATH_SETTING, PATH_RECENT_RPOFILES, PATH_AGENTS_UNDER_PLAN];
 

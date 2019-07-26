@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import * as paths from './paths';
 @Injectable({
   providedIn: 'root'
 })
@@ -24,6 +25,14 @@ export class Constants {
   DONT_SHOW_DOWNLOAD_PDF_DIALOG = "dont_show_download_pdf_dialog";
   DONT_SHOW_ASSIGNED_TO_DIALOG = "dont_show_assigned_to_dialog";
   DONT_SHOW_DOWNLOAD_AUDIT_PDF_DIALOG = "dont_show_download_audit_pdf_dialog";
+
+  // User config constants
+  GOOGLE_NEWS_FEED = "Google";
+  DEFAULT_NUMBER_FO_ROWS = 10;
+  HOME_MODULE = "HomeModules";
+  AGENT_MODULE = "AgentModules";
+  PERSON_MODULE = "PersonModules";
+  USER_NOTIFICATIONS_CONTROLS = "UserNotifications";
 
   ENTITY_ARRAY = "entity_array";
 
@@ -184,4 +193,21 @@ export class Constants {
     this.AGENT_UNDER_PLAN_DATA,
     this.AGENT_UNDER_PLAN_CURRENT_PAGE_NO,
     this.AGENT_UNDER_PLAN_TOTAL_ROWS];
+
+  public sideNavItemsWithPath = {
+    "Search": paths.PATH_SEARCH,
+    "Top Agents": paths.PATH_TOP_AGENTS,
+    "Agent With Alert": paths.PATH_AGENTS_WITH_ALERT,
+    "Agent With Performance": paths.PATH_AGENTS_WITH_PERFORMANCE,
+    "Agent Under Plan": paths.PATH_AGENTS_UNDER_PLAN,
+    "News": paths.PATH_NEWS,
+    "Recent Profile": paths.PATH_RECENT_RPOFILES,
+    "Following": paths.PATH_FOLLOWING,
+  }
+  public searchEntityArrayObjectUserConfig = {
+    "ALL": "All",
+    "Agents": this.ENTITY_AGENT_PRESENTER,
+    "Person": this.ENTITY_PERSON_PRESENTER,
+    "Employee": this.ENTITY_EMPLOYEE_PRESENTER
+  }
 }

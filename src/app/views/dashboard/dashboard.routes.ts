@@ -21,7 +21,7 @@ export const dashboardRoutes: Routes = [
     component: NavigationDrawerComponent,
     canActivate: [AuthGuardService],
     children: [
-      { path: '', redirectTo: path.PATH_SEARCH, pathMatch: 'full' },
+      { path: '', redirectTo: localStorage.getItem("selected_home_screen") ? localStorage.getItem("selected_home_screen") : path.PATH_SEARCH, pathMatch: 'full' },
       { path: path.PATH_TOP_AGENTS, component: TopAgentsComponent },
       { path: path.PATH_AGENTS_WITH_ALERT, component: AgentWithAlertComponent },
       { path: path.PATH_AGENTS_WITH_PERFORMANCE, component: AgentWithPerformanceComponent },
