@@ -11,6 +11,7 @@ import { MyLocalStorageService } from '../../services/my-local-storage.service';
 import { Constants } from '../../Constants/Constants';
 import { CanComponentDeactivate } from '../../guards/login-guard.guard';
 import { Router } from '@angular/router';
+import * as path from '../../Constants/paths';
 import { RoutingStateService } from 'src/app/services/routing-state.service';
 
 @Component({
@@ -41,7 +42,9 @@ export class LoginComponent implements OnInit, ApiResponseCallback, CanComponent
 
   ngOnInit() {
     if (this.myLocalStorage.getValue(this.constants.LOGGED_IN)) {
-      this.router.navigate([''], { replaceUrl: true });
+      let currentPath = localStorage.getItem("selected_home_screen") ? localStorage.getItem("selected_home_screen") : path.PATH_SEARCH;
+      this.commonFunctions.navigateWithReplaceUrl(currentPath);
+      
     } else {
       this.addValidation();
     }

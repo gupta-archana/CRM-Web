@@ -29,6 +29,11 @@ export class AppComponent extends BaseClass implements OnInit, OnDestroy {
     super(injector);
 
     this.checkAndSetUserConfig();
+    if (this.myLocalStorage.getValue(this.constants.LOGGED_IN)) {
+      let currentPath = localStorage.getItem("selected_home_screen") ? localStorage.getItem("selected_home_screen") : this.paths.PATH_SEARCH;
+      this.commonFunctions.navigateWithReplaceUrl(currentPath);
+
+    }
   }
 
   private checkAndSetUserConfig() {
