@@ -32,7 +32,6 @@ const appRoutesArray: Routes =
   [
     { path: '', component: AppComponent },
     { path: paths.PATH_LOGIN, component: LoginComponent, canDeactivate: [LoginGuardGuard] },
-    { path: '', redirectTo: '', pathMatch: 'full' },
     { path: paths.PATH_FORGOT_PASSWORD, component: ForgotPasswordComponent },
     { path: paths.PATH_AGENT_CONTACT_DETAIL, component: ContactDetailComponent },
     { path: paths.PATH_AGENT_OBJECTIVE, component: AgentObjectiveComponent },
