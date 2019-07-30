@@ -30,6 +30,7 @@ export class UtilService {
 
   handleBackpressEvent() {
     history.pushState(null, null, location.href);
+    this.called = false;
     this.regsiterAndListenNavigationEvent();
 
   }
@@ -40,7 +41,12 @@ export class UtilService {
     this.unlisten = myHistory.listen((location, state) => {
       var newUrl = location.pathname.substring(1, this.location.pathname.length);
       var url = this.router.url.substring(1, this.router.url.length);
-      if (paths.sideNavRoutePaths.indexOf(url) >= 0 && (newUrl == "" || paths.sideNavRoutePaths.indexOf(newUrl) >= 0)) {
+      if (newUrl == paths.PATH_AGENT_ASSOCIATES) {
+        for (let i = 0; i < history.length - 4; i++) {
+          self.location.back();
+        }
+      }
+      else if (paths.sideNavRoutePaths.indexOf(url) >= 0 && (newUrl == "" || paths.sideNavRoutePaths.indexOf(newUrl) >= 0)) {
         if (!self.called) {
           self.called = true;
           if (!self.exit) {
