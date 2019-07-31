@@ -56,7 +56,7 @@ export class UtilService {
           }
           else {
             let customHistory = this.routingState.getAllHistory();
-            for (let i = 0; i < customHistory.length; i++) {
+            for (let i = 0; i <= customHistory.length; i++) {
               self.location.back();
             }
           }
