@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { BaseClass } from '../../../global/base-class';
 import { NgxSmartModalService } from 'ngx-smart-modal';
+import { RoutingStateService } from '../../../services/routing-state.service';
 
 @Component({
   selector: 'app-navigation-drawer',
@@ -31,7 +32,8 @@ export class NavigationDrawerComponent extends BaseClass implements OnInit, OnDe
   constructor(private activatedRoute: ActivatedRoute,
     private injector: Injector,
     public router: Router,
-    public ngxSmartModel: NgxSmartModalService
+    public ngxSmartModel: NgxSmartModalService,
+    public routingStates: RoutingStateService
   ) { super(injector) }
 
   ngOnInit() {
@@ -150,6 +152,7 @@ function navigateToSelectedItem(context: NavigationDrawerComponent, selectedNavB
   context.closeNav();
   if (selectedNavBarItemPath) {
     context.commonFunctions.navigateWithReplaceUrl(selectedNavBarItemPath);
+    context.routingStates.clearHistory()
     changeHeaderTitle(selectedNavBarItemPath, context);
   }
 }

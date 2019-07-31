@@ -8,6 +8,7 @@ import { filter } from 'rxjs/operators';
 export class RoutingStateService {
 
   private history = [];
+  private allHistory = [];
 
   constructor(
     private router: Router
@@ -18,6 +19,7 @@ export class RoutingStateService {
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(({ urlAfterRedirects }: NavigationEnd) => {
         this.history = [...this.history, urlAfterRedirects];
+        this.allHistory = [...this.allHistory, urlAfterRedirects];
       });
   }
 
@@ -25,7 +27,13 @@ export class RoutingStateService {
     return this.history;
   }
 
+  public getAllHistory(): string[] {
+    return this.allHistory;
+  }
   public getPreviousUrl(): string {
     return this.history[this.history.length - 2] || '/index';
+  }
+  public clearHistory() {
+    this.history = [];
   }
 }

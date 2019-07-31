@@ -38,11 +38,13 @@ export class UtilService {
   private regsiterAndListenNavigationEvent() {
     var myHistory = createHistory();
     var self = this;
+
     this.unlisten = myHistory.listen((location, state) => {
       var newUrl = location.pathname.substring(1, this.location.pathname.length);
       var url = this.router.url.substring(1, this.router.url.length);
       if (newUrl == paths.PATH_AGENT_ASSOCIATES) {
-        for (let i = 0; i < history.length - 4; i++) {
+        let customHistory = this.routingState.getHistory();
+        for (let i = 0; i < customHistory.length - (customHistory.length - 2); i++) {
           self.location.back();
         }
       }
@@ -53,7 +55,8 @@ export class UtilService {
             self.onFirstBackClick(self);
           }
           else {
-            for (let i = 0; i < history.length; i++) {
+            let customHistory = this.routingState.getAllHistory();
+            for (let i = 0; i < customHistory.length; i++) {
               self.location.back();
             }
           }

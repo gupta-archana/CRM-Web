@@ -159,7 +159,7 @@ function setBasicConfigToLocalStorage(context: AppSettingComponent) {
 
 function TabChanged(context: AppSettingComponent) {
   context.tabSelectedSubscription = context.dataService.tabSelectedObservable.subscribe(index => {
-    if (index == 1) {
+    if (index == 1 && context.configBasicModels.length<=0) {
       context.apiHandler.getUserConfig(context);
     }
   })

@@ -77,7 +77,7 @@ export class AgentAssociatesComponent extends BaseClass implements OnInit, ApiRe
   private getEntityModel(item: AssociatesModel) {
     this.clickedEntity.name = item.dispname;
     this.clickedEntity.entityId = item.personID;
-
+    this.clickedEntity.type = this.constants.ENTITY_PERSON_PRESENTER
   }
 
 }
@@ -104,10 +104,11 @@ function setAssociates(context: AgentAssociatesComponent) {
 }
 
 function makeServerRequest(context: AgentAssociatesComponent) {
-  context.pageNum++;
-
-  //context.entityInfo.entityId = "017575";
-  context.apiHandler.getAssociates(context.entityModel.entityId, context.entityModel.type, context.pageNum, context);
+  if (context.entityModel.type) {
+    context.pageNum++;
+    //context.entityInfo.entityId = "017575";
+    context.apiHandler.getAssociates(context.entityModel.entityId, context.entityModel.type, context.pageNum, context);
+  }
 
   // else {
   //   context.apiHandler.getPersonAffiliations(context.entityInfo.entityId, context.pageNum, context)
