@@ -13,6 +13,7 @@ import { RecentProfilesComponent } from './recent-profiles/recent-profiles.compo
 import { FavoritesComponent } from './favorites/favorites.component';
 import { PersonDetailComponent } from '../person/person-detail/person-detail.component';
 import { AgentUnderPlanComponent } from './agent-under-plan/agent-under-plan.component';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 
 export const dashboardRoutes: Routes = [
@@ -31,6 +32,7 @@ export const dashboardRoutes: Routes = [
       { path: path.PATH_NEWS, component: NewsFeedsComponent },
       { path: path.PATH_SETTING, component: TabComponent },
       { path: path.PATH_RECENT_RPOFILES, component: RecentProfilesComponent },
+      { path: path.PATH_NOTIFICATIONS, component: NotificationsComponent },
       { path: path.PATH_FOLLOWING, component: FavoritesComponent }
     ]
   }

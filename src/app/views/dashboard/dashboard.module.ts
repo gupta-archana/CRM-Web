@@ -21,6 +21,7 @@ import { AgentsProfileComponent } from './recent-profiles/agents-profile/agents-
 import { PersonsProfileComponent } from './recent-profiles/persons-profile/persons-profile.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { AgentUnderPlanComponent } from './agent-under-plan/agent-under-plan.component';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 
 @NgModule({
@@ -31,6 +32,6 @@ import { AgentUnderPlanComponent } from './agent-under-plan/agent-under-plan.com
 
   ],
   providers: [AuthGuardService, CanDeactivateGuard],
-  declarations: [NavigationDrawerComponent, TopAgentsComponent, AgentWithAlertComponent, AgentWithPerformanceComponent, SearchComponent, NewsFeedsComponent, TabComponent, ProfileSettingComponent, AppSettingComponent, RecentProfilesComponent, AgentsProfileComponent, PersonsProfileComponent, FavoritesComponent, AgentUnderPlanComponent]
+  declarations: [NavigationDrawerComponent, TopAgentsComponent, AgentWithAlertComponent, AgentWithPerformanceComponent, SearchComponent, NewsFeedsComponent, TabComponent, ProfileSettingComponent, AppSettingComponent, RecentProfilesComponent, AgentsProfileComponent, PersonsProfileComponent, FavoritesComponent, AgentUnderPlanComponent, NotificationsComponent]
 })
 export class DashboardModule { }

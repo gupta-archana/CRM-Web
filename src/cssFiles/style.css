@@ -1838,7 +1838,18 @@ button:focus {
   padding: 0px 15px;
 }
 
+.minTxt {
+  font-size: 10px !important;
+}
 
+.dismissBtn a {
+  font-weight: bold;
+  color: #F68933;
+}
+
+.dismissBtn a:hover {
+  color: #F9AD72;
+}
 
 
 

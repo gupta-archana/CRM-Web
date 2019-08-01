@@ -12,6 +12,7 @@ export const PATH_NEWS = "news";
 export const PATH_RECENT_RPOFILES = "recentProfiles";
 export const PATH_SETTING = "setting";
 export const PATH_FOLLOWING = "following";
+export const PATH_NOTIFICATIONS = "notifications";
 
 //entity detail
 export const PATH_AGENT_DETAIL = "agentDetail";
@@ -38,6 +39,6 @@ export const PATH_NOTIFICATION_CONTROL = "notificationControls";
 export const PATH_REARRANGE_PERSON_DETAIL_ITEM = "rearrangePersonModules";
 
 // add side navigation path for hanlde back navigation
-export const sideNavRoutePaths = [PATH_TOP_AGENTS, PATH_AGENTS_WITH_ALERT, PATH_AGENTS_WITH_PERFORMANCE, PATH_SEARCH, PATH_NEWS, PATH_SETTING, PATH_RECENT_RPOFILES, PATH_AGENTS_UNDER_PLAN,PATH_SETTING];
+export const sideNavRoutePaths = [PATH_TOP_AGENTS, PATH_AGENTS_WITH_ALERT, PATH_AGENTS_WITH_PERFORMANCE, PATH_SEARCH, PATH_NEWS, PATH_SETTING, PATH_RECENT_RPOFILES, PATH_AGENTS_UNDER_PLAN, PATH_SETTING, PATH_NOTIFICATIONS];
 
 
