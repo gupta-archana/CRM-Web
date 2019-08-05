@@ -27,7 +27,11 @@ export class AppComponent extends BaseClass implements OnInit, OnDestroy {
     private injector: Injector,
     private routingState: RoutingStateService) {
     super(injector);
-
+    router.events.subscribe((event) => {
+      if (event instanceof NavigationStart) {
+        console.log("page refresh " + !router.navigated);
+      }
+    });
     this.checkAndSetUserConfig();
     if (this.myLocalStorage.getValue(this.constants.LOGGED_IN)) {
       let currentPath = localStorage.getItem("selected_home_screen") ? localStorage.getItem("selected_home_screen") : this.paths.PATH_SEARCH;

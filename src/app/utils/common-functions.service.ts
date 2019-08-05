@@ -132,10 +132,13 @@ export class CommonFunctionsService {
     window.onscroll = function() { self.scrollFunction(document) };
   }
   private scrollFunction(doc: Document) {
-    if (doc.body.scrollTop > 20 || doc.documentElement.scrollTop > 20) {
-      document.getElementById("myBtn").style.display = "block";
-    } else {
-      document.getElementById("myBtn").style.display = "none";
+    let element: HTMLElement = document.getElementById("myBtn");
+    if (element) {
+      if (doc.body.scrollTop > 20 || doc.documentElement.scrollTop > 20) {
+        element.style.display = "block";
+      } else {
+        element.style.display = "none";
+      }
     }
   }
   topFunction(doc: Document) {
