@@ -195,6 +195,14 @@ export class API {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=sysuserconfigset";
   }
 
+  getNotificationsUrl(app_mode: string) {
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=sysNotificationsGet&UID=" + this.email + "&EndDate=08/08/2019&StartDate=07/07/19";
+  }
+
+  getNotificationDismissUrl(app_mode: string, notificationID: string) {
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=notificationDismiss&NotificationID=" + notificationID;
+  }
+
   getStates() {
     return this.STATES_JSON_URL;
   }

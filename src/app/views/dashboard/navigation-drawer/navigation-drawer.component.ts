@@ -137,6 +137,9 @@ function navigateToSelectedPage(title: string, context: NavigationDrawerComponen
     case context.constants.FOLLOWING:
       selectedNavBarItemPath = context.paths.PATH_FOLLOWING;
       break;
+    case context.constants.NOTIFICATIONS:
+      selectedNavBarItemPath = context.paths.PATH_NOTIFICATIONS;
+      break;
     case context.constants.LOGOUT:
       context.onLogoutClick();
       break;
@@ -210,6 +213,10 @@ function changeHeaderTitle(path: string, context: NavigationDrawerComponent) {
         case context.paths.PATH_PERSON_DETAIL:
           context.showRecentProfileButton = true;
           context.headerTitle = context.constants.PERSON_DETAIL;
+          break;
+        case context.paths.PATH_NOTIFICATIONS:
+          context.showRefreshButton = true;
+          context.headerTitle = context.constants.NOTIFICATIONS;
           break;
         default:
           break;

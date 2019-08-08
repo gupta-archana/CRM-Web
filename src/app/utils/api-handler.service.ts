@@ -347,6 +347,26 @@ export class ApiHandlerService implements ApiResponseCallback {
   }
 
   /**
+   * getNotifications
+   */
+  public getNotifications(apiResponseCallback: ApiResponseCallback) {
+    this.dataService.onHideShowLoader(true);
+    this.apiResponseCallback = apiResponseCallback;
+    let url = this.api.getNotificationsUrl(this.getAppMode());
+    this.apiService.hitGetApi(url, this);
+  }
+
+  /**
+   * dismissNotification
+   */
+  public dismissNotification(notificationID: string, apiResponseCallback: ApiResponseCallback) {
+    this.dataService.onHideShowLoader(true);
+    this.apiResponseCallback = apiResponseCallback;
+    let url = this.api.getNotificationDismissUrl(this.getAppMode(), notificationID);
+    this.apiService.hitGetApi(url, handleAddAndUpdateApiResponse(this, apiResponseCallback));
+  }
+
+  /**
    * getStates
    */
   public getStates(apiResponseCallback: ApiResponseCallback) {

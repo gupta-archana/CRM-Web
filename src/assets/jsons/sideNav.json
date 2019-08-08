@@ -45,8 +45,13 @@
     "img": "../../../../images/module-recentprofile.svg"
   },
   {
-    "title": "Logout",
+    "title": "Notifications",
     "class": "logout",
     "img": "../../../../images/top-agents.svg"
+  },
+  {
+    "title": "Logout",
+    "class": "logout",
+    "img": "../../../../images/ic-logout.svg"
   }
 ]

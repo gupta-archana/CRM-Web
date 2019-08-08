@@ -138,6 +138,7 @@ export class Constants {
   SEARCH = "Search";
   RECENT_PROFILE = "Recent Profiles";
   SETTINGS = "Settings";
+  NOTIFICATIONS = "Notifications";
 
   //Agnet Detail Menues
   AGENT_DETAIL_CONTACT = "Contact";

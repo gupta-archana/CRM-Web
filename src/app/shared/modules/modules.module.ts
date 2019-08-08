@@ -8,10 +8,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UpdateUserProfileComponent } from '../../customUI/dialogs/update-user-profile/update-user-profile.component';
 import { SearchFilterComponent } from '../../customUI/dialogs/search-filter/search-filter.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {MatTabsModule, MatSnackBarModule, MatDialogModule, MatButtonModule, MatFormFieldModule } from '@angular/material';
+import { MatTabsModule, MatSnackBarModule, MatDialogModule, MatButtonModule, MatFormFieldModule } from '@angular/material';
 import { CurrencyMaskModule } from "ng2-currency-mask";
 import { DecimalPipe } from '@angular/common';
 import { CurrencyMaskConfig, CURRENCY_MASK_CONFIG } from 'ng2-currency-mask/src/currency-mask.config';
+import { MomentModule } from 'ngx-moment';
+
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "left",
   allowNegative: true,
@@ -35,7 +37,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     MatDialogModule,
     MatButtonModule,
     MatFormFieldModule,
-    CurrencyMaskModule
+    CurrencyMaskModule,
+    MomentModule
   ],
   declarations: [
     UpdateAgentProfileComponent,
@@ -60,6 +63,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     MatDialogModule,
     MatButtonModule,
     MatFormFieldModule,
+    MomentModule
 
   ],
   providers: [{ provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }, DecimalPipe],
