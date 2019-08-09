@@ -215,7 +215,6 @@ function changeHeaderTitle(path: string, context: NavigationDrawerComponent) {
           context.headerTitle = context.constants.PERSON_DETAIL;
           break;
         case context.paths.PATH_NOTIFICATIONS:
-          context.showRefreshButton = true;
           context.headerTitle = context.constants.NOTIFICATIONS;
           break;
         default:

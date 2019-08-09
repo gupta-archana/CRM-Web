@@ -3,6 +3,7 @@ export class NotificationsModel {
   UID: string;
   entityType: string;
   entityID: string;
+  name:string;
   stat: string;
   refSysNotificationID: string;
   notificationStat: string;

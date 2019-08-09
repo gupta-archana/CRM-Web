@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="24" height="24" fill="none"/>
+    </clipPath>
+    <clipPath id="clip-notification_icon_-_active">
+      <rect width="24" height="24"/>
+    </clipPath>
+  </defs>
+  <g id="notification_icon_-_active" data-name="notification icon - active" clip-path="url(#clip-notification_icon_-_active)">
+    <rect width="24" height="24" fill="#fff"/>
+    <g id="Symbol_102_3" data-name="Symbol 102 – 3" clip-path="url(#clip-path)">
+      <g id="baseline-notification_important-24px">
+        <path id="Path_126" data-name="Path 126" d="M18,16V11c0-3.07-1.64-5.64-4.5-6.32V4a1.5,1.5,0,0,0-3,0v.68C7.63,5.36,6,7.92,6,11v5L4,18v1H20V18Zm-5,0H11V14h2Zm0-4H11V8h2ZM12,22a2.006,2.006,0,0,0,2-2H10A2,2,0,0,0,12,22Z" fill="#f68933"/>
+        <path id="Path_127" data-name="Path 127" d="M0,0H24V24H0Z" fill="none"/>
+      </g>
+    </g>
+    <g id="Group_709" data-name="Group 709" transform="translate(-299 -6)">
+      <circle id="Ellipse_52" data-name="Ellipse 52" cx="4.222" cy="4.222" r="4.222" transform="translate(300 7)" fill="red" stroke="#fff" stroke-width="1"/>
+    </g>
+  </g>
+</svg>

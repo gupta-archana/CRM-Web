@@ -408,9 +408,14 @@ form input[type="checkbox"] {
   left: 5px;
 }
 
+.closebtn {
+    padding-left:15px !important;
+}
+
 ul.slide-menu {
   list-type: none;
-  padding-top: 40px;
+  padding-top:20px;
+  padding-left:30px;
 }
 
 ul.slide-menu li {
@@ -469,6 +474,11 @@ ul.slide-menu li.agent-profile a {
   padding-left: 45px;
 }
 
+ul.slide-menu li.agent-logout a {
+  background: url(../images/logout.svg) no-repeat left;
+  padding-left: 45px;
+}
+
 ul.slide-menu li.logout a {
   background: url(../images/ic-logout.svg) no-repeat left;
   padding-left: 45px;
@@ -483,6 +493,7 @@ ul.slide-menu li.logout a {
 
 .divider {
   height: 1px;
+  margin-top:0px !important;
   background: #c2c2c2;
 }
 
@@ -867,11 +878,10 @@ ul.agent-details li.associates a {
 
 .serach-emp {
   background: #F2F2F2 url(../images/empty-page.svg) top no-repeat;
-  /* background-position: 160px 85px; */
   background-position-y: 85px;
   padding-top: 50px;
   text-align: center;
-  min-height: 470px;
+  min-height:375px;
 }
 
 .serach-emp {
@@ -893,7 +903,7 @@ ul.agent-details li.associates a {
 
 .serach-result {
   background: #F2F2F2;
-  min-height: 470px;
+  min-height:380px;
 }
 
 .serach-result .green {
@@ -1850,6 +1860,21 @@ button:focus {
 .dismissBtn a:hover {
   color: #F9AD72;
 }
+
+.searchFixed {
+  position: fixed;
+  top: 63px;
+  width: 100%;
+  padding-top: 15px;
+  background:#F2F2F2;
+}
+
+.paddingTop85{
+  padding-top:85px;
+}
+
+
+
 
 
 

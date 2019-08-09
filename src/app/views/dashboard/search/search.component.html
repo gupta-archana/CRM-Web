@@ -1,5 +1,5 @@
-<div class="container-fluid nospace">
-  <div class="container app-bg2">
+<div class="container-fluid nospace searchFixed">
+  <div class="container">
     <div class="row">
       <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
         <div class="col-xs-12 search-box">
@@ -10,12 +10,15 @@
         </div>
       </form>
     </div>
-
-
     <div class="bottom-bord"></div>
     <div class="clearfix paddingTop15"></div>
 
-    <div class="serach-result">
+  </div>
+</div>
+
+<div class="container-fluid nospace">
+  <div class="container app-bg2 paddingTop85">
+      <div class="serach-result">
 
       <div class="row" *ngIf="hideNoDataDiv">
         <ul>
