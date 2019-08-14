@@ -2,7 +2,7 @@ image: node:10
 
 pipelines:
   branches:
-    master:
+    CRM-beta:
       - step:
           name: "Build, test and deploy to firebase production"
           deployment: production
