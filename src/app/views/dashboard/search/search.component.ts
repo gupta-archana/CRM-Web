@@ -182,7 +182,6 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Aft
     this.cdr.markForCheck();
   }
 
-
   ngOnDestroy(): void {
     if (this.searchFilterModelSub && !this.searchFilterModelSub.closed) {
       this.searchFilterModelSub.unsubscribe();
