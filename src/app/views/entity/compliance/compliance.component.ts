@@ -53,7 +53,7 @@ export class ComplianceComponent extends BaseClass implements OnInit {
 
 }
 function makeServerRequest(context: ComplianceComponent) {
-  context.entityModel.entityId = "017575";
+  //context.entityModel.entityId = "017575";
   context.apiHandler.getAgentCompliance(context.entityModel.entityId, context);
 }
 

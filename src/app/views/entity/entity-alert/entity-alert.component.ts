@@ -69,7 +69,7 @@ export class EntityAlertComponent extends BaseClass implements OnInit, ApiRespon
 }
 function makeServerRequest(context: EntityAlertComponent) {
   context.pageNum++;
-  context.entityModel.entityId = "432100";
+  //context.entityModel.entityId = "432100";
   context.apiHandler.getAlerts(context.entityModel.entityId, context.pageNum, context);
 }
 

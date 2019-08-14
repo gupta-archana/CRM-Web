@@ -77,7 +77,7 @@ export class AuditsComponent extends BaseClass implements OnInit {
 }
 function makeServerRequest(context: AuditsComponent) {
   context.pageNum++;
-  context.entityModel.entityId = "436005";
+  //context.entityModel.entityId = "436005";
   context.apiHandler.getAgentAudits(context.entityModel.entityId, context.pageNum, context);
 }
 

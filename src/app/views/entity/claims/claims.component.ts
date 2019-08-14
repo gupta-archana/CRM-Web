@@ -71,7 +71,7 @@ export class ClaimsComponent extends BaseClass implements OnInit {
 }
 function makeServerRequest(context: ClaimsComponent) {
   context.pageNum++;
-  context.entityModel.entityId = "436005";
+  //context.entityModel.entityId = "436005";
   context.apiHandler.getClaims(context.entityModel.entityId, getclaimType(context), context.pageNum, context);
 }
 
