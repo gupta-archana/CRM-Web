@@ -36,7 +36,8 @@ export class UpdateNoteComponent extends BaseClass implements OnInit, ApiRespons
 
   onSuccess(response: any) {
     this.commonFunctions.showSnackbar(response);
-    this.dataService.onShareUpdatedNote(this.note);
+    //this.dataService.onShareUpdatedNote(this.note);
+    this.dataService.onDataUpdated();
     this.closeUpdateNote.nativeElement.click();
   }
   onError(errorCode: number, errorMsg: string) {

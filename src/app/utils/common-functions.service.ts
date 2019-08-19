@@ -277,6 +277,25 @@ export class CommonFunctionsService {
     downloadLink.download = fileName;
     downloadLink.click();
   }
+
+  getCurrentDate(): string {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+
+    var todayDate = mm + '/' + dd + '/' + yyyy;
+    return todayDate;
+  }
+  getLastMonthDate(): string {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth()).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+
+    var lastMonthDate = mm + '/' + dd + '/' + yyyy;
+    return lastMonthDate;
+  }
 }
 function getRandomInt(min, max) {
   min = Math.ceil(min);

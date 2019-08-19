@@ -3,6 +3,7 @@ import { BaseClass } from '../../../../global/base-class';
 import { Subscription } from 'rxjs';
 import { NotesModel } from '../../../../models/notes-model';
 import { ApiResponseCallback } from '../../../../Interfaces/ApiResponseCallback';
+import { EntityModel } from '../../../../models/entity-model';
 
 @Component({
   selector: 'app-all-notes',
@@ -27,8 +28,11 @@ export class AllNotesComponent extends BaseClass implements OnInit, OnDestroy, A
   agentNotes: Array<NotesModel> = new Array<NotesModel>();
   selectedTabIndex: number = 0;
   selectedNoteIndex: number = -1;
+
+  entityModel: EntityModel;
   ngOnInit() {
     this.uid = this.commonFunctions.getLoginCredentials().email;
+    this.entityModel = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
     this.selectedNoteIndex = -1;
     tabSelectedIndexSubscription(this);
     onNewNoteAdded(this);
@@ -36,7 +40,7 @@ export class AllNotesComponent extends BaseClass implements OnInit, OnDestroy, A
   }
 
   getNotesType(item: NotesModel) {
-    if (item.UID == this.uid) {
+    if (item.entityID == this.entityModel.entityId) {
       return this.MY_NOTES
     }
     else {

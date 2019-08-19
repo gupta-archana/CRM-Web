@@ -389,7 +389,12 @@ ul.agent-details li.agents a {
   float: left;
   margin: 3px 5px 0px 0px;
 }
+
 ul.slide-menu li.notifications a {
   background: url(../images/notification_icon.svg) no-repeat left;
   padding-left: 45px;
+}
+
+.cell-bg {
+  margin-top: 5px;
 }

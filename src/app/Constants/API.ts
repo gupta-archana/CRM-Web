@@ -196,7 +196,7 @@ export class API {
   }
 
   getNotificationsUrl(app_mode: string) {
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=sysNotificationsGet&UID=" + this.email + "&EndDate=08/08/2019&StartDate=07/07/19";
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=sysNotificationsGet&UID=" + this.email + "&EndDate=" + this.commonFunctions.getCurrentDate() + "&StartDate=" + this.commonFunctions.getLastMonthDate();
   }
 
   getNotificationDismissUrl(app_mode: string, notificationID: string) {
