@@ -13,7 +13,7 @@ var json2xml = require('json2xml');
 export class ApiHandlerService implements ApiResponseCallback {
 
   private APP_MODE: Array<string> = ["dev", "beta", "prod"];
-  private ENABLE_APP_MODE = 0;
+  private ENABLE_APP_MODE = 1;
   private apiResponseCallback: ApiResponseCallback = null;
   constructor(private apiService: ApiService, public dataService: DataServiceService, private constants: Constants,
     private api: API) {
