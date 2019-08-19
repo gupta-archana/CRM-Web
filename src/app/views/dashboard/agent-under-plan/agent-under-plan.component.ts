@@ -51,6 +51,7 @@ export class AgentUnderPlanComponent extends BaseClass implements OnInit, OnDest
   }
 
   onError(errorCode: number, errorMsg: string) {
+    this.commonFunctions.showErrorSnackbar(errorMsg)
     this.renderUI();
   }
 

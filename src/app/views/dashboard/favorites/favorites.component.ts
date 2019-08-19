@@ -46,6 +46,7 @@ export class FavoritesComponent extends BaseClass implements OnInit, ApiResponse
 
 
   onError(errorCode: number, errorMsg: string) {
+    this.commonFunctions.showErrorSnackbar(errorMsg)
     this.renderUI();
   }
 
