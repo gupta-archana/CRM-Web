@@ -211,4 +211,10 @@ export class Constants {
     "Person": this.ENTITY_PERSON_PRESENTER,
     "Employee": this.ENTITY_EMPLOYEE_PRESENTER
   }
+
+  // app config constants
+  HOME_SCREEN = "HomeScreen";
+  SEARCH_FILTER = "SearchFilter";
+  BATCH_SIZE = "BatchSize";
+  NEWS_FEED = "NewsFeed";
 }

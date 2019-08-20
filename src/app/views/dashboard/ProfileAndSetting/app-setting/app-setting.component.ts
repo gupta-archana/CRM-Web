@@ -15,8 +15,6 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class AppSettingComponent extends BaseClass implements OnInit, ApiResponseCallback, OnDestroy {
 
-
-
   tabSelectedSubscription: Subscription;
 
   configBasicModels: Array<ConfigBasicModel> = [];
@@ -36,10 +34,7 @@ export class AppSettingComponent extends BaseClass implements OnInit, ApiRespons
   selectedNewsFeed: string = "";
 
   appSettingForm: FormGroup;
-  HOME_SCREEN = "HomeScreen";
-  SEARCH_FILTER = "SearchFilter";
-  BATCH_SIZE = "BatchSize";
-  NEWS_FEED = "NewsFeed";
+ 
   constructor(private injector: Injector) { super(injector); }
 
   ngOnInit() {
@@ -95,24 +90,24 @@ export class AppSettingComponent extends BaseClass implements OnInit, ApiRespons
     this.selectedHomeScreen = this.homeScreenArray[event.target.selectedIndex].name;
     this.selectedHomeScreenPath = this.homeScreenArray[event.target.selectedIndex].path;
     setBasicConfigToLocalStorage(this);
-    this.commonApis.updateBasicConfig(this.HOME_SCREEN, this.selectedHomeScreen);
+    this.commonApis.updateBasicConfig(this.constants.HOME_SCREEN, this.selectedHomeScreen);
   }
   onBatchSizeChanged(event) {
     this.selectedBatchSize = event.target.value;
     setBasicConfigToLocalStorage(this);
-    this.commonApis.updateBasicConfig(this.BATCH_SIZE, this.selectedBatchSize);
+    this.commonApis.updateBasicConfig(this.constants.BATCH_SIZE, this.selectedBatchSize);
   }
   onSearchInChanged(event) {
     this.selectedSearchIn = event.target.value;
     this.selectedSearchInPresenter = this.constants.searchEntityArrayObjectUserConfig[this.selectedSearchIn];
     setBasicConfigToLocalStorage(this);
-    this.commonApis.updateBasicConfig(this.SEARCH_FILTER, this.selectedSearchIn);
+    this.commonApis.updateBasicConfig(this.constants.SEARCH_FILTER, this.selectedSearchIn);
     clearSearch(this);
   }
   onNewsFeedChanged(event) {
     this.selectedNewsFeed = event.target.value;
     setBasicConfigToLocalStorage(this);
-    this.commonApis.updateBasicConfig(this.NEWS_FEED, this.selectedNewsFeed);
+    this.commonApis.updateBasicConfig(this.constants.NEWS_FEED, this.selectedNewsFeed);
   }
   ngOnDestroy(): void {
     if (this.tabSelectedSubscription && !this.tabSelectedSubscription.closed) {
@@ -126,18 +121,18 @@ function setBasicConfigToVariables(context: AppSettingComponent) {
 
   context.configBasicModels.forEach(element => {
     switch (element.configType) {
-      case context.HOME_SCREEN:
+      case context.constants.HOME_SCREEN:
         context.selectedHomeScreen = element.configuration;
         context.selectedHomeScreenPath = context.constants.sideNavItemsWithPath[element.configuration]
         break;
-      case context.SEARCH_FILTER:
+      case context.constants.SEARCH_FILTER:
         context.selectedSearchIn = element.configuration;
         context.selectedSearchInPresenter = context.constants.searchEntityArrayObjectUserConfig[context.selectedSearchIn];
         break;
-      case context.BATCH_SIZE:
+      case context.constants.BATCH_SIZE:
         context.selectedBatchSize = element.configuration;
         break;
-      case context.NEWS_FEED:
+      case context.constants.NEWS_FEED:
         context.selectedNewsFeed = element.configuration;
         break;
       default:

@@ -13,6 +13,7 @@ import { CanComponentDeactivate } from '../../guards/login-guard.guard';
 import { Router } from '@angular/router';
 import * as path from '../../Constants/paths';
 import { RoutingStateService } from 'src/app/services/routing-state.service';
+import { CommonApisService } from '../../utils/common-apis.service';
 
 @Component({
   selector: 'app-login',
@@ -35,6 +36,7 @@ export class LoginComponent implements OnInit, ApiResponseCallback, CanComponent
     private myLocalStorage: MyLocalStorageService,
     private constants: Constants,
     private router: Router,
+    private commonApis: CommonApisService,
     private routingState: RoutingStateService) {
 
 
@@ -44,7 +46,7 @@ export class LoginComponent implements OnInit, ApiResponseCallback, CanComponent
     if (this.myLocalStorage.getValue(this.constants.LOGGED_IN)) {
       let currentPath = localStorage.getItem("selected_home_screen") ? localStorage.getItem("selected_home_screen") : path.PATH_SEARCH;
       this.commonFunctions.navigateWithReplaceUrl(currentPath);
-      
+
     } else {
       this.addValidation();
     }
@@ -75,8 +77,16 @@ export class LoginComponent implements OnInit, ApiResponseCallback, CanComponent
   onSuccess(response: any) {
     this.dataService.onHideShowLoader(false);
     let userModel: UserModel = this.loginParser.parseLogin(response.parameter);
-    this.commonFunctions.showSnackbar("Successfully logged in " + userModel.currentUserName);
     this.authservice.onLoginSuccess(userModel.currentUserEmail, this.loginForm.value.password, this.loginForm.value.isChecked);
+    this.commonApis.getAppConfig().subscribe(success => {
+      if (success == 1) {
+        this.authservice.navigateToNextAfterLogin();
+      }
+    });
+
+
+
+
 
   }
 

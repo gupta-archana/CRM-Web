@@ -1,9 +1,14 @@
 import { ChangeDetectorRef, Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 import { EntityModel } from '../models/entity-model';
 import { ApiHandlerService } from './api-handler.service';
 import { CommonFunctionsService } from './common-functions.service';
 import { ApiResponseCallback } from '../Interfaces/ApiResponseCallback';
+import { Constants } from '../Constants/Constants';
+import { MyLocalStorageService } from '../services/my-local-storage.service';
+import { ConfigBasicModel } from '../models/config-basic-model';
+import { ConfigNotificationModel } from '../models/config-notification-model';
+import { ConfigReorderModel } from '../models/config-reorder-model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +16,11 @@ import { ApiResponseCallback } from '../Interfaces/ApiResponseCallback';
 export class CommonApisService {
 
   onApiResoponseSubject = new Subject();
+  configBasicModels: Array<ConfigBasicModel> = [];
+  configNotificationModels: Array<ConfigNotificationModel> = [];
+  configReorderModels: Array<ConfigReorderModel> = [];
   constructor(private commonFunctions: CommonFunctionsService,
-    public apiHandler: ApiHandlerService) { }
+    public apiHandler: ApiHandlerService, public constants: Constants, public myLocalStorage: MyLocalStorageService) { }
 
   /**
    * setFavorite
@@ -73,6 +81,42 @@ export class CommonApisService {
       }
     });
   }
+
+  public getAppConfig(): BehaviorSubject<any> {
+    let subject = new BehaviorSubject<any>('');
+    let self = this;
+    this.apiHandler.getUserConfig({
+      onSuccess(response: any) {
+        if (response.sysuserconfig) {
+
+          let sysuserconfig: Array<any> = response.sysuserconfig;
+          sysuserconfig.forEach(element => {
+            self.parseResponse(element);
+          });
+          setBasicConfigToVariables(self);
+          saveRearrangeItemsInLocalStorage(self);
+          subject.next(1);
+        }
+      },
+      onError(errorCode, errorMsg) {
+        subject.next(errorCode);
+      }
+    });
+    return subject;
+  }
+
+  parseResponse(element: any) {
+    if (element.configCategory == "Reorder") {
+      element.configuration = JSON.parse(element.configuration.replace(/'/g, '"'));
+      this.configReorderModels.push(element);
+    }
+    else if (element.configCategory == "Notification") {
+      this.configNotificationModels.push(element);
+    }
+    else if (element.configCategory == "Basic") {
+      this.configBasicModels.push(element);
+    }
+  }
 }
 function getRequest(configType: string, configuration: any) {
   let requestJson = {
@@ -84,4 +128,50 @@ function getRequest(configType: string, configuration: any) {
     "attr": requestJson
   }
   return finalJson;
+}
+
+function setBasicConfigToVariables(context: CommonApisService) {
+  context.configBasicModels.forEach(element => {
+    switch (element.configType) {
+      case context.constants.HOME_SCREEN:
+        let selectedHomeScreenPath = context.constants.sideNavItemsWithPath[element.configuration]
+        context.myLocalStorage.setValue(context.constants.SELECTED_HOME_SCREEN, selectedHomeScreenPath);
+        break;
+      case context.constants.SEARCH_FILTER:
+
+        let selectedSearchInPresenter = context.constants.searchEntityArrayObjectUserConfig[element.configuration];
+        context.myLocalStorage.setValue(context.constants.SELECTED_SEARCH_IN, selectedSearchInPresenter);
+        break;
+      case context.constants.BATCH_SIZE:
+        context.myLocalStorage.setValue(context.constants.NUMBER_OF_ROWS, element.configuration);
+
+        break;
+      case context.constants.NEWS_FEED:
+        context.myLocalStorage.setValue(context.constants.SELECTED_NEWS_FEED, element.configuration);
+
+        break;
+      default:
+        break;
+    }
+  });
+}
+
+function saveRearrangeItemsInLocalStorage(context: CommonApisService) {
+  context.myLocalStorage.setValue(context.constants.AGENT_DETAIL_ITEMS, JSON.stringify(getRearrangeItemArray(context, context.constants.AGENT_MODULE)));
+  context.myLocalStorage.setValue(context.constants.SIDE_NAV_ITEMS, JSON.stringify(getRearrangeItemArray(context, context.constants.HOME_MODULE)));
+  context.myLocalStorage.setValue(context.constants.PERSON_DETAIL_ITEMS, JSON.stringify(getRearrangeItemArray(context, context.constants.PERSON_MODULE)));
+  context.myLocalStorage.setValue(context.constants.USER_NOTIFICATIONS_CONTROLS, JSON.stringify(context.configNotificationModels));
+}
+
+function getRearrangeItemArray(context: CommonApisService, itemsFor: string) {
+  let itemsArray = [];
+  context.configReorderModels.every(function(element, index) {
+    if (element.configType == itemsFor) {
+      itemsArray = element.configuration;
+      return false;
+    }
+    else
+      return true;
+  });
+  return itemsArray;
 }

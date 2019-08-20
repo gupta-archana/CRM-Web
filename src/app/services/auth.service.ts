@@ -27,6 +27,10 @@ export class AuthService {
     this.myLocalStorage.setValue(this.constants.PASSWORD, password);
     this.myLocalStorage.setValue(this.constants.REMEMBER_ME, rememberMe ? "1" : "0");
     this.myLocalStorage.setValue(this.constants.LOGGED_IN, "1");
+   
+  }
+
+  navigateToNextAfterLogin(){
     let currentPath = localStorage.getItem("selected_home_screen") ? localStorage.getItem("selected_home_screen") : path.PATH_SEARCH;
     this._router.navigate([currentPath], { replaceUrl: true });
   }
