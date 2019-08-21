@@ -18,4 +18,5 @@ export class AuditModels {
   recommended: string;
   suggested: string;
   sectionscore: string;
+  uid:string;
 }

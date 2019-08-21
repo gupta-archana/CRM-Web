@@ -49,9 +49,8 @@ export class AuditDetailCompletedComponent extends BaseClass implements OnInit, 
   onSendEmailConfirmationClick() {
     this.openDialogService.showSendMailConfirmationDialog(this.auditModel.auditor).afterClosed().subscribe(sendMail => {
       if (sendMail) {
-        //this.commonFunctions.doEmail(this.auditModel)
+        this.commonFunctions.doEmail(this.auditModel.uid)
 
-        this.commonFunctions.showSnackbar("send mail please");
       }
     });
   }
