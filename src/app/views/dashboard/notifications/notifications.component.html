@@ -4,7 +4,7 @@
       <li *ngFor="let item of notifications;let i=index">
         <div class="col-xs-12 col-md-6 cell-bg">
           <div class="agent-detail">
-            <div class="dp" (click)="onAgentClick(item)" >
+            <div class="dp" (click)="onAgentClick(item)">
               <img src="../../../../images/baseline-business-24px.svg" alt="" />
             </div>
             <h4 (click)="onAgentClick(item)">{{item.notification}}</h4> <span style="color:#000;">NETCO. Inc</span>
@@ -18,5 +18,13 @@
       </li>
     </ul>
   </div>
-
+  <div class="row marginBottom20" *ngIf="moreDataAvailable">
+    <div class="col-xs-12 col-md-12 loadMoreWp">
+      <hr />
+      <div class="loadMore"><a (click)="onLoadMoreClick()" alt="Load More">Load More</a></div>
+    </div>
+  </div>
+  <div id="ratioView">{{totalAndCurrentRowsRatio}}</div>
+  <button (click)="topFunction()" id="myBtn" title="Go to top"><span
+      class="glyphicon glyphicon-arrow-up"></span></button>
 </div>

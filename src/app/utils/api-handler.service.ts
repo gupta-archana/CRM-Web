@@ -349,10 +349,10 @@ export class ApiHandlerService implements ApiResponseCallback {
   /**
    * getNotifications
    */
-  public getNotifications(apiResponseCallback: ApiResponseCallback) {
+  public getNotifications(pageNum: number, apiResponseCallback: ApiResponseCallback) {
     this.dataService.onHideShowLoader(true);
     this.apiResponseCallback = apiResponseCallback;
-    let url = this.api.getNotificationsUrl(this.getAppMode());
+    let url = this.api.getNotificationsUrl(this.getAppMode(), pageNum);
     this.apiService.hitGetApi(url, this);
   }
 

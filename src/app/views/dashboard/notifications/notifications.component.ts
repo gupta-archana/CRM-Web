@@ -14,11 +14,16 @@ export class NotificationsComponent extends BaseClass implements OnInit, ApiResp
 
   notifications: Array<NotificationsModel> = [];
   entityModel: EntityModel = new EntityModel();
+  pageNumber: number = 0;
+  totalRows: any = 0;
+  moreDataAvailable: boolean = true;
+  totalAndCurrentRowsRatio: string = "";
   constructor(injector: Injector) { super(injector) }
 
   ngOnInit() {
-    this.apiHandler.getNotifications(this);
-
+    this.pageNumber = 0;
+    makeServerRequest(this);
+    this.commonFunctions.hideShowTopScrollButton(document);
   }
   onAgentClick(item: NotificationsModel) {
     this.entityModel.type = this.constants.ENTITY_AGENT_PRESENTER;
@@ -41,11 +46,51 @@ export class NotificationsComponent extends BaseClass implements OnInit, ApiResp
     })
   }
 
+  onLoadMoreClick() {
+    makeServerRequest(this);
+  }
+
   onSuccess(response: any) {
-    this.notifications = response.SysNotification;
-    this.cdr.markForCheck();
+    let newNotifications: NotificationsModel[] = response.SysNotification;
+
+    newNotifications.forEach(element => {
+      if (element.entityType != "Total Notifications") {
+        this.notifications.push(element)
+      } else {
+        this.totalRows = element.rowNum;
+      }
+    });
+
+
+    this.renderUI();
   }
   onError(errorCode: number, errorMsg: string) {
     this.commonFunctions.showErrorSnackbar(errorMsg);
   }
+
+  public renderUI() {
+    checkMoreDataAvailable(this);
+    updateRatioUI(this);
+    this.cdr.markForCheck();
+  }
+
+  topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+}
+
+function makeServerRequest(context: NotificationsComponent) {
+  context.pageNumber++;
+  context.apiHandler.getNotifications(context.pageNumber, context);
+}
+function checkMoreDataAvailable(context: NotificationsComponent) {
+  if ((!context.notifications && context.notifications.length == 0) || context.notifications.length >= context.totalRows)
+    context.moreDataAvailable = false;
+  else
+    context.moreDataAvailable = true;
+}
+function updateRatioUI(context: NotificationsComponent) {
+  context.totalAndCurrentRowsRatio = context.commonFunctions.showMoreDataSnackbar(context.notifications, context.totalRows);
+  context.cdr.markForCheck();
 }
