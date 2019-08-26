@@ -23,7 +23,8 @@ export class AuditDetailQueuedComponent extends BaseClass implements OnInit, Api
   onSendEmailConfirmationClick() {
     this.openDialogService.showSendMailConfirmationDialog(this.auditModel.auditor).afterClosed().subscribe(sendMail => {
       if (sendMail) {
-        this.commonFunctions.showSnackbar("send mail please");
+        this.commonFunctions.doEmail(this.auditModel.uid)
+
       }
     });
   }

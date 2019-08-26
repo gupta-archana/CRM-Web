@@ -156,7 +156,7 @@ export class API {
 
 
   getUpdateNoteUrl(app_mode: string) {
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=systemNoteModify";
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=NoteModify";
   }
 
   getOpenAlertsUrl(app_mode: string, agentID: string, pageNum: string) {

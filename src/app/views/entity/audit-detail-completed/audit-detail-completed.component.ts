@@ -91,7 +91,7 @@ export class AuditDetailCompletedComponent extends BaseClass implements OnInit, 
     this.commonFunctions.downloadPdf(base64Pdf, filename);
   }
   onError(errorCode: number, errorMsg: string) {
-
+    this.commonFunctions.showErrorSnackbar(errorMsg);
   }
   goBack() {
     this.commonFunctions.backPress();
