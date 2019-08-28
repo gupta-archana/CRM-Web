@@ -48,7 +48,7 @@ export class MyNotesComponent extends BaseClass implements OnInit, OnDestroy {
       onSuccess(response: any) {
         self.onDeleteSuccess(i);
       }, onError(errorCode: number, errorMsg: string) {
-
+        this.commonFunctions.showErrorSnackbar(errorMsg)
       }
     })
   }
@@ -67,6 +67,7 @@ export class MyNotesComponent extends BaseClass implements OnInit, OnDestroy {
   }
   onError(errorCode: number, errorMsg: string) {
     this.renderUI();
+    this.commonFunctions.showErrorSnackbar(errorMsg)
   }
 
 

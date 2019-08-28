@@ -96,7 +96,7 @@ export class ClaimsDetailComponent extends BaseClass implements OnInit, ApiRespo
     this.commonFunctions.downloadPdf(base64Pdf, filename);
   }
   onError(errorCode: number, errorMsg: string) {
-
+    this.commonFunctions.showErrorSnackbar(errorMsg)
   }
 }
 

@@ -102,7 +102,7 @@ export class ContactDetailComponent extends BaseClass implements OnInit, ApiResp
     this.cdr.markForCheck();
   }
   onError(errorCode: number, errorMsg: string) {
-
+    this.commonFunctions.showErrorSnackbar(errorMsg)
   }
 
   ngOnDestroy(): void {

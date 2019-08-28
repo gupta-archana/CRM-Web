@@ -35,6 +35,7 @@ export class EntityAlertComponent extends BaseClass implements OnInit, ApiRespon
   }
   onError(errorCode: number, errorMsg: string) {
     this.renderUI();
+    this.commonFunctions.showErrorSnackbar(errorMsg)
   }
 
   private parseResponse(agents: OpenAlertsModel[]) {

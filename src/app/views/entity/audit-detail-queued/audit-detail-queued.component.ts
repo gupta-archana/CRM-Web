@@ -68,6 +68,6 @@ export class AuditDetailQueuedComponent extends BaseClass implements OnInit, Api
     this.commonFunctions.downloadPdf(base64Pdf, filename);
   }
   onError(errorCode: number, errorMsg: string) {
-
+    this.commonFunctions.showErrorSnackbar(errorMsg)
   }
 }

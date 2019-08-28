@@ -28,6 +28,7 @@ export class ComplianceComponent extends BaseClass implements OnInit {
   }
   onError(errorCode: number, errorMsg: string) {
     this.renderUI();
+    this.commonFunctions.showErrorSnackbar(errorMsg)
   }
 
 
