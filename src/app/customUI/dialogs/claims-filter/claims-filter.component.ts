@@ -24,7 +24,7 @@ export class ClaimsFilterComponent extends BaseClass implements OnInit {
   onApplyClick() {
     let ClaimsTypeData = {
       openChecked: this.isOpenChecked,
-      closeChecked: this.closedCheckChanged
+      closeChecked: this.isClosedChecked
     }
     this.dataService.onDataShare(ClaimsTypeData);
   }

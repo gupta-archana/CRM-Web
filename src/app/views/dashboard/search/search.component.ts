@@ -130,9 +130,7 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Aft
   }
 
   getAddress(item: EntityModel) {
-    let address: string = "";
-    address = item.city + " " + item.state + " " + item.zip;
-    return address;
+    return this.commonFunctions.getAddress(item);
   }
 
   onItemClick(item: EntityModel) {

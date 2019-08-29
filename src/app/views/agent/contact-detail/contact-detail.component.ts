@@ -58,7 +58,13 @@ export class ContactDetailComponent extends BaseClass implements OnInit, ApiResp
 
   openLocationOnMap(): void {
     let os = this.deviceDetector.os;
-    let mapLocAddress = this.entityModel.addr1 + "+" + this.entityModel.addr2 + "+" + this.entityModel.addr3 + "+" + this.entityModel.addr4 + "+" + this.entityModel.city + "+" + this.entityModel.state;
+    let mapLocAddress = this.entityContactModel.addr1 + "+" + this.entityContactModel.addr2 + "+" + this.entityContactModel.addr3 + "+" + this.entityContactModel.addr4 + "+" + this.entityContactModel.city + "+" + this.entityContactModel.state;
+
+    var filteredArray = mapLocAddress.split('+').filter(function(el) {
+      return el != null && el != "undefined" && el != "";
+    });
+
+    mapLocAddress = filteredArray.join("+")
 
     switch (os) {
       case "Windows":

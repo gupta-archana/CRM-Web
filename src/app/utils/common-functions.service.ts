@@ -296,6 +296,17 @@ export class CommonFunctionsService {
     var lastMonthDate = mm + '/' + dd + '/' + yyyy;
     return lastMonthDate;
   }
+
+  getAddress(item: EntityModel) {
+
+    let address: string = "";
+    address = item.city + ", " + item.state + ", " + item.zip;
+    if (address.startsWith(','))
+      address = address.substring(1);
+    if (address.endsWith(','))
+      address = address.substr(0, address.length - 2)
+    return address;
+  }
 }
 function getRandomInt(min, max) {
   min = Math.ceil(min);

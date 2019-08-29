@@ -107,7 +107,9 @@ export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponse
     checkMoreDataAvailable(this);
     this.cdr.markForCheck();
   }
-
+  getAddress(item: EntityModel) {
+    return this.commonFunctions.getAddress(item);
+  }
 
   topFunction() {
     document.body.scrollTop = 0;

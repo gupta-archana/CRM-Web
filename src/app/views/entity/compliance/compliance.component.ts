@@ -38,7 +38,13 @@ export class ComplianceComponent extends BaseClass implements OnInit {
     this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_COMPLIANCE_DETAIL);
 
   }
+  getComplianceDate(item: ComplianceModel) {
+    let date = "";
+    if (item.expirationDate)
+      date = "Expiration Date: " + item.expirationDate
 
+    return date;
+  }
 
   getFormattedDate(date: string) {
     return date.substring(0, 10);

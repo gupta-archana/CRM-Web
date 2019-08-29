@@ -42,7 +42,7 @@ export class ClaimsComponent extends BaseClass implements OnInit {
   onClaimSelected(item: ClaimsModel) {
     //this.dataService.onDataShare(item);
     sessionStorage.setItem(this.constants.SELECTED_CLAIM, JSON.stringify(item));
-    this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_CLAIM_DETAIL );
+    this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_CLAIM_DETAIL);
   }
 
   private parseResponse(agents: ClaimsModel[]) {
@@ -54,6 +54,20 @@ export class ClaimsComponent extends BaseClass implements OnInit {
         this.totalRows = element.rownum;
       }
     });
+  }
+
+  getStatus(status: string) {
+    switch (status.toLowerCase()) {
+      case "o":
+        return "Open"
+        break;
+      case "c":
+        return "Close"
+        break;
+      default:
+        return ""
+        break;
+    }
   }
   goBack() {
     this.commonFunctions.backPress();
@@ -90,7 +104,7 @@ function getData(context: ClaimsComponent) {
     context.claimsModels = dataArray;
     context.pageNum = Number(sessionStorage.getItem(context.constants.ENTITY_CLAIMS_PAGE_NUMBER));
     context.totalRows = sessionStorage.getItem(context.constants.ENTITY_CLAIMS_TOTAL_ROWS);
-    updateRatioUI(context);
+    context.renderUI();
   }
   else {
     makeServerRequest(context);
@@ -112,7 +126,10 @@ function updateRatioUI(context: ClaimsComponent) {
 function getClaimsTypeDataFromFilter(context: ClaimsComponent) {
   context.claimsTypesSubscription = context.dataService.shareDataObservable.subscribe(filterData => {
     if (filterData.openChecked != undefined) {
+      context.claimsModels = [];
       context.filterData = filterData;
+      context.pageNum = 0;
+      makeServerRequest(context);
     }
   });
 }

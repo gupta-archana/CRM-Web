@@ -4,13 +4,15 @@
       <li *ngFor="let item of topAgents">
         <div class="col-xs-12 col-md-6 cell-bg">
           <div class="agent-detail">
-            <div class="dp"><img src="../../../../images/baseline-business-24px.svg" onerror="this.src='../../../../images/placeholder.png'"
+            <div class="dp">
+              <img src="../../../../images/baseline-business-24px.svg" onerror="this.src='../../../../images/placeholder.png'"
                 (click)="onAgentClick(item)" />
+                <div class="dpProfile_wp proActiBg">{{item.stat}}</div>
             </div>
             <h4><a (click)="onAgentClick(item)">{{item.name}}</a> <span (click)="onAgentClick(item)">({{item.entityId}})</span><a><img
                   src="{{checkEntityFavorite(item)?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}"
                   alt="" (click)="onStarClick(item)"></a></h4>
-            <span>{{item.city+','+item.state}}</span>
+            <span>{{getAddress(item)}}</span>
             <div class="clearfix"></div>
             <div class="row" (click)="onAgentClick(item)">
               <div class="col-md-6 col-xs-6">
