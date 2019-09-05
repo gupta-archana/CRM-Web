@@ -865,6 +865,10 @@ ul.agent-details li.associates a {
   right: 25px;
 }
 
+.search-box{
+  margin-top: 20px;
+}
+
 .search-box .form-group input[type="text"] {
   border: 2px solid #F68933;
   border-radius: 20px;
@@ -1870,11 +1874,36 @@ button:focus {
 }
 
 .paddingTop85{
-  padding-top:85px;
+  padding-top:100px;
+}
+.tabIndcation {
+  padding: 0px 15px;
 }
 
+.tabIndcation .topAgent_wp img {
+  float: left;
 
+}
+.tabIndcation .topAgent_wp span.agentName{
+  white-space: nowrap; 
+  width:60%; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  float:left;
+}
 
+.tabIndcation .topAgent_wp span{
+  line-height: 20px;
+}
+
+.agent-detail h4.topAgentsName {
+  float: left;
+  width:84%;
+}
+
+.agent-detail a.favouritIconPosition{
+  float:right;
+}
 
 
 
@@ -1947,6 +1976,15 @@ button:focus {
 
   #filterPopup {
     margin-top: 20%;
+  }
+
+  .paddingTop85{
+    padding-top:90px;
+  }
+
+  .agent-detail h4.topAgentsName {
+    float: left;
+    width:72%;  
   }
 
 }

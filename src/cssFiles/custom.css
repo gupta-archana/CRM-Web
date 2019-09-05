@@ -330,9 +330,7 @@ ul.agent-details li.agents a {
 .wrapper-back {
   width: 100%;
   position: fixed;
-  z-index: 10;
-  overflow: auto;
-  height: 100px !important;
+  z-index: 10;   
 }
 
 .wrapper-back #detail-page-header {

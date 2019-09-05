@@ -8,7 +8,7 @@
               <img src="images/baseline-business-24px.svg" alt="" (click)="onAgentClick(item,i)"/>
               <div class="dpProfile_wp proActiBg">A</div>
             </div>
-            <h4><a (click)="onAgentClick(item)">{{item.name}}</a><span (click)="onAgentClick(item)">({{item.entityId}})</span><a><img img
+            <h4><a (click)="onAgentClick(item)">{{item.name}}</a><span (click)="onAgentClick(item)"> ({{item.entityId}})</span><a><img img
                   src="{{checkEntityFavorite(item)?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}"
                   alt="" (click)="onStarClick(item,i)"></a></h4>
             <span>{{item.city+','+item.state}}</span>

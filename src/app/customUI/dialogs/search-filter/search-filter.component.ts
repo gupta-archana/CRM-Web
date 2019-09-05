@@ -63,21 +63,21 @@ export class SearchFilterComponent extends BaseClass implements OnInit, OnDestro
 
 
   registerBtnClicks() {
-    var header = document.getElementById("addRemoveWp");
-    var btns = header.getElementsByClassName("btn-a-z");
-    let self = this;
-    for (var i = 0; i < btns.length; i++) {
-      btns[i].addEventListener("click", function() {
-        var current = document.getElementsByClassName("activeAz");
-        if (current[0] == self.ascendingOrder) {
-          self.searchFilterModel.ascendingOrder = false;
-        } else {
-          self.searchFilterModel.ascendingOrder = true;
-        }
-        current[0].className = current[0].className.replace(" activeAz", "");
-        this.className += " activeAz";
-      });
-    }
+    // var header = document.getElementById("addRemoveWp");
+    // var btns = header.getElementsByClassName("btn-a-z");
+    // let self = this;
+    // for (var i = 0; i < btns.length; i++) {
+    //   btns[i].addEventListener("click", function() {
+    //     var current = document.getElementsByClassName("activeAz");
+    //     if (current[0] == self.ascendingOrder) {
+    //       self.searchFilterModel.ascendingOrder = false;
+    //     } else {
+    //       self.searchFilterModel.ascendingOrder = true;
+    //     }
+    //     current[0].className = current[0].className.replace(" activeAz", "");
+    //     this.className += " activeAz";
+    //   });
+    // }
   }
 
   ngOnDestroy(): void {

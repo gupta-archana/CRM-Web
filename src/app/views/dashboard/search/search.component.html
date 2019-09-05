@@ -31,7 +31,7 @@
                     <div class="dpProfile_wp proActiBg">{{item.stat}}</div>
                   </div>
                 <h4><a (click)="onItemClick(item)">{{item.name}} </a> 
-                  <span (click)="onItemClick(item)">({{item.entityId}})</span><a><img
+                  <span (click)="onItemClick(item)"> ({{item.entityId}})</span><a><img
                       src="{{checkEntityFavorite(item)?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}"
                       alt="" (click)="onStarClick(item)"></a>
                 </h4>
