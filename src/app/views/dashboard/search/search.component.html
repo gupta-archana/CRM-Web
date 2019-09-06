@@ -18,7 +18,7 @@
 
 <div class="container-fluid nospace">
   <div class="container app-bg2 paddingTop85">
-      <div class="serach-result">
+    <div class="serach-result">
 
       <div class="row" *ngIf="hideNoDataDiv">
         <ul>
@@ -26,16 +26,20 @@
             <div class="col-xs-12 col-md-6 cell-bg">
               <div class="agent-detail ag-perform">
                 <div class="dp" (click)="onItemClick(item)">
-                  <img src="{{item.type=='A'?'../../../../../../images/baseline-business-24px.svg':'../../../../../../images/username.svg'}}"
+                  <img
+                    src="{{item.type=='A'?'../../../../../../images/baseline-business-24px.svg':'../../../../../../images/username.svg'}}"
                     alt="" />
-                    <div class="dpProfile_wp proActiBg">{{item.stat}}</div>
-                  </div>
-                <h4><a (click)="onItemClick(item)">{{item.name}} </a> 
-                  <span (click)="onItemClick(item)"> ({{item.entityId}})</span><a><img
-                      src="{{checkEntityFavorite(item)?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}"
-                      alt="" (click)="onStarClick(item)"></a>
+                  <div class="dpProfile_wp proActiBg">{{item.stat}}</div>
+                </div>
+
+                <h4 class="topAgentsName"><a (click)="onItemClick(item)">{{item.name}}</a>
+                  <span (click)="onItemClick(item)"> ({{item.entityId}})</span>
+                  <div class="clearfix paddingTop10"></div>
+                  <span>{{getAddress(item)}}</span>
                 </h4>
-                <span (click)="onItemClick(item)">{{getAddress(item)}}</span>
+                <a class="favouritIconPosition"><img
+                    src="{{checkEntityFavorite(item)?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}"
+                    alt="" (click)="onStarClick(item)"></a>
 
                 <div class="clearfix"></div>
               </div>
