@@ -106,7 +106,8 @@ function setData(context: AgentUnderPlanComponent) {
 
 
 function updateRatioUI(context: AgentUnderPlanComponent) {
-  context.totalAndCurrentRowsRatio = context.commonFunctions.showMoreDataSnackbar(context.agentsUnderPlan, context.totalRows);
+  context.commonFunctions.showLoadedItemTagOnHeader(context.agentsUnderPlan, context.totalRows);
+  //context.totalAndCurrentRowsRatio = context.commonFunctions.showMoreDataSnackbar(context.agentsUnderPlan, context.totalRows);
   context.cdr.markForCheck();
 }
 

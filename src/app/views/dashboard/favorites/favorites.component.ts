@@ -152,7 +152,8 @@ function checkMoreDataAvailable(context: FavoritesComponent) {
     context.moreDataAvailable = true;
 }
 function updateRatioUI(context: FavoritesComponent) {
-  context.totalAndCurrentRowsRatio = context.commonFunctions.showMoreDataSnackbar(context.favorites, context.totalRows);
+  context.commonFunctions.showLoadedItemTagOnHeader(context.favorites, context.totalRows);
+  //context.totalAndCurrentRowsRatio = context.commonFunctions.showMoreDataSnackbar(context.favorites, context.totalRows);
   context.cdr.markForCheck();
 }
 function refreshData(context: FavoritesComponent) {

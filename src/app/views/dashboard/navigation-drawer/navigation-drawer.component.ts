@@ -110,6 +110,7 @@ function getSideNavData(self: NavigationDrawerComponent) {
 function navigateToSelectedPage(title: string, context: NavigationDrawerComponent) {
 
   let selectedNavBarItemPath = "";
+  context.commonFunctions.showLoadedItemTagOnHeader([], "");
   switch (title) {
     case context.constants.TOP_AGENTS:
       selectedNavBarItemPath = context.paths.PATH_TOP_AGENTS;

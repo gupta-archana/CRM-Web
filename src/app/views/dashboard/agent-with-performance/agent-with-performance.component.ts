@@ -111,7 +111,8 @@ function getData(context: AgentWithPerformanceComponent) {
 }
 
 function updateRatioUI(context: AgentWithPerformanceComponent) {
-  context.totalAndCurrentRowsRatio = context.commonFunctions.showMoreDataSnackbar(context.agentPerformance, context.totalRows);
+  context.commonFunctions.showLoadedItemTagOnHeader(context.agentPerformance, context.totalRows);
+  //context.totalAndCurrentRowsRatio = context.commonFunctions.showMoreDataSnackbar(context.agentPerformance, context.totalRows);
   context.cdr.markForCheck();
 }
 

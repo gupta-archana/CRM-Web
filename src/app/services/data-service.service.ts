@@ -69,6 +69,8 @@ export class DataServiceService {
   private shareUpdateNoteSubject = new Subject<string>();
   shareUpdateNoteObservable = this.shareUpdateNoteSubject.asObservable();
 
+  private shareLoadedItemsSubject = new BehaviorSubject<string>("");
+  shareLoadedItemsObservable = this.shareLoadedItemsSubject.asObservable();
   constructor() { }
 
   onHideShowLoader(showLoader: boolean) {
@@ -145,5 +147,9 @@ export class DataServiceService {
 
   onShareUpdatedNote(note: string) {
     this.shareUpdateNoteSubject.next(note);
+  }
+
+  shareLoadedItemsTag(loadedItemsTag: string) {
+    this.shareLoadedItemsSubject.next(loadedItemsTag);
   }
 }

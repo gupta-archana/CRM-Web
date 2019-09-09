@@ -7,6 +7,7 @@ import { MatSnackBar, MatSnackBarConfig, MatSnackBarHorizontalPosition, MatSnack
 import { MyLocalStorageService } from '../services/my-local-storage.service';
 import * as paths from '../Constants/paths';
 import { EntityModel } from '../models/entity-model';
+import { DataServiceService } from '../services/data-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,7 @@ export class CommonFunctionsService {
     private router: Router,
     private constants: Constants,
     private myLocalStorage: MyLocalStorageService,
+    private dataService: DataServiceService,
     public snackBar: MatSnackBar) {
     createSnackbarConfig(this);
 
@@ -306,6 +308,15 @@ export class CommonFunctionsService {
     if (address.endsWith(','))
       address = address.substr(0, address.length - 2)
     return address;
+  }
+
+  showLoadedItemTagOnHeader(loadedItems: Array<any>, totalItemsCount: any) {
+    let tag = "";
+    if (totalItemsCount)
+      tag = "Listing " + loadedItems.length + " of " + totalItemsCount;
+      else
+      tag = "No Data Available"
+    this.dataService.shareLoadedItemsTag(tag)
   }
 }
 function getRandomInt(min, max) {

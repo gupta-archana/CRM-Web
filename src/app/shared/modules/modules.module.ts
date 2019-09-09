@@ -13,6 +13,7 @@ import { CurrencyMaskModule } from "ng2-currency-mask";
 import { DecimalPipe } from '@angular/common';
 import { CurrencyMaskConfig, CURRENCY_MASK_CONFIG } from 'ng2-currency-mask/src/currency-mask.config';
 import { MomentModule } from 'ngx-moment';
+import { EntityNameHeaderComponent } from '../../customUI/entity-name-header/entity-name-header.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "left",
@@ -38,15 +39,16 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     MatButtonModule,
     MatFormFieldModule,
     CurrencyMaskModule,
-    MomentModule
+    MomentModule,
+
   ],
   declarations: [
     UpdateAgentProfileComponent,
     RecentProfilesComponent,
     ShareVCardComponent,
     UpdateUserProfileComponent,
-    SearchFilterComponent
-
+    SearchFilterComponent,
+    EntityNameHeaderComponent
   ],
   exports: [
     UpdateAgentProfileComponent,
@@ -63,7 +65,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     MatDialogModule,
     MatButtonModule,
     MatFormFieldModule,
-    MomentModule
+    MomentModule,
+    EntityNameHeaderComponent
 
   ],
   providers: [{ provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }, DecimalPipe],

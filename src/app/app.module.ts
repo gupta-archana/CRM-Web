@@ -30,7 +30,7 @@ import { ForgotPasswordAlertComponent } from './customUI/dialogs/forgot-password
 import { MarkAsReviewedDialogComponent } from './customUI/dialogs/mark-as-reviewed-dialog/mark-as-reviewed-dialog.component';
 import { SendEmailConfirmationComponent } from './customUI/dialogs/send-email-confirmation/send-email-confirmation.component';
 import { UpdateNoteComponent } from './customUI/dialogs/update-note/update-note.component';
-import { EntityNameHeaderComponent } from './customUI/entity-name-header/entity-name-header.component';
+
 import { LoginGuardGuard } from './guards/login-guard.guard';
 import { ApiService } from "./services/api.service";
 import { ModulesModule } from './shared/modules/modules.module';
@@ -99,7 +99,6 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     PersonDetailComponent,
     PersonAgentsComponent,
     UpdateNoteComponent,
-    EntityNameHeaderComponent,
     EntityAlertComponent,
     EntityAlertDetailComponent,
     MarkAsReviewedDialogComponent,

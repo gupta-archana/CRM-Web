@@ -5,13 +5,16 @@
   {{entityModel.name}}
 </div> -->
 
-<div class="tabIndcation">
+<div class="tabIndcation" *ngIf="entityModel || loadedItemsTag!=''">
   <div class="row">
-  <div class="col-xs-12 col-md-12 noPadding" style="background: #fff;">
-  <div class="topAgent_wp"><img src="images/baseline-business-24px.svg" alt=""> <span class="agentName"> NETCO. Inc</span>
-    <span class="textRight">Listing 5 of 100</span>
-  <div class="clear"></div>
+    <div class="col-xs-12 col-md-12 noPadding" style="background: #fff;">
+      <div class="topAgent_wp">
+        <img *ngIf="entityModel"
+          src="{{entityModel.type=='A'?'../../../../images/baseline-business-24px.svg':'../../../../images/ic_note_profile.svg'}}"
+          alt=""> <span class="agentName">{{entityModel?entitiyModel.name:""}}</span>
+        <span class="textRight" *ngIf="loadedItemsTag!=''">{{loadedItemsTag}}</span>
+        <div class="clear"></div>
+      </div>
+    </div>
   </div>
-  </div>
-  </div> 
-  </div>
+</div>

@@ -14,7 +14,7 @@
 
 .bottom-wrapper {
   width: 100%;
-  padding-top: 60px;
+  padding-top: 70px;
   z-index: 5;
   overflow: auto;
 }
@@ -395,4 +395,12 @@ ul.slide-menu li.notifications a {
 
 .cell-bg {
   margin-top: 5px;
+}
+.search-box{
+  margin-top:45px;
+}
+@media (max-width: 768px) {
+  .paddingTop85{
+    padding-top:100px;
+  }
 }

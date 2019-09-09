@@ -261,6 +261,7 @@ function checkAndSetUi(context: SearchComponent) {
 }
 
 function updateRatioUI(context: SearchComponent) {
-  context.totalAndCurrentRowsRatio = context.commonFunctions.showMoreDataSnackbar(context.searchedUsers, context.totalRows);
+  context.commonFunctions.showLoadedItemTagOnHeader(context.searchedUsers, context.totalRows);
+  //context.totalAndCurrentRowsRatio = context.commonFunctions.showMoreDataSnackbar(context.searchedUsers, context.totalRows);
   context.cdr.markForCheck();
 }
