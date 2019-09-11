@@ -11,7 +11,7 @@
       <div class="topAgent_wp">
         <img *ngIf="entityModel"
           src="{{entityModel.type=='A'?'../../../../images/baseline-business-24px.svg':'../../../../images/ic_note_profile.svg'}}"
-          alt=""> <span class="agentName">{{entityModel?entitiyModel.name:""}}</span>
+          alt=""> <span class="agentName" *ngIf="entityModel">{{entityModel?entityModel.name:""}}</span>
         <span class="textRight" *ngIf="loadedItemsTag!=''">{{loadedItemsTag}}</span>
         <div class="clear"></div>
       </div>

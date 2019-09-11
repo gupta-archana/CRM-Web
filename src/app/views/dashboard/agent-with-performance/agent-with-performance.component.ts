@@ -50,6 +50,11 @@ export class AgentWithPerformanceComponent extends BaseClass implements OnInit, 
   onError(errorCode: number, errorMsg: string) {
     this.commonFunctions.showErrorSnackbar(errorMsg)
   }
+
+  getAddress(item: EntityModel) {
+    return this.commonFunctions.getAddress(item);
+  }
+
   onAgentClick(agent: EntityModel) {
     sessionStorage.setItem(this.constants.ENTITY_INFO, JSON.stringify(agent));
     setData(this);

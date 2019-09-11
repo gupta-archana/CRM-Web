@@ -5,28 +5,37 @@
         <div class="col-xs-12 col-md-6 cell-bg">
           <div class="agent-detail">
             <div class="dp">
-              <img src="images/baseline-business-24px.svg" alt=""  (click)="onAgentClick(item)"/>
+              <img src="images/baseline-business-24px.svg" alt="" (click)="onAgentClick(item)" />
               <div class="dpProfile_wp proActiBg">A</div>
             </div>
-            <h4><a (click)="onAgentClick(item)">{{item.name}}</a><span (click)="onAgentClick(item)"> ({{item.entityId}})</span><a><img
-                  src="{{checkEntityFavorite(item)?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}"
-                  alt="" (click)="onStarClick(item,i)"></a></h4>
-            <span>{{item.city+','+item.state}}</span>
+            <h4 class="topAgentsName"><a (click)="onAgentClick(item)">{{item.name}}</a><span
+                (click)="onAgentClick(item)">
+                ({{item.entityId}})</span>
+              <div class="clearfix paddingTop10"></div>
+              <span>{{getAddress(item)}}</span>
+            </h4>
+            <a class="favouritIconPosition"><img
+                src="{{checkEntityFavorite(item)?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}"
+                alt="" (click)="onStarClick(item,i)"></a>
             <div class="clearfix"></div>
             <div class="row">
               <div class="col-md-6 col-xs-6">
-                <div class="amount">NPR Annual Plan<br><span>{{item.nprPlanned| currency:'USD':"symbol-narrow":'1.0-0'}}</span></div>
+                <div class="amount">NPR Annual
+                  Plan<br><span>{{item.nprPlanned| currency:'USD':"symbol-narrow":'1.0-0'}}</span></div>
               </div>
               <div class="col-md-6 col-xs-6">
-                <div class="amount">NPR YTD % of Annual<br><span>{{item.nprPercent==''?'0':item.nprPercent|number:'1.1-1'}}%</span></div>
+                <div class="amount">NPR YTD % of
+                  Annual<br><span>{{item.nprPercent==''?'0':item.nprPercent|number:'1.1-1'}}%</span></div>
               </div>
             </div>
             <div class="row">
               <div class="col-md-6 col-xs-6">
-                <div class="amount">NPR YTD<br><span> {{item.nprActual| currency:'USD':"symbol-narrow":'1.0-0'}}</span></div>
+                <div class="amount">NPR YTD<br><span> {{item.nprActual| currency:'USD':"symbol-narrow":'1.0-0'}}</span>
+                </div>
               </div>
               <div class="col-md-6 col-xs-6">
-                <div class="amount">NPR YTD % YTD Plan<br><span>{{item.nprPercentYTD==''?'0':item.nprPercentYTD|number:'1.1-1'}}%</span></div>
+                <div class="amount">NPR YTD % YTD
+                  Plan<br><span>{{item.nprPercentYTD==''?'0':item.nprPercentYTD|number:'1.1-1'}}%</span></div>
               </div>
             </div>
             <div class="row">

@@ -24,6 +24,7 @@ export class AgentDetailComponent extends EntityDetailBaseClass implements OnIni
     private router: Router) {
     super(injector);
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.commonFunctions.showLoadedItemTagOnHeader([], 0, true);
   }
 
   ngOnInit() {

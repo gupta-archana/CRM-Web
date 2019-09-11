@@ -17,6 +17,7 @@ export class AuditDetailCompletedComponent extends BaseClass implements OnInit, 
   entityModel: EntityModel;
   sectionScoreArray: string[];
   ngOnInit() {
+    this.commonFunctions.showLoadedItemTagOnHeader([], "", true);
     this.entityModel = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
     this.auditModel = JSON.parse(sessionStorage.getItem(this.constants.SELECTED_AUDIT));
 

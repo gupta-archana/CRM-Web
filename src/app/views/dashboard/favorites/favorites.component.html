@@ -10,10 +10,15 @@
                 alt="" />
               <div class="dpProfile_wp proActiBg">{{getTypeAnnotation(item)}}</div>
             </div>
-            <h4><a (click)="onItemClick(item)">{{item.name}}</a> <span
-                (click)="onItemClick(item,i)">({{item.entityId}})</span><a><img
-                  src="../../../../images/favourite-icon.svg" alt="" (click)="onStarClick(item,i)"></a></h4>
-            <span>{{item.city+','+item.state}}</span>
+
+            <h4 class="topAgentsName"><a (click)="onItemClick(item)">{{item.name}}</a><span (click)="onItemClick(item)">
+                ({{item.entityId}})</span>
+              <div class="clearfix paddingTop10"></div>
+              <span>{{getAddress(item)}}</span>
+            </h4>
+            <a class="favouritIconPosition"><img src="../../../../images/favourite-icon.svg" alt=""
+                (click)="onStarClick(item,i)"></a>
+
           </div>
         </div>
       </li>

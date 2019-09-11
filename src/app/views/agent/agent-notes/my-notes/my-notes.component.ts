@@ -19,7 +19,7 @@ export class MyNotesComponent extends BaseClass implements OnInit, OnDestroy {
   moreDataAvailable: boolean = false;
   totalAndCurrentRowsRatio: string = "";
   uid: string;
-  entityModel:EntityModel;
+  entityModel: EntityModel;
   tabIndexSubscription: Subscription;
   newNoteAddedSubscription: Subscription;
   updatedNoteSubscription: Subscription;
@@ -114,7 +114,8 @@ function makeServerRequest(context: MyNotesComponent) {
 }
 
 function updateRatioUI(context: MyNotesComponent) {
-  context.totalAndCurrentRowsRatio = context.commonFunctions.showMoreDataSnackbar(context.agentNotes, context.totalRows);
+  context.commonFunctions.showLoadedItemTagOnHeader(context.agentNotes, context.totalRows);
+  //context.totalAndCurrentRowsRatio = context.commonFunctions.showMoreDataSnackbar(context.agentNotes, context.totalRows);
   context.cdr.markForCheck();
 }
 

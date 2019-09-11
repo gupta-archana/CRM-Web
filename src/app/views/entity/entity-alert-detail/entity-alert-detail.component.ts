@@ -18,6 +18,7 @@ export class EntityAlertDetailComponent extends BaseClass implements OnInit, OnD
   openAlertSubscription: Subscription;
   entityModel: EntityModel;
   ngOnInit() {
+    this.commonFunctions.showLoadedItemTagOnHeader([], "", true);
     this.entityModel = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
     this.openAlertModel = JSON.parse(sessionStorage.getItem(this.constants.SELECTED_ALERT));
 

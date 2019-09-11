@@ -125,7 +125,8 @@ function makeServerRequest(context: AllNotesComponent) {
 }
 
 function updateRatioUI(context: AllNotesComponent) {
-  context.totalAndCurrentRowsRatio = context.commonFunctions.showMoreDataSnackbar(context.agentNotes, context.totalRows);
+  context.commonFunctions.showLoadedItemTagOnHeader(context.agentNotes, context.totalRows);
+  //context.totalAndCurrentRowsRatio = context.commonFunctions.showMoreDataSnackbar(context.agentNotes, context.totalRows);
   context.cdr.markForCheck();
 }
 

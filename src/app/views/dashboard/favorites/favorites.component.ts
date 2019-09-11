@@ -19,7 +19,7 @@ export class FavoritesComponent extends BaseClass implements OnInit, ApiResponse
   favorites: Array<EntityModel> = new Array();
   moreDataAvailable: boolean = true;
   pageRefreshSubscription: Subscription;
-  removeFavSubscription:Subscription;
+  removeFavSubscription: Subscription;
 
   constructor(private injector: Injector) { super(injector); }
 
@@ -49,12 +49,14 @@ export class FavoritesComponent extends BaseClass implements OnInit, ApiResponse
     this.commonFunctions.showErrorSnackbar(errorMsg)
     this.renderUI();
   }
-
+  getAddress(item: EntityModel) {
+    return this.commonFunctions.getAddress(item);
+  }
 
   onStarClick(item: EntityModel, index: number) {
     var self = this;
-  this.removeFavSubscription =  this.commonApis.setFavorite(item, this.apiHandler, this.cdr).asObservable().subscribe(data => {
-    self.unsubscribeRemoveSubscription();
+    this.removeFavSubscription = this.commonApis.setFavorite(item, this.apiHandler, this.cdr).asObservable().subscribe(data => {
+      self.unsubscribeRemoveSubscription();
       self.favorites.splice(index, 1);
       self.totalRows--;
       self.renderUI();
@@ -69,8 +71,8 @@ export class FavoritesComponent extends BaseClass implements OnInit, ApiResponse
         sessionStorage.setItem(this.constants.ENTITY_INFO, JSON.stringify(item));
         break;
       case this.constants.ENTITY_PERSON_PRESENTER:
-      navigatingPath = this.paths.PATH_PERSON_DETAIL;
-      sessionStorage.setItem(this.constants.ENTITY_INFO, JSON.stringify(item));
+        navigatingPath = this.paths.PATH_PERSON_DETAIL;
+        sessionStorage.setItem(this.constants.ENTITY_INFO, JSON.stringify(item));
         break;
       default:
         break;

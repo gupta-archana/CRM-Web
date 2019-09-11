@@ -14,6 +14,7 @@ export class ComplianceDetailComponent extends BaseClass implements OnInit {
   entityModel: EntityModel;
   complianceModel: ComplianceModel;
   ngOnInit() {
+    this.commonFunctions.showLoadedItemTagOnHeader([], "", true);
     this.entityModel = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
     this.complianceModel = JSON.parse(sessionStorage.getItem(this.constants.SELECTED_COMPLIANCE));
   }

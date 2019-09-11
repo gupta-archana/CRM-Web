@@ -103,6 +103,7 @@ function checkMoreDataAvailable(context: EntityAlertComponent) {
 }
 
 function updateRatioUI(context: EntityAlertComponent) {
-  context.totalAndCurrentRowsRatio = context.commonFunctions.showMoreDataSnackbar(context.openAlertModels, context.totalRows);
+  context.commonFunctions.showLoadedItemTagOnHeader(context.openAlertModels, context.totalRows);
+  //context.totalAndCurrentRowsRatio = context.commonFunctions.showMoreDataSnackbar(context.openAlertModels, context.totalRows);
   context.cdr.markForCheck();
 }

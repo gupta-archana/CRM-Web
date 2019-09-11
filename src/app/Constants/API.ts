@@ -17,7 +17,6 @@ export class API {
 
   constructor(private commonFunctions: CommonFunctionsService, private myLocalStorage: MyLocalStorageService, private constants: Constants) {
     this.getNumberOfRows();
-
   }
 
   public checkAndGetCredentials() {
@@ -52,7 +51,7 @@ export class API {
 
   getSearchedProfileUrl(app_mode: string, stateId: string, type: string, pageNum: number, searchString: string) {
 
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=entityProfileSearch&stateId=" + stateId + "&Type=" + type + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows + "&searchString=" + searchString;
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=profileSearch&stateId=" + stateId + "&Type=" + type + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows + "&searchString=" + searchString;
   }
   getAgentSearchedUrl(app_mode: string, stateId: string, searchString: string) {
 
@@ -89,12 +88,12 @@ export class API {
 
   getAddFavoriteUrl(app_mode: string, entityType: string, entityId: string) {
 
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=systemFavoriteAdd&entity=" + entityType + "&entityID=" + entityId;
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userFavoriteAdd&entity=" + entityType + "&entityID=" + entityId;
   }
 
   getFavoritesUrl(app_mode: string, pageNum: any) {
 
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=SystemFavoritesGet" + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows;
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userFavoritesGet" + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows;
   }
 
 
@@ -105,7 +104,7 @@ export class API {
 
   getCreateNoteUrl(app_mode: string) {
 
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=systemNoteNew";
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userNoteNew";
   }
 
 
@@ -119,7 +118,7 @@ export class API {
   }
 
   getRemoveFavoriteUrl(app_mode, entity: string, entityId: string) {
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=systemFavoriteDelete&Entity=" + entity + "&EntityId=" + entityId;
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userFavoriteDelete&Entity=" + entity + "&EntityId=" + entityId;
   }
 
   getUpdateProfilePicture(app_mode: string) {
@@ -127,15 +126,15 @@ export class API {
   }
 
   getAssociatesUrl(app_mode: string, entityType: string, entityId: string, pageNum: number) {
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=associatesGet&entity=" + entityType + "&entityID=" + entityId + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows;
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=affiliatedassociates&entity=" + entityType + "&entityID=" + entityId + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows;
   }
 
   getPersonAffiliationsUrl(app_mode: string, entityId: string, pageNum: number) {
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=personaffiliationsGet&PersonID=" + entityId + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows;
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=affiliatedpersonGet&PersonID=" + entityId + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows;
   }
 
   getEntityContactDetailUrl(app_mode: string, entityType: string, entityId: string) {
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=entityContactGet&entity=" + entityType + "&entityID=" + entityId;
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=ContactGet&entity=" + entityType + "&entityID=" + entityId;
   }
 
   getAgentPerformanceUrl(app_mode: string, pageNum: number) {
@@ -143,7 +142,7 @@ export class API {
   }
 
   getUpdateEntityProfileUrl(app_mode: string) {
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=entitycontactModify";
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=contactModify";
   }
 
   getThirteenMonthActivityUrl(app_mode: string, agentId: string) {
@@ -151,12 +150,12 @@ export class API {
   }
 
   getDeleteNoteUrl(app_mode: string, noteId: string) {
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=systemNoteDelete&sysNoteID=" + noteId;
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userNoteDelete&sysNoteID=" + noteId;
   }
 
 
   getUpdateNoteUrl(app_mode: string) {
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=NoteModify";
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userNoteModify";
   }
 
   getOpenAlertsUrl(app_mode: string, agentID: string, pageNum: string) {
@@ -168,7 +167,7 @@ export class API {
   }
 
   getClaimDownloadPdfUrl(app_mode: string, claimID: string) {
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=claimPdfGet&ClaimID=" + claimID + "&OverView=yes&Coverage=yes&Property=yes&Contact=yes&Account=yes&Recovery=yes&Litigation=yes&LinkedClaims=yes&Activity=yes&Notes=yes";
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=agentclaimPdfGet&ClaimID=" + claimID + "&OverView=yes&Coverage=yes&Property=yes&Contact=yes&Account=yes&Recovery=yes&Litigation=yes&LinkedClaims=yes&Activity=yes&Notes=yes";
   }
 
   getMarkAsReviewedUrl(app_mode: string, claimID: string) {
@@ -176,7 +175,7 @@ export class API {
   }
 
   getAgentAuditsUrl(app_mode: string, agentID: string, pageNum: string) {
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=agentauditsGet&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows + "&agentID=" + agentID;
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=agentAuditsGet&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows + "&agentID=" + agentID;
   }
 
   getDownloadAuditPdfUrl(app_mode: string, auditId: string) {
@@ -188,11 +187,11 @@ export class API {
   }
 
   getUserConfigUrl(app_mode: string) {
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=sysuserconfigget";
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userconfigget";
   }
 
   getUpdateUserConfigUrl(app_mode: string) {
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=sysuserconfigset";
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userconfigset";
   }
 
   getNotificationsUrl(app_mode: string, pageNum: any) {
@@ -200,7 +199,7 @@ export class API {
   }
 
   getNotificationDismissUrl(app_mode: string, notificationID: string) {
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=notificationDismiss&NotificationID=" + notificationID;
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userNotificationDismiss&NotificationID=" + notificationID;
   }
 
   getStates() {

@@ -17,6 +17,7 @@ export class AuditDetailQueuedComponent extends BaseClass implements OnInit, Api
   auditModel: AuditModels;
   entityModel: EntityModel;
   ngOnInit() {
+    this.commonFunctions.showLoadedItemTagOnHeader([], "", true);
     this.entityModel = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
     this.auditModel = JSON.parse(sessionStorage.getItem(this.constants.SELECTED_AUDIT));
   }

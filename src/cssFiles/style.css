@@ -44,6 +44,8 @@ input {
   min-height: 380px;
 }
 
+a{cursor: pointer;}
+
 .nospace {
   padding: 0px;
   margin: 0px;
@@ -362,7 +364,7 @@ form input[type="checkbox"] {
 .nav-bg {
   margin-bottom: 0px;
   background: #045395;
-  height: 64px;
+  height:62px;
 }
 
 .nav-bg a {
@@ -502,7 +504,7 @@ ul.slide-menu li.logout a {
 }
 
 .tpad {
-  padding-top: 9px;
+  padding-top:16px;
 }
 
 h1.t-agent {
@@ -564,19 +566,23 @@ h1.t-agent {
 ul.agent-details {
   list-style: none;
   list-style-type: none;
-  padding: 20px 10px 0px 30px;
+  padding: 20px 20px 0px 20px;
 }
 
 ul.agent-details li {
   list-style: none;
   list-style-type: none;
   background: url(../images/arrow.svg) no-repeat right;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 4px 0px;
 }
 
 ul.agent-details li a {
   color: #000;
   line-height: 40px;
   font-size: 13px;
+  cursor: pointer;
 }
 
 ul.agent-details li.agent-contact a {

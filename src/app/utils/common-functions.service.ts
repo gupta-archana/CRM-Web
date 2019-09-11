@@ -310,12 +310,15 @@ export class CommonFunctionsService {
     return address;
   }
 
-  showLoadedItemTagOnHeader(loadedItems: Array<any>, totalItemsCount: any) {
+  showLoadedItemTagOnHeader(loadedItems: Array<any>, totalItemsCount: any, hide?: boolean) {
+
     let tag = "";
-    if (totalItemsCount)
-      tag = "Listing " + loadedItems.length + " of " + totalItemsCount;
+    if (!hide) {
+      if (totalItemsCount)
+        tag = "Listing " + loadedItems.length + " of " + totalItemsCount;
       else
-      tag = "No Data Available"
+        tag = "No Data Available"
+    }
     this.dataService.shareLoadedItemsTag(tag)
   }
 }

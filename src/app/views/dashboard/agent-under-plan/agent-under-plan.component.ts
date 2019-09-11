@@ -55,6 +55,9 @@ export class AgentUnderPlanComponent extends BaseClass implements OnInit, OnDest
     this.renderUI();
   }
 
+  getAddress(item: EntityModel) {
+    return this.commonFunctions.getAddress(item);
+  }
   public renderUI() {
     setData(this);
     updateRatioUI(this);

@@ -121,6 +121,7 @@ function checkMoreDataAvailable(context: AgentAssociatesComponent) {
 }
 
 function updateRatioUI(context: AgentAssociatesComponent) {
-  context.totalAndCurrentRowsRatio = context.commonFunctions.showMoreDataSnackbar(context.associatesModels, context.totalRows);
+  context.commonFunctions.showLoadedItemTagOnHeader(context.associatesModels, context.totalRows);
+  //context.totalAndCurrentRowsRatio = context.commonFunctions.showMoreDataSnackbar(context.associatesModels, context.totalRows);
   context.cdr.markForCheck();
 }
