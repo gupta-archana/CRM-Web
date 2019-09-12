@@ -28,6 +28,7 @@
                   Annual<br><span>{{item.nprPercent==''?'0':item.nprPercent|number:'1.1-1'}}%</span></div>
               </div>
             </div>
+            <div class="clearfix paddingTop10"></div>
             <div class="row">
               <div class="col-md-6 col-xs-6">
                 <div class="amount">NPR YTD<br><span> {{item.nprActual| currency:'USD':"symbol-narrow":'1.0-0'}}</span>
@@ -38,12 +39,14 @@
                   Plan<br><span>{{item.nprPercentYTD==''?'0':item.nprPercentYTD|number:'1.1-1'}}%</span></div>
               </div>
             </div>
+            <div class="clearfix paddingTop10"></div>
             <div class="row">
               <div class="col-md-12 col-xs-12">
                 <div class="amount">NPR Plan YTD <span class="fonSize">(Through end of current month)</span>
                   <br><span> {{item.nprPlannedYTD| currency:'USD':"symbol-narrow":'1.0-0'}}</span></div>
               </div>
             </div>
+            <div class="clearfix paddingTop10"></div>
           </div>
         </div>
       </div>

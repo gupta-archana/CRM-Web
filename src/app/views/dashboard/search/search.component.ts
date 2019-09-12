@@ -105,11 +105,15 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Aft
     this.onApiResponse(response.profile);
 
   }
+  onError(errorCode: number, errorMsg: string) {
+    this.onApiResponse([]);
+    this.commonFunctions.showErrorSnackbar(errorMsg);
+  }
 
   onApiResponse(newUsers: EntityModel[]) {
     this.dataService.onHideShowLoader(false);
     checkFilterChanged(this);
-    if (newUsers) {
+    if (newUsers && newUsers.length > 0) {
       newUsers.forEach(element => {
         if (element.type != this.TOTAL_MATCH) {
           this.commonFunctions.setFavoriteOnApisResponse(element);
@@ -120,14 +124,13 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Aft
         }
       });
 
+    } else if (this.pageNum == 1) {
+      this.totalRows = 0;
     }
     this.updateUI();
   }
 
-  onError(errorCode: number, errorMsg: string) {
-    this.onApiResponse([]);
-    this.commonFunctions.showErrorSnackbar(errorMsg);
-  }
+
 
   getAddress(item: EntityModel) {
     return this.commonFunctions.getAddress(item);

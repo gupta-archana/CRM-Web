@@ -34,6 +34,7 @@ export class ClaimsComponent extends BaseClass implements OnInit {
     this.renderUI();
   }
   onError(errorCode: number, errorMsg: string) {
+    this.parseResponse([]);
     this.renderUI();
     this.commonFunctions.showErrorSnackbar(errorMsg)
   }
@@ -46,14 +47,18 @@ export class ClaimsComponent extends BaseClass implements OnInit {
   }
 
   private parseResponse(agents: ClaimsModel[]) {
-    agents.forEach(element => {
-      if (element.summary != "Total Count") {
-        this.claimsModels.push(element);
-      }
-      else {
-        this.totalRows = element.rownum;
-      }
-    });
+    if (agents && agents.length > 0) {
+      agents.forEach(element => {
+        if (element.summary != "Total Count") {
+          this.claimsModels.push(element);
+        }
+        else {
+          this.totalRows = element.rownum;
+        }
+      });
+    } else if (this.pageNum == 1) {
+      this.totalRows = 0;
+    }
   }
 
   getStatus(status: string) {

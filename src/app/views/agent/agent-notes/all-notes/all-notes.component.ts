@@ -114,14 +114,17 @@ export class AllNotesComponent extends BaseClass implements OnInit, OnDestroy, A
 function tabSelectedIndexSubscription(context: AllNotesComponent) {
   context.tabIndexSubscription = context.dataService.tabSelectedObservable.subscribe((index: number) => {
     context.selectedTabIndex = index;
-    if (index == 0 && context.agentNotes.length <= 0) {
-      makeServerRequest(context);
+    if (index == 0) {
+      updateRatioUI(context);
+      if (context.agentNotes.length <= 0) {
+        makeServerRequest(context);
+      }
     }
   });
 }
 function makeServerRequest(context: AllNotesComponent) {
   context.pageNumber++;
-  context.apiHandler.getNotes(context.ALL, context.ALL, context.ALL, context.pageNumber, context);
+  context.apiHandler.getNotes(context.ALL, context.entityModel.type, context.entityModel.entityId, context.pageNumber, context);
 }
 
 function updateRatioUI(context: AllNotesComponent) {

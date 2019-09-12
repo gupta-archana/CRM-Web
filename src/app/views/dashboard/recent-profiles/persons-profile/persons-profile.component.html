@@ -1,3 +1,37 @@
 <div class="tab-content">
-  <div class="clearfix paddingTop15"></div>
+  <!-- ---tab First beginning here---- -->
+  <div id="agentsId" class="tab-pane fade in active">
+    <div class="clearfix paddingTop10"></div>
+    <div class="row">
+      <ul>
+        <li *ngFor="let item of recentProfileArray; let i = index;">
+          <div class="col-xs-12 col-md-6 cell-bg">
+            <div class="agent-detail ag-perform">
+              <div class="dp" (click)="onItemClick(item)">
+                <img
+                  src="{{item.type=='A'?'../../../../../../images/baseline-business-24px.svg':'../../../../../../images/username.svg'}}"
+                  alt="" />
+                <div class="dpProfile_wp proActiBg">{{item.stat}}</div>
+              </div>
+
+              <h4 class="topAgentsName"><a (click)="onItemClick(item)">{{item.name}}</a>
+                <span (click)="onItemClick(item)"> ({{item.entityId}})</span>
+                <div class="clearfix paddingTop10"></div>
+                <span>{{getAddress(item)}}</span>
+              </h4>
+              <a class="favouritIconPosition"><img
+                  src="{{checkEntityFavorite(item)?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}"
+                  alt="" (click)="onStarClick(item)"></a>
+
+              <div class="clearfix"></div>
+            </div>
+          </div>
+
+        </li>
+      </ul>
+
+    </div>
+
+    <div class="clearfix paddingTop15"></div>
+  </div>
 </div>

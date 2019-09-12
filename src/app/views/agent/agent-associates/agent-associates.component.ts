@@ -1,4 +1,4 @@
-import { Component, OnInit, Injector } from '@angular/core';
+import { Component, OnInit, Injector, OnDestroy } from '@angular/core';
 import { BaseClass } from '../../../global/base-class';
 import { AssociatesModel } from '../../../models/associates-model';
 import { EntityModel } from '../../../models/entity-model';
@@ -9,7 +9,8 @@ import { ApiResponseCallback } from '../../../Interfaces/ApiResponseCallback';
   templateUrl: './agent-associates.component.html',
   styleUrls: ['./agent-associates.component.css']
 })
-export class AgentAssociatesComponent extends BaseClass implements OnInit, ApiResponseCallback {
+export class AgentAssociatesComponent extends BaseClass implements OnInit, OnDestroy, ApiResponseCallback {
+
 
   associatesModels: AssociatesModel[] = new Array;
   entityModel: EntityModel;
@@ -19,11 +20,13 @@ export class AgentAssociatesComponent extends BaseClass implements OnInit, ApiRe
   currentEntityID = "";
   pageNum = 0;
   clickedEntity: EntityModel = new EntityModel();
+  destroyed: boolean = false;
   constructor(private injector: Injector) {
     super(injector);
   }
 
   ngOnInit() {
+    this.destroyed = false;
     this.entityModel = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
     getAssociates(this);
   }
@@ -39,22 +42,27 @@ export class AgentAssociatesComponent extends BaseClass implements OnInit, ApiRe
   }
 
   onSuccess(response: any) {
-    let persons: AssociatesModel[] = response.agentperson;
-    persons.forEach(element => {
-      if (element.dispname != "TotalAssociates") {
-        this.associatesModels.push(element);
-      } else {
-        this.totalRows = element.rowNum;
-      }
-    });
-    setAssociates(this);
-    this.renderUI();
+    if (!this.destroyed) {
+      let persons: AssociatesModel[] = response.agentperson;
+      persons.forEach(element => {
+        if (element.dispname != "TotalAssociates") {
+          this.associatesModels.push(element);
+        } else {
+          this.totalRows = element.rowNum;
+        }
+      });
+
+      setAssociates(this);
+      this.renderUI();
+    }
   }
 
 
   onError(errorCode: number, errorMsg: string) {
-    this.renderUI();
-    this.commonFunctions.showErrorSnackbar(errorMsg);
+    if (!this.destroyed) {
+      this.renderUI();
+      this.commonFunctions.showErrorSnackbar(errorMsg);
+    }
   }
 
   public renderUI() {
@@ -77,9 +85,12 @@ export class AgentAssociatesComponent extends BaseClass implements OnInit, ApiRe
   private getEntityModel(item: AssociatesModel) {
     this.clickedEntity.name = item.dispname;
     this.clickedEntity.entityId = item.personID;
+    this.clickedEntity.stat = item.stat;
     this.clickedEntity.type = this.constants.ENTITY_PERSON_PRESENTER
   }
-
+  ngOnDestroy(): void {
+    this.destroyed = true;
+  }
 }
 
 function getAssociates(context: AgentAssociatesComponent) {

@@ -20,6 +20,7 @@ export class PersonDetailComponent extends EntityDetailBaseClass implements OnIn
     private router: Router) {
     super(injector);
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.commonFunctions.showLoadedItemTagOnHeader([], 0, true);
   }
 
   ngOnInit() {

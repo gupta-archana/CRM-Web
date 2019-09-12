@@ -1,12 +1,14 @@
 <div class="container-fluid nospace">
-  <div class="nav-bg wrapper-back">
-    <div id="detail-page-header">
-      <div class="col-xs-2 toppad"><img src="../../../../images/back-btn.svg" alt="" (click)="goBack()"></div>
-      <div class="col-xs-8 text-center">
-        <h1 class="t-agent">Agents</h1>
+  <div class="wrapper-back">
+    <div class="container nav-bg">
+      <div id="detail-page-header">
+        <div class="col-xs-2 toppad"><img src="../../../../images/back-btn.svg" alt="" (click)="goBack()"></div>
+        <div class="col-xs-8 text-center">
+          <h1 class="t-agent">Agents</h1>
+        </div>
+        <div class="col-xs-2 text-right toppad"><a (click)="onRecentProfileClick()" alt="" data-toggle="modal"
+            data-target="#recentAssociatesl"><img src="../../../..//images/baseline-history.svg" alt=""></a></div>
       </div>
-      <div class="col-xs-2 text-right toppad"><a (click)="onRecentProfileClick()" alt="" data-toggle="modal"
-          data-target="#recentAssociatesl"><img src="../../../..//images/baseline-history.svg" alt=""></a></div>
     </div>
     <app-entity-name-header [entityModel]="entityModel"></app-entity-name-header>
   </div>

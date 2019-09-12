@@ -103,8 +103,11 @@ export class MyNotesComponent extends BaseClass implements OnInit, OnDestroy {
 function tabSelectedIndexSubscription(context: MyNotesComponent) {
   context.tabIndexSubscription = context.dataService.tabSelectedObservable.subscribe((index: number) => {
     context.selectedTabIndex = index;
-    if (index == 1 && context.agentNotes.length <= 0) {
-      makeServerRequest(context);
+    if (index == 1) {
+      updateRatioUI(context);
+      if (context.agentNotes.length <= 0) {
+        makeServerRequest(context);
+      }
     }
   });
 }

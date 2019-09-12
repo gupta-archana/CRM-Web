@@ -11,7 +11,7 @@
       <form role="form">
         <div class="modal-body">
           <ul class="recent">
-            <li [ngClass]="{'recent1':item.type=='A','recent2':item.type=='Person'}"
+            <li [ngClass]="{'recent1':item.type=='A','recent2':item.type=='P'}"
               *ngFor="let item of recentProfileArray" (click)="onProfileClick(item)">
               <a>{{item.name}}</a>
             </li>

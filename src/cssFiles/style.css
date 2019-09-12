@@ -44,7 +44,9 @@ input {
   min-height: 380px;
 }
 
-a{cursor: pointer;}
+a {
+  cursor: pointer;
+}
 
 .nospace {
   padding: 0px;
@@ -86,19 +88,41 @@ a{cursor: pointer;}
   font-weight: bold !important;
 }
 
-
-.box1 input[type="email"] {
-  background: #fff url(../images/username.svg) no-repeat left;
-  background-position: 6px;
-  padding: 20px 0px 20px 35px;
-  width: 310px;
+.box1 input.form-control {
+  background: #fff;
+  padding: 20px 0px 20px 0px;
+  width: 280px;
   height: 50px;
   margin-bottom: 28px;
   font-size: 14px;
   color: #000;
+  border-radius: 0;
+  border-left: 0;
 }
 
-.box1 input[type="password"] {
+.box1 input.userIcon {
+  background: #fff url(../images/username.svg) no-repeat left;
+  background-position: 6px;
+  margin-bottom: 28px;
+  border-right: 0;
+  width: 40px;
+}
+
+.box1 input.passwordIcon {
+  background: #fff url(../images/password.svg) no-repeat;
+  background-position: 6px;
+  margin-bottom: 28px;
+  border-right: 0;
+  width: 40px;
+}
+
+.box1 input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+
+/* .box1 input[type="password"] {
   background: #fff url(../images/password.svg) no-repeat;
   background-position: 6px;
   padding: 20px 0px 20px 35px;
@@ -106,7 +130,8 @@ a{cursor: pointer;}
   height: 50px;
   font-size: 14px;
   color: #000;
-}
+  border-radius:0;
+} */
 
 .box2 input[type="email"] {
   background: #fff url(../images/mail.svg) no-repeat left;
@@ -271,7 +296,7 @@ form input[type="checkbox"] {
   font-weight: bold;
   color: #F68933;
   padding: 0px;
-  margin: 5px 0px 0px 0px;
+  margin: 5px 0px 10px 0px;
 }
 
 .agent-detail-associates span {
@@ -364,7 +389,7 @@ form input[type="checkbox"] {
 .nav-bg {
   margin-bottom: 0px;
   background: #045395;
-  height:62px;
+  height: 62px;
 }
 
 .nav-bg a {
@@ -411,13 +436,13 @@ form input[type="checkbox"] {
 }
 
 .closebtn {
-    padding-left:15px !important;
+  padding-left: 15px !important;
 }
 
 ul.slide-menu {
   list-type: none;
-  padding-top:20px;
-  padding-left:30px;
+  padding-top: 20px;
+  padding-left: 30px;
 }
 
 ul.slide-menu li {
@@ -495,7 +520,7 @@ ul.slide-menu li.logout a {
 
 .divider {
   height: 1px;
-  margin-top:0px !important;
+  margin-top: 0px !important;
   background: #c2c2c2;
 }
 
@@ -504,7 +529,7 @@ ul.slide-menu li.logout a {
 }
 
 .tpad {
-  padding-top:16px;
+  padding-top: 16px;
 }
 
 h1.t-agent {
@@ -871,7 +896,7 @@ ul.agent-details li.associates a {
   right: 25px;
 }
 
-.search-box{
+.search-box {
   margin-top: 20px;
 }
 
@@ -891,7 +916,7 @@ ul.agent-details li.associates a {
   background-position-y: 85px;
   padding-top: 50px;
   text-align: center;
-  min-height:375px;
+  min-height: 375px;
 }
 
 .serach-emp {
@@ -913,7 +938,7 @@ ul.agent-details li.associates a {
 
 .serach-result {
   background: #F2F2F2;
-  min-height:380px;
+  min-height: 380px;
 }
 
 .serach-result .green {
@@ -1410,56 +1435,87 @@ input:checked+.slider:before {
   margin-top: 0;
 }
 
-.checkbox-primary input[type="checkbox"]:checked+label::before {
-  background-color: #428bca;
-  border-color: #428bca;
-}
-
-.checkbox-primary input[type="checkbox"]:checked+label::after {
-  color: #fff;
-}
-
-.checkbox-danger input[type="checkbox"]:checked+label::before {
-  background-color: #d9534f;
-  border-color: #d9534f;
-}
-
-.checkbox-danger input[type="checkbox"]:checked+label::after {
-  color: #fff;
-}
-
-.checkbox-info input[type="checkbox"]:checked+label::before {
-  background-color: #5bc0de;
-  border-color: #5bc0de;
-}
-
-.checkbox-info input[type="checkbox"]:checked+label::after {
-  color: #fff;
-}
-
-.checkbox-warning input[type="checkbox"]:checked+label::before {
-  background-color: #f0ad4e;
-  border-color: #f0ad4e;
-}
-
-.checkbox-warning input[type="checkbox"]:checked+label::after {
-  color: #fff;
-}
-
-.checkbox-success input[type="checkbox"]:checked+label::before {
-  background-color: #5cb85c;
-  border-color: #5cb85c;
-}
-
-.checkbox-success input[type="checkbox"]:checked+label::after {
-  color: #fff;
-}
-
 .checkbox label.rememberMe {
   font-size: 14px;
 }
 
 /* checkbox css end here */
+
+
+/* checkbox new css Beginning here */
+
+.containerBox {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 30px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: normal;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.containerBox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  /* background-color: #eee; */
+  border: solid 2px #fff;
+}
+
+/* On mouse-over, add a grey background color */
+.containerBox:hover input~.checkmark {
+  /* background-color: #ccc; */
+}
+
+/* When the checkbox is checked, add a blue background */
+.containerBox input:checked~.checkmark {
+  /*  background-color: #2196F3; */
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.containerBox input:checked~.checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.containerBox .checkmark:after {
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+/* checkbox new css end here */
+
+
 
 .recent-wp .icon-wp {
   width: 40px;
@@ -1876,12 +1932,13 @@ button:focus {
   top: 63px;
   width: 100%;
   padding-top: 15px;
-  background:#F2F2F2;
+  background: #F2F2F2;
 }
 
-.paddingTop85{
-  padding-top:100px;
+.paddingTop85 {
+  padding-top: 100px;
 }
+
 .tabIndcation {
   padding: 0px 15px;
 }
@@ -1890,36 +1947,44 @@ button:focus {
   float: left;
 
 }
-.tabIndcation .topAgent_wp span.agentName{
-  white-space: nowrap; 
-  width:60%; 
+
+.tabIndcation .topAgent_wp span.agentName {
+  white-space: nowrap;
+  width: 60%;
   overflow: hidden;
   text-overflow: ellipsis;
-  float:left;
+  float: left;
 }
 
-.tabIndcation .topAgent_wp span{
+.tabIndcation .topAgent_wp span {
   line-height: 20px;
 }
 
 .agent-detail h4.topAgentsName {
   float: left;
-  width:84%;
+  width: 84%;
 }
 
-.agent-detail a.favouritIconPosition{
-  float:right;
+.agent-detail a.favouritIconPosition {
+  float: right;
+}
+
+input:-internal-autofill-selected,
+input:-internal-autofill-selected {
+  background-color: rgb(255, 255, 255) !important;
+  background-image: none !important;
+  color: rgb(0, 0, 0) !important;
+}
+
+.mb-5 {
+  margin-bottom: 5px;
 }
 
 
 
 
-
-
-
-
-@media (max-width: 1200px) {}
-
+/* -------**************------------**************------------ */
+/* media query css beginning here */
 
 @media (max-width: 1024px) {
   .cell-bg {
@@ -1928,17 +1993,107 @@ button:focus {
   }
 }
 
+@media (min-width: 992px) {
+
+  .box1 input.form-control {
+    background: #fff;
+    padding: 20px 0px 20px 0px;
+    width: 88%;
+    height: 50px;
+    margin-bottom: 28px;
+    font-size: 14px;
+    color: #000;
+    border-radius: 0;
+    border-left: 0;
+  }
+
+  .box1 input.userIcon {
+    background: #fff url(../images/username.svg) no-repeat left;
+    background-position: 6px;
+    margin-bottom: 28px;
+    border-right: 0;
+    width: 12%;
+  }
+
+  .box1 input.passwordIcon {
+    background: #fff url(../images/password.svg) no-repeat;
+    background-position: 6px;
+    margin-bottom: 28px;
+    border-right: 0;
+    width: 12%;
+  }
+
+
+
+}
+
 @media (max-width: 992px) {
   .cell-bg {
     padding: 14px 25px;
     margin-bottom: 5px;
   }
 
+  .btn-login,
+  .btn-login:focus,
+  .btn-login:hover {
+    width: 100%;
+  }
+
+  button.btn-login {
+    width: 100%;
+    text-transform: uppercase;
+    height: 50px;
+  }
+
+  .box1 input[type="email"] {
+    width: 100%;
+  }
+
+  .box1 input[type="password"] {
+    width: 100%;
+  }
+
+  .box2 input[type="email"] {
+    width: 100%;
+  }
+
+  .input-group {
+    width: 100%;
+  }
+
+  .box1 input.form-control {
+    background: #fff;
+    padding: 20px 0px 20px 0px;
+    width: 94%;
+    height: 50px;
+    margin-bottom: 28px;
+    font-size: 14px;
+    color: #000;
+    border-radius: 0;
+    border-left: 0;
+  }
+
+  .box1 input.userIcon {
+    background: #fff url(../images/username.svg) no-repeat left;
+    background-position: 6px;
+    margin-bottom: 28px;
+    border-right: 0;
+    width: 6%;
+  }
+
+  .box1 input.passwordIcon {
+    background: #fff url(../images/password.svg) no-repeat;
+    background-position: 6px;
+    margin-bottom: 28px;
+    border-right: 0;
+    width: 6%;
+  }
+
+
 }
 
 
 @media (max-width: 768px) {
-
   .cell-bg {
     padding: 14px 25px;
     margin-bottom: 5px;
@@ -1984,25 +2139,51 @@ button:focus {
     margin-top: 20%;
   }
 
-  .paddingTop85{
-    padding-top:90px;
+  .paddingTop85 {
+    padding-top: 90px;
   }
 
   .agent-detail h4.topAgentsName {
     float: left;
-    width:72%;  
+    width: 72%;
   }
+
+  .box1 input.form-control {
+    background: #fff;
+    padding: 20px 0px 20px 0px;
+    width: 90%;
+    height: 50px;
+    margin-bottom: 28px;
+    font-size: 14px;
+    color: #000;
+    border-radius: 0;
+    border-left: 0;
+  }
+
+  .box1 input.userIcon {
+    background: #fff url(../images/username.svg) no-repeat left;
+    background-position: 6px;
+    margin-bottom: 28px;
+    border-right: 0;
+    width: 10%;
+  }
+
+  .box1 input.passwordIcon {
+    background: #fff url(../images/password.svg) no-repeat;
+    background-position: 6px;
+    margin-bottom: 28px;
+    border-right: 0;
+    width: 10%;
+  }
+
+
 
 }
 
 
-
-@media (max-width: 736px) {}
-
-
 @media (max-width: 478px) {
   .checkBoxWp {
-    margin: 20px 0px 30px 0px;
+    margin: 0px 0px 30px 0px;
   }
 
   .box2 {
@@ -2025,7 +2206,7 @@ button:focus {
   }
 
   .cell-bg {
-    padding: 14px 25px;
+    padding: 17px 25px;
     margin-bottom: 5px;
   }
 
@@ -2037,6 +2218,34 @@ button:focus {
     font-size: 18px;
   }
 
+  .box1 input.form-control {
+    background: #fff;
+    padding: 20px 0px 20px 0px;
+    width: 87%;
+    height: 50px;
+    margin-bottom: 28px;
+    font-size: 14px;
+    color: #000;
+    border-radius: 0;
+    border-left: 0;
+  }
+
+  .box1 input.userIcon {
+    background: #fff url(../images/username.svg) no-repeat left;
+    background-position: 6px;
+    margin-bottom: 28px;
+    border-right: 0;
+    width: 13%;
+  }
+
+  .box1 input.passwordIcon {
+    background: #fff url(../images/password.svg) no-repeat;
+    background-position: 6px;
+    margin-bottom: 28px;
+    border-right: 0;
+    width: 13%;
+  }
+
 
 
 
@@ -2044,9 +2253,3 @@ button:focus {
 
 
 }
-
-
-@media (max-width: 375px) {}
-
-
-@media (max-width: 320px) {}

@@ -126,7 +126,7 @@ export class API {
   }
 
   getAssociatesUrl(app_mode: string, entityType: string, entityId: string, pageNum: number) {
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=affiliatedassociates&entity=" + entityType + "&entityID=" + entityId + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows;
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=affiliatedassociatesGet&entity=" + entityType + "&entityID=" + entityId + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows;
   }
 
   getPersonAffiliationsUrl(app_mode: string, entityId: string, pageNum: number) {

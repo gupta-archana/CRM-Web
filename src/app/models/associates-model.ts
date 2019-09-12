@@ -13,4 +13,5 @@ export class AssociatesModel {
   zip: string;
   effectiveDate: string;
   rowNum: string;
+  stat:string;
 }

@@ -17,6 +17,7 @@
           <div class="col-md-4 col-xs-12 box1">
             <label for="Username">Username</label>
             <div class="input-group">
+              <input type="text" class="form-control userIcon" readonly="readonly">
               <input type="email" autocomplete="false" formControlName="email" class="form-control" id="username">
             </div>
           </div>
@@ -24,16 +25,22 @@
           <div class="col-md-4 col-xs-12 box1">
             <label for="Password">Password</label>
             <div class="input-group">
+              <input type="password" class="form-control passwordIcon" readonly="readonly">
               <input type="password" class="form-control" id="password" formControlName="password">
             </div>
           </div>
 
           <div class="col-md-4 col-xs-12 box1">
 
-            <div class="checkbox checkBoxWp">
+            <label class="containerBox">Remember me
+              <input type="checkbox" formControlName="isChecked">
+              <span class="checkmark"></span>
+            </label>
+
+            <!-- <div class="checkbox checkBoxWp">
               <input id="checkbox1" type="checkbox" formControlName="isChecked">
               <label class="rememberMe" for="checkbox1">Remember me</label>
-            </div>
+            </div> -->
 
             <button type="submit" class="btn btn-primary btn-lg btn-login">Login</button>
             <div class="clearfix paddingTop15"></div>

@@ -276,6 +276,10 @@ mat-ink-bar.mat-ink-bar {
   margin-bottom: 20px;
 }
 
+.marginTop25 {
+  margin-top: 25px;
+}
+
 .cdk-overlay-pane {
   display: contents !important;
 }
@@ -299,6 +303,11 @@ mat-ink-bar.mat-ink-bar {
   cursor: pointer;
   padding: 5px;
   border-radius: 4px;
+}
+
+.totalPostedCostText {
+  font-size: 11px !important;
+  
 }
 
 ul.agent-details li.agents a {
@@ -330,7 +339,7 @@ ul.agent-details li.agents a {
 .wrapper-back {
   width: 100%;
   position: fixed;
-  z-index: 10;   
+  z-index: 10;
 }
 
 .wrapper-back #detail-page-header {
@@ -396,11 +405,13 @@ ul.slide-menu li.notifications a {
 .cell-bg {
   margin-top: 5px;
 }
-.search-box{
-  margin-top:45px;
+
+.search-box {
+  margin-top: 45px;
 }
+
 @media (max-width: 768px) {
-  .paddingTop85{
-    padding-top:100px;
+  .paddingTop85 {
+    padding-top: 100px;
   }
 }

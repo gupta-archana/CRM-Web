@@ -1,9 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { SendEmailConfirmationComponent } from '../send-email-confirmation/send-email-confirmation.component';
-import { MyLocalStorageService } from '../../../services/my-local-storage.service';
 import { Constants } from '../../../Constants/Constants';
 import { DialogData } from '../../../Interfaces/DialogData';
+import { MyLocalStorageService } from '../../../services/my-local-storage.service';
 
 @Component({
   selector: 'app-download-pdf',

@@ -1,10 +1,12 @@
 <div class="container-fluid nospace">
-  <div class="nav-bg wrapper-back">
-    <div id="detail-page-header">
+  <div class="wrapper-back">
+    <div class="container nav-bg">
+      <div id="detail-page-header">
 
-      <div class="col-xs-2 toppad"><img src="../../../../images/back-btn.svg" alt="" (click)="goBack()"></div>
-      <div class="col-xs-7 text-center">
-        <h1 class="t-agent">Compliances</h1>
+        <div class="col-xs-2 toppad"><img src="../../../../images/back-btn.svg" alt="" (click)="goBack()"></div>
+        <div class="col-xs-7 text-center">
+          <h1 class="t-agent">Compliances</h1>
+        </div>
       </div>
     </div>
     <app-entity-name-header [entityModel]="entityModel"></app-entity-name-header>
@@ -78,7 +80,7 @@
           <div class="row">
             <div class="col-md-6 col-xs-6">
               <div class="alertType_wp">
-                <h4>Associated to</h4>
+                <h4 class="mb-5">Associated to</h4>
                 <span>{{complianceModel.appliesTo == 'Agent'?'':complianceModel.entityname}}</span>
               </div>
             </div>

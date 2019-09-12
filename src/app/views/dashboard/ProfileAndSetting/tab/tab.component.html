@@ -1,15 +1,19 @@
-<div style="background: #F2F2F2">
+<div class="container-fluid nospace">
+  <div class="container app-bg2">
+    <div style="background: #F2F2F2">
 
-  <mat-tab-group #tabGroup mat-align-tabs="center" animationDuration="500ms" (selectedTabChange)="onTabSelect($event)">
-    <mat-tab label="Profile Settings">
-      <app-profile-setting></app-profile-setting>
-    </mat-tab>
-    <mat-tab label="App Settings">
-      <app-app-setting></app-app-setting>
-    </mat-tab>
+      <mat-tab-group #tabGroup mat-align-tabs="center" animationDuration="500ms"
+        (selectedTabChange)="onTabSelect($event)">
+        <mat-tab label="Profile Settings">
+          <app-profile-setting></app-profile-setting>
+        </mat-tab>
+        <mat-tab label="App Settings">
+          <app-app-setting></app-app-setting>
+        </mat-tab>
 
-  </mat-tab-group>
-
+      </mat-tab-group>
+    </div>
+  </div>
 
   <app-update-user-profile></app-update-user-profile>
   <app-share-v-card></app-share-v-card>

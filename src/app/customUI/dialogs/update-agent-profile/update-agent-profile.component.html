@@ -5,7 +5,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" #closeEntityUpdateProfileModel>&times;</button>
-        <h4 class="modal-title">Agent Contact Information</h4>
+        <h4 class="modal-title">Entity Contact Information</h4>
       </div>
       <form role="form" [formGroup]="entityInfoForm">
         <div class="modal-body">
@@ -98,7 +98,7 @@
 
           <div class="form-group">
             <label for="Contact Number 1">Contact Number 1</label>
-            <input type="text" class="form-control" id="phone1" placeholder="720-434-1417" formControlName="phone1">
+            <input type="text" class="form-control" id="phone1" formControlName="phone1">
             <!-- Error View -->
             <div id="errorDiv" id="errorDiv" *ngIf="entityInfoForm.get('phone1').hasError('required') && submitClicked">
               You entered not valid input.
@@ -111,7 +111,7 @@
 
           <div class="form-group">
             <label for="Contact Number 2">Contact Number 2</label>
-            <input type="text" class="form-control" id="phone2" placeholder="720-434-1417" formControlName="phone2">
+            <input type="text" class="form-control" id="phone2" formControlName="phone2">
             <!-- Error View -->
             <div id="errorDiv" *ngIf="entityInfoForm.get('phone2').hasError('required') && submitClicked">
               You entered not valid input.

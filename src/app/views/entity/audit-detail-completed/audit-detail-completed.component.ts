@@ -48,12 +48,16 @@ export class AuditDetailCompletedComponent extends BaseClass implements OnInit, 
   }
 
   onSendEmailConfirmationClick() {
-    this.openDialogService.showSendMailConfirmationDialog(this.auditModel.auditor).afterClosed().subscribe(sendMail => {
-      if (sendMail) {
-        this.commonFunctions.doEmail(this.auditModel.uid)
+    if (!this.myLocalStorage.getValue(this.constants.DONT_SHOW_SEND_EMAIL_DIALOG)) {
+      this.openDialogService.showSendMailConfirmationDialog(this.auditModel.auditor).afterClosed().subscribe(sendMail => {
+        if (sendMail) {
+          this.commonFunctions.doEmail(this.auditModel.uid)
 
-      }
-    });
+        }
+      });
+    } else {
+      this.commonFunctions.doEmail(this.auditModel.uid)
+    }
   }
   onGeneratePdfClick() {
     if (this.auditModel.auditID) {

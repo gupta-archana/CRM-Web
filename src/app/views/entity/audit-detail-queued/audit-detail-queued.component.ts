@@ -22,12 +22,16 @@ export class AuditDetailQueuedComponent extends BaseClass implements OnInit, Api
     this.auditModel = JSON.parse(sessionStorage.getItem(this.constants.SELECTED_AUDIT));
   }
   onSendEmailConfirmationClick() {
-    this.openDialogService.showSendMailConfirmationDialog(this.auditModel.auditor).afterClosed().subscribe(sendMail => {
-      if (sendMail) {
-        this.commonFunctions.doEmail(this.auditModel.uid)
+    if (!this.myLocalStorage.getValue(this.constants.DONT_SHOW_SEND_EMAIL_DIALOG)) {
+      this.openDialogService.showSendMailConfirmationDialog(this.auditModel.auditor).afterClosed().subscribe(sendMail => {
+        if (sendMail) {
+          this.commonFunctions.doEmail(this.auditModel.uid)
 
-      }
-    });
+        }
+      });
+    } else {
+      this.commonFunctions.doEmail(this.auditModel.uid)
+    }
   }
   goBack() {
     this.commonFunctions.backPress();
