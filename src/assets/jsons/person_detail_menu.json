@@ -17,52 +17,5 @@
     "class": "associates",
     "title": "Associates",
     "img": "../../../../images/associate.svg"
-  },
-  {
-    "class": "objectives",
-    "title": "Objective",
-    "img": "../../../../images/objectives.svg"
-  },
-
-  {
-    "class": "events",
-    "title": "Events",
-    "img": "../../../../images/events.svg"
-  },
-  {
-    "class": "agent-tags",
-    "title": "Tags",
-    "img": "../../../../images/tags.svg"
-  },
-  {
-    "class": "associates",
-    "title": "Compliance",
-    "img": "../../../../images/associate.svg"
-  },
-
-  {
-    "class": "associates",
-    "title": "Alerts",
-    "img": "../../../../images/associate.svg"
-  },
-  {
-    "class": "associates",
-    "title": "Claims",
-    "img": "../../../../images/associate.svg"
-  },
-  {
-    "class": "associates",
-    "title": "Social",
-    "img": "../../../../images/associate.svg"
-  },
-  {
-    "class": "associates",
-    "title": "E-mail",
-    "img": "../../../../images/associate.svg"
-  },
-  {
-    "class": "associates",
-    "title": "Audits",
-    "img": "../../../../images/associate.svg"
   }
 ]

@@ -25,26 +25,6 @@
   },
 
   {
-    "title": "Agents with Alerts",
-    "class": "agent-alert",
-    "img": "../../../../images/agent-with-alerts.svg"
-  },
-  {
-    "title": "News",
-    "class": "agent-news",
-    "img": "../../../../images/ic-news.svg"
-  },
-  {
-    "title": "Anniversary",
-    "class": "agent-anniversary",
-    "img": "../../../../images/anniversary-icon.svg"
-  },
-  {
-    "title": "Recent Profiles",
-    "class": "agent-profile",
-    "img": "../../../../images/module-recentprofile.svg"
-  },
-  {
     "title": "Notifications",
     "class": "notifications",
     "img": "../../../../images/notification_icon.svg"
