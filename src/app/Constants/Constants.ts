@@ -154,7 +154,7 @@ export class Constants {
   AGENT_DETAIL_SOCIAL = "Social";
   AGENT_DETAIL_EMAILS = "E-mail";
   AGENT_DETAIL_AUDITS = "Audits";
-
+  NO_DATA_AVAILABLE = "No Data Available";
   // agent pages
   AGENT_DETAIL = "Agent Details";
   PERSON_DETAIL = "Person Details";

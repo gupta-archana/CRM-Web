@@ -37,14 +37,14 @@
           <div class="row">
             <div class="col-md-6 col-xs-6">
               <div class="alertType_wp">
-                <h4>Condition</h4>
+                <h4 class="mb-5">Condition</h4>
                 <span><img src="../../../../images/ic_objective_complete-4.svg" alt=""
-                    style="width:14px;">{{complianceModel.reqMet}}</span>
+                    style="width:14px;"> {{getReqMetText(complianceModel.reqMet)}}</span>
               </div>
             </div>
             <div class="col-md-6 col-xs-6">
               <div class="alertType_wp">
-                <h4>Compliance Status</h4>
+                <h4 class="mb-5">Compliance Status</h4>
                 <span
                   [ngClass]="{'greenIcon':complianceModel.comstat=='Green','yellowIcon':complianceModel.comstat=='Yellow','redIcon':complianceModel.comstat=='Red'}">&nbsp;</span>
                 <span
@@ -86,7 +86,7 @@
             </div>
             <div class="col-md-6 col-xs-6">
               <div class="alertType_wp">
-                <h4>Status</h4>
+                <h4 class="mb-5">Status</h4>
                 <span>{{complianceModel.stat}}</span>
               </div>
             </div>
@@ -94,13 +94,13 @@
           <div class="row">
             <div class="col-md-6 col-xs-6">
               <div class="alertType_wp">
-                <h4>Effective Date</h4>
+                <h4 class="mb-5">Effective Date</h4>
                 <span>{{complianceModel.effectiveDate | slice:0:10}}</span>
               </div>
             </div>
             <div class="col-md-6 col-xs-6">
               <div class="alertType_wp">
-                <h4>Expiration Date</h4>
+                <h4 class="mb-5">Expiration Date</h4>
                 <span>{{complianceModel.expirationDate | slice:0:10}}</span>
               </div>
             </div>

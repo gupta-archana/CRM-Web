@@ -8,7 +8,7 @@
 <div class="tabIndcation container" *ngIf="entityModel || loadedItemsTag!=''">
   <div class="row">
     <div class="col-xs-12 col-md-12 noPadding" style="background: #fff;">
-      <div class="topAgent_wp">
+      <div class="topAgent_wp" style="min-height: 32px">
         <img *ngIf="entityModel"
           src="{{entityModel.type=='A'?'../../../../images/baseline-business-24px.svg':'../../../../images/ic_note_profile.svg'}}"
           alt=""> <span class="agentName" *ngIf="entityModel">{{entityModel?entityModel.name:""}}</span>

@@ -42,7 +42,7 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Aft
     this.encryptedPassword = this.commonFunctions.getEncryptedPassword(this.myLocalStorage.getValue(this.constants.PASSWORD));
     getData(this);
     getSearchFilter(this);
-    this.updateUI();
+    //this.updateUI();
   }
 
   ngAfterViewInit(): void {

@@ -35,6 +35,8 @@ export class AddNoteComponent extends BaseClass implements OnInit, ApiResponseCa
 
 
   onSuccess(response: any) {
+    this.note = "";
+    this.cdr.markForCheck()
     this.commonFunctions.showSnackbar(response);
     this.dataService.onDataUpdated();
     this.closeAddNote.nativeElement.click();

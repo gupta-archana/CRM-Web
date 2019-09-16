@@ -23,6 +23,11 @@ export class SearchFilterComponent extends BaseClass implements OnInit, OnDestro
   filterForm: FormGroup;
   selectedState: any;
 
+  ALL_CHECK = "allCheck";
+  AGENT_CHECK = "agentCheck";
+  PEOPLE_CHECK = "peopleCheck";
+  EMPLOYEE_CHECK = "employeeCheck";
+
   ngOnInit() {
     this.searchFilterModel = new SearchFilterModel();
     getFilters(this);
@@ -31,7 +36,7 @@ export class SearchFilterComponent extends BaseClass implements OnInit, OnDestro
 
     addValidation(this);
     getStates(this);
-    this.registerBtnClicks();
+
   }
 
   onAllCheckChange(event) {
@@ -41,43 +46,46 @@ export class SearchFilterComponent extends BaseClass implements OnInit, OnDestro
 
   onAgentCheckChange(event) {
     this.searchFilterModel.agentCheck = event.target.checked;
+    this.checkAllChecked();
   }
 
   onPeopleCheckChange(event) {
     this.searchFilterModel.peopleCheck = event.target.checked;
+    this.checkAllChecked();
   }
 
   onEmployeeCheckChange(event) {
     this.searchFilterModel.employeeCheck = event.target.checked;
+    this.checkAllChecked();
   }
 
   onStateChanged(event) {
     this.searchFilterModel.selectedState = event.target.value;
   }
 
+  checkAllChecked() {
+    if (getCheckValue(this, this.AGENT_CHECK) && getCheckValue(this, this.PEOPLE_CHECK) && getCheckValue(this, this.EMPLOYEE_CHECK)) {
+      this.filterForm.get(this.ALL_CHECK).setValue(true);
+    } else {
+      this.filterForm.get(this.ALL_CHECK).setValue(false);
+    }
+  }
+
+
   onApplyClick() {
-    this.dataService.onSearchFilterApply(this.searchFilterModel);
+    this.dataService.onSearchFilterApply(this.getCheckModel());
     this.saveFilters();
     this.closeSearchFilter.nativeElement.click();
   }
 
 
-  registerBtnClicks() {
-    // var header = document.getElementById("addRemoveWp");
-    // var btns = header.getElementsByClassName("btn-a-z");
-    // let self = this;
-    // for (var i = 0; i < btns.length; i++) {
-    //   btns[i].addEventListener("click", function() {
-    //     var current = document.getElementsByClassName("activeAz");
-    //     if (current[0] == self.ascendingOrder) {
-    //       self.searchFilterModel.ascendingOrder = false;
-    //     } else {
-    //       self.searchFilterModel.ascendingOrder = true;
-    //     }
-    //     current[0].className = current[0].className.replace(" activeAz", "");
-    //     this.className += " activeAz";
-    //   });
-    // }
+  getCheckModel() {
+    this.searchFilterModel.allCheck = getCheckValue(this, this.ALL_CHECK)
+    this.searchFilterModel.agentCheck = getCheckValue(this, this.AGENT_CHECK)
+    this.searchFilterModel.peopleCheck = getCheckValue(this, this.PEOPLE_CHECK)
+    this.searchFilterModel.employeeCheck = getCheckValue(this, this.EMPLOYEE_CHECK)
+
+    return this.searchFilterModel;
   }
 
   ngOnDestroy(): void {
@@ -131,10 +139,19 @@ function setValueInForm(context: SearchFilterComponent) {
 }
 
 function setValueToChecks(context: SearchFilterComponent, value: boolean) {
-  context.filterForm.get("allCheck").setValue(value);
-  context.filterForm.get("agentCheck").setValue(value);
-  context.filterForm.get("peopleCheck").setValue(value);
-  context.filterForm.get("employeeCheck").setValue(value);
+  if (value == true || (getCheckValue(context, context.AGENT_CHECK) && getCheckValue(context, context.PEOPLE_CHECK) && getCheckValue(context, context.EMPLOYEE_CHECK))) {
+    context.filterForm.get(context.ALL_CHECK).setValue(value);
+    context.filterForm.get(context.AGENT_CHECK).setValue(value);
+    context.filterForm.get(context.PEOPLE_CHECK).setValue(value);
+    context.filterForm.get(context.EMPLOYEE_CHECK).setValue(value);
+
+
+
+  }
+}
+
+function getCheckValue(context: SearchFilterComponent, checkFor: any) {
+  return context.filterForm.get(checkFor).value;
 }
 function getStateTypeAll() {
   return { stateID: "All", description: "All" };

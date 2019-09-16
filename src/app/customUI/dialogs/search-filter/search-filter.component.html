@@ -17,16 +17,21 @@
           <div class="row">
             <div class="col-md-6 col-xs-6">
               <div class="checkbox">
-                <input id="checkbox1" type="checkbox" formControlName="allCheck" name="all"
-                  (change)="onAllCheckChange($event)">
-                <label class="rememberM" for="checkbox1">All</label>
+
+                <label class="containerBoxCustom">All
+                  <input type="checkbox" formControlName="allCheck" name="all" (change)="onAllCheckChange($event)">
+                  <span class="checkmarkCustom"></span>
+                </label>
               </div>
             </div>
             <div class="col-md-6 col-xs-6">
               <div class="checkbox">
-                <input id="checkbox2" type="checkbox" formControlName="agentCheck" name="agent"
-                  (change)="onAgentCheckChange($event)">
-                <label class="rememberM" for="checkbox2">Agent</label>
+
+                <label class="containerBoxCustom">Agent
+                  <input type="checkbox" formControlName="agentCheck" name="agent"
+                    (change)="onAgentCheckChange($event)">
+                  <span class="checkmarkCustom"></span>
+                </label>
               </div>
             </div>
           </div>
@@ -34,16 +39,22 @@
           <div class="row">
             <div class="col-md-6 col-xs-6">
               <div class="checkbox">
-                <input id="checkbox3" type="checkbox" formControlName="peopleCheck" name="people"
-                  (change)="onPeopleCheckChange($event)">
-                <label class="rememberM" for="checkbox3">People</label>
+
+                <label class="containerBoxCustom">People
+                  <input type="checkbox" formControlName="peopleCheck" name="people"
+                    (change)="onPeopleCheckChange($event)">
+                  <span class="checkmarkCustom"></span>
+                </label>
               </div>
             </div>
             <div class="col-md-6 col-xs-6">
               <div class="checkbox">
-                <input id="checkbox4" type="checkbox" name="employee" formControlName="employeeCheck"
-                  (change)="onEmployeeCheckChange($event)">
-                <label class="rememberM" for="checkbox4">Employee</label>
+                <label class="containerBoxCustom">Employee
+                  <input type="checkbox" name="employee" formControlName="employeeCheck"
+                    (change)="onEmployeeCheckChange($event)">
+                  <span class="checkmarkCustom"></span>
+                </label>
+
               </div>
             </div>
           </div>

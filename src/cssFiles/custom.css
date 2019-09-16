@@ -307,7 +307,7 @@ mat-ink-bar.mat-ink-bar {
 
 .totalPostedCostText {
   font-size: 11px !important;
-  
+
 }
 
 ul.agent-details li.agents a {
@@ -409,6 +409,33 @@ ul.slide-menu li.notifications a {
 .search-box {
   margin-top: 45px;
 }
+
+ul.agent-details li.calender a {
+  background: url(../images/ic_calender.svg) no-repeat left;
+  padding-left: 35px;
+}
+
+ul.agent-details li.compliance a {
+  background: url(../images/ic_compliance.svg) no-repeat left;
+  padding-left: 35px;
+}
+
+ul.agent-details li.alerts a {
+  background: url(../images/ic_alerts.svg) no-repeat left;
+  padding-left: 35px;
+}
+
+ul.agent-details li.claims a {
+  background: url(../images/ic_claims.svg) no-repeat left;
+  padding-left: 35px;
+}
+
+ul.agent-details li.audits a {
+  background: url(../images/ic_audits.svg) no-repeat left;
+  padding-left: 35px;
+}
+
+
 
 @media (max-width: 768px) {
   .paddingTop85 {

@@ -303,10 +303,11 @@ export class CommonFunctionsService {
 
     let address: string = "";
     address = item.city + ", " + item.state + ", " + item.zip;
+    address = address.trim()
     if (address.startsWith(','))
       address = address.substring(1);
     if (address.endsWith(','))
-      address = address.substr(0, address.length - 2)
+      address = address.substr(0, address.length - 1)
     return address;
   }
 
@@ -317,7 +318,7 @@ export class CommonFunctionsService {
       if (totalItemsCount)
         tag = "Listing " + loadedItems.length + " of " + totalItemsCount;
       else
-        tag = "No Data Available"
+        tag = this.constants.NO_DATA_AVAILABLE
     }
     this.dataService.shareLoadedItemsTag(tag)
   }

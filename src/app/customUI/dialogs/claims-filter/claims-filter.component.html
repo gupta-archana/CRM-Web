@@ -18,16 +18,28 @@
 
           <div class="row">
             <div class="col-md-6 col-xs-6">
-              <div class="checkbox">
+              <!-- <div class="checkbox">
                 <input id="checkbox1" type="checkbox" [(ngModel)]="isOpenChecked" (change)="openCheckChanged($event)" [ngModelOptions]="{standalone: true}">
                 <label class="rememberM" for="checkbox1">Open</label>
-              </div>
+              </div> -->
+              <label class="containerBoxCustom">Open
+                <input type="checkbox" [(ngModel)]="isOpenChecked" (change)="openCheckChanged($event)"
+                  [ngModelOptions]="{standalone: true}">
+                <span class="checkmarkCustom"></span>
+              </label>
+
             </div>
             <div class="col-md-6 col-xs-6">
-              <div class="checkbox">
+              <!-- <div class="checkbox">
                 <input id="checkbox2" type="checkbox" [(ngModel)]="isClosedChecked" (change)="closedCheckChanged($event)" [ngModelOptions]="{standalone: true}">
                 <label class="rememberM" for="checkbox2">Closed</label>
-              </div>
+              </div> -->
+              <label class="containerBoxCustom">Closed
+                <input type="checkbox" [(ngModel)]="isClosedChecked" (change)="closedCheckChanged($event)"
+                  [ngModelOptions]="{standalone: true}">
+                <span class="checkmarkCustom"></span>
+              </label>
+
             </div>
           </div>
 
@@ -36,7 +48,7 @@
         </div>
         <div class="modal-footer">
           <a href="#" data-dismiss="modal" alt="Cancel"><span>Cancel</span></a>
-          <a href="#" data-dismiss="modal" alt="Save Changes" (click)="onApplyClick()" >APPLY</a>
+          <a href="#" data-dismiss="modal" alt="Save Changes" (click)="onApplyClick()">APPLY</a>
         </div>
       </form>
     </div>

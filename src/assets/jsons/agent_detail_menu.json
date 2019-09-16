@@ -15,29 +15,29 @@
 "img": "../../../../images/associate.svg"
 },
 {
-"class":"associates",
+"class":"calender",
 "title":"13 Month Activity",
-"img": "../../../../images/associate.svg"
+"img": "../../../../images/ic_calender.svg"
 },
 
 {
-"class":"associates",
+"class":"compliance",
 "title":"Compliance",
 "img": "../../../../images/ic_compliance.svg"
 },
 {
-"class":"associates",
+"class":"alerts",
 "title":"Alerts",
 "img": "../../../../images/ic_alerts.svg"
 },
 {
-"class":"associates",
+"class":"claims",
 "title":"Claims",
 "img": "../../../../images/ic_claims.svg"
 },
 
 {
-"class":"associates",
+"class":"audits",
 "title":"Audits",
 "img": "../../../../images/ic_audits.svg"
 }

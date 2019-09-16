@@ -19,10 +19,11 @@
         </div>
 
         <div class="col-xs-12 col-md-12 noPadding">
-          <div class="checkbox">
-            <input id="checkbox1" type="checkbox">
-            <label class="rememberM" for="checkbox1" (change)="dontShowAgainChanged($event)">Don't show me again</label>
-          </div>
+
+          <label class="containerBoxCustom">Don't show me again
+            <input type="checkbox" (change)="dontShowAgainChanged($event)">
+            <span class="checkmarkCustom"></span>
+          </label>
         </div>
 
         <div class="clear paddingTop10"></div>

@@ -2,6 +2,7 @@ import { Component, OnInit, Input, OnDestroy, ChangeDetectorRef } from '@angular
 import { EntityModel } from '../../models/entity-model';
 import { Subscription } from 'rxjs';
 import { DataServiceService } from '../../services/data-service.service';
+import { Constants } from '../../Constants/Constants';
 
 @Component({
   selector: 'app-entity-name-header',
@@ -10,7 +11,7 @@ import { DataServiceService } from '../../services/data-service.service';
 })
 export class EntityNameHeaderComponent implements OnInit, OnDestroy {
 
-  constructor(private dataService: DataServiceService, private cdr: ChangeDetectorRef) { }
+  constructor(private dataService: DataServiceService, private cdr: ChangeDetectorRef, public constants: Constants) { }
   @Input()
   entityModel: EntityModel;
   loadedItemsTagSubscription: Subscription;
@@ -19,7 +20,10 @@ export class EntityNameHeaderComponent implements OnInit, OnDestroy {
     let self = this;
     this.loadedItemsTagSubscription = this.dataService.shareLoadedItemsObservable.subscribe(tag => {
       console.log(this.entityModel)
+      if (tag == self.constants.NO_DATA_AVAILABLE)
+        tag = " ";
       this.loadedItemsTag = tag;
+
       this.cdr.markForCheck();
     })
 

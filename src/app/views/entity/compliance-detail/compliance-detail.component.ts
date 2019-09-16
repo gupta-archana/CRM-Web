@@ -30,4 +30,19 @@ export class ComplianceDetailComponent extends BaseClass implements OnInit {
       });
     }
   }
+
+  getReqMetText(text: string) {
+    let formattedText: string = "";
+
+    switch (text.toLowerCase()) {
+      case 'yes':
+        formattedText = "Met"
+        break;
+
+      default:
+        formattedText = text;
+        break;
+    }
+    return formattedText;
+  }
 }
