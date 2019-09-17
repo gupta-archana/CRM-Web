@@ -168,7 +168,7 @@ export class Constants {
   ENTITY_EMPLOYEE_PRESENTER = "E";
   ENTITY_ALL_PRESENTER = "all";
 
-
+  NOC_EMAIL_ID = "noc@alliantnational.com";
 
   public entityArrayObject = {
     Agent: this.ENTITY_AGENT_PRESENTER,

@@ -17,6 +17,7 @@ export class TabComponent extends BaseClass implements OnInit {
   constructor(private injector: Injector) { super(injector) }
 
   ngOnInit() {
+    this.commonFunctions.showLoadedItemTagOnHeader([], 0, true);
     TabChanged(this);
   }
   onTabSelect(event) {

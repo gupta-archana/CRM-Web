@@ -22,12 +22,15 @@ export class ComplianceDetailComponent extends BaseClass implements OnInit {
     this.commonFunctions.backPress();
   }
   onNocEmailClick() {
+    let self = this;
     if (!this.myLocalStorage.getValue(this.constants.DONT_SHOW_EMAIL_NOC_DIALOG)) {
       this.openDialogService.showEmailNocDialog().afterClosed().subscribe(sendmail => {
         if (sendmail) {
-          this.commonFunctions.doEmail("");
+          self.commonFunctions.doEmail(self.constants.NOC_EMAIL_ID);
         }
       });
+    } else {
+      self.commonFunctions.doEmail(self.constants.NOC_EMAIL_ID);
     }
   }
 
