@@ -22,7 +22,7 @@ import { PersonsProfileComponent } from './recent-profiles/persons-profile/perso
 import { FavoritesComponent } from './favorites/favorites.component';
 import { AgentUnderPlanComponent } from './agent-under-plan/agent-under-plan.component';
 import { NotificationsComponent } from './notifications/notifications.component';
-
+import { ChangePasswordComponent } from '../../customUI/dialogs/change-password/change-password.component';
 
 @NgModule({
   imports: [
@@ -32,6 +32,6 @@ import { NotificationsComponent } from './notifications/notifications.component'
 
   ],
   providers: [AuthGuardService, CanDeactivateGuard],
-  declarations: [NavigationDrawerComponent, TopAgentsComponent, AgentWithAlertComponent, AgentWithPerformanceComponent, SearchComponent, NewsFeedsComponent, TabComponent, ProfileSettingComponent, AppSettingComponent, RecentProfilesComponent, AgentsProfileComponent, PersonsProfileComponent, FavoritesComponent, AgentUnderPlanComponent, NotificationsComponent]
+  declarations: [NavigationDrawerComponent, TopAgentsComponent, AgentWithAlertComponent, AgentWithPerformanceComponent, SearchComponent, NewsFeedsComponent, TabComponent, ProfileSettingComponent, AppSettingComponent, RecentProfilesComponent, AgentsProfileComponent, PersonsProfileComponent, FavoritesComponent, AgentUnderPlanComponent, NotificationsComponent, ChangePasswordComponent]
 })
 export class DashboardModule { }

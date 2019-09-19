@@ -367,6 +367,16 @@ export class ApiHandlerService implements ApiResponseCallback {
   }
 
   /**
+   * changePassword
+   */
+  public changePassword(newPassword: string, apiResponseCallback: ApiResponseCallback) {
+    this.dataService.onHideShowLoader(true);
+    this.apiResponseCallback = apiResponseCallback;
+    let url = this.api.getChangePasswordUrl(this.getAppMode(), newPassword);
+    this.apiService.hitGetApi(url, handleAddAndUpdateApiResponse(this, apiResponseCallback));
+  }
+
+  /**
    * getStates
    */
   public getStates(apiResponseCallback: ApiResponseCallback) {

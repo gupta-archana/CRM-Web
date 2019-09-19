@@ -65,6 +65,7 @@ import { PersonDetailItemsRearrangeComponent } from './views/rearrange-items-lay
 
 
 
+
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "left",
   allowNegative: true,
@@ -116,6 +117,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     EmailNocComponent,
     NotificationControlsComponent,
     PersonDetailItemsRearrangeComponent,
+
   ],
   imports: [
     BrowserModule,

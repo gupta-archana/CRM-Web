@@ -202,6 +202,10 @@ export class API {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userNotificationDismiss&NotificationID=" + notificationID;
   }
 
+  getChangePasswordUrl(app_mode: string, newPassword: string) {
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=systemUserPassword&userid=" + this.email + "&password=" + newPassword;
+  }
+
   getStates() {
     return this.STATES_JSON_URL;
   }
