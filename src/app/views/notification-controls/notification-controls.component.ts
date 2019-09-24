@@ -1,13 +1,14 @@
 import { Component, OnInit, Injector } from '@angular/core';
 import { BaseClass } from '../../global/base-class';
 import { ConfigNotificationModel } from '../../models/config-notification-model';
+import { ApiResponseCallback } from '../../Interfaces/ApiResponseCallback';
 
 @Component({
   selector: 'app-notification-controls',
   templateUrl: './notification-controls.component.html',
   styleUrls: ['./notification-controls.component.css']
 })
-export class NotificationControlsComponent extends BaseClass implements OnInit {
+export class NotificationControlsComponent extends BaseClass implements OnInit, ApiResponseCallback {
 
   claimCreated: ConfigNotificationModel = null;
   claimClosed: ConfigNotificationModel = null;
@@ -34,48 +35,56 @@ export class NotificationControlsComponent extends BaseClass implements OnInit {
 
   }
   onCheckClick(event: ConfigNotificationModel) {
-    this.commonApis.updateBasicConfig(event.configType, event.configuration);
+    this.commonApis.updateBasicConfig(event.configType, event.configuration, this);
   }
+
+  onSuccess(response: any) {
+    this.myLocalStorage.setValue(this.constants.USER_NOTIFICATIONS_CONTROLS, JSON.stringify(this.notificationControls));
+  }
+  onError(errorCode: number, errorMsg: string) {
+
+  }
+
 }
 
 function parseNotificationControls(context: NotificationControlsComponent) {
   context.notificationControls.forEach(element => {
     element.configuration = JSON.parse(element.configuration)
-    switch (element.configType) {
-      case "AlertNew":
+    switch (element.configType.toLowerCase()) {
+      case "alertnew":
         context.newAlertCreated = element;
         break;
-      case "arInvoiceComplete":
+      case "arinvoicecomplete":
         context.potentialRecoveryPosted = element;
         break;
-      case "arInvoiceNew":
+      case "arinvoicenew":
         context.recoveryReceived = element;
         break;
-      case "auditFinish":
+      case "auditfinish":
         context.auditCompleted = element;
         break;
-      case "auditNew":
+      case "auditnew":
         context.newAuditCreated = element;
         break;
-      case "auditQueue":
+      case "auditqueue":
         context.auditQueued = element;
         break;
-      case "batchCreate":
+      case "batchcreate":
         context.newRemittanceBatchCreated = element;
         break;
-      case "batchInvoice":
+      case "batchinvoice":
         context.remittanceBatchCompleted = element;
         break;
-      case "claimAdjReqApprove":
+      case "claimadjreqapprove":
         context.claimReserveIncreaded = element;
         break;
-      case "claimClose":
+      case "claimclose":
         context.claimClosed = element;
         break;
-      case "claimNew":
+      case "claimnew":
         context.claimCreated = element;
         break;
-      case "periodAccountingClose":
+      case "periodaccountingclose":
         context.accountingPeriodCompleted = element;
         break;
       // case "AlertNew":

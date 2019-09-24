@@ -67,7 +67,8 @@ export class NavigationDrawerComponent extends BaseClass implements OnInit, OnDe
 
     dialogRef.afterClosed().subscribe(callback => {
       if (callback) {
-        this.myLocalStorage.clearValue(this.constants.LOGGED_IN);
+        sessionStorage.clear();
+        this.myLocalStorage.clearAll();
         this.commonFunctions.navigateWithReplaceUrl(this.paths.PATH_LOGIN);
       }
     });

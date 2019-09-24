@@ -106,6 +106,7 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Aft
 
   }
   onError(errorCode: number, errorMsg: string) {
+    //this.pageNum--;
     this.onApiResponse([]);
     this.commonFunctions.showErrorSnackbar(errorMsg);
   }
