@@ -18,6 +18,9 @@ export class AgentDetailItemRearrangeComponent extends BaseClass implements OnIn
     moveItemInArray(this.agentDetailItems, event.previousIndex, event.currentIndex);
 
   }
+  goBack() {
+    this.commonFunctions.backPress();
+  }
 
   Save() {
     let itemsInString = JSON.stringify(this.agentDetailItems);

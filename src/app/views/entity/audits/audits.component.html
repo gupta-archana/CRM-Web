@@ -20,7 +20,7 @@
           <div class="col-xs-12 col-md-6 cell-bg">
             <div class="agent-detail ag-perform">
               <h4 class="paddingBottom5">{{item.stat}} <span
-                  class="textRight fontBold">{{item.stat=='Completed'?'Finish Date:':'Scheduled Date:'}}</span><br /><span
+                  class="textRight fontBold">{{item.stat!=''&&item.stat=='Completed'?'Finish Date:':'Scheduled Date:'}}</span><br /><span
                   class="textRight">{{getFormattedDate(item.stat=='Completed'?item.auditFinishDate:item.schedFinishDate)}}</span>
               </h4>
               <span class="textDoller">{{item.auditType}}</span>

@@ -3,8 +3,8 @@ export class UserProfileModel {
   name: string = "";
   jobTitle: string = "";
   picture: string = "";
-  address1: string = "";
-  address2: string = "";
+  addr1: string = "";
+  addr2: string = "";
   city: string = "";
   state: string = "";
   zip: string = "";

@@ -1,7 +1,7 @@
 <div class="container-fluid nospace">
   <div class="container nav-bg">
     <div class="row">
-      <div class="col-xs-2 toppad"><img src="../../../../images/back-btn.svg" alt=""></div>
+      <div class="col-xs-2 toppad"><img src="../../../../images/back-btn.svg" alt="" (click)="goBack()"></div>
       <div class="col-xs-7 text-center">
         <h1 class="t-agent">Person Detail Module Layout</h1>
       </div>
@@ -16,7 +16,7 @@
         <li class="example-box" *ngFor="let item of personDetailItems" cdkDrag>
           <div class="col-xs-12 col-md-6 cell-bg">
             <div class="modules-layout">
-              <a href="#" alt=""><img src="{{item.img}}" alt=""> &nbsp; {{item.title}}</a>
+              <a alt=""><img src="{{item.img}}" alt=""> &nbsp; {{item.title}}</a>
             </div>
           </div>
         </li>

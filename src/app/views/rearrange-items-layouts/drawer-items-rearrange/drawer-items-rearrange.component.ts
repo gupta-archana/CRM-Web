@@ -20,6 +20,9 @@ export class DrawerItemsRearrangeComponent extends BaseClass implements OnInit, 
     moveItemInArray(this.sideNavArray, event.previousIndex, event.currentIndex);
 
   }
+  goBack() {
+    this.commonFunctions.backPress();
+  }
 
   Save() {
     let itemsInString = JSON.stringify(this.sideNavArray);

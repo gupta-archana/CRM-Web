@@ -20,7 +20,9 @@ export class PersonDetailItemsRearrangeComponent extends BaseClass implements On
     moveItemInArray(this.personDetailItems, event.previousIndex, event.currentIndex);
 
   }
-
+  goBack() {
+    this.commonFunctions.backPress();
+  }
   Save() {
     let itemsInString = JSON.stringify(this.personDetailItems);
     this.myLocalStorage.setValue(this.constants.PERSON_DETAIL_ITEMS, itemsInString);

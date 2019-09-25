@@ -19,7 +19,6 @@ export class EntityNameHeaderComponent implements OnInit, OnDestroy {
   ngOnInit() {
     let self = this;
     this.loadedItemsTagSubscription = this.dataService.shareLoadedItemsObservable.subscribe(tag => {
-      console.log(this.entityModel)
       if (tag == self.constants.NO_DATA_AVAILABLE)
         tag = " ";
       this.loadedItemsTag = tag;

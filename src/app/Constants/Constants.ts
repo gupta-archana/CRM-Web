@@ -213,8 +213,8 @@ export class Constants {
   }
 
   // app config constants
-  HOME_SCREEN = "HomeScreen";
-  SEARCH_FILTER = "SearchFilter";
-  BATCH_SIZE = "BatchSize";
-  NEWS_FEED = "NewsFeed";
+  HOME_SCREEN = "homescreen";
+  SEARCH_FILTER = "searchfilter";
+  BATCH_SIZE = "batchsize";
+  NEWS_FEED = "newsfeed";
 }

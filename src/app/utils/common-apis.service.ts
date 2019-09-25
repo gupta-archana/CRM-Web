@@ -132,7 +132,7 @@ function getRequest(configType: string, configuration: any) {
 
 function setBasicConfigToVariables(context: CommonApisService) {
   context.configBasicModels.forEach(element => {
-    switch (element.configType) {
+    switch (element.configType.toLowerCase()) {
       case context.constants.HOME_SCREEN:
         let selectedHomeScreenPath = context.constants.sideNavItemsWithPath[element.configuration]
         context.myLocalStorage.setValue(context.constants.SELECTED_HOME_SCREEN, selectedHomeScreenPath);

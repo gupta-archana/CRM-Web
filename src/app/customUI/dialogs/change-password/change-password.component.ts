@@ -35,6 +35,7 @@ export class ChangePasswordComponent extends BaseClass implements OnInit, ApiRes
   }
 
   onSubmit() {
+    //this.onSuccess("");
     this.errorMsg = "";
     if (!this.oldPassword)
       this.errorMsg = "Old password can not left blank";
@@ -50,6 +51,7 @@ export class ChangePasswordComponent extends BaseClass implements OnInit, ApiRes
     }
   }
   onSuccess(response: any) {
+    this.myLocalStorage.setValue(this.constants.PASSWORD, this.newPassword);
     this.commonFunctions.showSnackbar(response)
     this.cancel.nativeElement.click();
   }

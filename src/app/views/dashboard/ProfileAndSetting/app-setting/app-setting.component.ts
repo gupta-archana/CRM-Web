@@ -34,7 +34,7 @@ export class AppSettingComponent extends BaseClass implements OnInit, ApiRespons
   selectedNewsFeed: string = "";
 
   appSettingForm: FormGroup;
- 
+
   constructor(private injector: Injector) { super(injector); }
 
   ngOnInit() {
@@ -120,7 +120,7 @@ export class AppSettingComponent extends BaseClass implements OnInit, ApiRespons
 function setBasicConfigToVariables(context: AppSettingComponent) {
 
   context.configBasicModels.forEach(element => {
-    switch (element.configType) {
+    switch (element.configType.toLowerCase()) {
       case context.constants.HOME_SCREEN:
         context.selectedHomeScreen = element.configuration;
         context.selectedHomeScreenPath = context.constants.sideNavItemsWithPath[element.configuration]
@@ -154,7 +154,7 @@ function setBasicConfigToLocalStorage(context: AppSettingComponent) {
 
 function TabChanged(context: AppSettingComponent) {
   context.tabSelectedSubscription = context.dataService.tabSelectedObservable.subscribe(index => {
-    if (index == 1 && context.configBasicModels.length<=0) {
+    if (index == 1 && context.configBasicModels.length <= 0) {
       context.apiHandler.getUserConfig(context);
     }
   })
