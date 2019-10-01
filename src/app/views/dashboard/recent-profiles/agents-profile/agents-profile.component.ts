@@ -37,6 +37,12 @@ export class AgentsProfileComponent extends BaseClass implements OnInit, OnDestr
     this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_AGENT_DETAIL);
   }
 
+  onStarClick(item: EntityModel) {
+    this.commonApis.setFavorite(item, this.apiHandler, this.cdr).asObservable().subscribe(data => {
+      getData(this);
+    });
+  }
+
   ngOnDestroy(): void {
     if (this.pageRefreshSubscription && !this.pageRefreshSubscription.closed) {
       this.pageRefreshSubscription.unsubscribe();

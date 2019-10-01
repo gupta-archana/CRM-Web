@@ -33,6 +33,11 @@ export class PersonsProfileComponent extends BaseClass implements OnInit, OnDest
     sessionStorage.setItem(this.constants.ENTITY_INFO, JSON.stringify(item));
     this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_PERSON_DETAIL);
   }
+  onStarClick(item: EntityModel) {
+    this.commonApis.setFavorite(item, this.apiHandler, this.cdr).asObservable().subscribe(data => {
+      getData(this);
+    });
+  }
 
   ngOnDestroy(): void {
     if (this.pageRefreshSubscription && !this.pageRefreshSubscription.closed) {
