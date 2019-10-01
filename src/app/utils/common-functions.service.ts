@@ -236,14 +236,15 @@ export class CommonFunctionsService {
   }
 
   setFavoriteOnApisResponse(item: EntityModel) {
-    if (item.favorite == "yes") {
-      let favAgents: string[] = JSON.parse(sessionStorage.getItem(this.constants.SESSION_FAV_ARRAY));
-      if (!favAgents) favAgents = new Array<string>();
-      if (favAgents.indexOf(item.entityId) == -1) {
-        favAgents.push(item.entityId)
-        sessionStorage.setItem(this.constants.SESSION_FAV_ARRAY, JSON.stringify(favAgents));
-      }
+    let favAgents: string[] = JSON.parse(sessionStorage.getItem(this.constants.SESSION_FAV_ARRAY));
+    if (!favAgents) favAgents = new Array<string>();
+    if (item.favorite == "yes" && favAgents.indexOf(item.entityId) == -1) {
+      favAgents.push(item.entityId)
     }
+    else if ((item.favorite.toLowerCase() == "no" || item.favorite.toLowerCase() == "") && favAgents.indexOf(item.entityId) > -1) {
+      favAgents.splice(favAgents.indexOf(item.entityId), 1);
+    }
+    sessionStorage.setItem(this.constants.SESSION_FAV_ARRAY, JSON.stringify(favAgents));
   }
 
   setFavoriteToSessionArray(entityId) {
