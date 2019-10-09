@@ -435,7 +435,9 @@ ul.agent-details li.audits a {
   padding-left: 35px;
 }
 
-
+.fontWeightBold{
+  font-weight: bold!important;
+}
 
 @media (max-width: 768px) {
   .paddingTop85 {
