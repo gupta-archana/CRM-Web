@@ -1,0 +1,11 @@
+{
+    "hosting": {
+      "public": "dist/AlliantCRM",
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  }
