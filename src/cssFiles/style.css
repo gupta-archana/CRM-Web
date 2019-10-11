@@ -608,6 +608,7 @@ ul.agent-details li a {
   line-height: 40px;
   font-size: 13px;
   cursor: pointer;
+  padding:5px 0px;
 }
 
 ul.agent-details li.agent-contact a {

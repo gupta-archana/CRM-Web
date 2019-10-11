@@ -44,7 +44,7 @@ export class AgentWithPerformanceComponent extends BaseClass implements OnInit, 
         this.totalRows = element.rowNum;
       }
     });
-
+    this.agentPerformance = this.agentPerformance.reverse();
     this.renderUI();
   }
   onError(errorCode: number, errorMsg: string) {
