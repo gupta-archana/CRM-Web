@@ -56,7 +56,8 @@ ul {
 }
 
 .padding-left-twenty-five {
-  padding-left: 25px;
+  padding-left: 25px!important;
+  background-size: 20px;
 }
 
 .load-more-div {
