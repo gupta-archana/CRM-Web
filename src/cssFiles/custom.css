@@ -56,7 +56,7 @@ ul {
 }
 
 .padding-left-twenty-five {
-  padding-left: 25px!important;
+  padding-left: 25px !important;
   background-size: 20px;
 }
 
@@ -436,12 +436,23 @@ ul.agent-details li.audits a {
   padding-left: 35px;
 }
 
-.fontWeightBold{
-  font-weight: bold!important;
+.fontWeightBold {
+  font-weight: bold !important;
 }
 
 @media (max-width: 768px) {
   .paddingTop85 {
     padding-top: 100px;
+  }
+}
+
+/* do not change value using for media query */
+.paddingLeft25 {
+  padding: 0px !important;
+}
+
+@media (max-width: 460px) {
+  .paddingLeft25 {
+    padding: 25px !important;
   }
 }
