@@ -12,7 +12,7 @@
                 (click)="onAgentClick(item)">{{item.name}}</a><span (click)="onAgentClick(item)"
                 class="paddingLeft25">({{item.entityId}})</span>
               <div class="clearfix paddingTop10"></div>
-              <span class="padding-left-twenty-five">{{getAddress(item)}}</span>
+              <span class="location-icon padding-left-twenty-five">{{getAddress(item)}}</span>
             </h4>
             <a class="favouritIconPosition"><img
                 src="{{checkEntityFavorite(item)?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}"

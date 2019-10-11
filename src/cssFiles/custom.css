@@ -57,7 +57,7 @@ ul {
 
 .padding-left-twenty-five {
   padding-left: 25px !important;
-  background-size: 20px;
+  background-size: 18px;
 }
 
 .load-more-div {
@@ -440,6 +440,14 @@ ul.agent-details li.audits a {
   font-weight: bold !important;
 }
 
+.location-icon {
+  background: url(../images/ic_location.svg) left no-repeat;
+}
+
+.paddingLeft25 {
+  padding: 0px !important;
+}
+
 @media (max-width: 768px) {
   .paddingTop85 {
     padding-top: 100px;
@@ -447,9 +455,7 @@ ul.agent-details li.audits a {
 }
 
 /* do not change value using for media query */
-.paddingLeft25 {
-  padding: 0px !important;
-}
+
 
 @media (max-width: 460px) {
   .paddingLeft25 {
