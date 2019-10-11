@@ -30,13 +30,13 @@ export class PersonAgentsComponent extends BaseClass implements OnInit, OnDestro
   }
 
   onSuccess(response: any) {
-    let agents: PersonAgentsModel[] = response.agentperson;
+    let agents: PersonAgentsModel[] = response.affiliatedperson;
     this.parseResponse(agents);
     this.renderUI();
   }
   private parseResponse(agents: PersonAgentsModel[]) {
     agents.forEach(element => {
-      if (element.name != "TotalAffiliation") {
+      if (element.name != "Totalaffiliatiedperson") {
         this.personAgentsModels.push(element);
       }
       else {
