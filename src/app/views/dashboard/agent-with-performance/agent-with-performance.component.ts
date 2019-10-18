@@ -19,6 +19,7 @@ export class AgentWithPerformanceComponent extends BaseClass implements OnInit, 
   moreDataAvailable: boolean = false;
   totalAndCurrentRowsRatio: string = "";
   agentPerformance: EntityModel[];
+  hideNoDataDiv: boolean = false;
   constructor(injector: Injector) { super(injector) }
 
   ngOnInit() {
@@ -127,11 +128,27 @@ function checkMoreDataAvailable(context: AgentWithPerformanceComponent) {
   else
     context.moreDataAvailable = true;
 }
+function checkAndSetUi(context: AgentWithPerformanceComponent) {
+  if (!context.agentPerformance || context.agentPerformance.length == 0) {
+    resetData(context);
+  }
+  else {
+    context.hideNoDataDiv = true;
+  }
+  context.cdr.markForCheck();
+}
+
 
 
 function refreshData(context: AgentWithPerformanceComponent) {
+  resetData(context);
+  makeServerRequest(context);
+}
+
+function resetData(context: AgentWithPerformanceComponent) {
   context.pageNumber = 0;
   context.agentPerformance = [];
   context.totalRows = 0;
-  makeServerRequest(context);
+  context.moreDataAvailable = false;
+  context.hideNoDataDiv = false;
 }

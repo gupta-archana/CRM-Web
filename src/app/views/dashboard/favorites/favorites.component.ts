@@ -18,6 +18,7 @@ export class FavoritesComponent extends BaseClass implements OnInit, ApiResponse
   totalAndCurrentRowsRatio: string = "";
   favorites: Array<EntityModel> = new Array();
   moreDataAvailable: boolean = true;
+  hideNoDataDiv: boolean = false;
   pageRefreshSubscription: Subscription;
   removeFavSubscription: Subscription;
 
@@ -89,6 +90,7 @@ export class FavoritesComponent extends BaseClass implements OnInit, ApiResponse
   public renderUI() {
     checkMoreDataAvailable(this);
     setData(this);
+    checkAndSetUi(this);
     updateRatioUI(this);
     this.cdr.markForCheck();
   }
@@ -155,14 +157,29 @@ function checkMoreDataAvailable(context: FavoritesComponent) {
 }
 function updateRatioUI(context: FavoritesComponent) {
   context.commonFunctions.showLoadedItemTagOnHeader(context.favorites, context.totalRows);
-  //context.totalAndCurrentRowsRatio = context.commonFunctions.showMoreDataSnackbar(context.favorites, context.totalRows);
   context.cdr.markForCheck();
 }
+
+function checkAndSetUi(context: FavoritesComponent) {
+  if (!context.favorites || context.favorites.length == 0) {
+    resetData(context);
+  }
+  else {
+    context.hideNoDataDiv = true;
+  }
+  context.cdr.markForCheck();
+}
+
 function refreshData(context: FavoritesComponent) {
-  context.pageNumber = 0;
-  context.favorites = [];
-  context.totalRows = 0;
+  resetData(context)
   makeServerRequest(context);
 }
 
+function resetData(context: FavoritesComponent) {
+  context.pageNumber = 0;
+  context.favorites = [];
+  context.totalRows = 0;
+  context.moreDataAvailable = false;
+  context.hideNoDataDiv = false;
+}
 
