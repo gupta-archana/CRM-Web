@@ -21,7 +21,7 @@ export class FavoritesComponent extends BaseClass implements OnInit, ApiResponse
   hideNoDataDiv: boolean = false;
   pageRefreshSubscription: Subscription;
   removeFavSubscription: Subscription;
-
+  errorMsg: string = "";
   constructor(private injector: Injector) { super(injector); }
 
   ngOnInit() {
@@ -47,7 +47,8 @@ export class FavoritesComponent extends BaseClass implements OnInit, ApiResponse
 
 
   onError(errorCode: number, errorMsg: string) {
-    this.commonFunctions.showErrorSnackbar(errorMsg)
+    //this.commonFunctions.showErrorSnackbar(errorMsg)
+    this.errorMsg = errorMsg;
     this.renderUI();
   }
   getAddress(item: EntityModel) {

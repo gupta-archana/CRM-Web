@@ -20,6 +20,8 @@ export class AgentUnderPlanComponent extends BaseClass implements OnInit, OnDest
   moreDataAvailable: boolean = false;
   totalAndCurrentRowsRatio: string = "";
   agentsUnderPlan: EntityModel[];
+  hideNoDataDiv: boolean = false;
+  errorMsg: string = "";
   ngOnInit() {
     this.pageRefreshSubscription = this.dataService.pageRefreshObservable.subscribe(data => {
       refreshData(this);
@@ -51,7 +53,8 @@ export class AgentUnderPlanComponent extends BaseClass implements OnInit, OnDest
   }
 
   onError(errorCode: number, errorMsg: string) {
-    this.commonFunctions.showErrorSnackbar(errorMsg)
+    this.errorMsg = errorMsg;
+    //this.commonFunctions.showErrorSnackbar(errorMsg)
     this.renderUI();
   }
 
@@ -60,6 +63,7 @@ export class AgentUnderPlanComponent extends BaseClass implements OnInit, OnDest
   }
   public renderUI() {
     setData(this);
+    checkAndSetUi(this);
     updateRatioUI(this);
     checkMoreDataAvailable(this);
     this.cdr.markForCheck();
@@ -121,9 +125,28 @@ function checkMoreDataAvailable(context: AgentUnderPlanComponent) {
     context.moreDataAvailable = true;
 }
 
+function checkAndSetUi(context: AgentUnderPlanComponent) {
+  if (!context.agentsUnderPlan || context.agentsUnderPlan.length == 0) {
+    resetData(context);
+  }
+  else {
+    context.hideNoDataDiv = true;
+  }
+  context.cdr.markForCheck();
+}
+
+
 function refreshData(context: AgentUnderPlanComponent) {
+  resetData(context);
   context.pageNumber = 0;
   context.agentsUnderPlan = [];
   context.totalRows = 0;
   makeServerRequest(context);
+}
+function resetData(context: AgentUnderPlanComponent) {
+  context.pageNumber = 0;
+  context.agentsUnderPlan = [];
+  context.totalRows = 0;
+  context.moreDataAvailable = false;
+  context.hideNoDataDiv = false;
 }

@@ -20,6 +20,7 @@ export class AgentWithPerformanceComponent extends BaseClass implements OnInit, 
   totalAndCurrentRowsRatio: string = "";
   agentPerformance: EntityModel[];
   hideNoDataDiv: boolean = false;
+  errorMsg: string = "";
   constructor(injector: Injector) { super(injector) }
 
   ngOnInit() {
@@ -49,7 +50,8 @@ export class AgentWithPerformanceComponent extends BaseClass implements OnInit, 
     this.renderUI();
   }
   onError(errorCode: number, errorMsg: string) {
-    this.commonFunctions.showErrorSnackbar(errorMsg)
+    this.errorMsg = errorMsg;
+    //this.commonFunctions.showErrorSnackbar(errorMsg)
   }
 
   getAddress(item: EntityModel) {
@@ -64,6 +66,7 @@ export class AgentWithPerformanceComponent extends BaseClass implements OnInit, 
 
   public renderUI() {
     setData(this);
+    checkAndSetUi(this);
     updateRatioUI(this);
     checkMoreDataAvailable(this);
     this.cdr.markForCheck();
