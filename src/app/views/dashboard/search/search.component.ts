@@ -108,7 +108,7 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Aft
   onError(errorCode: number, errorMsg: string) {
     //this.pageNum--;
     this.onApiResponse([]);
-    this.commonFunctions.showErrorSnackbar(errorMsg);
+    //this.commonFunctions.showErrorSnackbar(errorMsg);
   }
 
   onApiResponse(newUsers: EntityModel[]) {
@@ -255,7 +255,7 @@ function checkMoreDataAvailable(context: SearchComponent) {
 }
 
 function checkAndSetUi(context: SearchComponent) {
-  if (!context.searchedUsers) {
+  if (!context.searchedUsers || context.searchedUsers.length == 0) {
     resetData(context);
   }
   else {
