@@ -57,7 +57,10 @@ export class AuditsComponent extends BaseClass implements OnInit {
       else {
         this.totalRows = element.rowNum;
       }
+
+     
     });
+    this.auditsModels = this.auditsModels.reverse();
   }
 
   getFormattedDate(date: string) {
