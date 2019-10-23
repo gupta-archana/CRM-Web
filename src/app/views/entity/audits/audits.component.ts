@@ -19,7 +19,8 @@ export class AuditsComponent extends BaseClass implements OnInit {
   totalRows: any = 0;
   lastEntityID: any;
   auditsModels: Array<AuditModels> = new Array();
-
+  hideNoDataDiv: boolean = false;
+  errorMsg: string = "";
   ngOnInit() {
     this.entityModel = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
     getData(this);
@@ -33,8 +34,9 @@ export class AuditsComponent extends BaseClass implements OnInit {
     this.renderUI();
   }
   onError(errorCode: number, errorMsg: string) {
+    this.errorMsg = errorMsg;
     this.renderUI();
-    this.commonFunctions.showErrorSnackbar(errorMsg)
+    //this.commonFunctions.showErrorSnackbar(errorMsg)
   }
 
 
@@ -67,6 +69,7 @@ export class AuditsComponent extends BaseClass implements OnInit {
 
   public renderUI() {
     setData(this);
+    checkAndSetUi(this);
     updateRatioUI(this);
     checkMoreDataAvailable(this);
     this.cdr.markForCheck();
@@ -96,7 +99,8 @@ function getData(context: AuditsComponent) {
     context.auditsModels = dataArray;
     context.pageNum = Number(sessionStorage.getItem(context.constants.ENTITY_AUDITS_PAGE_NUMBER));
     context.totalRows = sessionStorage.getItem(context.constants.ENTITY_AUDITS_TOTAL_ROWS);
-    updateRatioUI(context);
+    //updateRatioUI(context);
+    context.renderUI();
   }
   else {
     makeServerRequest(context);
@@ -115,4 +119,21 @@ function updateRatioUI(context: AuditsComponent) {
   //context.totalAndCurrentRowsRatio = context.commonFunctions.showMoreDataSnackbar(context.auditsModels, context.totalRows);
   context.cdr.markForCheck();
 
+}
+function checkAndSetUi(context: AuditsComponent) {
+  if (!context.auditsModels || context.auditsModels.length == 0) {
+    resetData(context);
+  }
+  else {
+    context.hideNoDataDiv = true;
+  }
+  context.cdr.markForCheck();
+}
+
+function resetData(context: AuditsComponent) {
+  context.pageNum = 0;
+  context.auditsModels = [];
+  context.totalRows = 0;
+  context.moreDataAvailable = false;
+  context.hideNoDataDiv = false;
 }

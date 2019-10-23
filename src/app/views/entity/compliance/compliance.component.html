@@ -13,7 +13,7 @@
 
   </div>
 
-  <div class="container app-bg5 bottom-wrapper-for-back">
+  <div class="container app-bg5 bottom-wrapper-for-back" *ngIf="hideNoDataDiv">
     <div class="row marginTop20">
       <ul>
         <li *ngFor="let item of complianceModels" (click)="onComplianceClick(item)">
@@ -37,5 +37,9 @@
         </li>
       </ul>
     </div>
+  </div>
+  <div class="serach-emp " *ngIf="!hideNoDataDiv" style="margin-top:100px">
+    <h2><em>It is Empty Here!</em></h2>
+    <p><em>{{errorMsg}}</em></p>
   </div>
 </div>

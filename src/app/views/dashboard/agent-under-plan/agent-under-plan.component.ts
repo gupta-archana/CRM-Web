@@ -125,6 +125,13 @@ function checkMoreDataAvailable(context: AgentUnderPlanComponent) {
     context.moreDataAvailable = true;
 }
 
+
+
+function refreshData(context: AgentUnderPlanComponent) {
+  resetData(context);
+  makeServerRequest(context);
+}
+
 function checkAndSetUi(context: AgentUnderPlanComponent) {
   if (!context.agentsUnderPlan || context.agentsUnderPlan.length == 0) {
     resetData(context);
@@ -135,14 +142,6 @@ function checkAndSetUi(context: AgentUnderPlanComponent) {
   context.cdr.markForCheck();
 }
 
-
-function refreshData(context: AgentUnderPlanComponent) {
-  resetData(context);
-  context.pageNumber = 0;
-  context.agentsUnderPlan = [];
-  context.totalRows = 0;
-  makeServerRequest(context);
-}
 function resetData(context: AgentUnderPlanComponent) {
   context.pageNumber = 0;
   context.agentsUnderPlan = [];

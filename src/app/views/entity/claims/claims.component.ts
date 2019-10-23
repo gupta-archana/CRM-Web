@@ -21,6 +21,8 @@ export class ClaimsComponent extends BaseClass implements OnInit {
   claimsModels: Array<ClaimsModel> = new Array();
   claimsTypesSubscription: Subscription;
   filterData: any;
+  hideNoDataDiv: boolean = false;
+  errorMsg: string = "";
   ngOnInit() {
     this.entityModel = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
     getData(this);
@@ -35,8 +37,9 @@ export class ClaimsComponent extends BaseClass implements OnInit {
   }
   onError(errorCode: number, errorMsg: string) {
     this.parseResponse([]);
+    this.errorMsg = errorMsg;
     this.renderUI();
-    this.commonFunctions.showErrorSnackbar(errorMsg)
+    //this.commonFunctions.showErrorSnackbar(errorMsg)
   }
 
 
@@ -80,6 +83,7 @@ export class ClaimsComponent extends BaseClass implements OnInit {
 
   public renderUI() {
     setData(this);
+    checkAndSetUi(this);
     updateRatioUI(this);
     checkMoreDataAvailable(this);
     this.cdr.markForCheck();
@@ -158,4 +162,22 @@ function getclaimType(context: ClaimsComponent) {
   }
 
   return type;
+}
+
+function checkAndSetUi(context: ClaimsComponent) {
+  if (!context.claimsModels || context.claimsModels.length == 0) {
+    resetData(context);
+  }
+  else {
+    context.hideNoDataDiv = true;
+  }
+  context.cdr.markForCheck();
+}
+
+function resetData(context: ClaimsComponent) {
+  context.pageNum = 0;
+  context.claimsModels = [];
+  context.totalRows = 0;
+  context.moreDataAvailable = false;
+  context.hideNoDataDiv = false;
 }

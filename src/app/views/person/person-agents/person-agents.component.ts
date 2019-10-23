@@ -22,7 +22,8 @@ export class PersonAgentsComponent extends BaseClass implements OnInit, OnDestro
   personAgentsModels: Array<PersonAgentsModel> = new Array();
   clickedEntity: EntityModel = new EntityModel();
   currentEntityID: any;
-
+  hideNoDataDiv: boolean = false;
+  errorMsg: string = "";
   ngOnInit() {
     this.entityModel = JSON.parse(sessionStorage.getItem(this.constants.INTERNAL_ENTITY_MODEL));
     this.commonFunctions.printLog("last url " + this.routingState.getPreviousUrl());
@@ -46,6 +47,7 @@ export class PersonAgentsComponent extends BaseClass implements OnInit, OnDestro
   }
 
   onError(errorCode: number, errorMsg: string) {
+    this.errorMsg = errorMsg;
     this.renderUI();
   }
 
@@ -67,6 +69,7 @@ export class PersonAgentsComponent extends BaseClass implements OnInit, OnDestro
   }
   public renderUI() {
     setData(this);
+    checkAndSetUi(this);
     updateRatioUI(this);
     checkMoreDataAvailable(this);
     this.cdr.markForCheck();
@@ -127,5 +130,21 @@ function updateRatioUI(context: PersonAgentsComponent) {
   context.cdr.markForCheck();
 }
 
+function checkAndSetUi(context: PersonAgentsComponent) {
+  if (!context.personAgentsModels || context.personAgentsModels.length == 0) {
+    resetData(context);
+  }
+  else {
+    context.hideNoDataDiv = true;
+  }
+  context.cdr.markForCheck();
+}
 
+function resetData(context: PersonAgentsComponent) {
+  context.pageNum = 0;
+  context.personAgentsModels = [];
+  context.totalRows = 0;
+  context.moreDataAvailable = false;
+  context.hideNoDataDiv = false;
+}
 

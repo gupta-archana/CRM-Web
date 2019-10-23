@@ -1,6 +1,6 @@
 <div class="container tab-content">
 
-  <div id="allNotesId" class="tab-pane fade in active" style="overflow: hidden">
+  <div id="allNotesId" class="tab-pane fade in active" style="overflow: hidden" *ngIf="hideNoDataDiv">
 
     <ul>
       <li *ngFor="let item of agentNotes;let i = index">
@@ -41,15 +41,20 @@
       </li>
     </ul>
     <div class="clearfix paddingTop15"></div>
-  </div>
-  <div class="row  marginBottom40" *ngIf="moreDataAvailable">
-    <div class="col-xs-12 col-md-12 loadMoreWp">
-      <hr />
-      <div class="loadMore"><a (click)="onLoadMoreClick()" alt="Load More">Load More</a></div>
-    </div>
-  </div>
-  <!-- <div id="ratioView">{{totalAndCurrentRowsRatio}}</div> -->
 
-  <button (click)="topFunction()" id="myBtn" title="Go to top"><span
-      class="glyphicon glyphicon-arrow-up"></span></button>
+    <div class="row  marginBottom40" *ngIf="moreDataAvailable">
+      <div class="col-xs-12 col-md-12 loadMoreWp">
+        <hr />
+        <div class="loadMore"><a (click)="onLoadMoreClick()" alt="Load More">Load More</a></div>
+      </div>
+    </div>
+    <!-- <div id="ratioView">{{totalAndCurrentRowsRatio}}</div> -->
+
+    <button (click)="topFunction()" id="myBtn" title="Go to top"><span
+        class="glyphicon glyphicon-arrow-up"></span></button>
+  </div>
+  <div class="serach-emp " *ngIf="!hideNoDataDiv">
+    <h2><em>It is Empty Here!</em></h2>
+    <p><em>{{errorMsg}}</em></p>
+  </div>
 </div>

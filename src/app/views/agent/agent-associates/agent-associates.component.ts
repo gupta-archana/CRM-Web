@@ -15,12 +15,15 @@ export class AgentAssociatesComponent extends BaseClass implements OnInit, OnDes
   associatesModels: AssociatesModel[] = new Array;
   entityModel: EntityModel;
   totalRows: any = 0;
-  moreDataAvailable: boolean = true;
+  moreDataAvailable: boolean = false;
   totalAndCurrentRowsRatio: string = "";
   currentEntityID = "";
   pageNum = 0;
   clickedEntity: EntityModel = new EntityModel();
   destroyed: boolean = false;
+  hideNoDataDiv: boolean = false;
+  errorMsg: string = "";
+
   constructor(private injector: Injector) {
     super(injector);
   }
@@ -60,13 +63,15 @@ export class AgentAssociatesComponent extends BaseClass implements OnInit, OnDes
 
   onError(errorCode: number, errorMsg: string) {
     if (!this.destroyed) {
+      this.errorMsg = errorMsg;
       this.renderUI();
-      this.commonFunctions.showErrorSnackbar(errorMsg);
+      //this.commonFunctions.showErrorSnackbar(errorMsg);
     }
   }
 
   public renderUI() {
     updateRatioUI(this);
+    checkAndSetUi(this);
     checkMoreDataAvailable(this);
     this.cdr.markForCheck();
   }
@@ -129,10 +134,29 @@ function makeServerRequest(context: AgentAssociatesComponent) {
 function checkMoreDataAvailable(context: AgentAssociatesComponent) {
   if (!context.associatesModels || context.associatesModels.length == context.totalRows)
     context.moreDataAvailable = false;
+    else
+    context.moreDataAvailable = true;
 }
 
 function updateRatioUI(context: AgentAssociatesComponent) {
   context.commonFunctions.showLoadedItemTagOnHeader(context.associatesModels, context.totalRows);
   //context.totalAndCurrentRowsRatio = context.commonFunctions.showMoreDataSnackbar(context.associatesModels, context.totalRows);
   context.cdr.markForCheck();
+}
+function checkAndSetUi(context: AgentAssociatesComponent) {
+  if (!context.associatesModels || context.associatesModels.length == 0) {
+    resetData(context);
+  }
+  else {
+    context.hideNoDataDiv = true;
+  }
+  context.cdr.markForCheck();
+}
+
+function resetData(context: AgentAssociatesComponent) {
+
+  context.associatesModels = [];
+  context.totalRows = 0;
+  context.moreDataAvailable = false;
+  context.hideNoDataDiv = false;
 }

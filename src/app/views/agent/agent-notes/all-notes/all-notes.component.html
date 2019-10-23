@@ -1,5 +1,5 @@
 <div class="container tab-content">
-  <div id="allNotesId" class="tab-pane fade in active" style="overflow: hidden">
+  <div id="allNotesId" class="tab-pane fade in active" style="overflow: hidden" *ngIf="hideNoDataDiv">
     <div class="clearfix paddingTop10"></div>
     <ul>
       <li *ngFor="let item of agentNotes;let i=index">
@@ -30,8 +30,8 @@
               </div>
               <div class="col-xs-6 col-md-6 noPadding">
                 <div class="ag-detail-icons textRight">
-                  <a alt=""  data-toggle="modal" data-target="#updateNewNotes" (click)="onEditClick(item,i)"><img src="../../../../../images/ic_note_edit.svg" alt=""
-                      > Edit</a>
+                  <a alt="" data-toggle="modal" data-target="#updateNewNotes" (click)="onEditClick(item,i)"><img
+                      src="../../../../../images/ic_note_edit.svg" alt=""> Edit</a>
                 </div>
               </div>
             </div>
@@ -40,15 +40,21 @@
         </div>
       </li>
     </ul>
-    
-  </div>
-  <div class="row  marginBottom40" *ngIf="moreDataAvailable">
-    <div class="col-xs-12 col-md-12 loadMoreWp">
-      <hr />
-      <div class="loadMore"><a (click)="onLoadMoreClick()" alt="Load More">Load More</a></div>
-    </div>
-  </div>
-  <!-- <div id="ratioView">{{totalAndCurrentRowsRatio}}</div> -->
 
-  <button (click)="topFunction()" id="myBtn" title="Go to top"><span class="glyphicon glyphicon-arrow-up"></span></button>
+
+    <div class="row  marginBottom40" *ngIf="moreDataAvailable">
+      <div class="col-xs-12 col-md-12 loadMoreWp">
+        <hr />
+        <div class="loadMore"><a (click)="onLoadMoreClick()" alt="Load More">Load More</a></div>
+      </div>
+    </div>
+    <!-- <div id="ratioView">{{totalAndCurrentRowsRatio}}</div> -->
+
+    <button (click)="topFunction()" id="myBtn" title="Go to top"><span
+        class="glyphicon glyphicon-arrow-up"></span></button>
+  </div>
+  <div class="serach-emp " *ngIf="!hideNoDataDiv">
+    <h2><em>It is Empty Here!</em></h2>
+    <p><em>{{errorMsg}}</em></p>
+  </div>
 </div>

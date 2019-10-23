@@ -20,6 +20,9 @@ export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponse
   pageNumber: number = 0;
   totalRows: any = 0;
   moreDataAvailable: boolean = false;
+  hideNoDataDiv: boolean = false;
+  errorMsg: string = "";
+
   totalAndCurrentRowsRatio: string = "";
 
   constructor(private injector: Injector) {
@@ -82,7 +85,7 @@ export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponse
   }
 
   onError(errorCode: number, errorMsg: string) {
-    this.commonFunctions.showErrorSnackbar(errorMsg)
+    this.errorMsg = errorMsg;
     this.renderUI();
   }
 
@@ -103,6 +106,7 @@ export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponse
 
   public renderUI() {
     setData(this);
+    checkAndSetUi(this);
     updateRatioUI(this);
     checkMoreDataAvailable(this);
     this.cdr.markForCheck();
@@ -158,7 +162,24 @@ function updateRatioUI(context: TopAgentsComponent) {
 }
 
 function refreshData(context: TopAgentsComponent) {
-  context.pageNumber = 0;
-  context.topAgents = [];
+  resetData(context);
   hitApi(context);
 }
+function checkAndSetUi(context: TopAgentsComponent) {
+  if (!context.topAgents || context.topAgents.length == 0) {
+    resetData(context);
+  }
+  else {
+    context.hideNoDataDiv = true;
+  }
+  context.cdr.markForCheck();
+}
+
+function resetData(context: TopAgentsComponent) {
+  context.pageNumber = 0;
+  context.topAgents = [];
+  context.totalRows = 0;
+  context.moreDataAvailable = false;
+  context.hideNoDataDiv = false;
+}
+

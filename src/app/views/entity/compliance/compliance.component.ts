@@ -14,7 +14,8 @@ export class ComplianceComponent extends BaseClass implements OnInit {
   entityModel: EntityModel;
   lastEntityID: any;
   complianceModels: Array<ComplianceModel> = new Array();
-
+  hideNoDataDiv: boolean = false;
+  errorMsg: string = "";
   ngOnInit() {
     this.commonFunctions.showLoadedItemTagOnHeader([], "", true);
     this.entityModel = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
@@ -28,8 +29,9 @@ export class ComplianceComponent extends BaseClass implements OnInit {
     this.renderUI();
   }
   onError(errorCode: number, errorMsg: string) {
+    this.errorMsg = errorMsg;
     this.renderUI();
-    this.commonFunctions.showErrorSnackbar(errorMsg)
+    //this.commonFunctions.showErrorSnackbar(errorMsg)
   }
 
 
@@ -56,6 +58,7 @@ export class ComplianceComponent extends BaseClass implements OnInit {
 
   public renderUI() {
     setData(this);
+    checkAndSetUi(this);
     this.cdr.markForCheck();
   }
 
@@ -82,3 +85,19 @@ function getData(context: ComplianceComponent) {
 
 }
 
+function checkAndSetUi(context: ComplianceComponent) {
+  if (!context.complianceModels || context.complianceModels.length == 0) {
+    resetData(context);
+  }
+  else {
+    context.hideNoDataDiv = true;
+  }
+  context.cdr.markForCheck();
+}
+
+function resetData(context: ComplianceComponent) {
+
+  context.complianceModels = [];
+
+  context.hideNoDataDiv = false;
+}
