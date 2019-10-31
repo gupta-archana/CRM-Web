@@ -6,12 +6,10 @@ pipelines:
       - step:
           name: "Build, test and deploy to firebase production"
           deployment: production
-          
+          caches:
+            - node
           script: 
             - echo "only on CRM-beta"
-            - npm init --yes
-            - npm cache clean --force
-            - ls -al 
-            - npm install
+            - npm install --quiet
             - npm run build
             - npm run deploy
