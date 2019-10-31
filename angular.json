@@ -37,8 +37,7 @@
               "./src/js/jquery-3.2.1.min.js",
               "node_modules/popper.js/dist/umd/popper.min.js",
               "./src/js/bootstrap.min.js",
-              "node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.min.js",
-              "node_modules/chart.js/dist/chart.js"
+              "node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.min.js"
             ]
           },
           "configurations": {
