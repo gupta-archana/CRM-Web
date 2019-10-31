@@ -12,11 +12,50 @@ import { ThirteenMonthModel } from '../../../models/thirteen-month-model';
 export class AgentThirteenMonthActivityComponent extends BaseClass implements OnInit, ApiResponseCallback {
 
   monthsName: string[] = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
   entityModel: EntityModel;
   thirteenMonthsModels: ThirteenMonthModel[] = new Array<ThirteenMonthModel>();
+
   constructor(private injector: Injector) {
     super(injector);
   }
+
+  public barChartOptions = {
+    scaleShowVerticalLines: false,
+    responsive: true,
+    maintainAspectRatio: false
+
+  };
+  public barChartLabels:Array<any>=[];
+  public barChartType = 'bar';
+  public barChartLegend = true;
+  barData: Array<any> = [];
+  public barChartData = [
+    { data: this.barData, label: 'NPR Data' }
+  ];
+
+  public chartColors: Array<any> = [
+    {
+      backgroundColor: [
+        'rgba(54, 162, 235, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(54, 162, 235, 1)'
+      ],
+
+      borderWidth: 2,
+    }
+  ];
+
 
   ngOnInit() {
     this.entityModel = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
@@ -31,11 +70,12 @@ export class AgentThirteenMonthActivityComponent extends BaseClass implements On
   }
 
   getMonth(item: ThirteenMonthModel) {
-    return this.monthsName[Number(item.month) - 1];
+    return this.monthsName[Number(item.month) - 1];;
   }
 
   onSuccess(response: any) {
     this.thirteenMonthsModels = response.activitymonth.reverse();
+    setValueToBar(this);
     this.cdr.markForCheck();
   }
   onError(errorCode: number, errorMsg: string) {
@@ -45,4 +85,28 @@ export class AgentThirteenMonthActivityComponent extends BaseClass implements On
 
 function makeServerRequest(context: AgentThirteenMonthActivityComponent) {
   context.apiHandler.getThirteenMonthActivity(context.entityModel.entityId, context);
+}
+
+
+function setValueToBar(context: AgentThirteenMonthActivityComponent) {
+  let maximumValue: number = 0;
+  context.thirteenMonthsModels.forEach(element => {
+    context.barData.push(element.nprActual);
+    context.barChartLabels.push(context.getMonth(element));
+    if (maximumValue < Number(element.nprActual)) {
+      maximumValue = Number(element.nprActual);
+    }
+  });
+
+  let scales = {
+    yAxes: [{
+      ticks: {
+        steps: 10,
+        max: maximumValue,
+        min: 0
+      }
+    }]
+  }
+
+  context.barChartOptions['scales'] = scales;
 }

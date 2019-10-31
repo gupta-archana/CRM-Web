@@ -447,11 +447,15 @@ ul.agent-details li.audits a {
 .paddingLeft25 {
   padding: 0px !important;
 }
+.barHeight{
+  min-height: 200px;
+}
 
 @media (max-width: 768px) {
   .paddingTop85 {
     padding-top: 100px;
   }
+ 
 }
 
 /* do not change value using for media query */
