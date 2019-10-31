@@ -6,8 +6,7 @@ pipelines:
       - step:
           name: "Build, test and deploy to firebase production"
           deployment: production
-          caches:
-            - node
+          
           script: 
             - echo "only on CRM-beta"
             - rm -rf node_modules
