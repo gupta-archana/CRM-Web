@@ -10,6 +10,7 @@ pipelines:
             - node
           script: 
             - echo "only on CRM-beta"
+            - rm -rf node_modules
             - npm init --yes
             - ls -al 
             - npm install
