@@ -26,12 +26,12 @@ export class AgentThirteenMonthActivityComponent extends BaseClass implements On
     maintainAspectRatio: false
 
   };
-  public barChartLabels:Array<any>=[];
+  public barChartLabels: Array<any> = [];
   public barChartType = 'bar';
   public barChartLegend = true;
   barData: Array<any> = [];
   public barChartData = [
-    { data: this.barData, label: 'NPR Data' }
+    { data: this.barData, label: 'NPR Actual' }
   ];
 
   public chartColors: Array<any> = [
@@ -92,7 +92,7 @@ function setValueToBar(context: AgentThirteenMonthActivityComponent) {
   let maximumValue: number = 0;
   context.thirteenMonthsModels.forEach(element => {
     context.barData.push(element.nprActual);
-    context.barChartLabels.push(context.getMonth(element));
+    context.barChartLabels.push(context.getMonth(element) + '-' + element.year.substr(2, element.year.length));
     if (maximumValue < Number(element.nprActual)) {
       maximumValue = Number(element.nprActual);
     }
