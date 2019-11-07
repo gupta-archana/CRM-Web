@@ -1,40 +1,48 @@
 <div class="container app-bg2">
-  <ul>
-    <li *ngFor="let item of agentsUnderPlan;let i=index">
-      <div class="row">
-        <div class="col-xs-12 col-md-6 cell-bg">
-          <div class="agent-detail">
-            <div class="dp">
-              <img src="images/baseline-business-24px.svg" alt="" (click)="onAgentClick(item,i)" />
-              <div class="dpProfile_wp proActiBg">A</div>
-            </div>
-            <h4 class="topAgentsName"><a (click)="onAgentClick(item)">{{item.name}}</a><span
-                (click)="onAgentClick(item)">
-                ({{item.entityId}})</span>
-              <div class="clearfix paddingTop10"></div>
-              <span>{{getAddress(item)}}</span>
-            </h4>
-            <a class="favouritIconPosition"><img
-                src="{{checkEntityFavorite(item)?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}"
-                alt="" (click)="onStarClick(item,i)"></a>
-            <div class="clearfix"></div>
-            <div class="row">
+  <div *ngIf="hideNoDataDiv">
+    <ul>
+      <li *ngFor="let item of agentsUnderPlan;let i=index">
+        <div class="row">
+          <div class="col-xs-12 col-md-6 cell-bg">
+            <div class="agent-detail">
+              <div class="dp">
+                <span class="fontWeightBold">{{i+1}}</span>
+                <div class="dpProfile_wp proActiBg">A</div>
+              </div>
+              <h4 class="topAgentsName"><a class="building-icon padding-left-twenty-five"
+                  (click)="onAgentClick(item)">{{item.name}}</a><span (click)="onAgentClick(item)"
+                  class="paddingLeft25">
+                  ({{item.entityId}})</span>
+                <div class="clearfix paddingTop10"></div>
+                <span class="location-icon padding-left-twenty-five">{{getAddress(item)}}</span>
+              </h4>
+              <a class="favouritIconPosition"><img
+                  src="{{checkEntityFavorite(item)?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}"
+                  alt="" (click)="onStarClick(item,i)"></a>
+              <div class="clearfix"></div>
+              <div class="row">
 
-              <div class="col-md-6 col-xs-6">
-                <div class="amount">NPR YTD<br><span>{{item.netPermium| currency:'USD':"symbol-narrow":'1.0-0'}}</span>
+                <div class="col-md-6 col-xs-6">
+                  <div class="amount">NPR
+                    YTD<br><span>{{item.netPermium| currency:'USD':"symbol-narrow":'1.0-0'}}</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </li>
+    </ul>
+    <div class="row  marginBottom20" *ngIf="moreDataAvailable">
+      <div class="col-xs-12 col-md-12 loadMoreWp">
+        <hr />
+        <div class="loadMore"><a (click)="onLoadMoreClick()" alt="Load More">Load More</a></div>
       </div>
-    </li>
-  </ul>
-  <div class="row  marginBottom20" *ngIf="moreDataAvailable">
-    <div class="col-xs-12 col-md-12 loadMoreWp">
-      <hr />
-      <div class="loadMore"><a (click)="onLoadMoreClick()" alt="Load More">Load More</a></div>
     </div>
+  </div>
+  <div class="serach-emp " *ngIf="!hideNoDataDiv">
+    <h2><em>It is Empty Here!</em></h2>
+    <p><em>{{errorMsg}}</em></p>
   </div>
   <!-- <div id="ratioView">{{totalAndCurrentRowsRatio}}</div> -->
 

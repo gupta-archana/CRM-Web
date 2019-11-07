@@ -1,18 +1,20 @@
 <div class="container app-bg2">
-  <div class="row">
+  <div class="row" *ngIf="hideNoDataDiv">
     <ul>
-      <li *ngFor="let item of topAgents">
+      <li *ngFor="let item of topAgents; let i = index;">
         <div class="col-xs-12 col-md-6 cell-bg">
           <div class="agent-detail">
             <div class="dp">
-              <img src="../../../../images/baseline-business-24px.svg"
-                onerror="this.src='../../../../images/placeholder.png'" (click)="onAgentClick(item)" />
+              <!-- <img src="../../../../images/baseline-business-24px.svg"
+                onerror="this.src='../../../../images/placeholder.png'" (click)="onAgentClick(item)" /> -->
+              <span class="fontWeightBold">{{i+1}}</span>
               <div class="dpProfile_wp proActiBg">{{item.stat}}</div>
             </div>
-            <h4 class="topAgentsName"><a (click)="onAgentClick(item)">{{item.name}}</a>
-              <span (click)="onAgentClick(item)"> ({{item.entityId}})</span>
+            <h4 class="topAgentsName"><a class="building-icon padding-left-twenty-five"
+                (click)="onAgentClick(item)">{{item.name}}</a>
+              <span (click)="onAgentClick(item)" class="paddingLeft25"> ({{item.entityId}})</span>
               <div class="clearfix paddingTop10"></div>
-              <span>{{getAddress(item)}}</span>
+              <span class="location-icon padding-left-twenty-five">{{getAddress(item)}}</span>
             </h4>
             <a class="favouritIconPosition"><img
                 src="{{checkEntityFavorite(item)?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}"
@@ -44,5 +46,10 @@
     <!-- <div id="ratioView">{{totalAndCurrentRowsRatio}}</div> -->
 
     <!-- <button (click)="topFunction()" id="myBtn" title="Go to top"><span class="glyphicon glyphicon-arrow-up"></span></button> -->
+  </div>
+
+  <div class="serach-emp " *ngIf="!hideNoDataDiv">
+    <h2><em>It is Empty Here!</em></h2>
+    <p><em>{{errorMsg}}</em></p>
   </div>
 </div>

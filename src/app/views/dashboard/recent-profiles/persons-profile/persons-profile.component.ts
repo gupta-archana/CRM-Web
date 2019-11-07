@@ -14,6 +14,8 @@ export class PersonsProfileComponent extends BaseClass implements OnInit, OnDest
   pageRefreshSubscription: Subscription = null;
   tabIndexSubscription: Subscription = null;
   selectedIndex: number = -1;
+  hideNoDataDiv: boolean = false;
+  errorMsg: string = "";
   constructor(private injector: Injector) { super(injector) }
 
   ngOnInit() {
@@ -78,4 +80,22 @@ function tabSelectedIndexSubscription(context: PersonsProfileComponent) {
 
 function setHeaderContent(context: PersonsProfileComponent) {
   context.commonFunctions.showLoadedItemTagOnHeader(context.recentProfileArray, context.recentProfileArray.length)
+  checkAndSetUi(this);
+}
+
+function checkAndSetUi(context: PersonsProfileComponent) {
+  if (!context.recentProfileArray || context.recentProfileArray.length == 0) {
+    context.errorMsg = "No person profiles you visited yet";
+    resetData(context);
+  }
+  else {
+
+    context.hideNoDataDiv = true;
+  }
+  context.cdr.markForCheck();
+}
+
+function resetData(context: PersonsProfileComponent) {
+
+  context.hideNoDataDiv = false;
 }

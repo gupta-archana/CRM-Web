@@ -20,7 +20,8 @@ export class EntityAlertComponent extends BaseClass implements OnInit, ApiRespon
   totalRows: any = 0;
   lastEntityID: any;
   openAlertModels: Array<OpenAlertsModel> = new Array();
-
+  hideNoDataDiv: boolean = false;
+  errorMsg: string = "";
   ngOnInit() {
     this.entityModel = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
 
@@ -34,8 +35,9 @@ export class EntityAlertComponent extends BaseClass implements OnInit, ApiRespon
     this.renderUI();
   }
   onError(errorCode: number, errorMsg: string) {
+    this.errorMsg = errorMsg;
     this.renderUI();
-    this.commonFunctions.showErrorSnackbar(errorMsg)
+    //this.commonFunctions.showErrorSnackbar(errorMsg)
   }
 
   private parseResponse(agents: OpenAlertsModel[]) {
@@ -59,6 +61,7 @@ export class EntityAlertComponent extends BaseClass implements OnInit, ApiRespon
   }
   public renderUI() {
     setData(this);
+    checkAndSetUi(this);
     updateRatioUI(this);
     checkMoreDataAvailable(this);
     this.cdr.markForCheck();
@@ -106,4 +109,22 @@ function updateRatioUI(context: EntityAlertComponent) {
   context.commonFunctions.showLoadedItemTagOnHeader(context.openAlertModels, context.totalRows);
   //context.totalAndCurrentRowsRatio = context.commonFunctions.showMoreDataSnackbar(context.openAlertModels, context.totalRows);
   context.cdr.markForCheck();
+}
+
+function checkAndSetUi(context: EntityAlertComponent) {
+  if (!context.openAlertModels || context.openAlertModels.length == 0) {
+    resetData(context);
+  }
+  else {
+    context.hideNoDataDiv = true;
+  }
+  context.cdr.markForCheck();
+}
+
+function resetData(context: EntityAlertComponent) {
+  context.pageNum = 0;
+  context.openAlertModels = [];
+  context.totalRows = 0;
+  context.moreDataAvailable = false;
+  context.hideNoDataDiv = false;
 }

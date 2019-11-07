@@ -19,6 +19,8 @@ export class AgentWithPerformanceComponent extends BaseClass implements OnInit, 
   moreDataAvailable: boolean = false;
   totalAndCurrentRowsRatio: string = "";
   agentPerformance: EntityModel[];
+  hideNoDataDiv: boolean = false;
+  errorMsg: string = "";
   constructor(injector: Injector) { super(injector) }
 
   ngOnInit() {
@@ -44,11 +46,12 @@ export class AgentWithPerformanceComponent extends BaseClass implements OnInit, 
         this.totalRows = element.rowNum;
       }
     });
-
+    this.agentPerformance = this.agentPerformance.reverse();
     this.renderUI();
   }
   onError(errorCode: number, errorMsg: string) {
-    this.commonFunctions.showErrorSnackbar(errorMsg)
+    this.errorMsg = errorMsg;
+    //this.commonFunctions.showErrorSnackbar(errorMsg)
   }
 
   getAddress(item: EntityModel) {
@@ -63,6 +66,7 @@ export class AgentWithPerformanceComponent extends BaseClass implements OnInit, 
 
   public renderUI() {
     setData(this);
+    checkAndSetUi(this);
     updateRatioUI(this);
     checkMoreDataAvailable(this);
     this.cdr.markForCheck();
@@ -127,11 +131,27 @@ function checkMoreDataAvailable(context: AgentWithPerformanceComponent) {
   else
     context.moreDataAvailable = true;
 }
+function checkAndSetUi(context: AgentWithPerformanceComponent) {
+  if (!context.agentPerformance || context.agentPerformance.length == 0) {
+    resetData(context);
+  }
+  else {
+    context.hideNoDataDiv = true;
+  }
+  context.cdr.markForCheck();
+}
+
 
 
 function refreshData(context: AgentWithPerformanceComponent) {
+  resetData(context);
+  makeServerRequest(context);
+}
+
+function resetData(context: AgentWithPerformanceComponent) {
   context.pageNumber = 0;
   context.agentPerformance = [];
   context.totalRows = 0;
-  makeServerRequest(context);
+  context.moreDataAvailable = false;
+  context.hideNoDataDiv = false;
 }

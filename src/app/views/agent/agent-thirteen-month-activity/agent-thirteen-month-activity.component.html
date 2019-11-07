@@ -21,6 +21,13 @@
   </div>
   <div class="container app-bg2  " style="padding-top:10px;">
     <div class="row">
+
+      <div style="display: block">
+        <canvas baseChart class="barHeight" [datasets]="barChartData" [colors]="chartColors" [labels]="barChartLabels" [options]="barChartOptions"
+          [legend]="barChartLegend" [chartType]="barChartType">
+        </canvas>
+      </div>
+
       <div class="col-xs-12 col-md-6">
         <ul>
           <li *ngFor="let item of thirteenMonthsModels">

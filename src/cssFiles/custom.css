@@ -56,7 +56,8 @@ ul {
 }
 
 .padding-left-twenty-five {
-  padding-left: 25px;
+  padding-left: 25px !important;
+  background-size: 18px;
 }
 
 .load-more-div {
@@ -435,10 +436,33 @@ ul.agent-details li.audits a {
   padding-left: 35px;
 }
 
+.fontWeightBold {
+  font-weight: bold !important;
+}
 
+.location-icon {
+  background: url(../images/ic_location.svg) left no-repeat;
+}
+
+.paddingLeft25 {
+  padding: 0px !important;
+}
+.barHeight{
+  min-height: 200px;
+}
 
 @media (max-width: 768px) {
   .paddingTop85 {
     padding-top: 100px;
+  }
+ 
+}
+
+/* do not change value using for media query */
+
+
+@media (max-width: 460px) {
+  .paddingLeft25 {
+    padding: 25px !important;
   }
 }

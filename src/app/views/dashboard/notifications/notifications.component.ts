@@ -18,6 +18,8 @@ export class NotificationsComponent extends BaseClass implements OnInit, ApiResp
   totalRows: any = 0;
   moreDataAvailable: boolean = true;
   totalAndCurrentRowsRatio: string = "";
+  hideNoDataDiv: boolean = false;
+  errorMsg: string = "";
   constructor(injector: Injector) { super(injector) }
 
   ngOnInit() {
@@ -65,11 +67,14 @@ export class NotificationsComponent extends BaseClass implements OnInit, ApiResp
     this.renderUI();
   }
   onError(errorCode: number, errorMsg: string) {
-    this.commonFunctions.showErrorSnackbar(errorMsg);
+    this.errorMsg = errorMsg;
+    this.renderUI();
+    //this.commonFunctions.showErrorSnackbar(errorMsg);
   }
 
   public renderUI() {
     checkMoreDataAvailable(this);
+    checkAndSetUi(this);
     updateRatioUI(this);
     this.cdr.markForCheck();
   }
@@ -90,7 +95,25 @@ function checkMoreDataAvailable(context: NotificationsComponent) {
   else
     context.moreDataAvailable = true;
 }
+
+function checkAndSetUi(context: NotificationsComponent) {
+  if (!context.notifications || context.notifications.length == 0) {
+    resetData(context);
+  }
+  else {
+    context.hideNoDataDiv = true;
+  }
+  context.cdr.markForCheck();
+}
+
 function updateRatioUI(context: NotificationsComponent) {
   context.totalAndCurrentRowsRatio = context.commonFunctions.showMoreDataSnackbar(context.notifications, context.totalRows);
   context.cdr.markForCheck();
+}
+function resetData(context: NotificationsComponent) {
+  context.pageNumber = 0;
+  context.notifications = [];
+  context.totalRows = 0;
+  context.moreDataAvailable = false;
+  context.hideNoDataDiv = false;
 }

@@ -13,7 +13,7 @@
     <app-entity-name-header [entityModel]="entityModel"></app-entity-name-header>
   </div>
 
-  <div class="container app-bg2 bottom-wrapper-for-back">
+  <div class="container app-bg2 bottom-wrapper-for-back" *ngIf="hideNoDataDiv">
     <div class="row">
       <ul>
         <li *ngFor="let item of personAgentsModels">
@@ -42,5 +42,9 @@
       <button (click)="topFunction()" id="myBtn" title="Go to top"><span
           class="glyphicon glyphicon-arrow-up"></span></button>
     </div>
+  </div>
+  <div class="serach-emp " *ngIf="!hideNoDataDiv" style="margin-top:100px">
+    <h2><em>It is Empty Here!</em></h2>
+    <p><em>{{errorMsg}}</em></p>
   </div>
 </div>

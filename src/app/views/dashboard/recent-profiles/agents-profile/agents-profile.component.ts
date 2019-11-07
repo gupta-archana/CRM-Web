@@ -14,6 +14,8 @@ export class AgentsProfileComponent extends BaseClass implements OnInit, OnDestr
   pageRefreshSubscription: Subscription = null;
   tabIndexSubscription: Subscription = null;
   selectedIndex: number = -1;
+  hideNoDataDiv: boolean = false;
+  errorMsg: string = "";
   constructor(private injector: Injector) { super(injector) }
 
   ngOnInit() {
@@ -81,5 +83,22 @@ function tabSelectedIndexSubscription(context: AgentsProfileComponent) {
 
 function setHeaderContent(context: AgentsProfileComponent) {
   context.commonFunctions.showLoadedItemTagOnHeader(context.recentProfileArray, context.recentProfileArray.length)
+  checkAndSetUi(context);
 }
 
+function checkAndSetUi(context: AgentsProfileComponent) {
+  if (!context.recentProfileArray || context.recentProfileArray.length == 0) {
+    context.errorMsg = "No Agent profiles you visited yet";
+    resetData(context);
+  }
+  else {
+
+    context.hideNoDataDiv = true;
+  }
+  context.cdr.markForCheck();
+}
+
+function resetData(context: AgentsProfileComponent) {
+
+  context.hideNoDataDiv = false;
+}

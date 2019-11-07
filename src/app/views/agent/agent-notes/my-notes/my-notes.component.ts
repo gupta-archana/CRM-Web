@@ -26,6 +26,9 @@ export class MyNotesComponent extends BaseClass implements OnInit, OnDestroy {
   agentNotes: Array<NotesModel> = new Array<NotesModel>();
   selectedTabIndex: number = 0;
   selectedNoteIndex: number = -1;
+  hideNoDataDiv: boolean = false;
+  errorMsg: string = "";
+
   ngOnInit() {
     this.uid = this.commonFunctions.getLoginCredentials().email;
     this.entityModel = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
@@ -66,8 +69,9 @@ export class MyNotesComponent extends BaseClass implements OnInit, OnDestroy {
     this.renderUI();
   }
   onError(errorCode: number, errorMsg: string) {
+    this.errorMsg = errorMsg;
     this.renderUI();
-    this.commonFunctions.showErrorSnackbar(errorMsg)
+    //this.commonFunctions.showErrorSnackbar(errorMsg)
   }
 
 
@@ -88,6 +92,7 @@ export class MyNotesComponent extends BaseClass implements OnInit, OnDestroy {
   public renderUI() {
 
     updateRatioUI(this);
+    checkAndSetUi(this);
     checkMoreDataAvailable(this);
     this.cdr.markForCheck();
   }
@@ -148,10 +153,25 @@ function getUpdatedNote(context: MyNotesComponent) {
   });
 }
 
+
+
+function checkAndSetUi(context: MyNotesComponent) {
+  if (!context.agentNotes || context.agentNotes.length == 0) {
+    resetFields(context);
+  }
+  else {
+    context.hideNoDataDiv = true;
+  }
+  context.cdr.markForCheck();
+}
+
 function resetFields(context: MyNotesComponent) {
-  context.agentNotes = [];
   context.pageNumber = 0;
+  context.agentNotes = [];
   context.totalRows = 0;
   context.moreDataAvailable = false;
-  context.totalAndCurrentRowsRatio = "";
+  context.hideNoDataDiv = false;
 }
+
+
+

@@ -14,6 +14,8 @@ import { DecimalPipe } from '@angular/common';
 import { CurrencyMaskConfig, CURRENCY_MASK_CONFIG } from 'ng2-currency-mask/src/currency-mask.config';
 import { MomentModule } from 'ngx-moment';
 import { EntityNameHeaderComponent } from '../../customUI/entity-name-header/entity-name-header.component';
+import { ChartsModule } from 'ng2-charts';
+
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "left",
@@ -40,6 +42,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     MatFormFieldModule,
     CurrencyMaskModule,
     MomentModule,
+    ChartsModule
 
   ],
   declarations: [
@@ -66,6 +69,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     MatButtonModule,
     MatFormFieldModule,
     MomentModule,
+    ChartsModule,
     EntityNameHeaderComponent
 
   ],

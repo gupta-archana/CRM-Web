@@ -1,6 +1,6 @@
 <div class="tab-content">
   <!-- ---tab First beginning here---- -->
-  <div id="agentsId" class="tab-pane fade in active">
+  <div id="agentsId" class="tab-pane fade in active" *ngIf="hideNoDataDiv" >
     <div class="clearfix paddingTop10"></div>
     <div class="row">
       <ul>
@@ -33,5 +33,9 @@
     </div>
 
     <div class="clearfix paddingTop15"></div>
+  </div>
+  <div class="serach-emp " *ngIf="!hideNoDataDiv">
+    <h2><em>It is Empty Here!</em></h2>
+    <p><em>{{errorMsg}}</em></p>
   </div>
 </div>
