@@ -23,7 +23,13 @@
     <div class="row">
 
       <div style="display: block">
-        <canvas baseChart class="barHeight" [datasets]="barChartData" [colors]="chartColors" [labels]="barChartLabels" [options]="barChartOptions"
+        <canvas baseChart class="barHeight" [datasets]="nprChartData" [colors]="chartColors" [labels]="barChartLabels" [options]="barChartOptions"
+          [legend]="barChartLegend" [chartType]="barChartType">
+        </canvas>
+      </div>
+
+      <div style="display: block">
+        <canvas baseChart class="barHeight" [datasets]="cplChartData" [colors]="chartColors" [labels]="barChartLabels" [options]="barChartOptions"
           [legend]="barChartLegend" [chartType]="barChartType">
         </canvas>
       </div>
