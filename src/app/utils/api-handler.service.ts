@@ -13,7 +13,7 @@ var json2xml = require('json2xml');
 export class ApiHandlerService implements ApiResponseCallback {
 
   private APP_MODE: Array<string> = ["dev", "beta", "prod"];
-  private ENABLE_APP_MODE = 1;
+  private ENABLE_APP_MODE = 0;
   private apiResponseCallback: ApiResponseCallback = null;
   constructor(private apiService: ApiService, public dataService: DataServiceService, private constants: Constants,
     private api: API) {
@@ -349,10 +349,10 @@ export class ApiHandlerService implements ApiResponseCallback {
   /**
    * getNotifications
    */
-  public getNotifications(pageNum: number, apiResponseCallback: ApiResponseCallback) {
+  public getNotifications(stat: string, pageNum: number, apiResponseCallback: ApiResponseCallback) {
     this.dataService.onHideShowLoader(true);
     this.apiResponseCallback = apiResponseCallback;
-    let url = this.api.getNotificationsUrl(this.getAppMode(), pageNum);
+    let url = this.api.getNotificationsUrl(this.getAppMode(), stat, pageNum);
     this.apiService.hitGetApi(url, this);
   }
 

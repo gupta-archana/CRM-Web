@@ -1,0 +1,33 @@
+<div class="container tab-content">
+
+  <div class="row" *ngIf="hideNoDataDiv">
+    <ul>
+      <li *ngFor="let item of notifications;let i=index">
+        <div class="col-xs-12 col-md-6 cell-bg">
+          <div class="agent-detail">
+            <div class="dp" (click)="onAgentClick(item)">
+              <img src="../../../../images/baseline-business-24px.svg" alt="" />
+            </div>
+            <h4 (click)="onAgentClick(item)">{{item.notification}}</h4> <span style="color:#000;">NETCO. Inc</span>
+            <br />
+            <span class="minTxt"><time>{{item.createDate | amTimeAgo}}</time></span>
+            <span class="textRight dismissBtn"><a (click)="onDismissClick(i,item.sysNotificationID)"
+                alt="">DISMISS</a></span>
+          </div>
+        </div>
+
+      </li>
+    </ul>
+
+    <div class="row marginBottom20" *ngIf="moreDataAvailable">
+      <div class="col-xs-12 col-md-12 loadMoreWp">
+        <hr />
+        <div class="loadMore"><a (click)="onLoadMoreClick()" alt="Load More">Load More</a></div>
+      </div>
+    </div>
+  </div>
+  <div class="serach-emp " *ngIf="!hideNoDataDiv">
+    <h2><em>It is Empty Here!</em></h2>
+    <p><em>{{errorMsg}}</em></p>
+  </div>
+</div>

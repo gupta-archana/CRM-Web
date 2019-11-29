@@ -10,110 +10,19 @@ import { EntityModel } from '../../../models/entity-model';
   templateUrl: './notifications.component.html',
   styleUrls: ['./notifications.component.css']
 })
-export class NotificationsComponent extends BaseClass implements OnInit, ApiResponseCallback {
+export class NotificationsComponent extends BaseClass implements OnInit {
 
-  notifications: Array<NotificationsModel> = [];
-  entityModel: EntityModel = new EntityModel();
-  pageNumber: number = 0;
-  totalRows: any = 0;
-  moreDataAvailable: boolean = true;
-  totalAndCurrentRowsRatio: string = "";
-  hideNoDataDiv: boolean = false;
-  errorMsg: string = "";
+
   constructor(injector: Injector) { super(injector) }
 
   ngOnInit() {
-    this.pageNumber = 0;
-    makeServerRequest(this);
-    this.commonFunctions.hideShowTopScrollButton(document);
-  }
-  onAgentClick(item: NotificationsModel) {
-    this.entityModel.type = this.constants.ENTITY_AGENT_PRESENTER;
-    this.entityModel.entityId = item.entityID;
-    this.entityModel.name = item.name ? item.name : '';
-    sessionStorage.setItem(this.constants.ENTITY_INFO, JSON.stringify(this.entityModel));
-    this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_AGENT_DETAIL);
-  }
-  onDismissClick(index: number, notificationID: string) {
-    let self = this;
-    this.apiHandler.dismissNotification(notificationID, {
-      onSuccess(response: any) {
-        self.commonFunctions.showSnackbar(response)
-        self.notifications.splice(index, 1);
-        self.cdr.markForCheck();
-      },
-      onError(errorCode, errorMsg) {
-        self.commonFunctions.showErrorSnackbar(errorMsg)
-      }
-    })
-  }
 
-  onLoadMoreClick() {
-    makeServerRequest(this);
   }
-
-  onSuccess(response: any) {
-    let newNotifications: NotificationsModel[] = response.SysNotification;
-
-    newNotifications.forEach(element => {
-      if (element.entityType != "Total Notifications") {
-        this.notifications.push(element)
-      } else {
-        this.totalRows = element.rowNum;
-      }
-    });
-
-
-    this.renderUI();
-  }
-  onError(errorCode: number, errorMsg: string) {
-    this.errorMsg = errorMsg;
-    this.renderUI();
-    //this.commonFunctions.showErrorSnackbar(errorMsg);
-  }
-
-  public renderUI() {
-    checkMoreDataAvailable(this);
-    checkAndSetUi(this);
-    updateRatioUI(this);
-    this.cdr.markForCheck();
-  }
-
-  topFunction() {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
+  onTabSelect(event) {
+    this.commonFunctions.printLog(event);
+    shareTabIndexToChilds(this, event.index);
   }
 }
-
-function makeServerRequest(context: NotificationsComponent) {
-  context.pageNumber++;
-  context.apiHandler.getNotifications(context.pageNumber, context);
-}
-function checkMoreDataAvailable(context: NotificationsComponent) {
-  if ((!context.notifications && context.notifications.length == 0) || context.notifications.length >= context.totalRows)
-    context.moreDataAvailable = false;
-  else
-    context.moreDataAvailable = true;
-}
-
-function checkAndSetUi(context: NotificationsComponent) {
-  if (!context.notifications || context.notifications.length == 0) {
-    resetData(context);
-  }
-  else {
-    context.hideNoDataDiv = true;
-  }
-  context.cdr.markForCheck();
-}
-
-function updateRatioUI(context: NotificationsComponent) {
-  context.totalAndCurrentRowsRatio = context.commonFunctions.showMoreDataSnackbar(context.notifications, context.totalRows);
-  context.cdr.markForCheck();
-}
-function resetData(context: NotificationsComponent) {
-  context.pageNumber = 0;
-  context.notifications = [];
-  context.totalRows = 0;
-  context.moreDataAvailable = false;
-  context.hideNoDataDiv = false;
+function shareTabIndexToChilds(context: NotificationsComponent, index: number) {
+  context.dataService.onTabSelected(index);
 }
