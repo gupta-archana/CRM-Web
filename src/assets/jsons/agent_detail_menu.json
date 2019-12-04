@@ -1,44 +1,48 @@
-[
-{
-"class":"agent-contact",
-"title":"Contact",
-"img": "../../../../images/contact.svg"
-},
-{
-"class":"notes",
-"title":"Notes",
-"img": "../../../../images/note.svg"
-},
-{
-"class":"associates",
-"title":"Associates",
-"img": "../../../../images/associate.svg"
-},
-{
-"class":"calender",
-"title":"13 Month Activity",
-"img": "../../../../images/ic_calender.svg"
-},
+[{
+    "class": "agent-contact",
+    "title": "Contact",
+    "img": "../../../../images/contact.svg"
+  },
+  {
+    "class": "notes",
+    "title": "Notes",
+    "img": "../../../../images/note.svg"
+  },
+  {
+    "class": "associates",
+    "title": "Associates",
+    "img": "../../../../images/associate.svg"
+  },
+  {
+    "class": "objectives",
+    "title": "Objective",
+    "img": "../../../../images/objectives.svg"
+  },
+  {
+    "class": "calender",
+    "title": "13 Month Activity",
+    "img": "../../../../images/ic_calender.svg"
+  },
 
-{
-"class":"compliance",
-"title":"Compliance",
-"img": "../../../../images/ic_compliance.svg"
-},
-{
-"class":"alerts",
-"title":"Alerts",
-"img": "../../../../images/ic_alerts.svg"
-},
-{
-"class":"claims",
-"title":"Claims",
-"img": "../../../../images/ic_claims.svg"
-},
+  {
+    "class": "compliance",
+    "title": "Compliance",
+    "img": "../../../../images/ic_compliance.svg"
+  },
+  {
+    "class": "alerts",
+    "title": "Alerts",
+    "img": "../../../../images/ic_alerts.svg"
+  },
+  {
+    "class": "claims",
+    "title": "Claims",
+    "img": "../../../../images/ic_claims.svg"
+  },
 
-{
-"class":"audits",
-"title":"Audits",
-"img": "../../../../images/ic_audits.svg"
-}
+  {
+    "class": "audits",
+    "title": "Audits",
+    "img": "../../../../images/ic_audits.svg"
+  }
 ]
