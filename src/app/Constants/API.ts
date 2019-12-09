@@ -206,6 +206,10 @@ export class API {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=systemUserPassword&userid=" + this.email + "&password=" + newPassword;
   }
 
+  getTagSearchUrl(app_mode: string, stateId: string, type: string, pageNum: number, searchString: string) {
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=tagsSearch&searchString=%23" + searchString + "&entity=" + type + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows;
+  }
+
   getStates() {
     return this.STATES_JSON_URL;
   }

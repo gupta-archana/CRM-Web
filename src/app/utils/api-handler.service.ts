@@ -376,6 +376,17 @@ export class ApiHandlerService implements ApiResponseCallback {
     this.apiService.hitGetApi(url, handleAddAndUpdateApiResponse(this, apiResponseCallback));
   }
 
+
+  /**
+ * GetTagSearchedData
+ */
+  public GetTagSearchedData(type: string, stateId: string, searchString: string, pageNum: number, apiResponseCallback: ApiResponseCallback) {
+    this.apiResponseCallback = apiResponseCallback;
+    let url = this.api.getTagSearchUrl(this.APP_MODE[this.ENABLE_APP_MODE], stateId, type, pageNum, searchString);
+    this.apiService.hitGetApi(url, this);
+  }
+
+
   /**
    * getStates
    */
