@@ -62,6 +62,7 @@ import { PersonDetailComponent } from './views/person/person-detail/person-detai
 import { AgentDetailItemRearrangeComponent } from './views/rearrange-items-layouts/agent-detail-item-rearrange/agent-detail-item-rearrange.component';
 import { DrawerItemsRearrangeComponent } from './views/rearrange-items-layouts/drawer-items-rearrange/drawer-items-rearrange.component';
 import { PersonDetailItemsRearrangeComponent } from './views/rearrange-items-layouts/person-detail-items-rearrange/person-detail-items-rearrange.component';
+import { AgentTagsComponent } from './views/agent/agent-tags/agent-tags.component';
 
 
 
@@ -117,6 +118,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     EmailNocComponent,
     NotificationControlsComponent,
     PersonDetailItemsRearrangeComponent,
+    AgentTagsComponent,
 
   ],
   imports: [
