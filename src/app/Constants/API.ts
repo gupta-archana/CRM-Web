@@ -210,6 +210,10 @@ export class API {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=tagsSearch&searchString=%23" + searchString + "&entity=" + type + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows;
   }
 
+  getTagsUrl(app_mode: string, entityType: string, entityId: any) {
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userTagsGet&entity=" + entityType + "&entityID=" + entityId;
+  }
+
   getStates() {
     return this.STATES_JSON_URL;
   }

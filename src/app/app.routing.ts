@@ -25,6 +25,7 @@ import { ComplianceComponent } from './views/entity/compliance/compliance.compon
 import { ComplianceDetailComponent } from './views/entity/compliance-detail/compliance-detail.component';
 import { NotificationControlsComponent } from './views/notification-controls/notification-controls.component';
 import { PersonDetailItemsRearrangeComponent } from './views/rearrange-items-layouts/person-detail-items-rearrange/person-detail-items-rearrange.component';
+import { AgentTagsComponent } from './views/agent/agent-tags/agent-tags.component';
 
 
 
@@ -53,6 +54,7 @@ const appRoutesArray: Routes =
     { path: paths.PATH_AGENT_COMPLIANCE, component: ComplianceComponent },
     { path: paths.PATH_COMPLIANCE_DETAIL, component: ComplianceDetailComponent },
     { path: paths.PATH_NOTIFICATION_CONTROL, component: NotificationControlsComponent },
+    { path: paths.PATH_AGENT_TAGS, component: AgentTagsComponent },
     { path: '**', component: PageNotFoundComponent }
 
   ];

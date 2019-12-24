@@ -19,6 +19,11 @@
     "img": "../../../../images/objectives.svg"
   },
   {
+    "class": "agent-tags",
+    "title": "Tags",
+    "img": "../../../../images/tags.svg"
+  },
+  {
     "class": "calender",
     "title": "13 Month Activity",
     "img": "../../../../images/ic_calender.svg"

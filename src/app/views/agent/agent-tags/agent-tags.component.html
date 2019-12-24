@@ -4,23 +4,43 @@
       <div id="detail-page-header">
         <div class="col-xs-2 toppad"><img src="../../../../images/back-btn.svg" alt="" (click)="goBack()"></div>
         <div class="col-xs-8 text-center">
-          <h1 class="t-agent">Associates</h1>
+          <h1 class="t-agent">Tags</h1>
         </div>
-        <div class="col-xs-2 text-right toppad"><a (click)="onRecentProfileClick()" alt="" data-toggle="modal"
-            data-target="#recentAssociatesl"><img src="../../../../images/baseline-history.svg" alt=""></a></div>
+        <div class="col-xs-2 text-right toppad">
+          <a alt="" data-toggle="modal" data-target="#editTagsPopup"><img src="../../../../images/edit.svg"
+              alt=""><br><span class="edit-detail">Edit Tags</span></a>
+        </div>
       </div>
     </div>
     <app-entity-name-header [entityModel]="entityModel"></app-entity-name-header>
   </div>
-  <div class="container app-bg2 bottom-wrapper-for-back">
-    <div class="row">
+  <div class="container app-bg2 bottom-wrapper-for-back" *ngIf="hideNoDataDiv">
+    <div class="row" *ngFor="let item of tags">
       <div class="col-xs-6 col-md-3">
-        <button type="button" class="btn btn-primary btn-tags">#GoodAgent</button>
+        <button type="button" class="btn btn-primary btn-tags">{{item.name}}</button>
       </div>
     </div>
   </div>
-</div>
 
+
+
+  <div class="container add-box app-bg2-">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="form-group">
+          <input type="text" class="form-control pr-38" placeholder="Add private tag for this agent">
+        </div>
+        <button type="submit" class="btn btn-default add-btn"><img src="../../../../images/add-icon.svg"
+            alt=""></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="serach-emp " *ngIf="!hideNoDataDiv" style="margin-top: 50%">
+    <h2><em>It is Empty Here!</em></h2>
+    <p><em>{{errorMsg}}</em></p>
+  </div>
+</div>
 <!-- Modal beginning here -->
 <div class="modal fade" id="editTagsPopup" role="dialog">
   <div class="modal-dialog" style="margin-top:20%;">
@@ -36,20 +56,22 @@
           <div class="clear paddingTop10"></div>
 
 
-          <div class="row">
+          <div class="row" *ngFor="let item of tags">
             <div class="col-md-12">
               <div class="form-group">
-                <input type="text" class="form-control pr-35 opacity50" value="#GoodAgent" placeholder="">
+                <input type="text" class="form-control pr-35 opacity50" placeholder="" [(ngModel)]="item.name"
+                  [ngModelOptions]="{standalone: true}">
               </div>
-              <button type="submit" class="btn btn-default delete-btn"><img src="images/ic_delete.svg" alt=""></button>
+              <button type="submit" class="btn btn-default delete-btn"><img src="../../../../images/ic_delete.svg"
+                  alt=""></button>
             </div>
           </div>
 
           <div class="clear paddingTop10"></div>
         </div>
         <div class="modal-footer">
-          <a href="#" data-dismiss="modal" alt="Cancel"><span>Cancel</span></a>
-          <a href="#" data-dismiss="modal" alt="Save Changes">Finish Editing</a>
+          <a data-dismiss="modal" alt="Cancel"><span>Cancel</span></a>
+          <a data-dismiss="modal" alt="Save Changes">Finish Editing</a>
         </div>
       </form>
     </div>
@@ -57,13 +79,3 @@
   </div>
 </div>
 <!-- Modal End here -->
-<div class="container add-box app-bg2-">
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="form-group">
-        <input type="text" class="form-control pr-38" placeholder="Add private tag for this agent">
-      </div>
-      <button type="submit" class="btn btn-default add-btn"><img src="images/add-icon.svg" alt=""></button>
-    </div>
-  </div>
-</div>

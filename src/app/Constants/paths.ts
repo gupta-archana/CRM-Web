@@ -32,6 +32,7 @@ export const PATH_AGENT_AUDIT_QUEUED = "agentAuditQueued";
 export const PATH_AGENT_AUDIT_COMPLETED = "agentAuditCompleted";
 export const PATH_AGENT_COMPLIANCE = "agentCompliance";
 export const PATH_COMPLIANCE_DETAIL = "complianceDetail";
+export const PATH_AGENT_TAGS = "agentTags";
 //others
 export const PATH_REARRANGE_DRAWER_ITEM = "rearrangeHomeModules";
 export const PATH_REARRANGE_AGENT_DETAIL_ITEM = "rearrangeAgentDetailModules";

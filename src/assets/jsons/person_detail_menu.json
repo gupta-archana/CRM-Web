@@ -9,6 +9,11 @@
     "img": "../../../../images/note.svg"
   },
   {
+    "class": "agent-tags",
+    "title": "Tags",
+    "img": "../../../../images/tags.svg"
+  },
+  {
     "class": "agents",
     "title": "Agents",
     "img": "../../../../images/building-icon.svg"

@@ -48,40 +48,6 @@ a {
   cursor: pointer;
 }
 
-.nospace {
-  padding: 0px;
-  margin: 0px;
-  z-index: 1;
-}
-
-.clear,
-.clearfix {
-  clear: both;
-}
-
-.noPadding {
-  padding: 0px;
-}
-
-.paddingTop5 {
-  padding-top: 5px;
-}
-
-.paddingTop10 {
-  padding-top: 10px;
-}
-
-.paddingTop15 {
-  padding-top: 15px;
-}
-
-.paddingTop25 {
-  padding-top: 25px;
-}
-
-.paddingBottom5 {
-  padding-bottom: 5px !important;
-}
 
 
 .fontBold {
@@ -180,6 +146,36 @@ button.btn-login {
   border: 2px solid #F68933;
 }
 
+
+.btn-tags,
+.btn-tags:focus {
+  background: #F68933;
+  color: #fff;
+  font-size: 14px;
+  font-weight: normal;
+  border-radius: 30px;
+  width:100%;
+  padding: 10px 15px;
+  margin-bottom: 15px;
+  border:0;
+  text-align: left;
+}
+
+.btn-tags:hover{
+	background: #F68933;
+	color:#000;
+}
+
+
+.tagsContent h4{
+  color:rgba(0, 0, 0, 0.5);
+  font-size: 14px;
+  font-weight: normal;
+  text-align: center;
+  margin-top: 0;
+}
+
+
 button.btn-cancel {
   width: 92px;
   border: 2px solid #F68933;
@@ -248,7 +244,6 @@ form input[type="checkbox"] {
   background: #F2F2F2;
   padding: 25px 40px 25px 40px;
 }
-
 
 .app-bg5 {
   background: #F2F2F2;
@@ -608,7 +603,6 @@ ul.agent-details li a {
   line-height: 40px;
   font-size: 13px;
   cursor: pointer;
-  padding:5px 0px;
 }
 
 ul.agent-details li.agent-contact a {
@@ -944,6 +938,51 @@ ul.agent-details li.associates a {
 
 .serach-result .green {
   color: #36B700 !important;
+}
+
+
+
+.add-box {
+ background:#fff;
+  margin-top: 20px;
+  position:fixed;
+  bottom: 0;
+  padding:15px 15px 0px 15px;
+  width: 100%;
+}
+
+.add-box .form-group input[type="text"] {
+  border: 2px solid #F68933;
+  border-radius: 20px;
+  color: #000;
+  padding-right: 50px;
+  padding: 18px 15px;
+}
+
+.add-btn,
+.add-btn:hover,
+.add-btn a:active {
+  background-color: none;
+  box-shadow: 0px;
+  border: none;
+  background:none;  
+  position: absolute;
+  top: 2px;
+  right: 25px;
+  padding: 6px 8px 10px 9px;
+}
+
+.delete-btn,
+.delete-btn:hover,
+.delete-btn a:active {
+  background-color: none;
+  box-shadow: 0px;
+  border: none;
+  background:none;  
+  position: absolute;
+  top: 2px;
+  right:15px;
+  padding:5px;
 }
 
 ul.recent {
@@ -1449,7 +1488,7 @@ input:checked+.slider:before {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  color: #000;
+  color:#000;
 }
 
 /* Hide the browser's default checkbox */
@@ -1466,8 +1505,8 @@ input:checked+.slider:before {
   position: absolute;
   top: 0;
   left: 0;
-  height: 16px;
-  width: 16px;
+  height:16px;
+  width:16px;
   /* background-color: #eee; */
   border: solid 1px #F68933;
 }
@@ -1486,14 +1525,13 @@ input:checked+.slider:before {
 
 /* Style the checkmark/indicator */
 .containerBoxCustom .checkmarkCustom:after {
-  left: 2px;
-  top: 2px;
+  left:2px;
+  top:2px;
   width: 10px;
-  height: 10px;
+  height: 10px; 
   border-width: 2px 2px 2px 2px;
   background: #F68933;
 }
-
 /* Inner page Custom checkbox css end here */
 
 
@@ -1537,31 +1575,31 @@ input:checked+.slider:before {
   font-size: 12px;
   /* color: #a3a3a3; */
   font-weight: normal;
-  color: #000;
-  opacity: 0.8;
-  margin: 0px 0px 5px 0px;
+  color:#000;
+  opacity:0.8;
+  margin:0px 0px 5px 0px;
 }
 
 .passwordRequirements ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+	list-style: none;
+	margin: 0;
+	padding: 0;
 }
 
-.passwordRequirements ul li {
-  background: url(../images/check-default.svg) no-repeat left;
-  font-size: 12px;
-  font-weight: normal;
-  color: #000;
-  line-height: 18px;
-  /* opacity:0.8; */
-  color: #585858;
-  margin: 0;
-  padding: 0px 0px 0px 25px;
+.passwordRequirements ul li{
+	background:url(../images/check-default.svg) no-repeat left;	
+	font-size: 12px;
+	font-weight: normal;
+    color:#000;
+    line-height: 18px;
+    /* opacity:0.8; */
+    color: #585858;
+    margin: 0;
+	padding:0px 0px 0px 25px;	
 }
 
-.passwordRequirements ul li.valid {
-  background: url(../images/check-green.svg) no-repeat left;
+.passwordRequirements ul li.valid{
+	background:url(../images/check-green.svg) no-repeat left;		
 }
 
 .modal-body label.rememberM {
@@ -1933,10 +1971,6 @@ button:focus {
   background: #F2F2F2;
 }
 
-.paddingTop85 {
-  padding-top: 115px;
-}
-
 .tabIndcation {
   padding: 0px 15px;
 }
@@ -1974,9 +2008,66 @@ input:-internal-autofill-selected {
   color: rgb(0, 0, 0) !important;
 }
 
+
+
+
+
+
+
+.opacity50{
+	color:rgba(0, 0, 0, 0.5)!important;
+}
+
+.paddingTop85 {
+  padding-top: 115px;
+}
+
 .mb-5 {
   margin-bottom: 5px !important;
 }
+
+.nospace {
+  padding: 0px;
+  margin: 0px;
+  z-index: 1;
+}
+
+.clear,
+.clearfix {
+  clear: both;
+}
+
+.noPadding {
+  padding: 0px;
+}
+
+.paddingTop5 {
+  padding-top: 5px;
+}
+
+.paddingTop10 {
+  padding-top: 10px;
+}
+
+.paddingTop15 {
+  padding-top: 15px;
+}
+
+.paddingTop25 {
+  padding-top: 25px;
+}
+
+.paddingBottom5 {
+  padding-bottom: 5px !important;
+}
+
+.pr-35{padding-right:35px !important;}
+.pr-38{padding-right:38px !important;}
+
+
+
+
+
 
 
 
