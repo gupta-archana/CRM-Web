@@ -396,6 +396,16 @@ export class ApiHandlerService implements ApiResponseCallback {
     this.apiService.hitGetApi(url, this);
   }
 
+
+  /**
+   * setTags
+   */
+  public createTags(requestJson: any, apiResponseCallback: ApiResponseCallback) {
+    this.dataService.onHideShowLoader(true);
+    let url = this.api.getCreateNewTagUrl(this.APP_MODE[this.ENABLE_APP_MODE]);
+    this.apiService.hitPostApi(url, this.getRequestXml(requestJson), handleAddAndUpdateApiResponse(this, apiResponseCallback));
+  }
+
   /**
    * getStates
    */

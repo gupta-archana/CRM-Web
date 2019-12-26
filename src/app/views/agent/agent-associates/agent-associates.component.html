@@ -6,8 +6,10 @@
         <div class="col-xs-8 text-center">
           <h1 class="t-agent">Associates</h1>
         </div>
-        <div class="col-xs-2 text-right toppad"><a (click)="onRecentProfileClick()" alt="" data-toggle="modal"
-            data-target="#recentAssociatesl"><img src="../../../../images/baseline-history.svg" alt=""></a></div>
+        <div class="col-xs-2 text-right toppad">
+          <a (click)="onRecentProfileClick()" alt="" data-toggle="modal" data-target="#recentAssociatesl"><img
+              src="../../../../images/baseline-history.svg" alt=""></a>
+        </div>
       </div>
     </div>
     <app-entity-name-header [entityModel]="entityModel"></app-entity-name-header>
@@ -24,8 +26,8 @@
                 <div class="dpProfile_wp proActiBg">{{item.stat}}</div>
               </div>
               <h4>{{item.dispname}} <span>({{item.personID}})</span></h4>
-               <span class="paddingTop5">{{item.jobTitle}}</span>
-                <span class="date">{{item.effectiveDate | slice:0:10}}</span>
+              <span class="paddingTop5">{{item.jobTitle}}</span>
+              <span class="date">{{item.effectiveDate | slice:0:10}}</span>
               <div class="clearfix"></div>
               <div class="row">
                 <div class="col-md-12 col-xs-12" *ngIf="entityModel.type == P">
