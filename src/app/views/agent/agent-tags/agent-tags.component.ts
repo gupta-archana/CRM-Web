@@ -55,6 +55,8 @@ function createTag(context: AgentTagsComponent) {
 
 }
 function createJsonForAddTag(context: AgentTagsComponent) {
+  if (!context.newTag.startsWith('#'))
+    context.newTag = "#" + context.newTag;
   let requestBody = {
     tagID: "",
     entity: context.entityModel.type,
