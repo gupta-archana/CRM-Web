@@ -48,8 +48,6 @@ a {
   cursor: pointer;
 }
 
-
-
 .fontBold {
   font-weight: bold !important;
 }
@@ -86,7 +84,6 @@ a {
   outline: none;
   box-shadow: none;
 }
-
 
 /* .box1 input[type="password"] {
   background: #fff url(../images/password.svg) no-repeat;
@@ -947,6 +944,7 @@ ul.agent-details li.associates a {
   margin-top: 20px;
   position:fixed;
   bottom: 0;
+  left:0;
   padding:15px 15px 0px 15px;
   width: 100%;
 }
@@ -2007,6 +2005,110 @@ input:-internal-autofill-selected {
   background-image: none !important;
   color: rgb(0, 0, 0) !important;
 }
+.objectivesWp{
+	margin:0px;
+	padding:0px;
+	text-align: right;
+}
+
+.objectivesWp a{
+	font-size: 12px;
+	color:#F68933;
+	font-weight: bold;
+	
+}
+
+.addNoteBtn,
+.addNoteBtn:focus,
+.addNoteBtn:hover {
+  background: #f2f2f2;
+  color: #F68933;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+  border-radius: 6px;
+  border: 0;
+  border:solid 2px #F68933;
+}
+
+
+.monthSelectorWp {
+  position: relative;
+  margin: 10px 0px;
+}
+
+.monthSelectorWp hr {
+  height: 1px;
+  background: #000;
+  margin: 0;
+  opacity: 0.2;
+}
+
+.monthSelectorWp span {
+  position: absolute;
+  right: 0;
+  bottom:-8px;  
+}
+
+.monthSelectorWp span a{
+	font-size: 14px;
+	color: #F68933;
+	font-weight:bold; 
+    padding-right: 6px;
+    padding-left: 12px;
+    background:#F2F2F2;	
+}
+
+
+
+.yearSelectorWp {
+  position: relative;
+  margin: 10px 0px;
+}
+
+.yearSelectorWp hr {
+  height: 1px;
+  background: #707070;
+  margin: 0;
+  opacity: 0.2;
+}
+
+.yearSelectorWp span {
+  position: absolute;
+  left: 0;
+  bottom:-9px;
+  font-size: 16px;
+  font-weight:bold;
+  color:rgba(0, 0, 0, 0.5);
+  background:#fff;
+  padding-right:10px;  
+}
+
+
+.monthSelectorTable{
+	margin:0;
+	padding:0;
+}
+
+.monthSelectorTable table{
+	width:100%;
+}
+
+.monthSelectorTable table td{
+	width:50%;
+	font-size: 14px;
+  font-weight:normal;
+  color:rgba(0, 0, 0, 0.5);
+  padding: 10px 0px;
+}
+
+.monthSelectorTable table td.activeMonth{
+	font-size: 14px;
+  font-weight:bold;
+  color:#F68933;
+}
+
 
 
 
@@ -2064,7 +2166,21 @@ input:-internal-autofill-selected {
 .pr-35{padding-right:35px !important;}
 .pr-38{padding-right:38px !important;}
 
+.mr-25{margin-right:25px;}
+.ml-25{margin-left:25px;}
 
+.bgWhite{
+	background:#fff;
+}
+.bdr-top{
+	border-top:solid 1px #ccc;
+}
+
+.btmShadow{
+	-webkit-box-shadow: 0 8px 8px -4px rgba(46, 61, 73, .2);
+    -moz-box-shadow: 0 8px 8px -4px rgba(46, 61, 73, .2);
+    box-shadow: 0 8px 8px -4px rgba(46, 61, 73, .2);
+}
 
 
 

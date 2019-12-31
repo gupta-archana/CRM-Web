@@ -9,8 +9,10 @@ import { CommonFunctionsService } from '../../../utils/common-functions.service'
 export class AgentObjectiveComponent implements OnInit {
 
   constructor(private commonFunctions: CommonFunctionsService) { }
-
+  objectivesMapArray:Map<string, Array<number>>;
   ngOnInit() {
+
+    //this.objectivesMapArray.
   }
   goBack() {
     this.commonFunctions.backPress();

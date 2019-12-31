@@ -10,26 +10,171 @@
     </div>
   </div>
   <div class="container app-bg2 bottom-wrapper-for-back">
+    <ul class="nav nav-tabs mr-25 ml-25">
+      <li class="active"><a data-toggle="tab" href="#tab1">Agent Objective</a></li>
+      <li><a data-toggle="tab" href="#tab2">Our Objective</a></li>
+    </ul>
+
     <div class="row">
-      <div class="col-xs-12 col-md-6 cell-bg">
+      <!-- *****************************	 -->
+      <div class="col-xs-12 col-md-12">
 
-        <div class="ag-obj-active">
-          <div class="status">Status: <span>Active</span></div>
-          <div class="d-date text-right">Due Date: 21/2/2019</div>
-          <div class="clearfix"></div>
-          <p>Certain Object which needs to be fulfilled to benefit this agent.</p>
-        </div>
+        <div class="tab-content">
+          <!-- ---tab First beginning here---- -->
+          <div id="tab1" class="tab-pane fade in active">
+            <div class="clearfix paddingTop10"></div>
+            <div class="clearfix paddingTop10"></div>
 
-        <div class="ag-objective">
-          <ul>
-            <li class="complete">Complete</li>
-            <li class="cancel">Cancel</li>
-            <li class="edit">Edit</li>
-          </ul>
+            <div id="agentObjective">
+
+              <div class="row">
+                <div class="col-xs-12 col-md-6 cell-bg">
+                  <div class="ag-obj-active">
+                    <div class="status">Status: <span>Active</span></div>
+                    <div class="d-date text-right">Due Date: 21/2/2019</div>
+                    <div class="clearfix"></div>
+                    <p>Certain Object which needs to be fulfilled to benefit this agent.</p>
+                  </div>
+                  <div class="ag-objective">
+                    <ul>
+                      <li style="width:60%;" class="complete">Complete</li>
+                      <li style="width:40%;" class="cancel">Cancel</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix paddingTop15"></div>
+
+              <div class="col-xs-12 col-md-12 noPadding">
+                <div class="objectivesWp">
+                  <a href="#" onclick="showRecentAgentObj();">See all Recent Agent Objective</a>
+                </div>
+              </div>
+
+            </div>
+
+            <div id="recentAgentObj" style="display:none;">
+
+              <div class="row">
+                <div class="col-md-12 col-xs-12 noPadding">
+                  <div class="monthSelectorWp">
+                    <hr />
+                    <span><a href="#" data-toggle="modal" data-target="#monthSelectorPopup">21 Feb 2019</a></span>
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix paddingTop5"></div>
+              <div class="row">
+                <div class="col-xs-12 col-md-6 cell-bg">
+                  <div class="ag-obj-active">
+                    <div class="status">Status: <span>Complete</span></div>
+                    <div class="d-date text-right">Due Date: 2/21/2019</div>
+                    <div class="clearfix"></div>
+                    <p>Our Objective will be written here.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix paddingTop15"></div>
+
+              <div class="row">
+                <div class="col-md-12 col-xs-12 noPadding">
+                  <div class="monthSelectorWp">
+                    <hr />
+                    <span><a href="#">21 Jan 2019</a></span>
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix paddingTop5"></div>
+              <div class="row">
+                <div class="col-xs-12 col-md-6 cell-bg">
+                  <div class="ag-obj-active">
+                    <div class="status">Status: <span>Complete</span></div>
+                    <div class="d-date text-right">Due Date: 1/21/2019</div>
+                    <div class="clearfix"></div>
+                    <p>Our Objective will be written here.</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="container add-box">
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="form-group">
+                    <button type="button" class="btn btn-primary addNoteBtn">
+                      <img src="images/add-note-icon.svg" alt=""> &nbsp; Add Note
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="clearfix paddingTop15"></div>
+          </div>
+
+          <!-- ---tab First end here---- -->
+
+          <!-- ---tab second beginning here---- -->
+          <div id="tab2" class="tab-pane fade">
+            <div class="clearfix paddingTop10"></div>
+            <div class="clearfix paddingTop10"></div>
+            <div class="row">
+              <div class="col-xs-12 col-md-6 cell-bg">
+                <div class="ag-obj-active">
+                  <div class="status">Status: <span>Active</span></div>
+                  <div class="d-date text-right">Due Date: 21/2/2019</div>
+                  <div class="clearfix"></div>
+                  <p>Our Objective will be written here.</p>
+                </div>
+                <div class="ag-objective">
+                  <ul>
+                    <li style="width:60%;" class="complete">Complete</li>
+                    <li style="width:40%;" class="cancel">Cancel</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="clearfix paddingTop15"></div>
+
+            <div class="col-xs-12 col-md-12 noPadding">
+              <div class="objectivesWp">
+                <a href="#">See all Recent Agent Objectives</a>
+              </div>
+            </div>
+
+
+
+            <div class="container add-box">
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="form-group">
+                    <button type="button" class="btn btn-primary addNoteBtn">
+                      <img src="images/add-note-icon.svg" alt=""> &nbsp; Add Note
+                    </button>
+                  </div>
+                </div>
+
+                <div class="buttonFooter_wp">
+                  <button type="button" class="btn btn-primary footerBtn">
+                    <img src="images/record-obj-icon.svg" alt=""> Record Objective Sentiment
+                  </button>
+                </div>
+
+              </div>
+            </div>
+
+
+
+            <div class="clearfix paddingTop15"></div>
+          </div>
+          <!-- ---tab second end here---- -->
+
         </div>
       </div>
 
-      <!-- <button (click)="topFunction()" id="myBtn" title="Go to top"><span class="glyphicon glyphicon-arrow-up"></span></button> -->
     </div>
+
   </div>
 </div>

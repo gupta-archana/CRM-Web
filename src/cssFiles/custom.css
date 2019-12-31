@@ -19,6 +19,8 @@
   overflow: auto;
 }
 
+
+
 .bottom-wrapper-for-back {
   padding-top: 100px;
   z-index: 5;
@@ -451,11 +453,16 @@ ul.agent-details li.audits a {
   min-height: 200px;
 }
 
+.no-data-margin-top{
+  margin-top: 10%;
+  }
 @media (max-width: 768px) {
   .paddingTop85 {
     padding-top: 100px;
   }
- 
+  .no-data-margin-top{
+    margin-top: 30%;
+    }
 }
 
 /* do not change value using for media query */

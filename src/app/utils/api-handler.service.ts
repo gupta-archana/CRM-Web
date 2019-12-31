@@ -391,6 +391,7 @@ export class ApiHandlerService implements ApiResponseCallback {
    * getTags
    */
   public getTags(entityType: string, entityId: any, apiResponseCallback: ApiResponseCallback) {
+    this.dataService.onHideShowLoader(true);
     this.apiResponseCallback = apiResponseCallback;
     let url = this.api.getTagsUrl(this.APP_MODE[this.ENABLE_APP_MODE], entityType, entityId);
     this.apiService.hitGetApi(url, this);
