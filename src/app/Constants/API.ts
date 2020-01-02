@@ -217,6 +217,11 @@ export class API {
   getCreateNewTagUrl(app_mode: string) {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userTagNew";
   }
+
+  getObjectivesUrl(app_mode: string, stat: string, entity: any, entityId: any, type: string, pageNum: any) {
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userObjectivesGet&entity=" + entity + "&entityID=" + entityId + "&stat=" + stat + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows;
+  }
+
   getStates() {
     return this.STATES_JSON_URL;
   }

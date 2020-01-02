@@ -27,13 +27,13 @@
 
             <div id="agentObjective">
 
-              <div class="row">
+              <div class="row" *ngIf="agentActiveObjective">
                 <div class="col-xs-12 col-md-6 cell-bg">
                   <div class="ag-obj-active">
                     <div class="status">Status: <span>Active</span></div>
-                    <div class="d-date text-right">Due Date: 21/2/2019</div>
+                    <div class="d-date text-right">Due Date: {{agentActiveObjective.dueDate | slice:0:10}}</div>
                     <div class="clearfix"></div>
-                    <p>Certain Object which needs to be fulfilled to benefit this agent.</p>
+                    <p>{{agentActiveObjective.description}}</p>
                   </div>
                   <div class="ag-objective">
                     <ul>
@@ -119,13 +119,13 @@
           <div id="tab2" class="tab-pane fade">
             <div class="clearfix paddingTop10"></div>
             <div class="clearfix paddingTop10"></div>
-            <div class="row">
+            <div class="row" *ngIf="ourActiveObjective">
               <div class="col-xs-12 col-md-6 cell-bg">
                 <div class="ag-obj-active">
                   <div class="status">Status: <span>Active</span></div>
-                  <div class="d-date text-right">Due Date: 21/2/2019</div>
+                  <div class="d-date text-right">Due Date: {{ourActiveObjective.dueDate | slice:0:10}}</div>
                   <div class="clearfix"></div>
-                  <p>Our Objective will be written here.</p>
+                  <p>{{ourActiveObjective.description}}</p>
                 </div>
                 <div class="ag-objective">
                   <ul>
@@ -134,47 +134,46 @@
                   </ul>
                 </div>
               </div>
-            </div>
 
-            <div class="clearfix paddingTop15"></div>
+              <div class="clearfix paddingTop15"></div>
 
-            <div class="col-xs-12 col-md-12 noPadding">
-              <div class="objectivesWp">
-                <a href="#">See all Recent Agent Objectives</a>
+              <div class="col-xs-12 col-md-12 noPadding">
+                <div class="objectivesWp">
+                  <a href="#">See all Recent Agent Objectives</a>
+                </div>
               </div>
-            </div>
 
 
 
-            <div class="container add-box">
-              <div class="row">
-                <div class="col-xs-12">
-                  <div class="form-group">
-                    <button type="button" class="btn btn-primary addNoteBtn">
-                      <img src="images/add-note-icon.svg" alt=""> &nbsp; Add Note
+              <div class="container add-box">
+                <div class="row">
+                  <div class="col-xs-12">
+                    <div class="form-group">
+                      <button type="button" class="btn btn-primary addNoteBtn">
+                        <img src="images/add-note-icon.svg" alt=""> &nbsp; Add Note
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="buttonFooter_wp">
+                    <button type="button" class="btn btn-primary footerBtn">
+                      <img src="images/record-obj-icon.svg" alt=""> Record Objective Sentiment
                     </button>
                   </div>
-                </div>
 
-                <div class="buttonFooter_wp">
-                  <button type="button" class="btn btn-primary footerBtn">
-                    <img src="images/record-obj-icon.svg" alt=""> Record Objective Sentiment
-                  </button>
                 </div>
-
               </div>
+
+
+
+              <div class="clearfix paddingTop15"></div>
             </div>
+            <!-- ---tab second end here---- -->
 
-
-
-            <div class="clearfix paddingTop15"></div>
           </div>
-          <!-- ---tab second end here---- -->
-
         </div>
+
       </div>
 
     </div>
-
   </div>
-</div>

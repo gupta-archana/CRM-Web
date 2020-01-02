@@ -408,6 +408,16 @@ export class ApiHandlerService implements ApiResponseCallback {
   }
 
   /**
+   * getObjectives
+   */
+  public getObjectives(stat: string, entity: any, entityId: any, objectiveFor: string, pageNum: any, apiResponseCallback: ApiResponseCallback) {
+    this.apiResponseCallback = apiResponseCallback;
+    this.dataService.onHideShowLoader(true);
+    let url = this.api.getObjectivesUrl(this.APP_MODE[this.ENABLE_APP_MODE], stat, entity, entityId, objectiveFor, pageNum);
+    this.apiService.hitGetApi(url, this.apiResponseCallback);
+  }
+
+  /**
    * getStates
    */
   public getStates(apiResponseCallback: ApiResponseCallback) {
