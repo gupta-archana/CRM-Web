@@ -20,8 +20,13 @@ export class AgentTagsComponent extends BaseClass implements OnInit, ApiResponse
   newTag: string = "";
   ngOnInit() {
     this.entityModel = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
-    this.apiHandler.getTags(this.entityModel.type, this.entityModel.entityId, this);
+    getTags(this);
   }
+
+  goBack() {
+    this.commonFunctions.backPress();
+  }
+
   onSuccess(response: any) {
     this.hideNoDataDiv = true;
     this.tags = response.tag;
@@ -33,6 +38,11 @@ export class AgentTagsComponent extends BaseClass implements OnInit, ApiResponse
     this.errorMsg = errorMsg;
     this.cdr.markForCheck();
   }
+
+  onTagClick(item: TagModel) {
+    let params = { selectedTag: item.name }
+    this.commonFunctions.navigateWithParams(this.paths.PATH_ASSOCIATED_AGENTS, params);
+  }
   onCreateTagClick() {
     if (this.newTag.length > 0) {
       createTag(this);
@@ -41,6 +51,9 @@ export class AgentTagsComponent extends BaseClass implements OnInit, ApiResponse
     }
   }
 }
+function getTags(context: AgentTagsComponent) {
+  context.apiHandler.getTags(context.entityModel.type, context.entityModel.entityId, context);
+}
 
 
 function createTag(context: AgentTagsComponent) {
@@ -48,8 +61,10 @@ function createTag(context: AgentTagsComponent) {
   context.apiHandler.createTags(createJsonForAddTag(context), {
     onSuccess(response) {
       context.commonFunctions.showSnackbar(response);
+      context.newTag = "";
+      getTags(context);
     }, onError(errorCode, errorMsg) {
-
+      context.commonFunctions.showErrorSnackbar(errorMsg);
     }
   })
 

@@ -63,6 +63,7 @@ import { AgentDetailItemRearrangeComponent } from './views/rearrange-items-layou
 import { DrawerItemsRearrangeComponent } from './views/rearrange-items-layouts/drawer-items-rearrange/drawer-items-rearrange.component';
 import { PersonDetailItemsRearrangeComponent } from './views/rearrange-items-layouts/person-detail-items-rearrange/person-detail-items-rearrange.component';
 import { AgentTagsComponent } from './views/agent/agent-tags/agent-tags.component';
+import { SelectedTagAgentsComponent } from './views/agent/selected-tag-agents/selected-tag-agents.component';
 
 
 
@@ -119,6 +120,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     NotificationControlsComponent,
     PersonDetailItemsRearrangeComponent,
     AgentTagsComponent,
+    SelectedTagAgentsComponent,
 
   ],
   imports: [

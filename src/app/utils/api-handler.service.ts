@@ -408,6 +408,16 @@ export class ApiHandlerService implements ApiResponseCallback {
   }
 
   /**
+   * getAssociatedAgentFromTag
+   */
+  public getAssociatedAgentFromTag(selectedTag: string, type: string, pageNum: number, apiResponseCallback: ApiResponseCallback) {
+    this.dataService.onHideShowLoader(true);
+    this.apiResponseCallback = apiResponseCallback;
+    let url = this.api.getAssociatedAgentsWithTagUrl(this.APP_MODE[this.ENABLE_APP_MODE], selectedTag, type, pageNum);
+    this.apiService.hitGetApi(url, this);
+  }
+
+  /**
    * getObjectives
    */
   public getObjectives(stat: string, entity: any, entityId: any, objectiveFor: string, pageNum: any, apiResponseCallback: ApiResponseCallback) {

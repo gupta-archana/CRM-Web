@@ -67,6 +67,10 @@ export class CommonFunctionsService {
   navigateWithoutReplaceUrl(path: string) {
     this.router.navigate([path]);
   }
+
+  navigateWithParams(path: string, params) {
+    this.router.navigate([path], { queryParams: params });
+  }
   getEncryptedPassword(pUnencrypted: string) {
     //pUnencrypted = "TestingPassword"
     let passwordCeilingNumber = Math.ceil(pUnencrypted.length / 26);

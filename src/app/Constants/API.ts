@@ -218,6 +218,10 @@ export class API {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userTagNew";
   }
 
+  getAssociatedAgentsWithTagUrl(app_mode: string, tag: string, type: string, pageNum: number) {
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=matchedtagSearch&searchString=%23" + tag + "&entity=" + type + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows;
+  }
+
   getObjectivesUrl(app_mode: string, stat: string, entity: any, entityId: any, type: string, pageNum: any) {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userObjectivesGet&entity=" + entity + "&entityID=" + entityId + "&stat=" + stat + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows;
   }

@@ -17,7 +17,7 @@
   <div class="container app-bg2 bottom-wrapper-for-back" *ngIf="hideNoDataDiv">
     <div class="row" *ngFor="let item of tags">
       <div class="col-xs-6 col-md-3">
-        <button type="button" class="btn btn-primary btn-tags">{{item.name}}</button>
+        <button type="button" class="btn btn-primary btn-tags" (click)="onTagClick(item)">{{item.name}}</button>
       </div>
     </div>
   </div>

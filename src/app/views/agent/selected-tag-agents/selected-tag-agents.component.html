@@ -1,0 +1,44 @@
+<div class="container-fluid nospace">
+  <div class="wrapper-back">
+    <div class="container nav-bg">
+      <div id="detail-page-header">
+        <div class="col-xs-2 toppad"><img src="../../../../images/back-btn.svg" alt="" (click)="goBack()"></div>
+        <div class="col-xs-8 text-center">
+          <h1 class="t-agent">{{'#'+selectedTag}}</h1>
+        </div>
+      </div>
+    </div>
+    <app-entity-name-header [entityModel]="entityModel"></app-entity-name-header>
+  </div>
+  <div class="container app-bg2 bottom-wrapper-for-back">
+    <div class="row">
+      <div class="col-xs-12 tagsContent">
+        <h4>Entities associated with this tag are following</h4>
+      </div>
+    </div>
+    <div class="row">
+      <ul>
+        <li *ngFor="let item of agents;let i=index">
+          <div class="col-xs-12 col-md-6 cell-bg">
+            <div class="agent-detail">
+              <div class="dp">
+                <img src="../../../../../../images/baseline-business-24px.svg" alt="" />
+                <div class="dpProfile_wp proActiBg">{{item.stat}}</div>
+              </div>
+              <h4>{{item.name}} <span>({{item.entityId}})</span><a><img
+                    src="{{checkEntityFavorite(item)?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}"
+                    alt="" (click)="onStarClick(item)"></a></h4>
+              <span>{{getAddress(item)}}</span>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="row  marginBottom20" *ngIf="moreDataAvailable">
+      <div class="col-xs-12 col-md-12 loadMoreWp">
+        <hr />
+        <div class="loadMore"><a (click)="onLoadMoreClick()" alt="Load More">Load More</a></div>
+      </div>
+    </div>
+  </div>
+</div>
