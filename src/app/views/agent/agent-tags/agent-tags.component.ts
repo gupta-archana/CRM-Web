@@ -20,6 +20,7 @@ export class AgentTagsComponent extends BaseClass implements OnInit, ApiResponse
   newTag: string = "";
   ngOnInit() {
     this.entityModel = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
+    updateRatioUI(this);
     getTags(this);
   }
 
@@ -69,6 +70,12 @@ function createTag(context: AgentTagsComponent) {
   })
 
 }
+
+function updateRatioUI(context: AgentTagsComponent) {
+  context.commonFunctions.showLoadedItemTagOnHeader(new Array, 0);
+  context.cdr.markForCheck();
+}
+
 function createJsonForAddTag(context: AgentTagsComponent) {
   if (!context.newTag.startsWith('#'))
     context.newTag = "#" + context.newTag;

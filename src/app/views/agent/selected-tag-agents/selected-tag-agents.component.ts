@@ -20,6 +20,8 @@ export class SelectedTagAgentsComponent extends BaseClass implements OnInit, Api
   moreDataAvailable: boolean = false;
   agents: Array<EntityModel> = new Array<EntityModel>();
   totalRows: number = 0;
+  hideNoDataDiv: boolean = false;
+  errorMsg: string = "";
   ngOnInit() {
     this.entityModel = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
     getTagFromRoute(this);
@@ -48,7 +50,9 @@ export class SelectedTagAgentsComponent extends BaseClass implements OnInit, Api
 
 
   onError(errorCode: number, errorMsg: string) {
-
+    updateNoDataAvailableFlag(this);
+    this.errorMsg = errorMsg;
+    this.cdr.markForCheck();
   }
 }
 function getTagFromRoute(context: SelectedTagAgentsComponent) {
@@ -64,7 +68,7 @@ function getTagFromRoute(context: SelectedTagAgentsComponent) {
 function hitApi(context: SelectedTagAgentsComponent) {
   context.pageNum++;
 
-  context.apiHandler.getAssociatedAgentFromTag(context.selectedTag, context.TYPES, context.pageNum, context);
+  context.apiHandler.getAssociatedAgentFromTag(context.selectedTag, context.TYPES, context.entityModel.type, context.entityModel.entityId, context.pageNum, context);
 }
 
 
@@ -76,9 +80,20 @@ function parseResponse(response: any, context: SelectedTagAgentsComponent) {
     else
       context.totalRows = Number(element.rowNum);
   });
+
   checkMoreDataAvailable(context);
+  updateNoDataAvailableFlag(context);
+
+}
+
+function updateNoDataAvailableFlag(context: SelectedTagAgentsComponent) {
+  if (context.agents && context.agents.length > 0) {
+    context.hideNoDataDiv = true
+  } else
+    context.hideNoDataDiv = false;
   updateRatioUI(context);
 }
+
 function checkMoreDataAvailable(context: SelectedTagAgentsComponent) {
   if ((!context.agents && context.agents.length == 0) || context.agents.length >= context.totalRows)
     context.moreDataAvailable = false;
@@ -87,6 +102,7 @@ function checkMoreDataAvailable(context: SelectedTagAgentsComponent) {
 }
 function updateRatioUI(context: SelectedTagAgentsComponent) {
   context.commonFunctions.showLoadedItemTagOnHeader(context.agents, context.totalRows);
-  //context.totalAndCurrentRowsRatio = context.commonFunctions.showMoreDataSnackbar(context.agentNotes, context.totalRows);
   context.cdr.markForCheck();
 }
+
+

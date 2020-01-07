@@ -14,30 +14,30 @@
     </div>
     <app-entity-name-header [entityModel]="entityModel"></app-entity-name-header>
   </div>
-  <div class="container app-bg2 bottom-wrapper-for-back" *ngIf="hideNoDataDiv">
-    <div class="row" *ngFor="let item of tags">
-      <div class="col-xs-6 col-md-3">
-        <button type="button" class="btn btn-primary btn-tags" (click)="onTagClick(item)">{{item.name}}</button>
-      </div>
-    </div>
-  </div>
+  <form (ngSubmit)="onCreateTagClick()">
+    <div class="container app-bg2 bottom-wrapper-for-back" *ngIf="hideNoDataDiv">
 
-
-
-  <div class="container add-box app-bg2-">
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="form-group">
-          <input type="text" class="form-control pr-38" placeholder="Add private tag for this agent"
-            [(ngModel)]="newTag" [ngModelOptions]="{standalone: true}">
+      <div class="row">
+        <div class="col-xs-6 col-md-3" *ngFor="let item of tags">
+          <button type="button" class="btn btn-primary btn-tags" (click)="onTagClick(item)">{{item.name}}</button>
         </div>
-        <button type="submit" class="btn btn-default add-btn" (click)="onCreateTagClick()"><img
-            src="../../../../images/add-icon.svg" alt=""></button>
       </div>
     </div>
-  </div>
 
-  <div class="serach-emp  no-data-margin-top" *ngIf="!hideNoDataDiv" >
+    <div class="container add-box app-bg2-">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <input type="text" class="form-control pr-38" placeholder="Add private tag for this agent"
+              [(ngModel)]="newTag" [ngModelOptions]="{standalone: true}">
+          </div>
+          <button type="submit" class="btn btn-default add-btn"><img src="../../../../images/add-icon.svg"
+              alt=""></button>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="serach-emp  no-data-margin-top" *ngIf="!hideNoDataDiv">
     <h2><em>It is Empty Here!</em></h2>
     <p><em>{{errorMsg}}</em></p>
   </div>

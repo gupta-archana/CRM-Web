@@ -410,10 +410,10 @@ export class ApiHandlerService implements ApiResponseCallback {
   /**
    * getAssociatedAgentFromTag
    */
-  public getAssociatedAgentFromTag(selectedTag: string, type: string, pageNum: number, apiResponseCallback: ApiResponseCallback) {
+  public getAssociatedAgentFromTag(selectedTag: string, type: string, currEntity: string, currEntityId: any, pageNum: number, apiResponseCallback: ApiResponseCallback) {
     this.dataService.onHideShowLoader(true);
     this.apiResponseCallback = apiResponseCallback;
-    let url = this.api.getAssociatedAgentsWithTagUrl(this.APP_MODE[this.ENABLE_APP_MODE], selectedTag, type, pageNum);
+    let url = this.api.getAssociatedAgentsWithTagUrl(this.APP_MODE[this.ENABLE_APP_MODE], selectedTag, type, currEntity, currEntityId, pageNum);
     this.apiService.hitGetApi(url, this);
   }
 

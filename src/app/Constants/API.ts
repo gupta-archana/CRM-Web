@@ -211,19 +211,19 @@ export class API {
   }
 
   getTagsUrl(app_mode: string, entityType: string, entityId: any) {
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userTagsGet&entity=" + entityType + "&entityID=" + entityId;
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userTagsGet&entity=" + entityType + "&entityID=" + entityId + "&getAllTags=false";
   }
 
   getCreateNewTagUrl(app_mode: string) {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userTagNew";
   }
 
-  getAssociatedAgentsWithTagUrl(app_mode: string, tag: string, type: string, pageNum: number) {
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=matchedtagSearch&searchString=%23" + tag + "&entity=" + type + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows;
+  getAssociatedAgentsWithTagUrl(app_mode: string, tag: string, type: string, currEntity: string, currEntityId: any, pageNum: number) {
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=matchedtagSearch&searchString=%23" + tag + "&entity=" + type + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows + "&currEntity=" + currEntity + "&currEntityID=" + currEntityId;
   }
 
   getObjectivesUrl(app_mode: string, stat: string, entity: any, entityId: any, type: string, pageNum: any) {
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userObjectivesGet&entity=" + entity + "&entityID=" + entityId + "&stat=" + stat + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows;
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userObjectivesGet&entity=" + entity + "&entityID=" + entityId + "&stat=" + stat + "&type" + type + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows;
   }
 
   getStates() {

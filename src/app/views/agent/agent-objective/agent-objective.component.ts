@@ -43,9 +43,29 @@ export class AgentObjectiveComponent extends BaseClass implements OnInit, ApiRes
 
 
 function hitApiForActiveStatuses(context: AgentObjectiveComponent) {
-  context.pageNum++;
-  this.apiHandler.getObjectives(context.STATUS_ACTIVE, context.entityModel.type, context.entityModel.entityId, context.OBJECTIVE_FOR_OUR, context.pageNum, context);
+  //context.pageNum++;
+  //context.apiHandler.getObjectives(context.STATUS_ACTIVE, context.entityModel.type, context.entityModel.entityId, context.OBJECTIVE_FOR_OUR, context.pageNum, context);
+  getAgentActiveStatuses(context);
+  getOurActiveStatuses(context);
+}
 
+function getAgentActiveStatuses(context: AgentObjectiveComponent) {
+  context.apiHandler.getObjectives(context.STATUS_ACTIVE, context.entityModel.type, context.entityModel.entityId, context.OBJECTIVE_FOR_AGENT, 1, {
+    onSuccess(response) {
+      context.agentActiveObjective = response[0];
+    }, onError(errorCode, errorMsg) {
+
+    }
+  });
+}
+function getOurActiveStatuses(context: AgentObjectiveComponent) {
+  context.apiHandler.getObjectives(context.STATUS_ACTIVE, context.entityModel.type, context.entityModel.entityId, context.OBJECTIVE_FOR_OUR, 1, {
+    onSuccess(response) {
+      context.ourActiveObjective = response[0];
+    }, onError(errorCode, errorMsg) {
+
+    }
+  });
 }
 function parseResponseForActiveObjective(context: AgentObjectiveComponent, response: any) {
   let objectives: Array<ObjectiveModel> = response.objective;
