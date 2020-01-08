@@ -424,7 +424,7 @@ export class ApiHandlerService implements ApiResponseCallback {
     this.apiResponseCallback = apiResponseCallback;
     this.dataService.onHideShowLoader(true);
     let url = this.api.getObjectivesUrl(this.APP_MODE[this.ENABLE_APP_MODE], stat, entity, entityId, objectiveFor, pageNum);
-    this.apiService.hitGetApi(url, this.apiResponseCallback);
+    this.apiService.hitGetApi(url, this);
   }
 
   /**

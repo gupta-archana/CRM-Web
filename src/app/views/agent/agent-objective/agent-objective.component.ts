@@ -17,8 +17,8 @@ export class AgentObjectiveComponent extends BaseClass implements OnInit, ApiRes
   constructor(private injector: Injector) { super(injector) }
   entityModel: EntityModel;
   objectivesMapArray: Map<string, Array<ObjectiveModel>>;
-  agentActiveObjective: ObjectiveModel = new ObjectiveModel();
-  ourActiveObjective: ObjectiveModel = new ObjectiveModel();
+  agentActiveObjective: ObjectiveModel = null;
+  ourActiveObjective: ObjectiveModel = null;
   pageNum: number = 0;
   STATUS_ACTIVE = "A";
   STATUS_ALL = "ALL";
@@ -33,7 +33,7 @@ export class AgentObjectiveComponent extends BaseClass implements OnInit, ApiRes
     this.commonFunctions.backPress();
   }
   onSuccess(response: any) {
-    parseResponseForActiveObjective(this, response);
+
     this.cdr.markForCheck();
   }
   onError(errorCode: number, errorMsg: string) {
@@ -53,6 +53,7 @@ function getAgentActiveStatuses(context: AgentObjectiveComponent) {
   context.apiHandler.getObjectives(context.STATUS_ACTIVE, context.entityModel.type, context.entityModel.entityId, context.OBJECTIVE_FOR_AGENT, 1, {
     onSuccess(response) {
       context.agentActiveObjective = response[0];
+      context.cdr.markForCheck();
     }, onError(errorCode, errorMsg) {
 
     }
@@ -62,25 +63,11 @@ function getOurActiveStatuses(context: AgentObjectiveComponent) {
   context.apiHandler.getObjectives(context.STATUS_ACTIVE, context.entityModel.type, context.entityModel.entityId, context.OBJECTIVE_FOR_OUR, 1, {
     onSuccess(response) {
       context.ourActiveObjective = response[0];
+      context.cdr.markForCheck();
     }, onError(errorCode, errorMsg) {
 
     }
   });
 }
-function parseResponseForActiveObjective(context: AgentObjectiveComponent, response: any) {
-  let objectives: Array<ObjectiveModel> = response.objective;
-  if (objectives && objectives.length > 0) {
-    objectives.forEach(element => {
-      switch (element.type) {
-        case context.OBJECTIVE_FOR_OUR:
-          context.ourActiveObjective = element;
-          break;
-        case context.OBJECTIVE_FOR_AGENT:
-          context.agentActiveObjective = element;
-          break;
-        default:
-          break;
-      }
-    });
-  }
-}
+
+

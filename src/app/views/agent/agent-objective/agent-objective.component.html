@@ -119,8 +119,8 @@
           <div id="tab2" class="tab-pane fade">
             <div class="clearfix paddingTop10"></div>
             <div class="clearfix paddingTop10"></div>
-            <div class="row" *ngIf="ourActiveObjective">
-              <div class="col-xs-12 col-md-6 cell-bg">
+            <div class="row" >
+              <div class="col-xs-12 col-md-6 cell-bg" *ngIf="ourActiveObjective">
                 <div class="ag-obj-active">
                   <div class="status">Status: <span>Active</span></div>
                   <div class="d-date text-right">Due Date: {{ourActiveObjective.dueDate | slice:0:10}}</div>
