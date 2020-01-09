@@ -30,7 +30,7 @@ export class AgentNotesComponent extends BaseClass implements OnInit {
 
 
   onTabSelect(event) {
-    //this.commonFunctions.showSnackbar(event.index);
+    // this.commonFunctions.showSnackbar(event.index);
     this.commonFunctions.printLog(event);
     shareTabIndexToChilds(this, event.index);
   }
