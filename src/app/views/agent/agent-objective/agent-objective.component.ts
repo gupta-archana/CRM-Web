@@ -1,9 +1,8 @@
-import { Component, OnInit, Injector, ChangeDetectionStrategy } from '@angular/core';
-import { CommonFunctionsService } from '../../../utils/common-functions.service';
-import { ObjectiveModel } from '../../../models/objective-model';
+import { ChangeDetectionStrategy, Component, Injector, OnInit } from '@angular/core';
 import { BaseClass } from '../../../global/base-class';
 import { ApiResponseCallback } from '../../../Interfaces/ApiResponseCallback';
 import { EntityModel } from '../../../models/entity-model';
+import { ObjectiveModel } from '../../../models/objective-model';
 
 @Component({
   selector: 'app-agent-objective',
@@ -17,6 +16,7 @@ export class AgentObjectiveComponent extends BaseClass implements OnInit, ApiRes
   constructor(private injector: Injector) { super(injector); }
   entityModel: EntityModel;
   agentObjectivesMapArray: Map<string, Array<ObjectiveModel>> = new Map<string, Array<ObjectiveModel>>();
+  ourObjectivesMapArray: Map<string, Array<ObjectiveModel>> = new Map<string, Array<ObjectiveModel>>();
   agentActiveObjective: ObjectiveModel = null;
   ourActiveObjective: ObjectiveModel = null;
   agentPageNum = 0;
@@ -91,7 +91,7 @@ function getOurActiveStatuses(context: AgentObjectiveComponent) {
 function getAllRecentObjectiveForAgent(context: AgentObjectiveComponent) {
   context.agentPageNum++;
   context.apiHandler.getObjectives(context.STATUS_ALL, context.entityModel.type,
-    context.entityModel.entityId, context.OBJECTIVE_FOR_OUR, context.agentPageNum, {
+    context.entityModel.entityId, context.OBJECTIVE_FOR_AGENT, context.agentPageNum, {
     onSuccess(response) {
       context.agentObjectivesMapArray = parseRecentObjectivesResponse(context, false, response);
       context.cdr.markForCheck();
@@ -106,7 +106,8 @@ function getAllRecentObjectiveForOur(context: AgentObjectiveComponent) {
   context.apiHandler.getObjectives(context.STATUS_ALL, context.entityModel.type,
     context.entityModel.entityId, context.OBJECTIVE_FOR_OUR, context.ourPageNum, {
     onSuccess(response) {
-
+      context.ourObjectivesMapArray = parseRecentObjectivesResponse(context, true, response);
+      context.cdr.markForCheck();
     }, onError(errorCode, errorMsg) {
 
     }
