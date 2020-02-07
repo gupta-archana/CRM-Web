@@ -64,6 +64,7 @@ import { DrawerItemsRearrangeComponent } from './views/rearrange-items-layouts/d
 import { PersonDetailItemsRearrangeComponent } from './views/rearrange-items-layouts/person-detail-items-rearrange/person-detail-items-rearrange.component';
 import { AgentTagsComponent } from './views/agent/agent-tags/agent-tags.component';
 import { SelectedTagAgentsComponent } from './views/agent/selected-tag-agents/selected-tag-agents.component';
+import { EditObjectiveComponent } from './customUI/dialogs/edit-objective/edit-objective.component';
 
 
 
@@ -121,6 +122,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     PersonDetailItemsRearrangeComponent,
     AgentTagsComponent,
     SelectedTagAgentsComponent,
+    EditObjectiveComponent,
 
   ],
   imports: [
@@ -166,7 +168,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     SendEmailConfirmationComponent,
     DownloadPdfComponent,
     EmailNocComponent,
-    AssignedToComponent
+    AssignedToComponent,
+    EditObjectiveComponent
   ],
   providers: [Constants, ApiService,
     { provide: UrlSerializer, useClass: LowerCaseUrlSerializer },

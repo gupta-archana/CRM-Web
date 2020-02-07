@@ -428,6 +428,27 @@ export class ApiHandlerService implements ApiResponseCallback {
   }
 
   /**
+ * getActiveObjectives
+ */
+  public getActiveObjectives(stat: string, entity: any, entityId: any, objectiveFor: string, pageNum: any, apiResponseCallback: ApiResponseCallback) {
+    this.apiResponseCallback = apiResponseCallback;
+    this.dataService.onHideShowLoader(true);
+    let url = this.api.getObjectivesUrl(this.APP_MODE[this.ENABLE_APP_MODE], stat, entity, entityId, objectiveFor, pageNum);
+    this.apiService.hitGetApi(url, this);
+  }
+
+
+  /**
+   * updateObjective
+   */
+  public updateObjective(requestJson, apiResponseCallback: ApiResponseCallback) {
+    this.dataService.onHideShowLoader(true);
+    let url = this.api.getUpdateObjectiveUrl(this.APP_MODE[this.ENABLE_APP_MODE]);
+    //console.log(this.getRequestXml(requestJson));
+    this.apiService.hitPostApi(url, this.getRequestXml(requestJson), handleAddAndUpdateApiResponse(this, apiResponseCallback));
+  }
+
+  /**
    * getStates
    */
   public getStates(apiResponseCallback: ApiResponseCallback) {

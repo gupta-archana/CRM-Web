@@ -223,7 +223,11 @@ export class API {
   }
 
   getObjectivesUrl(app_mode: string, stat: string, entity: any, entityId: any, type: string, pageNum: any) {
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userObjectivesGet&entity=" + entity + "&entityID=" + entityId + "&stat=" + stat + "&type" + type + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows;
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userObjectivesGet&entity=" + entity + "&entityID=" + entityId + "&stat=" + stat + "&type=" + type + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows;
+  }
+
+  getUpdateObjectiveUrl(app_mode: string) {
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userObjectiveModify";
   }
 
   getStates() {

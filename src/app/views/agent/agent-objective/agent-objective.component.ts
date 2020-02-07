@@ -21,25 +21,43 @@ export class AgentObjectiveComponent extends BaseClass implements OnInit, ApiRes
   ourActiveObjective: ObjectiveModel = null;
   agentPageNum = 0;
   ourPageNum = 0;
+  selectedTab: number = 1;
 
   totalAgentObjective: number = 0;
   totalOurObjective: number = 0;
 
   STATUS_ACTIVE = 'A';
   STATUS_ALL = 'ALL';
-  OBJECTIVE_FOR_OUR = 'our';
-  OBJECTIVE_FOR_AGENT = 'agent';
+  OBJECTIVE_FOR_OUR = 'O';
+  OBJECTIVE_FOR_AGENT = 'T';
+  showingOtherThanActiveObjectives: boolean = false;
 
   ngOnInit() {
     this.entityModel = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
     getAgentActiveStatuses(this);
-    getAllRecentObjectiveForAgent(this);
+    //getAllRecentObjectiveForAgent(this);
   }
   goBack() {
+    if (this.selectedTab == 1) {
+      if (document.getElementById("recentAgentObj").style.display == "block") {
+        this.showAgentActiveObj();
+        return;
+      }
+
+    }
+    else {
+      if (document.getElementById("ourObj").style.display == "block") {
+        this.showOurActiveObj();
+        return;
+      }
+
+    }
+
     this.commonFunctions.backPress();
   }
 
   onTabClick(tabNumber: number) {
+    this.selectedTab = tabNumber;
     if (tabNumber == 1) {
       if (!this.agentActiveObjective) {
         getAgentActiveStatuses(this);
@@ -53,11 +71,49 @@ export class AgentObjectiveComponent extends BaseClass implements OnInit, ApiRes
   }
 
   onSuccess(response: any) {
-
     this.cdr.markForCheck();
   }
   onError(errorCode: number, errorMsg: string) {
-    throw new Error('Method not implemented.');
+
+  }
+
+  showAgentRecentObj() {
+    document.getElementById("recentAgentObj").style.display = "block";
+    document.getElementById("agentObjective").style.display = "none";
+    this.showingOtherThanActiveObjectives = true;
+  }
+
+  showAgentActiveObj() {
+    document.getElementById("recentAgentObj").style.display = "none";
+    document.getElementById("agentObjective").style.display = "block";
+    this.showingOtherThanActiveObjectives = false;
+  }
+
+  showOurRecentObj() {
+    document.getElementById("ourObj").style.display = "block";
+    document.getElementById("ourObjective").style.display = "none";
+    this.showingOtherThanActiveObjectives = true;
+  }
+
+  showOurActiveObj() {
+    document.getElementById("ourObj").style.display = "none";
+    document.getElementById("ourObjective").style.display = "block";
+    this.showingOtherThanActiveObjectives = false;
+  }
+
+
+  openEditObjectiveDialog() {
+    if (this.selectedTab == 1) {
+      this.openDialogService.showEditObjectiveDialog(JSON.stringify(this.agentActiveObjective)).afterClosed().subscribe(updated => {
+        if (updated)
+          getAgentActiveStatuses(this);
+      });
+    } else if (this.selectedTab == 2) {
+      this.openDialogService.showEditObjectiveDialog(JSON.stringify(this.ourActiveObjective)).afterClosed().subscribe(updated => {
+        if (updated)
+          getOurActiveStatuses(this);
+      });
+    }
   }
 }
 
@@ -65,28 +121,17 @@ export class AgentObjectiveComponent extends BaseClass implements OnInit, ApiRes
 
 
 function getAgentActiveStatuses(context: AgentObjectiveComponent) {
-  context.apiHandler.getObjectives(context.STATUS_ACTIVE, context.entityModel.type,
+  context.apiHandler.getActiveObjectives(context.STATUS_ACTIVE, context.entityModel.type,
     context.entityModel.entityId, context.OBJECTIVE_FOR_AGENT, 1, {
     onSuccess(response) {
-      context.agentActiveObjective = response[0];
+      context.agentActiveObjective = response.objective[0];
+      getAllRecentObjectiveForAgent(context);
       context.cdr.markForCheck();
     }, onError(errorCode, errorMsg) {
 
     }
   });
 }
-function getOurActiveStatuses(context: AgentObjectiveComponent) {
-  context.apiHandler.getObjectives(context.STATUS_ACTIVE, context.entityModel.type,
-    context.entityModel.entityId, context.OBJECTIVE_FOR_OUR, 1, {
-    onSuccess(response) {
-      context.ourActiveObjective = response[0];
-      context.cdr.markForCheck();
-    }, onError(errorCode, errorMsg) {
-
-    }
-  });
-}
-
 
 function getAllRecentObjectiveForAgent(context: AgentObjectiveComponent) {
   context.agentPageNum++;
@@ -94,6 +139,19 @@ function getAllRecentObjectiveForAgent(context: AgentObjectiveComponent) {
     context.entityModel.entityId, context.OBJECTIVE_FOR_AGENT, context.agentPageNum, {
     onSuccess(response) {
       context.agentObjectivesMapArray = parseRecentObjectivesResponse(context, false, response);
+      context.cdr.markForCheck();
+    }, onError(errorCode, errorMsg) {
+
+    }
+  });
+}
+
+function getOurActiveStatuses(context: AgentObjectiveComponent) {
+  context.apiHandler.getActiveObjectives(context.STATUS_ACTIVE, context.entityModel.type,
+    context.entityModel.entityId, context.OBJECTIVE_FOR_OUR, 1, {
+    onSuccess(response) {
+      context.ourActiveObjective = response.objective[0];
+      getAllRecentObjectiveForOur(context);
       context.cdr.markForCheck();
     }, onError(errorCode, errorMsg) {
 

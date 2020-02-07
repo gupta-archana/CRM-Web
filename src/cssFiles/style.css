@@ -924,7 +924,7 @@ ul.agent-details li.associates a {
 
 .serach-emp p {
   font-size: 14px;
-  padding: 10px 50px;
+  padding: 10px 0px;
   color: #b1b1b1;
 }
 
@@ -939,6 +939,32 @@ ul.agent-details li.associates a {
 
 
 
+.serach-empName {
+  background: #F2F2F2 url(../images/empty-page.svg) top no-repeat;
+  background-position-y:15px;
+  padding-top: 50px;
+  text-align: center;
+  min-height:230px;
+}
+
+.serach-empName {
+  padding-top:115px;
+}
+
+.serach-empName h2 {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0px;
+  color: #b1b1b1;
+}
+
+.serach-empName p {
+  font-size: 14px;
+  padding: 10px 0px;
+  color: #b1b1b1;
+}
+
+
 .add-box {
  background:#fff;
   margin-top: 20px;
@@ -946,7 +972,10 @@ ul.agent-details li.associates a {
   bottom: 0;
   left:0;
   padding:15px 15px 0px 15px;
-  width: 100%;
+  width: 100%;  
+  -webkit-box-shadow:-4px -5px 8px -4px rgba(46, 61, 73, 0.3);
+  -moz-box-shadow:-4px -5px 8px -4px rgba(46, 61, 73, 0.3);
+  box-shadow: -4px -5px 8px -4px rgba(46, 61, 73, 0.3);   
 }
 
 .add-box .form-group input[type="text"] {
@@ -1478,7 +1507,7 @@ input:checked+.slider:before {
   display: block;
   position: relative;
   padding-left: 30px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   cursor: pointer;
   font-size: 14px;
   font-weight: normal;
@@ -1501,7 +1530,7 @@ input:checked+.slider:before {
 /* Create a custom checkbox */
 .checkmarkCustom {
   position: absolute;
-  top: 0;
+  top: 2px;
   left: 0;
   height:16px;
   width:16px;
@@ -2109,6 +2138,80 @@ input:-internal-autofill-selected {
   color:#F68933;
 }
 
+.feedbackWp {
+	width: 50px;
+	position: relative;	
+	text-align: center;
+	margin: 0 auto;	
+}
+
+.feedback-detail {
+  font-size: 10px;
+  color:#F68933;
+  white-space: nowrap;
+  margin:0;
+  padding:0;
+  text-align: center;
+}
+
+.feedbackNoWp {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    position: absolute;
+    top: -10px;
+    right:2px;
+    font-size:10px;
+    color:#F68933;
+    font-weight: bold;
+    padding: 1px 0px 0px 0px;
+    background:#fff;
+    border:solid 2px #F68933;
+}
+
+.feedback-request {
+	margin:0;
+	padding:0;
+}
+
+.feedback-request img {
+  float: left;
+  margin-right:10px;
+  margin-bottom: 15px;
+}
+
+.feedback-request h4 {
+  font-size: 12px;
+  font-weight: bold;
+  color: #F68933;
+  padding: 0px;
+  margin: 5px 0px 0px 0px;
+}
+
+.feedback-request span {
+  font-size: 10px;
+  font-weight: normal;  
+  color:rgba(0, 0, 0, 0.6)
+}
+
+.emailIconBtn {
+  font-size: 10px;
+  color: #F68933;
+  font-weight: normal;
+  margin: 0px;
+  padding: 0px;
+}
+
+.emailIconBtn a {
+  color: #F68933;
+}
+
+
+
+
+
+
+
 
 
 
@@ -2162,19 +2265,21 @@ input:-internal-autofill-selected {
 .paddingBottom5 {
   padding-bottom: 5px !important;
 }
+.pb-10 {
+  padding-bottom: 10px;
+}
 
+.pr-0{padding-right:0px;}
+.pl-0{padding-left:0px;}
 .pr-35{padding-right:35px !important;}
 .pr-38{padding-right:38px !important;}
 
+.mt-0{margin-top:0px;}
 .mr-25{margin-right:25px;}
 .ml-25{margin-left:25px;}
 
-.bgWhite{
-	background:#fff;
-}
-.bdr-top{
-	border-top:solid 1px #ccc;
-}
+.bgWhite{background:#fff;}
+.bdr-top{ border-top:solid 1px #ccc;}
 
 .btmShadow{
 	-webkit-box-shadow: 0 8px 8px -4px rgba(46, 61, 73, .2);

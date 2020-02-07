@@ -1,0 +1,32 @@
+<mat-dialog-content class="mat-dialog-content">
+  <!-- Modal content-->
+
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title">Edit Objective</h4>
+  </div>
+  <form role="form">
+    <div class="modal-body">
+      <div class="clear paddingTop10"></div>
+
+      <div class="form-group">
+        <label for="usr">Objective Details</label>
+        <input type="text" class="form-control" id="name" [(ngModel)]="objectiveModel.description"
+          [ngModelOptions]="{standalone: true}">
+      </div>
+
+
+
+      <div class="clear paddingTop10"></div>
+    </div>
+    <!-- <div class="modal-footer">
+      <a href="#" data-dismiss="modal" alt="Cancel"><span>Cancel</span></a>
+      <a href="#" data-dismiss="modal" alt="Save Changes">Save Changes</a>
+    </div> -->
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions id="MarkAsReviewedDialogButtonGroup" align="end">
+  <button (click)="onCancelClick()">Cancel</button>
+  <button (click)="onSaveChangesClick()">Save Changes</button>
+</mat-dialog-actions>
+<!-- Edit Objective Modal End here -->

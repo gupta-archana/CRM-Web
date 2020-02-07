@@ -6,12 +6,17 @@
         <div class="col-xs-7 text-center">
           <h1 class="t-agent">Objective</h1>
         </div>
+        <div class="col-xs-3 text-center tpad" *ngIf="!showingOtherThanActiveObjectives">
+          <a alt="" (click)="openEditObjectiveDialog()"><img src="../../../../images/add.svg" alt=""><br>
+            <span class="edit-detail">Edit Objective</span></a>
+        </div>
       </div>
     </div>
+    <app-entity-name-header [entityModel]="entityModel"></app-entity-name-header>
   </div>
   <div class="container app-bg2 bottom-wrapper-for-back">
     <ul class="nav nav-tabs mr-25 ml-25">
-      <li class="active"><a data-toggle="tab" href="#tab1" (click)="onTabClick(1)" >Agent Objective</a></li>
+      <li class="active"><a data-toggle="tab" href="#tab1" (click)="onTabClick(1)">Agent Objective</a></li>
       <li><a data-toggle="tab" href="#tab2" (click)="onTabClick(2)">Our Objective</a></li>
     </ul>
 
@@ -47,55 +52,37 @@
 
               <div class="col-xs-12 col-md-12 noPadding">
                 <div class="objectivesWp">
-                  <a href="#" onclick="showRecentAgentObj();">See all Recent Agent Objective</a>
+                  <a (click)="showAgentRecentObj()">See all Recent Agent Objective</a>
                 </div>
               </div>
 
             </div>
 
             <div id="recentAgentObj" style="display:none;">
-
-              <div class="row">
-                <div class="col-md-12 col-xs-12 noPadding">
-                  <div class="monthSelectorWp">
-                    <hr />
-                    <span><a href="#" data-toggle="modal" data-target="#monthSelectorPopup">21 Feb 2019</a></span>
+              <div *ngFor="let item of agentObjectivesMapArray | keyvalue">
+                <div class="row">
+                  <div class="col-md-12 col-xs-12 noPadding">
+                    <div class="monthSelectorWp">
+                      <hr />
+                      <span><a href="#" data-toggle="modal"
+                          data-target="#monthSelectorPopup">{{item.key | slice:0:10}}</a></span>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="clearfix paddingTop5"></div>
-              <div class="row">
-                <div class="col-xs-12 col-md-6 cell-bg">
-                  <div class="ag-obj-active">
-                    <div class="status">Status: <span>Complete</span></div>
-                    <div class="d-date text-right">Due Date: 2/21/2019</div>
-                    <div class="clearfix"></div>
-                    <p>Our Objective will be written here.</p>
+                <div class="clearfix paddingTop5"></div>
+                <div class="row">
+                  <div class="col-xs-12 col-md-6 cell-bg" *ngFor="let innerItem of item.value">
+                    <div class="ag-obj-active">
+                      <div class="status">Status: <span>{{innerItem.Stat}}</span></div>
+                      <div class="d-date text-right">Due Date: {{innerItem.dueDate | slice:0:10}}</div>
+                      <div class="clearfix"></div>
+                      <p>{{innerItem.description}}</p>
+                    </div>
+                    <div class="paddingTop10"></div>
                   </div>
                 </div>
+                <div class="clearfix paddingTop15"></div>
               </div>
-              <div class="clearfix paddingTop15"></div>
-
-              <div class="row">
-                <div class="col-md-12 col-xs-12 noPadding">
-                  <div class="monthSelectorWp">
-                    <hr />
-                    <span><a href="#">21 Jan 2019</a></span>
-                  </div>
-                </div>
-              </div>
-              <div class="clearfix paddingTop5"></div>
-              <div class="row">
-                <div class="col-xs-12 col-md-6 cell-bg">
-                  <div class="ag-obj-active">
-                    <div class="status">Status: <span>Complete</span></div>
-                    <div class="d-date text-right">Due Date: 1/21/2019</div>
-                    <div class="clearfix"></div>
-                    <p>Our Objective will be written here.</p>
-                  </div>
-                </div>
-              </div>
-
             </div>
 
             <div class="container add-box">
@@ -119,31 +106,57 @@
           <div id="tab2" class="tab-pane fade">
             <div class="clearfix paddingTop10"></div>
             <div class="clearfix paddingTop10"></div>
-            <div class="row" >
-              <div class="col-xs-12 col-md-6 cell-bg" *ngIf="ourActiveObjective">
-                <div class="ag-obj-active">
-                  <div class="status">Status: <span>Active</span></div>
-                  <div class="d-date text-right">Due Date: {{ourActiveObjective.dueDate | slice:0:10}}</div>
-                  <div class="clearfix"></div>
-                  <p>{{ourActiveObjective.description}}</p>
+            <div class="row">
+              <div id="ourObjective">
+                <div class="col-xs-12 col-md-6 cell-bg" *ngIf="ourActiveObjective">
+                  <div class="ag-obj-active">
+                    <div class="status">Status: <span>Active</span></div>
+                    <div class="d-date text-right">Due Date: {{ourActiveObjective.dueDate | slice:0:10}}</div>
+                    <div class="clearfix"></div>
+                    <p>{{ourActiveObjective.description}}</p>
+                  </div>
+                  <div class="ag-objective">
+                    <ul>
+                      <li style="width:60%;" class="complete">Complete</li>
+                      <li style="width:40%;" class="cancel">Cancel</li>
+                    </ul>
+                  </div>
                 </div>
-                <div class="ag-objective">
-                  <ul>
-                    <li style="width:60%;" class="complete">Complete</li>
-                    <li style="width:40%;" class="cancel">Cancel</li>
-                  </ul>
+
+                <div class="clearfix paddingTop15"></div>
+
+                <div class="col-xs-12 col-md-12 noPadding">
+                  <div class="objectivesWp">
+                    <a (click)="showOurRecentObj()">See all our Objectives</a>
+                  </div>
                 </div>
               </div>
-
-              <div class="clearfix paddingTop15"></div>
-
-              <div class="col-xs-12 col-md-12 noPadding">
-                <div class="objectivesWp">
-                  <a href="#">See all Recent Agent Objectives</a>
+              <div id="ourObj" style="display:none;">
+                <div *ngFor="let item of ourObjectivesMapArray | keyvalue">
+                  <div class="row">
+                    <div class="col-md-12 col-xs-12 noPadding">
+                      <div class="monthSelectorWp">
+                        <hr />
+                        <span><a href="#" data-toggle="modal"
+                            data-target="#monthSelectorPopup">{{item.key | slice:0:10}}</a></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="clearfix paddingTop5"></div>
+                  <div class="row">
+                    <div class="col-xs-12 col-md-6 cell-bg" *ngFor="let innerItem of item.value">
+                      <div class="ag-obj-active">
+                        <div class="status">Status: <span>{{innerItem.Stat}}</span></div>
+                        <div class="d-date text-right">Due Date: {{innerItem.dueDate | slice:0:10}}</div>
+                        <div class="clearfix"></div>
+                        <p>{{innerItem.description}}</p>
+                      </div>
+                      <div class="paddingTop10"></div>
+                    </div>
+                  </div>
+                  <div class="clearfix paddingTop15"></div>
                 </div>
               </div>
-
-
 
               <div class="container add-box">
                 <div class="row">
@@ -177,3 +190,4 @@
 
     </div>
   </div>
+</div>
