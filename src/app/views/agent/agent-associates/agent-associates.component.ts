@@ -122,19 +122,14 @@ function setAssociates(context: AgentAssociatesComponent) {
 function makeServerRequest(context: AgentAssociatesComponent) {
   if (context.entityModel.type) {
     context.pageNum++;
-    //context.entityInfo.entityId = "017575";
     context.apiHandler.getAssociates(context.entityModel.entityId, context.entityModel.type, context.pageNum, context);
   }
-
-  // else {
-  //   context.apiHandler.getPersonAffiliations(context.entityInfo.entityId, context.pageNum, context)
-  // }
 }
 
 function checkMoreDataAvailable(context: AgentAssociatesComponent) {
   if (!context.associatesModels || context.associatesModels.length == context.totalRows)
     context.moreDataAvailable = false;
-    else
+  else
     context.moreDataAvailable = true;
 }
 

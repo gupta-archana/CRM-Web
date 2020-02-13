@@ -217,4 +217,15 @@ export class Constants {
   SEARCH_FILTER = "searchfilter";
   BATCH_SIZE = "batchsize";
   NEWS_FEED = "newsfeed";
+
+  //Statuses Array
+
+  public statusFull =
+    {
+      c: 'Completed',
+      a: "Active",
+      x: 'Cancel'
+    }
+
+
 }

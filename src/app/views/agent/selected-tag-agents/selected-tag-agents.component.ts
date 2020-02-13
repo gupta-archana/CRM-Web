@@ -39,11 +39,17 @@ export class SelectedTagAgentsComponent extends BaseClass implements OnInit, Api
   getAddress(item: EntityModel) {
     return this.commonFunctions.getAddress(item);
   }
-
-
+  
   goBack() {
     this.commonFunctions.backPress();
   }
+
+  onPersonClick(item: EntityModel) {
+    sessionStorage.setItem(this.constants.ENTITY_INFO, JSON.stringify(item));
+    let navigatingPath = this.paths.PATH_AGENT_DETAIL;
+    this.commonFunctions.navigateWithoutReplaceUrl(navigatingPath);
+  }
+
   onSuccess(response: any) {
     parseResponse(response, this);
   }

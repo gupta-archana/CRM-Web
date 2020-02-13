@@ -53,6 +53,13 @@ export class API {
 
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=profileSearch&stateId=" + stateId + "&Type=" + type + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows + "&searchString=" + searchString;
   }
+
+
+  getSearchedProfileForTagAndNonTagUrl(app_mode: string, stateId: string, type: string, pageNum: number, searchString: string) {
+
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=entityProfileSearch&stateId=" + stateId + "&Type=" + type + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows + "&searchString=" + searchString;
+  }
+
   getAgentSearchedUrl(app_mode: string, stateId: string, searchString: string) {
 
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=agentssearch&stateId=" + stateId + "&searchString=" + searchString;

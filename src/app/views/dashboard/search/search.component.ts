@@ -81,9 +81,12 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Aft
     ({ selectedState, type } = this.setFilterForApiRequest(selectedState, type));
 
     let searchString: string = this.searchForm.value.search;
-    if (searchString.startsWith("#"))
-      this.apiHandler.GetTagSearchedData(type, selectedState, searchString.substring(1, searchString.length), this.pageNum, this);
-    else
+    searchString = searchString.replace(/#/g, '%23');
+    searchString = searchString.replace(/,/g, '%2c');
+    searchString = searchString.replace(/\s/g, '%2c');
+    // if (searchString.startsWith("#"))
+    //   this.apiHandler.GetTagSearchedData(type, selectedState, searchString.substring(1, searchString.length), this.pageNum, this);
+    // else
       this.apiHandler.GetSearchedData(type, selectedState, searchString, this.pageNum, this);
   }
 

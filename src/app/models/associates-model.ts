@@ -14,4 +14,5 @@ export class AssociatesModel {
   effectiveDate: string;
   rowNum: string;
   stat:string;
+  jobTitle:any;
 }

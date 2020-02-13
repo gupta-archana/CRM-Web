@@ -30,12 +30,12 @@ export class AgentObjectiveComponent extends BaseClass implements OnInit, ApiRes
   STATUS_ALL = 'ALL';
   OBJECTIVE_FOR_OUR = 'O';
   OBJECTIVE_FOR_AGENT = 'T';
-  showingOtherThanActiveObjectives: boolean = false;
+  hideEditObjective: boolean = true;
+  showingRecents: boolean = false;
 
   ngOnInit() {
     this.entityModel = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
     getAgentActiveStatuses(this);
-    //getAllRecentObjectiveForAgent(this);
   }
   goBack() {
     if (this.selectedTab == 1) {
@@ -50,14 +50,13 @@ export class AgentObjectiveComponent extends BaseClass implements OnInit, ApiRes
         this.showOurActiveObj();
         return;
       }
-
     }
-
     this.commonFunctions.backPress();
   }
 
   onTabClick(tabNumber: number) {
     this.selectedTab = tabNumber;
+    showHideEditObjective(this);
     if (tabNumber == 1) {
       if (!this.agentActiveObjective) {
         getAgentActiveStatuses(this);
@@ -80,27 +79,37 @@ export class AgentObjectiveComponent extends BaseClass implements OnInit, ApiRes
   showAgentRecentObj() {
     document.getElementById("recentAgentObj").style.display = "block";
     document.getElementById("agentObjective").style.display = "none";
-    this.showingOtherThanActiveObjectives = true;
+    this.showingRecents = true;
+    showHideEditObjective(this);
   }
 
   showAgentActiveObj() {
     document.getElementById("recentAgentObj").style.display = "none";
     document.getElementById("agentObjective").style.display = "block";
-    this.showingOtherThanActiveObjectives = false;
+    this.showingRecents = false;
+    showHideEditObjective(this);
   }
 
   showOurRecentObj() {
     document.getElementById("ourObj").style.display = "block";
     document.getElementById("ourObjective").style.display = "none";
-    this.showingOtherThanActiveObjectives = true;
+    this.showingRecents = true;
+    showHideEditObjective(this);
   }
 
   showOurActiveObj() {
     document.getElementById("ourObj").style.display = "none";
     document.getElementById("ourObjective").style.display = "block";
-    this.showingOtherThanActiveObjectives = false;
+    this.showingRecents = false;
+    showHideEditObjective(this);
+  }
+  onCompleteClick(item: ObjectiveModel) {
+    changeObjectiveStatus(this, item, "C");
   }
 
+  onCancelClick(item: ObjectiveModel) {
+    changeObjectiveStatus(this, item, "X");
+  }
 
   openEditObjectiveDialog() {
     if (this.selectedTab == 1) {
@@ -124,14 +133,23 @@ function getAgentActiveStatuses(context: AgentObjectiveComponent) {
   context.apiHandler.getActiveObjectives(context.STATUS_ACTIVE, context.entityModel.type,
     context.entityModel.entityId, context.OBJECTIVE_FOR_AGENT, 1, {
     onSuccess(response) {
-      context.agentActiveObjective = response.objective[0];
-      getAllRecentObjectiveForAgent(context);
-      context.cdr.markForCheck();
+      handleActiveAgentStatusesResponse(context, response);
     }, onError(errorCode, errorMsg) {
-
+      showHideEditObjective(context);
+      if (context.agentObjectivesMapArray.size == 0)
+        getAllRecentObjectiveForAgent(context);
     }
   });
 }
+
+function handleActiveAgentStatusesResponse(context: AgentObjectiveComponent, response) {
+  context.agentActiveObjective = response.objective[0];
+  showHideEditObjective(context);
+  if (context.agentObjectivesMapArray.size == 0)
+    getAllRecentObjectiveForAgent(context);
+  context.cdr.markForCheck();
+}
+
 
 function getAllRecentObjectiveForAgent(context: AgentObjectiveComponent) {
   context.agentPageNum++;
@@ -150,13 +168,21 @@ function getOurActiveStatuses(context: AgentObjectiveComponent) {
   context.apiHandler.getActiveObjectives(context.STATUS_ACTIVE, context.entityModel.type,
     context.entityModel.entityId, context.OBJECTIVE_FOR_OUR, 1, {
     onSuccess(response) {
-      context.ourActiveObjective = response.objective[0];
-      getAllRecentObjectiveForOur(context);
-      context.cdr.markForCheck();
+      handleOurActiveStatusResponse(context, response);
     }, onError(errorCode, errorMsg) {
-
+      showHideEditObjective(context);
+      if (context.ourObjectivesMapArray.size == 0)
+        getAllRecentObjectiveForOur(context);
     }
   });
+}
+
+function handleOurActiveStatusResponse(context: AgentObjectiveComponent, response) {
+  context.ourActiveObjective = response.objective[0];
+  showHideEditObjective(context);
+  if (context.ourObjectivesMapArray.size == 0)
+    getAllRecentObjectiveForOur(context);
+  context.cdr.markForCheck();
 }
 
 function getAllRecentObjectiveForOur(context: AgentObjectiveComponent) {
@@ -170,6 +196,44 @@ function getAllRecentObjectiveForOur(context: AgentObjectiveComponent) {
 
     }
   });
+}
+
+function changeObjectiveStatus(context: AgentObjectiveComponent, objectiveModel: ObjectiveModel, status: any) {
+  objectiveModel.Stat = status;
+  context.apiHandler.updateObjective(createRequestJson(objectiveModel), {
+    onSuccess(response) {
+      context.commonFunctions.showSnackbar(response);
+      updateObjectivesAfterChangeStatus(context);
+    }, onError(errorCode, errorMsg) {
+      context.commonFunctions.showErrorSnackbar(errorMsg);
+    }
+  });
+
+}
+
+function createRequestJson(objectiveModel) {
+  let finalJson = {
+    "objective": "",
+    "attr": objectiveModel
+  }
+  return finalJson;
+}
+
+function updateObjectivesAfterChangeStatus(context: AgentObjectiveComponent) {
+  if (context.selectedTab == 1) {
+    context.agentPageNum = 0;
+    context.agentActiveObjective = null;
+    context.agentObjectivesMapArray = new Map<string, Array<ObjectiveModel>>();
+    context.cdr.markForCheck();
+    getAgentActiveStatuses(context);
+  }
+  else {
+    context.ourPageNum = 0;
+    context.ourActiveObjective = null;
+    context.ourObjectivesMapArray = new Map<string, Array<ObjectiveModel>>();
+    context.cdr.markForCheck();
+    getOurActiveStatuses(context);
+  }
 }
 
 function parseRecentObjectivesResponse(context: AgentObjectiveComponent, ourObjective: boolean, response) {
@@ -187,6 +251,7 @@ function parseRecentObjectivesResponse(context: AgentObjectiveComponent, ourObje
   });
   return recentMap;
 }
+
 function addItemToMap(element: ObjectiveModel, recentMap: Map<string, ObjectiveModel[]>) {
   let key: string = element.dueDate;
   let objectivesArrayForDate = recentMap.get(key);
@@ -196,3 +261,22 @@ function addItemToMap(element: ObjectiveModel, recentMap: Map<string, ObjectiveM
   recentMap.set(key, objectivesArrayForDate);
 }
 
+function showHideEditObjective(context: AgentObjectiveComponent) {
+  if (context.showingRecents) {
+    context.hideEditObjective = true;
+  }
+  else if (context.selectedTab == 1) {
+    if (context.agentActiveObjective) {
+      context.hideEditObjective = false;
+    } else {
+      context.hideEditObjective = true;
+    }
+  } else {
+    if (context.ourActiveObjective) {
+      context.hideEditObjective = false;
+    } else {
+      context.hideEditObjective = true;
+    }
+  }
+  context.cdr.markForCheck();
+}

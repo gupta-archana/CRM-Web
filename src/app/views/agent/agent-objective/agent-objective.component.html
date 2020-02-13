@@ -6,7 +6,7 @@
         <div class="col-xs-7 text-center">
           <h1 class="t-agent">Objective</h1>
         </div>
-        <div class="col-xs-3 text-center tpad" *ngIf="!showingOtherThanActiveObjectives">
+        <div class="col-xs-3 text-center tpad" *ngIf="!hideEditObjective">
           <a alt="" (click)="openEditObjectiveDialog()"><img src="../../../../images/add.svg" alt=""><br>
             <span class="edit-detail">Edit Objective</span></a>
         </div>
@@ -42,8 +42,9 @@
                   </div>
                   <div class="ag-objective">
                     <ul>
-                      <li style="width:60%;" class="complete">Complete</li>
-                      <li style="width:40%;" class="cancel">Cancel</li>
+                      <li style="width:60%;" class="complete" (click)="onCompleteClick(agentActiveObjective)">Complete
+                      </li>
+                      <li style="width:40%;" class="cancel" (click)="onCancelClick(agentActiveObjective)">Cancel</li>
                     </ul>
                   </div>
                 </div>
@@ -73,7 +74,8 @@
                 <div class="row">
                   <div class="col-xs-12 col-md-6 cell-bg" *ngFor="let innerItem of item.value">
                     <div class="ag-obj-active">
-                      <div class="status">Status: <span>{{innerItem.Stat}}</span></div>
+                      <div class="status">Status:
+                        <span>{{constants.statusFull[innerItem.Stat.toLocaleLowerCase()]}}</span></div>
                       <div class="d-date text-right">Due Date: {{innerItem.dueDate | slice:0:10}}</div>
                       <div class="clearfix"></div>
                       <p>{{innerItem.description}}</p>
@@ -117,8 +119,9 @@
                   </div>
                   <div class="ag-objective">
                     <ul>
-                      <li style="width:60%;" class="complete">Complete</li>
-                      <li style="width:40%;" class="cancel">Cancel</li>
+                      <li style="width:60%;" class="complete" (click)="onCompleteClick(ourActiveObjective)">Complete
+                      </li>
+                      <li style="width:40%;" class="cancel" (click)="onCancelClick(ourActiveObjective)">Cancel</li>
                     </ul>
                   </div>
                 </div>
@@ -146,7 +149,8 @@
                   <div class="row">
                     <div class="col-xs-12 col-md-6 cell-bg" *ngFor="let innerItem of item.value">
                       <div class="ag-obj-active">
-                        <div class="status">Status: <span>{{innerItem.Stat}}</span></div>
+                        <div class="status">Status:
+                          <span>{{constants.statusFull[innerItem.Stat.toLocaleLowerCase()]}}</span></div>
                         <div class="d-date text-right">Due Date: {{innerItem.dueDate | slice:0:10}}</div>
                         <div class="clearfix"></div>
                         <p>{{innerItem.description}}</p>
