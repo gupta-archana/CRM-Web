@@ -309,6 +309,11 @@ form input[type="checkbox"] {
   text-align: center;
 }
 
+.agent-detail h4 span.textRight img{
+	float: initial;
+	margin-top: -6px;
+}
+
 .associatAgentName span {
   font-size: 12px;
   font-weight: normal;
@@ -2206,6 +2211,22 @@ input:-internal-autofill-selected {
   color: #F68933;
 }
 
+.imgWidth{
+	width:20px;
+}
+
+.calenderPosition{
+	position: relative;	
+}
+
+.calenderPosition button.add-btn{
+	position: absolute;
+	right: 0px;
+	top: 26px;
+	width: 32px;
+	height: 32px;
+	padding: 0;
+}
 
 
 
@@ -2443,6 +2464,10 @@ input:-internal-autofill-selected {
 
   #filterPopup {
     margin-top: 20%;
+  }
+  
+  #addEventModal {
+    margin-top:5%;
   }
 
   .paddingTop85 {

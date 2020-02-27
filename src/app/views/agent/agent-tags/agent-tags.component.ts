@@ -41,8 +41,9 @@ export class AgentTagsComponent extends BaseClass implements OnInit, ApiResponse
   }
 
   onTagClick(item: TagModel) {
-    let params = { selectedTag: item.name }
-    this.commonFunctions.navigateWithParams(this.paths.PATH_ASSOCIATED_AGENTS, params);
+    //let params = { selectedTag: item.name }
+    this.dataService.onDataShare(item.name);
+    this.commonFunctions.navigateWithReplaceUrl(this.paths.PATH_SEARCH);
   }
   onCreateTagClick() {
     if (this.newTag.length > 0) {

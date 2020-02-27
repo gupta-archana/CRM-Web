@@ -10,6 +10,7 @@ import { DownloadPdfComponent } from '../customUI/dialogs/download-pdf/download-
 import { EmailNocComponent } from '../customUI/dialogs/email-noc/email-noc.component';
 import { AssignedToComponent } from '../customUI/dialogs/assigned-to/assigned-to.component';
 import { EditObjectiveComponent } from '../customUI/dialogs/edit-objective/edit-objective.component';
+import { AddNewEventComponent } from '../customUI/dialogs/add-new-event/add-new-event.component';
 
 @Injectable({
   providedIn: 'root'
@@ -82,5 +83,9 @@ export class OpenDialogsService {
           message: objective
         }
       });
+  }
+
+  showAddNewEventDialog() {
+    return this.dialog.open(AddNewEventComponent);
   }
 }

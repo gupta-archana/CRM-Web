@@ -1,0 +1,90 @@
+<mat-dialog-content class="mat-dialog-content">
+  <!-- Modal content-->
+
+
+  <div class="modal-header">
+    <button type="button" class="close" (click)="onCancelClick()">&times;</button>
+    <h4 class="modal-title">Add Event</h4>
+  </div>
+  <form role="form">
+    <div class="modal-body">
+
+      <div class="form-group">
+        <label for="state">Type of Event</label>
+        <select class="form-control" id="sel1">
+          <option>Select Event Type</option>
+          <option>Agency Event Type</option>
+          <option>Agency Anniversary</option>
+          <option>Agency Milestone</option>
+          <option>Agency Event</option>
+          <option>Others</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="usr">Event Description</label>
+        <input type="text" class="form-control" id="name" placeholder="Write Event Description here">
+      </div>
+
+
+      <div class="form-group calenderPosition">
+        <label for="usr">Date of Event</label>
+        <input type="text" class="form-control pr-38" placeholder="Select Date">
+        <button type="submit" class="btn btn-default add-btn"><img src="images/calendar-icon.svg" alt=""></button>
+      </div>
+
+      <div class="form-group">
+        <label for="Address">Set Reminder</label>
+        <div class="clear"></div>
+        <div class="visibleBtnWp">
+          <span class="onOffTxt">Off</span>
+          <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+          </label>
+          <span class="onOffTxt">On</span>
+        </div>
+        <div class="clear"></div>
+      </div>
+
+
+
+
+
+      <div class="form-group calenderPosition">
+        <ng-autocomplete [data]="persons" [searchKeyword]="keyword" (selected)='selectEvent($event)'
+          (inputChanged)='onChangeSearch($event)' [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+        </ng-autocomplete>
+
+        <ng-template #itemTemplate let-item>
+          <a [innerHTML]="item.name"></a>
+        </ng-template>
+
+        <ng-template #notFoundTemplate let-notFound>
+          <div [innerHTML]="notFound"></div>
+        </ng-template>
+
+
+
+
+
+
+
+        <!-- <label for="usr">Event Associated with Person</label>
+        <input type="text" class="form-control pr-38" placeholder="Associated Person Name">
+        <button type="submit" class="btn btn-default add-btn"><img src="images/search-icon.svg" alt=""></button> -->
+      </div>
+
+      <div class="clear"></div>
+      <div class="paddingTop5"></div>
+
+    </div>
+  </form>
+
+
+</mat-dialog-content>
+<mat-dialog-actions id="MarkAsReviewedDialogButtonGroup" align="end">
+  <button (click)="onCancelClick()">Cancel</button>
+  <button (click)="onSaveChangesClick()">Save Changes</button>
+</mat-dialog-actions>
+<!-- Edit Objective Modal End here -->

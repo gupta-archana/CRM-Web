@@ -159,6 +159,9 @@ export class Constants {
   AGENT_DETAIL = "Agent Details";
   PERSON_DETAIL = "Person Details";
 
+  ENTITIY_ID_ALL = "ALL";
+  ENTITY_TYPE_ALL = "ALL";
+
   // person detail menu
   PERSON_AGENT = "Agents";
 

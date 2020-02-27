@@ -32,6 +32,8 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Aft
   moreDataAvailable: boolean = false;
   totalAndCurrentRowsRatio: string = "";
   filters: SearchFilterModel = null;
+  shareDataSubscription: Subscription;
+
   constructor(injector: Injector) {
     super(injector);
   }
@@ -46,7 +48,7 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Aft
   }
 
   ngAfterViewInit(): void {
-
+    getTagFromEntityTagList(this);
   }
 
 
@@ -84,10 +86,21 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Aft
     searchString = searchString.replace(/#/g, '%23');
     searchString = searchString.replace(/,/g, '%2c');
     searchString = searchString.replace(/\s/g, '%2c');
-    // if (searchString.startsWith("#"))
-    //   this.apiHandler.GetTagSearchedData(type, selectedState, searchString.substring(1, searchString.length), this.pageNum, this);
-    // else
-      this.apiHandler.GetSearchedData(type, selectedState, searchString, this.pageNum, this);
+
+    this.apiHandler.GetSearchedData(type, selectedState, searchString, this.pageNum, this);
+  }
+
+  public makeServerRequestForSelectedTag() {
+    this.pageNum++;
+    this.dataService.onHideShowLoader(true);
+    let selectedState = "All";
+    let type = this.myLocalStorage.getValue(this.constants.SELECTED_SEARCH_IN);
+    ({ selectedState, type } = this.setFilterForApiRequest(selectedState, type));
+    this.searchString = this.searchString.replace(/#/g, '%23');
+    this.searchString = this.searchString.replace(/,/g, '%2c');
+    this.searchString = this.searchString.replace(/\s/g, '%2c');
+
+    this.apiHandler.GetSearchedData(type, selectedState, this.searchString, this.pageNum, this);
   }
 
   private setFilterForApiRequest(selectedState: string, type: string) {
@@ -196,6 +209,9 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Aft
     if (this.searchFilterModelSub && !this.searchFilterModelSub.closed) {
       this.searchFilterModelSub.unsubscribe();
     }
+    if (this.shareDataSubscription && !this.shareDataSubscription.closed) {
+      this.shareDataSubscription.unsubscribe();
+    }
   }
 }
 
@@ -207,8 +223,6 @@ function checkFilterChanged(context: SearchComponent) {
     context.filterChanged = false;
   }
 }
-
-
 
 function getSearchFilter(context: SearchComponent) {
   context.searchFilterModelSub = context.dataService.searchFiltersObservable.subscribe(data => {
@@ -276,4 +290,15 @@ function updateRatioUI(context: SearchComponent) {
   context.commonFunctions.showLoadedItemTagOnHeader(context.searchedUsers, context.totalRows);
   //context.totalAndCurrentRowsRatio = context.commonFunctions.showMoreDataSnackbar(context.searchedUsers, context.totalRows);
   context.cdr.markForCheck();
+}
+
+function getTagFromEntityTagList(context: SearchComponent) {
+  context.shareDataSubscription = context.dataService.shareDataObservable.subscribe(tag => {
+    debugger;
+    if (tag) {
+      context.searchString = tag;
+      context.makeServerRequestForSelectedTag();
+      context.cdr.markForCheck();
+    }
+  });
 }

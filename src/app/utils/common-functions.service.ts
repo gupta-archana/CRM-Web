@@ -198,7 +198,7 @@ export class CommonFunctionsService {
         navigatingUrl = paths.PATH_AGENT_OBJECTIVE;
         break;
       case this.constants.AGENT_DETAIL_EVENTS:
-        navigatingUrl = paths.PATH_AGENT_DETAIL;
+        navigatingUrl = paths.PATH_EVENTS;
         break;
       case this.constants.AGENT_DETAIL_TAGS:
         navigatingUrl = paths.PATH_AGENT_TAGS;

@@ -34,6 +34,7 @@ export const PATH_AGENT_COMPLIANCE = "agentCompliance";
 export const PATH_COMPLIANCE_DETAIL = "complianceDetail";
 export const PATH_AGENT_TAGS = "agentTags";
 export const PATH_ASSOCIATED_AGENTS = "associatedAgents";
+export const PATH_EVENTS = "events";
 //others
 export const PATH_REARRANGE_DRAWER_ITEM = "rearrangeHomeModules";
 export const PATH_REARRANGE_AGENT_DETAIL_ITEM = "rearrangeAgentDetailModules";

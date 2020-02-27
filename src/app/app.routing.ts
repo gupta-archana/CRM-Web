@@ -27,6 +27,7 @@ import { NotificationControlsComponent } from './views/notification-controls/not
 import { PersonDetailItemsRearrangeComponent } from './views/rearrange-items-layouts/person-detail-items-rearrange/person-detail-items-rearrange.component';
 import { AgentTagsComponent } from './views/agent/agent-tags/agent-tags.component';
 import { SelectedTagAgentsComponent } from './views/agent/selected-tag-agents/selected-tag-agents.component';
+import { EventsComponent } from './views/agent/events/events.component';
 
 
 
@@ -57,6 +58,7 @@ const appRoutesArray: Routes =
     { path: paths.PATH_NOTIFICATION_CONTROL, component: NotificationControlsComponent },
     { path: paths.PATH_AGENT_TAGS, component: AgentTagsComponent },
     { path: paths.PATH_ASSOCIATED_AGENTS, component: SelectedTagAgentsComponent },
+    { path: paths.PATH_EVENTS, component: EventsComponent },
     { path: '**', component: PageNotFoundComponent }
 
   ];

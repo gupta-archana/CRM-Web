@@ -15,7 +15,7 @@ import { CurrencyMaskConfig, CURRENCY_MASK_CONFIG } from 'ng2-currency-mask/src/
 import { MomentModule } from 'ngx-moment';
 import { EntityNameHeaderComponent } from '../../customUI/entity-name-header/entity-name-header.component';
 import { ChartsModule } from 'ng2-charts';
-
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "left",
@@ -42,7 +42,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     MatFormFieldModule,
     CurrencyMaskModule,
     MomentModule,
-    ChartsModule
+    ChartsModule,
+    AutocompleteLibModule
 
   ],
   declarations: [
@@ -70,7 +71,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     MatFormFieldModule,
     MomentModule,
     ChartsModule,
-    EntityNameHeaderComponent
+    EntityNameHeaderComponent,
+    AutocompleteLibModule
 
   ],
   providers: [{ provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }, DecimalPipe],

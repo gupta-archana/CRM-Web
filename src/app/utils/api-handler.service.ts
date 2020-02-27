@@ -448,6 +448,17 @@ export class ApiHandlerService implements ApiResponseCallback {
     this.apiService.hitPostApi(url, this.getRequestXml(requestJson), handleAddAndUpdateApiResponse(this, apiResponseCallback));
   }
 
+
+  /**
+   * getEvents
+   */
+  public getEvents(entityType: any, entityId: any, apiResponseCallback: ApiResponseCallback) {
+    this.apiResponseCallback = apiResponseCallback;
+    this.dataService.onHideShowLoader(true);
+    let url = this.api.getEventsListUrl(this.APP_MODE[this.ENABLE_APP_MODE], entityType, entityId);
+    this.apiService.hitGetApi(url, this);
+  }
+
   /**
    * getStates
    */
