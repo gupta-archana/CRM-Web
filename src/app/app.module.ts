@@ -67,6 +67,7 @@ import { SelectedTagAgentsComponent } from './views/agent/selected-tag-agents/se
 import { EditObjectiveComponent } from './customUI/dialogs/edit-objective/edit-objective.component';
 import { EventsComponent } from './views/agent/events/events.component';
 import { AddNewEventComponent } from './customUI/dialogs/add-new-event/add-new-event.component';
+import { EditAndDeleteTagPopupComponent } from './customUI/dialogs/edit-and-delete-tag-popup/edit-and-delete-tag-popup.component';
 
 
 
@@ -127,6 +128,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     EditObjectiveComponent,
     EventsComponent,
     AddNewEventComponent,
+    EditAndDeleteTagPopupComponent,
 
   ],
   imports: [
@@ -174,7 +176,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     EmailNocComponent,
     AssignedToComponent,
     EditObjectiveComponent,
-    AddNewEventComponent
+    AddNewEventComponent,
+    EditAndDeleteTagPopupComponent
   ],
   providers: [Constants, ApiService,
     { provide: UrlSerializer, useClass: LowerCaseUrlSerializer },

@@ -237,11 +237,19 @@ export class API {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userObjectiveModify";
   }
 
+  getUpdateTagUrl(app_mode: string) {
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userTagModify";
+  }
+
+  getDeleteTagUrl(app_mode: string, noteId: string) {
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=EntityUntag&tagID=" + noteId;
+  }
 
   getEventsListUrl(app_mode: string, entityType: any, entityId: any) {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=eventsGet&entity=" + entityType + "&entityID=" + entityId;
   }
 
+  
   getStates() {
     return this.STATES_JSON_URL;
   }

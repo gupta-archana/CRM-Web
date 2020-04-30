@@ -11,6 +11,7 @@ import { EmailNocComponent } from '../customUI/dialogs/email-noc/email-noc.compo
 import { AssignedToComponent } from '../customUI/dialogs/assigned-to/assigned-to.component';
 import { EditObjectiveComponent } from '../customUI/dialogs/edit-objective/edit-objective.component';
 import { AddNewEventComponent } from '../customUI/dialogs/add-new-event/add-new-event.component';
+import { EditAndDeleteTagPopupComponent } from '../customUI/dialogs/edit-and-delete-tag-popup/edit-and-delete-tag-popup.component';
 
 @Injectable({
   providedIn: 'root'
@@ -78,6 +79,15 @@ export class OpenDialogsService {
   }
   showEditObjectiveDialog(objective: string) {
     return this.dialog.open(EditObjectiveComponent,
+      {
+        data: {
+          message: objective
+        }
+      });
+  }
+
+  showEditTagDialog(objective: string) {
+    return this.dialog.open(EditAndDeleteTagPopupComponent,
       {
         data: {
           message: objective

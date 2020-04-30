@@ -2227,9 +2227,36 @@ input:-internal-autofill-selected {
 	height: 32px;
 	padding: 0;
 }
+.editTag-wp {
+	margin:0px;
+	padding:0px;
+	text-align: right;
+	margin-top: 8px;
+}
 
+.editTag-wp a{
+	color:#F68933;
+}
 
+.editTag-wp a span{
+	font-size: 11px;
+}
 
+.editTag-wp a:hover{
+	opacity: 0.8;
+}
+
+.modal-header button.delete-btn{
+	font-size: 14px;
+	color:#F68933;
+	font-weight: normal;	
+	right: 10px;
+	top: 8px;
+}
+
+.modal-header button.delete-btn:hover{
+	opacity: 0.8;
+}
 
 
 
@@ -2463,6 +2490,10 @@ input:-internal-autofill-selected {
   }
 
   #filterPopup {
+    margin-top: 20%;
+  }
+  
+  #editTagsPopup {
     margin-top: 20%;
   }
   

@@ -13,7 +13,7 @@ import { EntityModel } from '../../../models/entity-model';
 export class AgentTagsComponent extends BaseClass implements OnInit, ApiResponseCallback {
 
   constructor(private injector: Injector) { super(injector) }
-  tags: Array<TagModel> = [];
+  tags: TagModel; 
   entityModel: EntityModel;
   hideNoDataDiv: boolean = false;
   errorMsg: string = "";
@@ -45,7 +45,18 @@ export class AgentTagsComponent extends BaseClass implements OnInit, ApiResponse
     this.dataService.onDataShare(item.name);
     this.commonFunctions.navigateWithReplaceUrl(this.paths.PATH_SEARCH);
   }
-  onCreateTagClick() {
+  createTagClick() {
+    if (this.newTag.length > 0) {
+      createTag(this);
+    } else {
+      this.commonFunctions.showErrorSnackbar("Please enter some tag in field");
+    }
+  }
+  openEditTagsDialog(rowData?) {
+    this.openDialogService.showEditTagDialog(JSON.stringify(rowData)).afterClosed()
+  }
+
+  deleteTag(event) {
     if (this.newTag.length > 0) {
       createTag(this);
     } else {

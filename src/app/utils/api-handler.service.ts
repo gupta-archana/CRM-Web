@@ -448,6 +448,21 @@ export class ApiHandlerService implements ApiResponseCallback {
     this.apiService.hitPostApi(url, this.getRequestXml(requestJson), handleAddAndUpdateApiResponse(this, apiResponseCallback));
   }
 
+  public updateTag(requestJson, apiResponseCallback: ApiResponseCallback) {
+    this.dataService.onHideShowLoader(true);
+     let url = this.api.getUpdateTagUrl(this.APP_MODE[this.ENABLE_APP_MODE]);
+    this.apiService.hitPostApi(url, this.getRequestXml(requestJson), handleAddAndUpdateApiResponse(this, apiResponseCallback));
+  }
+
+    /**
+   * deleteNote
+   */
+  public deleteTag(tagId: string, apiResponseCallback: ApiResponseCallback) {
+    this.dataService.onHideShowLoader(true);
+    let url = this.api.getDeleteTagUrl(this.getAppMode(), tagId);
+   // let url="https://compass.alliantnational.com:8118/do/action/WService=dev/get?I1=agupta@alliantnational.com&I2=a2NqPWphbmlVWndkZnhESnhzd0AxMjM0YURRZlBHQmpFcGN1bnh1Q01TSEhCeVJBemRqQW1pQlpPUmp1UG10cnJhbUJtZURyQWhOUmdBS2hkQmloanRzTG51cElJYVlyeFhnTmhXUm5zdG1NdGdJYXBZSmNucnR6VHhGSUl3QUtBREls&I3=EntityUntag&tagID="+tagId 
+    this.apiService.hitGetApi(url, handleAddAndUpdateApiResponse(this, apiResponseCallback));
+  }
 
   /**
    * getEvents

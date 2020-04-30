@@ -1,82 +1,96 @@
 <div class="container-fluid nospace">
-  <div class="wrapper-back">
-    <div class="container nav-bg">
-      <div id="detail-page-header">
-        <div class="col-xs-2 toppad"><img src="../../../../images/back-btn.svg" alt="" (click)="goBack()"></div>
-        <div class="col-xs-8 text-center">
-          <h1 class="t-agent">Tags</h1>
-        </div>
-        <div class="col-xs-2 text-right toppad">
-          <a alt="" data-toggle="modal" data-target="#editTagsPopup"><img src="../../../../images/edit.svg"
-              alt=""><br><span class="edit-detail">Edit Tags</span></a>
-        </div>
+
+  <div class="container nav-bg">
+    <div class="row">
+      <div class="col-xs-2 toppad"><a href=""><img src="images/back-btn.svg" alt=""></a></div>
+      <div class="col-xs-7 text-center">
+        <h1 class="t-agent">Tags</h1>
+      </div>
+      <div class="col-xs-3 text-center tpad">
+        <!-- <a href="#" alt="" data-toggle="modal" data-target="#editTagsPopup"><img src="images/edit.svg" alt=""><br><span class="edit-detail">Edit Tags</span></a> -->
       </div>
     </div>
-    <app-entity-name-header [entityModel]="entityModel"></app-entity-name-header>
   </div>
-  <form (ngSubmit)="onCreateTagClick()">
-    <div class="container app-bg2 bottom-wrapper-for-back" *ngIf="hideNoDataDiv">
 
-      <div class="row">
-        <div class="col-xs-6 col-md-3" *ngFor="let item of tags">
-          <button type="button" class="btn btn-primary btn-tags" (click)="onTagClick(item)">{{item.name}}</button>
-        </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-12 noPadding">
+        <div class="topAgent_wp"><img src="images/baseline-business-24px.svg" alt=""> <span> NETCO. Inc</span></div>
       </div>
     </div>
+  </div>
 
-    <div class="container add-box app-bg2-">
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="form-group">
-            <input type="text" class="form-control pr-38" placeholder="Add private tag for this agent"
-              [(ngModel)]="newTag" [ngModelOptions]="{standalone: true}">
+  <div class="container paddingTop25 app-bg5-">
+    <div class="row">
+      <div class="col-xs-12 col-md-4"  *ngFor="let item of tags">
+        <div class="row">
+          <div class="col-md-9 col-xs-9">
+            <button type="button" class="btn btn-primary btn-tags">{{item.name}}</button>
           </div>
-          <button type="submit" class="btn btn-default add-btn"><img src="../../../../images/add-icon.svg"
-              alt=""></button>
-        </div>
-      </div>
-    </div>
-  </form>
-  <div class="serach-emp  no-data-margin-top" *ngIf="!hideNoDataDiv">
-    <h2><em>It is Empty Here!</em></h2>
-    <p><em>{{errorMsg}}</em></p>
-  </div>
-</div>
-<!-- Modal beginning here -->
-<div class="modal fade" id="editTagsPopup" role="dialog">
-  <div class="modal-dialog" style="margin-top:20%;">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Edit Tags</h4>
-      </div>
-      <form role="form">
-        <div class="modal-body">
-          <div class="clear paddingTop10"></div>
-
-
-          <div class="row" *ngFor="let item of tags">
-            <div class="col-md-12">
-              <div class="form-group">
-                <input type="text" class="form-control pr-35 opacity50" placeholder="" [(ngModel)]="item.name"
-                  [ngModelOptions]="{standalone: true}">
-              </div>
-              <button type="submit" class="btn btn-default delete-btn"><img src="../../../../images/ic_delete.svg"
-                  alt=""></button>
+          <div class="col-md-3 col-xs-3 pl-0">
+            <div class="editTag-wp">
+              <a data-toggle="modal"  (click)="openEditTagsDialog(item)"><span>Edit Tag</span> <img
+                  src="images/edit-icon-orange.svg" alt=""></a>
             </div>
           </div>
-
-          <div class="clear paddingTop10"></div>
         </div>
-        <div class="modal-footer">
-          <a data-dismiss="modal" alt="Cancel"><span>Cancel</span></a>
-          <a data-dismiss="modal" alt="Save Changes">Finish Editing</a>
-        </div>
-      </form>
+      </div>
     </div>
+
+
+
+    <!-- Modal beginning here -->
+    <!-- <div class="modal fade" id="editTagsPopup" role="dialog">
+      <div class="modal-dialog" style="margin-top:20%;"> -->
+
+        <!-- Modal content-->
+        <!-- <div class="modal-content">
+          <div class="modal-header">
+            <button type="submit"  class="btn btn-default delete-btn" data-dismiss="modal" (click)="deleteTag($event)">Delete Tag <img
+                src="images/delete-icon-large.svg" alt=""></button> -->
+            <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+            <!-- <h4 class="modal-title">Edit Tag</h4>
+          </div>
+          <form role="form">
+            <div class="modal-body">
+              <div class="clear paddingTop10"></div>
+
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <input type="text" class="form-control opacity50" value="#GoodAgent" placeholder="">
+                  </div>
+
+                </div>
+              </div>
+
+
+              <div class="clear paddingTop25"></div>
+            </div>
+            <div class="modal-footer">
+              <a href="#" data-dismiss="modal" alt="Cancel"><span>Cancel</span></a>
+              <a href="#" data-dismiss="modal" alt="Save Changes" (click)="saveTag(item)">Save Changes</a>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div> -->
+    <!-- Modal End here -->
+
 
   </div>
 </div>
-<!-- Modal End here -->
+
+
+<div class="container add-box app-bg2-">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="form-group">
+        <input type="text" class="form-control pr-38"  [(ngModel)]="newTag" [ngModelOptions]="{standalone: true}" placeholder="Add private tag for this agent">
+      </div>
+      <button type="submit" class="btn btn-default add-btn" ><img src="images/add-icon.svg" alt="" (click) = "createTagClick()"></button>
+    </div>
+  </div>
+</div>

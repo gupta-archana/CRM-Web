@@ -51,8 +51,11 @@ export class ApiService {
   hitPostApi(url, data, apiResponseCallback: ApiResponseCallback) {
     this.http.post(url, data)
       .subscribe(result => {
-        if (result.status == 200)
-          apiResponseCallback.onSuccess(result.json());
+        if (result.status == 200) {        
+            var json = result.json();
+            apiResponseCallback.onSuccess(json);
+          
+        }
         else
           apiResponseCallback.onError(result.status, result.statusText);
 
