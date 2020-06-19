@@ -46,7 +46,7 @@ export class AgentAssociatesComponent extends BaseClass implements OnInit, OnDes
 
   onSuccess(response: any) {
     if (!this.destroyed) {
-      let persons: AssociatesModel[] = response.agentperson;
+      let persons: AssociatesModel[] = response.affiliation;
       persons.forEach(element => {
         if (element.dispname != "TotalAssociates") {
           this.associatesModels.push(element);

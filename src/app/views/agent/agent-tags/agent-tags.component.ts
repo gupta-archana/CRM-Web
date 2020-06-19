@@ -3,6 +3,8 @@ import { BaseClass } from '../../../global/base-class';
 import { ApiResponseCallback } from '../../../Interfaces/ApiResponseCallback';
 import { TagModel } from '../../../models/tag-model';
 import { EntityModel } from '../../../models/entity-model';
+import { EditAndDeleteTagPopupComponent } from '../../../customUI/dialogs/edit-and-delete-tag-popup/edit-and-delete-tag-popup.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-agent-tags',
@@ -12,7 +14,7 @@ import { EntityModel } from '../../../models/entity-model';
 })
 export class AgentTagsComponent extends BaseClass implements OnInit, ApiResponseCallback {
 
-  constructor(private injector: Injector) { super(injector) }
+  constructor(private injector: Injector,private dialog: MatDialog) { super(injector) }
   tags: TagModel; 
   entityModel: EntityModel;
   hideNoDataDiv: boolean = false;
@@ -53,7 +55,13 @@ export class AgentTagsComponent extends BaseClass implements OnInit, ApiResponse
     }
   }
   openEditTagsDialog(rowData?) {
-    this.openDialogService.showEditTagDialog(JSON.stringify(rowData)).afterClosed()
+    //this.openDialogService.showEditTagDialog(JSON.stringify(rowData)).afterClosed()
+    this.dialog.open(EditAndDeleteTagPopupComponent,
+      {
+        data: {
+          message: (JSON.stringify(rowData))
+        }
+      });
   }
 
   deleteTag(event) {

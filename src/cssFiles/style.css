@@ -1009,12 +1009,13 @@ ul.agent-details li.associates a {
 .delete-btn a:active {
   background-color: none;
   box-shadow: 0px;
-  border: none;
+  /* border: none; */
   background:none;  
-  position: absolute;
+  position: unset;
   top: 2px;
   right:15px;
   padding:5px;
+  float: right;
 }
 
 ul.recent {

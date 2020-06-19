@@ -294,7 +294,6 @@ function updateRatioUI(context: SearchComponent) {
 
 function getTagFromEntityTagList(context: SearchComponent) {
   context.shareDataSubscription = context.dataService.shareDataObservable.subscribe(tag => {
-    debugger;
     if (tag) {
       context.searchString = tag;
       context.makeServerRequestForSelectedTag();
