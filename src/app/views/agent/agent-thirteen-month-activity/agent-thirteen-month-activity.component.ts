@@ -85,7 +85,7 @@ export class AgentThirteenMonthActivityComponent extends BaseClass implements On
   }
 
   onSuccess(response: any) {
-    this.thirteenMonthsModels = response.activitymonth;
+    this.thirteenMonthsModels = response.activitymonth.reverse();
     setValueToBar(this);
     this.thirteenMonthsModels = this.thirteenMonthsModels.reverse();
     this.cdr.markForCheck();

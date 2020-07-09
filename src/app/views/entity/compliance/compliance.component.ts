@@ -34,7 +34,6 @@ export class ComplianceComponent extends BaseClass implements OnInit {
     //this.commonFunctions.showErrorSnackbar(errorMsg)
   }
 
-
   onComplianceClick(item: ComplianceModel) {
 
     sessionStorage.setItem(this.constants.SELECTED_COMPLIANCE, JSON.stringify(item));
@@ -78,6 +77,7 @@ function getData(context: ComplianceComponent) {
   context.lastEntityID = sessionStorage.getItem(context.constants.AGENT_COMPLIANCE_CURRENT_ENTITY_ID);
   if (dataArray && dataArray.length > 0 && context.lastEntityID === context.entityModel.entityId) {
     context.complianceModels = dataArray;
+    context.renderUI();
   }
   else {
     makeServerRequest(context);
