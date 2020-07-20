@@ -25,7 +25,7 @@
       <div class="col-xs-12 col-md-4"  *ngFor="let item of tags">
         <div class="row">
           <div class="col-md-9 col-xs-9">
-            <button type="button" class="btn btn-primary btn-tags">{{item.name}}</button>
+            <button type="button" class="btn btn-primary btn-tags" (click)="onTagClick(item)">{{item.name}}</button>
           </div>
           <div class="col-md-3 col-xs-3 pl-0">
             <div class="editTag-wp">
@@ -36,49 +36,6 @@
         </div>
       </div>
     </div>
-
-
-
-    <!-- Modal beginning here -->
-    <!-- <div class="modal fade" id="editTagsPopup" role="dialog">
-      <div class="modal-dialog" style="margin-top:20%;"> -->
-
-        <!-- Modal content-->
-        <!-- <div class="modal-content">
-          <div class="modal-header">
-            <button type="submit"  class="btn btn-default delete-btn" data-dismiss="modal" (click)="deleteTag($event)">Delete Tag <img
-                src="images/delete-icon-large.svg" alt=""></button> -->
-            <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
-            <!-- <h4 class="modal-title">Edit Tag</h4>
-          </div>
-          <form role="form">
-            <div class="modal-body">
-              <div class="clear paddingTop10"></div>
-
-
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <input type="text" class="form-control opacity50" value="#GoodAgent" placeholder="">
-                  </div>
-
-                </div>
-              </div>
-
-
-              <div class="clear paddingTop25"></div>
-            </div>
-            <div class="modal-footer">
-              <a href="#" data-dismiss="modal" alt="Cancel"><span>Cancel</span></a>
-              <a href="#" data-dismiss="modal" alt="Save Changes" (click)="saveTag(item)">Save Changes</a>
-            </div>
-          </form>
-        </div>
-
-      </div>
-    </div> -->
-    <!-- Modal End here -->
-
 
   </div>
   <div class="serach-emp " *ngIf="!hideNoDataDiv">

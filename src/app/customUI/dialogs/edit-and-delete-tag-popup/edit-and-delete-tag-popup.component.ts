@@ -24,7 +24,7 @@ export class EditAndDeleteTagPopupComponent  implements OnInit {
   }
 
   onSuccess(response: any) {
-    this.dialogRef.close(true);
+    this.dialogRef.close(response);
   }
   onError(errorCode: number, errorMsg: string) {
     this.dialogRef.close(false);

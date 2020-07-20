@@ -55,22 +55,25 @@ export class AgentTagsComponent extends BaseClass implements OnInit, ApiResponse
     }
   }
   openEditTagsDialog(rowData?) {
-    //this.openDialogService.showEditTagDialog(JSON.stringify(rowData)).afterClosed()
-    this.dialog.open(EditAndDeleteTagPopupComponent,
+    const dialogRef =  this.dialog.open(EditAndDeleteTagPopupComponent,
       {
         data: {
           message: (JSON.stringify(rowData))
         }
       });
+      dialogRef.afterClosed().subscribe((message: any) => {
+        if (message) {
+          this.onEditSuccess(message)
+        }
+      });
+  }
+  
+  onEditSuccess(response)
+  {
+    getTags(this);
+    this.commonFunctions.showSnackbar(response);
   }
 
-  deleteTag(event) {
-    if (this.newTag.length > 0) {
-      createTag(this);
-    } else {
-      this.commonFunctions.showErrorSnackbar("Please enter some tag in field");
-    }
-  }
 }
 function getTags(context: AgentTagsComponent) {
   context.apiHandler.getTags(context.entityModel.type, context.entityModel.entityId, context);
