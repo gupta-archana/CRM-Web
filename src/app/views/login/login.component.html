@@ -26,7 +26,14 @@
             <label for="Password">Password</label>
             <div class="input-group">
               <input type="password" class="form-control passwordIcon" readonly="readonly">
-              <input type="password" class="form-control" id="password" formControlName="password">
+              <input [type]="show ? 'text' : 'password'"  class="form-control" id="password" formControlName="password">
+              <!-- <a><img src="../../../images//download.png" width="40" height="50" (click) = "showHidePassword()" title="Show Password"></a> -->
+              <div class="input-group-append" *ngIf = "showButton === true">
+                <button class=" form-control btn btn-outline-primary" type="button" (click) = "showHidePassword()" id="showpassword" >
+                  <i class="fa fa-eye-slash" aria-hidden="true" *ngIf = "show === true" style="color: gray;"></i>
+                  <i class="fa fa-eye" aria-hidden="true" *ngIf = "show === false" style="color: gray;"></i>
+                </button>
+              </div>
             </div>
           </div>
 

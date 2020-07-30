@@ -80,6 +80,7 @@ a {
   width: 40px;
 }
 
+
 .box1 input:focus {
   outline: none;
   box-shadow: none;
@@ -2357,7 +2358,7 @@ input:-internal-autofill-selected {
   .box1 input.form-control {
     background: #fff;
     padding: 20px 0px 20px 0px;
-    width: 88%;
+    width: 75%;
     height: 50px;
     margin-bottom: 28px;
     font-size: 14px;

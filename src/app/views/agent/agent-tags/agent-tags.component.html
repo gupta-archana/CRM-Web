@@ -2,7 +2,7 @@
 
   <div class="container nav-bg">
     <div class="row">
-      <div class="col-xs-2 toppad"><a href=""><img src="images/back-btn.svg" alt=""></a></div>
+      <div class="col-xs-2 toppad"><img src="images/back-btn.svg" alt="" (click)="goBack()"></div>
       <div class="col-xs-7 text-center">
         <h1 class="t-agent">Tags</h1>
       </div>
@@ -15,7 +15,7 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-12 col-md-12 noPadding">
-        <div class="topAgent_wp"><img src="images/baseline-business-24px.svg" alt=""> <span> NETCO. Inc</span></div>
+        <app-entity-name-header [entityModel]="entityModel"></app-entity-name-header>
       </div>
     </div>
   </div>

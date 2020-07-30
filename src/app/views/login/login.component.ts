@@ -26,7 +26,8 @@ export class LoginComponent implements OnInit, ApiResponseCallback, CanComponent
   username: string = "";
   password: string = "";
   isChecked: boolean = false;
-
+  show:boolean
+  showButton : boolean
   constructor(
     private commonFunctions: CommonFunctionsService,
     private authservice: AuthService,
@@ -39,6 +40,8 @@ export class LoginComponent implements OnInit, ApiResponseCallback, CanComponent
     private commonApis: CommonApisService,
     private routingState: RoutingStateService) {
 
+      this.show = false;
+      this.showButton = true;
 
   }
 
@@ -50,6 +53,9 @@ export class LoginComponent implements OnInit, ApiResponseCallback, CanComponent
     } else {
       this.addValidation();
     }
+      // if (this.loginForm['password'].dirty) {
+      //   this.showButton = true;
+      // }
   }
 
   checkValue(event) {
@@ -74,6 +80,10 @@ export class LoginComponent implements OnInit, ApiResponseCallback, CanComponent
 
   }
 
+showHidePassword()
+{
+this.show = !this.show
+}
   onSuccess(response: any) {
     this.dataService.onHideShowLoader(false);
     let userModel: UserModel = this.loginParser.parseLogin(response.parameter);

@@ -65,13 +65,15 @@ export class AgentTagsComponent extends BaseClass implements OnInit, ApiResponse
         if (message) {
           this.onEditSuccess(message)
         }
+        
       });
   }
   
-  onEditSuccess(response)
+  onEditSuccess(message)
   {
     getTags(this);
-    this.commonFunctions.showSnackbar(response);
+    this.commonFunctions.showSnackbar(message);
+    
   }
 
 }

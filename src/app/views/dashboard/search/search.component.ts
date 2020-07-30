@@ -296,8 +296,12 @@ function getTagFromEntityTagList(context: SearchComponent) {
   context.shareDataSubscription = context.dataService.shareDataObservable.subscribe(tag => {
     if (tag) {
       context.searchString = tag;
+      context.searchForm.get("search").setValue(context.searchString);
       context.makeServerRequestForSelectedTag();
+    document.getElementById("searchButton").click();
       context.cdr.markForCheck();
+
+      
     }
   });
 }
