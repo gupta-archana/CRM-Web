@@ -69,6 +69,16 @@
           </div>
 
           <div class="form-group">
+            <label for="city">City</label>
+            <input type="text" class="form-control" id="city" formControlName="city" placeholder="Enter City" required>
+            <!-- Error View -->
+            <div id="errorDiv" *ngIf="entityInfoForm.get('city').hasError('required') && submitClicked">
+              You entered not valid input.
+            </div>
+            <!-- Error View End -->
+          </div>
+
+          <div class="form-group">
             <label for="sel1">State</label>
             <select class="form-control" id="state" formControlName="state" (change)="onStateChanged($event)">
               <option [value]="i.stateID" *ngFor="let i of states">{{i.description}}</option>
@@ -96,7 +106,7 @@
             <!-- Error View End -->
           </div>
 
-          <div class="form-group">
+          <div class="form-group" *ngIf = "entitiyContactModel.entity === 'P'">
             <label for="Contact Number 1">Contact Number 1</label>
             <input type="text" class="form-control" id="phone1" formControlName="phone1">
             <!-- Error View -->
@@ -109,7 +119,7 @@
             <!-- Error View End -->
           </div>
 
-          <div class="form-group">
+          <div class="form-group" *ngIf = "entitiyContactModel.entity === 'A'">
             <label for="Contact Number 2">Contact Number 2</label>
             <input type="text" class="form-control" id="phone2" formControlName="phone2">
             <!-- Error View -->

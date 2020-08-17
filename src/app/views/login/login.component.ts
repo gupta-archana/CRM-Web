@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit, ApiResponseCallback, CanComponent
     private routingState: RoutingStateService) {
 
       this.show = false;
-      this.showButton = true;
+      this.showButton = false;
 
   }
 
@@ -53,9 +53,14 @@ export class LoginComponent implements OnInit, ApiResponseCallback, CanComponent
     } else {
       this.addValidation();
     }
-      // if (this.loginForm['password'].dirty) {
-      //   this.showButton = true;
-      // }
+
+  }
+
+  showHidePasswordButton()
+  {
+    if (this.loginForm.get('password').dirty ) {
+      this.showButton = true;
+    }
   }
 
   checkValue(event) {

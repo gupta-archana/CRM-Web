@@ -71,6 +71,7 @@ function addValidation(context: UpdateAgentProfileComponent) {
     phone2: new FormControl(""),
     state: new FormControl(""),
     email: new FormControl(""),
+    city : new FormControl("")
   })
 }
 
