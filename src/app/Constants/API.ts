@@ -106,12 +106,12 @@ export class API {
 
   getNotesUrl(app_mode: string, uid: string, entityType: string, entityId: string, pageNum: any) {
 
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=systemNotesGet&UID=" + uid + "&entity=" + entityType + "&entityID=" + entityId + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows;
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=agentNotesGet&AgentID=" + entityId + "&Seq=0";
   }
 
-  getCreateNoteUrl(app_mode: string) {
+  getCreateNoteUrl(app_mode: string,entityId,Notes) {
 
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userNoteNew";
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=agentNoteNew&AgentID=" + entityId + "&Category=1&Subject=NewNote" + entityId + "&NoteType=1&Notes=" + Notes;
   }
 
 

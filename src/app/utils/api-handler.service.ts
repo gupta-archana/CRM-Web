@@ -129,7 +129,9 @@ export class ApiHandlerService implements ApiResponseCallback {
    */
   public createNote(requestJson: any, apiResponseCallback: ApiResponseCallback) {
     this.dataService.onHideShowLoader(true);
-    let url = this.api.getCreateNoteUrl(this.getAppMode());
+    let agentID = requestJson.attr.entityID;
+    let notes = requestJson.attr.notes
+    let url = this.api.getCreateNoteUrl(this.getAppMode(),agentID,notes);
     this.apiService.hitPostApi(url, this.getRequestXml(requestJson), handleAddAndUpdateApiResponse(this, apiResponseCallback));
   }
 

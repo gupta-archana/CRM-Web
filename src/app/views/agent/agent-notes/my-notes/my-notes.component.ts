@@ -47,7 +47,7 @@ export class MyNotesComponent extends BaseClass implements OnInit, OnDestroy {
   }
   onDeleteClick(item: NotesModel, i: number) {
     let self = this;
-    this.apiHandler.deleteNote(item.sysNoteID, {
+    this.apiHandler.deleteNote(item.agentID, {
       onSuccess(response: any) {
         self.onDeleteSuccess(i);
       }, onError(errorCode: number, errorMsg: string) {
@@ -57,10 +57,10 @@ export class MyNotesComponent extends BaseClass implements OnInit, OnDestroy {
   }
 
   onSuccess(response: any) {
-    let data: NotesModel[] = response.sysNote;
+    let data: NotesModel[] = response.AgentNote;
     data.forEach(element => {
-      if (element.entity != "TotalNotes") {
-        element.dateCreated = element.dateCreated.split(" ")[0];
+      if (element.notes) {
+       // element.dateCreated = element.dateCreated.split(" ")[0];
         this.agentNotes.push(element);
       } else {
         this.totalRows = element.rowNum;
