@@ -8,7 +8,7 @@ export class Constants {
   NO_INTERNET_CONNECTION_ERROR_CODE = 101;
   EMAIL = "email";
   PASSWORD = "password";
-  REMEMBER_ME = "remeberMe";
+  REMEMBER_ME = "rememberMe";
   LOGOUT_CONFIRMATION = "Logout Confirmation";
   ENTITY_INFO = "entityinfo";
   INTERNAL_ENTITY_MODEL = "internal_entitiy_model";

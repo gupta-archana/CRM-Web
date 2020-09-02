@@ -14,7 +14,7 @@
     <div class="container app-bg">
       <div class="row">
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-          <div class="col-md-4 col-xs-12 box1">
+          <div class="col-md-4 col-xs-10 box1">
             <label for="Username">Username</label>
             <div class="input-group">
               <input type="text" class="form-control userIcon" readonly="readonly">
@@ -22,13 +22,13 @@
             </div>
           </div>
 
-          <div class="col-md-4 col-xs-12 box1">
+          <div class="col-md-4 col-xs-10 box1">
             <label for="Password">Password</label>
             <div class="input-group">
               <input type="password" class="form-control passwordIcon" readonly="readonly">
               <input [type]="show ? 'text' : 'password'"  class="form-control" id="password" formControlName="password" name="password" (keyup)="showHidePasswordButton()">
               
-              <div class="input-group-append" *ngIf = "showButton === true">
+              <div class="input-group-append" *ngIf = "showButton === true" style="display: flex;">
                 <button class=" form-control btn btn-outline-primary" type="button" (click) = "showHidePassword()" id="showpassword"  >
                   <i class="fa fa-eye-slash" aria-hidden="true" *ngIf = "show === true" style="color: gray;"></i>
                   <i class="fa fa-eye" aria-hidden="true" *ngIf = "show === false" style="color: gray;"></i>

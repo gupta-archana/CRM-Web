@@ -1,19 +1,27 @@
-import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, Injector, ViewChild, ElementRef } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { BaseClass } from '../../../global/base-class';
-import { NgxSmartModalService } from 'ngx-smart-modal';
-import { RoutingStateService } from '../../../services/routing-state.service';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  OnDestroy,
+  Injector,
+  ViewChild,
+  ElementRef,
+} from "@angular/core";
+import { Router, ActivatedRoute } from "@angular/router";
+import { Subscription } from "rxjs";
+import { BaseClass } from "../../../global/base-class";
+import { NgxSmartModalService } from "ngx-smart-modal";
+import { RoutingStateService } from "../../../services/routing-state.service";
 
 @Component({
-  selector: 'app-navigation-drawer',
-  templateUrl: './navigation-drawer.component.html',
-  styleUrls: ['./navigation-drawer.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  selector: "app-navigation-drawer",
+  templateUrl: "./navigation-drawer.component.html",
+  styleUrls: ["./navigation-drawer.component.css"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NavigationDrawerComponent extends BaseClass implements OnInit, OnDestroy {
-
-
+export class NavigationDrawerComponent
+  extends BaseClass
+  implements OnInit, OnDestroy {
   sideNavArray = [];
   headerTitle: string = "";
   activatedRouteSubscription: Subscription = null;
@@ -29,24 +37,33 @@ export class NavigationDrawerComponent extends BaseClass implements OnInit, OnDe
 
   @ViewChild("recentProfile")
   recentProfile: ElementRef;
-  constructor(private activatedRoute: ActivatedRoute,
+  constructor(
+    private activatedRoute: ActivatedRoute,
     private injector: Injector,
     public router: Router,
     public ngxSmartModel: NgxSmartModalService,
     public routingStates: RoutingStateService
-  ) { super(injector) }
+  ) {
+    super(injector);
+  }
 
   ngOnInit() {
     let self = this;
     getSideNavData(self);
 
-    this.activatedRouteSubscription = this.activatedRoute.paramMap.subscribe(url => {
-      changeHeaderTitle(this.activatedRoute.firstChild.routeConfig.path, this);
-    });
-    this.currentPagePathSubscription = this.dataService.currentPagePathObservable.subscribe(path => {
-      changeHeaderTitle(path, this);
-    });
-
+    this.activatedRouteSubscription = this.activatedRoute.paramMap.subscribe(
+      (url) => {
+        changeHeaderTitle(
+          this.activatedRoute.firstChild.routeConfig.path,
+          this
+        );
+      }
+    );
+    this.currentPagePathSubscription = this.dataService.currentPagePathObservable.subscribe(
+      (path) => {
+        changeHeaderTitle(path, this);
+      }
+    );
   }
 
   onNavigationItemClick(title) {
@@ -63,12 +80,23 @@ export class NavigationDrawerComponent extends BaseClass implements OnInit, OnDe
   }
 
   onLogoutClick() {
-    const dialogRef = this.openDialogService.showConfirmationDialog(this.constants.LOGOUT, this.constants.ALERT_LOGOUT_CONFIRMATION, this.constants.CANCEL, this.constants.LOGOUT);
+    const dialogRef = this.openDialogService.showConfirmationDialog(
+      this.constants.LOGOUT,
+      this.constants.ALERT_LOGOUT_CONFIRMATION,
+      this.constants.CANCEL,
+      this.constants.LOGOUT
+    );
 
-    dialogRef.afterClosed().subscribe(callback => {
+    dialogRef.afterClosed().subscribe((callback) => {
       if (callback) {
         sessionStorage.clear();
+        if (this.myLocalStorage.getValue(this.constants.REMEMBER_ME) != "1") {
         this.myLocalStorage.clearAll();
+        }
+        else 
+        {this.myLocalStorage.clearValue(this.constants.LOGGED_IN);
+        }
+
         this.commonFunctions.navigateWithReplaceUrl(this.paths.PATH_LOGIN);
       }
     });
@@ -76,7 +104,6 @@ export class NavigationDrawerComponent extends BaseClass implements OnInit, OnDe
 
   onSettingClick() {
     navigateToSelectedItem(this, this.paths.PATH_SETTING);
-
   }
 
   onRefreshClick() {
@@ -93,23 +120,27 @@ export class NavigationDrawerComponent extends BaseClass implements OnInit, OnDe
   }
 
   ngOnDestroy(): void {
-    if (this.activatedRouteSubscription && !this.activatedRouteSubscription.closed)
+    if (
+      this.activatedRouteSubscription &&
+      !this.activatedRouteSubscription.closed
+    )
       this.activatedRouteSubscription.unsubscribe();
     if (this.sideNavSub && !this.sideNavSub.closed)
       this.sideNavSub.unsubscribe();
   }
 }
 function getSideNavData(self: NavigationDrawerComponent) {
-  self.sideNavSub = self.utils.getSideNavItems().subscribe(data => {
+  self.sideNavSub = self.utils.getSideNavItems().subscribe((data) => {
     console.log("data " + JSON.stringify(data));
-    if (data)
-      self.sideNavArray = data;
+    if (data) self.sideNavArray = data;
     self.cdr.markForCheck();
   });
 }
 
-function navigateToSelectedPage(title: string, context: NavigationDrawerComponent) {
-
+function navigateToSelectedPage(
+  title: string,
+  context: NavigationDrawerComponent
+) {
   let selectedNavBarItemPath = "";
   context.commonFunctions.showLoadedItemTagOnHeader([], "");
   switch (title) {
@@ -152,18 +183,24 @@ function navigateToSelectedPage(title: string, context: NavigationDrawerComponen
   navigateToSelectedItem(context, selectedNavBarItemPath);
 }
 
-
-function navigateToSelectedItem(context: NavigationDrawerComponent, selectedNavBarItemPath: string) {
+function navigateToSelectedItem(
+  context: NavigationDrawerComponent,
+  selectedNavBarItemPath: string
+) {
   context.closeNav();
   if (selectedNavBarItemPath) {
     context.commonFunctions.navigateWithReplaceUrl(selectedNavBarItemPath);
-    context.routingStates.clearHistory()
+    context.routingStates.clearHistory();
     changeHeaderTitle(selectedNavBarItemPath, context);
   }
 }
 
 function changeHeaderTitle(path: string, context: NavigationDrawerComponent) {
-  if (path && path != context.paths.PATH_LOGIN && path != context.paths.PATH_FORGOT_PASSWORD) {
+  if (
+    path &&
+    path != context.paths.PATH_LOGIN &&
+    path != context.paths.PATH_FORGOT_PASSWORD
+  ) {
     reasetHeaderButtons(context);
     //clearSession(context);
     if (path) {
@@ -228,25 +265,29 @@ function changeHeaderTitle(path: string, context: NavigationDrawerComponent) {
   }
 }
 
-
 function reasetHeaderButtons(context: NavigationDrawerComponent) {
   context.showRefreshButton = false;
   context.showFilterButton = false;
   context.showRecentProfileButton = false;
   context.showLogoutButton = false;
-
-
 }
 
 function printButtonStatus(context: NavigationDrawerComponent, from: any) {
-  context.commonFunctions.printLog("from " + from + " refresh button " + context.showRefreshButton + ", Filter Button " + context.showFilterButton + " ,recent profile " + context.showRecentProfileButton);
+  context.commonFunctions.printLog(
+    "from " +
+      from +
+      " refresh button " +
+      context.showRefreshButton +
+      ", Filter Button " +
+      context.showFilterButton +
+      " ,recent profile " +
+      context.showRecentProfileButton
+  );
 }
 
-
 function clearSession(context: NavigationDrawerComponent) {
-
   let sessionKeys: string[] = context.constants.sessionConstants;
-  sessionKeys.forEach(element => {
+  sessionKeys.forEach((element) => {
     sessionStorage.removeItem(element);
   });
 }
