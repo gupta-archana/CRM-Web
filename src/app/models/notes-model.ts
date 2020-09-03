@@ -1,10 +1,15 @@
 export class NotesModel {
-  sysNoteID: string;
-  UID: string;
-  entity: string;
-  entityID: string;
-  notes: string;
-  dateCreated: string;
-  dateModified: string;
-  rowNum: string;
+
+agentID: string;
+category: string
+categoryDesc: string
+edited: string
+noteDate: string
+noteType: string
+notes: string
+seq: string
+subject: string
+typeDesc: string
+uid: string
+rowNum : string
 }
