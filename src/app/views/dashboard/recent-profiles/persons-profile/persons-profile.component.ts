@@ -61,7 +61,7 @@ function refreshContent(context: PersonsProfileComponent) {
 function getData(context: PersonsProfileComponent) {
   if (context.selectedIndex == 1) {
     context.recentProfileArray = JSON.parse(context.myLocalStorage.getValue(context.constants.ENTITY_ARRAY));
-    context.recentProfileArray = context.recentProfileArray.filter(t => t.type.toLowerCase() == 'p')
+    context.recentProfileArray = context.recentProfileArray.filter(t => t.type == 'P')
     setHeaderContent(context);
   }
 }
@@ -80,7 +80,7 @@ function tabSelectedIndexSubscription(context: PersonsProfileComponent) {
 
 function setHeaderContent(context: PersonsProfileComponent) {
   context.commonFunctions.showLoadedItemTagOnHeader(context.recentProfileArray, context.recentProfileArray.length)
-  checkAndSetUi(this);
+  checkAndSetUi(context);
 }
 
 function checkAndSetUi(context: PersonsProfileComponent) {

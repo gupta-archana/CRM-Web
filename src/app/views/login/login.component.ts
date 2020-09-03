@@ -23,6 +23,7 @@ import { CommonApisService } from '../../utils/common-apis.service';
 export class LoginComponent implements OnInit, ApiResponseCallback, CanComponentDeactivate {
 
   loginForm: FormGroup;
+  tooltipText:string = "Show Password";
   username: string = "";
   password: string = "";
   isChecked: boolean = false;
@@ -88,6 +89,10 @@ export class LoginComponent implements OnInit, ApiResponseCallback, CanComponent
 showHidePassword()
 {
 this.show = !this.show
+if(this.show)
+this.tooltipText = "Hide Password"
+else
+this.tooltipText = "Show Password"
 }
   onSuccess(response: any) {
     this.dataService.onHideShowLoader(false);

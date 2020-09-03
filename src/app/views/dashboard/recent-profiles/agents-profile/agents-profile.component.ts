@@ -64,7 +64,7 @@ function refreshContent(context: AgentsProfileComponent) {
 function getData(context: AgentsProfileComponent) {
   if (context.selectedIndex == 0) {
     context.recentProfileArray = JSON.parse(context.myLocalStorage.getValue(context.constants.ENTITY_ARRAY));
-    context.recentProfileArray = context.recentProfileArray.filter(t => t.type.toLowerCase() == 'a')
+    context.recentProfileArray = context.recentProfileArray.filter(t => t.type == 'A')
     setHeaderContent(context);
   }
 }

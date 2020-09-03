@@ -62,7 +62,7 @@ function getNoteModel(context: UpdateNoteComponent) {
 function getRequest(context: UpdateNoteComponent) {
 
   let requestJson = {
-    "sysNoteID": context.noteModel.sysNoteID,
+    "agentID": context.noteModel.agentID,
     "notes": context.note
   }
 

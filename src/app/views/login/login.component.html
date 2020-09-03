@@ -29,7 +29,7 @@
               <input [type]="show ? 'text' : 'password'"  class="form-control" id="password" formControlName="password" name="password" (keyup)="showHidePasswordButton()">
               
               <div class="input-group-append" *ngIf = "showButton === true" style="display: flex;">
-                <button class=" form-control btn btn-outline-primary" type="button" (click) = "showHidePassword()" id="showpassword"  >
+                <button class=" form-control btn btn-outline-primary" type="button" (click) = "showHidePassword()" id="showpassword" tooltip={{tooltipText}} placement="top" hide-delay = "50">
                   <i class="fa fa-eye-slash" aria-hidden="true" *ngIf = "show === true" style="color: gray;"></i>
                   <i class="fa fa-eye" aria-hidden="true" *ngIf = "show === false" style="color: gray;"></i>
                 </button>

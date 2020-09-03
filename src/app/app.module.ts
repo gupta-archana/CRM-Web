@@ -68,7 +68,7 @@ import { EditObjectiveComponent } from './customUI/dialogs/edit-objective/edit-o
 import { EventsComponent } from './views/agent/events/events.component';
 import { AddNewEventComponent } from './customUI/dialogs/add-new-event/add-new-event.component';
 import { EditAndDeleteTagPopupComponent } from './customUI/dialogs/edit-and-delete-tag-popup/edit-and-delete-tag-popup.component';
-
+import { TooltipModule } from 'ng2-tooltip-directive';
 
 
 
@@ -141,6 +141,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     ImageCropperModule,
     ToastrModule,
     NgxVcardModule,
+    TooltipModule ,
     SidebarModule.forRoot(),
     ToastNoAnimationModule.forRoot({
       timeOut: 2500,
