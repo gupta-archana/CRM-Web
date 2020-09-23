@@ -21,4 +21,5 @@ export class EntityModel {
   nprPlannedYTD: string;
   nprPercentYTD: string;
   agentImg: string;
+  email:string
 }

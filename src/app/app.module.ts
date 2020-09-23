@@ -69,7 +69,8 @@ import { EventsComponent } from './views/agent/events/events.component';
 import { AddNewEventComponent } from './customUI/dialogs/add-new-event/add-new-event.component';
 import { EditAndDeleteTagPopupComponent } from './customUI/dialogs/edit-and-delete-tag-popup/edit-and-delete-tag-popup.component';
 import { TooltipModule } from 'ng2-tooltip-directive';
-
+import { NgSelectModule } from '@ng-select/ng-select';
+import { ObjectiveSentimentComponent } from './customUI/dialogs/objective-sentiment/objective-sentiment.component';
 
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
@@ -129,6 +130,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     EventsComponent,
     AddNewEventComponent,
     EditAndDeleteTagPopupComponent,
+    ObjectiveSentimentComponent,
 
   ],
   imports: [
@@ -162,8 +164,9 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     DragDropModule,
     Ng2ImgMaxModule,
     CurrencyMaskModule,
+    NgSelectModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   entryComponents: [
     // See https://material.angular.io/components/dialog/overview#configuring-dialog-content-via-code-entrycomponents-code- for more info

@@ -1,22 +1,61 @@
 <div class="container tab-content">
-
   <div id="allNotesId" class="tab-pane fade in active" style="overflow: hidden" *ngIf="hideNoDataDiv">
-
+<form>
     <ul>
       <li *ngFor="let item of agentNotes;let i = index">
         <div class="row">
           <div class="col-xs-12 col-md-12 cell-bg">
-            <div class="col-xs-6 col-md-6 noPadding">
-              <div class="myNotesWp"><img src="../../../../../images/ic_note_profile.svg" alt=""> My Notes</div>
+
+            <div class="myNotesWp"><img src="../../../../../images/ic_note_profile.svg" alt=""> My Notes</div>
+            <br>
+
+            <!-- <div class="row">
+              <div class="col-md-3 col-xs-12">
+
+                <label>Category:</label>
+                <input type="text" class="form-control" [disabled]=true value="">
+              </div>
+            </div> -->
+            <div class="col-xs-12 col-md-12">
+              <div class="agent-contact">
+                <div class="clearfix"></div>
+                <div class="state">Category <br><span>{{item.category}}</span></div>
+                <div class="state">Summary<br> <span>{{item.subject}}</span></div>
+                <div class="state">Note<br><span>{{item.notes}}</span></div>
+              </div>
             </div>
-            <div class="col-xs-6 col-md-6 noPadding">
-              <div class="myNotesWp textRight">{{item.dateCreated}}</div>
+
+            <!-- <div class="row">
+              <div class="col-md-3 col-xs-12">
+
+                <label>Summary:</label>
+                <input type="text" class="form-control" [disabled]=true value="{{item.subject}}">
+              </div>
+            </div> -->
+            <!-- <br>
+            <div class="row">
+              <div class="col-md-3 col-xs-12">
+                <label>Note:</label>
+                <div class="col-xs-12 col-md-12 noPadding">
+                  <div class="myNotesDetails">
+                    <p>{{item.notes}}</p>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+
+
+            <!-- <div class="col-xs-6 col-md-6 noPadding">
+              <div class="myNotesWp textRight">
+                dgdsg
+              </div>
             </div>
             <div class="col-xs-12 col-md-12 noPadding">
               <div class="myNotesDetails">
                 <p>{{item.notes}}</p>
               </div>
-            </div>
+            </div> -->
 
             <div class="clearfix paddingTop5"></div>
             <div class="divider"></div>
@@ -52,9 +91,11 @@
 
     <button (click)="topFunction()" id="myBtn" title="Go to top"><span
         class="glyphicon glyphicon-arrow-up"></span></button>
+      </form>
   </div>
   <div class="serach-emp " *ngIf="!hideNoDataDiv">
     <h2><em>It is Empty Here!</em></h2>
     <p><em>{{errorMsg}}</em></p>
   </div>
+  
 </div>

@@ -130,8 +130,10 @@ export class ApiHandlerService implements ApiResponseCallback {
   public createNote(requestJson: any, apiResponseCallback: ApiResponseCallback) {
     this.dataService.onHideShowLoader(true);
     let agentID = requestJson.attr.entityID;
-    let notes = requestJson.attr.notes
-    let url = this.api.getCreateNoteUrl(this.getAppMode(),agentID,notes);
+    let notes = requestJson.attr.notes;
+    let summary = requestJson.attr.subject;
+    let selectedCategory = requestJson.attr.notesCategory;
+    let url = this.api.getCreateNoteUrl(this.getAppMode(),agentID,notes,summary,selectedCategory);
     this.apiService.hitPostApi(url, this.getRequestXml(requestJson), handleAddAndUpdateApiResponse(this, apiResponseCallback));
   }
 
@@ -256,7 +258,13 @@ export class ApiHandlerService implements ApiResponseCallback {
    */
   public updateNote(requestJson: any, apiResponseCallback: ApiResponseCallback) {
     this.dataService.onHideShowLoader(true);
-    let url = this.api.getUpdateNoteUrl(this.getAppMode());
+
+    let agentID = requestJson.attr.agentID;
+    let notes = requestJson.attr.notes;
+    let summary = requestJson.attr.subject;
+    let selectedCategory = requestJson.attr.category;
+
+    let url = this.api.getUpdateNoteUrl(this.getAppMode(),agentID,notes,summary,selectedCategory);
     this.apiService.hitPostApi(url, this.getRequestXml(requestJson), handleAddAndUpdateApiResponse(this, apiResponseCallback));
   }
 

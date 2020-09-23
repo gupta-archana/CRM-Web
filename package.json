@@ -25,6 +25,7 @@
     "@angular/platform-browser-dynamic": "^6.1.0",
     "@angular/router": "^6.1.0",
     "@ng-bootstrap/ng-bootstrap": "^4.1.1",
+    "@ng-select/ng-select": "^2.16.0",
     "@types/jquery": "^3.5.1",
     "angular-ng-autocomplete": "^1.1.17",
     "blueimp-canvas-to-blob": "^3.14.0",

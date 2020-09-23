@@ -41,11 +41,11 @@ export class AllNotesComponent extends BaseClass implements OnInit, OnDestroy, A
   }
 
   getNotesType(item: NotesModel) {
-    if (item.agentID == this.entityModel.entityId) {
+    if (item.uid === this.entityModel.email) {
       return this.MY_NOTES
     }
     else {
-      return item.agentID;
+      return item.uid;
     }
   }
   onLoadMoreClick() {
@@ -72,6 +72,17 @@ export class AllNotesComponent extends BaseClass implements OnInit, OnDestroy, A
     let data: NotesModel[] = response.AgentNote;
     data.forEach(element => {
       if (element.notes) {
+        if(element.category ==='1')
+        element.category = "General"
+        else if(element.category ==='2')
+        element.category = "Events"
+        else if(element.category ==='3')
+        element.category = "Opportunities"
+        else if(element.category ==='4')
+        element.category = "Issues"
+        else
+        element.category = ""
+ 
        // element.dateCreated = element.dateCreated.split(" ")[0];
         this.agentNotes.push(element);
       } else {

@@ -1,0 +1,18 @@
+label{
+    color: black;
+    font-size: 14px;
+    
+}
+.form-control
+{
+    width: 90% !important;
+    height: 30px !important;
+}
+.agent-contact
+{
+    margin-top: 0px !important;
+}
+.agent-contact .state
+{
+margin-top: 15px !important;
+}

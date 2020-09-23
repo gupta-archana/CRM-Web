@@ -59,12 +59,25 @@ export class MyNotesComponent extends BaseClass implements OnInit, OnDestroy {
   onSuccess(response: any) {
     let data: NotesModel[] = response.AgentNote;
     data.forEach(element => {
-      if (element.notes) {
+      if (element.notes && element.uid === this.uid) {
        // element.dateCreated = element.dateCreated.split(" ")[0];
+       if(element.category ==='1')
+       element.category = "General"
+       else if(element.category ==='2')
+       element.category = "Events"
+       else if(element.category ==='3')
+       element.category = "Opportunities"
+       else if(element.category ==='4')
+       element.category = "Issues"
+       else
+       element.category = ""
+
         this.agentNotes.push(element);
-      } else {
-        this.totalRows = element.rowNum;
-      }
+        this.totalRows = ++this.totalRows
+      } 
+      // else {
+      //   this.totalRows = element.seq;
+      // }
     });
     this.renderUI();
   }

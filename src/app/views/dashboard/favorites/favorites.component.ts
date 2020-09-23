@@ -121,13 +121,17 @@ function makeServerRequest(context: FavoritesComponent) {
 function parserResponse(response: any, context: FavoritesComponent) {
   let favorites = response.sysfavorite;
   favorites.forEach(element => {
-    if (element.type != "TotalFavorite") {
+    if (element.type == "E" || element.type == "A" || element.type == "P" ) {
+      if(element.favorite ==="yes")
+      {
       context.commonFunctions.setFavoriteOnApisResponse(element);
       context.favorites.push(element);
+      context.totalRows = ++context.totalRows
     }
-    else {
-      context.totalRows = element.rowNum;
-    }
+  }
+    // else {
+    //   context.totalRows = element.rowNum;
+    // }
   });
 }
 

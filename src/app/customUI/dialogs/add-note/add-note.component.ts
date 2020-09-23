@@ -17,9 +17,17 @@ export class AddNoteComponent extends BaseClass implements OnInit, ApiResponseCa
   @ViewChild("closeAddNote")
   closeAddNote: ElementRef;
   note: string = "";
+  summary : string = "";
   entityInfo: EntityModel;
   shareEntityIdAndTypeSubscription: Subscription = null;
-
+  disableOnEdit: boolean = false;
+  notesCategory:any
+category = [
+  { id : 1,value: "General"},
+  { id : 2,value: "Events"},
+  { id : 3,value: "Opportunities"},
+  { id : 4,value: "Issues"},
+]
   ngOnInit() {
     getEntityTypeAndId(this);
 
@@ -28,8 +36,6 @@ export class AddNoteComponent extends BaseClass implements OnInit, ApiResponseCa
   onSaveClick() {
     if (this.note) {
       this.apiHandler.createNote(getRequest(this), this);
-
-      //getRequest(this);
     }
   }
 
@@ -56,7 +62,9 @@ function getRequest(context: AddNoteComponent) {
     "UID": context.commonFunctions.getLoginCredentials().email,
     "entity": context.entityInfo.type,
     "entityID": context.entityInfo.entityId,
-    "notes": context.note
+    "notes": context.note,
+    "summary": context.summary,
+    "notesCategory": context.notesCategory
   }
 
   let finalJson = {

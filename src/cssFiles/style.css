@@ -1,6 +1,8 @@
 @charset "utf-8";
 /* CSS Document */
 
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
 * {
   transition: all 0.3s ease 0s;
 }
@@ -10,6 +12,12 @@ body {
   padding: 0;
   margin: 0;
   background: #f2f2f2;
+}
+
+.ng-select.ng-select-disabled>.ng-select-container {
+  height: calc(2.3rem + 2px);
+  background-color: #e9ecef;
+  border: none;
 }
 
 .bg {
@@ -809,18 +817,23 @@ ul.agent-details li.associates a {
 .ag-objective ul li.complete {
   background: url(../images/check.svg) no-repeat left;
   padding-left: 25px;
+  cursor: pointer;
 }
 
 .ag-objective ul li.cancel {
   background: url(../images/close-btn.svg) no-repeat left;
   padding-left: 25px;
+  cursor: pointer;
+
 }
 
 .ag-objective ul li.edit {
   background: url(../images/edit-btn.svg) no-repeat left;
   padding-left: 25px;
-  width: 23%;
-  margin-left: 32px;
+  /* width: 23%;
+  margin-left: 32px; */
+  cursor: pointer;
+
 }
 
 .ag-obj-active .status,
@@ -1430,7 +1443,8 @@ input:checked+.slider:before {
   font-size: 14px;
   color: #4c4c4c;
   font-weight: normal;
-  margin: 10px 0px;
+  margin-top: 5px;
+ /* margin: 10px 0px; */
 
 }
 
@@ -2446,7 +2460,7 @@ input:-internal-autofill-selected {
     background-position: 6px;
     margin-bottom: 28px;
     border-right: 0;
-    width: 6%;
+    width: 7%;
   }
 
 

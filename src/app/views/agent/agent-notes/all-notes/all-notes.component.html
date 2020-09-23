@@ -9,15 +9,20 @@
               <div class="myNotesWp"><img src="../../../../../images/ic_note_profile.svg" alt="">{{getNotesType(item)}}
               </div>
             </div>
-            <div class="col-xs-6 col-md-6 noPadding">
-              <div class="myNotesWp textRight">{{item.dateCreated}}</div>
-            </div>
-            <div class="col-xs-12 col-md-12 noPadding">
-              <div class="myNotesDetails">
-                <p>{{item.notes}}</p>
+            <!-- <div class="col-xs-6 col-md-6 noPadding">
+              <div class="myNotesWp textRight">
+                 {{item.dateCreated}} 
               </div>
+            </div> -->
+            <div class="col-xs-12 col-md-12">
+              <div class="agent-contact">
+                <div class="clearfix"></div>
+                <div class="state">Category <br><span>{{item.category}}</span></div>
+                <div class="state">Summary<br> <span>{{item.subject}}</span></div>
+                <div class="state">Note<br><span>{{item.notes}}</span></div>
+              </div>              
             </div>
-            <div *ngIf="getNotesType(item)=='My Notes'">
+            <!-- <div *ngIf="getNotesType(item)=='My Notes'">
               <div class="clearfix paddingTop5"></div>
               <div class="divider"></div>
               <div class="clearfix paddingTop5"></div>
@@ -34,7 +39,7 @@
                       src="../../../../../images/ic_note_edit.svg" alt=""> Edit</a>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
 
         </div>

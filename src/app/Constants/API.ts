@@ -109,10 +109,7 @@ export class API {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=agentNotesGet&AgentID=" + entityId + "&Seq=0";
   }
 
-  getCreateNoteUrl(app_mode: string,entityId,Notes) {
 
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=agentNoteNew&AgentID=" + entityId + "&Category=1&Subject=NewNote" + entityId + "&NoteType=1&Notes=" + Notes;
-  }
 
 
   getUpdateUserProfileUrl(app_mode: string) {
@@ -160,9 +157,13 @@ export class API {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userNoteDelete&sysNoteID=" + noteId;
   }
 
+  getCreateNoteUrl(app_mode: string,entityId,Notes,summary,selectedCategory) {
 
-  getUpdateNoteUrl(app_mode: string) {
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userNoteModify";
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=agentNoteNew&AgentID=" + entityId + "&Category=" + selectedCategory + "&Subject=" + summary + "&NoteType=1&Notes=" + Notes;
+  }
+
+  getUpdateNoteUrl(app_mode: string,agentId,Notes,summary,selectedCategory) {
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=agentNoteModify&AgentID=" +agentId + "&Seq=1&Category=" +selectedCategory + "&Subject=" + summary +  "&NoteType=1&Notes="  + Notes;
   }
 
   getOpenAlertsUrl(app_mode: string, agentID: string, pageNum: string) {
