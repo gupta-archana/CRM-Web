@@ -45,7 +45,7 @@ export class AllNotesComponent extends BaseClass implements OnInit, OnDestroy, A
       return this.MY_NOTES
     }
     else {
-      return item.uid;
+      return item.userName;
     }
   }
   onLoadMoreClick() {

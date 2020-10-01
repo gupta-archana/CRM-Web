@@ -31,6 +31,8 @@ export class EditObjectiveComponent implements OnInit, ApiResponseCallback {
   }
   onSuccess(response: any) {
     this.dialogRef.close(true);
+    // add a snackbaar
+
   }
   onError(errorCode: number, errorMsg: string) {
     this.dialogRef.close(false);

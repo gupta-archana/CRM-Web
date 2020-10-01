@@ -12,6 +12,7 @@ import { AssignedToComponent } from '../customUI/dialogs/assigned-to/assigned-to
 import { EditObjectiveComponent } from '../customUI/dialogs/edit-objective/edit-objective.component';
 import { AddNewEventComponent } from '../customUI/dialogs/add-new-event/add-new-event.component';
 import { EditAndDeleteTagPopupComponent } from '../customUI/dialogs/edit-and-delete-tag-popup/edit-and-delete-tag-popup.component';
+import { AddObjectivePopupComponent } from '../customUI/dialogs/add-objective-popup/add-objective-popup.component';
 
 @Injectable({
   providedIn: 'root'
@@ -79,6 +80,15 @@ export class OpenDialogsService {
   }
   showEditObjectiveDialog(objective: string) {
     return this.dialog.open(EditObjectiveComponent,
+      {
+        data: {
+          message: objective
+        }
+      });
+  }
+
+  showAddObjectiveDialog(objective: string) {
+    return this.dialog.open(AddObjectivePopupComponent,
       {
         data: {
           message: objective

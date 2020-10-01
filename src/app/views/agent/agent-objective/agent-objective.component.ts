@@ -71,6 +71,7 @@ export class AgentObjectiveComponent extends BaseClass implements OnInit, ApiRes
 
   onSuccess(response: any) {
     this.cdr.markForCheck();
+    this.commonFunctions.showSnackbar(response.message)
   }
   onError(errorCode: number, errorMsg: string) {
 
@@ -110,7 +111,36 @@ export class AgentObjectiveComponent extends BaseClass implements OnInit, ApiRes
   onCancelClick(item: ObjectiveModel) {
     changeObjectiveStatus(this, item, "X");
   }
-
+openAddObjectiveDialog()
+{
+  sessionStorage.setItem("tabSelected",this.selectedTab.toString())
+  if (this.selectedTab == 1) {
+    if(this.agentActiveObjective !=null)
+    {
+      this.openDialogService.showAddObjectiveDialog(JSON.stringify(this.agentActiveObjective))
+    }
+    else
+    {
+      this.openDialogService.showAddObjectiveDialog(JSON.stringify(this.agentActiveObjective)).afterClosed().subscribe(updated => {
+        if (updated)
+          getOurActiveStatuses(this);
+      });
+    }
+  }
+  if (this.selectedTab == 2) {
+    if(this.ourActiveObjective !=null)
+    {
+      this.openDialogService.showAddObjectiveDialog(JSON.stringify(this.ourActiveObjective))
+    }
+    else
+    {
+      this.openDialogService.showAddObjectiveDialog(JSON.stringify(this.ourActiveObjective)).afterClosed().subscribe(updated => {
+        if (updated)
+          getOurActiveStatuses(this);
+      });
+    }
+  }
+}
   openEditObjectiveDialog() {
     if (this.selectedTab == 1) {
       this.openDialogService.showEditObjectiveDialog(JSON.stringify(this.agentActiveObjective)).afterClosed().subscribe(updated => {

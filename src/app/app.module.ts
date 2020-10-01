@@ -71,6 +71,9 @@ import { EditAndDeleteTagPopupComponent } from './customUI/dialogs/edit-and-dele
 import { TooltipModule } from 'ng2-tooltip-directive';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ObjectiveSentimentComponent } from './customUI/dialogs/objective-sentiment/objective-sentiment.component';
+import { AddObjectivePopupComponent } from './customUI/dialogs/add-objective-popup/add-objective-popup.component';
+import {MatDatepickerModule, MatInputModule,MatNativeDateModule} from '@angular/material'
+import { DatePipe } from '@angular/common';
 
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
@@ -131,6 +134,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     AddNewEventComponent,
     EditAndDeleteTagPopupComponent,
     ObjectiveSentimentComponent,
+    AddObjectivePopupComponent,
+    ObjectiveSentimentComponent
 
   ],
   imports: [
@@ -145,6 +150,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     NgxVcardModule,
     TooltipModule ,
     SidebarModule.forRoot(),
+    MatDatepickerModule,
     ToastNoAnimationModule.forRoot({
       timeOut: 2500,
       positionClass: 'toast-bottom-center',
@@ -165,9 +171,13 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     Ng2ImgMaxModule,
     CurrencyMaskModule,
     NgSelectModule,
-    FormsModule,
     ReactiveFormsModule,
-  ],
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule,
+    FormsModule
+
+   ],
   entryComponents: [
     // See https://material.angular.io/components/dialog/overview#configuring-dialog-content-via-code-entrycomponents-code- for more info
     AlertDialogComponent,
@@ -181,11 +191,12 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     AssignedToComponent,
     EditObjectiveComponent,
     AddNewEventComponent,
-    EditAndDeleteTagPopupComponent
+    EditAndDeleteTagPopupComponent,
+    AddObjectivePopupComponent
   ],
   providers: [Constants, ApiService,
     { provide: UrlSerializer, useClass: LowerCaseUrlSerializer },
-    LoginGuardGuard,
+    LoginGuardGuard,DatePipe,
     { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }
   ],
   bootstrap: [AppComponent]

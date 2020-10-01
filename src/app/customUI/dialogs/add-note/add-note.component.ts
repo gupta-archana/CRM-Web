@@ -30,7 +30,9 @@ category = [
 ]
   ngOnInit() {
     getEntityTypeAndId(this);
-
+    this.summary =null
+    this.notesCategory = null
+    this.note = null
   }
 
   onSaveClick() {
@@ -46,6 +48,9 @@ category = [
     this.commonFunctions.showSnackbar(response);
     this.dataService.onDataUpdated();
     this.closeAddNote.nativeElement.click();
+    this.summary =""
+    this.notesCategory = ""
+    this.note = ""
   }
   onError(errorCode: number, errorMsg: string) {
 
@@ -63,7 +68,7 @@ function getRequest(context: AddNoteComponent) {
     "entity": context.entityInfo.type,
     "entityID": context.entityInfo.entityId,
     "notes": context.note,
-    "summary": context.summary,
+    "subject": context.summary,
     "notesCategory": context.notesCategory
   }
 

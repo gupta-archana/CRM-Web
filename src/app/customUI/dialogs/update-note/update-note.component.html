@@ -15,9 +15,8 @@
             <label for="cars">Category:</label>
             <div class="clear paddingTop15">
             </div>
-            <ng-select [items]="category" bindLabel="value" name="category" bindValue="id" [(ngModel)]="notesCategory"
-              [multiple]="false" [virtualScroll]="true" placeholder="Select the Category" required>
-            </ng-select>
+            <input type="text" class="form-control"  [(ngModel)]="notesCategory"
+            [ngModelOptions]="{standalone: true}" readonly> 
           </span>
           <div class="clear paddingTop15">
           </div>
@@ -27,7 +26,7 @@
             </div>
             <div class="form-group">
             <input type="text" class="form-control" placeholder="Write the Summary" [(ngModel)]="summary"
-            [ngModelOptions]="{standalone: true}" required> 
+            [ngModelOptions]="{standalone: true}" readonly> 
             </div>
           <div class="clear paddingTop15">
           </div>

@@ -162,8 +162,8 @@ export class API {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=agentNoteNew&AgentID=" + entityId + "&Category=" + selectedCategory + "&Subject=" + summary + "&NoteType=1&Notes=" + Notes;
   }
 
-  getUpdateNoteUrl(app_mode: string,agentId,Notes,summary,selectedCategory) {
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=agentNoteModify&AgentID=" +agentId + "&Seq=1&Category=" +selectedCategory + "&Subject=" + summary +  "&NoteType=1&Notes="  + Notes;
+  getUpdateNoteUrl(app_mode: string,agentId,Notes,summary,seq,selectedCategory) {
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=agentNoteModify&AgentID=" +agentId + "&Seq="+seq + "&Category=" +selectedCategory + "&Subject=" + summary +  "&NoteType=1&Notes="  + Notes;
   }
 
   getOpenAlertsUrl(app_mode: string, agentID: string, pageNum: string) {
@@ -237,6 +237,11 @@ export class API {
   getUpdateObjectiveUrl(app_mode: string) {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userObjectiveModify";
   }
+
+   createObjectiveUrl(app_mode : string)
+   {
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userObjectiveNew";
+   }
 
   getUpdateTagUrl(app_mode: string) {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userTagModify";

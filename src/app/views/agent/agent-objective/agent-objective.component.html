@@ -10,7 +10,7 @@
           <div class="col-xs-3 text-center tpad">
           <!-- <a alt="" (click)="openEditObjectiveDialog()"><img src="../../../../images/add.svg" alt=""><br>
             <span class="edit-detail">Edit Objective</span></a> -->
-            <a alt="" (click)="openEditObjectiveDialog()"><img src="../../../../images/add.svg" alt=""><br>
+            <a alt="" (click)="openAddObjectiveDialog()"><img src="../../../../images/add.svg" alt=""><br>
               <span class="edit-detail">Add Objective</span></a>
         </div>
       </div>
@@ -45,9 +45,11 @@
                   </div>
                   <div class="ag-objective">
                     <ul>
-                      <li style="width:60%;" class="complete" (click)="onCompleteClick(agentActiveObjective)">Complete
+                      <li class="complete" (click)="onCompleteClick(agentActiveObjective)">Complete
                       </li>
-                      <li style="width:40%;" class="cancel" (click)="onCancelClick(agentActiveObjective)">Cancel</li>
+                      <li  class="edit" (click)="openEditObjectiveDialog(ourActiveObjective)" >Edit
+                      </li>
+                      <li  class="cancel" (click)="onCancelClick(agentActiveObjective)">Cancel</li>
                     </ul>
                   </div>
                 </div>
@@ -183,7 +185,7 @@
                   </div>
 
                   <div class="buttonFooter_wp">
-                    <button type="button" class="btn btn-primary footerBtn">
+                    <button type="button" class="btn btn-primary footerBtn" data-toggle="modal"  data-target="#recordInteractionModal">
                       <img src="images/record-obj-icon.svg" alt=""> Record Objective Sentiment
                     </button>
                   </div>
@@ -206,3 +208,4 @@
   </div>
 </div>
 <app-add-note></app-add-note>
+<app-objective-sentiment></app-objective-sentiment>

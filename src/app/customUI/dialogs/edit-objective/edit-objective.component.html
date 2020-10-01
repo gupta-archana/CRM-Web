@@ -2,7 +2,7 @@
   <!-- Modal content-->
 
   <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <button type="button" class="close" data-dismiss="modal" (click) = "onCancelClick()" >&times;</button>
     <h4 class="modal-title">Edit Objective</h4>
   </div>
   <form role="form">
@@ -11,13 +11,18 @@
 
       <div class="form-group">
         <label for="usr">Objective Details</label>
-        <input type="text" class="form-control" id="name" [(ngModel)]="objectiveModel.description"
-          [ngModelOptions]="{standalone: true}">
+         <input type="text" class="form-control" id="name" [(ngModel)]="objectiveModel.description"
+          [ngModelOptions]="{standalone: true}"> 
       </div>
       <div class="form-group calenderPosition">
         <label for="usr">Due Date of Objective</label>
-        <input type="text" class="form-control pr-38" placeholder="02-21-2019">
-        <button type="submit" class="btn btn-default add-btn"><img src="images/calendar-icon.svg" alt=""></button>
+        <br>
+         <!-- <button type="submit" class="btn btn-default add-btn"><img src="images/calendar-icon.svg" alt=""></button> -->
+        <mat-form-field>
+          <input matInput [matDatepicker] = "picker" placeholder = "Choose a date" name="dueDate"  [(ngModel)]="objectiveModel.dueDate">
+          <mat-datepicker-toggle matSuffix [for] = "picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+       </mat-form-field>
         </div>
         <!-- <mat-form-field appearance="fill">
           <mat-label>Custom calendar header</mat-label>

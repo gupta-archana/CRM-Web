@@ -1,11 +1,10 @@
 {
-    "hosting": {
-      "public": "dist/AlliantCRM",
-      "rewrites": [
-        {
-          "source": "**",
-          "destination": "/index.html"
-        }
-      ]
-    }
+  "hosting": {
+    "public": "dist/AlliantCRM",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
   }
+}

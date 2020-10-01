@@ -12,4 +12,5 @@ subject: string
 typeDesc: string
 uid: string
 rowNum : string
+  userName: string;
 }

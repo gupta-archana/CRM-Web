@@ -94,6 +94,14 @@ this.tooltipText = "Hide Password"
 else
 this.tooltipText = "Show Password"
 }
+hideIcon()
+{
+  //this.show = !this.show
+if(this.show)
+this.tooltipText = "Hide Password"
+else
+this.tooltipText = "Show Password"
+}
   onSuccess(response: any) {
     this.dataService.onHideShowLoader(false);
     let userModel: UserModel = this.loginParser.parseLogin(response.parameter);

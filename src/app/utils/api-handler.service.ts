@@ -4,6 +4,7 @@ import { ApiResponseCallback } from '../Interfaces/ApiResponseCallback';
 import { API } from '../Constants/API';
 import { DataServiceService } from '../services/data-service.service';
 import { Constants } from '../Constants/Constants';
+import * as moment from 'moment';
 declare var require: any;
 var json2xml = require('json2xml');
 
@@ -259,12 +260,21 @@ export class ApiHandlerService implements ApiResponseCallback {
   public updateNote(requestJson: any, apiResponseCallback: ApiResponseCallback) {
     this.dataService.onHideShowLoader(true);
 
+    if(requestJson.attr.category ==='General')
+    requestJson.attr.category = 1
+    else if(requestJson.attr.category ==='Events')
+    requestJson.attr.category = 2
+    else if(requestJson.attr.category ==='Opportunities')
+    requestJson.attr.category = 3
+    else if(requestJson.attr.category ==='Issues')
+    requestJson.attr.category = 4
+
     let agentID = requestJson.attr.agentID;
     let notes = requestJson.attr.notes;
     let summary = requestJson.attr.subject;
     let selectedCategory = requestJson.attr.category;
-
-    let url = this.api.getUpdateNoteUrl(this.getAppMode(),agentID,notes,summary,selectedCategory);
+    let seq = requestJson.attr.seq;
+    let url = this.api.getUpdateNoteUrl(this.getAppMode(),agentID,notes,summary,seq,selectedCategory);
     this.apiService.hitPostApi(url, this.getRequestXml(requestJson), handleAddAndUpdateApiResponse(this, apiResponseCallback));
   }
 
@@ -453,11 +463,26 @@ export class ApiHandlerService implements ApiResponseCallback {
    */
   public updateObjective(requestJson, apiResponseCallback: ApiResponseCallback) {
     this.dataService.onHideShowLoader(true);
+    const momentDate = new Date(requestJson.attr.dueDate); // Replace event.value with your date value
+    const formattedDate = moment(momentDate).format("MM/DD/YYYY");
+    requestJson.attr.dueDate = formattedDate
+    console.log(formattedDate);
     let url = this.api.getUpdateObjectiveUrl(this.APP_MODE[this.ENABLE_APP_MODE]);
     //console.log(this.getRequestXml(requestJson));
     this.apiService.hitPostApi(url, this.getRequestXml(requestJson), handleAddAndUpdateApiResponse(this, apiResponseCallback));
   }
-
+/**
+ * Create Objectiobe
+ */
+public createObjective(requestJson, apiResponseCallback: ApiResponseCallback) {
+  this.dataService.onHideShowLoader(true);
+  const momentDate = new Date(requestJson.attr.dueDate); // Replace event.value with your date value
+  const formattedDate = moment(momentDate).format("MM/DD/YYYY");
+  requestJson.attr.dueDate = formattedDate
+  console.log(formattedDate);
+  let url = this.api.createObjectiveUrl(this.APP_MODE[this.ENABLE_APP_MODE]);
+  this.apiService.hitPostApi(url, this.getRequestXml(requestJson), handleAddAndUpdateApiResponse(this, apiResponseCallback));
+}
   public updateTag(requestJson, apiResponseCallback: ApiResponseCallback) {
     this.dataService.onHideShowLoader(true);
      let url = this.api.getUpdateTagUrl(this.APP_MODE[this.ENABLE_APP_MODE]);

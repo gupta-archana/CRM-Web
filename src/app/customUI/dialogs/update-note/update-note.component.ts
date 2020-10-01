@@ -4,6 +4,7 @@ import { ApiResponseCallback } from 'src/app/Interfaces/ApiResponseCallback';
 import { EntityModel } from 'src/app/models/entity-model';
 import { Subscription } from 'rxjs';
 import { NotesModel } from 'src/app/models/notes-model';
+import { data } from 'jquery';
 
 @Component({
   selector: 'app-update-note',
@@ -28,6 +29,7 @@ export class UpdateNoteComponent extends BaseClass implements OnInit, ApiRespons
     { id : 3,value: "Opportunities"},
     { id : 4,value: "Issues"},
   ]
+  seq:any
   ngOnInit() {
 
     getNoteModel(this);
@@ -62,17 +64,18 @@ export class UpdateNoteComponent extends BaseClass implements OnInit, ApiRespons
 function getNoteModel(context: UpdateNoteComponent) {
   context.noteModelSubscription = context.dataService.shareDataObservable.subscribe((data: NotesModel) => {
     context.noteModel = data;
+    context.seq = data.seq
     
-    if(context.noteModel.category ==='General')
-    context.notesCategory= 1
-    else if(context.noteModel .category ==='Events')
-    context.notesCategory= 2
-    else if(context.noteModel .category ==='Opportunities')
-    context.notesCategory = 3
-    else if(context.noteModel .category ==='Issues')
-    context.notesCategory = 4
+    // if(context.noteModel.category ==='General')
+    // context.notesCategory= 1
+    // else if(context.noteModel .category ==='Events')
+    // context.notesCategory= 2
+    // else if(context.noteModel .category ==='Opportunities')
+    // context.notesCategory = 3
+    // else if(context.noteModel .category ==='Issues')
+    // context.notesCategory = 4
    
-
+    context.notesCategory = context.noteModel.category
     context.note = context.noteModel.notes;
     context.summary = context.noteModel.subject
     // context.notesCategory = context.noteModel.category
@@ -81,12 +84,14 @@ function getNoteModel(context: UpdateNoteComponent) {
 }
 
 function getRequest(context: UpdateNoteComponent) {
+
+
   let requestJson = {
     "UID": context.commonFunctions.getLoginCredentials().email,
     "agentID": context.noteModel.agentID,
     "notes": context.note,
     "subject": context.summary,
-    
+    "seq" : context.seq,
     "category": context.notesCategory
   }
 
