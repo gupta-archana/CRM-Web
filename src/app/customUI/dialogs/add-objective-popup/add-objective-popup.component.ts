@@ -65,7 +65,7 @@ function createRequestJson(context: AddObjectivePopupComponent) {
     context.objectiveModel.type = 'o'
 
     context.objectiveModel.private = 'no'
-    context.objectiveModel.Stat = context.entityModel.stat
+    context.objectiveModel.Stat = "A"
 
   }
   let finalJson = {

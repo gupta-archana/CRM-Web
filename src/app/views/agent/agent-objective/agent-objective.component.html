@@ -101,7 +101,7 @@
                     </button>
                   </div>
                 </div>
-                <div class="buttonFooter_wp">
+                <div class="buttonFooter_wp" *ngIf = "agentActiveObjective !=null">
                   <button type="button" class="btn btn-primary footerBtn">
                     <img src="images/record-obj-icon.svg" alt=""> Record Objective Sentiment
                   </button>
@@ -184,7 +184,7 @@
                     </div>
                   </div>
 
-                  <div class="buttonFooter_wp">
+                  <div class="buttonFooter_wp" *ngIf = "ourActiveObjective !=null">
                     <button type="button" class="btn btn-primary footerBtn" data-toggle="modal"  data-target="#recordInteractionModal">
                       <img src="images/record-obj-icon.svg" alt=""> Record Objective Sentiment
                     </button>

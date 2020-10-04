@@ -86,22 +86,18 @@ export class LoginComponent implements OnInit, ApiResponseCallback, CanComponent
 
   }
 
-showHidePassword()
+showHidePassword(showPassword:boolean)
 {
-this.show = !this.show
-if(this.show)
-this.tooltipText = "Hide Password"
-else
-this.tooltipText = "Show Password"
+  if(showPassword)
+  {
+  this.show = true;
+  this.tooltipText ="Show Password"
+  }
+  else
+  this.show = false;
+  
 }
-hideIcon()
-{
-  //this.show = !this.show
-if(this.show)
-this.tooltipText = "Hide Password"
-else
-this.tooltipText = "Show Password"
-}
+
   onSuccess(response: any) {
     this.dataService.onHideShowLoader(false);
     let userModel: UserModel = this.loginParser.parseLogin(response.parameter);
