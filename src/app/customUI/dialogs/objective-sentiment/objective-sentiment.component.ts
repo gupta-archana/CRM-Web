@@ -7,6 +7,7 @@ import { ObjectiveModel } from "../../../models/objective-model";
 import { SentimentModel } from "../../../models/sentiment-model";
 import { MyLocalStorageService } from "../../../services/my-local-storage.service";
 import { ApiHandlerService } from "../../../utils/api-handler.service";
+import { CommonFunctionsService } from "../../../utils/common-functions.service";
 
 @Component({
   selector: "app-objective-sentiment",
@@ -28,7 +29,7 @@ export class ObjectiveSentimentComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     public apiHandler: ApiHandlerService,
     private myLocalStorage: MyLocalStorageService,
-    private constants: Constants
+    private constants: Constants, private commonFunctions : CommonFunctionsService
   ) {}
 
   ngOnInit() {
@@ -52,11 +53,29 @@ export class ObjectiveSentimentComponent implements OnInit {
   }
 
   saveSentiment() {
+    let self = this
     if (this.sentimentModel)
-      this.apiHandler.modifySentiment(createSentimentRequestJson(this), this);
+      this.apiHandler.modifySentiment(createSentimentRequestJson(this),
+      {
+        onSuccess(response: any) {
+          
+          self.commonFunctions.showSnackbar(response)
+          self.dialogRef.close(true);
+          
+        },
+        onError(errorCode: number, errorMsg: string) {
+          self.commonFunctions.showErrorSnackbar(errorMsg)
+
+          self.dialogRef.close(false);
+
+        }
+      }
+      )
     else
-      this.apiHandler.createSentiment(createSentimentRequestJson(this), this);
+    {
+      this.apiHandler.createSentiment(createSentimentRequestJson(this), this)
   }
+}
   selectedSentiments(type) {
     this.type = type;
   }
