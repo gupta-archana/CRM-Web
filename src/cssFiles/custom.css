@@ -353,7 +353,7 @@ ul.agent-details li.agents a {
   /* display: inherit !important;
   background: transparent !important; */
   height: inherit !important;
-  width: 95% !important;
+  width: 50% !important;
 }
 
 #MarkAsReviewedDialogButtonGroup {

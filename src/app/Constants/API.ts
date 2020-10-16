@@ -10,7 +10,7 @@ export class API {
   AGENT_DETAIL_MENU = "../assets/jsons/agent_detail_menu.json";
   PERSON_DETAIL_MENU = "../assets/jsons/person_detail_menu.json";
   STATES_JSON_URL = "../assets/jsons/state.json";
-  private API_BASE_URL = "https://compass.alliantnational.com:8118/do/action/WService=";
+  private API_BASE_URL = "https://compasstest.alliantnational.com:8118/do/action/WService=";
   private numberOfRows: number;
   email: string = "";
   encryptedPassword: string = "";
@@ -109,8 +109,16 @@ export class API {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=agentNotesGet&AgentID=" + entityId + "&Seq=0";
   }
 
+  getUpdateSentimentUrl(app_mode:string)
+  {
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=sentimentModify" ;
+  }
 
-
+  getCreateSentimentUrl(app_mode:string)
+  {
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=sentimentNew" ;
+    
+  }
 
   getUpdateUserProfileUrl(app_mode: string) {
 
@@ -234,6 +242,11 @@ export class API {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userObjectivesGet&entity=" + entity + "&entityID=" + entityId + "&stat=" + stat + "&type=" + type + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows;
   }
 
+  getPersonListUrl(app_mode: string,agentState,agentID)
+  {
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=agentAffiliationsGet&stateID=" + agentState + "&agentID=" + agentID;
+
+  }
   getUpdateObjectiveUrl(app_mode: string) {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userObjectiveModify";
   }
@@ -250,6 +263,8 @@ export class API {
   getDeleteTagUrl(app_mode: string, noteId: string) {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=EntityUntag&tagID=" + noteId;
   }
+
+
 
   getEventsListUrl(app_mode: string, entityType: any, entityId: any) {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=eventsGet&entity=" + entityType + "&entityID=" + entityId;

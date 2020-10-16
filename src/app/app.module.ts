@@ -72,7 +72,7 @@ import { TooltipModule } from 'ng2-tooltip-directive';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ObjectiveSentimentComponent } from './customUI/dialogs/objective-sentiment/objective-sentiment.component';
 import { AddObjectivePopupComponent } from './customUI/dialogs/add-objective-popup/add-objective-popup.component';
-import {MatDatepickerModule, MatInputModule,MatNativeDateModule} from '@angular/material'
+import {MatDatepickerModule, MatDialogRef, MatInputModule,MatNativeDateModule, MAT_DIALOG_DATA} from '@angular/material'
 import { DatePipe } from '@angular/common';
 
 
@@ -134,8 +134,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     AddNewEventComponent,
     EditAndDeleteTagPopupComponent,
     ObjectiveSentimentComponent,
-    AddObjectivePopupComponent,
-    ObjectiveSentimentComponent
+    AddObjectivePopupComponent
 
   ],
   imports: [
@@ -192,12 +191,15 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     EditObjectiveComponent,
     AddNewEventComponent,
     EditAndDeleteTagPopupComponent,
-    AddObjectivePopupComponent
+    AddObjectivePopupComponent,
+    ObjectiveSentimentComponent
   ],
   providers: [Constants, ApiService,
     { provide: UrlSerializer, useClass: LowerCaseUrlSerializer },
     LoginGuardGuard,DatePipe,
-    { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }
+    { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig },
+    { provide: MatDialogRef, useValue: {} },
+    { provide: MAT_DIALOG_DATA, useValue: [] },
   ],
   bootstrap: [AppComponent]
 })

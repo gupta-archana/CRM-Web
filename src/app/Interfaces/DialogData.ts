@@ -5,4 +5,5 @@ export interface DialogData {
   noText: string;
   name: string;
   okText: string;
+  sentiment:string
 }

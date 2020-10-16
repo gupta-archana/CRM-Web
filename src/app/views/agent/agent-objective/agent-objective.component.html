@@ -10,8 +10,11 @@
           <div class="col-xs-3 text-center tpad">
           <!-- <a alt="" (click)="openEditObjectiveDialog()"><img src="../../../../images/add.svg" alt=""><br>
             <span class="edit-detail">Edit Objective</span></a> -->
-            <a alt="" (click)="openAddObjectiveDialog()"><img src="../../../../images/add.svg" alt=""><br>
+            <a  *ngIf ="hideEditObjective" alt="" (click)="openAddObjectiveDialog()"><img src="../../../../images/add.svg" alt=""><br>
               <span class="edit-detail">Add Objective</span></a>
+              <a *ngIf ="!hideEditObjective" alt="" (click)="openEditObjectiveDialog()"><img src="../../../../images/add.svg" alt=""><br>
+                <span class="edit-detail">Edit Objective</span></a>
+                
         </div>
       </div>
     </div>
@@ -47,9 +50,7 @@
                     <ul>
                       <li class="complete" (click)="onCompleteClick(agentActiveObjective)">Complete
                       </li>
-                      <li  class="edit" (click)="openEditObjectiveDialog(ourActiveObjective)" >Edit
-                      </li>
-                      <li  class="cancel" (click)="onCancelClick(agentActiveObjective)">Cancel</li>
+                      <li  class="cancel" (click)="onCancelClick(agentActiveObjective)" style="float: right;">Cancel</li>
                     </ul>
                   </div>
                 </div>
@@ -102,7 +103,7 @@
                   </div>
                 </div>
                 <div class="buttonFooter_wp" *ngIf = "agentActiveObjective !=null">
-                  <button type="button" class="btn btn-primary footerBtn">
+                  <button type="button" class="btn btn-primary footerBtn" (click)="openRecordSentiment(agentActiveObjective)">
                     <img src="images/record-obj-icon.svg" alt=""> Record Objective Sentiment
                   </button>
                 </div>
@@ -131,9 +132,7 @@
                     <ul>
                       <li  class="complete" (click)="onCompleteClick(ourActiveObjective)">Complete
                       </li>
-                      <li  class="edit" (click)="openEditObjectiveDialog(ourActiveObjective)" >Edit
-                      </li>
-                      <li class="cancel" (click)="onCancelClick(ourActiveObjective)">Cancel</li>
+                      <li class="cancel" (click)="onCancelClick(ourActiveObjective)" style="float: right;">Cancel</li>
                     </ul>
                   </div>
                 </div>
@@ -185,8 +184,8 @@
                   </div>
 
                   <div class="buttonFooter_wp" *ngIf = "ourActiveObjective !=null">
-                    <button type="button" class="btn btn-primary footerBtn" data-toggle="modal"  data-target="#recordInteractionModal">
-                      <img src="images/record-obj-icon.svg" alt=""> Record Objective Sentiment
+                    <button type="button" class="btn btn-primary footerBtn" (click)="openRecordSentiment(ourActiveObjective)">
+                      <img src="images/record-obj-icon.svg" alt="" > Record Objective Sentiment
                     </button>
                   </div>
 
@@ -208,4 +207,3 @@
   </div>
 </div>
 <app-add-note></app-add-note>
-<app-objective-sentiment></app-objective-sentiment>

@@ -3,6 +3,7 @@ import { BaseClass } from '../../../global/base-class';
 import { ApiResponseCallback } from '../../../Interfaces/ApiResponseCallback';
 import { EntityModel } from '../../../models/entity-model';
 import { ObjectiveModel } from '../../../models/objective-model';
+import { SentimentModel } from '../../../models/sentiment-model';
 
 @Component({
   selector: 'app-agent-objective',
@@ -19,6 +20,8 @@ export class AgentObjectiveComponent extends BaseClass implements OnInit, ApiRes
   ourObjectivesMapArray: Map<string, Array<ObjectiveModel>> = new Map<string, Array<ObjectiveModel>>();
   agentActiveObjective: ObjectiveModel = null;
   ourActiveObjective: ObjectiveModel = null;
+  agentActiveSentiment:SentimentModel = null;
+  ourActiveSentiment : SentimentModel = null;
   agentPageNum = 0;
   ourPageNum = 0;
   selectedTab: number = 1;
@@ -123,7 +126,7 @@ openAddObjectiveDialog()
     {
       this.openDialogService.showAddObjectiveDialog(JSON.stringify(this.agentActiveObjective)).afterClosed().subscribe(updated => {
         if (updated)
-          getOurActiveStatuses(this);
+          getAgentActiveStatuses(this);
       });
     }
   }
@@ -154,6 +157,14 @@ openAddObjectiveDialog()
       });
     }
   }
+
+  openRecordSentiment(objectiveModel)
+  {
+    if(objectiveModel.type === 't')
+    this.openDialogService.showRecordSentimentsDialog(JSON.stringify(objectiveModel),JSON.stringify(this.agentActiveSentiment))
+    if(objectiveModel.type === 'o')
+    this.openDialogService.showRecordSentimentsDialog(JSON.stringify(objectiveModel),JSON.stringify(this.ourActiveSentiment))
+  }
 }
 
 
@@ -173,7 +184,9 @@ function getAgentActiveStatuses(context: AgentObjectiveComponent) {
 }
 
 function handleActiveAgentStatusesResponse(context: AgentObjectiveComponent, response) {
-  context.agentActiveObjective = response.objective[0];
+  context.agentActiveObjective = response[0].objective[0];
+  context.agentActiveSentiment = response[1].sentiment[0];
+
   showHideEditObjective(context);
   if (context.agentObjectivesMapArray.size == 0)
     getAllRecentObjectiveForAgent(context);
@@ -199,6 +212,7 @@ function getOurActiveStatuses(context: AgentObjectiveComponent) {
     context.entityModel.entityId, context.OBJECTIVE_FOR_OUR, 1, {
     onSuccess(response) {
       handleOurActiveStatusResponse(context, response);
+      
     }, onError(errorCode, errorMsg) {
       showHideEditObjective(context);
       if (context.ourObjectivesMapArray.size == 0)
@@ -208,7 +222,14 @@ function getOurActiveStatuses(context: AgentObjectiveComponent) {
 }
 
 function handleOurActiveStatusResponse(context: AgentObjectiveComponent, response) {
-  context.ourActiveObjective = response.objective[0];
+  if(response.name == "objective")
+  {
+    context.agentActiveObjective = response.objective[0];
+  }
+  else{
+  context.ourActiveObjective = response[0].objective[0];
+  context.ourActiveSentiment = response[1].sentiment[0];
+  }
   showHideEditObjective(context);
   if (context.ourObjectivesMapArray.size == 0)
     getAllRecentObjectiveForOur(context);

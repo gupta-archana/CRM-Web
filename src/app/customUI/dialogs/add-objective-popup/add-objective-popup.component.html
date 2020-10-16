@@ -1,30 +1,5 @@
-<mat-dialog-content class="mat-dialog-content" *ngIf = "objectiveModel != null">
 
-    <!-- Modal content-->
-
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" (click) = "onCancelClick()"  >&times;</button>
-        <h4 class="modal-title">Take action on Existing Objective</h4>
-      </div>
-      <form role="form">
-      <div class="modal-body">
-<div class="clear paddingTop10"></div>
-
-<div class="form-group">
-    <p class="msg-text">You need to Complete or Cancel the current objective to add a new one.</p>
-  </div>
-<div class="clear paddingTop10"></div>
-</div>
-      <div class="modal-footer">
-      <!-- <a href="#" data-dismiss="modal" alt="Cancel"><span>Cancel</span></a> -->
-      <a  data-dismiss="modal" alt="OK, let me take action" (click) = "onCancelClick()">OK, let me take action</a>
-      </div>
-       </form>
-  
-    
-</mat-dialog-content>
-
-<mat-dialog-content class="mat-dialog-content"  *ngIf = "objectiveModel == null">
+<mat-dialog-content class="mat-dialog-content">
   <!-- Modal content-->
 
   <div class="modal-header">
@@ -50,22 +25,11 @@
           <mat-datepicker #picker ></mat-datepicker>
        </mat-form-field>
         </div>
-        <!-- <mat-form-field appearance="fill">
-          <mat-label>Custom calendar header</mat-label>
-          <input matInput [matDatepicker]="picker">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker ></mat-datepicker>
-        </mat-form-field> -->
-
       <div class="clear paddingTop10"></div>
     </div>
-    <!-- <div class="modal-footer">
-      <a href="#" data-dismiss="modal" alt="Cancel"><span>Cancel</span></a>
-      <a href="#" data-dismiss="modal" alt="Save Changes">Save Changes</a>
-    </div> -->
   </form>
 </mat-dialog-content>
-<mat-dialog-actions id="MarkAsReviewedDialogButtonGroup" align="end" *ngIf = "objectiveModel == null">
+<mat-dialog-actions id="MarkAsReviewedDialogButtonGroup" align="end" >
   <button (click)="onCancelClick()">Cancel</button>
   <button (click)="onSaveChangesClick()">Save Changes</button>
 </mat-dialog-actions>

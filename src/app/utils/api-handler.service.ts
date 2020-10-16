@@ -457,6 +457,12 @@ export class ApiHandlerService implements ApiResponseCallback {
     this.apiService.hitGetApi(url, this);
   }
 
+  public getPersonList(agentState,AgentID)
+  {
+    this.dataService.onHideShowLoader(true);
+    let url = this.api.getPersonListUrl(this.APP_MODE[this.ENABLE_APP_MODE],agentState,AgentID);
+    this.apiService.hitGetApi(url, this);
+  }
 
   /**
    * updateObjective
@@ -489,6 +495,24 @@ public createObjective(requestJson, apiResponseCallback: ApiResponseCallback) {
     this.apiService.hitPostApi(url, this.getRequestXml(requestJson), handleAddAndUpdateApiResponse(this, apiResponseCallback));
   }
 
+  modifySentiment(requestJson, apiResponseCallback: ApiResponseCallback)
+  {
+    this.dataService.onHideShowLoader(true);
+    let url = this.api.getUpdateSentimentUrl(this.APP_MODE[this.ENABLE_APP_MODE]);
+    this.apiService.hitPostApi(url, this.getRequestXml(requestJson), handleAddAndUpdateApiResponse(this, apiResponseCallback));
+  }
+
+  createSentiment(requestJson,apiResponseCallback: ApiResponseCallback)
+  {
+    const momentDate = new Date(requestJson.attr.createDate); // Replace event.value with your date value
+    const formattedDate = moment(momentDate).format("MM/DD/YYYY");
+    requestJson.attr.createDate = formattedDate
+    console.log(formattedDate);
+
+    this.dataService.onHideShowLoader(true);
+    let url = this.api.getCreateSentimentUrl(this.APP_MODE[this.ENABLE_APP_MODE]);
+    this.apiService.hitPostApi(url, this.getRequestXml(requestJson), handleAddAndUpdateApiResponse(this, apiResponseCallback));
+  }
     /**
    * deleteNote
    */
@@ -533,8 +557,11 @@ public createObjective(requestJson, apiResponseCallback: ApiResponseCallback) {
     }
     else {
       let data: Object[] = responseBody.dataset;
-      if (data && data.length > 0)
+      if (data && data.length > 0 && data.find(e => e.name === "sentiment"))
+      this.apiResponseCallback.onSuccess(data);
+      else if (data && data.length > 0)
         this.apiResponseCallback.onSuccess(data[0]);
+        
       else
         this.onError(200, this.constants.ERROR_NO_DATA_AVAILABLE);
     }

@@ -1,91 +1,107 @@
-<div class="modal fade" id="recordInteractionModal" role="dialog">
-  <div class="modal-dialog" style="margin-top:5%;">
-  
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Record Interaction</h4>
-      </div>
-      <form role="form">
-      <div class="modal-body">
-<div class="clear paddingTop10"></div>
+<mat-dialog-content class="mat-dialog-content">
 
-<div class="row">
-<div class="col-md-12 col-xs-12">
-<span>This is our Objective, What's your take on it.</span>
-</div>
-          
-<div class="col-md-12 col-xs-12">						
+
+  <!-- Modal content-->
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title">Record Interaction</h4>
+  </div>
+  <form role="form">
+    <div class="modal-body">
+      <div class="clear paddingTop10"></div>
+
+      <div class="row">
+        <div class="col-md-12 col-xs-12">
+          <span>{{objectiveModel.description}}</span>
+        </div>
+
+        <!-- <div class="col-md-12 col-xs-12">						
 <div class="collapse" id="collapseExample">
 More text...........?????????
 </div>
 <div class="clear paddingTop5"></div>
 <input type="button" class="showMoreBtn" data-toggle="collapse" href="#collapseExample" title="Show More" value="Show more" onclick="showLessBtn(this)" />
-</div>
-</div>
-<div class="clear paddingTop15"></div>
-
-<div class="divider"></div>
-
-<div class="clear paddingTop15"></div>
-<div class="clear paddingTop10"></div>
-
-<div class="row">
-<div class="col-md-4 col-xs-4">
-<div class="form-group">
-    <label class="paddingTop10" for="state">Sentiments of:</label>      
-  </div>
-</div>
-<div class="col-md-8 col-xs-8">
-<div class="form-group">     
-    <select class="form-control" id="sel1">
-      <option>Richard</option>        
-    </select>
-  </div>
-</div>
-</div>
-
-<div class="clear paddingTop15"></div>
-
-<div class="form-group">
-    <label for="usr">Sentiment Scale</label>
-<!--     <input type="text" class="form-control" id="name" placeholder="(Optional)"> -->
-  </div>
-
-
-
-<div class="clear paddingTop15"></div>
-<div class="clear paddingTop15"></div>
-<div class="clear paddingTop15"></div>
-<div class="clear paddingTop15"></div>
-
-<div class="form-group">
-    <p>Sentiment scale is remaining</p>
-</div>
-  
-<div class="clear paddingTop15"></div>
-<div class="clear paddingTop15"></div>
-<div class="clear paddingTop15"></div>    
-  
-
-  
-  
-<div class="form-group">
-    <label for="usr">Note</label>
-    <input type="text" class="form-control" id="name" placeholder="(Optional)">
-  </div>    
-  
-  
-  
-<div class="clear paddingTop10"></div>
-</div>
-      <div class="modal-footer">
-      <a href="#" data-dismiss="modal" alt="Cancel"><span>Cancel</span></a>
-      <a href="#" data-dismiss="modal" alt="OK, let me take action">Update</a>
+</div> -->
       </div>
-       </form>
+      <div class="clear paddingTop15"></div>
+
+      <div class="divider"></div>
+
+      <div class="clear paddingTop15"></div>
+      <div class="clear paddingTop10"></div>
+
+      <div class="row">
+        <div class="col-md-2 col-xs-4">
+          <div class="form-group">
+            <label class="paddingTop10" for="state">Sentiments of:</label>
+          </div>
+        </div>
+        <div class="col-md-8 col-xs-8">
+          <div class="form-group">
+            <ng-select *ngIf="personList.length > 0" [items]="personList" bindLabel="dispname" name="person"
+              bindValue="personID" value="sentimentModel.personName" [(ngModel)]="selectedPerson" [multiple]="false"
+              [virtualScroll]="true" placeholder="Select the Person" required>
+            </ng-select>
+          </div>
+        </div>
+      </div>
+
+      <div class="clear paddingTop15"></div>
+
+      <div class="row justify-content-center" >
+        <div class="col-auto example-block text-center" > <label class="radio-inline"> <input type="radio" name="emotion"
+          id="happy" class="input-hidden" /> <img src="https://img.icons8.com/emoji/48/000000/pensive-face.png" [ngClass] = "{ 'postClick':type==1}"
+          width="60" height="60" (click)=" selectedSentiments(1)" /> </label> </div>
+          <div   class="col-auto example-block text-center" ><label class="radio-inline"> <input type="radio" name="emotion"
+                id="sad" class="input-hidden" /><img src="https://img.icons8.com/color/100/000000/sad.png"  [ngClass] = "{ 'postClick':type==2}" width="60"
+                height="60"(click)="selectedSentiments(2)"></label></div>
+          <div class="col-auto example-block text-center" > <label class="radio-inline"> <input type="radio" name="emotion"
+                id="happy" class="input-hidden" /> <img src="https://img.icons8.com/emoji/48/000000/neutral-face.png" [ngClass] = "{ 'postClick':type==3}"
+                width="60" height="60" (click)=" selectedSentiments(3)" /> </label> </div>
+        <div class="col-auto example-block text-center" > <label class="radio-inline"> <input type="radio" name="emotion"
+              id="exicetd" class="input-hidden" /> <img src="https://img.icons8.com/emoji/48/000000/smiling-face.png" [ngClass] = "{ 'postClick':type==4}"
+              width="60" height="60" (click)="selectedSentiments(4)"> </label> </div>
+        <div class="col-auto example-block text-center" > <label class="radio-inline"> <input type="radio" name="emotion"
+              id="exicetd" class="input-hidden" /> <img src="https://img.icons8.com/emoji/48/000000/star-struck.png" [ngClass] = "{ 'postClick':type==5}"
+              width="60" height="60" (click)="selectedSentiments(5)" /> </label> </div>
+      </div>
+      <div class="clear paddingTop15"></div>
+
+      <!-- <div class="form-group">
+        <label for="usr">Sentiment Scale</label>
+
+
+      </div>
+      <div class="slidecontainer">
+        <input type="range" min="1" max="5" value="1" class="slider" id="myRange">
+      </div> -->
+
+
+      <div class="clear paddingTop15"></div>
+      <div class="clear paddingTop15"></div>
+      <!-- <div class="clear paddingTop15"></div>
+<div class="clear paddingTop15"></div> -->
+      <!-- <div class="form-group">
+    <p>Sentiment scale is remaining</p>
+</div> -->
+
+
+      <div class="form-group">
+        <label for="usr">Note</label>
+        <input  type="text" class="form-control" id="name" name="notes" placeholder="(Optional)" [(ngModel)]="note">
+      </div>
     </div>
-    
-  </div>
-</div>	  
+    <div class="clear paddingTop10"></div>
+  </form>
+</mat-dialog-content>
+<div class="row">
+  <mat-dialog-actions id="MarkAsReviewedDialogButtonGroup" align="end">
+    <div class="col-md-6">
+    </div>
+    <div class="col-md-6">
+      <button (click)="onCancelClick()">Cancel</button>
+      <button (click)="saveSentiment()">Save Changes</button>
+
+    </div>
+  </mat-dialog-actions>
+</div>

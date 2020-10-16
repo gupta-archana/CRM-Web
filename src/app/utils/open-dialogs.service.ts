@@ -13,6 +13,7 @@ import { EditObjectiveComponent } from '../customUI/dialogs/edit-objective/edit-
 import { AddNewEventComponent } from '../customUI/dialogs/add-new-event/add-new-event.component';
 import { EditAndDeleteTagPopupComponent } from '../customUI/dialogs/edit-and-delete-tag-popup/edit-and-delete-tag-popup.component';
 import { AddObjectivePopupComponent } from '../customUI/dialogs/add-objective-popup/add-objective-popup.component';
+import { ObjectiveSentimentComponent } from '../customUI/dialogs/objective-sentiment/objective-sentiment.component';
 
 @Injectable({
   providedIn: 'root'
@@ -95,6 +96,16 @@ export class OpenDialogsService {
         }
       });
   }
+
+  showRecordSentimentsDialog(objective: string,sentiment) {
+    return this.dialog.open(ObjectiveSentimentComponent,
+      {
+        data: {
+          message: objective,sentiment
+        }
+      });
+  }
+
 
   showEditTagDialog(objective: string) {
     return this.dialog.open(EditAndDeleteTagPopupComponent,
