@@ -184,6 +184,11 @@ function getAgentActiveStatuses(context: AgentObjectiveComponent) {
 }
 
 function handleActiveAgentStatusesResponse(context: AgentObjectiveComponent, response) {
+  if(response.name == "objective")
+  {
+    context.agentActiveObjective = response.objective[0];
+  }
+  
   context.agentActiveObjective = response[0].objective[0];
   context.agentActiveSentiment = response[1].sentiment[0];
 
@@ -224,7 +229,7 @@ function getOurActiveStatuses(context: AgentObjectiveComponent) {
 function handleOurActiveStatusResponse(context: AgentObjectiveComponent, response) {
   if(response.name == "objective")
   {
-    context.agentActiveObjective = response.objective[0];
+    context.ourActiveObjective = response.objective[0];
   }
   else{
   context.ourActiveObjective = response[0].objective[0];
