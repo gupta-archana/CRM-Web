@@ -25,6 +25,7 @@ export class ObjectiveSentimentComponent implements OnInit {
   selectedPerson: string;
   type: any;
   note: string = "";
+  changeColor: boolean
   constructor(
     public dialogRef: MatDialogRef<ObjectiveSentimentComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -37,9 +38,25 @@ export class ObjectiveSentimentComponent implements OnInit {
     this.objectiveModel = JSON.parse(this.data.message);
     this.sentimentModel = JSON.parse(this.data.sentiment);
 
-    if(this.sentimentModel)
+    if(this.sentimentModel.sentimentID)
+    {
     this.note = this.sentimentModel.notes;
-    
+    if(this.sentimentModel.type === "1")
+    document.getElementById("terrible").click()
+    else if(this.sentimentModel.type === "2")
+    document.getElementById("poor").click()
+    else if(this.sentimentModel.type === "3")
+    document.getElementById("alright").click()
+    else if(this.sentimentModel.type === "4")
+    document.getElementById("good").click()
+    else if(this.sentimentModel.type === "5")
+    document.getElementById("great").click()
+    }
+
+    else{
+      this.sentimentModel = new SentimentModel();
+    }
+
     console.log(this.note)
     let agentInfo = JSON.parse(
       sessionStorage.getItem(this.constants.ENTITY_INFO)
@@ -55,7 +72,7 @@ export class ObjectiveSentimentComponent implements OnInit {
 
   saveSentiment() {
     let self = this
-    if (this.sentimentModel)
+    if (this.sentimentModel.sentimentID)
       this.apiHandler.modifySentiment(createSentimentRequestJson(this),
       {
         onSuccess(response: any) {
@@ -96,6 +113,7 @@ export class ObjectiveSentimentComponent implements OnInit {
   }
   selectedSentiments(type) {
     this.type = type;
+    this.sentimentModel.type = type;
   }
   getPersonDetails() {
     //this.apiHandler.getPersonList(this.agentState,this.agentId);
@@ -121,7 +139,7 @@ export class ObjectiveSentimentComponent implements OnInit {
 }
 
 function createSentimentRequestJson(context: ObjectiveSentimentComponent) {
-  if(context.sentimentModel == null)
+  if(context.sentimentModel.sentimentID == null)
   {
   context.sentimentModel = new SentimentModel();
 

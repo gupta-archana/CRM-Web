@@ -1,9 +1,9 @@
 
 ::ng-deep .mat-datepicker-content {
-  width: fit-content;
+  width: fit-content !important;
  }
 
  ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-suffix .mat-datepicker-toggle-default-icon {
     width: 2em !important;
-    color: orange;
+    color: orange !important;
 }

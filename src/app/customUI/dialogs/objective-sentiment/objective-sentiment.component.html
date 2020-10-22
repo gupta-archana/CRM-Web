@@ -48,22 +48,43 @@ More text...........?????????
 
       <div class="clear paddingTop15"></div>
 
-      <div class="row justify-content-center" >
-        <div class="col-auto example-block text-center" > <label class="radio-inline"> <input type="radio" name="emotion"
-          id="happy" class="input-hidden" /> <img src="https://img.icons8.com/emoji/48/000000/pensive-face.png" [ngClass] = "{ 'postClick':type==1}"
-          width="60" height="60" (click)=" selectedSentiments(1)" /> </label> </div>
-          <div   class="col-auto example-block text-center" ><label class="radio-inline"> <input type="radio" name="emotion"
-                id="sad" class="input-hidden" /><img src="https://img.icons8.com/color/100/000000/sad.png"  [ngClass] = "{ 'postClick':type==2}" width="60"
-                height="60"(click)="selectedSentiments(2)"></label></div>
-          <div class="col-auto example-block text-center" > <label class="radio-inline"> <input type="radio" name="emotion"
-                id="happy" class="input-hidden" /> <img src="https://img.icons8.com/emoji/48/000000/neutral-face.png" [ngClass] = "{ 'postClick':type==3}"
-                width="60" height="60" (click)=" selectedSentiments(3)" /> </label> </div>
-        <div class="col-auto example-block text-center" > <label class="radio-inline"> <input type="radio" name="emotion"
-              id="exicetd" class="input-hidden" /> <img src="https://img.icons8.com/emoji/48/000000/smiling-face.png" [ngClass] = "{ 'postClick':type==4}"
-              width="60" height="60" (click)="selectedSentiments(4)"> </label> </div>
-        <div class="col-auto example-block text-center" > <label class="radio-inline"> <input type="radio" name="emotion"
-              id="exicetd" class="input-hidden" /> <img src="https://img.icons8.com/emoji/48/000000/star-struck.png" [ngClass] = "{ 'postClick':type==5}"
-              width="60" height="60" (click)="selectedSentiments(5)" /> </label> </div>
+      <div class="row justify-content-center">
+        <div class="col-auto example-block text-center"> <label class="radio-inline"> <input type="radio" name="emotion"
+              id="terrible" id="happy" class="input-hidden" /> <img
+              src="https://img.icons8.com/emoji/48/000000/pensive-face.png" id="terrible"
+              [ngClass]="{ 'postClick':type==1}" width="50" height="50" (click)=" selectedSentiments(1)" /> </label>
+          <div class="expressionText" >
+            <p [ngStyle]="{'color':sentimentModel.type =='1' ? 'darkred' : 'grey' }">Terrible!</p>
+          </div>
+        </div>
+        <div class="col-auto example-block text-center"><label class="radio-inline"> <input type="radio" name="emotion"
+              id="poor" id="sad" class="input-hidden" /><img src="https://img.icons8.com/color/100/000000/sad.png"
+              id="poor" [ngClass]="{ 'postClick':type==2}" width="50" height="50"
+              (click)="selectedSentiments(2)"></label>
+          <div class="expressionText">
+            <p [ngStyle]="{'color':sentimentModel.type =='2' ? 'red' : 'grey' }">Poor!</p></div>
+        </div>
+        <div class="col-auto example-block text-center"> <label class="radio-inline"> <input type="radio" name="emotion"
+              id="alright" id="happy" class="input-hidden" /> <img
+              src="https://img.icons8.com/emoji/48/000000/neutral-face.png" id="alright"
+              [ngClass]="{ 'postClick':type==3}" width="50" height="50" (click)=" selectedSentiments(3)" /> </label>
+          <div class="expressionText" >
+            <p [ngStyle]="{'color':sentimentModel.type =='3'? 'blue' : 'grey' }">Alright!</p></div>
+        </div>
+        <div class="col-auto example-block text-center"> <label class="radio-inline"> <input type="radio" name="emotion"
+              id="good" id="exicetd" class="input-hidden" /> <img
+              src="https://img.icons8.com/emoji/48/000000/smiling-face.png" id="good" [ngClass]="{ 'postClick':type==4}"
+              width="50" height="50" (click)="selectedSentiments(4)"> </label>
+          <div class="expressionText" >
+            <p [ngStyle]="{'color':sentimentModel.type =='4' ? 'green' : 'grey' }">Good!</p></div>
+        </div>
+        <div class="col-auto example-block text-center"> <label class="radio-inline"> <input type="radio" name="emotion"
+              id="great" id="exicetd" class="input-hidden" /> <img
+              src="https://img.icons8.com/emoji/48/000000/star-struck.png" [ngClass]="{ 'postClick':type==5}" id="great"
+              width="50" height="50" (click)="selectedSentiments(5)" /> </label>
+          <div class="expressionText" >
+            <p [ngStyle]="{'color':sentimentModel.type =='5' ? 'darkgreen' : 'grey' }">Great!</p></div>
+        </div>
       </div>
       <div class="clear paddingTop15"></div>
 
@@ -88,7 +109,7 @@ More text...........?????????
 
       <div class="form-group">
         <label for="usr">Note</label>
-        <input  type="text" class="form-control" id="name" name="notes" placeholder="(Optional)" [(ngModel)]="note">
+        <input type="text" class="form-control" id="name" name="notes" placeholder="(Optional)" [(ngModel)]="note">
       </div>
     </div>
     <div class="clear paddingTop10"></div>
