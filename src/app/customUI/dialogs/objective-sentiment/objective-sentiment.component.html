@@ -30,22 +30,15 @@ More text...........?????????
       <div class="clear paddingTop15"></div>
       <div class="clear paddingTop10"></div>
 
-      <div class="row">
-        <div class="col-md-2 col-xs-4">
+      
           <div class="form-group">
             <label class="paddingTop10" for="state">Sentiments of:</label>
-          </div>
-        </div>
-        <div class="col-md-8 col-xs-8">
-          <div class="form-group">
             <ng-select *ngIf="personList.length > 0" [items]="personList" bindLabel="dispname" name="person"
               bindValue="personID" value="sentimentModel.personName" [(ngModel)]="selectedPerson" [multiple]="false"
               [virtualScroll]="true" placeholder="Select the Person" required>
             </ng-select>
           </div>
-        </div>
-      </div>
-
+          
       <div class="clear paddingTop15"></div>
 
       <div class="row justify-content-center">
