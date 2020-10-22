@@ -71,6 +71,11 @@ export class DataServiceService {
 
   private shareLoadedItemsSubject = new BehaviorSubject<string>("");
   shareLoadedItemsObservable = this.shareLoadedItemsSubject.asObservable();
+
+  private getSentimentDataSubject = new Subject<any>();
+  getSentimentDataObservable = this.getSentimentDataSubject.asObservable();
+
+
   constructor() { }
 
   onHideShowLoader(showLoader: boolean) {
@@ -151,5 +156,8 @@ export class DataServiceService {
 
   shareLoadedItemsTag(loadedItemsTag: string) {
     this.shareLoadedItemsSubject.next(loadedItemsTag);
+  }
+  shareSentimentData(data: any) {
+    this.getSentimentDataSubject.next(data);
   }
 }

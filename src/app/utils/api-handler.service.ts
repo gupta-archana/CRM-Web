@@ -557,7 +557,7 @@ public createObjective(requestJson, apiResponseCallback: ApiResponseCallback) {
     }
     else {
       let data: Object[] = responseBody.dataset;
-      if (data && data.length > 0 && data.find(e => e.name === "sentiment"))
+      if (data && data.length > 0 && data.find(e => e["name"] === "sentiment"))
       this.apiResponseCallback.onSuccess(data);
       else if (data && data.length > 0)
         this.apiResponseCallback.onSuccess(data[0]);

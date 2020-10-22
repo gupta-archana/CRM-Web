@@ -1,9 +1,11 @@
 import { ChangeDetectionStrategy, Component, Injector, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { BaseClass } from '../../../global/base-class';
 import { ApiResponseCallback } from '../../../Interfaces/ApiResponseCallback';
 import { EntityModel } from '../../../models/entity-model';
 import { ObjectiveModel } from '../../../models/objective-model';
 import { SentimentModel } from '../../../models/sentiment-model';
+import { DataServiceService } from '../../../services/data-service.service';
 
 @Component({
   selector: 'app-agent-objective',
@@ -14,7 +16,7 @@ import { SentimentModel } from '../../../models/sentiment-model';
 export class AgentObjectiveComponent extends BaseClass implements OnInit, ApiResponseCallback {
 
 
-  constructor(private injector: Injector) { super(injector); }
+  constructor(private injector: Injector,public dataService: DataServiceService) { super(injector); }
   entityModel: EntityModel;
   agentObjectivesMapArray: Map<string, Array<ObjectiveModel>> = new Map<string, Array<ObjectiveModel>>();
   ourObjectivesMapArray: Map<string, Array<ObjectiveModel>> = new Map<string, Array<ObjectiveModel>>();
@@ -25,6 +27,7 @@ export class AgentObjectiveComponent extends BaseClass implements OnInit, ApiRes
   agentPageNum = 0;
   ourPageNum = 0;
   selectedTab: number = 1;
+  reloadSubscription: Subscription;
 
   totalAgentObjective: number = 0;
   totalOurObjective: number = 0;
@@ -38,7 +41,8 @@ export class AgentObjectiveComponent extends BaseClass implements OnInit, ApiRes
 
   ngOnInit() {
     this.entityModel = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
-    getAgentActiveStatuses(this);
+    reloadObjectiveData(this)
+  getAgentActiveStatuses(this);
   }
   goBack() {
     if (this.selectedTab == 1) {
@@ -162,6 +166,7 @@ openAddObjectiveDialog()
   {
     if(objectiveModel.type === 't')
     this.openDialogService.showRecordSentimentsDialog(JSON.stringify(objectiveModel),JSON.stringify(this.agentActiveSentiment))
+    
     if(objectiveModel.type === 'o')
     this.openDialogService.showRecordSentimentsDialog(JSON.stringify(objectiveModel),JSON.stringify(this.ourActiveSentiment))
   }
@@ -335,4 +340,17 @@ function showHideEditObjective(context: AgentObjectiveComponent) {
     }
   }
   context.cdr.markForCheck();
+}
+
+function reloadObjectiveData(context: AgentObjectiveComponent) {
+  context.reloadSubscription = context.dataService.getSentimentDataObservable
+    .subscribe((data: any) => {
+      console.log(data)
+      if (data) {
+        if (context.selectedTab == 1)
+        getAgentActiveStatuses(context);
+        if (context.selectedTab == 2)
+        getOurActiveStatuses(context)
+      }
+    })
 }
