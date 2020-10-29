@@ -125,3 +125,7 @@ input[type=radio]+label>img {
     padding-left: 60px !important;
     padding-top: 10px !important;
 }
+label
+{
+    font-weight: bold;
+}

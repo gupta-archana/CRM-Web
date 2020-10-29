@@ -164,10 +164,10 @@ openAddObjectiveDialog()
 
   openRecordSentiment(objectiveModel)
   {
-    if(objectiveModel.type === 't')
+    if(objectiveModel.type === 't' || objectiveModel.type ==='T')
     this.openDialogService.showRecordSentimentsDialog(JSON.stringify(objectiveModel),JSON.stringify(this.agentActiveSentiment))
     
-    if(objectiveModel.type === 'o')
+    if(objectiveModel.type === 'o' || objectiveModel.type ==='O')
     this.openDialogService.showRecordSentimentsDialog(JSON.stringify(objectiveModel),JSON.stringify(this.ourActiveSentiment))
   }
 }

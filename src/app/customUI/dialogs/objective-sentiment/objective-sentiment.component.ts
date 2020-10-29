@@ -38,7 +38,7 @@ export class ObjectiveSentimentComponent implements OnInit {
     this.objectiveModel = JSON.parse(this.data.message);
     this.sentimentModel = JSON.parse(this.data.sentiment);
 
-    if(this.sentimentModel.sentimentID)
+    if(this.sentimentModel)
     {
     this.note = this.sentimentModel.notes;
     if(this.sentimentModel.type === "1")
@@ -150,12 +150,14 @@ function createSentimentRequestJson(context: ObjectiveSentimentComponent) {
   context.sentimentModel.createDate = new Date().toString()
   context.sentimentModel.uid = context.objectiveModel.UID;
   context.sentimentModel.personID = context.selectedPerson;
+  if(context.personList.length > 0)
   context.sentimentModel.personName = context.personList.find(e => e.personID == context.selectedPerson).dispname;
   }
   else{
     context.sentimentModel.notes = context.note;
     context.sentimentModel.type = context.type;
     context.sentimentModel.personID = context.selectedPerson;
+    if(context.personList.length > 0)
     context.sentimentModel.personName = context.personList.find(e => e.personID == context.selectedPerson).dispname;
 
   }

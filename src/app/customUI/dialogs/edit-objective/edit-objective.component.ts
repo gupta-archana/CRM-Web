@@ -7,6 +7,7 @@ import { ObjectiveModel } from '../../../models/objective-model';
 import { ApiHandlerService } from '../../../utils/api-handler.service';
 import { ApiResponseCallback } from '../../../Interfaces/ApiResponseCallback';
 import * as moment from 'moment';
+import { CommonFunctionsService } from '../../../utils/common-functions.service';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class EditObjectiveComponent implements OnInit, ApiResponseCallback {
   dueDate: any;
   constructor(public dialogRef: MatDialogRef<EditObjectiveComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private apiHandler: ApiHandlerService) { }
+    private apiHandler: ApiHandlerService,private commonFunctions : CommonFunctionsService) { }
 
   ngOnInit() {
     this.objectiveModel = JSON.parse(this.data.message);
@@ -37,6 +38,8 @@ export class EditObjectiveComponent implements OnInit, ApiResponseCallback {
     this.dialogRef.close(false);
   }
   onSuccess(response: any) {
+    let self = this
+    self.commonFunctions.showSnackbar(response)
     this.dialogRef.close(true);
     // add a snackbaar
 
