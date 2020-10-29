@@ -7,6 +7,7 @@ import { EntityModel } from "../../../models/entity-model";
 import { ObjectiveModel } from "../../../models/objective-model";
 import { MyLocalStorageService } from "../../../services/my-local-storage.service";
 import { ApiHandlerService } from "../../../utils/api-handler.service";
+import { CommonFunctionsService } from "../../../utils/common-functions.service";
 
 @Component({
   selector: "app-add-objective-popup",
@@ -24,7 +25,7 @@ export class AddObjectivePopupComponent implements OnInit {
     public dialogRef: MatDialogRef<AddObjectivePopupComponent>, 
     private injector: Injector,private myStorage:MyLocalStorageService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    public apiHandler: ApiHandlerService
+    public apiHandler: ApiHandlerService,private commonFunctions : CommonFunctionsService
   ) {}
 
   ngOnInit() {
@@ -40,6 +41,8 @@ export class AddObjectivePopupComponent implements OnInit {
     this.apiHandler.createObjective(createRequestJson(this), this);
   }
   onSuccess(response: any) {
+    let self = this;
+    self.commonFunctions.showSnackbar(response)
     this.dialogRef.close(true);
     // add a snackbaar
   }
