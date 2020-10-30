@@ -37,6 +37,10 @@ More text...........?????????
               bindValue="personID" value="sentimentModel.personName" [(ngModel)]="selectedPerson" [multiple]="false"
               [virtualScroll]="true" placeholder="Select the Person" required>
             </ng-select>
+            <ng-select *ngIf="personList.length == 0" [items]="personList" bindLabel="dispname" name="person"
+              bindValue="personID" value="sentimentModel.personName" [(ngModel)]="selectedPerson" [multiple]="false"
+              [virtualScroll]="true" placeholder="Select the Person" required>
+            </ng-select>
           </div>
           
       <div class="clear paddingTop15"></div>
