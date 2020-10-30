@@ -123,9 +123,12 @@ export class ObjectiveSentimentComponent implements OnInit {
   onSuccess(response: any) {
     let data: AssociatesModel[] = response.affiliation;
         data.forEach((element) => {
-          if (element.personID) {
-             this.personList.push(element);
-          }
+          setTimeout (() => {
+            if (element.personID) {
+              this.personList.push(element);
+           }
+         }, 1000);
+
         });
     console.log(this.personList);
 
