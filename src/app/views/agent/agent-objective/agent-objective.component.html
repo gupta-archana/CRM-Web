@@ -10,9 +10,9 @@
           <div class="col-xs-3 text-center tpad">
           <!-- <a alt="" (click)="openEditObjectiveDialog()"><img src="../../../../images/add.svg" alt=""><br>
             <span class="edit-detail">Edit Objective</span></a> -->
-            <a  *ngIf ="hideEditObjective" alt="" (click)="openAddObjectiveDialog()"><img src="../../../../images/add.svg" alt=""><br>
+            <a  *ngIf ="hideEditObjective && !hideAddEdit" alt="" (click)="openAddObjectiveDialog()"><img src="../../../../images/add.svg" alt=""><br>
               <span class="edit-detail">Add Objective</span></a>
-              <a *ngIf ="!hideEditObjective" alt="" (click)="openEditObjectiveDialog()"><img src="../../../../images/add.svg" alt=""><br>
+              <a *ngIf ="!hideEditObjective && !hideAddEdit" alt="" (click)="openEditObjectiveDialog()"><img src="../../../../images/add.svg" alt=""><br>
                 <span class="edit-detail">Edit Objective</span></a>
                 
         </div>

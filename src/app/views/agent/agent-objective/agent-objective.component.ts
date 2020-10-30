@@ -28,7 +28,7 @@ export class AgentObjectiveComponent extends BaseClass implements OnInit, ApiRes
   ourPageNum = 0;
   selectedTab: number = 1;
   reloadSubscription: Subscription;
-
+  hideAddEdit:boolean;
   totalAgentObjective: number = 0;
   totalOurObjective: number = 0;
 
@@ -45,6 +45,7 @@ export class AgentObjectiveComponent extends BaseClass implements OnInit, ApiRes
   getAgentActiveStatuses(this);
   }
   goBack() {
+    this.hideAddEdit = false;
     if (this.selectedTab == 1) {
       if (document.getElementById("recentAgentObj").style.display == "block") {
         this.showAgentActiveObj();
@@ -85,6 +86,7 @@ export class AgentObjectiveComponent extends BaseClass implements OnInit, ApiRes
   }
 
   showAgentRecentObj() {
+    this.hideAddEdit = true;
     document.getElementById("recentAgentObj").style.display = "block";
     document.getElementById("agentObjective").style.display = "none";
     this.showingRecents = true;
@@ -99,6 +101,7 @@ export class AgentObjectiveComponent extends BaseClass implements OnInit, ApiRes
   }
 
   showOurRecentObj() {
+    this.hideAddEdit = true;
     document.getElementById("ourObj").style.display = "block";
     document.getElementById("ourObjective").style.display = "none";
     this.showingRecents = true;
@@ -176,7 +179,7 @@ openAddObjectiveDialog()
 
 
 function getAgentActiveStatuses(context: AgentObjectiveComponent) {
-  context.apiHandler.getActiveObjectives(context.STATUS_ACTIVE, context.entityModel.type,
+     context.apiHandler.getActiveObjectives(context.STATUS_ACTIVE, context.entityModel.type,
     context.entityModel.entityId, context.OBJECTIVE_FOR_AGENT, 1, {
     onSuccess(response) {
       handleActiveAgentStatusesResponse(context, response);
@@ -185,7 +188,7 @@ function getAgentActiveStatuses(context: AgentObjectiveComponent) {
       if (context.agentObjectivesMapArray.size == 0)
         getAllRecentObjectiveForAgent(context);
     }
-  });
+  }); 
 }
 
 function handleActiveAgentStatusesResponse(context: AgentObjectiveComponent, response) {
