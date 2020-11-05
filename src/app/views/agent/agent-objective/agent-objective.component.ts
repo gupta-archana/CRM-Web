@@ -31,7 +31,7 @@ export class AgentObjectiveComponent extends BaseClass implements OnInit, ApiRes
   hideAddEdit:boolean;
   totalAgentObjective: number = 0;
   totalOurObjective: number = 0;
-
+  recentObjectives : Array<ObjectiveModel>;
   STATUS_ACTIVE = 'A';
   STATUS_ALL = 'ALL';
   OBJECTIVE_FOR_OUR = 'O';
@@ -213,6 +213,7 @@ function getAllRecentObjectiveForAgent(context: AgentObjectiveComponent) {
     context.entityModel.entityId, context.OBJECTIVE_FOR_AGENT, context.agentPageNum, {
     onSuccess(response) {
       context.agentObjectivesMapArray = parseRecentObjectivesResponse(context, false, response);
+      console.log(context.agentObjectivesMapArray)
       context.cdr.markForCheck();
     }, onError(errorCode, errorMsg) {
 
@@ -255,6 +256,7 @@ function getAllRecentObjectiveForOur(context: AgentObjectiveComponent) {
     context.entityModel.entityId, context.OBJECTIVE_FOR_OUR, context.ourPageNum, {
     onSuccess(response) {
       context.ourObjectivesMapArray = parseRecentObjectivesResponse(context, true, response);
+      console.log(context.ourObjectivesMapArray)
       context.cdr.markForCheck();
     }, onError(errorCode, errorMsg) {
 
@@ -302,8 +304,11 @@ function updateObjectivesAfterChangeStatus(context: AgentObjectiveComponent) {
 
 function parseRecentObjectivesResponse(context: AgentObjectiveComponent, ourObjective: boolean, response) {
   let recentMap: Map<string, Array<ObjectiveModel>> = new Map<string, Array<ObjectiveModel>>();
-  let objectives: Array<ObjectiveModel> = response.objective;
-  objectives.forEach(element => {
+  if(response.objective !=undefined && response.objective !=null)
+  context.recentObjectives = response.objective;
+  else
+    context.recentObjectives = response[0].objective;
+  context.recentObjectives.forEach(element => {
     if (element.description == 'TotalObjectives') {
       if (ourObjective)
         context.totalOurObjective = Number(element.type);
