@@ -261,10 +261,8 @@ export class API {
   }
 
   getDeleteTagUrl(app_mode: string, noteId: string) {
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=EntityUntag&tagID=" + noteId;
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=entityUntag&TagID=" + noteId;
   }
-
-
 
   getEventsListUrl(app_mode: string, entityType: any, entityId: any) {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=eventsGet&entity=" + entityType + "&entityID=" + entityId;

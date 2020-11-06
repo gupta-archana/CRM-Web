@@ -20,7 +20,7 @@
     </div>
   </div>
 
-  <div class="container paddingTop25 app-bg5-">
+  <div class="container paddingTop25 app-bg5-" *ngIf="hideNoDataDiv"> 
     <div class="row">
       <div class="col-xs-12 col-md-4"  *ngFor="let item of tags">
         <div class="row">

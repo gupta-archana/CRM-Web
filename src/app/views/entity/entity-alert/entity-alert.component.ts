@@ -91,7 +91,9 @@ function getData(context: EntityAlertComponent) {
     context.openAlertModels = dataArray;
     context.pageNum = Number(sessionStorage.getItem(context.constants.ENTITY_ALERTS_PAGE_NUMBER));
     context.totalRows = sessionStorage.getItem(context.constants.ENTITY_ALERTS_TOTAL_ROWS);
+    context.hideNoDataDiv = true;
     updateRatioUI(context);
+  console.log(context.hideNoDataDiv)
   }
   else {
     makeServerRequest(context);
@@ -107,8 +109,10 @@ function checkMoreDataAvailable(context: EntityAlertComponent) {
 
 function updateRatioUI(context: EntityAlertComponent) {
   context.commonFunctions.showLoadedItemTagOnHeader(context.openAlertModels, context.totalRows);
+  console.log(context.hideNoDataDiv)
+
   //context.totalAndCurrentRowsRatio = context.commonFunctions.showMoreDataSnackbar(context.openAlertModels, context.totalRows);
-  context.cdr.markForCheck();
+ // context.cdr.markForCheck();
 }
 
 function checkAndSetUi(context: EntityAlertComponent) {

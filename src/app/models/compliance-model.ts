@@ -11,4 +11,5 @@ export class ComplianceModel {
   expirationDate: string;
   qualification: string;
   comstat: string;
+  qualStatDesc:string
 }

@@ -75,6 +75,9 @@ export class DataServiceService {
   private getSentimentDataSubject = new Subject<any>();
   getSentimentDataObservable = this.getSentimentDataSubject.asObservable();
 
+  private getTagDataSubject = new Subject<any>();
+  getTagsDataObservable = this.getTagDataSubject.asObservable();
+
 
   constructor() { }
 
@@ -159,5 +162,9 @@ export class DataServiceService {
   }
   shareSentimentData(data: any) {
     this.getSentimentDataSubject.next(data);
+  }
+
+  reloadTagData(data:any){
+    this.getTagDataSubject.next(data);
   }
 }

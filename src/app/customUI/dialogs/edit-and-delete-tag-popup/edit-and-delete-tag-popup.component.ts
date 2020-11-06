@@ -2,6 +2,7 @@ import { Component, OnInit, Inject, OnDestroy, Injector } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { DialogData } from '../../../Interfaces/DialogData';
 import { TagModel } from '../../../models/tag-model';
+import { DataServiceService } from '../../../services/data-service.service';
 import { ApiHandlerService } from '../../../utils/api-handler.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class EditAndDeleteTagPopupComponent  implements OnInit {
 
   tagModel:TagModel;
   constructor(public dialogRef: MatDialogRef<EditAndDeleteTagPopupComponent>, private injector: Injector,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,public apiHandler: ApiHandlerService) {}
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,public apiHandler: ApiHandlerService, private dataService : DataServiceService) {}
 
   ngOnInit() {
     this.tagModel = JSON.parse(this.data.message);
@@ -23,8 +24,12 @@ export class EditAndDeleteTagPopupComponent  implements OnInit {
     this.dialogRef.close(false);
   }
 
+  
   onSuccess(response: any) {
+    let self = this;
+    self.dataService.reloadTagData({data:'reload'})
     this.dialogRef.close(response);
+
   }
   onError(errorCode: number, errorMsg: string) {
     this.dialogRef.close(false);
@@ -46,3 +51,4 @@ function createRequestJson(context: EditAndDeleteTagPopupComponent) {
   }
   return finalJson;
 }
+

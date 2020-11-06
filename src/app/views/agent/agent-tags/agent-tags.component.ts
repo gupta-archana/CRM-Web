@@ -5,6 +5,7 @@ import { TagModel } from '../../../models/tag-model';
 import { EntityModel } from '../../../models/entity-model';
 import { EditAndDeleteTagPopupComponent } from '../../../customUI/dialogs/edit-and-delete-tag-popup/edit-and-delete-tag-popup.component';
 import { MatDialog } from '@angular/material';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-agent-tags',
@@ -20,8 +21,11 @@ export class AgentTagsComponent extends BaseClass implements OnInit, ApiResponse
   hideNoDataDiv: boolean = false;
   errorMsg: string = "";
   newTag: string = "";
+  reloadSubscription : Subscription;
+
   ngOnInit() {
     this.entityModel = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
+    reloadObjectiveData(this);
     updateRatioUI(this);
     getTags(this);
   }
@@ -55,17 +59,11 @@ export class AgentTagsComponent extends BaseClass implements OnInit, ApiResponse
     }
   }
   openEditTagsDialog(rowData?) {
-    const dialogRef =  this.dialog.open(EditAndDeleteTagPopupComponent,
+   this.dialog.open(EditAndDeleteTagPopupComponent,
       {
         data: {
           message: (JSON.stringify(rowData))
         }
-      });
-      dialogRef.afterClosed().subscribe((message: any) => {
-        if (message) {
-          this.onEditSuccess(message)
-        }
-        
       });
   }
   
@@ -116,4 +114,14 @@ function createJsonForAddTag(context: AgentTagsComponent) {
     "attr": requestBody
   }
   return finalJson;
+}
+
+function reloadObjectiveData(context: AgentTagsComponent) {
+  context.reloadSubscription = context.dataService.getTagsDataObservable
+    .subscribe((data: any) => {
+      console.log(data)
+      if (data) {
+      getTags(context);
+      }
+    })
 }
