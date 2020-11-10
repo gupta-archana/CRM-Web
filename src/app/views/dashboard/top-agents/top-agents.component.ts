@@ -22,6 +22,7 @@ export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponse
   moreDataAvailable: boolean = false;
   hideNoDataDiv: boolean = false;
   errorMsg: string = "";
+  type:string ="T"
 
   totalAndCurrentRowsRatio: string = "";
 
@@ -131,7 +132,7 @@ export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponse
 
 function hitApi(context: TopAgentsComponent) {
   context.pageNumber++;
-  context.apiHandler.getTopAgents(context.pageNumber, context);
+  context.apiHandler.getTopAgents(context.type,context.pageNumber, context);
 }
 
 

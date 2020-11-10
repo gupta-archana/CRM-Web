@@ -16,6 +16,7 @@ export class ApiHandlerService implements ApiResponseCallback {
   private APP_MODE: Array<string> = ["dev", "beta", "prod"];
   private ENABLE_APP_MODE = 0;
   private apiResponseCallback: ApiResponseCallback = null;
+  private noteURL:string;
   constructor(private apiService: ApiService, public dataService: DataServiceService, private constants: Constants,
     private api: API) {
 
@@ -35,10 +36,10 @@ export class ApiHandlerService implements ApiResponseCallback {
     this.apiService.hitGetApi(this.api.getForgotPasswordUrl(email, this.APP_MODE[this.ENABLE_APP_MODE]), this.apiResponseCallback);
   }
 
-  public getTopAgents(page_no: number, apiResponseCallback: ApiResponseCallback) {
+  public getTopAgents(type,page_no: number, apiResponseCallback: ApiResponseCallback) {
     this.dataService.onHideShowLoader(true);
     this.apiResponseCallback = apiResponseCallback;
-    this.apiService.hitGetApi(this.api.getTopAgentsUrl(page_no, this.APP_MODE[this.ENABLE_APP_MODE]), this);
+    this.apiService.hitGetApi(this.api.getTopAgentsUrl(type,page_no, this.APP_MODE[this.ENABLE_APP_MODE]), this);
   }
 
   /**
@@ -134,8 +135,12 @@ export class ApiHandlerService implements ApiResponseCallback {
     let notes = requestJson.attr.notes;
     let summary = requestJson.attr.subject;
     let selectedCategory = requestJson.attr.notesCategory;
-    let url = this.api.getCreateNoteUrl(this.getAppMode(),agentID,notes,summary,selectedCategory);
-    this.apiService.hitPostApi(url, this.getRequestXml(requestJson), handleAddAndUpdateApiResponse(this, apiResponseCallback));
+    if(requestJson.attr.entity ==='P')
+    this.noteURL = this.api.getCreatePersonNoteUrl(this.getAppMode(),agentID,notes,summary,selectedCategory);
+    else
+    this.noteURL = this.api.getCreateNoteUrl(this.getAppMode(),agentID,notes,summary,selectedCategory);
+    
+    this.apiService.hitPostApi(this.noteURL, this.getRequestXml(requestJson), handleAddAndUpdateApiResponse(this, apiResponseCallback));
   }
 
   /**
@@ -274,8 +279,11 @@ export class ApiHandlerService implements ApiResponseCallback {
     let summary = requestJson.attr.subject;
     let selectedCategory = requestJson.attr.category;
     let seq = requestJson.attr.seq;
-    let url = this.api.getUpdateNoteUrl(this.getAppMode(),agentID,notes,summary,seq,selectedCategory);
-    this.apiService.hitPostApi(url, this.getRequestXml(requestJson), handleAddAndUpdateApiResponse(this, apiResponseCallback));
+    if(requestJson.attr.entity ==="P")
+    this.noteURL = this.api.getUpdateNoteUrl(this.getAppMode(),agentID,notes,summary,seq,selectedCategory);
+    else
+    this.noteURL = this.api.getUpdatePersonNoteUrl(this.getAppMode(),agentID,notes,summary,seq,selectedCategory);
+    this.apiService.hitPostApi(this.noteURL, this.getRequestXml(requestJson), handleAddAndUpdateApiResponse(this, apiResponseCallback));
   }
 
   /**

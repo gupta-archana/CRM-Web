@@ -27,7 +27,7 @@
               <div class="statusInd_wp"
                 [ngClass]="{'bgGreen':item.comstat =='Green','bgYellow':item.comstat=='Yellow','bgRed':item.comstat=='Red'}">
                 {{item.comstat | slice:0:1}}</div>
-              <span>{{item.stat?item.stat:'Unknown'}}</span>
+              <span>{{item.qualification?item.qualification:'Unknown'}}</span>
               <span class="expDate">{{getComplianceDate(item) | slice:0:28}}</span>
               <div class="clear"></div>
               <div class="paddingTop10"></div>

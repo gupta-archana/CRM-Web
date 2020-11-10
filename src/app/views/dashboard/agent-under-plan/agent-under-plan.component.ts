@@ -22,6 +22,7 @@ export class AgentUnderPlanComponent extends BaseClass implements OnInit, OnDest
   agentsUnderPlan: EntityModel[];
   hideNoDataDiv: boolean = false;
   errorMsg: string = "";
+  type:string = "U";
   ngOnInit() {
     this.pageRefreshSubscription = this.dataService.pageRefreshObservable.subscribe(data => {
       refreshData(this);
@@ -86,7 +87,7 @@ export class AgentUnderPlanComponent extends BaseClass implements OnInit, OnDest
 }
 function makeServerRequest(context: AgentUnderPlanComponent) {
   context.pageNumber++;
-  context.apiHandler.getTopAgents(context.pageNumber, context);
+  context.apiHandler.getTopAgents(context.type,context.pageNumber, context);
 }
 
 
