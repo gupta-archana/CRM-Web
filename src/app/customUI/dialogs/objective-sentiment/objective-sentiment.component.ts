@@ -65,6 +65,7 @@ export class ObjectiveSentimentComponent implements OnInit {
     this.agentId = agentInfo.entityId;
     console.log(this.agentState, this.agentId);
     this.getPersonDetails();
+    console.log(this.personList)
   }
   onCancelClick() {
     this.dialogRef.close(false);
@@ -121,13 +122,14 @@ export class ObjectiveSentimentComponent implements OnInit {
   }
 
   onSuccess(response: any) {
+    let self = this;
     let data: AssociatesModel[] = response.affiliation;
         data.forEach((element) => {
-          setTimeout (() => {
+          
             if (element.personID) {
-              this.personList.push(element);
+              self.personList.push(element);
            }
-         }, 1000);
+        
 
         });
     console.log(this.personList);
