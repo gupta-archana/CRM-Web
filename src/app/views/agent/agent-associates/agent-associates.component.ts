@@ -23,6 +23,7 @@ export class AgentAssociatesComponent extends BaseClass implements OnInit, OnDes
   destroyed: boolean = false;
   hideNoDataDiv: boolean = false;
   errorMsg: string = "";
+  personAddress:string = "";
 
   constructor(private injector: Injector) {
     super(injector);
@@ -80,8 +81,16 @@ export class AgentAssociatesComponent extends BaseClass implements OnInit, OnDes
 
 
   getAddress(item: AssociatesModel) {
-    return item.city + " " + item.state;
+    if(item.city)
+    this.personAddress = item.city  + " ,   "
+    if(item.state)
+    this.personAddress = this.personAddress + item.state + " ,   " 
+    if(item.zip)
+    this.personAddress = this.personAddress + item.zip
+
+    return this.personAddress;
   }
+
   onPersonClick(item: AssociatesModel) {
     this.getEntityModel(item);
     sessionStorage.setItem(this.constants.ENTITY_INFO, JSON.stringify(this.clickedEntity));

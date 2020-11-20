@@ -28,6 +28,9 @@ export class MyNotesComponent extends BaseClass implements OnInit, OnDestroy {
   selectedNoteIndex: number = -1;
   hideNoDataDiv: boolean = false;
   errorMsg: string = "";
+  noteDataFromServer : NotesModel[]
+  categoryAndSummaryVisibility : boolean = false;
+
 
   ngOnInit() {
     this.uid = this.commonFunctions.getLoginCredentials().email;
@@ -57,9 +60,17 @@ export class MyNotesComponent extends BaseClass implements OnInit, OnDestroy {
   }
 
   onSuccess(response: any) {
-    let data: NotesModel[] = response.AgentNote;
-    data.forEach(element => {
-      if (element.notes && element.uid === this.uid) {
+    if(response.name === "AgentNote")
+    this.noteDataFromServer = response.AgentNote;
+
+    else if(response.name === "sysNote")
+    this.noteDataFromServer = response.sysNote
+    this.noteDataFromServer.forEach(element => {
+
+      if(element.agentID && element.notes)
+      this.categoryAndSummaryVisibility = true
+
+      if (element.notes && element.uid?element.uid:element.UID === this.uid) {
        // element.dateCreated = element.dateCreated.split(" ")[0];
        if(element.category ==='1')
        element.category = "General"

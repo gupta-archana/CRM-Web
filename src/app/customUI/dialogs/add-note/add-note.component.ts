@@ -69,7 +69,8 @@ function getRequest(context: AddNoteComponent) {
     "entityID": context.entityInfo.entityId,
     "notes": context.note,
     "subject": context.summary,
-    "notesCategory": context.notesCategory
+    "notesCategory": context.notesCategory,
+    "sysNoteID" : 0
   }
 
   let finalJson = {

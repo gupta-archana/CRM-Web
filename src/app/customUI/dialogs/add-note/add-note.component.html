@@ -11,7 +11,7 @@
         <div class="modal-body">
           <div class="clear paddingTop15">
           </div>
-          <span>
+          <span *ngIf = "entityInfo.type !='P'">
             <label for="cars">Category:</label>
             <div class="clear paddingTop15">
             </div>
@@ -19,16 +19,16 @@
               [virtualScroll]="true" placeholder="Select the Category" required>
             </ng-select>
           </span>
-          <div class="clear paddingTop15">
+          <div  *ngIf = "entityInfo.type !='P'" class="clear paddingTop15">
           </div>
-          <span>
+          <span *ngIf = "entityInfo.type !='P'">
             <label for="cars">Summary:</label>
             <div class="clear paddingTop15">
             </div>
             <input type="text" class="form-control" placeholder="Write the Summary" [(ngModel)]="summary"
               [ngModelOptions]="{standalone: true}" required>
           </span>
-          <div class="clear paddingTop15">
+          <div  *ngIf = "entityInfo.type !='P'"class="clear paddingTop15">
           </div>
           <label for="cars">Notes:</label>
           <div class="clear paddingTop15">

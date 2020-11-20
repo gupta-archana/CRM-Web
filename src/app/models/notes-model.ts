@@ -13,4 +13,7 @@ typeDesc: string
 uid: string
 rowNum : string
   userName: string;
+  UID: string;
+  sysNoteID:string;
+  entity: string;
 }

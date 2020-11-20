@@ -15,11 +15,11 @@
               </div>
             </div> -->
             <div class="col-xs-12 col-md-12">
-              <div class="agent-contact">
-                <div class="clearfix"></div>
-                <div class="state">Category <br><span>{{item.category}}</span></div>
-                <div class="state">Summary<br> <span>{{item.subject}}</span></div>
-                <div class="state" style="width: 100% !important;">Note<br><span>{{item.notes}}</span></div>
+              <div class="agent-contact" >
+                <div class="clearfix" *ngIf = "categoryAndSummaryVisibility"></div>
+                <div class="state" *ngIf = "categoryAndSummaryVisibility"><label for="category">Category</label> <br><span>{{item.category}}</span></div>
+                <div class="state" *ngIf = "categoryAndSummaryVisibility"><label for="summary">Summary</label><br> <span>{{item.subject}}</span></div>
+                <div class="state" style="width: 100% !important;"><label for="note">Note</label><br><span>{{item.notes}}</span></div>
               </div>              
             </div>
             <!-- <div *ngIf="getNotesType(item)=='My Notes'">

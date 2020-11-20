@@ -17,6 +17,8 @@ export class ApiHandlerService implements ApiResponseCallback {
   private ENABLE_APP_MODE = 0;
   private apiResponseCallback: ApiResponseCallback = null;
   private noteURL:string;
+  private getnoteURL:string;
+
   constructor(private apiService: ApiService, public dataService: DataServiceService, private constants: Constants,
     private api: API) {
 
@@ -149,8 +151,13 @@ export class ApiHandlerService implements ApiResponseCallback {
   public getNotes(uid, entityType, entityId, pageNum: any, apiResponseCallback: ApiResponseCallback) {
     this.apiResponseCallback = apiResponseCallback;
     this.dataService.onHideShowLoader(true);
-    let url = this.api.getNotesUrl(this.getAppMode(), uid, entityType, entityId, pageNum);
-    this.apiService.hitGetApi(url, this);
+
+    if(entityType === "P")
+    this.getnoteURL = this.api.getPersonNotesUrl(this.getAppMode(), uid, entityType, entityId, pageNum);
+
+    else if(entityType === "A")
+    this.getnoteURL = this.api.getNotesUrl(this.getAppMode(), uid, entityType, entityId, pageNum);
+    this.apiService.hitGetApi(this.getnoteURL, this);
   }
 
   /**
@@ -280,9 +287,9 @@ export class ApiHandlerService implements ApiResponseCallback {
     let selectedCategory = requestJson.attr.category;
     let seq = requestJson.attr.seq;
     if(requestJson.attr.entity ==="P")
-    this.noteURL = this.api.getUpdateNoteUrl(this.getAppMode(),agentID,notes,summary,seq,selectedCategory);
-    else
     this.noteURL = this.api.getUpdatePersonNoteUrl(this.getAppMode(),agentID,notes,summary,seq,selectedCategory);
+    else
+    this.noteURL = this.api.getUpdateNoteUrl(this.getAppMode(),agentID,notes,summary,seq,selectedCategory);
     this.apiService.hitPostApi(this.noteURL, this.getRequestXml(requestJson), handleAddAndUpdateApiResponse(this, apiResponseCallback));
   }
 

@@ -23,6 +23,7 @@ export class UpdateNoteComponent extends BaseClass implements OnInit, ApiRespons
   noteModelSubscription: Subscription = null;
   notesCategory:any
   summary : string = "";
+  entityInfo: EntityModel;
   category = [
     { id : 1,value: "General"},
     { id : 2,value: "Events"},
@@ -31,7 +32,7 @@ export class UpdateNoteComponent extends BaseClass implements OnInit, ApiRespons
   ]
   seq:any
   ngOnInit() {
-
+    getEntityTypeAndId(this);
     getNoteModel(this);
 
   }
@@ -61,6 +62,9 @@ export class UpdateNoteComponent extends BaseClass implements OnInit, ApiRespons
   }
 }
 
+function getEntityTypeAndId(context: UpdateNoteComponent) {
+  context.entityInfo = JSON.parse(sessionStorage.getItem(context.constants.ENTITY_INFO));;
+}
 function getNoteModel(context: UpdateNoteComponent) {
   context.noteModelSubscription = context.dataService.shareDataObservable.subscribe((data: NotesModel) => {
     context.noteModel = data;
@@ -85,20 +89,41 @@ function getNoteModel(context: UpdateNoteComponent) {
 
 function getRequest(context: UpdateNoteComponent) {
 
-
+if(context.entityInfo.type=="A")
+{
   let requestJson = {
     "UID": context.commonFunctions.getLoginCredentials().email,
     "agentID": context.noteModel.agentID,
     "notes": context.note,
     "subject": context.summary,
     "seq" : context.seq,
-    "category": context.notesCategory
+    "category": context.notesCategory,
+    "entity": context.entityInfo.type,
   }
-
   let finalJson = {
     "SysNote": "",
     "attr": requestJson
   }
   return finalJson;
+
+}
+ if(context.entityInfo.type=="P")
+ {
+  let requestJson = {
+    "uid": context.commonFunctions.getLoginCredentials().email,
+    "entity": context.entityInfo.type,
+    "entityID": context.entityInfo.entityId,
+    "notes": context.note,
+    "subject": context.summary,
+    "seq" : context.seq,
+    "category": context.notesCategory,
+    "sysNoteID": context.noteModel.sysNoteID
+  }
+  let finalJson = {
+    "SysNote": "",
+    "attr": requestJson
+  }
+  return finalJson;
+ }
 }
 

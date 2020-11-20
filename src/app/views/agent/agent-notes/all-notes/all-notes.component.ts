@@ -31,6 +31,9 @@ export class AllNotesComponent extends BaseClass implements OnInit, OnDestroy, A
   hideNoDataDiv: boolean = false;
   errorMsg: string = "";
   entityModel: EntityModel;
+  noteDataFromServer: NotesModel[]
+  categoryAndSummaryVisibility : boolean = false;
+  
   ngOnInit() {
     this.uid = this.commonFunctions.getLoginCredentials().email;
     this.entityModel = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
@@ -69,8 +72,16 @@ export class AllNotesComponent extends BaseClass implements OnInit, OnDestroy, A
   }
 
   onSuccess(response: any) {
-    let data: NotesModel[] = response.AgentNote;
-    data.forEach(element => {
+    if(response.name === "AgentNote")
+    this.noteDataFromServer = response.AgentNote;
+
+    else if(response.name === "sysNote")
+    this.noteDataFromServer = response.sysNote
+
+    this.noteDataFromServer.forEach(element => {
+      if(element.agentID && element.notes)
+      this.categoryAndSummaryVisibility = true
+
       if (element.notes) {
         if(element.category ==='1')
         element.category = "General"
