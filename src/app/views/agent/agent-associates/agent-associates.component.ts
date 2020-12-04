@@ -54,7 +54,7 @@ export class AgentAssociatesComponent extends BaseClass implements OnInit, OnDes
         } else {
           this.totalRows = element.rowNum;
         }
-        this.totalRows = this.associatesModels.length;
+        //this.totalRows = this.associatesModels.length;
       });
 
       setAssociates(this);
