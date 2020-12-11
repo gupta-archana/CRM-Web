@@ -102,6 +102,11 @@ export class AgentAssociatesComponent extends BaseClass implements OnInit, OnDes
     this.clickedEntity.entityId = item.personID;
     this.clickedEntity.stat = item.stat;
     this.clickedEntity.type = this.constants.ENTITY_PERSON_PRESENTER
+    this.clickedEntity.city = item.city;
+    this.clickedEntity.state = item.state;
+    this.clickedEntity.zip = item.zip;
+
+
   }
   ngOnDestroy(): void {
     this.destroyed = true;

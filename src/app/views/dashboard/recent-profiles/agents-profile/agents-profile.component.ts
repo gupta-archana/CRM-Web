@@ -56,7 +56,7 @@ export class AgentsProfileComponent extends BaseClass implements OnInit, OnDestr
 }
 function refreshContent(context: AgentsProfileComponent) {
   context.pageRefreshSubscription = context.dataService.pageRefreshObservable.subscribe(called => {
-    if (called)
+    //if (called)
       getData(context);
   });
 }

@@ -53,7 +53,7 @@ export class PersonsProfileComponent extends BaseClass implements OnInit, OnDest
 
 function refreshContent(context: PersonsProfileComponent) {
   context.pageRefreshSubscription = context.dataService.pageRefreshObservable.subscribe(called => {
-    if (called)
+    //if (called)
       getData(context);
   });
 }

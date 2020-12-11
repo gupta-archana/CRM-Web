@@ -237,7 +237,7 @@ function changeHeaderTitle(path: string, context: NavigationDrawerComponent) {
 
         case context.paths.PATH_RECENT_RPOFILES:
           context.headerTitle = context.constants.RECENT_PROFILE;
-          context.showRefreshButton = true;
+         // context.showRefreshButton = true;
           break;
 
         case context.paths.PATH_FOLLOWING:
