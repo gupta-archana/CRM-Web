@@ -556,6 +556,14 @@ public createObjective(requestJson, apiResponseCallback: ApiResponseCallback) {
     this.apiService.hitGetApi(url, apiResponseCallback);
   }
 
+  /**
+   * resetApplicationSetting
+   */
+  public resetApplicationSetting()
+  {
+    let url = this.api.getResetApplicationSetting(this.APP_MODE[this.ENABLE_APP_MODE])
+    this.apiService.hitGetApi(url,this);
+  }
   private getAppMode(): string {
     return this.APP_MODE[this.ENABLE_APP_MODE];
   }

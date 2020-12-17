@@ -7,6 +7,8 @@ import { ConfigNotificationModel } from '../../../../models/config-notification-
 import * as configs from '../../../../Constants/ConfigArrays';
 import { Subscription } from 'rxjs';
 import { FormGroup, FormControl } from '@angular/forms';
+import { initChangeDetectorIfExisting } from '@angular/core/src/render3/instructions';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-app-setting',
@@ -35,7 +37,7 @@ export class AppSettingComponent extends BaseClass implements OnInit, ApiRespons
 
   appSettingForm: FormGroup;
 
-  constructor(private injector: Injector) { super(injector); }
+  constructor(private injector: Injector,public router : Router, public route:ActivatedRoute) { super(injector); }
 
   ngOnInit() {
     addValidation(this);
@@ -60,20 +62,38 @@ export class AppSettingComponent extends BaseClass implements OnInit, ApiRespons
     this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_NOTIFICATION_CONTROL);
   }
 
+  resetApplicationSettings()
+  {
+    this.configBasicModels = new Array<ConfigBasicModel>();
+    this.configNotificationModels = new Array<ConfigNotificationModel>();
+    this.configReorderModels = new Array<ConfigReorderModel>();
+    
+    this.apiHandler.resetApplicationSetting()
+    this.dataService.onHideShowLoader(true);
+    reloadComponent(this);
+    
+    
+    
+  }
   onSuccess(response: any) {
+    let self = this;
     if (response.sysuserconfig) {
       let sysuserconfig: Array<any> = response.sysuserconfig;
       sysuserconfig.forEach(element => {
         this.parseResponse(element);
+        
       });
       setBasicConfigToVariables(this);
+
     }
+
   }
   onError(errorCode: number, errorMsg: string) {
 
   }
 
   private parseResponse(element: any) {
+    
     if (element.configCategory == "Reorder") {
       element.configuration = JSON.parse(element.configuration.replace(/'/g, '"'));
       this.configReorderModels.push(element);
@@ -142,6 +162,8 @@ function setBasicConfigToVariables(context: AppSettingComponent) {
   setValueToDropdowns(context);
   setBasicConfigToLocalStorage(context);
   context.cdr.markForCheck();
+  context.dataService.onHideShowLoader(false);
+
 }
 
 function setBasicConfigToLocalStorage(context: AppSettingComponent) {
@@ -194,3 +216,9 @@ function clearSearch(context: AppSettingComponent) {
   sessionStorage.removeItem(context.constants.SEARCH_TOTAL_ROWS);
 
 }
+
+function reloadComponent(context: AppSettingComponent) {​​
+  context.router.routeReuseStrategy.shouldReuseRoute = () => false;
+  context.router.onSameUrlNavigation = 'reload';
+  context.router.navigate(['/setting']);
+}​​

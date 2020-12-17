@@ -66,8 +66,8 @@
             </div>
 
             <div id="recentAgentObj" style="display:none;">
-              <div *ngFor="let item of agentObjectivesMapArray | keyvalue">
-                <div class="row">
+              <!-- <div *ngFor="let item of agentObjectivesMapArray | keyvalue"> -->
+                <!-- <div class="row">
                   <div class="col-md-12 col-xs-12 noPadding">
                     <div class="monthSelectorWp">
                       <hr />
@@ -75,10 +75,10 @@
                           data-target="#monthSelectorPopup">{{item.key | slice:0:10}}</a></span>
                     </div>
                   </div>
-                </div>
+                </div> -->
                 <div class="clearfix paddingTop5"></div>
                 <div class="row">
-                  <div class="col-xs-12 col-md-6 cell-bg" *ngFor="let innerItem of item.value">
+                  <div class="col-xs-12 col-md-6 cell-bg" *ngFor="let innerItem of agentobjectiveModels">
                     <div class="ag-obj-active">
                       <div class="status">Status:
                         <span>{{constants.statusFull[innerItem.Stat.toLocaleLowerCase()]}}</span></div>
@@ -90,10 +90,16 @@
                   </div>
                 </div>
                 <div class="clearfix paddingTop15"></div>
+              <!-- </div> -->
+              <div class="row " *ngIf="moreDataAvailable">
+                <div class="col-xs-12 col-md-12 loadMoreWp">
+                  <hr />
+                  <div class="loadMore"><a (click)="onLoadMoreClick()" alt="Load More">Load More</a></div>
+                </div>
               </div>
             </div>
 
-            <div class="container add-box">
+            <!-- <div class="container add-box">
               <div class="row">
                 <div class="col-xs-12">
                   <div class="form-group">
@@ -108,11 +114,12 @@
                   </button>
                 </div>
               </div>
-            </div>
+            </div> -->
 
             <div class="clearfix paddingTop15"></div>
           </div>
 
+          
           <!-- ---tab First end here---- -->
 
           <!-- ---tab second beginning here---- -->
@@ -146,8 +153,8 @@
                 </div>
               </div>
               <div id="ourObj" style="display:none;">
-                <div *ngFor="let item of ourObjectivesMapArray | keyvalue">
-                  <div class="row">
+                <!-- <div *ngFor="let item of ourObjectivesMapArray | keyvalue"> -->
+                  <!-- <div class="row">
                     <div class="col-md-12 col-xs-12 noPadding">
                       <div class="monthSelectorWp">
                         <hr />
@@ -155,10 +162,10 @@
                             data-target="#monthSelectorPopup">{{item.key | slice:0:10}}</a></span>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
                   <div class="clearfix paddingTop5"></div>
                   <div class="row">
-                    <div class="col-xs-12 col-md-6 cell-bg" *ngFor="let innerItem of item.value">
+                    <div class="col-xs-12 col-md-6 cell-bg" *ngFor="let innerItem of ourobjectiveModels">
                       <div class="ag-obj-active">
                         <div class="status">Status:
                           <span>{{constants.statusFull[innerItem.Stat.toLocaleLowerCase()]}}</span></div>
@@ -170,10 +177,69 @@
                     </div>
                   </div>
                   <div class="clearfix paddingTop15"></div>
+                <!-- </div> -->
+                <div class="row" *ngIf="moreDataAvailable">
+                  <div class="col-xs-12 col-md-12 loadMoreWp">
+                    <hr />
+                    <div class="loadMore"><a (click)="onLoadMoreClick()" alt="Load More">Load More</a></div>
+                  </div>
                 </div>
               </div>
 
-              <div class="container add-box">
+              <!-- <div class="container add-box">
+                <div class="row">
+                  <div class="col-xs-12">
+                    <div class="form-group">
+                      <button type="button" class="btn btn-primary addNoteBtn" data-toggle="modal" data-target="#addNewNotes">
+                        <img src="images/add-note-icon.svg" alt=""> &nbsp; Add Note
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="buttonFooter_wp" *ngIf = "ourActiveObjective !=null">
+                    <button type="button" class="btn btn-primary footerBtn" (click)="openRecordSentiment(ourActiveObjective)">
+                      <img src="images/record-obj-icon.svg" alt="" > Record Objective Sentiment
+                    </button>
+                  </div>
+
+                </div>
+              </div> -->
+
+
+
+              <div class="clearfix paddingTop15"></div>
+            </div>
+            <!-- ---tab second end here---- -->
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    
+    
+  </div>
+</div>
+<div class="container" *ngIf= "selectedTab == 1">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="form-group">
+        <button type="button" class="btn btn-primary addNoteBtn" data-toggle="modal" data-target="#addNewNotes">
+          <img src="images/add-note-icon.svg" alt=""> &nbsp; Add Note
+        </button>
+      </div>
+    </div>
+    <div class="buttonFooter_wp" *ngIf = "agentActiveObjective !=null">
+      <button type="button" class="btn btn-primary footerBtn" (click)="openRecordSentiment(agentActiveObjective)">
+        <img src="images/record-obj-icon.svg" alt=""> Record Objective Sentiment
+      </button>
+    </div>
+  </div>
+</div>
+
+              <div class="container" *ngIf= "selectedTab == 2">
                 <div class="row">
                   <div class="col-xs-12">
                     <div class="form-group">
@@ -191,19 +257,5 @@
 
                 </div>
               </div>
-
-
-
-              <div class="clearfix paddingTop15"></div>
-            </div>
-            <!-- ---tab second end here---- -->
-
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </div>
-</div>
+              
 <app-add-note></app-add-note>
