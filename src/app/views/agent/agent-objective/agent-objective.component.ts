@@ -61,6 +61,7 @@ export class AgentObjectiveComponent
   moreDataAvailable: boolean = false;
   objectiveList: any = null;
   agentObjectiveList: any;
+  loadMoreClicked:boolean = false;
 
   ngOnInit() {
     this.entityModel = JSON.parse(
@@ -68,13 +69,16 @@ export class AgentObjectiveComponent
     );
     reloadObjectiveData(this);
     getAgentActiveStatuses(this);
-    updateRatioUI(this)
   }
   onLoadMoreClick() {
+    this.loadMoreClicked = true;
     hitApi(this);
+    updateRatioUI(this)
   }
   goBack() {
     this.hideAddEdit = false;
+  this.commonFunctions.showLoadedItemTagOnHeader(null,null);
+
     if (this.selectedTab == 1) {
       if (document.getElementById("recentAgentObj").style.display == "block") {
         this.showAgentActiveObj();
@@ -90,6 +94,7 @@ export class AgentObjectiveComponent
   }
 
   onTabClick(tabNumber: number) {
+    
     this.selectedTab = tabNumber;
     showHideEditObjective(this);
     if (tabNumber == 1) {
@@ -115,6 +120,7 @@ export class AgentObjectiveComponent
     document.getElementById("agentObjective").style.display = "none";
     this.showingRecents = true;
     showHideEditObjective(this);
+    updateRatioUI(this);
   }
 
   showAgentActiveObj() {
@@ -130,6 +136,7 @@ export class AgentObjectiveComponent
     document.getElementById("ourObjective").style.display = "none";
     this.showingRecents = true;
     showHideEditObjective(this);
+    updateRatioUI(this)
   }
 
   showOurActiveObj() {
@@ -276,6 +283,9 @@ function getAllRecentObjectiveForAgent(context: AgentObjectiveComponent) {
             context.agentobjectiveModels.push(element)
         });
         console.log(context.agentobjectiveModels)
+        if(context.loadMoreClicked)
+        updateRatioUI(context);
+
         checkMoreDataAvailable(context);
       },
       onError(errorCode, errorMsg) {},
@@ -317,6 +327,7 @@ function handleOurActiveStatusResponse(
   if (context.ourObjectivesMapArray.size == 0)
     getAllRecentObjectiveForOur(context);
   context.cdr.markForCheck();
+
 }
 
 function getAllRecentObjectiveForOur(context: AgentObjectiveComponent) {
@@ -349,6 +360,8 @@ function getAllRecentObjectiveForOur(context: AgentObjectiveComponent) {
             context.ourobjectiveModels.push(element)
         });
         console.log(context.ourobjectiveModels)
+        if(context.loadMoreClicked)
+       updateRatioUI(context);
         checkMoreDataAvailable(context);
         
       },
@@ -477,15 +490,6 @@ function checkMoreDataAvailable(context: AgentObjectiveComponent) {
     else context.moreDataAvailable = true;
   }
 }
-function hitApi(context: AgentObjectiveComponent) {
-  context.agentPageNum++;
-  if (context.selectedTab === 1) {
-    getAllRecentObjectiveForAgent(context);
-  } else {
-    context.ourPageNum++;
-    getAllRecentObjectiveForOur(context);
-  }
-}
 function updateRatioUI(context: AgentObjectiveComponent) 
 { 
   if (context.selectedTab === 1) 
@@ -496,3 +500,13 @@ function updateRatioUI(context: AgentObjectiveComponent)
   //context.totalAndCurrentRowsRatio = context.commonFunctions.showMoreDataSnackbar(context.associatesModels, context.totalRows);
   context.cdr.markForCheck();
 }
+function hitApi(context: AgentObjectiveComponent) {
+  context.agentPageNum++;
+  if (context.selectedTab === 1) {
+    getAllRecentObjectiveForAgent(context);
+  } else {
+    context.ourPageNum++;
+    getAllRecentObjectiveForOur(context);
+  }
+}
+
