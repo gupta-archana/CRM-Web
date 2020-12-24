@@ -53,7 +53,7 @@ export class AppSettingComponent extends BaseClass implements OnInit, ApiRespons
     this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_REARRANGE_AGENT_DETAIL_ITEM);
   }
   rearrangePersonDetailModules() {
-    this.myLocalStorage.setValue(this.constants.AGENT_DETAIL_ITEMS, JSON.stringify(getRearrangeItemArray(this, this.constants.PERSON_MODULE)));
+    this.myLocalStorage.setValue(this.constants.PERSON_DETAIL_ITEMS, JSON.stringify(getRearrangeItemArray(this, this.constants.PERSON_MODULE)));
     this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_REARRANGE_PERSON_DETAIL_ITEM);
   }
 

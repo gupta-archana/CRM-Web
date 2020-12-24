@@ -27,7 +27,7 @@ export class PersonDetailItemsRearrangeComponent extends BaseClass implements On
     let itemsInString = JSON.stringify(this.personDetailItems);
     this.myLocalStorage.setValue(this.constants.PERSON_DETAIL_ITEMS, itemsInString);
     itemsInString = itemsInString.replace(/"/g, "'");
-    this.commonApis.updateBasicConfig(this.constants.HOME_MODULE, itemsInString, this);
+    this.commonApis.updateBasicConfig(this.constants.PERSON_MODULE, itemsInString, this);
     this.utils.getAgentDetailItems();
   }
   onSuccess(response: any) {

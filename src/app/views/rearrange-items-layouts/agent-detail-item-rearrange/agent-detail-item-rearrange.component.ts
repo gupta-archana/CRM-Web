@@ -26,7 +26,7 @@ export class AgentDetailItemRearrangeComponent extends BaseClass implements OnIn
     let itemsInString = JSON.stringify(this.agentDetailItems);
     this.myLocalStorage.setValue(this.constants.AGENT_DETAIL_ITEMS, itemsInString);
     itemsInString = itemsInString.replace(/"/g, "'");
-    this.commonApis.updateBasicConfig(this.constants.HOME_MODULE, itemsInString, this);
+    this.commonApis.updateBasicConfig(this.constants.AGENT_MODULE, itemsInString, this);
     this.utils.getAgentDetailItems();
   }
   onSuccess(response: any) {
