@@ -28,6 +28,7 @@ import { PersonDetailItemsRearrangeComponent } from './views/rearrange-items-lay
 import { AgentTagsComponent } from './views/agent/agent-tags/agent-tags.component';
 import { SelectedTagAgentsComponent } from './views/agent/selected-tag-agents/selected-tag-agents.component';
 import { EventsComponent } from './views/agent/events/events.component';
+import { ViewSentimentHistoryComponent } from './customUI/dialogs/view-sentiment-history/view-sentiment-history.component';
 
 
 
@@ -55,6 +56,7 @@ const appRoutesArray: Routes =
     { path: paths.PATH_AGENT_AUDIT_COMPLETED, component: AuditDetailCompletedComponent },
     { path: paths.PATH_AGENT_COMPLIANCE, component: ComplianceComponent },
     { path: paths.PATH_COMPLIANCE_DETAIL, component: ComplianceDetailComponent },
+    { path: paths.PATH_VIEW_SENTIMENT_HISTORY, component: ViewSentimentHistoryComponent  },
     { path: paths.PATH_NOTIFICATION_CONTROL, component: NotificationControlsComponent },
     { path: paths.PATH_AGENT_TAGS, component: AgentTagsComponent },
     { path: paths.PATH_ASSOCIATED_AGENTS, component: SelectedTagAgentsComponent },

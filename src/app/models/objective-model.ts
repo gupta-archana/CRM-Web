@@ -5,8 +5,8 @@ export class ObjectiveModel {
   UID: string;
   Stat: string;
   dueDate: string;
-  description: string;
   type: string;
   createDate: string;
   private: string;
+  description: string;
 }

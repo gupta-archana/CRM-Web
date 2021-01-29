@@ -14,6 +14,7 @@ import { AddNewEventComponent } from '../customUI/dialogs/add-new-event/add-new-
 import { EditAndDeleteTagPopupComponent } from '../customUI/dialogs/edit-and-delete-tag-popup/edit-and-delete-tag-popup.component';
 import { AddObjectivePopupComponent } from '../customUI/dialogs/add-objective-popup/add-objective-popup.component';
 import { ObjectiveSentimentComponent } from '../customUI/dialogs/objective-sentiment/objective-sentiment.component';
+import { ViewSentimentHistoryComponent } from '../customUI/dialogs/view-sentiment-history/view-sentiment-history.component';
 
 @Injectable({
   providedIn: 'root'
@@ -99,6 +100,14 @@ export class OpenDialogsService {
 
   showRecordSentimentsDialog(objective: string,sentiment) {
     return this.dialog.open(ObjectiveSentimentComponent,
+      {
+        data: {
+          message: objective,sentiment
+        }
+      });
+  }
+  showViewSentimentHistoryDialog(objective: string,sentiment) {
+    return this.dialog.open(ViewSentimentHistoryComponent,
       {
         data: {
           message: objective,sentiment

@@ -69,7 +69,7 @@ export class CommonFunctionsService {
   }
 
   navigateWithParams(path: string, params) {
-    this.router.navigate([path], { queryParams: params });
+    this.router.navigate([path], { queryParams: {param:params} });
   }
   getEncryptedPassword(pUnencrypted: string) {
     //pUnencrypted = "TestingPassword"

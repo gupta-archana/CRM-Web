@@ -32,6 +32,8 @@ export const PATH_AGENT_AUDIT_QUEUED = "agentAuditQueued";
 export const PATH_AGENT_AUDIT_COMPLETED = "agentAuditCompleted";
 export const PATH_AGENT_COMPLIANCE = "agentCompliance";
 export const PATH_COMPLIANCE_DETAIL = "complianceDetail";
+export const PATH_VIEW_SENTIMENT_HISTORY = "sentimentHistory";
+
 export const PATH_AGENT_TAGS = "agentTags";
 export const PATH_ASSOCIATED_AGENTS = "associatedAgents";
 export const PATH_EVENTS = "events";

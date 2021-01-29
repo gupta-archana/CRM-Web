@@ -231,10 +231,18 @@
         </button>
       </div>
     </div>
+
     <div class="buttonFooter_wp" *ngIf = "agentActiveObjective !=null">
       <button type="button" class="btn btn-primary footerBtn" (click)="openRecordSentiment(agentActiveObjective)">
         <img src="images/record-obj-icon.svg" alt=""> Record Objective Sentiment
       </button>
+    </div>
+    <div class="col-xs-12">
+    <div class="form-group" *ngIf = "agentActiveObjective !=null">
+      <button type="button" class="btn btn-primary addNoteBtn" data-toggle="modal" (click)="openViewSentimentHistory(agentActiveObjective)">
+        <img src="images/add-note-icon.svg" alt="" > &nbsp; View Sentiment History 
+      </button>
+    </div>
     </div>
   </div>
 </div>
@@ -254,7 +262,14 @@
                       <img src="images/record-obj-icon.svg" alt="" > Record Objective Sentiment
                     </button>
                   </div>
+                  <div class="col-xs-12">
 
+                  <div class="form-group" *ngIf = "ourActiveObjective !=null">
+                    <button type="button" class="btn btn-primary addNoteBtn" (click)="openViewSentimentHistory(ourActiveObjective)" data-toggle="modal">
+                      <img src="images/add-note-icon.svg" alt="" > &nbsp; View Sentiment History 
+                    </button>
+                  </div>
+</div>
                 </div>
               </div>
               

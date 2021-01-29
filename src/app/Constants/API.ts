@@ -145,6 +145,10 @@ export class API {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=affiliatedassociatesGet&entity=" + entityType + "&entityID=" + entityId + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows;
   }
 
+  getViewSentimentHistoryUrl(app_mode: string, stat: string, entity: any, entityId: any, type: string, pageNum: any) {
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userObjectivesGet&entity=" + entity + "&entityID=" + entityId + "&stat=" + stat + "&type=" + type + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows + "&OtherApp=yes&NeedInteractions=yes";
+  }
+
   getPersonAffiliationsUrl(app_mode: string, entityId: string, pageNum: number) {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=affiliatedpersonGet&PersonID=" + entityId + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows;
   }

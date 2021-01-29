@@ -60,6 +60,9 @@ export class DataServiceService {
   shareDataSubject = new BehaviorSubject<any>("");
   shareDataObservable = this.shareDataSubject.asObservable();
 
+  shareSentimentsDataSubject = new BehaviorSubject<any>("");
+  shareSentimentsDataObservable = this.shareSentimentsDataSubject.asObservable();
+
   private searchFiltersSubject = new Subject<SearchFilterModel>();
   searchFiltersObservable = this.searchFiltersSubject.asObservable();
 
@@ -143,6 +146,10 @@ export class DataServiceService {
 
   onDataShare(data: any) {
     this.shareDataSubject.next(data);
+  }
+
+  onSentimentsDataShare(data: any) {
+    this.shareSentimentsDataSubject.next(data);
   }
 
   onSearchFilterApply(filterModel: SearchFilterModel) {

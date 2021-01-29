@@ -7,4 +7,5 @@ export class SentimentModel {
   sentimentID : string
   type: string;
   uid: string;
+  objective:string;
 }

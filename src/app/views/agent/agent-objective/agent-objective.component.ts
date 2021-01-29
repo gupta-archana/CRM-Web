@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Injector,
-  OnInit,
-} from "@angular/core";
+import {ChangeDetectionStrategy,Component,Injector,OnInit} from "@angular/core";
 import { Subscription } from "rxjs";
 import { BaseClass } from "../../../global/base-class";
 import { ApiResponseCallback } from "../../../Interfaces/ApiResponseCallback";
@@ -18,24 +13,14 @@ import { DataServiceService } from "../../../services/data-service.service";
   styleUrls: ["./agent-objective.component.css"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AgentObjectiveComponent
-  extends BaseClass
-  implements OnInit, ApiResponseCallback {
-  constructor(
-    private injector: Injector,
-    public dataService: DataServiceService
-  ) {
+export class AgentObjectiveComponent extends BaseClass implements OnInit, ApiResponseCallback {
+  
+  constructor(private injector: Injector,public dataService: DataServiceService) {
     super(injector);
   }
   entityModel: EntityModel;
-  agentObjectivesMapArray: Map<string, Array<ObjectiveModel>> = new Map<
-    string,
-    Array<ObjectiveModel>
->();
-  ourObjectivesMapArray: Map<string, Array<ObjectiveModel>> = new Map<
-    string,
-    Array<ObjectiveModel>
-  >();
+  agentObjectivesMapArray: Map<string, Array<ObjectiveModel>> = new Map<string,Array<ObjectiveModel>>();
+  ourObjectivesMapArray: Map<string, Array<ObjectiveModel>> = new Map<string,Array<ObjectiveModel>>();
   agentobjectiveModels: ObjectiveModel[] = new Array;
   ourobjectiveModels: ObjectiveModel[] = new Array;
   agentActiveObjective: ObjectiveModel = null;
@@ -65,8 +50,7 @@ export class AgentObjectiveComponent
 
   ngOnInit() {
     this.entityModel = JSON.parse(
-      sessionStorage.getItem(this.constants.ENTITY_INFO)
-    );
+    sessionStorage.getItem(this.constants.ENTITY_INFO)); 
     reloadObjectiveData(this);
     getAgentActiveStatuses(this);
   }
@@ -77,7 +61,7 @@ export class AgentObjectiveComponent
   }
   goBack() {
     this.hideAddEdit = false;
-  this.commonFunctions.showLoadedItemTagOnHeader(null,null);
+    this.commonFunctions.showLoadedItemTagOnHeader(null,null);
 
     if (this.selectedTab == 1) {
       if (document.getElementById("recentAgentObj").style.display == "block") {
@@ -94,7 +78,6 @@ export class AgentObjectiveComponent
   }
 
   onTabClick(tabNumber: number) {
-    
     this.selectedTab = tabNumber;
     showHideEditObjective(this);
     if (tabNumber == 1) {
@@ -201,6 +184,31 @@ export class AgentObjectiveComponent
     }
   }
 
+  openViewSentimentHistory(objectiveModel)
+  {
+    if (objectiveModel.type === "t" || objectiveModel.type === "T")
+    {
+      // this.openDialogService.showViewSentimentHistoryDialog(
+      //   JSON.stringify(objectiveModel),
+      //   JSON.stringify(this.agentActiveSentiment)
+
+      // );
+      this.agentActiveSentiment.objective = objectiveModel.description;
+      this.dataService.onSentimentsDataShare(this.agentActiveSentiment)
+    this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_VIEW_SENTIMENT_HISTORY);
+      }
+
+      if (objectiveModel.type === "o" || objectiveModel.type === "O")
+      {
+      // this.openDialogService.showViewSentimentHistoryDialog(
+      //   JSON.stringify(objectiveModel),
+      //   JSON.stringify(this.ourActiveSentiment)
+      // );
+      this.dataService.onSentimentsDataShare(this.ourActiveSentiment)
+    this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_VIEW_SENTIMENT_HISTORY);
+
+      }
+  }
   openRecordSentiment(objectiveModel) {
     if (objectiveModel.type === "t" || objectiveModel.type === "T")
       this.openDialogService.showRecordSentimentsDialog(

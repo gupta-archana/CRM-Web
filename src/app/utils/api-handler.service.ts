@@ -217,6 +217,13 @@ export class ApiHandlerService implements ApiResponseCallback {
     this.apiService.hitGetApi(url, this);
   }
 
+  public getSentimentHistory(entityId: string, entitiyType: string, pageNum: number, apiResponseCallback: ApiResponseCallback) {
+    this.dataService.onHideShowLoader(true);
+    this.apiResponseCallback = apiResponseCallback;
+    let url = this.api.getAssociatesUrl(this.getAppMode(), entitiyType, entityId, pageNum);
+    this.apiService.hitGetApi(url, this);
+  }
+
   /**
    * getPersonAffiliations
    */
@@ -536,6 +543,13 @@ public createObjective(requestJson, apiResponseCallback: ApiResponseCallback) {
     let url = this.api.getDeleteTagUrl(this.getAppMode(), tagId);
    // let url="https://compass.alliantnational.com:8118/do/action/WService=dev/get?I1=agupta@alliantnational.com&I2=a2NqPWphbmlVWndkZnhESnhzd0AxMjM0YURRZlBHQmpFcGN1bnh1Q01TSEhCeVJBemRqQW1pQlpPUmp1UG10cnJhbUJtZURyQWhOUmdBS2hkQmloanRzTG51cElJYVlyeFhnTmhXUm5zdG1NdGdJYXBZSmNucnR6VHhGSUl3QUtBREls&I3=EntityUntag&tagID="+tagId 
     this.apiService.hitGetApi(url, handleAddAndUpdateApiResponse(this, apiResponseCallback));
+  }
+
+  public getViewSentimentHistory(stat: string, entity: any, entityId: any, objectiveFor: string, pageNum: any, apiResponseCallback: ApiResponseCallback) {
+    this.apiResponseCallback = apiResponseCallback;
+    this.dataService.onHideShowLoader(true);
+    let url = this.api.getViewSentimentHistoryUrl(this.APP_MODE[this.ENABLE_APP_MODE], stat, entity, entityId, objectiveFor, pageNum);
+    this.apiService.hitGetApi(url, this);
   }
 
   /**
