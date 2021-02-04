@@ -36,7 +36,7 @@ export class ViewSentimentHistoryComponent implements OnInit, ApiResponseCallbac
     private router: Router,
     private commonFunctions : CommonFunctionsService
   ) {}
-
+  lastDate:any = new Date();
   sentimentModel: SentimentModel;
   agentActiveSentiment: SentimentModel[] = new Array<SentimentModel>();
   dataUpdatedSubscription: Subscription;
@@ -61,16 +61,23 @@ export class ViewSentimentHistoryComponent implements OnInit, ApiResponseCallbac
   endDate:any;
   todayDate = new Date();
   datee:any;
+  yearBeforeDate;
   dates:any
   finalDate: any;
   ngOnInit(): void { 
+    init(this)
+    this.datee= formatMaxMinDate(this.todayDate)
+    this.yearBeforeDate = formatMaxMinDate(new Date(new Date().setFullYear(new Date().getFullYear() - 1)));
+    console.log(this.yearBeforeDate);
+    this.lastDate = this.datee;
     this.myForm = new FormGroup({
       name: new FormControl(''),
       email: new FormControl(''),
       message: new FormControl('')
     });
-init(this)
-this.datee= formatMaxMinDate(this.todayDate)
+this.myForm.controls.email.setValue(this.yearBeforeDate);
+this.myForm.controls.message.setValue(this.lastDate);
+calculation(this.myForm.controls.email.value,this.myForm.controls.message.value)
 
   }
 
@@ -81,6 +88,7 @@ this.datee= formatMaxMinDate(this.todayDate)
   onSubmit(form: FormGroup) {
     this.startDate = form.value.email
     this.endDate = form.value.message
+
 
     console.log(this.startDate,this.endDate)
   
@@ -110,6 +118,55 @@ this.datee= formatMaxMinDate(this.todayDate)
 
 }
 
+function calculation(startDate,endDate)
+{
+ var start = new Date(startDate);
+ var end = new Date(endDate);
+// var dataPoints = [];
+
+// var loop = new Date(start);
+// while(loop <= end){
+//    alert(loop);           
+
+//    var newDate = loop.setDate((loop.getMonth())+1);
+//    loop = new Date(newDate);
+   
+//    dataPoints.push(loop);
+//    alert(loop)
+// }
+// console.log(dataPoints)
+var dataPoints = [];
+var f =0
+while(start < end){
+  var month = start.getMonth();
+
+  if(f!=0)
+  var mm1 = month + 1;
+  else
+  var mm1 = month 
+  var yyyy = start.getFullYear();
+  if(mm1 >= 12)
+  {
+  mm1 = 0;
+  var yyyy = start.getFullYear() + 1;
+  }
+    var mm = ((mm1+1)>=10)?(mm1 +1 ):'0'+(mm1+1);
+    var dd = ((start.getDate())>=10)? (start.getDate()) : '0' + (start.getDate());
+    
+    var date = yyyy + '-' + mm + '-' + dd; //yyyy-mm-dd
+
+   console.log(date)
+
+    start = new Date(date); //date increase by 1
+    dataPoints.push({
+      x: new Date(date)
+    });
+  f++;
+
+}
+console.log(dataPoints)
+return dataPoints;
+}
 function formatDate(date) {
   var d = new Date(date),
       month = '' + (d.getMonth() + 1),
@@ -148,6 +205,13 @@ function formatSelectedDate(context:ViewSentimentHistoryComponent,date)
     
     var finalDate = year + '-' + month + '-' + day;
     context.finalDate = finalDate;
+    context.lastDate = context.finalDate
+context.myForm.controls.message.setValue(context.lastDate);
+
+console.log(context.myForm.controls.message.value)
+console.log(context.myForm.controls.email.value)
+
+
 }
 
 function fillData(context:ViewSentimentHistoryComponent)
@@ -160,7 +224,7 @@ function fillData(context:ViewSentimentHistoryComponent)
     },
     axisX:{
       
-      interval: 1,
+      interval: 3,
       intervalType: "month",
       valueFormatString: "MMM YY"
     },
@@ -189,11 +253,13 @@ function fillData(context:ViewSentimentHistoryComponent)
 function type1DataPoints(context:ViewSentimentHistoryComponent)
 {
   var dataPoints = [];
+  dataPoints = calculation(context.myForm.value.email,context.myForm.value.message)
   context.agentActiveSentiment.forEach((element) => {
     if (element.objectiveID === context.sentimentModel.objectiveID)
     {
       if(context.myForm.value.email != "" && context.myForm.value.message != "" )
       {
+        
         const d = new Date(element.createDate);
         if(d.getTime() <= new Date(context.myForm.value.message).getTime() && d.getTime() >= new Date(context.myForm.value.email).getTime())
         {

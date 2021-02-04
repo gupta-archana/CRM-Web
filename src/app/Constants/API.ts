@@ -146,7 +146,7 @@ export class API {
   }
 
   getViewSentimentHistoryUrl(app_mode: string, stat: string, entity: any, entityId: any, type: string, pageNum: any) {
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userObjectivesGet&entity=" + entity + "&entityID=" + entityId + "&stat=" + stat + "&type=" + type + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows + "&OtherApp=yes&NeedInteractions=yes";
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userObjectivesGet&entity=" + entity + "&entityID=" + entityId + "&stat=" + stat + "&type=" + type + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows + "&OtherApp=yes&NeedInteractions=no";
   }
 
   getPersonAffiliationsUrl(app_mode: string, entityId: string, pageNum: number) {

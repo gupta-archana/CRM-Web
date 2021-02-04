@@ -20,18 +20,18 @@
   <div class="container app-bg2 bottom-wrapper-for-back cell-bg">
     <p>Objective: &nbsp; {{sentimentModel.objective}}</p>
   </div>
-  <div class=" container app-bg2 bottom-wrapper-for-back cell-bg">
+  <div class=" container cell-bg">
     <div class="row">
     <p>Sentiment of : &nbsp; {{sentimentModel.personName? sentimentModel.personName:"No Name Found"}}</p>
     
     <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
 
     <div class="col-xs-5">
-    <input type="date" id="dt" formControlName="email" class="form-control" max={{this.datee}} (change)="handler($event);" style="width: 110%;">
+    <input type="date" id="dt" formControlName="email" class="form-control"  max = {{yearBeforeDate}}  (change)="handler($event);" style="width: 118%;">
     </div>
 
     <div class="col-xs-5">
-      <input type="date" id="dt" formControlName="message" class="form-control" min={{this.dates}} max={{this.finalDate}} style="width: 110%;">
+      <input type="date" id="dt" formControlName="message" class="form-control"  min={{dates}} max={{finalDate}} style="width: 118%;" [readOnly]= "true">
     </div>
     <div class="col-xs-2">
       <button type="submit">Send</button>
