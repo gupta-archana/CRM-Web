@@ -22,6 +22,7 @@ export class AppSettingComponent extends BaseClass implements OnInit, ApiRespons
   configBasicModels: Array<ConfigBasicModel> = [];
   configNotificationModels: Array<ConfigNotificationModel> = [];
   configReorderModels: Array<ConfigReorderModel> = [];
+  itemsArray = [];
 
   homeScreenArray: Array<any> = configs.HOME_SCREEN_ARRAY;
   searchInArray: Array<string> = configs.SEARCH_IN_ARRAY;
@@ -70,10 +71,10 @@ export class AppSettingComponent extends BaseClass implements OnInit, ApiRespons
     
     this.apiHandler.resetApplicationSetting()
     this.dataService.onHideShowLoader(true);
-    reloadComponent(this);
-    
-    
-    
+    setTimeout(() => {
+      reloadComponent(this);    
+    }, 2000);
+ 
   }
   onSuccess(response: any) {
     let self = this;
@@ -84,6 +85,7 @@ export class AppSettingComponent extends BaseClass implements OnInit, ApiRespons
         
       });
       setBasicConfigToVariables(this);
+      //setReorderConfigToVariables(this)
 
     }
 
@@ -166,6 +168,30 @@ function setBasicConfigToVariables(context: AppSettingComponent) {
 
 }
 
+function setReorderConfigToVariables(context: AppSettingComponent)
+{
+  context.configReorderModels.forEach(element => {
+    if(element.configType === "HomeModules")
+    {
+      context.itemsArray = getRearrangeItemArray(context, element.configType);
+    this.myLocalStorage.setValue(context.constants.SIDE_NAV_ITEMS, JSON.stringify(context.itemsArray));
+    }
+    if(element.configType === "AgentModules")
+    {
+      context.itemsArray = getRearrangeItemArray(context, element.configType);
+    this.myLocalStorage.setValue(context.constants.AGENT_DETAIL_ITEMS, JSON.stringify(context.itemsArray));
+    }
+    if(element.configType === "PersonModules")
+    {
+      context.itemsArray = getRearrangeItemArray(context, element.configType);
+    this.myLocalStorage.setValue(context.constants.PERSON_DETAIL_ITEMS, JSON.stringify(getRearrangeItemArray(context, element.configType)));
+    }
+  });
+
+  console.log(this.myLocalStorage.getValue(context.constants.SIDE_NAV_ITEMS))
+  console.log(this.myLocalStorage.getValue(context.constants.AGENT_DETAIL_ITEMS))
+  console.log(this.myLocalStorage.getValue(context.constants.PERSON_DETAIL_ITEMS))
+}
 function setBasicConfigToLocalStorage(context: AppSettingComponent) {
   context.myLocalStorage.setValue(context.constants.SELECTED_SEARCH_IN, context.selectedSearchInPresenter);
   context.myLocalStorage.setValue(context.constants.NUMBER_OF_ROWS, context.selectedBatchSize);
