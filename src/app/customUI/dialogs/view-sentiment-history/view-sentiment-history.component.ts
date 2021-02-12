@@ -25,15 +25,15 @@ import { FormControl, FormGroup } from "@angular/forms";
   templateUrl: "./view-sentiment-history.component.html",
   styleUrls: ["./view-sentiment-history.component.css"],
 })
-export class ViewSentimentHistoryComponent implements OnInit, ApiResponseCallback {
+export class ViewSentimentHistoryComponent implements OnInit,ApiResponseCallback {
 
   
   constructor(
+    public dialogRef: MatDialogRef<ViewSentimentHistoryComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
     public apiHandler: ApiHandlerService,
     public constants: Constants,
     public dataService: DataServiceService,
-    private route: ActivatedRoute,
-    private router: Router,
     private commonFunctions : CommonFunctionsService
   ) {}
   lastDate:any = new Date();
@@ -64,7 +64,12 @@ export class ViewSentimentHistoryComponent implements OnInit, ApiResponseCallbac
   yearBeforeDate;
   dates:any
   finalDate: any;
-  ngOnInit(): void { 
+  objectiveModel: ObjectiveModel;
+
+
+  ngOnInit() { 
+    this.objectiveModel = JSON.parse(this.data.message);
+    this.sentimentModel = JSON.parse(this.data.sentiment);
     init(this)
     this.datee= formatMaxMinDate(this.todayDate)
     this.yearBeforeDate = formatMaxMinDate(new Date(new Date().setFullYear(new Date().getFullYear() - 1)));
@@ -75,16 +80,20 @@ export class ViewSentimentHistoryComponent implements OnInit, ApiResponseCallbac
       email: new FormControl(''),
       message: new FormControl('')
     });
-this.myForm.controls.email.setValue(this.yearBeforeDate);
-this.myForm.controls.message.setValue(this.lastDate);
-calculation(this.myForm.controls.email.value,this.myForm.controls.message.value)
+    this.myForm.controls.email.setValue(this.yearBeforeDate);
+    this.myForm.controls.message.setValue(this.lastDate);
+    calculation(this.myForm.controls.email.value,this.myForm.controls.message.value)
 
   }
 
   goBack() {
     this.commonFunctions.backPress();
   }
-  
+
+  onCancelClick() {
+    this.dialogRef.close(false);
+  }
+
   onSubmit(form: FormGroup) {
     this.startDate = form.value.email
     this.endDate = form.value.message
@@ -122,19 +131,7 @@ function calculation(startDate,endDate)
 {
  var start = new Date(startDate);
  var end = new Date(endDate);
-// var dataPoints = [];
 
-// var loop = new Date(start);
-// while(loop <= end){
-//    alert(loop);           
-
-//    var newDate = loop.setDate((loop.getMonth())+1);
-//    loop = new Date(newDate);
-   
-//    dataPoints.push(loop);
-//    alert(loop)
-// }
-// console.log(dataPoints)
 var dataPoints = [];
 var f =0
 while(start < end){
@@ -219,9 +216,9 @@ function fillData(context:ViewSentimentHistoryComponent)
   let chart = new CanvasJS.Chart("chartContainer", {
     animationEnabled: true,
     theme: "light2",
-    title:{
-      text: "Sentiment History"
-    },
+    // title:{
+    //   text: "Sentiment History"
+    // },
     axisX:{
       
       interval: 3,

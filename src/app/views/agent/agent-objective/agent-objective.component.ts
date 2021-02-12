@@ -195,20 +195,32 @@ export class AgentObjectiveComponent extends BaseClass implements OnInit, ApiRes
       // );
       this.agentActiveSentiment.objective = objectiveModel.description;
       this.dataService.onSentimentsDataShare(this.agentActiveSentiment)
-    this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_VIEW_SENTIMENT_HISTORY);
+      this.openDialogService.showViewSentimentHistoryDialog(
+        JSON.stringify(objectiveModel),
+        JSON.stringify(this.agentActiveSentiment)
+      );
+      //this.openDialogService.showSentimentHistoryDialog() 
+    //this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_VIEW_SENTIMENT_HISTORY);
       }
 
       if (objectiveModel.type === "o" || objectiveModel.type === "O")
       {
-      // this.openDialogService.showViewSentimentHistoryDialog(
+      this.openDialogService.showViewSentimentHistoryDialog(
+        JSON.stringify(objectiveModel),
+        JSON.stringify(this.ourActiveSentiment)
+      );
+      // this.openDialogService.showRecordSentimentsDialog(
       //   JSON.stringify(objectiveModel),
-      //   JSON.stringify(this.ourActiveSentiment)
+      //   JSON.stringify(this.agentActiveSentiment)
       // );
       this.dataService.onSentimentsDataShare(this.ourActiveSentiment)
-    this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_VIEW_SENTIMENT_HISTORY);
+      //this.openDialogService.showSentimentHistoryDialog() 
 
+    //this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_VIEW_SENTIMENT_HISTORY);
+      
       }
-  }
+  
+}
   openRecordSentiment(objectiveModel) {
     if (objectiveModel.type === "t" || objectiveModel.type === "T")
       this.openDialogService.showRecordSentimentsDialog(

@@ -128,4 +128,7 @@ export class OpenDialogsService {
   showAddNewEventDialog() {
     return this.dialog.open(AddNewEventComponent);
   }
+  showSentimentHistoryDialog() {
+    return this.dialog.open(ViewSentimentHistoryComponent);
+  }
 }

@@ -1,4 +1,58 @@
-<div class="container-fluid nospace">
+<mat-dialog-content class="mat-dialog-content">
+
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" (click) = "onCancelClick()">&times;</button>
+    <h4 class="modal-title">Sentiment History</h4>
+  </div>
+
+  <form role="form">
+    <div class="modal-body">
+
+      <div class="row">
+        <div class="col-md-12 col-xs-12">
+          <p>Objective: &nbsp; </p>
+          <span>{{sentimentModel.objective}}</span>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="clear paddingTop10"></div>
+      <div class="form-group">
+        <label class="paddingTop10" for="state">Sentiments of:</label>
+        <p>{{sentimentModel.personName? sentimentModel.personName:"No Name Found"}}</p>
+      </div>
+      <div class="clear paddingTop15"></div>
+
+
+      <div class="form-group">
+        <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+
+          <div class="col-xs-5">
+          <input type="date" id="dt" formControlName="email" class="form-control"  max = {{yearBeforeDate}}  (change)="handler($event);" style="width: 118%;">
+          </div>
+      
+          <div class="col-xs-5">
+            <input type="date" id="dt" formControlName="message" class="form-control"  min={{dates}} max={{finalDate}} style="width: 118%;" [readOnly]= "true">
+          </div>
+          <div class="col-xs-2">
+            <button type="submit">Send</button>
+      
+          </div>
+        </form>
+      </div>
+      <div class="clear paddingTop25"></div>
+      <div class="clear paddingTop10"></div>
+
+<div class="row">
+      <div id="chartContainer"  style="height: 370px; width: 100%; margin-left:auto;margin-right:auto;"></div>
+    </div>
+</div>
+      </form>
+</mat-dialog-content>
+
+
+<!-- <div class="container-fluid nospace">
   <div class="wrapper-back">
     <div class="container nav-bg">
       <div class="row">
@@ -6,10 +60,7 @@
         <div class="col-xs-7 text-center">
           <h1 class="t-agent">Objective</h1>
         </div>
-        <!-- <div class="col-xs-3 text-center tpad" *ngIf="!hideEditObjective"> -->
           <div class="col-xs-3 text-center tpad">
-          <!-- <a alt="" (click)="openEditObjectiveDialog()"><img src="../../../../images/add.svg" alt=""><br>
-            <span class="edit-detail">Edit Objective</span></a> -->
             <a><img src="../../../../images/add.svg" alt=""><br>Update</a>
         </div>
       </div>
@@ -43,5 +94,4 @@
     <div id="chartContainer" style="height: 370px; width: 100%; margin-left:auto;margin-right:auto;"></div>
   </div>
 
-</div>
-
+</div> -->
