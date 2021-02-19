@@ -20,6 +20,7 @@ export class EditObjectiveComponent implements OnInit, ApiResponseCallback {
 
   objectiveModel: ObjectiveModel;
   dueDate: any;
+  minDate = new Date();
   constructor(public dialogRef: MatDialogRef<EditObjectiveComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private apiHandler: ApiHandlerService,private commonFunctions : CommonFunctionsService) { }

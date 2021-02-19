@@ -19,8 +19,8 @@
         <br>
          <!-- <button type="submit" class="btn btn-default add-btn"><img src="images/calendar-icon.svg" alt=""></button> -->
         <mat-form-field>
-          <input matInput [matDatepicker] = "picker"  placeholder = "Choose a date" name="dueDate"  ngControl = "dueDate" [(ngModel)]="dueDate" readonly>
-          <mat-datepicker-toggle matSuffix [for] = "picker"></mat-datepicker-toggle>
+          <input matInput [matDatepicker] = "picker"  placeholder = "Choose a date" name="dueDate"  ngControl = "dueDate" [(ngModel)]="dueDate" [min]="minDate" readonly>
+          <mat-datepicker-toggle matSuffix [for] = "picker" ></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
        </mat-form-field>
         </div>

@@ -21,6 +21,7 @@ export class AddObjectivePopupComponent implements OnInit {
   entityModel: EntityModel;
   constants:Constants
   selectedTab:string
+  minDate = new Date();
   constructor(
     public dialogRef: MatDialogRef<AddObjectivePopupComponent>, 
     private injector: Injector,private myStorage:MyLocalStorageService,
