@@ -152,7 +152,7 @@ function createSentimentRequestJson(context: ObjectiveSentimentComponent) {
   context.sentimentModel.type = context.type;
   context.sentimentModel.objectiveID = context.objectiveModel.objectiveID;
   context.sentimentModel.sentimentID = "0";
-  context.sentimentModel.createDate = new Date().toString()
+  context.sentimentModel.createDate = new Date().toString();
   context.sentimentModel.uid = context.objectiveModel.UID;
   context.sentimentModel.personID = context.selectedPerson;
   if(context.personList.length > 0)
@@ -162,6 +162,7 @@ function createSentimentRequestJson(context: ObjectiveSentimentComponent) {
     context.sentimentModel.notes = context.note;
     context.sentimentModel.type = context.type;
     context.sentimentModel.personID = context.selectedPerson;
+  context.sentimentModel.createDate = new Date().toString();
     if(context.personList.length > 0)
     context.sentimentModel.personName = context.personList.find(e => e.personID == context.selectedPerson).dispname;
 

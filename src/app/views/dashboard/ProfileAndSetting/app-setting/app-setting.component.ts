@@ -35,6 +35,7 @@ export class AppSettingComponent extends BaseClass implements OnInit, ApiRespons
   selectedSearchIn: string = "";
   selectedSearchInPresenter: string = "";
   selectedNewsFeed: string = "";
+  f:any=1;
 
   appSettingForm: FormGroup;
 
@@ -71,10 +72,19 @@ export class AppSettingComponent extends BaseClass implements OnInit, ApiRespons
     
     this.apiHandler.resetApplicationSetting()
     this.dataService.onHideShowLoader(true);
+    
     setTimeout(() => {
       reloadComponent(this);    
+    }, 2600);
+
+    if(this.f==1)
+    {
+    setTimeout(() => {
+      document.getElementById("resetClick").click() 
     }, 2000);
- 
+    this.f = 2;
+  }
+  
   }
   onSuccess(response: any) {
     let self = this;
@@ -85,7 +95,7 @@ export class AppSettingComponent extends BaseClass implements OnInit, ApiRespons
         
       });
       setBasicConfigToVariables(this);
-      //setReorderConfigToVariables(this)
+      setReorderConfigToVariables(this)
 
     }
 
@@ -171,26 +181,27 @@ function setBasicConfigToVariables(context: AppSettingComponent) {
 function setReorderConfigToVariables(context: AppSettingComponent)
 {
   context.configReorderModels.forEach(element => {
+    console.log(element)
     if(element.configType === "HomeModules")
     {
       context.itemsArray = getRearrangeItemArray(context, element.configType);
-    this.myLocalStorage.setValue(context.constants.SIDE_NAV_ITEMS, JSON.stringify(context.itemsArray));
+    context.myLocalStorage.setValue(context.constants.SIDE_NAV_ITEMS, JSON.stringify(context.itemsArray));
     }
     if(element.configType === "AgentModules")
     {
       context.itemsArray = getRearrangeItemArray(context, element.configType);
-    this.myLocalStorage.setValue(context.constants.AGENT_DETAIL_ITEMS, JSON.stringify(context.itemsArray));
+    context.myLocalStorage.setValue(context.constants.AGENT_DETAIL_ITEMS, JSON.stringify(context.itemsArray));
     }
     if(element.configType === "PersonModules")
     {
       context.itemsArray = getRearrangeItemArray(context, element.configType);
-    this.myLocalStorage.setValue(context.constants.PERSON_DETAIL_ITEMS, JSON.stringify(getRearrangeItemArray(context, element.configType)));
+    context.myLocalStorage.setValue(context.constants.PERSON_DETAIL_ITEMS, JSON.stringify(context.itemsArray));
     }
   });
 
-  console.log(this.myLocalStorage.getValue(context.constants.SIDE_NAV_ITEMS))
-  console.log(this.myLocalStorage.getValue(context.constants.AGENT_DETAIL_ITEMS))
-  console.log(this.myLocalStorage.getValue(context.constants.PERSON_DETAIL_ITEMS))
+  console.log(context.myLocalStorage.getValue(context.constants.SIDE_NAV_ITEMS))
+  console.log(context.myLocalStorage.getValue(context.constants.AGENT_DETAIL_ITEMS))
+  console.log(context.myLocalStorage.getValue(context.constants.PERSON_DETAIL_ITEMS))
 }
 function setBasicConfigToLocalStorage(context: AppSettingComponent) {
   context.myLocalStorage.setValue(context.constants.SELECTED_SEARCH_IN, context.selectedSearchInPresenter);
