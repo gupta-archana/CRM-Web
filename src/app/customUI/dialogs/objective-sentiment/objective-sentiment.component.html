@@ -111,7 +111,7 @@
     </div>
     <div class="col-md-6">
       <button (click)="onCancelClick()">Cancel</button>
-      <button (click)="saveSentiment()">Save Changes</button>
+      <button (click)="saveSentiment()"  [ngClass] = "{'saveButton' : (type == 0 ||type == undefined)}">Save Changes</button>
 
     </div>
   </mat-dialog-actions>

@@ -38,24 +38,24 @@ export class ObjectiveSentimentComponent implements OnInit {
     this.objectiveModel = JSON.parse(this.data.message);
     this.sentimentModel = JSON.parse(this.data.sentiment);
 
-    if(this.sentimentModel)
-    {
-    this.note = this.sentimentModel.notes;
-    if(this.sentimentModel.type === "1")
-    document.getElementById("terrible").click()
-    else if(this.sentimentModel.type === "2")
-    document.getElementById("poor").click()
-    else if(this.sentimentModel.type === "3")
-    document.getElementById("alright").click()
-    else if(this.sentimentModel.type === "4")
-    document.getElementById("good").click()
-    else if(this.sentimentModel.type === "5")
-    document.getElementById("great").click()
-    }
+    // if(this.sentimentModel)
+    // {
+    // this.note = this.sentimentModel.notes;
+    // if(this.sentimentModel.type === "1")
+    // document.getElementById("terrible").click()
+    // else if(this.sentimentModel.type === "2")
+    // document.getElementById("poor").click()
+    // else if(this.sentimentModel.type === "3")
+    // document.getElementById("alright").click()
+    // else if(this.sentimentModel.type === "4")
+    // document.getElementById("good").click()
+    // else if(this.sentimentModel.type === "5")
+    // document.getElementById("great").click()
+    // }
 
-    else{
+    // else{
       this.sentimentModel = new SentimentModel();
-    }
+   // }
 
     console.log(this.note)
     let agentInfo = JSON.parse(
@@ -64,7 +64,7 @@ export class ObjectiveSentimentComponent implements OnInit {
     this.agentState = agentInfo.state;
     this.agentId = agentInfo.entityId;
     console.log(this.agentState, this.agentId);
-    this.getPersonDetails();
+    //this.getPersonDetails();
     console.log(this.personList)
   }
   onCancelClick() {
@@ -73,26 +73,26 @@ export class ObjectiveSentimentComponent implements OnInit {
 
   saveSentiment() {
     let self = this
-    if (this.sentimentModel.sentimentID)
-      this.apiHandler.modifySentiment(createSentimentRequestJson(this),
-      {
-        onSuccess(response: any) {
+    // if (this.sentimentModel.sentimentID)
+    //   this.apiHandler.modifySentiment(createSentimentRequestJson(this),
+    //   {
+    //     onSuccess(response: any) {
           
-          self.commonFunctions.showSnackbar(response)
-          self.dataService.shareSentimentData({data:'reload'})
-          self.dialogRef.close(true);
+    //       self.commonFunctions.showSnackbar(response)
+    //       self.dataService.shareSentimentData({data:'reload'})
+    //       self.dialogRef.close(true);
           
-        },
-        onError(errorCode: number, errorMsg: string) {
-          self.commonFunctions.showErrorSnackbar(errorMsg)
+    //     },
+    //     onError(errorCode: number, errorMsg: string) {
+    //       self.commonFunctions.showErrorSnackbar(errorMsg)
 
-          self.dialogRef.close(false);
+    //       self.dialogRef.close(false);
 
-        }
-      }
-      )
-    else
-    {
+    //     }
+    //   }
+    //   )
+    // else
+    
       this.apiHandler.createSentiment(createSentimentRequestJson(this) ,
       {
         onSuccess(response: any) {
@@ -110,7 +110,7 @@ export class ObjectiveSentimentComponent implements OnInit {
         }
       }
       )
-    }
+    
   }
   selectedSentiments(type) {
     this.type = type;
@@ -144,8 +144,8 @@ export class ObjectiveSentimentComponent implements OnInit {
 }
 
 function createSentimentRequestJson(context: ObjectiveSentimentComponent) {
-  if(context.sentimentModel.sentimentID == null)
-  {
+  // if(context.sentimentModel.sentimentID == null)
+  // {
   context.sentimentModel = new SentimentModel();
 
   context.sentimentModel.notes = context.note
@@ -155,18 +155,18 @@ function createSentimentRequestJson(context: ObjectiveSentimentComponent) {
   context.sentimentModel.createDate = new Date().toString();
   context.sentimentModel.uid = context.objectiveModel.UID;
   context.sentimentModel.personID = context.selectedPerson;
-  if(context.personList.length > 0)
-  context.sentimentModel.personName = context.personList.find(e => e.personID == context.selectedPerson).dispname;
-  }
-  else{
-    context.sentimentModel.notes = context.note;
-    context.sentimentModel.type = context.type;
-    context.sentimentModel.personID = context.selectedPerson;
-  context.sentimentModel.createDate = new Date().toString();
-    if(context.personList.length > 0)
-    context.sentimentModel.personName = context.personList.find(e => e.personID == context.selectedPerson).dispname;
+  // if(context.personList.length > 0)
+  // context.sentimentModel.personName = context.personList.find(e => e.personID == context.selectedPerson).dispname;
+ // }
+  // else{
+  //   context.sentimentModel.notes = context.note;
+  //   context.sentimentModel.type = context.type;
+  //   context.sentimentModel.personID = context.selectedPerson;
+  // context.sentimentModel.createDate = new Date().toString();
+  //   if(context.personList.length > 0)
+  //   context.sentimentModel.personName = context.personList.find(e => e.personID == context.selectedPerson).dispname;
 
-  }
+  // }
   let finalJson = {
     sentiment: "",
     attr: context.sentimentModel,

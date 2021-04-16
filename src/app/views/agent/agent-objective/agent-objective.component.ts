@@ -47,12 +47,14 @@ export class AgentObjectiveComponent extends BaseClass implements OnInit, ApiRes
   objectiveList: any = null;
   agentObjectiveList: any;
   loadMoreClicked:boolean = false;
+  disableAgentTab : boolean = false
 
   ngOnInit() {
     this.entityModel = JSON.parse(
     sessionStorage.getItem(this.constants.ENTITY_INFO)); 
     reloadObjectiveData(this);
     getAgentActiveStatuses(this);
+
   }
   onLoadMoreClick() {
     this.loadMoreClicked = true;
@@ -79,6 +81,7 @@ export class AgentObjectiveComponent extends BaseClass implements OnInit, ApiRes
 
   onTabClick(tabNumber: number) {
     this.selectedTab = tabNumber;
+    this.commonFunctions.showLoadedItemTagOnHeader(null,null);
     showHideEditObjective(this);
     if (tabNumber == 1) {
       if (!this.agentActiveObjective) {
@@ -242,7 +245,7 @@ function getAgentActiveStatuses(context: AgentObjectiveComponent) {
     context.entityModel.type,
     context.entityModel.entityId,
     context.OBJECTIVE_FOR_AGENT,
-    context.agentPageNum,
+    1,
     {
       onSuccess(response) {
         handleActiveAgentStatusesResponse(context, response);
@@ -319,7 +322,7 @@ function getOurActiveStatuses(context: AgentObjectiveComponent) {
     context.entityModel.type,
     context.entityModel.entityId,
     context.OBJECTIVE_FOR_OUR,
-    context.ourPageNum,
+    1,
     {
       onSuccess(response) {
         handleOurActiveStatusResponse(context, response);

@@ -129,3 +129,8 @@ label
 {
     font-weight: bold;
 }
+.saveButton
+{
+color: grey !important;
+pointer-events: none;
+}

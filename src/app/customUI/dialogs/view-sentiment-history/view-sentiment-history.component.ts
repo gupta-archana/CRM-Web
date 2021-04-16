@@ -258,10 +258,10 @@ function type1DataPoints(context:ViewSentimentHistoryComponent)
       {
         
         const d = new Date(element.createDate);
-        if(d.getTime() <= new Date(context.myForm.value.message).getTime() && d.getTime() >= new Date(context.myForm.value.email).getTime())
+        if(d.setHours(0,0,0,0) <= new Date(context.myForm.value.message).setHours(0,0,0,0) && d.getTime() >= new Date(context.myForm.value.email).getTime())
         {
           var str = formatDate(element.createDate)
-          var date = parseInt(str.substring(0,4))  + "," + parseInt(str.substring(8,10)) + "," + parseInt(str.substring(6,7));
+          var date = parseInt(str.substring(0,4))  + "," + parseInt(str.substring(8,10)) + "," + parseInt(str.substring(5,7));
         var inte = parseInt((element.type).toString())
         dataPoints.push({
           x: new Date(date), y: inte

@@ -143,13 +143,13 @@ function setData(context: FavoritesComponent) {
 }
 
 function getData(context: FavoritesComponent) {
-  let favArray = JSON.parse(sessionStorage.getItem(context.constants.SESSION_FAV_ARRAY));
-  if (favArray) {
-    context.favorites = favArray;
-    context.pageNumber = Number(sessionStorage.getItem(context.constants.FAVORITE_PAGE_NUMBER));
-    context.totalRows = Number(sessionStorage.getItem(context.constants.FAVORITE_TOTAL_ROWS));
-    context.renderUI();
-  }
+  // let favArray = JSON.parse(sessionStorage.getItem(context.constants.SESSION_FAV_ARRAY));
+  // if (favArray) {
+  //   context.favorites = favArray;
+  //   context.pageNumber = Number(sessionStorage.getItem(context.constants.FAVORITE_PAGE_NUMBER));
+  //   context.totalRows = Number(sessionStorage.getItem(context.constants.FAVORITE_TOTAL_ROWS));
+  //   context.renderUI();
+  // }
   
     makeServerRequest(context);
 

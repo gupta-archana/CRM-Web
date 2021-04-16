@@ -50,6 +50,11 @@ export class AddObjectivePopupComponent implements OnInit {
   onError(errorCode: number, errorMsg: string) {
     this.dialogRef.close(false);
   }
+
+  keyDownHandler(event) {
+    if ((this.description =='' || this.description== undefined) &&  event.which  === 32)
+        event.preventDefault();
+}
 }
 
 function createRequestJson(context: AddObjectivePopupComponent) {

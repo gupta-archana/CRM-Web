@@ -48,6 +48,10 @@ export class EditObjectiveComponent implements OnInit, ApiResponseCallback {
   onError(errorCode: number, errorMsg: string) {
     this.dialogRef.close(false);
   }
+  keyDownHandler(event) {
+    if ((this.objectiveModel.description =='' || this.objectiveModel.description== undefined) &&  event.which  === 32)
+        event.preventDefault();
+}
 }
 function createRequestJson(context: EditObjectiveComponent) {
   let finalJson = {

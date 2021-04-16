@@ -7,3 +7,8 @@
     width: 2em !important;
     color: orange !important;
 }
+.saveButton
+{
+color: grey !important;
+pointer-events: none;
+}
