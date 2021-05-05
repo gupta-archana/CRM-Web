@@ -81,14 +81,15 @@ export class ClaimsDetailComponent extends BaseClass implements OnInit, ApiRespo
 
   onSuccess(response: any) {
 
-    let downloadPdfModel: DownloadPdfModel[] = response.pdf;
+    let downloadPdfModel: DownloadPdfModel[] = response.File;
     let base64Pdf = "";
-    let filename: string;
+    let filename = "";
+    filename = response.FileName;
 
     downloadPdfModel.forEach(element => {
-      base64Pdf = base64Pdf + element.base64;
-      if (!filename) {
-        let splittedName = element.filename.split("\\");
+      base64Pdf = base64Pdf + element.Base64;
+      if (filename) {
+        let splittedName = filename.split('\\')
         filename = splittedName[splittedName.length - 1];
       }
     });

@@ -85,7 +85,7 @@ export class AuditDetailCompletedComponent extends BaseClass implements OnInit, 
     let filename: string;
 
     downloadPdfModel.forEach(element => {
-      base64Pdf = base64Pdf + element.base64;
+      base64Pdf = base64Pdf + element.Base64;
       if (!filename) {
         let splittedName = element.filename.split("\\");
         filename = splittedName[splittedName.length - 1];

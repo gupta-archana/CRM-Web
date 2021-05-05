@@ -1,5 +1,5 @@
 export class DownloadPdfModel {
     filename: string;
     order: string;
-    base64: string;
+    Base64: string;
 }
