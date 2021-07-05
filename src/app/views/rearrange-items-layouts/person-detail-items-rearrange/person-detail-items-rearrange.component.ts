@@ -12,13 +12,14 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 export class PersonDetailItemsRearrangeComponent extends BaseClass implements OnInit, ApiResponseCallback {
   personDetailItems = [];
   constructor(private injector: Injector) { super(injector) }
+  public disableSave = true;
 
   ngOnInit() {
     getAgentDetailItems(this);
   }
-  onSort(event: CdkDragDrop<any[]>) {
+  onSort(event: CdkDragDrop<any[]>, rearrangeItem: boolean) {
+    this.disableSave = rearrangeItem;
     moveItemInArray(this.personDetailItems, event.previousIndex, event.currentIndex);
-
   }
   goBack() {
     this.commonFunctions.backPress();

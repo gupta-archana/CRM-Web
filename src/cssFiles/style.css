@@ -461,7 +461,10 @@ ul.slide-menu li a {
   font-size: 15px;
   color: #000;
 }
-
+.noWrap
+{
+  white-space: normal !important;
+}
 ul.slide-menu li.top-agent a {
   background: url(../images/top-agents.svg) no-repeat left;
   padding-left: 45px;

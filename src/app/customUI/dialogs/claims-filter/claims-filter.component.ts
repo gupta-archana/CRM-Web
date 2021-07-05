@@ -9,16 +9,19 @@ import { BaseClass } from '../../../global/base-class';
 export class ClaimsFilterComponent extends BaseClass implements OnInit {
   isOpenChecked: boolean = false;
   isClosedChecked: boolean = false;
+  disableSave: boolean = true;
   constructor(private injector: Injector) { super(injector) }
 
   ngOnInit() {
   }
 
   openCheckChanged(event: any) {
+    this.disableSave = false;
     this.isOpenChecked = event.target.checked;
 
   }
   closedCheckChanged(event: any) {
+    this.disableSave = false;
     this.isClosedChecked = event.target.checked;
   }
   onApplyClick() {

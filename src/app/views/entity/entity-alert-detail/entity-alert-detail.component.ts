@@ -4,6 +4,7 @@ import { OpenAlertsModel } from '../../../models/Open-Alerts-model';
 import { Subscription } from 'rxjs';
 import { EntityModel } from '../../../models/entity-model';
 import { ApiResponseCallback } from '../../../Interfaces/ApiResponseCallback';
+import { Constants } from 'src/app/Constants/Constants';
 
 @Component({
   selector: 'app-entity-alert-detail',
@@ -17,6 +18,7 @@ export class EntityAlertDetailComponent extends BaseClass implements OnInit, OnD
   openAlertModel: OpenAlertsModel = new OpenAlertsModel();
   openAlertSubscription: Subscription;
   entityModel: EntityModel;
+  public constants: Constants
   ngOnInit() {
     this.commonFunctions.showLoadedItemTagOnHeader([], "", true);
     this.entityModel = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
@@ -28,10 +30,10 @@ export class EntityAlertDetailComponent extends BaseClass implements OnInit, OnD
   }
 
   onSuccess(response: any) {
-    this.commonFunctions.showSnackbar(response);
+    this.commonFunctions.showSnackbar("Alert" + " " + this.constants.UPDATe_SUCCESS);
   }
   onError(errorCode: number, errorMsg: string) {
-    this.commonFunctions.showSnackbar(errorMsg);
+    this.commonFunctions.showSnackbar("Alert" + " " + this.constants.UPDATED_FAIL);
   }
 
 

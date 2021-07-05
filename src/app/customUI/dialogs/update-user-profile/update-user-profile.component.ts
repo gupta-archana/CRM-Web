@@ -4,6 +4,7 @@ import { UserProfileModel } from '../../../models/user-profile-model';
 import { ApiResponseCallback } from '../../../Interfaces/ApiResponseCallback';
 import { BaseClass } from '../../../global/base-class';
 import { FormGroup, FormControl, Validators, ValidationErrors } from '@angular/forms';
+import { Constants } from 'src/app/Constants/Constants';
 
 @Component({
   selector: 'app-update-user-profile',
@@ -27,6 +28,7 @@ export class UpdateUserProfileComponent extends BaseClass implements OnInit, OnD
   selectedNumberOneType: string = "";
   selectedNumberTwoType: string = "";
   submitClicked: boolean = false;
+  public constants: Constants
 
   ngOnInit() {
     this.selectedNumberOneType = this.numberTypeArray[2];
@@ -56,12 +58,12 @@ export class UpdateUserProfileComponent extends BaseClass implements OnInit, OnD
   }
 
   onSuccess(response: any) {
-    this.commonFunctions.showSnackbar(response);
+    this.commonFunctions.showSnackbar("User Profile" + " " + this.constants.UPDATe_SUCCESS);
     this.dataService.onDataUpdated();
     this.closeUpdateUserProfileModal.nativeElement.click();
   }
   onError(errorCode: number, errorMsg: string) {
-    this.commonFunctions.showErrorSnackbar(errorMsg);
+    this.commonFunctions.showErrorSnackbar("User Profile" + " " + this.constants.UPDATED_FAIL);
   }
 
 

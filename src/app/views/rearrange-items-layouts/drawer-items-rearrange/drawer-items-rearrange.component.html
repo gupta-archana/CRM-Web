@@ -3,16 +3,17 @@
     <div class="row">
       <div class="col-xs-2 toppad"><img src="../../../../images/back-btn.svg" alt="" (click)="goBack()"></div>
       <div class="col-xs-7 text-center">
-        <h1 class="t-agent">Module Layout</h1>
+        <h1 class="t-agent noWrap">Module Layout</h1>
       </div>
-      <div class="col-xs-3 text-right tpad"><a class="opacity" (click)="Save()"><img
-            src="../../../../images/save-icon.svg" alt=""><br><span class="edit-detail">Save</span></a>
+      <div class="col-xs-3 text-right tpad" [ngClass]="{saveButton : disableSave == true}"><a class="opacity"
+          (click)="Save()"><img src="../../../../images/save-icon.svg" alt=""><br><span
+            class="edit-detail">Save</span></a>
       </div>
     </div>
   </div>
   <div class="container app-bg4">
     <div class="row">
-      <ul class="example-list" cdkDropList (cdkDropListDropped)="onSort($event)">
+      <ul class="example-list" cdkDropList (cdkDropListDropped)="onSort($event,false)">
         <li class="example-box" *ngFor="let item of sideNavArray" cdkDrag>
           <div class="col-xs-12 col-md-6 cell-bg">
             <div class="modules-layout">

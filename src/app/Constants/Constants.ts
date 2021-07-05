@@ -125,6 +125,27 @@ export class Constants {
   PASSWORD_SENT = "Password Sent";
   PASSWORD_SENT_ALERT_MSG = "Your Password has been sent to the registered email ID that you provided.";
 
+  //SUCCESS MESSAGES
+  UPDATe_SUCCESS = "has been updated successfully";
+  CREATE_SUCCESS = "has been created successfully";
+  DELETE_SUCCESS = "has been deleted successfully";
+
+
+  //FALIURE MESSAGES 
+  UPDATED_FAIL = "Update Failed";
+  CREATE_FAIL = "Creation Failed";
+  DELETED_FAIL = "Deletion Failed";
+
+  //LOGIN SCREEN MESSAGES
+
+  LOGIN_SUCCESS = "Logged in Successfully";
+  LOGOUT_SUCESS = "Logged out Successfully";
+
+  //FAVORITE MESSAGES
+  ADD_FAVORITE = "Marked as Favorite";
+  REMOVE_FAVORITE = "Removed as Favorite";
+  ACTION_FAILED = "Action failed"
+
   //Side Nav Drawer pages name
   TOP_AGENTS = "Top Agents";
   AGENTS_UNDER_PLAN = "Agents Under Plan";

@@ -10,7 +10,7 @@ export class API {
   AGENT_DETAIL_MENU = "../assets/jsons/agent_detail_menu.json";
   PERSON_DETAIL_MENU = "../assets/jsons/person_detail_menu.json";
   STATES_JSON_URL = "../assets/jsons/state.json";
-  private API_BASE_URL = "https://compasstest.alliantnational.com:8118/do/action/WService=";
+  private API_BASE_URL = "https://compass.alliantnational.com:8118/do/action/WService=";
   private numberOfRows: number;
   email: string = "";
   encryptedPassword: string = "";

@@ -4,6 +4,7 @@ import { BaseClass } from '../../../global/base-class';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { EntityContactModel } from '../../../models/entity-contact-model';
 import { ApiResponseCallback } from '../../../Interfaces/ApiResponseCallback';
+import { Constants } from 'src/app/Constants/Constants';
 
 @Component({
   selector: 'app-update-agent-profile',
@@ -20,6 +21,7 @@ export class UpdateAgentProfileComponent extends BaseClass implements OnInit, On
   entitiyContactModel: EntityContactModel = new EntityContactModel();
   states: Array<any> = [];
   submitClicked: boolean = false;
+  constants: Constants
   constructor(private injector: Injector) { super(injector) }
 
   ngOnInit() {
@@ -45,12 +47,12 @@ export class UpdateAgentProfileComponent extends BaseClass implements OnInit, On
   }
 
   onSuccess(response: any) {
-    this.commonFunctions.showSnackbar(response);
+    this.commonFunctions.showSnackbar("Agent Profile" + " " + this.constants.UPDATe_SUCCESS);
     this.dataService.onDataUpdated();
     this.closeEntityUpdateProfileModel.nativeElement.click();
   }
   onError(errorCode: number, errorMsg: string) {
-    this.commonFunctions.showErrorSnackbar(errorMsg);
+    this.commonFunctions.showErrorSnackbar("Agent Profile" + " " + this.constants.UPDATED_FAIL);
   }
   ngOnDestroy(): void {
     if (this.agentProfileEditSubscription && !this.agentProfileEditSubscription.closed) {
@@ -71,7 +73,7 @@ function addValidation(context: UpdateAgentProfileComponent) {
     phone2: new FormControl(""),
     state: new FormControl(""),
     email: new FormControl(""),
-    city : new FormControl("")
+    city: new FormControl("")
   })
 }
 

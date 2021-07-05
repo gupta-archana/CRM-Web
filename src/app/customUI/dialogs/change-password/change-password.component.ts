@@ -2,6 +2,7 @@ import { Component, OnInit, Injector, ViewChild, ElementRef } from '@angular/cor
 import { BaseClass } from '../../../global/base-class';
 import { PatternValidator } from '@angular/forms';
 import { ApiResponseCallback } from '../../../Interfaces/ApiResponseCallback';
+import { Constants } from 'src/app/Constants/Constants';
 
 @Component({
   selector: 'app-change-password',
@@ -25,7 +26,7 @@ export class ChangePasswordComponent extends BaseClass implements OnInit, ApiRes
   rePassword: string = "";
 
   errorMsg: string = "";
-
+  public constants: Constants
   ngOnInit() {
     this.currentPassword = this.myLocalStorage.getValue(this.constants.PASSWORD);
   }
@@ -52,11 +53,11 @@ export class ChangePasswordComponent extends BaseClass implements OnInit, ApiRes
   }
   onSuccess(response: any) {
     this.myLocalStorage.setValue(this.constants.PASSWORD, this.newPassword);
-    this.commonFunctions.showSnackbar(response)
+    this.commonFunctions.showSnackbar("Password" + " " + this.constants.UPDATe_SUCCESS)
     this.cancel.nativeElement.click();
   }
   onError(errorCode: number, errorMsg: string) {
-    this.commonFunctions.showErrorSnackbar(errorMsg)
+    this.commonFunctions.showErrorSnackbar("Password" + " " + this.constants.UPDATED_FAIL)
   }
 
 }

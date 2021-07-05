@@ -9,12 +9,14 @@ import { ApiResponseCallback } from '../../../Interfaces/ApiResponseCallback';
 })
 export class AgentDetailItemRearrangeComponent extends BaseClass implements OnInit, ApiResponseCallback {
   agentDetailItems = [];
+  public disableSave = true;
   constructor(private injector: Injector) { super(injector) }
 
   ngOnInit() {
     getAgentDetailItems(this);
   }
-  onSort(event: CdkDragDrop<any[]>) {
+  onSort(event: CdkDragDrop<any[]>, rearrangeItem: boolean) {
+    this.disableSave = rearrangeItem;
     moveItemInArray(this.agentDetailItems, event.previousIndex, event.currentIndex);
 
   }

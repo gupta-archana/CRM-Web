@@ -23,12 +23,12 @@ import { CommonApisService } from '../../utils/common-apis.service';
 export class LoginComponent implements OnInit, ApiResponseCallback, CanComponentDeactivate {
 
   loginForm: FormGroup;
-  tooltipText:string = "Show Password";
+  tooltipText: string = "Show Password";
   username: string = "";
   password: string = "";
   isChecked: boolean = false;
-  show:boolean
-  showButton : boolean
+  show: boolean
+  showButton: boolean
   constructor(
     private commonFunctions: CommonFunctionsService,
     private authservice: AuthService,
@@ -41,8 +41,8 @@ export class LoginComponent implements OnInit, ApiResponseCallback, CanComponent
     private commonApis: CommonApisService,
     private routingState: RoutingStateService) {
 
-      this.show = false;
-      this.showButton = false;
+    this.show = false;
+    this.showButton = false;
 
   }
 
@@ -57,9 +57,8 @@ export class LoginComponent implements OnInit, ApiResponseCallback, CanComponent
 
   }
 
-  showHidePasswordButton()
-  {
-    if (this.loginForm.get('password').dirty ) {
+  showHidePasswordButton() {
+    if (this.loginForm.get('password').dirty) {
       this.showButton = true;
     }
   }
@@ -86,17 +85,15 @@ export class LoginComponent implements OnInit, ApiResponseCallback, CanComponent
 
   }
 
-showHidePassword(showPassword:boolean)
-{
-  if(showPassword)
-  {
-  this.show = true;
-  this.tooltipText ="Show Password"
+  showHidePassword(showPassword: boolean) {
+    if (showPassword) {
+      this.show = true;
+      this.tooltipText = "Show Password"
+    }
+    else
+      this.show = false;
+
   }
-  else
-  this.show = false;
-  
-}
 
   onSuccess(response: any) {
     this.dataService.onHideShowLoader(false);
@@ -105,6 +102,8 @@ showHidePassword(showPassword:boolean)
     this.commonApis.getAppConfig().subscribe(success => {
       if (success == 1) {
         this.authservice.navigateToNextAfterLogin();
+        this.commonFunctions.showSnackbar(this.constants.LOGIN_SUCCESS);
+
       }
     });
 

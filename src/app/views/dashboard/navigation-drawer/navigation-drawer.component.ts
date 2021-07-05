@@ -91,13 +91,15 @@ export class NavigationDrawerComponent
       if (callback) {
         sessionStorage.clear();
         if (this.myLocalStorage.getValue(this.constants.REMEMBER_ME) != "1") {
-        this.myLocalStorage.clearAll();
+          this.myLocalStorage.clearAll();
         }
-        else 
-        {this.myLocalStorage.clearValue(this.constants.LOGGED_IN);
+        else {
+          this.myLocalStorage.clearValue(this.constants.LOGGED_IN);
         }
 
         this.commonFunctions.navigateWithReplaceUrl(this.paths.PATH_LOGIN);
+        this.commonFunctions.showSnackbar(this.constants.LOGOUT_SUCESS)
+
       }
     });
   }
@@ -237,7 +239,7 @@ function changeHeaderTitle(path: string, context: NavigationDrawerComponent) {
 
         case context.paths.PATH_RECENT_RPOFILES:
           context.headerTitle = context.constants.RECENT_PROFILE;
-         // context.showRefreshButton = true;
+          // context.showRefreshButton = true;
           break;
 
         case context.paths.PATH_FOLLOWING:
@@ -275,13 +277,13 @@ function reasetHeaderButtons(context: NavigationDrawerComponent) {
 function printButtonStatus(context: NavigationDrawerComponent, from: any) {
   context.commonFunctions.printLog(
     "from " +
-      from +
-      " refresh button " +
-      context.showRefreshButton +
-      ", Filter Button " +
-      context.showFilterButton +
-      " ,recent profile " +
-      context.showRecentProfileButton
+    from +
+    " refresh button " +
+    context.showRefreshButton +
+    ", Filter Button " +
+    context.showFilterButton +
+    " ,recent profile " +
+    context.showRecentProfileButton
   );
 }
 

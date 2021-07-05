@@ -48,7 +48,8 @@
         </div>
         <div class="modal-footer">
           <a href="#" data-dismiss="modal" alt="Cancel"><span>Cancel</span></a>
-          <a href="#" data-dismiss="modal" alt="Save Changes" (click)="onApplyClick()">APPLY</a>
+          <a href="#" data-dismiss="modal" alt="Save Changes" [ngClass]="{saveButton : disableSave === true}"
+            (click)="onApplyClick()">APPLY</a>
         </div>
       </form>
     </div>

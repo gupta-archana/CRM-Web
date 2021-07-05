@@ -32,8 +32,8 @@ export class AllNotesComponent extends BaseClass implements OnInit, OnDestroy, A
   errorMsg: string = "";
   entityModel: EntityModel;
   noteDataFromServer: NotesModel[]
-  categoryAndSummaryVisibility : boolean = false;
-  
+  categoryAndSummaryVisibility: boolean = false;
+
   ngOnInit() {
     this.uid = this.commonFunctions.getLoginCredentials().email;
     this.entityModel = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
@@ -65,36 +65,37 @@ export class AllNotesComponent extends BaseClass implements OnInit, OnDestroy, A
     this.apiHandler.deleteNote(item.agentID, {
       onSuccess(response: any) {
         self.onDeleteSuccess(i);
+        this.commonFunctions.showSnackbar("Note" + " " + self.constants.DELETE_SUCCESS)
       }, onError(errorCode: number, errorMsg: string) {
-        this.commonFunctions.showErrorSnackbar(errorMsg)
+        this.commonFunctions.showErrorSnackbar("Note" + " " + self.constants.DELETED_FAIL)
       }
     })
   }
 
   onSuccess(response: any) {
-    if(response.name === "AgentNote")
-    this.noteDataFromServer = response.AgentNote;
+    if (response.name === "AgentNote")
+      this.noteDataFromServer = response.AgentNote;
 
-    else if(response.name === "sysNote")
-    this.noteDataFromServer = response.sysNote
+    else if (response.name === "sysNote")
+      this.noteDataFromServer = response.sysNote
 
     this.noteDataFromServer.forEach(element => {
-      if(element.agentID && element.notes)
-      this.categoryAndSummaryVisibility = true
+      if (element.agentID && element.notes)
+        this.categoryAndSummaryVisibility = true
 
       if (element.notes) {
-        if(element.category ==='1')
-        element.category = "General"
-        else if(element.category ==='2')
-        element.category = "Events"
-        else if(element.category ==='3')
-        element.category = "Opportunities"
-        else if(element.category ==='4')
-        element.category = "Issues"
+        if (element.category === '1')
+          element.category = "General"
+        else if (element.category === '2')
+          element.category = "Events"
+        else if (element.category === '3')
+          element.category = "Opportunities"
+        else if (element.category === '4')
+          element.category = "Issues"
         else
-        element.category = ""
- 
-       // element.dateCreated = element.dateCreated.split(" ")[0];
+          element.category = ""
+
+        // element.dateCreated = element.dateCreated.split(" ")[0];
         this.agentNotes.push(element);
       } else {
         this.totalRows = element.rowNum;

@@ -4,6 +4,7 @@ import { BaseClass } from '../../../global/base-class';
 import { ApiResponseCallback } from '../../../Interfaces/ApiResponseCallback';
 import { UtilService } from '../../../utils/util.service';
 import { EntityModel } from '../../../models/entity-model';
+import { Constants } from 'src/app/Constants/Constants';
 
 @Component({
   selector: 'app-add-note',
@@ -17,20 +18,21 @@ export class AddNoteComponent extends BaseClass implements OnInit, ApiResponseCa
   @ViewChild("closeAddNote")
   closeAddNote: ElementRef;
   note: string = "";
-  summary : string = "";
+  summary: string = "";
   entityInfo: EntityModel;
   shareEntityIdAndTypeSubscription: Subscription = null;
   disableOnEdit: boolean = false;
-  notesCategory:any
-category = [
-  { id : 1,value: "General"},
-  { id : 2,value: "Events"},
-  { id : 3,value: "Opportunities"},
-  { id : 4,value: "Issues"},
-]
+  notesCategory: any;
+  public constants: Constants;
+  category = [
+    { id: 1, value: "General" },
+    { id: 2, value: "Events" },
+    { id: 3, value: "Opportunities" },
+    { id: 4, value: "Issues" },
+  ]
   ngOnInit() {
     getEntityTypeAndId(this);
-    this.summary =null
+    this.summary = null
     this.notesCategory = null
     this.note = null
   }
@@ -45,16 +47,16 @@ category = [
   onSuccess(response: any) {
     this.note = "";
     this.cdr.markForCheck()
-    this.commonFunctions.showSnackbar(response);
+    this.commonFunctions.showSnackbar("Note" + " " + this.constants.CREATE_SUCCESS);
     this.dataService.onDataUpdated();
     this.closeAddNote.nativeElement.click();
-    this.summary =""
+    this.summary = ""
     this.notesCategory = ""
     this.note = ""
   }
   onError(errorCode: number, errorMsg: string) {
 
-    this.commonFunctions.showErrorSnackbar(errorMsg);
+    this.commonFunctions.showErrorSnackbar(this.constants.CREATE_FAIL);
   }
 }
 function getEntityTypeAndId(context: AddNoteComponent) {
@@ -70,7 +72,7 @@ function getRequest(context: AddNoteComponent) {
     "notes": context.note,
     "subject": context.summary,
     "notesCategory": context.notesCategory,
-    "sysNoteID" : 0
+    "sysNoteID": 0
   }
 
   let finalJson = {

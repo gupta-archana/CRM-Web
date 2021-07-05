@@ -25,14 +25,15 @@ export class ObjectiveSentimentComponent implements OnInit {
   selectedPerson: string;
   type: any;
   note: string = "";
-  changeColor: boolean
+  changeColor: boolean;
   constructor(
     public dialogRef: MatDialogRef<ObjectiveSentimentComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     public apiHandler: ApiHandlerService,
     private myLocalStorage: MyLocalStorageService,
-    private constants: Constants, private commonFunctions : CommonFunctionsService,public dataService : DataServiceService
-  ) {}
+    public constants: Constants,
+    private commonFunctions: CommonFunctionsService, public dataService: DataServiceService,
+  ) { }
 
   ngOnInit() {
     this.objectiveModel = JSON.parse(this.data.message);
@@ -54,8 +55,8 @@ export class ObjectiveSentimentComponent implements OnInit {
     // }
 
     // else{
-      this.sentimentModel = new SentimentModel();
-   // }
+    this.sentimentModel = new SentimentModel();
+    // }
 
     console.log(this.note)
     let agentInfo = JSON.parse(
@@ -77,11 +78,11 @@ export class ObjectiveSentimentComponent implements OnInit {
     //   this.apiHandler.modifySentiment(createSentimentRequestJson(this),
     //   {
     //     onSuccess(response: any) {
-          
+
     //       self.commonFunctions.showSnackbar(response)
     //       self.dataService.shareSentimentData({data:'reload'})
     //       self.dialogRef.close(true);
-          
+
     //     },
     //     onError(errorCode: number, errorMsg: string) {
     //       self.commonFunctions.showErrorSnackbar(errorMsg)
@@ -92,25 +93,25 @@ export class ObjectiveSentimentComponent implements OnInit {
     //   }
     //   )
     // else
-    
-      this.apiHandler.createSentiment(createSentimentRequestJson(this) ,
+
+    this.apiHandler.createSentiment(createSentimentRequestJson(this),
       {
         onSuccess(response: any) {
-          
-          self.commonFunctions.showSnackbar(response)
-          self.dataService.shareSentimentData({data:'reload'})
+
+          self.commonFunctions.showSnackbar("Sentiment" + " " + self.constants.UPDATe_SUCCESS)
+          self.dataService.shareSentimentData({ data: 'reload' })
           self.dialogRef.close(true);
-          
+
         },
         onError(errorCode: number, errorMsg: string) {
-          self.commonFunctions.showErrorSnackbar(errorMsg)
+          self.commonFunctions.showErrorSnackbar("Sentiment" + " " + self.constants.UPDATED_FAIL)
 
           self.dialogRef.close(false);
 
         }
       }
-      )
-    
+    )
+
   }
   selectedSentiments(type) {
     this.type = type;
@@ -124,18 +125,18 @@ export class ObjectiveSentimentComponent implements OnInit {
   onSuccess(response: any) {
     let self = this;
     let data: AssociatesModel[] = response.affiliation;
-        data.forEach((element) => {
-          
-            if (element.personID) {
-              self.personList.push(element);
-           }
-        
+    data.forEach((element) => {
 
-        });
+      if (element.personID) {
+        self.personList.push(element);
+      }
+
+
+    });
     console.log(this.personList);
 
-    if(this.sentimentModel)
-    this.selectedPerson = this.sentimentModel.personID;
+    if (this.sentimentModel)
+      this.selectedPerson = this.sentimentModel.personID;
     // add a snackbaar
   }
   onError(errorCode: number, errorMsg: string) {
@@ -157,7 +158,7 @@ function createSentimentRequestJson(context: ObjectiveSentimentComponent) {
   context.sentimentModel.personID = context.selectedPerson;
   // if(context.personList.length > 0)
   // context.sentimentModel.personName = context.personList.find(e => e.personID == context.selectedPerson).dispname;
- // }
+  // }
   // else{
   //   context.sentimentModel.notes = context.note;
   //   context.sentimentModel.type = context.type;

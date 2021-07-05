@@ -5,6 +5,7 @@ import { EntityModel } from 'src/app/models/entity-model';
 import { Subscription } from 'rxjs';
 import { NotesModel } from 'src/app/models/notes-model';
 import { data } from 'jquery';
+import { Constants } from 'src/app/Constants/Constants';
 
 @Component({
   selector: 'app-update-note',
@@ -21,16 +22,17 @@ export class UpdateNoteComponent extends BaseClass implements OnInit, ApiRespons
   note: string = "";
   noteModel: NotesModel = new NotesModel();
   noteModelSubscription: Subscription = null;
-  notesCategory:any
-  summary : string = "";
+  notesCategory: any
+  summary: string = "";
   entityInfo: EntityModel;
+  constants: Constants
   category = [
-    { id : 1,value: "General"},
-    { id : 2,value: "Events"},
-    { id : 3,value: "Opportunities"},
-    { id : 4,value: "Issues"},
+    { id: 1, value: "General" },
+    { id: 2, value: "Events" },
+    { id: 3, value: "Opportunities" },
+    { id: 4, value: "Issues" },
   ]
-  seq:any
+  seq: any
   ngOnInit() {
     getEntityTypeAndId(this);
     getNoteModel(this);
@@ -46,13 +48,13 @@ export class UpdateNoteComponent extends BaseClass implements OnInit, ApiRespons
 
   onSuccess(response: any) {
     this.cdr.markForCheck()
-    this.commonFunctions.showSnackbar(response);
+    this.commonFunctions.showSnackbar("Note" + " " + this.constants.UPDATe_SUCCESS);
     //this.dataService.onShareUpdatedNote(this.note);
     this.dataService.onDataUpdated();
     this.closeUpdateNote.nativeElement.click();
   }
   onError(errorCode: number, errorMsg: string) {
-    this.commonFunctions.showErrorSnackbar(errorMsg);
+    this.commonFunctions.showErrorSnackbar("Note" + " " + this.constants.UPDATED_FAIL);
   }
 
   ngOnDestroy(): void {
@@ -69,7 +71,7 @@ function getNoteModel(context: UpdateNoteComponent) {
   context.noteModelSubscription = context.dataService.shareDataObservable.subscribe((data: NotesModel) => {
     context.noteModel = data;
     context.seq = data.seq
-    
+
     // if(context.noteModel.category ==='General')
     // context.notesCategory= 1
     // else if(context.noteModel .category ==='Events')
@@ -78,7 +80,7 @@ function getNoteModel(context: UpdateNoteComponent) {
     // context.notesCategory = 3
     // else if(context.noteModel .category ==='Issues')
     // context.notesCategory = 4
-   
+
     context.notesCategory = context.noteModel.category
     context.note = context.noteModel.notes;
     context.summary = context.noteModel.subject
@@ -89,41 +91,39 @@ function getNoteModel(context: UpdateNoteComponent) {
 
 function getRequest(context: UpdateNoteComponent) {
 
-if(context.entityInfo.type=="A")
-{
-  let requestJson = {
-    "UID": context.commonFunctions.getLoginCredentials().email,
-    "agentID": context.noteModel.agentID,
-    "notes": context.note,
-    "subject": context.summary,
-    "seq" : context.seq,
-    "category": context.notesCategory,
-    "entity": context.entityInfo.type,
-  }
-  let finalJson = {
-    "SysNote": "",
-    "attr": requestJson
-  }
-  return finalJson;
+  if (context.entityInfo.type == "A") {
+    let requestJson = {
+      "UID": context.commonFunctions.getLoginCredentials().email,
+      "agentID": context.noteModel.agentID,
+      "notes": context.note,
+      "subject": context.summary,
+      "seq": context.seq,
+      "category": context.notesCategory,
+      "entity": context.entityInfo.type,
+    }
+    let finalJson = {
+      "SysNote": "",
+      "attr": requestJson
+    }
+    return finalJson;
 
-}
- if(context.entityInfo.type=="P")
- {
-  let requestJson = {
-    "uid": context.commonFunctions.getLoginCredentials().email,
-    "entity": context.entityInfo.type,
-    "entityID": context.entityInfo.entityId,
-    "notes": context.note,
-    "subject": context.summary,
-    "seq" : context.seq,
-    "category": context.notesCategory,
-    "sysNoteID": context.noteModel.sysNoteID
   }
-  let finalJson = {
-    "SysNote": "",
-    "attr": requestJson
+  if (context.entityInfo.type == "P") {
+    let requestJson = {
+      "uid": context.commonFunctions.getLoginCredentials().email,
+      "entity": context.entityInfo.type,
+      "entityID": context.entityInfo.entityId,
+      "notes": context.note,
+      "subject": context.summary,
+      "seq": context.seq,
+      "category": context.notesCategory,
+      "sysNoteID": context.noteModel.sysNoteID
+    }
+    let finalJson = {
+      "SysNote": "",
+      "attr": requestJson
+    }
+    return finalJson;
   }
-  return finalJson;
- }
 }
 

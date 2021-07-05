@@ -12,14 +12,18 @@ export class DrawerItemsRearrangeComponent extends BaseClass implements OnInit, 
 
   sideNavArray = [];
   constructor(private injector: Injector) { super(injector) }
+  public disableSave = true;
+
 
   ngOnInit() {
     getSideNavData(this);
   }
-  onSort(event: CdkDragDrop<any[]>) {
-    moveItemInArray(this.sideNavArray, event.previousIndex, event.currentIndex);
 
+  onSort(event: CdkDragDrop<any[]>, rearrangeItem: boolean) {
+    this.disableSave = rearrangeItem;
+    moveItemInArray(this.sideNavArray, event.previousIndex, event.currentIndex);
   }
+
   goBack() {
     this.commonFunctions.backPress();
   }

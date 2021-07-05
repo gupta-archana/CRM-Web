@@ -23,13 +23,13 @@ export class EditObjectiveComponent implements OnInit, ApiResponseCallback {
   minDate = new Date();
   constructor(public dialogRef: MatDialogRef<EditObjectiveComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private apiHandler: ApiHandlerService,private commonFunctions : CommonFunctionsService) { }
+    private apiHandler: ApiHandlerService, private commonFunctions: CommonFunctionsService, private constants: Constants) { }
 
   ngOnInit() {
     this.objectiveModel = JSON.parse(this.data.message);
     console.log(this.objectiveModel)
-   this.dueDate = new Date(this.objectiveModel.dueDate).toISOString();
-   console.log(this.dueDate)
+    this.dueDate = new Date(this.objectiveModel.dueDate).toISOString();
+    console.log(this.dueDate)
   }
   onSaveChangesClick() {
     this.objectiveModel.dueDate = this.dueDate;
@@ -40,18 +40,19 @@ export class EditObjectiveComponent implements OnInit, ApiResponseCallback {
   }
   onSuccess(response: any) {
     let self = this
-    self.commonFunctions.showSnackbar(response)
+    self.commonFunctions.showSnackbar("Objectiive" + " " + self.constants.UPDATe_SUCCESS)
     this.dialogRef.close(true);
     // add a snackbaar
 
   }
   onError(errorCode: number, errorMsg: string) {
+    this.commonFunctions.showErrorSnackbar("Objective" + " " + this.constants.UPDATED_FAIL)
     this.dialogRef.close(false);
   }
   keyDownHandler(event) {
-    if ((this.objectiveModel.description =='' || this.objectiveModel.description== undefined) &&  event.which  === 32)
-        event.preventDefault();
-}
+    if ((this.objectiveModel.description == '' || this.objectiveModel.description == undefined) && event.which === 32)
+      event.preventDefault();
+  }
 }
 function createRequestJson(context: EditObjectiveComponent) {
   let finalJson = {

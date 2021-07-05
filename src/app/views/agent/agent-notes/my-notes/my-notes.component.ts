@@ -28,8 +28,8 @@ export class MyNotesComponent extends BaseClass implements OnInit, OnDestroy {
   selectedNoteIndex: number = -1;
   hideNoDataDiv: boolean = false;
   errorMsg: string = "";
-  noteDataFromServer : NotesModel[]
-  categoryAndSummaryVisibility : boolean = false;
+  noteDataFromServer: NotesModel[]
+  categoryAndSummaryVisibility: boolean = false;
 
 
   ngOnInit() {
@@ -50,42 +50,43 @@ export class MyNotesComponent extends BaseClass implements OnInit, OnDestroy {
   }
   onDeleteClick(item: NotesModel, i: number) {
     let self = this;
-    this.apiHandler.deleteNote(item.agentID, {
+    this.apiHandler.deleteNote(item.sysNoteID, {
       onSuccess(response: any) {
         self.onDeleteSuccess(i);
+        self.commonFunctions.showSnackbar("Note" + " " + self.constants.DELETE_SUCCESS)
       }, onError(errorCode: number, errorMsg: string) {
-        this.commonFunctions.showErrorSnackbar(errorMsg)
+        self.commonFunctions.showErrorSnackbar(self.constants.DELETED_FAIL)
       }
     })
   }
 
   onSuccess(response: any) {
-    if(response.name === "AgentNote")
-    this.noteDataFromServer = response.AgentNote;
+    if (response.name === "AgentNote")
+      this.noteDataFromServer = response.AgentNote;
 
-    else if(response.name === "sysNote")
-    this.noteDataFromServer = response.sysNote
+    else if (response.name === "sysNote")
+      this.noteDataFromServer = response.sysNote
     this.noteDataFromServer.forEach(element => {
 
-      if(element.agentID && element.notes)
-      this.categoryAndSummaryVisibility = true
+      if (element.agentID && element.notes)
+        this.categoryAndSummaryVisibility = true
 
-      if (element.notes && element.uid?element.uid:element.UID === this.uid) {
-       // element.dateCreated = element.dateCreated.split(" ")[0];
-       if(element.category ==='1')
-       element.category = "General"
-       else if(element.category ==='2')
-       element.category = "Events"
-       else if(element.category ==='3')
-       element.category = "Opportunities"
-       else if(element.category ==='4')
-       element.category = "Issues"
-       else
-       element.category = ""
+      if (element.notes && element.uid ? element.uid : element.UID === this.uid) {
+        // element.dateCreated = element.dateCreated.split(" ")[0];
+        if (element.category === '1')
+          element.category = "General"
+        else if (element.category === '2')
+          element.category = "Events"
+        else if (element.category === '3')
+          element.category = "Opportunities"
+        else if (element.category === '4')
+          element.category = "Issues"
+        else
+          element.category = ""
 
         this.agentNotes.push(element);
         this.totalRows = ++this.totalRows
-      } 
+      }
       // else {
       //   this.totalRows = element.seq;
       // }

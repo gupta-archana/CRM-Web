@@ -62,6 +62,7 @@ export class FavoritesComponent extends BaseClass implements OnInit, ApiResponse
       self.favorites.splice(index, 1);
       self.totalRows--;
       self.renderUI();
+      this.commonFunctions.showSnackbar(this.constants.REMOVE_FAVORITE)
     });;
   }
 
@@ -121,17 +122,16 @@ function makeServerRequest(context: FavoritesComponent) {
 function parserResponse(response: any, context: FavoritesComponent) {
   let favorites = response.sysfavorite;
   favorites.forEach(element => {
-    if (element.type == "E" || element.type == "A" || element.type == "P" ) {
-      if(element.favorite ==="yes")
-      {
-      context.commonFunctions.setFavoriteOnApisResponse(element);
-      context.favorites.push(element);
-      context.totalRows = ++context.totalRows
+    if (element.type == "E" || element.type == "A" || element.type == "P") {
+      if (element.favorite === "yes") {
+        context.commonFunctions.setFavoriteOnApisResponse(element);
+        context.favorites.push(element);
+        context.totalRows = ++context.totalRows
+      }
     }
-  }
-     else {
-       context.totalRows = element.rowNum;
-     }
+    else {
+      context.totalRows = element.rowNum;
+    }
   });
   //context.totalRows = context.favorites.length;
 }
@@ -150,8 +150,8 @@ function getData(context: FavoritesComponent) {
   //   context.totalRows = Number(sessionStorage.getItem(context.constants.FAVORITE_TOTAL_ROWS));
   //   context.renderUI();
   // }
-  
-    makeServerRequest(context);
+
+  makeServerRequest(context);
 
 }
 

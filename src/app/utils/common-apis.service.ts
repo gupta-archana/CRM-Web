@@ -46,8 +46,9 @@ export class CommonApisService {
         self.commonFunctions.setFavoriteToSessionArray(item.entityId);
         self.onApiResoponseSubject.next();
         cdr.markForCheck();
+        self.commonFunctions.showSnackbar(self.constants.ADD_FAVORITE)
       }, onError(errorCode, errorMsg) {
-        self.commonFunctions.showErrorSnackbar(errorMsg);
+        self.commonFunctions.showErrorSnackbar(self.constants.ACTION_FAILED);
       }
     });
   }
@@ -60,8 +61,9 @@ export class CommonApisService {
         item.sysfavoriteID = '0';
         self.onApiResoponseSubject.next();
         cdr.markForCheck();
+        self.commonFunctions.showSnackbar(self.constants.REMOVE_FAVORITE)
       }, onError(errorCode, errorMsg) {
-        self.commonFunctions.showErrorSnackbar(errorMsg);
+        self.commonFunctions.showErrorSnackbar(self.constants.ACTION_FAILED);
       }
     });
   }
@@ -165,7 +167,7 @@ function saveRearrangeItemsInLocalStorage(context: CommonApisService) {
 
 function getRearrangeItemArray(context: CommonApisService, itemsFor: string) {
   let itemsArray = [];
-  context.configReorderModels.every(function(element, index) {
+  context.configReorderModels.every(function (element, index) {
     if (element.configType == itemsFor) {
       itemsArray = element.configuration;
       return false;

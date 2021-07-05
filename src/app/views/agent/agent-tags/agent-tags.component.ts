@@ -15,13 +15,13 @@ import { Subscription } from 'rxjs';
 })
 export class AgentTagsComponent extends BaseClass implements OnInit, ApiResponseCallback {
 
-  constructor(private injector: Injector,private dialog: MatDialog) { super(injector) }
-  tags: TagModel; 
+  constructor(private injector: Injector, private dialog: MatDialog) { super(injector) }
+  tags: TagModel;
   entityModel: EntityModel;
   hideNoDataDiv: boolean = false;
   errorMsg: string = "";
   newTag: string = "";
-  reloadSubscription : Subscription;
+  reloadSubscription: Subscription;
 
   ngOnInit() {
     this.entityModel = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
@@ -59,19 +59,29 @@ export class AgentTagsComponent extends BaseClass implements OnInit, ApiResponse
     }
   }
   openEditTagsDialog(rowData?) {
-   this.dialog.open(EditAndDeleteTagPopupComponent,
+    this.dialog.open(EditAndDeleteTagPopupComponent,
       {
         data: {
           message: (JSON.stringify(rowData))
         }
+      }).afterClosed().subscribe(response => {
+        if (response) {
+          this.OnTagDialogClose(response)
+        }
+        else
+          this.commonFunctions.showErrorSnackbar("Tag" + " " + this.constants.UPDATED_FAIL);
+
       });
   }
-  
-  onEditSuccess(message)
-  {
+
+  OnTagDialogClose(message: string) {
+    if (message == "Untag was successful.")
+      this.commonFunctions.showSnackbar("Tag" + " " + this.constants.DELETE_SUCCESS);
+
+    if (message == "Tag has been changed.")
+      this.commonFunctions.showSnackbar("Tag" + " " + this.constants.UPDATe_SUCCESS);
+
     getTags(this);
-    this.commonFunctions.showSnackbar(message);
-    
   }
 
 }
@@ -84,11 +94,11 @@ function createTag(context: AgentTagsComponent) {
 
   context.apiHandler.createTags(createJsonForAddTag(context), {
     onSuccess(response) {
-      context.commonFunctions.showSnackbar(response);
+      context.commonFunctions.showSnackbar("Tag" + " " + context.constants.CREATE_SUCCESS);
       context.newTag = "";
       getTags(context);
     }, onError(errorCode, errorMsg) {
-      context.commonFunctions.showErrorSnackbar(errorMsg);
+      context.commonFunctions.showErrorSnackbar("Tag" + " " + context.constants.CREATE_FAIL);
     }
   })
 
@@ -121,7 +131,7 @@ function reloadObjectiveData(context: AgentTagsComponent) {
     .subscribe((data: any) => {
       console.log(data)
       if (data) {
-      getTags(context);
+        getTags(context);
       }
     })
 }
