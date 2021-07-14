@@ -37,7 +37,6 @@ export class ObjectiveSentimentComponent implements OnInit {
 
   ngOnInit() {
     this.objectiveModel = JSON.parse(this.data.message);
-    this.sentimentModel = JSON.parse(this.data.sentiment);
 
     // if(this.sentimentModel)
     // {
@@ -65,7 +64,7 @@ export class ObjectiveSentimentComponent implements OnInit {
     this.agentState = agentInfo.state;
     this.agentId = agentInfo.entityId;
     console.log(this.agentState, this.agentId);
-    //this.getPersonDetails();
+    this.getPersonDetails();
     console.log(this.personList)
   }
   onCancelClick() {

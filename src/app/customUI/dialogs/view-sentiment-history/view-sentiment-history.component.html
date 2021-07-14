@@ -29,14 +29,14 @@
         <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
 
           <div class="col-xs-5">
-          <input type="date" id="dt" formControlName="email" class="form-control"  max = {{yearBeforeDate}}  (change)="handler($event);" style="width: 118%;">
+          <input type="date" id="dt" formControlName="email" class="form-control"  max = {{yearBeforeDate}}  (change)="handler($event);" (keydown)="disableDate()" style="width: 118%;">
           </div>
       
           <div class="col-xs-5">
             <input type="date" id="dt" formControlName="message" class="form-control"  min={{dates}} max={{finalDate}} style="width: 118%;" [readOnly]= "true">
           </div>
-          <div class="col-xs-2">
-            <button type="submit">Send</button>
+          <div class="col-xs-2" >
+            <button type="submit">Show</button>
       
           </div>
         </form>

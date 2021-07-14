@@ -124,6 +124,9 @@ export class ViewSentimentHistoryComponent implements OnInit,ApiResponseCallback
   handler(e){
     formatSelectedDate(this,e.target.value);
   }
+  disableDate(){
+    return false;
+}  
 
 }
 
