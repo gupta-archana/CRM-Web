@@ -72,12 +72,12 @@ export class CommonApisService {
     let self = this;
     this.apiHandler.updateUserConfig(getRequest(configType, configuration), {
       onSuccess(response: any) {
-        self.commonFunctions.showSnackbar(response);
+        self.commonFunctions.showSnackbar(configType + " "+ self.constants.UPDATe_SUCCESS);
         if (apiResponseCallback)
           apiResponseCallback.onSuccess(response);
       },
       onError(errorCode: number, errorMsg: string) {
-        self.commonFunctions.showErrorSnackbar(errorMsg);
+        self.commonFunctions.showErrorSnackbar(configType + " "+ self.constants.UPDATED_FAIL);
         if (apiResponseCallback)
           apiResponseCallback.onError(errorCode, errorMsg);
       }

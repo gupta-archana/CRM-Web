@@ -27,7 +27,7 @@
             <label class="paddingTop10" for="state">Sentiments of:</label>
             <ng-select *ngIf="personList.length > 0" [items]="personList" bindLabel="dispname" name="person"
               bindValue="personID" value="sentimentModel.personName" [(ngModel)]="selectedPerson" [multiple]="false"
-              [virtualScroll]="true" placeholder="Select the Person" required>
+              [virtualScroll]="true" placeholder="Select the Person">
             </ng-select>
             <p *ngIf="personList.length == 0"> No Person Found</p>
             <!-- <ng-select *ngIf="personList.length == 0" [items]="personList" bindLabel="dispname" name="person"
@@ -111,7 +111,7 @@
     </div>
     <div class="col-md-6">
       <button (click)="onCancelClick()">Cancel</button>
-      <button (click)="saveSentiment()"  [ngClass] = "{'saveButton' : (type == 0 ||type == undefined)}">Save Changes</button>
+      <button (click)="saveSentiment()"  [ngClass] = "{'saveButton' : (selectedPerson === undefined || type === 0)}">Save Changes</button>
 
     </div>
   </mat-dialog-actions>

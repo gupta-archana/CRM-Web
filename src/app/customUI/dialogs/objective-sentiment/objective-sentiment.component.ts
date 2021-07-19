@@ -134,8 +134,8 @@ export class ObjectiveSentimentComponent implements OnInit {
     });
     console.log(this.personList);
 
-    if (this.sentimentModel)
-      this.selectedPerson = this.sentimentModel.personID;
+    if (self.personList.length === 1)
+      self.selectedPerson = self.personList[0].personID;
     // add a snackbaar
   }
   onError(errorCode: number, errorMsg: string) {
