@@ -5,9 +5,12 @@
       <div class="col-xs-7 text-center">
         <h1 class="t-agent noWrap">Agent Layout</h1>
       </div>
-      <div class="col-xs-3 text-right tpad" [ngClass]="{saveButton : disableSave == true}"><a class="opacity"
-          (click)="Save()"><img src="../../../../images/save-icon.svg" alt=""><br><span
-            class="edit-detail">Save</span></a>
+      <div class="col-xs-3 text-right tpad">
+        <a class="opacity" [ngClass]="{saveButton : disableSave == true}" (click)="Save()"><img
+            src="../../../../images/save-icon.svg" alt=""
+            [ngStyle]="disableSave == true?{'background-color': 'lightslategray'} : {'background-color': 'unset'}"><br><span
+            class="edit-detail"
+            [ngStyle]="disableSave == true?{'background-color': 'lightslategray'	} : {'background-color': 'unset'}">Save</span></a>
       </div>
     </div>
   </div>

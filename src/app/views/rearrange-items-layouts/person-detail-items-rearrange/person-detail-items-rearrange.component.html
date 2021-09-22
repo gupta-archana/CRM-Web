@@ -6,8 +6,10 @@
         <h1 class="t-agent noWrap">Person Module Layout</h1>
       </div>
       <div class="col-xs-1  tpad" [ngClass]="{saveButton : disableSave == true}"><a class="opacity"
-          (click)="Save()"><img src="../../../../images/save-icon.svg" alt=""><br><span
-            class="edit-detail">Save</span></a>
+          (click)="Save()"><img src="../../../../images/save-icon.svg" alt=""
+            [ngStyle]="disableSave == true?{'background-color': 'lightslategray'} : {'background-color': 'unset'}"><br><span
+            class="edit-detail"
+            [ngStyle]="disableSave == true?{'background-color': 'lightslategray'} : {'background-color': 'unset'}">Save</span></a>
       </div>
     </div>
   </div>

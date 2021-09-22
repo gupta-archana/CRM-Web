@@ -11,7 +11,7 @@
       <div class="row">
         <div class="col-md-12 col-xs-12">
           <p>Objective: &nbsp; </p>
-          <span>{{sentimentModel.objective}}</span>
+          <span>{{objectiveModel.description}}</span>
         </div>
       </div>
 
@@ -20,78 +20,42 @@
       <div class="clear paddingTop10"></div>
       <div class="form-group">
         <label class="paddingTop10" for="state">Sentiments of:</label>
-        <p>{{sentimentModel.personName? sentimentModel.personName:"No Name Found"}}</p>
+        <ng-select *ngIf="personList?.length > 0" [items]="personList" bindLabel="dispname" name="person"
+          bindValue="personID" value="sentimentModel.personName" [(ngModel)]="selectedPerson" [multiple]="false"
+          [virtualScroll]="true" placeholder="Select the Person" required (change) = "OnPersonChange(selectedPerson)">
+        </ng-select>
+        <p *ngIf="personList?.length == 0"> No Person Found</p>
       </div>
       <div class="clear paddingTop15"></div>
 
 
       <div class="form-group">
         <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
-
-          <div class="col-xs-5">
-          <input type="date" id="dt" formControlName="email" class="form-control"  max = {{yearBeforeDate}}  (change)="handler($event);" (keydown)="disableDate()" style="width: 118%;">
+<div class="row">
+          <div class="col-sm-5">
+          <input type="date" id="dt" formControlName="email" class="form-control"  max = {{yearBeforeDate}}  (change)="handler($event);" (keydown)="disableDate()" >
           </div>
+          <div class="clear paddingTop10"></div>
+          <div class="col-sm-5">
+            <input type="date" id="dt" formControlName="message" class="form-control"  min={{dates}} max={{finalDate}}  [readOnly]= "true">
+          </div>
+          <div class="clear paddingTop10"></div>
+          <div class="col-sm-2">
+            <button class= "form-control"type="submit" style="width: 70%;">Show</button>
       
-          <div class="col-xs-5">
-            <input type="date" id="dt" formControlName="message" class="form-control"  min={{dates}} max={{finalDate}} style="width: 118%;" [readOnly]= "true">
           </div>
-          <div class="col-xs-2" >
-            <button type="submit">Show</button>
-      
-          </div>
+        </div>
         </form>
       </div>
       <div class="clear paddingTop25"></div>
       <div class="clear paddingTop10"></div>
 
 <div class="row">
-      <div id="chartContainer"  style="height: 370px; width: 100%; margin-left:auto;margin-right:auto;"></div>
+      <!-- <div id="chartContainer"  style="height: 370px; width: 100%; margin-left:auto;margin-right:auto;"></div> -->
+      <p-chart type="line" [data]="basicData" width="400" height="400" [options]="basicOptions" *ngIf="basicData != [] "></p-chart>
     </div>
 </div>
       </form>
 </mat-dialog-content>
 
 
-<!-- <div class="container-fluid nospace">
-  <div class="wrapper-back">
-    <div class="container nav-bg">
-      <div class="row">
-        <div class="col-xs-2 toppad"><img src="../../../../images/back-btn.svg" alt="" (click)="goBack()"></div>
-        <div class="col-xs-7 text-center">
-          <h1 class="t-agent">Objective</h1>
-        </div>
-          <div class="col-xs-3 text-center tpad">
-            <a><img src="../../../../images/add.svg" alt=""><br>Update</a>
-        </div>
-      </div>
-    </div>
-    <app-entity-name-header [entityModel]="entityModel"></app-entity-name-header>
-  </div>
-  <br>
-  <div class="container app-bg2 bottom-wrapper-for-back cell-bg">
-    <p>Objective: &nbsp; {{sentimentModel.objective}}</p>
-  </div>
-  <div class=" container cell-bg">
-    <div class="row">
-    <p>Sentiment of : &nbsp; {{sentimentModel.personName? sentimentModel.personName:"No Name Found"}}</p>
-    
-    <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
-
-    <div class="col-xs-5">
-    <input type="date" id="dt" formControlName="email" class="form-control"  max = {{yearBeforeDate}}  (change)="handler($event);" style="width: 118%;">
-    </div>
-
-    <div class="col-xs-5">
-      <input type="date" id="dt" formControlName="message" class="form-control"  min={{dates}} max={{finalDate}} style="width: 118%;" [readOnly]= "true">
-    </div>
-    <div class="col-xs-2">
-      <button type="submit">Send</button>
-
-    </div>
-  </form>
-  </div>
-    <br>
-    <div id="chartContainer" style="height: 370px; width: 100%; margin-left:auto;margin-right:auto;"></div>
-  </div>
-
-</div> -->

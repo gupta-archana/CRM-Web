@@ -3,11 +3,11 @@
     <div class="container nav-bg">
       <div class="row">
         <div class="col-xs-2 toppad"><img src="../../../../images/back-btn.svg" alt="" (click)="goBack()"></div>
-        <div class="col-xs-7 text-center">
+        <div class="col-xs-6 text-center">
           <h1 class="t-agent">Objective</h1>
         </div>
         <!-- <div class="col-xs-3 text-center tpad" *ngIf="!hideEditObjective"> -->
-          <div class="col-xs-3 text-center tpad">
+          <div class="col-xs-4 text-right tpad">
           <!-- <a alt="" (click)="openEditObjectiveDialog()"><img src="../../../../images/add.svg" alt=""><br>
             <span class="edit-detail">Edit Objective</span></a> -->
             <a  *ngIf ="hideEditObjective && !hideAddEdit" alt="" (click)="openAddObjectiveDialog()"><img src="../../../../images/add.svg" alt=""><br>

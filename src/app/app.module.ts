@@ -76,6 +76,7 @@ import {MatDatepickerModule, MatDialogRef, MatInputModule,MatNativeDateModule, M
 import { DatePipe } from '@angular/common';
 import { ViewSentimentHistoryComponent } from './customUI/dialogs/view-sentiment-history/view-sentiment-history.component';
 import { ChartsModule } from 'ng2-charts';
+import {ChartModule} from 'primeng/chart';
 
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
@@ -178,8 +179,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     MatNativeDateModule,
     MatInputModule,
     FormsModule,
-    ChartsModule 
-
+    ChartsModule,
+    ChartModule 
    ],
   entryComponents: [
     // See https://material.angular.io/components/dialog/overview#configuring-dialog-content-via-code-entrycomponents-code- for more info

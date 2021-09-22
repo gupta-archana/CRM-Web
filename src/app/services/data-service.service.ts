@@ -13,7 +13,7 @@ export class DataServiceService {
   private hideShowLoaderSubject = new Subject<boolean>();
   hideShowLoaderObservable = this.hideShowLoaderSubject.asObservable();
 
-  private agentInfoModel: AgentInfoModel;
+  private agentInfoModel= new AgentInfoModel();
   private shareAgentInfoSubject = new BehaviorSubject<AgentInfoModel>(this.agentInfoModel);
   shareAgentInfoObservable = this.shareAgentInfoSubject.asObservable();
 

@@ -2,14 +2,21 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, ResponseContentType, Response } from '@angular/http';
 import { ApiResponseCallback } from '../Interfaces/ApiResponseCallback';
 import { Constants } from '../Constants/Constants';
-import { Observable, forkJoin } from 'rxjs';
+import { Observable, forkJoin, of } from 'rxjs';
+import { catchError, timeout } from 'rxjs/operators';
+import { CommonFunctionsService } from '../utils/common-functions.service';
+import { DataServiceService } from './data-service.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
-  constructor(private http: Http, private constants: Constants) { }
+  constructor(private http: Http, private constants: Constants,
+  private commonFunctions: CommonFunctionsService,
+  public dataService: DataServiceService,
+
+  ) { }
 
   hitGetApi(url, apiResponseCallback: ApiResponseCallback) {
 
@@ -22,7 +29,12 @@ export class ApiService {
         headers: headers,
         responseType: ResponseContentType.Text
       });
-      this.http.get(url, options)
+      this.http.get(url, options).pipe( timeout(180000),
+      catchError(e => {
+        this.commonFunctions.showErrorSnackbar("Server Timeout")
+        this.dataService.onHideShowLoader(false);
+        return of(null);
+      }))
         .subscribe(result => {
           if (result.status == 200) {
             try {
@@ -49,7 +61,13 @@ export class ApiService {
   }
 
   hitPostApi(url, data, apiResponseCallback: ApiResponseCallback) {
-    this.http.post(url, data)
+    this.http.post(url, data).pipe( timeout(180000),
+    catchError(e => {
+      this.commonFunctions.showErrorSnackbar("Server Timeout")
+      this.dataService.onHideShowLoader(false);
+      
+      return of(null);
+    }))
       .subscribe(result => {
         if (result.status == 200) {        
             var json = result.json();

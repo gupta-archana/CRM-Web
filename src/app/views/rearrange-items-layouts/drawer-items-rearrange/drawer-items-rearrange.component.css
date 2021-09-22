@@ -2,3 +2,8 @@
 {
     pointer-events: none;
 }
+
+.saveDisplay
+{
+    background-color: lightslategray !important;
+}
