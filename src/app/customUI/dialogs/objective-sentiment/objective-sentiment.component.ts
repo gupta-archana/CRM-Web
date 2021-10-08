@@ -37,25 +37,7 @@ export class ObjectiveSentimentComponent implements OnInit {
 
   ngOnInit() {
     this.objectiveModel = JSON.parse(this.data.message);
-
-    // if(this.sentimentModel)
-    // {
-    // this.note = this.sentimentModel.notes;
-    // if(this.sentimentModel.type === "1")
-    // document.getElementById("terrible").click()
-    // else if(this.sentimentModel.type === "2")
-    // document.getElementById("poor").click()
-    // else if(this.sentimentModel.type === "3")
-    // document.getElementById("alright").click()
-    // else if(this.sentimentModel.type === "4")
-    // document.getElementById("good").click()
-    // else if(this.sentimentModel.type === "5")
-    // document.getElementById("great").click()
-    // }
-
-    // else{
     this.sentimentModel = new SentimentModel();
-    // }
 
     console.log(this.note)
     let agentInfo = JSON.parse(
@@ -139,7 +121,7 @@ export class ObjectiveSentimentComponent implements OnInit {
     // add a snackbaar
   }
   onError(errorCode: number, errorMsg: string) {
-    this.dialogRef.close(false);
+    //this.dialogRef.close(false);
   }
 }
 
