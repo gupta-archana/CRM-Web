@@ -19,5 +19,5 @@ export class AuditModels {
   suggested: string;
   sectionscore: string;
   uid:string;
-  grade:string;
+  grade:any;
 }

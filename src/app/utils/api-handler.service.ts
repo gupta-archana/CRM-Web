@@ -13,11 +13,11 @@ var json2xml = require('json2xml');
 })
 export class ApiHandlerService implements ApiResponseCallback {
 
-  private APP_MODE: Array<string> = ["dev",'dvlp', "beta", "live"];
-  private ENABLE_APP_MODE = 2;
+  private APP_MODE: Array<string> = ["alfa", 'dvlp', "beta", "live"];
+  private ENABLE_APP_MODE = 0;
   private apiResponseCallback: ApiResponseCallback = null;
-  private noteURL:string;
-  private getnoteURL:string;
+  private noteURL: string;
+  private getnoteURL: string;
 
   constructor(private apiService: ApiService, public dataService: DataServiceService, private constants: Constants,
     private api: API) {
@@ -38,10 +38,10 @@ export class ApiHandlerService implements ApiResponseCallback {
     this.apiService.hitGetApi(this.api.getForgotPasswordUrl(email, this.APP_MODE[this.ENABLE_APP_MODE]), this.apiResponseCallback);
   }
 
-  public getTopAgents(type,page_no: number, apiResponseCallback: ApiResponseCallback) {
+  public getTopAgents(type, page_no: number, apiResponseCallback: ApiResponseCallback) {
     this.dataService.onHideShowLoader(true);
     this.apiResponseCallback = apiResponseCallback;
-    this.apiService.hitGetApi(this.api.getTopAgentsUrl(type,page_no, this.APP_MODE[this.ENABLE_APP_MODE]), this);
+    this.apiService.hitGetApi(this.api.getTopAgentsUrl(type, page_no, this.APP_MODE[this.ENABLE_APP_MODE]), this);
   }
 
   /**
@@ -137,11 +137,11 @@ export class ApiHandlerService implements ApiResponseCallback {
     let notes = requestJson.attr.notes;
     let summary = requestJson.attr.subject;
     let selectedCategory = requestJson.attr.notesCategory;
-    if(requestJson.attr.entity ==='P')
-    this.noteURL = this.api.getCreatePersonNoteUrl(this.getAppMode(),agentID,notes,summary,selectedCategory);
+    if (requestJson.attr.entity === 'P')
+      this.noteURL = this.api.getCreatePersonNoteUrl(this.getAppMode(), agentID, notes, summary, selectedCategory);
     else
-    this.noteURL = this.api.getCreateNoteUrl(this.getAppMode(),agentID,notes,summary,selectedCategory);
-    
+      this.noteURL = this.api.getCreateNoteUrl(this.getAppMode(), agentID, notes, summary, selectedCategory);
+
     this.apiService.hitPostApi(this.noteURL, this.getRequestXml(requestJson), handleAddAndUpdateApiResponse(this, apiResponseCallback));
   }
 
@@ -152,11 +152,11 @@ export class ApiHandlerService implements ApiResponseCallback {
     this.apiResponseCallback = apiResponseCallback;
     this.dataService.onHideShowLoader(true);
 
-    if(entityType === "P")
-    this.getnoteURL = this.api.getPersonNotesUrl(this.getAppMode(), uid, entityType, entityId, pageNum);
+    if (entityType === "P")
+      this.getnoteURL = this.api.getPersonNotesUrl(this.getAppMode(), uid, entityType, entityId, pageNum);
 
-    else if(entityType === "A")
-    this.getnoteURL = this.api.getNotesUrl(this.getAppMode(), uid, entityType, entityId, pageNum);
+    else if (entityType === "A")
+      this.getnoteURL = this.api.getNotesUrl(this.getAppMode(), uid, entityType, entityId, pageNum);
     this.apiService.hitGetApi(this.getnoteURL, this);
   }
 
@@ -279,24 +279,24 @@ export class ApiHandlerService implements ApiResponseCallback {
   public updateNote(requestJson: any, apiResponseCallback: ApiResponseCallback) {
     this.dataService.onHideShowLoader(true);
 
-    if(requestJson.attr.category ==='General')
-    requestJson.attr.category = 1
-    else if(requestJson.attr.category ==='Events')
-    requestJson.attr.category = 2
-    else if(requestJson.attr.category ==='Opportunities')
-    requestJson.attr.category = 3
-    else if(requestJson.attr.category ==='Issues')
-    requestJson.attr.category = 4
+    if (requestJson.attr.category === 'General')
+      requestJson.attr.category = 1
+    else if (requestJson.attr.category === 'Events')
+      requestJson.attr.category = 2
+    else if (requestJson.attr.category === 'Opportunities')
+      requestJson.attr.category = 3
+    else if (requestJson.attr.category === 'Issues')
+      requestJson.attr.category = 4
 
     let agentID = requestJson.attr.agentID;
     let notes = requestJson.attr.notes;
     let summary = requestJson.attr.subject;
     let selectedCategory = requestJson.attr.category;
     let seq = requestJson.attr.seq;
-    if(requestJson.attr.entity ==="P")
-    this.noteURL = this.api.getUpdatePersonNoteUrl(this.getAppMode(),agentID,notes,summary,seq,selectedCategory);
+    if (requestJson.attr.entity === "P")
+      this.noteURL = this.api.getUpdatePersonNoteUrl(this.getAppMode(), agentID, notes, summary, seq, selectedCategory);
     else
-    this.noteURL = this.api.getUpdateNoteUrl(this.getAppMode(),agentID,notes,summary,seq,selectedCategory);
+      this.noteURL = this.api.getUpdateNoteUrl(this.getAppMode(), agentID, notes, summary, seq, selectedCategory);
     this.apiService.hitPostApi(this.noteURL, this.getRequestXml(requestJson), handleAddAndUpdateApiResponse(this, apiResponseCallback));
   }
 
@@ -479,10 +479,9 @@ export class ApiHandlerService implements ApiResponseCallback {
     this.apiService.hitGetApi(url, this);
   }
 
-  public getPersonList(agentState,AgentID)
-  {
+  public getPersonList(agentState, AgentID) {
     this.dataService.onHideShowLoader(true);
-    let url = this.api.getPersonListUrl(this.APP_MODE[this.ENABLE_APP_MODE],agentState,AgentID);
+    let url = this.api.getPersonListUrl(this.APP_MODE[this.ENABLE_APP_MODE], agentState, AgentID);
     this.apiService.hitGetApi(url, this);
   }
 
@@ -499,33 +498,31 @@ export class ApiHandlerService implements ApiResponseCallback {
     //console.log(this.getRequestXml(requestJson));
     this.apiService.hitPostApi(url, this.getRequestXml(requestJson), handleAddAndUpdateApiResponse(this, apiResponseCallback));
   }
-/**
- * Create Objectiobe
- */
-public createObjective(requestJson, apiResponseCallback: ApiResponseCallback) {
-  this.dataService.onHideShowLoader(true);
-  const momentDate = new Date(requestJson.attr.dueDate); // Replace event.value with your date value
-  const formattedDate = moment(momentDate).format("MM/DD/YYYY");
-  requestJson.attr.dueDate = formattedDate
-  console.log(formattedDate);
-  let url = this.api.createObjectiveUrl(this.APP_MODE[this.ENABLE_APP_MODE]);
-  this.apiService.hitPostApi(url, this.getRequestXml(requestJson), handleAddAndUpdateApiResponse(this, apiResponseCallback));
-}
+  /**
+   * Create Objectiobe
+   */
+  public createObjective(requestJson, apiResponseCallback: ApiResponseCallback) {
+    this.dataService.onHideShowLoader(true);
+    const momentDate = new Date(requestJson.attr.dueDate); // Replace event.value with your date value
+    const formattedDate = moment(momentDate).format("MM/DD/YYYY");
+    requestJson.attr.dueDate = formattedDate
+    console.log(formattedDate);
+    let url = this.api.createObjectiveUrl(this.APP_MODE[this.ENABLE_APP_MODE]);
+    this.apiService.hitPostApi(url, this.getRequestXml(requestJson), handleAddAndUpdateApiResponse(this, apiResponseCallback));
+  }
   public updateTag(requestJson, apiResponseCallback: ApiResponseCallback) {
     this.dataService.onHideShowLoader(true);
-     let url = this.api.getUpdateTagUrl(this.APP_MODE[this.ENABLE_APP_MODE]);
+    let url = this.api.getUpdateTagUrl(this.APP_MODE[this.ENABLE_APP_MODE]);
     this.apiService.hitPostApi(url, this.getRequestXml(requestJson), handleAddAndUpdateApiResponse(this, apiResponseCallback));
   }
 
-  modifySentiment(requestJson, apiResponseCallback: ApiResponseCallback)
-  {
+  modifySentiment(requestJson, apiResponseCallback: ApiResponseCallback) {
     this.dataService.onHideShowLoader(true);
     let url = this.api.getUpdateSentimentUrl(this.APP_MODE[this.ENABLE_APP_MODE]);
     this.apiService.hitPostApi(url, this.getRequestXml(requestJson), handleAddAndUpdateApiResponse(this, apiResponseCallback));
   }
 
-  createSentiment(requestJson,apiResponseCallback: ApiResponseCallback)
-  {
+  createSentiment(requestJson, apiResponseCallback: ApiResponseCallback) {
     const momentDate = new Date(requestJson.attr.createDate); // Replace event.value with your date value
     const formattedDate = moment(momentDate).format("MM/DD/YYYY");
     requestJson.attr.createDate = formattedDate
@@ -535,13 +532,13 @@ public createObjective(requestJson, apiResponseCallback: ApiResponseCallback) {
     let url = this.api.getCreateSentimentUrl(this.APP_MODE[this.ENABLE_APP_MODE]);
     this.apiService.hitPostApi(url, this.getRequestXml(requestJson), handleAddAndUpdateApiResponse(this, apiResponseCallback));
   }
-    /**
-   * deleteNote
-   */
+  /**
+ * deleteNote
+ */
   public deleteTag(tagId: string, apiResponseCallback: ApiResponseCallback) {
     this.dataService.onHideShowLoader(true);
     let url = this.api.getDeleteTagUrl(this.getAppMode(), tagId);
-   // let url="https://compass.alliantnational.com:8118/do/action/WService=dev/get?I1=agupta@alliantnational.com&I2=a2NqPWphbmlVWndkZnhESnhzd0AxMjM0YURRZlBHQmpFcGN1bnh1Q01TSEhCeVJBemRqQW1pQlpPUmp1UG10cnJhbUJtZURyQWhOUmdBS2hkQmloanRzTG51cElJYVlyeFhnTmhXUm5zdG1NdGdJYXBZSmNucnR6VHhGSUl3QUtBREls&I3=EntityUntag&tagID="+tagId 
+    // let url="https://compass.alliantnational.com:8118/do/action/WService=dev/get?I1=agupta@alliantnational.com&I2=a2NqPWphbmlVWndkZnhESnhzd0AxMjM0YURRZlBHQmpFcGN1bnh1Q01TSEhCeVJBemRqQW1pQlpPUmp1UG10cnJhbUJtZURyQWhOUmdBS2hkQmloanRzTG51cElJYVlyeFhnTmhXUm5zdG1NdGdJYXBZSmNucnR6VHhGSUl3QUtBREls&I3=EntityUntag&tagID="+tagId 
     this.apiService.hitGetApi(url, handleAddAndUpdateApiResponse(this, apiResponseCallback));
   }
 
@@ -573,10 +570,9 @@ public createObjective(requestJson, apiResponseCallback: ApiResponseCallback) {
   /**
    * resetApplicationSetting
    */
-  public resetApplicationSetting()
-  {
+  public resetApplicationSetting() {
     let url = this.api.getResetApplicationSetting(this.APP_MODE[this.ENABLE_APP_MODE])
-    this.apiService.hitGetApi(url,this);
+    this.apiService.hitGetApi(url, this);
   }
   private getAppMode(): string {
     return this.APP_MODE[this.ENABLE_APP_MODE];
@@ -595,10 +591,10 @@ public createObjective(requestJson, apiResponseCallback: ApiResponseCallback) {
     else {
       let data: Object[] = responseBody.dataset;
       if (data && data.length > 0 && data.find(e => e["name"] === "sentiment"))
-      this.apiResponseCallback.onSuccess(data);
+        this.apiResponseCallback.onSuccess(data);
       else if (data && data.length > 0)
         this.apiResponseCallback.onSuccess(data[0]);
-        
+
       else
         this.onError(200, this.constants.ERROR_NO_DATA_AVAILABLE);
     }

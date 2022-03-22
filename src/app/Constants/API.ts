@@ -10,7 +10,7 @@ export class API {
   AGENT_DETAIL_MENU = "../assets/jsons/agent_detail_menu.json";
   PERSON_DETAIL_MENU = "../assets/jsons/person_detail_menu.json";
   STATES_JSON_URL = "../assets/jsons/state.json";
-  private API_BASE_URL = "https://compass.alliantnational.com:8118/do/action/WService=";
+  private API_BASE_URL = "https://compassalfa.alliantnational.com:8118/do/action/WService=";
   private numberOfRows: number;
   email: string = "";
   encryptedPassword: string = "";
@@ -44,9 +44,9 @@ export class API {
     return this.getBaseUrl(app_mode) + "I3=systemEmailPassword&User=" + email;
   }
 
-  getTopAgentsUrl(type,page_no: number, app_mode: string) {
+  getTopAgentsUrl(type, page_no: number, app_mode: string) {
 
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=agentsNprActualToPlanGet&PageNum=" + page_no + "&NoOfRows=" + this.numberOfRows + "&NprSortOrder=" +type;
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=agentsNprActualToPlanGet&PageNum=" + page_no + "&NoOfRows=" + this.numberOfRows + "&NprSortOrder=" + type;
   }
 
   getSearchedProfileUrl(app_mode: string, stateId: string, type: string, pageNum: number, searchString: string) {
@@ -113,15 +113,13 @@ export class API {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=systemNotesGet&UID=ALL&entity=P&entityID=" + entityId + "&PageNum=1&NoOfRows=20";
   }
 
-  getUpdateSentimentUrl(app_mode:string)
-  {
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=sentimentModify" ;
+  getUpdateSentimentUrl(app_mode: string) {
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=sentimentModify";
   }
 
-  getCreateSentimentUrl(app_mode:string)
-  {
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=sentimentNew" ;
-    
+  getCreateSentimentUrl(app_mode: string) {
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=sentimentNew";
+
   }
 
   getUpdateUserProfileUrl(app_mode: string) {
@@ -173,19 +171,19 @@ export class API {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userNoteDelete&sysNoteID=" + noteId;
   }
 
-  getCreateNoteUrl(app_mode: string,entityId,Notes,summary,selectedCategory) {
+  getCreateNoteUrl(app_mode: string, entityId, Notes, summary, selectedCategory) {
 
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=agentNoteNew&AgentID=" + entityId + "&Category=" + selectedCategory + "&Subject=" + summary + "&NoteType=1&Notes=" + Notes;
   }
-  getCreatePersonNoteUrl(app_mode: string,entityId,Notes,summary,selectedCategory) {
+  getCreatePersonNoteUrl(app_mode: string, entityId, Notes, summary, selectedCategory) {
 
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userNoteNew";
   }
-  getUpdatePersonNoteUrl(app_mode: string,agentId,Notes,summary,seq,selectedCategory) {
+  getUpdatePersonNoteUrl(app_mode: string, agentId, Notes, summary, seq, selectedCategory) {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userNoteModify"
   }
-  getUpdateNoteUrl(app_mode: string,agentId,Notes,summary,seq,selectedCategory) {
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=agentNoteModify&AgentID=" + agentId + "&Seq="+seq + "&Category=" +selectedCategory + "&Subject=" + summary +  "&NoteType=1&Notes="  + Notes;
+  getUpdateNoteUrl(app_mode: string, agentId, Notes, summary, seq, selectedCategory) {
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=agentNoteModify&AgentID=" + agentId + "&Seq=" + seq + "&Category=" + selectedCategory + "&Subject=" + summary + "&NoteType=1&Notes=" + Notes;
   }
 
   getOpenAlertsUrl(app_mode: string, agentID: string, pageNum: string) {
@@ -256,8 +254,7 @@ export class API {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userObjectivesGet&entity=" + entity + "&entityID=" + entityId + "&stat=" + stat + "&type=" + type + "&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows;
   }
 
-  getPersonListUrl(app_mode: string,agentState,agentID)
-  {
+  getPersonListUrl(app_mode: string, agentState, agentID) {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=agentAffiliationsGet&stateID=" + agentState + "&agentID=" + agentID;
 
   }
@@ -265,10 +262,9 @@ export class API {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userObjectiveModify";
   }
 
-   createObjectiveUrl(app_mode : string)
-   {
+  createObjectiveUrl(app_mode: string) {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userObjectiveNew";
-   }
+  }
 
   getUpdateTagUrl(app_mode: string) {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=userTagModify";
@@ -282,9 +278,8 @@ export class API {
     return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=eventsGet&entity=" + entityType + "&entityID=" + entityId;
   }
 
-  getResetApplicationSetting(app_mode: string)
-  {
-    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=appSettingsReset&appCode=CRM&ObjAction=userConfig"; 
+  getResetApplicationSetting(app_mode: string) {
+    return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=appSettingsReset&appCode=CRM&ObjAction=userConfig";
   }
 
   getStates() {
@@ -300,6 +295,6 @@ export class API {
   private getBaseUrl(app_mode: string) {
     this.checkAndGetCredentials();
     this.getNumberOfRows();
-    return this.API_BASE_URL + app_mode + "/get?I0=JSON&I4=CRM&";
+    return this.API_BASE_URL + app_mode + "/act?I0=JSON&I4=CRM&";
   }
 }
