@@ -72,12 +72,12 @@ export class CommonApisService {
     let self = this;
     this.apiHandler.updateUserConfig(getRequest(configType, configuration), {
       onSuccess(response: any) {
-        self.commonFunctions.showSnackbar(configType + " "+ self.constants.UPDATe_SUCCESS);
+        self.commonFunctions.showSnackbar(configType + " " + self.constants.UPDATe_SUCCESS);
         if (apiResponseCallback)
           apiResponseCallback.onSuccess(response);
       },
       onError(errorCode: number, errorMsg: string) {
-        self.commonFunctions.showErrorSnackbar(configType + " "+ self.constants.UPDATED_FAIL);
+        self.commonFunctions.showErrorSnackbar(configType + " " + self.constants.UPDATED_FAIL);
         if (apiResponseCallback)
           apiResponseCallback.onError(errorCode, errorMsg);
       }
@@ -111,6 +111,7 @@ export class CommonApisService {
     if (element.configCategory == "Reorder") {
       element.configuration = JSON.parse(element.configuration.replace(/'/g, '"'));
       this.configReorderModels.push(element);
+      console.log(this.configReorderModels);
     }
     else if (element.configCategory == "Notification") {
       this.configNotificationModels.push(element);
@@ -167,7 +168,8 @@ function saveRearrangeItemsInLocalStorage(context: CommonApisService) {
 
 function getRearrangeItemArray(context: CommonApisService, itemsFor: string) {
   let itemsArray = [];
-  context.configReorderModels.every(function (element, index) {
+  console.log(context.configReorderModels)
+  context.configReorderModels.forEach(function (element, index) {
     if (element.configType == itemsFor) {
       itemsArray = element.configuration;
       return false;

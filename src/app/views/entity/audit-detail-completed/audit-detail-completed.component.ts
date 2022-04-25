@@ -80,18 +80,17 @@ export class AuditDetailCompletedComponent extends BaseClass implements OnInit, 
   }
 
   onSuccess(response: any) {
-    let downloadPdfModel: DownloadPdfModel[] = response.pdf;
+    let downloadPdfModel: DownloadPdfModel[] = response.File;
     let base64Pdf = "";
     let filename: string;
 
     downloadPdfModel.forEach(element => {
       base64Pdf = base64Pdf + element.Base64;
-      if (!filename) {
-        let splittedName = element.filename.split("\\");
-        filename = splittedName[splittedName.length - 1];
-      }
     });
-
+    if (!filename) {
+      let splittedName = response.FileName.split("\\");
+      filename = splittedName[splittedName.length - 1];
+    }
 
     this.commonFunctions.downloadPdf(base64Pdf, filename);
   }

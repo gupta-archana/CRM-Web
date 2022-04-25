@@ -35,11 +35,11 @@ export class AppSettingComponent extends BaseClass implements OnInit, ApiRespons
   selectedSearchIn: string = "";
   selectedSearchInPresenter: string = "";
   selectedNewsFeed: string = "";
-  f:any=1;
+  f: any = 1;
 
   appSettingForm: FormGroup;
 
-  constructor(private injector: Injector,public router : Router, public route:ActivatedRoute) { super(injector); }
+  constructor(private injector: Injector, public router: Router, public route: ActivatedRoute) { super(injector); }
 
   ngOnInit() {
     addValidation(this);
@@ -64,27 +64,25 @@ export class AppSettingComponent extends BaseClass implements OnInit, ApiRespons
     this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_NOTIFICATION_CONTROL);
   }
 
-  resetApplicationSettings()
-  {
+  resetApplicationSettings() {
     this.configBasicModels = new Array<ConfigBasicModel>();
     this.configNotificationModels = new Array<ConfigNotificationModel>();
     this.configReorderModels = new Array<ConfigReorderModel>();
-    
+
     this.apiHandler.resetApplicationSetting()
     this.dataService.onHideShowLoader(true);
-    
+
     setTimeout(() => {
-      reloadComponent(this);    
+      reloadComponent(this);
     }, 2600);
 
-    if(this.f==1)
-    {
-    setTimeout(() => {
-      document.getElementById("resetClick").click() 
-    }, 2000);
-    this.f = 2;
-  }
-  
+    if (this.f == 1) {
+      setTimeout(() => {
+        document.getElementById("resetClick").click()
+      }, 2000);
+      this.f = 2;
+    }
+
   }
   onSuccess(response: any) {
     let self = this;
@@ -92,7 +90,7 @@ export class AppSettingComponent extends BaseClass implements OnInit, ApiRespons
       let sysuserconfig: Array<any> = response.sysuserconfig;
       sysuserconfig.forEach(element => {
         this.parseResponse(element);
-        
+
       });
       setBasicConfigToVariables(this);
       setReorderConfigToVariables(this)
@@ -105,7 +103,7 @@ export class AppSettingComponent extends BaseClass implements OnInit, ApiRespons
   }
 
   private parseResponse(element: any) {
-    
+
     if (element.configCategory == "Reorder") {
       element.configuration = JSON.parse(element.configuration.replace(/'/g, '"'));
       this.configReorderModels.push(element);
@@ -178,24 +176,20 @@ function setBasicConfigToVariables(context: AppSettingComponent) {
 
 }
 
-function setReorderConfigToVariables(context: AppSettingComponent)
-{
+function setReorderConfigToVariables(context: AppSettingComponent) {
   context.configReorderModels.forEach(element => {
     console.log(element)
-    if(element.configType === "HomeModules")
-    {
+    if (element.configType === "HomeModules") {
       context.itemsArray = getRearrangeItemArray(context, element.configType);
-    context.myLocalStorage.setValue(context.constants.SIDE_NAV_ITEMS, JSON.stringify(context.itemsArray));
+      context.myLocalStorage.setValue(context.constants.SIDE_NAV_ITEMS, JSON.stringify(context.itemsArray));
     }
-    if(element.configType === "AgentModules")
-    {
+    if (element.configType === "AgentModules") {
       context.itemsArray = getRearrangeItemArray(context, element.configType);
-    context.myLocalStorage.setValue(context.constants.AGENT_DETAIL_ITEMS, JSON.stringify(context.itemsArray));
+      context.myLocalStorage.setValue(context.constants.AGENT_DETAIL_ITEMS, JSON.stringify(context.itemsArray));
     }
-    if(element.configType === "PersonModules")
-    {
+    if (element.configType === "PersonModules") {
       context.itemsArray = getRearrangeItemArray(context, element.configType);
-    context.myLocalStorage.setValue(context.constants.PERSON_DETAIL_ITEMS, JSON.stringify(context.itemsArray));
+      context.myLocalStorage.setValue(context.constants.PERSON_DETAIL_ITEMS, JSON.stringify(context.itemsArray));
     }
   });
 
@@ -234,7 +228,7 @@ function setValueToDropdowns(context: AppSettingComponent) {
 }
 function getRearrangeItemArray(context: AppSettingComponent, itemsFor: string) {
   let itemsArray = [];
-  context.configReorderModels.every(function(element, index) {
+  context.configReorderModels.every(function (element, index) {
     if (element.configType == itemsFor) {
       itemsArray = element.configuration;
       return false;
@@ -254,8 +248,8 @@ function clearSearch(context: AppSettingComponent) {
 
 }
 
-function reloadComponent(context: AppSettingComponent) {​​
+function reloadComponent(context: AppSettingComponent) {
   context.router.routeReuseStrategy.shouldReuseRoute = () => false;
   context.router.onSameUrlNavigation = 'reload';
   context.router.navigate(['/setting']);
-}​​
+}
