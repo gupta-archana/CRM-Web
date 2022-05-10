@@ -1,19 +1,28 @@
-import { Component, OnInit, OnDestroy, Injector, ViewChild, ElementRef } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { BaseClass } from '../../../global/base-class';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { EntityContactModel } from '../../../models/entity-contact-model';
-import { ApiResponseCallback } from '../../../Interfaces/ApiResponseCallback';
-import { Constants } from 'src/app/Constants/Constants';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  Injector,
+  ViewChild,
+  ElementRef,
+} from "@angular/core";
+import { Subscription } from "rxjs";
+import { BaseClass } from "../../../global/base-class";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { EntityContactModel } from "../../../models/entity-contact-model";
+import { ApiResponseCallback } from "../../../Interfaces/ApiResponseCallback";
+import { Constants } from "src/app/Constants/Constants";
 
 @Component({
-  selector: 'app-update-agent-profile',
-  templateUrl: './update-agent-profile.component.html',
-  styleUrls: ['./update-agent-profile.component.css']
+  selector: "app-update-agent-profile",
+  templateUrl: "./update-agent-profile.component.html",
+  styleUrls: ["./update-agent-profile.component.css"],
 })
-export class UpdateAgentProfileComponent extends BaseClass implements OnInit, OnDestroy, ApiResponseCallback {
-
-  @ViewChild("closeEntityUpdateProfileModel")
+export class UpdateAgentProfileComponent
+  extends BaseClass
+  implements OnInit, OnDestroy, ApiResponseCallback
+{
+  @ViewChild("closeEntityUpdateProfileModel", { static: true })
   closeEntityUpdateProfileModel: ElementRef;
   showAgentProfileDialog: boolean = false;
   agentProfileEditSubscription: Subscription = null;
@@ -21,8 +30,10 @@ export class UpdateAgentProfileComponent extends BaseClass implements OnInit, On
   entitiyContactModel: EntityContactModel = new EntityContactModel();
   states: Array<any> = [];
   submitClicked: boolean = false;
-  constants: Constants
-  constructor(private injector: Injector) { super(injector) }
+  constants: Constants;
+  constructor(private injector: Injector) {
+    super(injector);
+  }
 
   ngOnInit() {
     addValidation(this);
@@ -47,21 +58,29 @@ export class UpdateAgentProfileComponent extends BaseClass implements OnInit, On
   }
 
   onSuccess(response: any) {
-    this.commonFunctions.showSnackbar("Agent Profile" + " " + this.constants.UPDATe_SUCCESS);
+    this.commonFunctions.showSnackbar(
+      "Agent Profile" + " " + this.constants.UPDATe_SUCCESS
+    );
     this.dataService.onDataUpdated();
     this.closeEntityUpdateProfileModel.nativeElement.click();
   }
   onError(errorCode: number, errorMsg: string) {
-    this.commonFunctions.showErrorSnackbar("Agent Profile" + " " + this.constants.UPDATED_FAIL);
+    this.commonFunctions.showErrorSnackbar(
+      "Agent Profile" + " " + this.constants.UPDATED_FAIL
+    );
   }
   ngOnDestroy(): void {
-    if (this.agentProfileEditSubscription && !this.agentProfileEditSubscription.closed) {
+    if (
+      this.agentProfileEditSubscription &&
+      !this.agentProfileEditSubscription.closed
+    ) {
       this.agentProfileEditSubscription.unsubscribe();
     }
   }
 }
 function addValidation(context: UpdateAgentProfileComponent) {
-  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  var re =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   context.entityInfoForm = new FormGroup({
     zip: new FormControl(""),
     name: new FormControl(""),
@@ -73,15 +92,18 @@ function addValidation(context: UpdateAgentProfileComponent) {
     phone2: new FormControl(""),
     state: new FormControl(""),
     email: new FormControl(""),
-    city: new FormControl("")
-  })
+    city: new FormControl(""),
+  });
 }
 
 function registerDataSubscription(context: UpdateAgentProfileComponent) {
-  context.agentProfileEditSubscription = context.dataService.editAgentProfileDialogObservable.subscribe(entityContactModel => {
-    context.entitiyContactModel = entityContactModel;
-    getStates(context);
-  });
+  context.agentProfileEditSubscription =
+    context.dataService.editAgentProfileDialogObservable.subscribe(
+      (entityContactModel) => {
+        context.entitiyContactModel = entityContactModel;
+        getStates(context);
+      }
+    );
 }
 
 function getStates(context: UpdateAgentProfileComponent) {
@@ -90,35 +112,31 @@ function getStates(context: UpdateAgentProfileComponent) {
       context.states = response;
       setValueInFormControls(context);
       context.cdr.markForCheck();
-    }, onError(errorCode: number, errorMsg: string) {
-
-    }
-  })
+    },
+    onError(errorCode: number, errorMsg: string) {},
+  });
 }
 
-
 function setValueInFormControls(context: UpdateAgentProfileComponent) {
-  Object.keys(context.entityInfoForm.controls).forEach(key => {
+  Object.keys(context.entityInfoForm.controls).forEach((key) => {
     let value = context.entitiyContactModel[key];
     context.entityInfoForm.get(key).setValue(value);
-
   });
 }
 
 function createRequestJson(context: UpdateAgentProfileComponent) {
   let requestJson = {};
-  Object.keys(context.entityInfoForm.controls).forEach(key => {
+  Object.keys(context.entityInfoForm.controls).forEach((key) => {
     let value = context.entityInfoForm.get(key).value;
     requestJson[key] = value;
-
   });
 
   requestJson["entity"] = context.entitiyContactModel.entity;
   requestJson["entityID"] = context.entitiyContactModel.entityID;
   let finalJson = {
-    "EntityContact": "",
-    "attr": requestJson
-  }
+    EntityContact: "",
+    attr: requestJson,
+  };
   context.commonFunctions.printLog(JSON.stringify(finalJson));
   return finalJson;
 }

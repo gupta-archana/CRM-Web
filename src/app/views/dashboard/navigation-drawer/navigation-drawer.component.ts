@@ -21,7 +21,8 @@ import { RoutingStateService } from "../../../services/routing-state.service";
 })
 export class NavigationDrawerComponent
   extends BaseClass
-  implements OnInit, OnDestroy {
+  implements OnInit, OnDestroy
+{
   sideNavArray = [];
   headerTitle: string = "";
   activatedRouteSubscription: Subscription = null;
@@ -35,7 +36,7 @@ export class NavigationDrawerComponent
   called: boolean = false;
   functionCalled: any;
 
-  @ViewChild("recentProfile")
+  @ViewChild("recentProfile", { static: false })
   recentProfile: ElementRef;
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -59,11 +60,10 @@ export class NavigationDrawerComponent
         );
       }
     );
-    this.currentPagePathSubscription = this.dataService.currentPagePathObservable.subscribe(
-      (path) => {
+    this.currentPagePathSubscription =
+      this.dataService.currentPagePathObservable.subscribe((path) => {
         changeHeaderTitle(path, this);
-      }
-    );
+      });
   }
 
   onNavigationItemClick(title) {
@@ -92,14 +92,12 @@ export class NavigationDrawerComponent
         sessionStorage.clear();
         if (this.myLocalStorage.getValue(this.constants.REMEMBER_ME) != "1") {
           this.myLocalStorage.clearAll();
-        }
-        else {
+        } else {
           this.myLocalStorage.clearValue(this.constants.LOGGED_IN);
         }
 
         this.commonFunctions.navigateWithReplaceUrl(this.paths.PATH_LOGIN);
-        this.commonFunctions.showSnackbar(this.constants.LOGOUT_SUCESS)
-
+        this.commonFunctions.showSnackbar(this.constants.LOGOUT_SUCESS);
       }
     });
   }
@@ -277,13 +275,13 @@ function reasetHeaderButtons(context: NavigationDrawerComponent) {
 function printButtonStatus(context: NavigationDrawerComponent, from: any) {
   context.commonFunctions.printLog(
     "from " +
-    from +
-    " refresh button " +
-    context.showRefreshButton +
-    ", Filter Button " +
-    context.showFilterButton +
-    " ,recent profile " +
-    context.showRecentProfileButton
+      from +
+      " refresh button " +
+      context.showRefreshButton +
+      ", Filter Button " +
+      context.showFilterButton +
+      " ,recent profile " +
+      context.showRecentProfileButton
   );
 }
 

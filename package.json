@@ -14,18 +14,18 @@
   "private": true,
   "dependencies": {
     "-": "0.0.1",
-    "@angular/animations": "^7.2.16",
-    "@angular/cdk": "^7.3.7",
-    "@angular/common": "^7.2.16",
-    "@angular/compiler": "^7.2.16",
-    "@angular/core": "^7.2.16",
+    "@angular/animations": "^8.2.14",
+    "@angular/cdk": "^8.2.3",
+    "@angular/common": "^8.2.14",
+    "@angular/compiler": "^8.2.14",
+    "@angular/core": "^8.2.14",
     "@angular/fire": "^6.0.3",
-    "@angular/forms": "^7.2.16",
+    "@angular/forms": "^8.2.14",
     "@angular/http": "^7.2.16",
-    "@angular/material": "^7.3.3",
-    "@angular/platform-browser": "^7.2.16",
-    "@angular/platform-browser-dynamic": "^7.2.16",
-    "@angular/router": "^7.2.16",
+    "@angular/material": "^8.2.3",
+    "@angular/platform-browser": "^8.2.14",
+    "@angular/platform-browser-dynamic": "^8.2.14",
+    "@angular/router": "^8.2.14",
     "@ng-bootstrap/ng-bootstrap": "^4.1.1",
     "@ng-select/ng-select": "^2.20.5",
     "@types/jquery": "^3.5.1",
@@ -62,9 +62,9 @@
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "0.8.9",
-    "@angular/cli": "^7.3.10",
-    "@angular/compiler-cli": "^6.1.0",
+    "@angular-devkit/build-angular": "^0.803.29",
+    "@angular/cli": "^8.3.29",
+    "@angular/compiler-cli": "^8.2.14",
     "@angular/language-service": "^6.1.0",
     "@types/jasmine": "~2.8.6",
     "@types/jasminewd2": "~2.0.3",
@@ -84,6 +84,6 @@
     "puppeteer": "^1.18.1",
     "ts-node": "~5.0.1",
     "tslint": "~5.9.1",
-    "typescript": "^2.9.2"
+    "typescript": "^3.4.5"
   }
 }
