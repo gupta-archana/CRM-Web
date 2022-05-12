@@ -89,7 +89,7 @@ const appRoutesArray: Routes = [
   { path: "**", component: PageNotFoundComponent },
 ];
 
-export const appRoutes: ModuleWithProviders = RouterModule.forRoot(
+export const appRoutes: ModuleWithProviders<any> = RouterModule.forRoot(
   appRoutesArray,
   { useHash: false, onSameUrlNavigation: "reload" }
 );
