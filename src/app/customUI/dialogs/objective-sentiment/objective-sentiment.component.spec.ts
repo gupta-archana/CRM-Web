@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ObjectiveSentimentComponent } from './objective-sentiment.component';
 
@@ -6,7 +6,7 @@ describe('ObjectiveSentimentComponent', () => {
   let component: ObjectiveSentimentComponent;
   let fixture: ComponentFixture<ObjectiveSentimentComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ObjectiveSentimentComponent ]
     })

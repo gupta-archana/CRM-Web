@@ -91,5 +91,5 @@ const appRoutesArray: Routes = [
 
 export const appRoutes: ModuleWithProviders<any> = RouterModule.forRoot(
   appRoutesArray,
-  { useHash: false, onSameUrlNavigation: "reload" }
+  { useHash: false, onSameUrlNavigation: "reload", relativeLinkResolution: 'legacy' }
 );
