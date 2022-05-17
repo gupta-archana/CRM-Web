@@ -6,11 +6,11 @@ import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { UrlSerializer } from "@angular/router";
 import { SidebarModule } from "ng-sidebar";
-import { CurrencyMaskModule } from "ng2-currency-mask";
-import {
-  CurrencyMaskConfig,
-  CURRENCY_MASK_CONFIG,
-} from "ng2-currency-mask/src/currency-mask.config";
+// import { CurrencyMaskModule } from "ng2-currency-mask";
+// import {
+//   CurrencyMaskConfig,
+//   CURRENCY_MASK_CONFIG,
+// } from "ng2-currency-mask/src/currency-mask.config";
 import { Ng2ImgMaxModule } from "ng2-img-max";
 import { DeviceDetectorModule } from "ngx-device-detector";
 import { ImageCropperModule } from "ngx-image-cropper";
@@ -87,15 +87,15 @@ import { ViewSentimentHistoryComponent } from "./customUI/dialogs/view-sentiment
 import { ChartsModule } from "ng2-charts";
 import { ChartModule } from "primeng/chart";
 
-export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
-  align: "left",
-  allowNegative: true,
-  decimal: ",",
-  precision: 2,
-  prefix: "",
-  suffix: "",
-  thousands: ",",
-};
+// export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
+//   align: "left",
+//   allowNegative: true,
+//   decimal: ",",
+//   precision: 2,
+//   prefix: "",
+//   suffix: "",
+//   thousands: ",",
+// };
 
 @NgModule({
   declarations: [
@@ -179,7 +179,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     ModulesModule,
     DragDropModule,
     Ng2ImgMaxModule,
-    CurrencyMaskModule,
+    // CurrencyMaskModule,
     NgSelectModule,
     ReactiveFormsModule,
     MatDatepickerModule,
@@ -213,7 +213,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     { provide: UrlSerializer, useClass: LowerCaseUrlSerializer },
     LoginGuardGuard,
     DatePipe,
-    { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig },
+    // { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig },
     { provide: MatDialogRef, useValue: {} },
     { provide: MAT_DIALOG_DATA, useValue: [] },
   ],

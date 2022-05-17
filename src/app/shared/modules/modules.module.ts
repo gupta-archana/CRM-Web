@@ -1,31 +1,37 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { UpdateAgentProfileComponent } from '../../customUI/dialogs/update-agent-profile/update-agent-profile.component';
-import { NgxSmartModalModule } from 'ngx-smart-modal';
-import { RecentProfilesComponent } from '../../customUI/dialogs/recent-profiles/recent-profiles.component';
-import { ShareVCardComponent } from '../../customUI/dialogs/share-v-card/share-v-card.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { UpdateUserProfileComponent } from '../../customUI/dialogs/update-user-profile/update-user-profile.component';
-import { SearchFilterComponent } from '../../customUI/dialogs/search-filter/search-filter.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { MatTabsModule, MatSnackBarModule, MatDialogModule, MatButtonModule, MatFormFieldModule } from '@angular/material';
-import { CurrencyMaskModule } from "ng2-currency-mask";
-import { DecimalPipe } from '@angular/common';
-import { CurrencyMaskConfig, CURRENCY_MASK_CONFIG } from 'ng2-currency-mask/src/currency-mask.config';
-import { MomentModule } from 'ngx-moment';
-import { EntityNameHeaderComponent } from '../../customUI/entity-name-header/entity-name-header.component';
-import { ChartsModule } from 'ng2-charts';
-import { AutocompleteLibModule } from 'angular-ng-autocomplete';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { UpdateAgentProfileComponent } from "../../customUI/dialogs/update-agent-profile/update-agent-profile.component";
+import { NgxSmartModalModule } from "ngx-smart-modal";
+import { RecentProfilesComponent } from "../../customUI/dialogs/recent-profiles/recent-profiles.component";
+import { ShareVCardComponent } from "../../customUI/dialogs/share-v-card/share-v-card.component";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { UpdateUserProfileComponent } from "../../customUI/dialogs/update-user-profile/update-user-profile.component";
+import { SearchFilterComponent } from "../../customUI/dialogs/search-filter/search-filter.component";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import {
+  MatTabsModule,
+  MatSnackBarModule,
+  MatDialogModule,
+  MatButtonModule,
+  MatFormFieldModule,
+} from "@angular/material";
+// import { CurrencyMaskModule } from "ng2-currency-mask";
+import { DecimalPipe } from "@angular/common";
+// import { CurrencyMaskConfig, CURRENCY_MASK_CONFIG } from 'ng2-currency-mask/src/currency-mask.config';
+import { MomentModule } from "ngx-moment";
+import { EntityNameHeaderComponent } from "../../customUI/entity-name-header/entity-name-header.component";
+import { ChartsModule } from "ng2-charts";
+import { AutocompleteLibModule } from "angular-ng-autocomplete";
 
-export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
-  align: "left",
-  allowNegative: true,
-  decimal: ",",
-  precision: 2,
-  prefix: "",
-  suffix: "",
-  thousands: ","
-};
+// export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
+//   align: "left",
+//   allowNegative: true,
+//   decimal: ",",
+//   precision: 2,
+//   prefix: "",
+//   suffix: "",
+//   thousands: ","
+// };
 
 //import { ModalService } from '../../services/modal.service';
 @NgModule({
@@ -40,11 +46,10 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     MatDialogModule,
     MatButtonModule,
     MatFormFieldModule,
-    CurrencyMaskModule,
+    // CurrencyMaskModule,
     MomentModule,
     ChartsModule,
-    AutocompleteLibModule
-
+    AutocompleteLibModule,
   ],
   declarations: [
     UpdateAgentProfileComponent,
@@ -52,7 +57,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     ShareVCardComponent,
     UpdateUserProfileComponent,
     SearchFilterComponent,
-    EntityNameHeaderComponent
+    EntityNameHeaderComponent,
   ],
   exports: [
     UpdateAgentProfileComponent,
@@ -72,9 +77,11 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     MomentModule,
     ChartsModule,
     EntityNameHeaderComponent,
-    AutocompleteLibModule
-
+    AutocompleteLibModule,
   ],
-  providers: [{ provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }, DecimalPipe],
+  providers: [
+    // { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig },
+    DecimalPipe,
+  ],
 })
-export class ModulesModule { }
+export class ModulesModule {}
