@@ -1,45 +1,63 @@
 <div class="modal fade" id="addNewNotes" role="dialog">
-  <div class="modal-dialog" style="margin-top:20%;">
-
+  <div class="modal-dialog" style="margin-top: 20%">
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" #closeAddNote>&times;</button>
+        <button type="button" class="close" data-dismiss="modal" #closeAddNote>
+          &times;
+        </button>
         <h4 class="modal-title">Add New Note</h4>
       </div>
       <form role="form">
         <div class="modal-body">
-          <div class="clear paddingTop15">
-          </div>
-          <span *ngIf = "entityInfo.type !='P'">
+          <div class="clear paddingTop15"></div>
+          <span *ngIf="entityInfo.type !== 'P'">
             <label for="cars">Category:</label>
-            <div class="clear paddingTop15">
-            </div>
-            <ng-select [items]="category" bindLabel="value" name="category" bindValue="id" [(ngModel)]="notesCategory" [multiple]="false"
-              [virtualScroll]="true" placeholder="Select the Category" required>
+            <div class="clear paddingTop15"></div>
+            <ng-select
+              [items]="category"
+              bindLabel="value"
+              name="category"
+              bindValue="id"
+              [(ngModel)]="notesCategory"
+              [multiple]="false"
+              [virtualScroll]="true"
+              placeholder="Select the Category"
+              required
+            >
             </ng-select>
           </span>
-          <div  *ngIf = "entityInfo.type !='P'" class="clear paddingTop15">
-          </div>
-          <span *ngIf = "entityInfo.type !='P'">
+          <div *ngIf="entityInfo.type !== 'P'" class="clear paddingTop15"></div>
+          <span *ngIf="entityInfo.type !== 'P'">
             <label for="cars">Summary:</label>
-            <div class="clear paddingTop15">
-            </div>
-            <input type="text" class="form-control" placeholder="Write the Summary" [(ngModel)]="summary"
-              [ngModelOptions]="{standalone: true}" required>
+            <div class="clear paddingTop15"></div>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Write the Summary"
+              [(ngModel)]="summary"
+              [ngModelOptions]="{ standalone: true }"
+              required
+            />
           </span>
-          <div  *ngIf = "entityInfo.type !='P'"class="clear paddingTop15">
-          </div>
+          <div *ngIf="entityInfo.type !== 'P'" class="clear paddingTop15"></div>
           <label for="cars">Notes:</label>
-          <div class="clear paddingTop15">
-          </div>
+          <div class="clear paddingTop15"></div>
           <div class="form-group">
-            <textarea type="text" class="form-control" id="name" placeholder="Write your note here..."
-              [(ngModel)]="note" [ngModelOptions]="{standalone: true}" rows="6" cols="50" style="resize:none;"
-              required></textarea>
+            <textarea
+              type="text"
+              class="form-control"
+              id="name"
+              placeholder="Write your note here..."
+              [(ngModel)]="note"
+              [ngModelOptions]="{ standalone: true }"
+              rows="6"
+              cols="50"
+              style="resize: none"
+              required
+            ></textarea>
           </div>
           <div class="clear paddingTop15"></div>
-
         </div>
         <div class="modal-footer">
           <a data-dismiss="modal" alt="Cancel"><span>Cancel</span></a>
@@ -47,6 +65,5 @@
         </div>
       </form>
     </div>
-
   </div>
 </div>

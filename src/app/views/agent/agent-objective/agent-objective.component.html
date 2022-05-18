@@ -2,34 +2,62 @@
   <div class="wrapper-back">
     <div class="container nav-bg">
       <div class="row">
-        <div class="col-xs-2 toppad"><img src="../../../../images/back-btn.svg" alt="" (click)="goBack()"></div>
+        <div class="col-xs-2 toppad">
+          <img
+            src="../../../../images/back-btn.svg"
+            alt=""
+            (click)="goBack()"
+          />
+        </div>
         <div class="col-xs-6 text-center">
           <h1 class="t-agent">Objective</h1>
         </div>
         <!-- <div class="col-xs-3 text-center tpad" *ngIf="!hideEditObjective"> -->
-          <div class="col-xs-4 text-right tpad">
+        <div class="col-xs-4 text-right tpad">
           <!-- <a alt="" (click)="openEditObjectiveDialog()"><img src="../../../../images/add.svg" alt=""><br>
             <span class="edit-detail">Edit Objective</span></a> -->
-            <a  *ngIf ="hideEditObjective && !hideAddEdit" alt="" (click)="openAddObjectiveDialog()"><img src="../../../../images/add.svg" alt=""><br>
-              <span class="edit-detail">Add Objective</span></a>
-              <a *ngIf ="!hideEditObjective && !hideAddEdit" alt="" (click)="openEditObjectiveDialog()"><img src="../../../../images/add.svg" alt=""><br>
-                <span class="edit-detail">Edit Objective</span></a>
-                
+          <a
+            *ngIf="hideEditObjective && !hideAddEdit"
+            alt=""
+            (click)="openAddObjectiveDialog()"
+            ><img src="../../../../images/add.svg" alt="" /><br />
+            <span class="edit-detail">Add Objective</span></a
+          >
+          <a
+            *ngIf="!hideEditObjective && !hideAddEdit"
+            alt=""
+            (click)="openEditObjectiveDialog()"
+            ><img src="../../../../images/add.svg" alt="" /><br />
+            <span class="edit-detail">Edit Objective</span></a
+          >
         </div>
       </div>
     </div>
-    <app-entity-name-header [entityModel]="entityModel"></app-entity-name-header>
+    <app-entity-name-header
+      [entityModel]="entityModel"
+    ></app-entity-name-header>
   </div>
   <div class="container app-bg2 bottom-wrapper-for-back">
     <ul class="nav nav-tabs mr-25 ml-25">
-      <li class="active"><a data-toggle="tab" href="#tab1" (click)="onTabClick(1)"  [class.disabled] = "true">Agent Objective</a></li>
-      <li><a data-toggle="tab" href="#tab2" (click)="onTabClick(2)">Our Objective</a></li>
+      <li class="active">
+        <a
+          data-toggle="tab"
+          href="#tab1"
+          (click)="onTabClick(1)"
+          [class.disabled]="true"
+          >Agent Objective</a
+        >
+      </li>
+      <li>
+        <a data-toggle="tab" href="#tab2" (click)="onTabClick(2)"
+          >Our Objective</a
+        >
+      </li>
     </ul>
 
     <div class="row">
       <!-- *****************************	 -->
       <div class="col-xs-12 col-md-12">
-
         <div class="tab-content">
           <!-- ---tab First beginning here---- -->
           <div id="tab1" class="tab-pane fade in active">
@@ -37,20 +65,31 @@
             <div class="clearfix paddingTop10"></div>
 
             <div id="agentObjective">
-
               <div class="row" *ngIf="agentActiveObjective">
                 <div class="col-xs-12 col-md-6 cell-bg">
                   <div class="ag-obj-active">
                     <div class="status">Status: <span>Active</span></div>
-                    <div class="d-date text-right">Due Date: {{agentActiveObjective.dueDate | slice:0:10}}</div>
+                    <div class="d-date text-right">
+                      Due Date: {{ agentActiveObjective.dueDate | slice: 0:10 }}
+                    </div>
                     <div class="clearfix"></div>
-                    <p>{{agentActiveObjective.description}}</p>
+                    <p>{{ agentActiveObjective.description }}</p>
                   </div>
                   <div class="ag-objective">
                     <ul>
-                      <li class="complete" (click)="onCompleteClick(agentActiveObjective)">Complete
+                      <li
+                        class="complete"
+                        (click)="onCompleteClick(agentActiveObjective)"
+                      >
+                        Complete
                       </li>
-                      <li  class="cancel" (click)="onCancelClick(agentActiveObjective)" style="float: right;">Cancel</li>
+                      <li
+                        class="cancel"
+                        (click)="onCancelClick(agentActiveObjective)"
+                        style="float: right"
+                      >
+                        Cancel
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -59,15 +98,16 @@
 
               <div class="col-xs-12 col-md-12 noPadding">
                 <div class="objectivesWp">
-                  <a (click)="showAgentRecentObj()">See all Recent Agent Objective</a>
+                  <a (click)="showAgentRecentObj()"
+                    >See all Recent Agent Objective</a
+                  >
                 </div>
               </div>
-
             </div>
 
-            <div id="recentAgentObj" style="display:none;">
+            <div id="recentAgentObj" style="display: none">
               <!-- <div *ngFor="let item of agentObjectivesMapArray | keyvalue"> -->
-                <!-- <div class="row">
+              <!-- <div class="row">
                   <div class="col-md-12 col-xs-12 noPadding">
                     <div class="monthSelectorWp">
                       <hr />
@@ -76,25 +116,36 @@
                     </div>
                   </div>
                 </div> -->
-                <div class="clearfix paddingTop5"></div>
-                <div class="row">
-                  <div class="col-xs-12 col-md-6 cell-bg" *ngFor="let innerItem of agentobjectiveModels">
-                    <div class="ag-obj-active">
-                      <div class="status">Status:
-                        <span>{{constants.statusFull[innerItem.Stat.toLocaleLowerCase()]}}</span></div>
-                      <div class="d-date text-right">Due Date: {{innerItem.dueDate | slice:0:10}}</div>
-                      <div class="clearfix"></div>
-                      <p>{{innerItem.description}}</p>
+              <div class="clearfix paddingTop5"></div>
+              <div class="row">
+                <div
+                  class="col-xs-12 col-md-6 cell-bg"
+                  *ngFor="let innerItem of agentobjectiveModels"
+                >
+                  <div class="ag-obj-active">
+                    <div class="status">
+                      Status:
+                      <span>{{
+                        constants.statusFull[innerItem.Stat.toLocaleLowerCase()]
+                      }}</span>
                     </div>
-                    <div class="paddingTop10"></div>
+                    <div class="d-date text-right">
+                      Due Date: {{ innerItem.dueDate | slice: 0:10 }}
+                    </div>
+                    <div class="clearfix"></div>
+                    <p>{{ innerItem.description }}</p>
                   </div>
+                  <div class="paddingTop10"></div>
                 </div>
-                <div class="clearfix paddingTop15"></div>
+              </div>
+              <div class="clearfix paddingTop15"></div>
               <!-- </div> -->
-              <div class="row " *ngIf="moreDataAvailable">
+              <div class="row" *ngIf="moreDataAvailable">
                 <div class="col-xs-12 col-md-12 loadMoreWp">
                   <hr />
-                  <div class="loadMore"><a (click)="onLoadMoreClick()" alt="Load More">Load More</a></div>
+                  <div class="loadMore">
+                    <a (click)="onLoadMoreClick()" alt="Load More">Load More</a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -119,7 +170,6 @@
             <div class="clearfix paddingTop15"></div>
           </div>
 
-          
           <!-- ---tab First end here---- -->
 
           <!-- ---tab second beginning here---- -->
@@ -128,18 +178,33 @@
             <div class="clearfix paddingTop10"></div>
             <div class="row">
               <div id="ourObjective">
-                <div class="col-xs-12 col-md-6 cell-bg" *ngIf="ourActiveObjective">
+                <div
+                  class="col-xs-12 col-md-6 cell-bg"
+                  *ngIf="ourActiveObjective"
+                >
                   <div class="ag-obj-active">
                     <div class="status">Status: <span>Active</span></div>
-                    <div class="d-date text-right">Due Date: {{ourActiveObjective.dueDate | slice:0:10}}</div>
+                    <div class="d-date text-right">
+                      Due Date: {{ ourActiveObjective.dueDate | slice: 0:10 }}
+                    </div>
                     <div class="clearfix"></div>
-                    <p>{{ourActiveObjective.description}}</p>
+                    <p>{{ ourActiveObjective.description }}</p>
                   </div>
                   <div class="ag-objective">
                     <ul>
-                      <li  class="complete" (click)="onCompleteClick(ourActiveObjective)">Complete
+                      <li
+                        class="complete"
+                        (click)="onCompleteClick(ourActiveObjective)"
+                      >
+                        Complete
                       </li>
-                      <li class="cancel" (click)="onCancelClick(ourActiveObjective)" style="float: right;">Cancel</li>
+                      <li
+                        class="cancel"
+                        (click)="onCancelClick(ourActiveObjective)"
+                        style="float: right"
+                      >
+                        Cancel
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -152,9 +217,9 @@
                   </div>
                 </div>
               </div>
-              <div id="ourObj" style="display:none;">
+              <div id="ourObj" style="display: none">
                 <!-- <div *ngFor="let item of ourObjectivesMapArray | keyvalue"> -->
-                  <!-- <div class="row">
+                <!-- <div class="row">
                     <div class="col-md-12 col-xs-12 noPadding">
                       <div class="monthSelectorWp">
                         <hr />
@@ -163,25 +228,40 @@
                       </div>
                     </div>
                   </div> -->
-                  <div class="clearfix paddingTop5"></div>
-                  <div class="row">
-                    <div class="col-xs-12 col-md-6 cell-bg" *ngFor="let innerItem of ourobjectiveModels">
-                      <div class="ag-obj-active">
-                        <div class="status">Status:
-                          <span>{{constants.statusFull[innerItem.Stat.toLocaleLowerCase()]}}</span></div>
-                        <div class="d-date text-right">Due Date: {{innerItem.dueDate | slice:0:10}}</div>
-                        <div class="clearfix"></div>
-                        <p>{{innerItem.description}}</p>
+                <div class="clearfix paddingTop5"></div>
+                <div class="row">
+                  <div
+                    class="col-xs-12 col-md-6 cell-bg"
+                    *ngFor="let innerItem of ourobjectiveModels"
+                  >
+                    <div class="ag-obj-active">
+                      <div class="status">
+                        Status:
+                        <span>{{
+                          constants.statusFull[
+                            innerItem.Stat.toLocaleLowerCase()
+                          ]
+                        }}</span>
                       </div>
-                      <div class="paddingTop10"></div>
+                      <div class="d-date text-right">
+                        Due Date: {{ innerItem.dueDate | slice: 0:10 }}
+                      </div>
+                      <div class="clearfix"></div>
+                      <p>{{ innerItem.description }}</p>
                     </div>
+                    <div class="paddingTop10"></div>
                   </div>
-                  <div class="clearfix paddingTop15"></div>
+                </div>
+                <div class="clearfix paddingTop15"></div>
                 <!-- </div> -->
                 <div class="row" *ngIf="moreDataAvailable">
                   <div class="col-xs-12 col-md-12 loadMoreWp">
                     <hr />
-                    <div class="loadMore"><a (click)="onLoadMoreClick()" alt="Load More">Load More</a></div>
+                    <div class="loadMore">
+                      <a (click)="onLoadMoreClick()" alt="Load More"
+                        >Load More</a
+                      >
+                    </div>
                   </div>
                 </div>
               </div>
@@ -205,72 +285,95 @@
                 </div>
               </div> -->
 
-
-
               <div class="clearfix paddingTop15"></div>
             </div>
             <!-- ---tab second end here---- -->
-
           </div>
         </div>
-
       </div>
-
     </div>
-
-    
-    
   </div>
 </div>
-<div class="container" *ngIf= "selectedTab == 1">
+<div class="container" *ngIf="selectedTab === 1">
   <div class="row">
     <div class="col-xs-12">
       <div class="form-group">
-        <button type="button" class="btn btn-primary addNoteBtn" data-toggle="modal" data-target="#addNewNotes">
-          <img src="images/add-note-icon.svg" alt=""> &nbsp; Add Note
+        <button
+          type="button"
+          class="btn btn-primary addNoteBtn"
+          data-toggle="modal"
+          data-target="#addNewNotes"
+        >
+          <img src="images/add-note-icon.svg" alt="" /> &nbsp; Add Note
         </button>
       </div>
     </div>
 
-    <div class="buttonFooter_wp" *ngIf = "agentActiveObjective !=null">
-      <button type="button" class="btn btn-primary footerBtn" (click)="openRecordSentiment(agentActiveObjective)">
-        <img src="images/record-obj-icon.svg" alt=""> Record Objective Sentiment
+    <div class="buttonFooter_wp" *ngIf="agentActiveObjective !== null">
+      <button
+        type="button"
+        class="btn btn-primary footerBtn"
+        (click)="openRecordSentiment(agentActiveObjective)"
+      >
+        <img src="images/record-obj-icon.svg" alt="" /> Record Objective
+        Sentiment
       </button>
     </div>
     <div class="col-xs-12">
-    <div class="form-group" *ngIf = "agentActiveSentiment !=null">
-      <button type="button" class="btn btn-primary addNoteBtn" data-toggle="modal" (click)="openViewSentimentHistory(agentActiveObjective)">
-        <img src="images/add-note-icon.svg" alt="" > &nbsp; View Sentiment History 
-      </button>
-    </div>
+      <div class="form-group" *ngIf="agentActiveSentiment !== null">
+        <button
+          type="button"
+          class="btn btn-primary addNoteBtn"
+          data-toggle="modal"
+          (click)="openViewSentimentHistory(agentActiveObjective)"
+        >
+          <img src="images/add-note-icon.svg" alt="" /> &nbsp; View Sentiment
+          History
+        </button>
+      </div>
     </div>
   </div>
 </div>
 
-              <div class="container" *ngIf= "selectedTab == 2">
-                <div class="row">
-                  <div class="col-xs-12">
-                    <div class="form-group">
-                      <button type="button" class="btn btn-primary addNoteBtn" data-toggle="modal" data-target="#addNewNotes">
-                        <img src="images/add-note-icon.svg" alt=""> &nbsp; Add Note
-                      </button>
-                    </div>
-                  </div>
+<div class="container" *ngIf="selectedTab === 2">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="form-group">
+        <button
+          type="button"
+          class="btn btn-primary addNoteBtn"
+          data-toggle="modal"
+          data-target="#addNewNotes"
+        >
+          <img src="images/add-note-icon.svg" alt="" /> &nbsp; Add Note
+        </button>
+      </div>
+    </div>
 
-                  <div class="buttonFooter_wp" *ngIf = "ourActiveObjective !=null">
-                    <button type="button" class="btn btn-primary footerBtn" (click)="openRecordSentiment(ourActiveObjective)">
-                      <img src="images/record-obj-icon.svg" alt="" > Record Objective Sentiment
-                    </button>
-                  </div>
-                  <div class="col-xs-12">
-
-                  <div class="form-group" *ngIf = "ourActiveSentiment !=null">
-                    <button type="button" class="btn btn-primary addNoteBtn" (click)="openViewSentimentHistory(ourActiveObjective)" data-toggle="modal">
-                      <img src="images/add-note-icon.svg" alt="" > &nbsp; View Sentiment History 
-                    </button>
-                  </div>
+    <div class="buttonFooter_wp" *ngIf="ourActiveObjective !== null">
+      <button
+        type="button"
+        class="btn btn-primary footerBtn"
+        (click)="openRecordSentiment(ourActiveObjective)"
+      >
+        <img src="images/record-obj-icon.svg" alt="" /> Record Objective
+        Sentiment
+      </button>
+    </div>
+    <div class="col-xs-12">
+      <div class="form-group" *ngIf="ourActiveSentiment !== null">
+        <button
+          type="button"
+          class="btn btn-primary addNoteBtn"
+          (click)="openViewSentimentHistory(ourActiveObjective)"
+          data-toggle="modal"
+        >
+          <img src="images/add-note-icon.svg" alt="" /> &nbsp; View Sentiment
+          History
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
-                </div>
-              </div>
-              
+
 <app-add-note></app-add-note>

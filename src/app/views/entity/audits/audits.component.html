@@ -2,15 +2,21 @@
   <div class="wrapper-back">
     <div class="container nav-bg">
       <div id="detail-page-header">
-
-        <div class="col-xs-2 toppad"><img src="../../../../images/back-btn.svg" alt="" (click)="goBack()"></div>
+        <div class="col-xs-2 toppad">
+          <img
+            src="../../../../images/back-btn.svg"
+            alt=""
+            (click)="goBack()"
+          />
+        </div>
         <div class="col-xs-7 text-center">
           <h1 class="t-agent">Audits</h1>
         </div>
-
       </div>
     </div>
-    <app-entity-name-header [entityModel]="entityModel"></app-entity-name-header>
+    <app-entity-name-header
+      [entityModel]="entityModel"
+    ></app-entity-name-header>
   </div>
 
   <div class="container app-bg5 bottom-wrapper-for-back" *ngIf="hideNoDataDiv">
@@ -19,11 +25,22 @@
         <li *ngFor="let item of auditsModels" (click)="onAuditSelected(item)">
           <div class="col-xs-12 col-md-6 cell-bg">
             <div class="agent-detail ag-perform">
-              <h4 class="paddingBottom5">{{item.stat}} <span
-                  class="textRight fontBold">{{item.stat!=''&&item.stat=='Completed'?'Finish Date:':'Scheduled Date:'}}</span><br /><span
-                  class="textRight">{{getFormattedDate(item.stat=='Completed'?item.auditFinishDate:item.schedFinishDate)}}</span>
+              <h4 class="paddingBottom5">
+                {{ item.stat }}
+                <span class="textRight fontBold">{{
+                  item.stat !== "" && item.stat === "Completed"
+                    ? "Finish Date:"
+                    : "Scheduled Date:"
+                }}</span
+                ><br /><span class="textRight">{{
+                  getFormattedDate(
+                    item.stat === "Completed"
+                      ? item.auditFinishDate
+                      : item.schedFinishDate
+                  )
+                }}</span>
               </h4>
-              <span class="textDoller">{{item.auditType}}</span>
+              <span class="textDoller">{{ item.auditType }}</span>
               <div class="clearfix"></div>
               <div class="paddingTop10"></div>
             </div>
@@ -33,15 +50,19 @@
       <div class="row marginBottom20" *ngIf="moreDataAvailable">
         <div class="col-xs-12 col-md-12 loadMoreWp">
           <hr />
-          <div class="loadMore"><a alt="Load More" (click)="onLoadMoreClick()">Load More</a></div>
+          <div class="loadMore">
+            <a alt="Load More" (click)="onLoadMoreClick()">Load More</a>
+          </div>
         </div>
       </div>
       <!-- <div id="ratioView">{{totalAndCurrentRowsRatio}}</div> -->
     </div>
   </div>
-  <div class="serach-emp " *ngIf="!hideNoDataDiv" style="margin-top:100px">
+  <div class="serach-emp" *ngIf="!hideNoDataDiv" style="margin-top: 100px">
     <h2><em>It is Empty Here!</em></h2>
-    <p><em>{{errorMsg}}</em></p>
+    <p>
+      <em>{{ errorMsg }}</em>
+    </p>
   </div>
 </div>
 <app-claims-filter></app-claims-filter>

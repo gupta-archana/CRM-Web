@@ -1,9 +1,14 @@
 <mat-dialog-content class="mat-dialog-content">
-
-
   <!-- Modal content-->
   <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" (click) = "onCancelClick()">&times;</button>
+    <button
+      type="button"
+      class="close"
+      data-dismiss="modal"
+      (click)="onCancelClick()"
+    >
+      &times;
+    </button>
     <h4 class="modal-title">Record Interaction</h4>
   </div>
   <form role="form">
@@ -12,7 +17,7 @@
 
       <div class="row">
         <div class="col-md-12 col-xs-12">
-          <span>{{objectiveModel.description}}</span>
+          <span>{{ objectiveModel.description }}</span>
         </div>
       </div>
       <div class="clear paddingTop15"></div>
@@ -22,58 +27,167 @@
       <div class="clear paddingTop15"></div>
       <div class="clear paddingTop10"></div>
 
-      
-          <div class="form-group">
-            <label class="paddingTop10" for="state">Sentiments of:</label>
-            <ng-select *ngIf="personList.length > 0" [items]="personList" bindLabel="dispname" name="person"
-              bindValue="personID" value="sentimentModel.personName" [(ngModel)]="selectedPerson" [multiple]="false"
-              [virtualScroll]="true" placeholder="Select the Person">
-            </ng-select>
-            <p *ngIf="personList.length == 0"> No Person Found</p>
-            <!-- <ng-select *ngIf="personList.length == 0" [items]="personList" bindLabel="dispname" name="person"
+      <div class="form-group">
+        <label class="paddingTop10" for="state">Sentiments of:</label>
+        <ng-select
+          *ngIf="personList.length > 0"
+          [items]="personList"
+          bindLabel="dispname"
+          name="person"
+          bindValue="personID"
+          value="sentimentModel.personName"
+          [(ngModel)]="selectedPerson"
+          [multiple]="false"
+          [virtualScroll]="true"
+          placeholder="Select the Person"
+        >
+        </ng-select>
+        <p *ngIf="personList.length === 0">No Person Found</p>
+        <!-- <ng-select *ngIf="personList.length == 0" [items]="personList" bindLabel="dispname" name="person"
               bindValue="personID" value="sentimentModel.personName" [(ngModel)]="selectedPerson" [multiple]="false"
               [virtualScroll]="true" placeholder="Select the Person" required>
             </ng-select> -->
-          </div>
-          
+      </div>
+
       <div class="clear paddingTop15"></div>
 
       <div class="row justify-content-center">
-        <div class="col-auto example-block text-center"> <label class="radio-inline"> <input type="radio" name="emotion"
-              id="terrible" id="happy" class="input-hidden" /> <img
-              src="https://img.icons8.com/emoji/48/000000/pensive-face.png" id="terrible"
-              [ngClass]="{ 'postClick':type==1}" width="50" height="50" (click)=" selectedSentiments(1)" /> </label>
-          <div class="expressionText" >
-            <p [ngStyle]="{'color':sentimentModel.type =='1' ? 'darkred' : 'grey' }">Terrible!</p>
+        <div class="col-auto example-block text-center">
+          <label class="radio-inline">
+            <input
+              type="radio"
+              name="emotion"
+              id="terrible"
+              id="happy"
+              class="input-hidden"
+            />
+            <img
+              src="https://img.icons8.com/emoji/48/000000/pensive-face.png"
+              id="terrible"
+              [ngClass]="{ postClick: type === 1 }"
+              width="50"
+              height="50"
+              (click)="selectedSentiments(1)"
+            />
+          </label>
+          <div class="expressionText">
+            <p
+              [ngStyle]="{
+                color: sentimentModel.type === '1' ? 'darkred' : 'grey'
+              }"
+            >
+              Terrible!
+            </p>
           </div>
         </div>
-        <div class="col-auto example-block text-center"><label class="radio-inline"> <input type="radio" name="emotion"
-              id="poor" id="sad" class="input-hidden" /><img src="https://img.icons8.com/color/100/000000/sad.png"
-              id="poor" [ngClass]="{ 'postClick':type==2}" width="50" height="50"
-              (click)="selectedSentiments(2)"></label>
+        <div class="col-auto example-block text-center">
+          <label class="radio-inline">
+            <input
+              type="radio"
+              name="emotion"
+              id="poor"
+              id="sad"
+              class="input-hidden" /><img
+              src="https://img.icons8.com/color/100/000000/sad.png"
+              id="poor"
+              [ngClass]="{ postClick: type === 2 }"
+              width="50"
+              height="50"
+              (click)="selectedSentiments(2)"
+          /></label>
           <div class="expressionText">
-            <p [ngStyle]="{'color':sentimentModel.type =='2' ? 'red' : 'grey' }">Poor!</p></div>
+            <p
+              [ngStyle]="{
+                color: sentimentModel.type === '2' ? 'red' : 'grey'
+              }"
+            >
+              Poor!
+            </p>
+          </div>
         </div>
-        <div class="col-auto example-block text-center"> <label class="radio-inline"> <input type="radio" name="emotion"
-              id="alright" id="happy" class="input-hidden" /> <img
-              src="https://img.icons8.com/emoji/48/000000/neutral-face.png" id="alright"
-              [ngClass]="{ 'postClick':type==3}" width="50" height="50" (click)=" selectedSentiments(3)" /> </label>
-          <div class="expressionText" >
-            <p [ngStyle]="{'color':sentimentModel.type =='3'? 'blue' : 'grey' }">Alright!</p></div>
+        <div class="col-auto example-block text-center">
+          <label class="radio-inline">
+            <input
+              type="radio"
+              name="emotion"
+              id="alright"
+              id="happy"
+              class="input-hidden"
+            />
+            <img
+              src="https://img.icons8.com/emoji/48/000000/neutral-face.png"
+              id="alright"
+              [ngClass]="{ postClick: type === 3 }"
+              width="50"
+              height="50"
+              (click)="selectedSentiments(3)"
+            />
+          </label>
+          <div class="expressionText">
+            <p
+              [ngStyle]="{
+                color: sentimentModel.type === '3' ? 'blue' : 'grey'
+              }"
+            >
+              Alright!
+            </p>
+          </div>
         </div>
-        <div class="col-auto example-block text-center"> <label class="radio-inline"> <input type="radio" name="emotion"
-              id="good" id="exicetd" class="input-hidden" /> <img
-              src="https://img.icons8.com/emoji/48/000000/smiling-face.png" id="good" [ngClass]="{ 'postClick':type==4}"
-              width="50" height="50" (click)="selectedSentiments(4)"> </label>
-          <div class="expressionText" >
-            <p [ngStyle]="{'color':sentimentModel.type =='4' ? 'green' : 'grey' }">Good!</p></div>
+        <div class="col-auto example-block text-center">
+          <label class="radio-inline">
+            <input
+              type="radio"
+              name="emotion"
+              id="good"
+              id="exicetd"
+              class="input-hidden"
+            />
+            <img
+              src="https://img.icons8.com/emoji/48/000000/smiling-face.png"
+              id="good"
+              [ngClass]="{ postClick: type === 4 }"
+              width="50"
+              height="50"
+              (click)="selectedSentiments(4)"
+            />
+          </label>
+          <div class="expressionText">
+            <p
+              [ngStyle]="{
+                color: sentimentModel.type === '4' ? 'green' : 'grey'
+              }"
+            >
+              Good!
+            </p>
+          </div>
         </div>
-        <div class="col-auto example-block text-center"> <label class="radio-inline"> <input type="radio" name="emotion"
-              id="great" id="exicetd" class="input-hidden" /> <img
-              src="https://img.icons8.com/emoji/48/000000/star-struck.png" [ngClass]="{ 'postClick':type==5}" id="great"
-              width="50" height="50" (click)="selectedSentiments(5)" /> </label>
-          <div class="expressionText" >
-            <p [ngStyle]="{'color':sentimentModel.type =='5' ? 'darkgreen' : 'grey' }">Great!</p></div>
+        <div class="col-auto example-block text-center">
+          <label class="radio-inline">
+            <input
+              type="radio"
+              name="emotion"
+              id="great"
+              id="exicetd"
+              class="input-hidden"
+            />
+            <img
+              src="https://img.icons8.com/emoji/48/000000/star-struck.png"
+              [ngClass]="{ postClick: type === 5 }"
+              id="great"
+              width="50"
+              height="50"
+              (click)="selectedSentiments(5)"
+            />
+          </label>
+          <div class="expressionText">
+            <p
+              [ngStyle]="{
+                color: sentimentModel.type === '5' ? 'darkgreen' : 'grey'
+              }"
+            >
+              Great!
+            </p>
+          </div>
         </div>
       </div>
       <div class="clear paddingTop15"></div>
@@ -87,7 +201,6 @@
         <input type="range" min="1" max="5" value="1" class="slider" id="myRange">
       </div> -->
 
-
       <div class="clear paddingTop15"></div>
       <div class="clear paddingTop15"></div>
       <!-- <div class="clear paddingTop15"></div>
@@ -96,10 +209,16 @@
     <p>Sentiment scale is remaining</p>
 </div> -->
 
-
       <div class="form-group">
         <label for="usr">Note</label>
-        <input type="text" class="form-control" id="name" name="notes" placeholder="(Optional)" [(ngModel)]="note">
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          name="notes"
+          placeholder="(Optional)"
+          [(ngModel)]="note"
+        />
       </div>
     </div>
     <div class="clear paddingTop10"></div>
@@ -107,12 +226,15 @@
 </mat-dialog-content>
 <div class="row">
   <mat-dialog-actions id="MarkAsReviewedDialogButtonGroup" align="end">
-    <div class="col-md-6">
-    </div>
+    <div class="col-md-6"></div>
     <div class="col-md-6">
       <button (click)="onCancelClick()">Cancel</button>
-      <button (click)="saveSentiment()"  [ngClass] = "{'saveButton' : (selectedPerson === undefined || type === 0)}">Save Changes</button>
-
+      <button
+        (click)="saveSentiment()"
+        [ngClass]="{ saveButton: selectedPerson === undefined || type === 0 }"
+      >
+        Save Changes
+      </button>
     </div>
   </mat-dialog-actions>
 </div>

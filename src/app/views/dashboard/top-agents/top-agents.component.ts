@@ -1,19 +1,30 @@
-import { Component, OnInit, ChangeDetectorRef, HostListener, OnDestroy, Injector } from '@angular/core';
-import { AgentInfoModel } from 'src/app/models/TopAgentsModel';
+import {
+  Component,
+  OnInit,
+  ChangeDetectorRef,
+  HostListener,
+  OnDestroy,
+  Injector,
+  AfterContentInit,
+} from "@angular/core";
+import { AgentInfoModel } from "src/app/models/TopAgentsModel";
 
-import { ApiResponseCallback } from '../../../Interfaces/ApiResponseCallback';
+import { ApiResponseCallback } from "../../../Interfaces/ApiResponseCallback";
 
-import { Subscription } from 'rxjs';
-import { BaseClass } from '../../../global/base-class';
-import { EntityModel } from '../../../models/entity-model';
-import { CommonApisService } from '../../../utils/common-apis.service';
+import { Subscription } from "rxjs";
+import { BaseClass } from "../../../global/base-class";
+import { EntityModel } from "../../../models/entity-model";
+import { CommonApisService } from "../../../utils/common-apis.service";
 
 @Component({
-  selector: 'app-top-agents',
-  templateUrl: './top-agents.component.html',
-  styleUrls: ['./top-agents.component.css']
+  selector: "app-top-agents",
+  templateUrl: "./top-agents.component.html",
+  styleUrls: ["./top-agents.component.css"],
 })
-export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponseCallback, OnDestroy {
+export class TopAgentsComponent
+  extends BaseClass
+  implements OnInit, ApiResponseCallback, OnDestroy, AfterContentInit
+{
   emailId: string;
   encryptedPassword: string;
   pageRefreshSubscription: Subscription = null;
@@ -22,7 +33,7 @@ export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponse
   moreDataAvailable: boolean = false;
   hideNoDataDiv: boolean = false;
   errorMsg: string = "";
-  type:string ="T"
+  type: string = "T";
 
   totalAndCurrentRowsRatio: string = "";
 
@@ -35,10 +46,10 @@ export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponse
 
   ngOnInit() {
     this.commonFunctions.hideShowTopScrollButton(document);
-    this.pageRefreshSubscription = this.dataService.pageRefreshObservable.subscribe(called => {
-      if (called)
-        refreshData(this);
-    });
+    this.pageRefreshSubscription =
+      this.dataService.pageRefreshObservable.subscribe((called) => {
+        if (called) refreshData(this);
+      });
   }
   ngAfterContentInit() {
     this.getTopAgents();
@@ -51,33 +62,38 @@ export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponse
   onAgentClick(agent: EntityModel) {
     sessionStorage.setItem(this.constants.ENTITY_INFO, JSON.stringify(agent));
     setData(this);
-    this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_AGENT_DETAIL);
+    this.commonFunctions.navigateWithoutReplaceUrl(
+      this.paths.PATH_AGENT_DETAIL
+    );
   }
-
-
 
   private getTopAgents() {
     this.emailId = this.myLocalStorage.getValue(this.constants.EMAIL);
-    this.encryptedPassword = this.commonFunctions.getEncryptedPassword(this.myLocalStorage.getValue(this.constants.PASSWORD));
-    this.topAgents = JSON.parse(sessionStorage.getItem(this.constants.TOP_AGENT_DATA));
+    this.encryptedPassword = this.commonFunctions.getEncryptedPassword(
+      this.myLocalStorage.getValue(this.constants.PASSWORD)
+    );
+    this.topAgents = JSON.parse(
+      sessionStorage.getItem(this.constants.TOP_AGENT_DATA)
+    );
     if (!this.topAgents) {
       this.topAgents = [];
       hitApi(this);
-    }
-    else {
+    } else {
       getData(this);
     }
   }
-
 
   checkEntityFavorite(item: EntityModel) {
     return !this.commonFunctions.checkFavorite(item.entityId);
   }
 
   onStarClick(item: EntityModel) {
-    this.commonApis.setFavorite(item, this.apiHandler, this.cdr).asObservable().subscribe(data => {
-      this.renderUI();
-    });;
+    this.commonApis
+      .setFavorite(item, this.apiHandler, this.cdr)
+      .asObservable()
+      .subscribe((data) => {
+        this.renderUI();
+      });
   }
 
   onSuccess(response: any) {
@@ -93,7 +109,7 @@ export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponse
   private parseAndShowDataOnUi(response: any) {
     let newTopAgents = response.profile;
     if (newTopAgents) {
-      newTopAgents.forEach(element => {
+      newTopAgents.forEach((element) => {
         if (element.type == this.constants.ENTITY_AGENT_PRESENTER) {
           this.commonFunctions.setFavoriteOnApisResponse(element);
           this.topAgents.push(element);
@@ -122,42 +138,56 @@ export class TopAgentsComponent extends BaseClass implements OnInit, ApiResponse
   }
 
   ngOnDestroy(): void {
-
     if (this.pageRefreshSubscription && !this.pageRefreshSubscription.closed) {
       this.pageRefreshSubscription.unsubscribe();
     }
   }
-
 }
 
 function hitApi(context: TopAgentsComponent) {
   context.pageNumber++;
-  context.apiHandler.getTopAgents(context.type,context.pageNumber, context);
+  context.apiHandler.getTopAgents(context.type, context.pageNumber, context);
 }
 
-
 function setData(context: TopAgentsComponent) {
-  sessionStorage.setItem(context.constants.TOP_AGENT_CURRENT_PAGE_NO, context.pageNumber.toString());
-  sessionStorage.setItem(context.constants.TOP_AGENT_DATA, JSON.stringify(context.topAgents));
-  sessionStorage.setItem(context.constants.TOP_AGENT_TOTAL_ROWS, context.totalRows);
+  sessionStorage.setItem(
+    context.constants.TOP_AGENT_CURRENT_PAGE_NO,
+    context.pageNumber.toString()
+  );
+  sessionStorage.setItem(
+    context.constants.TOP_AGENT_DATA,
+    JSON.stringify(context.topAgents)
+  );
+  sessionStorage.setItem(
+    context.constants.TOP_AGENT_TOTAL_ROWS,
+    context.totalRows
+  );
 }
 
 function getData(context: TopAgentsComponent) {
-  context.pageNumber = Number(sessionStorage.getItem(context.constants.TOP_AGENT_CURRENT_PAGE_NO));
-  context.totalRows = Number(sessionStorage.getItem(context.constants.TOP_AGENT_TOTAL_ROWS));
+  context.pageNumber = Number(
+    sessionStorage.getItem(context.constants.TOP_AGENT_CURRENT_PAGE_NO)
+  );
+  context.totalRows = Number(
+    sessionStorage.getItem(context.constants.TOP_AGENT_TOTAL_ROWS)
+  );
   context.renderUI();
-
 }
 
 function checkMoreDataAvailable(context: TopAgentsComponent) {
-  if ((!context.topAgents && context.topAgents.length == 0) || context.topAgents.length >= context.totalRows)
+  if (
+    (!context.topAgents && context.topAgents.length == 0) ||
+    context.topAgents.length >= context.totalRows
+  )
     context.moreDataAvailable = false;
-  else
-    context.moreDataAvailable = true;
+  else context.moreDataAvailable = true;
 }
 
 function updateRatioUI(context: TopAgentsComponent) {
-  context.commonFunctions.showLoadedItemTagOnHeader(context.topAgents, context.totalRows);
+  context.commonFunctions.showLoadedItemTagOnHeader(
+    context.topAgents,
+    context.totalRows
+  );
   //context.totalAndCurrentRowsRatio = context.commonFunctions.showMoreDataSnackbar(context.topAgents, context.totalRows);
   context.cdr.markForCheck();
 }
@@ -169,8 +199,7 @@ function refreshData(context: TopAgentsComponent) {
 function checkAndSetUi(context: TopAgentsComponent) {
   if (!context.topAgents || context.topAgents.length == 0) {
     resetData(context);
-  }
-  else {
+  } else {
     context.hideNoDataDiv = true;
   }
   context.cdr.markForCheck();
@@ -183,4 +212,3 @@ function resetData(context: TopAgentsComponent) {
   context.moreDataAvailable = false;
   context.hideNoDataDiv = false;
 }
-

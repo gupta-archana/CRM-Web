@@ -2,7 +2,14 @@
   <!-- Modal content-->
 
   <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" (click) = "onCancelClick()" >&times;</button>
+    <button
+      type="button"
+      class="close"
+      data-dismiss="modal"
+      (click)="onCancelClick()"
+    >
+      &times;
+    </button>
     <h4 class="modal-title">Edit Objective</h4>
   </div>
   <form role="form" #registerForm="ngForm">
@@ -11,28 +18,59 @@
 
       <div class="form-group">
         <label for="usr">Objective Details</label>
-         <input type="text" class="form-control" id="name" [(ngModel)]="objectiveModel.description"
-          [ngModelOptions]="{standalone: true}" #name="ngModel" required (keydown)="keyDownHandler($event)"> 
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          [(ngModel)]="objectiveModel.description"
+          [ngModelOptions]="{ standalone: true }"
+          #name="ngModel"
+          required
+          (keydown)="keyDownHandler($event)"
+        />
       </div>
-      <span class="text-danger"
-      *ngIf="(name.touched || registerForm.submitted) && name.errors?.required">
-      <p style="color: red;">Name is required</p>
-  </span>
+      <span
+        class="text-danger"
+        *ngIf="
+          (name.touched || registerForm.submitted) && name.errors?.required
+        "
+      >
+        <p style="color: red">Name is required</p>
+      </span>
       <div class="form-group calenderPosition">
         <label for="usr">Due Date of Objective</label>
-        <br>
-         <!-- <button type="submit" class="btn btn-default add-btn"><img src="images/calendar-icon.svg" alt=""></button> -->
+        <br />
+        <!-- <button type="submit" class="btn btn-default add-btn"><img src="images/calendar-icon.svg" alt=""></button> -->
         <mat-form-field>
-          <input matInput [matDatepicker] = "picker"  placeholder = "Choose a date" name="dueDate"  ngControl = "dueDate" [(ngModel)]="dueDate" [min]="minDate" readonly required  #date="ngModel">
-          <mat-datepicker-toggle matSuffix [for] = "picker" required></mat-datepicker-toggle>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            placeholder="Choose a date"
+            name="dueDate"
+            ngControl="dueDate"
+            [(ngModel)]="dueDate"
+            [min]="minDate"
+            readonly
+            required
+            #date="ngModel"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+            required
+          ></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
-       </mat-form-field>
-       <span class="text-danger"
-       *ngIf="(date.touched || registerForm.submitted) && date.errors?.required">
-       <p style="color: red;">Due Date is required</p>
-   </span>
-        </div>
-        <!-- <mat-form-field appearance="fill">
+        </mat-form-field>
+        <span
+          class="text-danger"
+          *ngIf="
+            (date.touched || registerForm.submitted) && date.errors?.required
+          "
+        >
+          <p style="color: red">Due Date is required</p>
+        </span>
+      </div>
+      <!-- <mat-form-field appearance="fill">
           <mat-label>Custom calendar header</mat-label>
           <input matInput [matDatepicker]="picker">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -49,6 +87,17 @@
 </mat-dialog-content>
 <mat-dialog-actions id="MarkAsReviewedDialogButtonGroup" align="end">
   <button (click)="onCancelClick()">Cancel</button>
-  <button type="submit" (click)="onSaveChangesClick()" [ngClass] = "{'saveButton' : (objectiveModel.description == undefined ||objectiveModel.description == ''  || dueDate ==undefined)}">Save Changes</button>
+  <button
+    type="submit"
+    (click)="onSaveChangesClick()"
+    [ngClass]="{
+      saveButton:
+        objectiveModel.description === undefined ||
+        objectiveModel.description === '' ||
+        dueDate === undefined
+    }"
+  >
+    Save Changes
+  </button>
 </mat-dialog-actions>
 <!-- Edit Objective Modal End here -->

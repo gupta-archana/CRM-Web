@@ -1,17 +1,22 @@
 <mat-dialog-content class="mat-dialog-content">
-
   <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" (click) = "onCancelClick()">&times;</button>
+    <button
+      type="button"
+      class="close"
+      data-dismiss="modal"
+      (click)="onCancelClick()"
+    >
+      &times;
+    </button>
     <h4 class="modal-title">Sentiment History</h4>
   </div>
 
   <form role="form">
     <div class="modal-body">
-
       <div class="row">
         <div class="col-md-12 col-xs-12">
-          <p>Objective: &nbsp; </p>
-          <span>{{objectiveModel.description}}</span>
+          <p>Objective: &nbsp;</p>
+          <span>{{ objectiveModel.description }}</span>
         </div>
       </div>
 
@@ -20,42 +25,74 @@
       <div class="clear paddingTop10"></div>
       <div class="form-group">
         <label class="paddingTop10" for="state">Sentiments of:</label>
-        <ng-select *ngIf="personList?.length > 0" [items]="personList" bindLabel="dispname" name="person"
-          bindValue="personID" value="sentimentModel.personName" [(ngModel)]="selectedPerson" [multiple]="false"
-          [virtualScroll]="true" placeholder="Select the Person" required (change) = "OnPersonChange(selectedPerson)">
+        <ng-select
+          *ngIf="personList?.length > 0"
+          [items]="personList"
+          bindLabel="dispname"
+          name="person"
+          bindValue="personID"
+          value="sentimentModel.personName"
+          [(ngModel)]="selectedPerson"
+          [multiple]="false"
+          [virtualScroll]="true"
+          placeholder="Select the Person"
+          required
+          (change)="OnPersonChange(selectedPerson)"
+        >
         </ng-select>
-        <p *ngIf="personList?.length == 0"> No Person Found</p>
+        <p *ngIf="personList?.length === 0">No Person Found</p>
       </div>
       <div class="clear paddingTop15"></div>
 
-
       <div class="form-group">
         <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
-<div class="row">
-          <div class="col-sm-5">
-          <input type="date" id="dt" formControlName="email" class="form-control"  max = {{yearBeforeDate}}  (change)="handler($event);" (keydown)="disableDate()" >
+          <div class="row">
+            <div class="col-sm-5">
+              <input
+                type="date"
+                id="dt"
+                formControlName="email"
+                class="form-control"
+                max="{{ yearBeforeDate }}"
+                (change)="handler($event)"
+                (keydown)="disableDate()"
+              />
+            </div>
+            <div class="clear paddingTop10"></div>
+            <div class="col-sm-5">
+              <input
+                type="date"
+                id="dt"
+                formControlName="message"
+                class="form-control"
+                min="{{ dates }}"
+                max="{{ finalDate }}"
+                [readOnly]="true"
+              />
+            </div>
+            <div class="clear paddingTop10"></div>
+            <div class="col-sm-2">
+              <button class="form-control" type="submit" style="width: 70%">
+                Show
+              </button>
+            </div>
           </div>
-          <div class="clear paddingTop10"></div>
-          <div class="col-sm-5">
-            <input type="date" id="dt" formControlName="message" class="form-control"  min={{dates}} max={{finalDate}}  [readOnly]= "true">
-          </div>
-          <div class="clear paddingTop10"></div>
-          <div class="col-sm-2">
-            <button class= "form-control"type="submit" style="width: 70%;">Show</button>
-      
-          </div>
-        </div>
         </form>
       </div>
       <div class="clear paddingTop25"></div>
       <div class="clear paddingTop10"></div>
 
-<div class="row">
-      <!-- <div id="chartContainer"  style="height: 370px; width: 100%; margin-left:auto;margin-right:auto;"></div> -->
-      <p-chart type="line" [data]="basicData" width="400" height="400" [options]="basicOptions" *ngIf="basicData != [] "></p-chart>
+      <div class="row">
+        <!-- <div id="chartContainer"  style="height: 370px; width: 100%; margin-left:auto;margin-right:auto;"></div> -->
+        <p-chart
+          type="line"
+          [data]="basicData"
+          width="400"
+          height="400"
+          [options]="basicOptions"
+          *ngIf="basicData !== []"
+        ></p-chart>
+      </div>
     </div>
-</div>
-      </form>
+  </form>
 </mat-dialog-content>
-
-

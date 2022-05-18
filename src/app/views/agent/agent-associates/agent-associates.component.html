@@ -2,43 +2,67 @@
   <div class="wrapper-back">
     <div class="container nav-bg">
       <div id="detail-page-header">
-        <div class="col-xs-2 toppad"><img src="../../../../images/back-btn.svg" alt="" (click)="goBack()"></div>
+        <div class="col-xs-2 toppad">
+          <img
+            src="../../../../images/back-btn.svg"
+            alt=""
+            (click)="goBack()"
+          />
+        </div>
         <div class="col-xs-8 text-center">
           <h1 class="t-agent">Associates</h1>
         </div>
         <div class="col-xs-2 text-right toppad">
-          <a (click)="onRecentProfileClick()" alt="" data-toggle="modal" data-target="#recentAssociatesl"><img
-              src="../../../../images/baseline-history.svg" alt=""></a>
+          <a
+            (click)="onRecentProfileClick()"
+            alt=""
+            data-toggle="modal"
+            data-target="#recentAssociatesl"
+            ><img src="../../../../images/baseline-history.svg" alt=""
+          /></a>
         </div>
       </div>
     </div>
-    <app-entity-name-header [entityModel]="entityModel"></app-entity-name-header>
+    <app-entity-name-header
+      [entityModel]="entityModel"
+    ></app-entity-name-header>
   </div>
   <div class="container app-bg2 bottom-wrapper-for-back">
     <div class="row">
-
       <ul>
         <li *ngFor="let item of associatesModels" (click)="onPersonClick(item)">
           <div class="col-xs-12 col-md-6 cell-bg">
             <div class="agent-detail-associates">
               <div class="dp">
-                <img src="../../../../images/ic_note_profile.svg" alt="" (click)="onPersonClick(item)" />
-                <div class="dpProfile_wp proActiBg">{{item.stat}}</div>
+                <img
+                  src="../../../../images/ic_note_profile.svg"
+                  alt=""
+                  (click)="onPersonClick(item)"
+                />
+                <div class="dpProfile_wp proActiBg">{{ item.stat }}</div>
               </div>
-              <h4>{{item.dispname}} <span>({{item.personID}})</span></h4>
+              <h4>
+                {{ item.dispname }} <span>({{ item.personID }})</span>
+              </h4>
               <!-- <span class="paddingTop5">{{item.jobTitle}}</span> -->
-              <span>{{getAddress(item)}}</span>
+              <span>{{ getAddress(item) }}</span>
 
-
-              <span class="date">{{item.effectiveDate | slice:0:10}}</span>
+              <span class="date">{{ item.effectiveDate | slice: 0:10 }}</span>
               <div class="clearfix"></div>
               <div class="row">
-                <div class="col-md-12 col-xs-12" *ngIf="entityModel.type == 'P'">
-                  <div class="associatAgentName"><img src="../../../../images/baseline-business-24px.svg" alt="" />
-                    <span>{{item.agentname}}</span></div>
+                <div
+                  class="col-md-12 col-xs-12"
+                  *ngIf="entityModel.type === 'P'"
+                >
+                  <div class="associatAgentName">
+                    <img
+                      src="../../../../images/baseline-business-24px.svg"
+                      alt=""
+                    />
+                    <span>{{ item.agentname }}</span>
+                  </div>
                 </div>
               </div>
-
             </div>
           </div>
         </li>
@@ -46,15 +70,19 @@
       <div class="row" *ngIf="moreDataAvailable">
         <div class="col-xs-12 col-md-12 loadMoreWp">
           <hr />
-          <div class="loadMore"><a alt="Load More" (click)="onLoadMoreClick()">Load More</a></div>
+          <div class="loadMore">
+            <a alt="Load More" (click)="onLoadMoreClick()">Load More</a>
+          </div>
         </div>
       </div>
       <!-- <div id="ratioView">{{totalAndCurrentRowsRatio}}</div> -->
     </div>
   </div>
-  <div class="serach-emp " *ngIf="!hideNoDataDiv">
+  <div class="serach-emp" *ngIf="!hideNoDataDiv">
     <h2><em>It is Empty Here!</em></h2>
-    <p><em>{{errorMsg}}</em></p>
+    <p>
+      <em>{{ errorMsg }}</em>
+    </p>
   </div>
 </div>
 <app-recent-profile-dialog></app-recent-profile-dialog>

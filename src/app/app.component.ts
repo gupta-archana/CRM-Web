@@ -1,19 +1,30 @@
-import { Component, Injector, OnDestroy, OnInit } from '@angular/core';
-import { Event as NavigationEvent, NavigationStart, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
-import { BaseClass } from './global/base-class';
-import { RoutingStateService } from './services/routing-state.service';
+import {
+  AfterViewChecked,
+  Component,
+  Injector,
+  OnDestroy,
+  OnInit,
+} from "@angular/core";
+import {
+  Event as NavigationEvent,
+  NavigationStart,
+  Router,
+} from "@angular/router";
+import { Subscription } from "rxjs";
+import { filter } from "rxjs/operators";
+import { BaseClass } from "./global/base-class";
+import { RoutingStateService } from "./services/routing-state.service";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"],
 })
-export class AppComponent extends BaseClass implements OnInit, OnDestroy {
-
-
-  title = 'AlliantCRM';
+export class AppComponent
+  extends BaseClass
+  implements OnInit, OnDestroy, AfterViewChecked
+{
+  title = "AlliantCRM";
   private _opened: boolean = false;
   exit: boolean = false;
   called: boolean = false;
@@ -23,9 +34,11 @@ export class AppComponent extends BaseClass implements OnInit, OnDestroy {
   private _toggleSidebar() {
     this._opened = !this._opened;
   }
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     private injector: Injector,
-    private routingState: RoutingStateService) {
+    private routingState: RoutingStateService
+  ) {
     super(injector);
     router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
@@ -34,32 +47,47 @@ export class AppComponent extends BaseClass implements OnInit, OnDestroy {
     });
     this.checkAndSetUserConfig();
     var newUrl = location.pathname.substring(1, location.pathname.length);
-    if (this.myLocalStorage.getValue(this.constants.LOGGED_IN) && newUrl == "") {
-      let currentPath = localStorage.getItem("selected_home_screen") ? localStorage.getItem("selected_home_screen") : this.paths.PATH_SEARCH;
+    if (
+      this.myLocalStorage.getValue(this.constants.LOGGED_IN) &&
+      newUrl == ""
+    ) {
+      let currentPath = localStorage.getItem("selected_home_screen")
+        ? localStorage.getItem("selected_home_screen")
+        : this.paths.PATH_SEARCH;
       this.commonFunctions.navigateWithReplaceUrl(currentPath);
-
     }
   }
 
   private checkAndSetUserConfig() {
     if (!this.myLocalStorage.getValue(this.constants.SELECTED_HOME_SCREEN))
-      this.myLocalStorage.setValue(this.constants.SELECTED_HOME_SCREEN, this.paths.PATH_SEARCH);
+      this.myLocalStorage.setValue(
+        this.constants.SELECTED_HOME_SCREEN,
+        this.paths.PATH_SEARCH
+      );
     if (!this.myLocalStorage.getValue(this.constants.SELECTED_SEARCH_IN))
-      this.myLocalStorage.setValue(this.constants.SELECTED_SEARCH_IN, this.constants.ENTITY_ALL_PRESENTER);
+      this.myLocalStorage.setValue(
+        this.constants.SELECTED_SEARCH_IN,
+        this.constants.ENTITY_ALL_PRESENTER
+      );
     if (!this.myLocalStorage.getValue(this.constants.NUMBER_OF_ROWS))
-      this.myLocalStorage.setValue(this.constants.NUMBER_OF_ROWS, this.constants.DEFAULT_NUMBER_FO_ROWS);
+      this.myLocalStorage.setValue(
+        this.constants.NUMBER_OF_ROWS,
+        this.constants.DEFAULT_NUMBER_FO_ROWS
+      );
     if (!this.myLocalStorage.getValue(this.constants.SELECTED_NEWS_FEED))
-      this.myLocalStorage.setValue(this.constants.SELECTED_NEWS_FEED, this.constants.GOOGLE_NEWS_FEED);
+      this.myLocalStorage.setValue(
+        this.constants.SELECTED_NEWS_FEED,
+        this.constants.GOOGLE_NEWS_FEED
+      );
   }
 
   ngOnInit(): void {
     this.utils.handleBackpressEvent();
     this.routingState.loadRouting();
     sendCurrentPagePath(this, this.router);
-    window.onbeforeunload = ev => {
-
+    window.onbeforeunload = (ev) => {
       this.utils.removeBackpressEventListener();
-    }
+    };
     registerHideShowLoaderBroadcast(this);
   }
 
@@ -69,27 +97,26 @@ export class AppComponent extends BaseClass implements OnInit, OnDestroy {
     }
   }
   ngAfterViewChecked() {
-
     this.cdr.detectChanges();
   }
 }
 function registerHideShowLoaderBroadcast(context: AppComponent) {
-  context.loaderSubscription = context.dataService.hideShowLoaderObservable.subscribe(
-    showLoader => {
+  context.loaderSubscription =
+    context.dataService.hideShowLoaderObservable.subscribe((showLoader) => {
       context.loading = showLoader;
-    }
-  );
+    });
 }
 function sendCurrentPagePath(context: AppComponent, router: Router) {
   router.events
-    .pipe(filter((event: NavigationEvent) => {
-      return (event instanceof NavigationStart);
-    })
-    ).subscribe(
-      (event: NavigationStart) => {
-        let newUrl = event.url.substring(1, event.url.length);
-        if (newUrl) {
-          context.dataService.sendCurrentPagePath(newUrl);
-        }
-      });
+    .pipe(
+      filter((event: NavigationEvent) => {
+        return event instanceof NavigationStart;
+      })
+    )
+    .subscribe((event: NavigationStart) => {
+      let newUrl = event.url.substring(1, event.url.length);
+      if (newUrl) {
+        context.dataService.sendCurrentPagePath(newUrl);
+      }
+    });
 }

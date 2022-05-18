@@ -1,38 +1,57 @@
 <mat-dialog-content class="mat-dialog-content">
-
   <!-- Modal beginning here -->
 
   <!-- Modal content-->
   <div class="modal-header">
-    <button type="submit" class="btn btn-default delete-btn" data-dismiss="modal" (click)="deleteTag()">Delete Tag <img
-        src="images/delete-icon-large.svg" style="margin-top: -10px"></button>
+    <button
+      type="submit"
+      class="btn btn-default delete-btn"
+      data-dismiss="modal"
+      (click)="deleteTag()"
+    >
+      Delete Tag
+      <img src="images/delete-icon-large.svg" style="margin-top: -10px" />
+    </button>
     <h4 class="modal-title">Edit Tag</h4>
   </div>
   <form role="form">
     <div class="modal-body">
       <div class="clear paddingTop10"></div>
 
-
       <div class="row">
         <div class="col-md-12">
           <div class="form-group">
-            <input type="text" class="form-control opacity50" name="tagName" [(ngModel)]="tagModel.name" placeholder="">
+            <input
+              type="text"
+              class="form-control opacity50"
+              name="tagName"
+              [(ngModel)]="tagModel.name"
+              placeholder=""
+            />
           </div>
-
         </div>
       </div>
-
 
       <div class="clear paddingTop25"></div>
     </div>
     <div class="modal-footer">
-      <a data-dismiss="modal" alt="Cancel" (click)="onCancelClick()"><span>Cancel</span></a>
-      <a data-dismiss="modal" alt="Save Changes" (click)="onSaveChangesClick()"
-        [ngClass]="{'saveButton' : (tagModel.name == undefined ||tagModel.name == '' || tagModel.name == '#')}">Save
-        Changes</a>
+      <a data-dismiss="modal" alt="Cancel" (click)="onCancelClick()"
+        ><span>Cancel</span></a
+      >
+      <a
+        data-dismiss="modal"
+        alt="Save Changes"
+        (click)="onSaveChangesClick()"
+        [ngClass]="{
+          saveButton:
+            tagModel.name === undefined ||
+            tagModel.name === '' ||
+            tagModel.name === '#'
+        }"
+        >Save Changes</a
+      >
     </div>
   </form>
 
   <!-- Modal End here -->
-
 </mat-dialog-content>

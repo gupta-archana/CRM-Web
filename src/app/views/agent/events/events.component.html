@@ -2,45 +2,65 @@
   <div class="wrapper-back">
     <div class="container nav-bg">
       <div class="row">
-        <div class="col-xs-2 toppad"><img src="../../../../images/back-btn.svg" alt=""
-            (click)="commonFunctions.backPress()"></div>
+        <div class="col-xs-2 toppad">
+          <img
+            src="../../../../images/back-btn.svg"
+            alt=""
+            (click)="commonFunctions.backPress()"
+          />
+        </div>
         <div class="col-xs-7 text-center">
           <h1 class="t-agent">Events</h1>
         </div>
         <div class="col-xs-3 text-center tpad">
-          <a alt="" (click)="onAddNewEventClick()"><img src="../../../../images/add.svg" alt=""><br>
-            <span class="edit-detail">Add New</span></a>
+          <a alt="" (click)="onAddNewEventClick()"
+            ><img src="../../../../images/add.svg" alt="" /><br />
+            <span class="edit-detail">Add New</span></a
+          >
         </div>
       </div>
     </div>
-    <app-entity-name-header [entityModel]="entityModel"></app-entity-name-header>
+    <app-entity-name-header
+      [entityModel]="entityModel"
+    ></app-entity-name-header>
   </div>
 
   <div class="container app-bg2 bottom-wrapper-for-back">
-
-
     <div class="row">
       <ul>
         <li *ngFor="let item of eventModels">
           <div class="col-xs-12 col-md-6 cell-bg">
             <div class="agent-detail">
-              <h4>{{item.name}}<span class="textRight">{{item.createdDate | slice:0:10}} &nbsp;
+              <h4>
+                {{ item.name
+                }}<span class="textRight"
+                  >{{ item.createdDate | slice: 0:10 }} &nbsp;
                   <img
-                    [src]="item.reminder=='yes'?'../../../../images/reminder-icon.svg':'../../../../images/reminder-dis-icon.svg'"
-                    alt=""></span></h4>
-              <span>{{item.description}}</span><br />
+                    [src]="
+                      item.reminder === 'yes'
+                        ? '../../../../images/reminder-icon.svg'
+                        : '../../../../images/reminder-dis-icon.svg'
+                    "
+                    alt=""
+                /></span>
+              </h4>
+              <span>{{ item.description }}</span
+              ><br />
               <div class="clear paddingTop5"></div>
-              <span><img src="images/username.svg" alt="" class="imgWidth"> &nbsp;
-                <!-- <img src="images/username.svg" alt=""> --> {{item.personName}}</span>
+              <span
+                ><img src="images/username.svg" alt="" class="imgWidth" />
+                &nbsp;
+                <!-- <img src="images/username.svg" alt=""> -->
+                {{ item.personName }}</span
+              >
             </div>
           </div>
         </li>
       </ul>
-
-
-
     </div>
 
-    <button onclick="topFunction()" id="myBtn" title="Go to top"><span
-        class="glyphicon glyphicon-arrow-up"></span></button>
+    <button onclick="topFunction()" id="myBtn" title="Go to top">
+      <span class="glyphicon glyphicon-arrow-up"></span>
+    </button>
   </div>
+</div>
