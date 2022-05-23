@@ -1,5 +1,5 @@
 import { Component, Inject, Input, OnInit } from "@angular/core";
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Constants } from "../../../Constants/Constants";
 import { DialogData } from "../../../Interfaces/DialogData";
 import { AssociatesModel } from "../../../models/associates-model";

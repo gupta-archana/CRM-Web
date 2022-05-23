@@ -1,5 +1,5 @@
 import { Component, Injector, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { DialogData } from '../../../Interfaces/DialogData';
 import { ImageCroppedEvent } from 'ngx-image-cropper';

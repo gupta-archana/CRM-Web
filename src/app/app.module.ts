@@ -75,13 +75,10 @@ import { TooltipModule } from "ng2-tooltip-directive";
 import { NgSelectModule } from "@ng-select/ng-select";
 import { ObjectiveSentimentComponent } from "./customUI/dialogs/objective-sentiment/objective-sentiment.component";
 import { AddObjectivePopupComponent } from "./customUI/dialogs/add-objective-popup/add-objective-popup.component";
-import {
-  MatDatepickerModule,
-  MatDialogRef,
-  MatInputModule,
-  MatNativeDateModule,
-  MAT_DIALOG_DATA,
-} from "@angular/material";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import {MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatInputModule} from '@angular/material/input';
 import { DatePipe } from "@angular/common";
 import { ViewSentimentHistoryComponent } from "./customUI/dialogs/view-sentiment-history/view-sentiment-history.component";
 import { ChartsModule } from "ng2-charts";

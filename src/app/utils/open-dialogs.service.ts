@@ -1,5 +1,5 @@
 import { Injectable, Component } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { AlertDialogComponent } from '../customUI/dialogs/alert-dialog/alert-dialog.component';
 import { Constants } from '../Constants/Constants';
 import { ConfirmationDialogComponent } from '../customUI/dialogs/confirmation-dialog/confirmation-dialog.component';

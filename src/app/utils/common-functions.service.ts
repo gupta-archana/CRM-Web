@@ -8,7 +8,7 @@ import {
   MatSnackBarConfig,
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
-} from "@angular/material";
+} from "@angular/material/snack-bar";
 import { MyLocalStorageService } from "../services/my-local-storage.service";
 import * as paths from "../Constants/paths";
 import { EntityModel } from "../models/entity-model";

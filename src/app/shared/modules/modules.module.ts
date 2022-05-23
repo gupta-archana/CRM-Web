@@ -8,13 +8,12 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { UpdateUserProfileComponent } from "../../customUI/dialogs/update-user-profile/update-user-profile.component";
 import { SearchFilterComponent } from "../../customUI/dialogs/search-filter/search-filter.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
-import {
-  MatTabsModule,
-  MatSnackBarModule,
-  MatDialogModule,
-  MatButtonModule,
-  MatFormFieldModule,
-} from "@angular/material";
+import { MatTabsModule } from "@angular/material/tabs";
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
+import {MatFormFieldModule} from '@angular/material/form-field';
+
 // import { CurrencyMaskModule } from "ng2-currency-mask";
 import { DecimalPipe } from "@angular/common";
 // import { CurrencyMaskConfig, CURRENCY_MASK_CONFIG } from 'ng2-currency-mask/src/currency-mask.config';

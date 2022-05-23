@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material/dialog';
 import { MyLocalStorageService } from '../../../services/my-local-storage.service';
 import { Constants } from '../../../Constants/Constants';
 

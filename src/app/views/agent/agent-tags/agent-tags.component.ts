@@ -4,7 +4,7 @@ import { ApiResponseCallback } from '../../../Interfaces/ApiResponseCallback';
 import { TagModel } from '../../../models/tag-model';
 import { EntityModel } from '../../../models/entity-model';
 import { EditAndDeleteTagPopupComponent } from '../../../customUI/dialogs/edit-and-delete-tag-popup/edit-and-delete-tag-popup.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 
 @Component({

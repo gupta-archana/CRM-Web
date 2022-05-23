@@ -5,7 +5,7 @@ import { CommonFunctionsService } from '../../utils/common-functions.service';
 import { Constants } from '../../Constants/Constants';
 import { ApiResponseCallback } from '../../Interfaces/ApiResponseCallback';
 import { ApiHandlerService } from '../../utils/api-handler.service';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { AlertDialogComponent } from '../../customUI/dialogs/alert-dialog/alert-dialog.component';
 import { ForgotPasswordAlertComponent } from '../../customUI/dialogs/forgot-password/forgot-password-alert.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';

@@ -6,7 +6,7 @@ import {
   ViewChild,
 } from "@angular/core";
 import { BaseClass } from "../../../../global/base-class";
-import { MatTabGroup } from "@angular/material";
+import { MatTabGroup } from "@angular/material/tabs";
 import { Subscription } from "rxjs";
 
 @Component({
