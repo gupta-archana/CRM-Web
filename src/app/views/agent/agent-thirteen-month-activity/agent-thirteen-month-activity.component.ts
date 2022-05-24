@@ -5,124 +5,124 @@ import { ApiResponseCallback } from '../../../Interfaces/ApiResponseCallback';
 import { ThirteenMonthModel } from '../../../models/thirteen-month-model';
 
 @Component({
-  selector: 'app-agent-thirteen-month-activity',
-  templateUrl: './agent-thirteen-month-activity.component.html',
-  styleUrls: ['./agent-thirteen-month-activity.component.css']
+    selector: 'app-agent-thirteen-month-activity',
+    templateUrl: './agent-thirteen-month-activity.component.html',
+    styleUrls: ['./agent-thirteen-month-activity.component.css']
 })
 export class AgentThirteenMonthActivityComponent extends BaseClass implements OnInit, ApiResponseCallback {
 
-  monthsName: string[] = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    monthsName: string[] = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-  entityModel: EntityModel;
-  thirteenMonthsModels: ThirteenMonthModel[] = new Array<ThirteenMonthModel>();
+    entityModel: EntityModel;
+    thirteenMonthsModels: ThirteenMonthModel[] = new Array<ThirteenMonthModel>();
 
-  constructor(private injector: Injector) {
-    super(injector);
-  }
-
-  public barChartOptions = {
-    scaleShowVerticalLines: false,
-    responsive: true,
-    maintainAspectRatio: false
-
-  };
-  public barChartLabels: Array<any> = [];
-  public barChartType = 'bar';
-  public barChartLegend = true;
-  barNprActualData: Array<any> = [];
-  barNprPlannedData: Array<any> = [];
-  barCplActualData: Array<any> = [];
-  barCplPlannedData: Array<any> = []
-
-
-  public nprChartData = [
-    { data: this.barNprActualData, label: 'NPR Actual' },
-    { data: this.barNprPlannedData, label: 'NPR Planned' }
-  ];
-
-  public cplChartData = [
-    { data: this.barCplActualData, label: 'CPL Actual' },
-    { data: this.barCplPlannedData, label: 'CPL Planned' }
-  ];
-
-  public chartColors: Array<any> = [
-    {
-      backgroundColor: [
-        'rgba(54, 162, 235, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(54, 162, 235, 1)'
-      ],
-
-      borderWidth: 2,
+    constructor(private injector: Injector) {
+        super(injector);
     }
-  ];
+
+    public barChartOptions = {
+        scaleShowVerticalLines: false,
+        responsive: true,
+        maintainAspectRatio: false
+
+    };
+    public barChartLabels: Array<any> = [];
+    public barChartType = 'bar';
+    public barChartLegend = true;
+    barNprActualData: Array<any> = [];
+    barNprPlannedData: Array<any> = [];
+    barCplActualData: Array<any> = [];
+    barCplPlannedData: Array<any> = [];
 
 
-  ngOnInit() {
-    this.entityModel = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
-    makeServerRequest(this);
-  }
-  goBack() {
-    this.commonFunctions.backPress();
-  }
+    public nprChartData = [
+        { data: this.barNprActualData, label: 'NPR Actual' },
+        { data: this.barNprPlannedData, label: 'NPR Planned' }
+    ];
 
-  onRecentProfileClick() {
-    this.dataService.onRecentProfileClick();
-  }
+    public cplChartData = [
+        { data: this.barCplActualData, label: 'CPL Actual' },
+        { data: this.barCplPlannedData, label: 'CPL Planned' }
+    ];
 
-  getMonth(item: ThirteenMonthModel) {
-    return this.monthsName[Number(item.month) - 1];;
-  }
+    public chartColors: Array<any> = [
+        {
+            backgroundColor: [
+                'rgba(54, 162, 235, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(54, 162, 235, 1)'
+            ],
 
-  onSuccess(response: any) {
-    this.thirteenMonthsModels = response.activitymonth.reverse();
-    setValueToBar(this);
-    this.thirteenMonthsModels = this.thirteenMonthsModels.reverse();
-    this.cdr.markForCheck();
-  }
-  onError(errorCode: number, errorMsg: string) {
-    this.commonFunctions.showErrorSnackbar(errorMsg);
-  }
+            borderWidth: 2,
+        }
+    ];
+
+
+    ngOnInit() {
+        this.entityModel = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
+        makeServerRequest(this);
+    }
+    goBack() {
+        this.commonFunctions.backPress();
+    }
+
+    onRecentProfileClick() {
+        this.dataService.onRecentProfileClick();
+    }
+
+    getMonth(item: ThirteenMonthModel) {
+        return this.monthsName[Number(item.month) - 1]; ;
+    }
+
+    onSuccess(response: any) {
+        this.thirteenMonthsModels = response.activitymonth.reverse();
+        setValueToBar(this);
+        this.thirteenMonthsModels = this.thirteenMonthsModels.reverse();
+        this.cdr.markForCheck();
+    }
+    onError(errorCode: number, errorMsg: string) {
+        this.commonFunctions.showErrorSnackbar(errorMsg);
+    }
 }
 
 function makeServerRequest(context: AgentThirteenMonthActivityComponent) {
-  context.apiHandler.getThirteenMonthActivity(context.entityModel.entityId, context);
+    context.apiHandler.getThirteenMonthActivity(context.entityModel.entityId, context);
 }
 
 
 function setValueToBar(context: AgentThirteenMonthActivityComponent) {
-  let maximumValue: number = 0;
-  context.thirteenMonthsModels.forEach(element => {
-    context.barNprActualData.push(element.nprActual);
-    context.barNprPlannedData.push(element.nprPlanned);
+    let maximumValue = 0;
+    context.thirteenMonthsModels.forEach(element => {
+        context.barNprActualData.push(element.nprActual);
+        context.barNprPlannedData.push(element.nprPlanned);
 
-    context.barCplActualData.push(element.cplActual);
-    context.barCplPlannedData.push(element.cplPlanned);
-    context.barChartLabels.push(context.getMonth(element) + '-' + element.year.substr(2, element.year.length));
-    if (maximumValue < Number(element.nprActual)) {
-      maximumValue = Number(element.nprActual);
-    }
-  });
+        context.barCplActualData.push(element.cplActual);
+        context.barCplPlannedData.push(element.cplPlanned);
+        context.barChartLabels.push(context.getMonth(element) + '-' + element.year.substr(2, element.year.length));
+        if (maximumValue < Number(element.nprActual)) {
+            maximumValue = Number(element.nprActual);
+        }
+    });
 
-  let scales = {
-    yAxes: [{
-      ticks: {
-        steps: 10,
-        max: maximumValue,
-        min: 0
-      }
-    }]
-  }
+    const scales = {
+        yAxes: [{
+            ticks: {
+                steps: 10,
+                max: maximumValue,
+                min: 0
+            }
+        }]
+    };
 
-  context.barChartOptions['scales'] = scales;
+    context.barChartOptions['scales'] = scales;
 }

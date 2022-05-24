@@ -1,5 +1,5 @@
 export class AgentInfoModel {
-    agentImg: string = "";
+    agentImg = "";
     rowNum: string;
     agentId: string;
     name: string;

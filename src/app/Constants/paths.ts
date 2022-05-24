@@ -14,7 +14,7 @@ export const PATH_SETTING = "setting";
 export const PATH_FOLLOWING = "following";
 export const PATH_NOTIFICATIONS = "notifications";
 
-//entity detail
+// entity detail
 export const PATH_AGENT_DETAIL = "agentDetail";
 export const PATH_PERSON_DETAIL = "personDetail";
 export const PATH_AGENT_CONTACT_DETAIL = "contactDetail";
@@ -37,7 +37,7 @@ export const PATH_VIEW_SENTIMENT_HISTORY = "sentimentHistory";
 export const PATH_AGENT_TAGS = "agentTags";
 export const PATH_ASSOCIATED_AGENTS = "associatedAgents";
 export const PATH_EVENTS = "events";
-//others
+// others
 export const PATH_REARRANGE_DRAWER_ITEM = "rearrangeHomeModules";
 export const PATH_REARRANGE_AGENT_DETAIL_ITEM = "rearrangeAgentDetailModules";
 export const PATH_NOTIFICATION_CONTROL = "notificationControls";

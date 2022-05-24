@@ -6,23 +6,25 @@ import { onErrorResumeNext } from 'rxjs';
 import { EntityModel } from '../../../models/entity-model';
 
 @Component({
-  selector: 'app-notifications',
-  templateUrl: './notifications.component.html',
-  styleUrls: ['./notifications.component.css']
+    selector: 'app-notifications',
+    templateUrl: './notifications.component.html',
+    styleUrls: ['./notifications.component.css']
 })
 export class NotificationsComponent extends BaseClass implements OnInit {
 
 
-  constructor(injector: Injector) { super(injector) }
+    constructor(injector: Injector) {
+        super(injector);
+    }
 
-  ngOnInit() {
+    ngOnInit() {
 
-  }
-  onTabSelect(event) {
-    this.commonFunctions.printLog(event);
-    shareTabIndexToChilds(this, event.index);
-  }
+    }
+    onTabSelect(event) {
+        this.commonFunctions.printLog(event);
+        shareTabIndexToChilds(this, event.index);
+    }
 }
 function shareTabIndexToChilds(context: NotificationsComponent, index: number) {
-  context.dataService.onTabSelected(index);
+    context.dataService.onTabSelected(index);
 }

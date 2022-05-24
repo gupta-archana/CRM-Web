@@ -3,37 +3,37 @@ import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class RoutingStateService {
 
-  private history = [];
-  private allHistory = [];
+    private history = [];
+    private allHistory = [];
 
-  constructor(
-    private router: Router
-  ) { }
+    constructor(
+        private router: Router
+    ) { }
 
-  public loadRouting(): void {
-    this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe(({ urlAfterRedirects }: NavigationEnd) => {
-        this.history = [...this.history, urlAfterRedirects];
-        this.allHistory = [...this.allHistory, urlAfterRedirects];
-      });
-  }
+    public loadRouting(): void {
+        this.router.events
+            .pipe(filter(event => event instanceof NavigationEnd))
+            .subscribe(({ urlAfterRedirects }: NavigationEnd) => {
+                this.history = [...this.history, urlAfterRedirects];
+                this.allHistory = [...this.allHistory, urlAfterRedirects];
+            });
+    }
 
-  public getHistory(): string[] {
-    return this.history;
-  }
+    public getHistory(): string[] {
+        return this.history;
+    }
 
-  public getAllHistory(): string[] {
-    return this.allHistory;
-  }
-  public getPreviousUrl(): string {
-    return this.history[this.history.length - 2] || '/index';
-  }
-  public clearHistory() {
-    this.history = [];
-  }
+    public getAllHistory(): string[] {
+        return this.allHistory;
+    }
+    public getPreviousUrl(): string {
+        return this.history[this.history.length - 2] || '/index';
+    }
+    public clearHistory() {
+        this.history = [];
+    }
 }

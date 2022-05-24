@@ -5,26 +5,26 @@ import { MyLocalStorageService } from '../../../services/my-local-storage.servic
 import { Constants } from '../../../Constants/Constants';
 
 @Component({
-  selector: 'app-mark-as-reviewed-dialog',
-  templateUrl: './mark-as-reviewed-dialog.component.html',
-  styleUrls: ['./mark-as-reviewed-dialog.component.css']
+    selector: 'app-mark-as-reviewed-dialog',
+    templateUrl: './mark-as-reviewed-dialog.component.html',
+    styleUrls: ['./mark-as-reviewed-dialog.component.css']
 })
 export class MarkAsReviewedDialogComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<MarkAsReviewedDialogComponent>,
-    private myLocalStorage: MyLocalStorageService, private constants: Constants) { }
+    constructor(public dialogRef: MatDialogRef<MarkAsReviewedDialogComponent>,
+        private myLocalStorage: MyLocalStorageService, private constants: Constants) { }
 
-  isDontShowChecked: boolean = false;
-  ngOnInit() {
-  }
-  dontShowAgainChanged(event) {
-    this.myLocalStorage.setValue(this.constants.DONT_SHOW_MARK_REVIED_DIALOG, event.target.checked);
-  }
-  onMarkAsReviewClick() {
-    this.dialogRef.close(true);
-  }
+    isDontShowChecked = false;
+    ngOnInit() {
+    }
+    dontShowAgainChanged(event) {
+        this.myLocalStorage.setValue(this.constants.DONT_SHOW_MARK_REVIED_DIALOG, event.target.checked);
+    }
+    onMarkAsReviewClick() {
+        this.dialogRef.close(true);
+    }
 
-  onCancelClick() {
-    this.dialogRef.close(false);
-  }
+    onCancelClick() {
+        this.dialogRef.close(false);
+    }
 }

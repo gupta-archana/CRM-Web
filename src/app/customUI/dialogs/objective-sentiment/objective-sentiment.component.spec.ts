@@ -3,23 +3,23 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ObjectiveSentimentComponent } from './objective-sentiment.component';
 
 describe('ObjectiveSentimentComponent', () => {
-  let component: ObjectiveSentimentComponent;
-  let fixture: ComponentFixture<ObjectiveSentimentComponent>;
+    let component: ObjectiveSentimentComponent;
+    let fixture: ComponentFixture<ObjectiveSentimentComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ ObjectiveSentimentComponent ]
-    })
-    .compileComponents();
-  }));
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [ ObjectiveSentimentComponent ]
+        })
+            .compileComponents();
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ObjectiveSentimentComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(ObjectiveSentimentComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

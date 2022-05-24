@@ -1,17 +1,17 @@
 export class UserProfileModel {
-  uid: string = "";
-  name: string = "";
-  jobTitle: string = "";
-  picture: string = "";
-  addr1: string = "";
-  addr2: string = "";
-  city: string = "";
-  state: string = "";
-  zip: string = "";
-  phoneType: string = "";
-  phone: string = "";
-  phone2Type: string = "";
-  phone2: string = "";
-  email: string = "";
-  shareable: boolean = false;
+    uid = "";
+    name = "";
+    jobTitle = "";
+    picture = "";
+    addr1 = "";
+    addr2 = "";
+    city = "";
+    state = "";
+    zip = "";
+    phoneType = "";
+    phone = "";
+    phone2Type = "";
+    phone2 = "";
+    email = "";
+    shareable = false;
 }

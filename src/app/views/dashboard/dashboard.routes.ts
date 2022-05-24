@@ -17,23 +17,23 @@ import { NotificationsComponent } from './notifications/notifications.component'
 
 
 export const dashboardRoutes: Routes = [
-  {
-    path: '',
-    component: NavigationDrawerComponent,
-    canActivate: [AuthGuardService],
-    children: [
-      { path: path.PATH_TOP_AGENTS, component: TopAgentsComponent },
-      { path: path.PATH_AGENTS_WITH_ALERT, component: AgentWithAlertComponent },
-      { path: path.PATH_AGENTS_WITH_PERFORMANCE, component: AgentWithPerformanceComponent },
-      { path: path.PATH_AGENTS_UNDER_PLAN, component: AgentUnderPlanComponent },
-      { path: path.PATH_AGENT_DETAIL, component: AgentDetailComponent },
-      { path: path.PATH_PERSON_DETAIL, component: PersonDetailComponent },
-      { path: path.PATH_SEARCH, component: SearchComponent },
-      { path: path.PATH_NEWS, component: NewsFeedsComponent },
-      { path: path.PATH_SETTING, component: TabComponent },
-      { path: path.PATH_RECENT_RPOFILES, component: RecentProfilesComponent },
-      { path: path.PATH_NOTIFICATIONS, component: NotificationsComponent },
-      { path: path.PATH_FOLLOWING, component: FavoritesComponent }
-    ]
-  }
+    {
+        path: '',
+        component: NavigationDrawerComponent,
+        canActivate: [AuthGuardService],
+        children: [
+            { path: path.PATH_TOP_AGENTS, component: TopAgentsComponent },
+            { path: path.PATH_AGENTS_WITH_ALERT, component: AgentWithAlertComponent },
+            { path: path.PATH_AGENTS_WITH_PERFORMANCE, component: AgentWithPerformanceComponent },
+            { path: path.PATH_AGENTS_UNDER_PLAN, component: AgentUnderPlanComponent },
+            { path: path.PATH_AGENT_DETAIL, component: AgentDetailComponent },
+            { path: path.PATH_PERSON_DETAIL, component: PersonDetailComponent },
+            { path: path.PATH_SEARCH, component: SearchComponent },
+            { path: path.PATH_NEWS, component: NewsFeedsComponent },
+            { path: path.PATH_SETTING, component: TabComponent },
+            { path: path.PATH_RECENT_RPOFILES, component: RecentProfilesComponent },
+            { path: path.PATH_NOTIFICATIONS, component: NotificationsComponent },
+            { path: path.PATH_FOLLOWING, component: FavoritesComponent }
+        ]
+    }
 ];

@@ -5,9 +5,9 @@ import { Router, ActivatedRoute } from "@angular/router";
 
 // @Directive()
 export abstract class FormCanDeactivate extends ComponentCanDeactivate {
-  //abstract get form(): NgForm;
+    // abstract get form(): NgForm;
 
-  canDeactivate(): boolean {
-    return false;
-  }
+    canDeactivate(): boolean {
+        return false;
+    }
 }

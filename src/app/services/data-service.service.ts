@@ -6,172 +6,172 @@ import { SearchFilterModel } from '../models/search-filter-model';
 
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class DataServiceService {
 
-  private hideShowLoaderSubject = new Subject<boolean>();
-  hideShowLoaderObservable = this.hideShowLoaderSubject.asObservable();
+    private hideShowLoaderSubject = new Subject<boolean>();
+    hideShowLoaderObservable = this.hideShowLoaderSubject.asObservable();
 
-  private agentInfoModel= new AgentInfoModel();
-  private shareAgentInfoSubject = new BehaviorSubject<AgentInfoModel>(this.agentInfoModel);
-  shareAgentInfoObservable = this.shareAgentInfoSubject.asObservable();
+    private agentInfoModel = new AgentInfoModel();
+    private shareAgentInfoSubject = new BehaviorSubject<AgentInfoModel>(this.agentInfoModel);
+    shareAgentInfoObservable = this.shareAgentInfoSubject.asObservable();
 
-  private currentPagePathSubject = new BehaviorSubject<string>("");
-  currentPagePathObservable = this.currentPagePathSubject.asObservable();
+    private currentPagePathSubject = new BehaviorSubject<string>("");
+    currentPagePathObservable = this.currentPagePathSubject.asObservable();
 
-  private pageTitleSubject = new BehaviorSubject<string>("");
-  pageTitleObservable = this.pageTitleSubject.asObservable();
+    private pageTitleSubject = new BehaviorSubject<string>("");
+    pageTitleObservable = this.pageTitleSubject.asObservable();
 
-  private pageRefreshSubject = new Subject<any>();
-  pageRefreshObservable = this.pageRefreshSubject.asObservable();
+    private pageRefreshSubject = new Subject<any>();
+    pageRefreshObservable = this.pageRefreshSubject.asObservable();
 
-  private filterSubject = new Subject<any>();;
-  filterObservable = this.filterSubject.asObservable();
+    private filterSubject = new Subject<any>(); ;
+    filterObservable = this.filterSubject.asObservable();
 
-  private recentProfileSubject = new Subject<any>();
-  recentProfileObservable = this.recentProfileSubject.asObservable();
+    private recentProfileSubject = new Subject<any>();
+    recentProfileObservable = this.recentProfileSubject.asObservable();
 
-  private injectorSubject = new Subject<any>();;
-  injectorObservable = this.injectorSubject.asObservable();
+    private injectorSubject = new Subject<any>(); ;
+    injectorObservable = this.injectorSubject.asObservable();
 
-  private editAgentProfileDialogSubject = new Subject<any>();
-  editAgentProfileDialogObservable = this.editAgentProfileDialogSubject.asObservable();
+    private editAgentProfileDialogSubject = new Subject<any>();
+    editAgentProfileDialogObservable = this.editAgentProfileDialogSubject.asObservable();
 
-  private sideNavItemsSubject = new BehaviorSubject<any>("");
-  sideNavItemsSubjectObservable = this.sideNavItemsSubject.asObservable();
+    private sideNavItemsSubject = new BehaviorSubject<any>("");
+    sideNavItemsSubjectObservable = this.sideNavItemsSubject.asObservable();
 
-  private agentDetailItemsSubject = new BehaviorSubject<any>("");
-  agentDetailItemsObservable = this.agentDetailItemsSubject.asObservable();
+    private agentDetailItemsSubject = new BehaviorSubject<any>("");
+    agentDetailItemsObservable = this.agentDetailItemsSubject.asObservable();
 
-  private personDetailItemsSubject = new BehaviorSubject<any>("");
-  personDetailItemsObservable = this.personDetailItemsSubject.asObservable();
-
-
-  private shareEntityIdAndTypeSubject = new BehaviorSubject<any>("");
-  shareEntityIdAndTypeObservable = this.shareEntityIdAndTypeSubject.asObservable();
-
-  private shareUserProfileSubject = new BehaviorSubject<UserProfileModel>(null);
-  shareUserProfileObservable = this.shareUserProfileSubject.asObservable();
-
-  private dataUpdatedSubject = new Subject<boolean>();
-  dataUpdatedObservable = this.dataUpdatedSubject.asObservable();
-
-  shareDataSubject = new BehaviorSubject<any>("");
-  shareDataObservable = this.shareDataSubject.asObservable();
-
-  shareSentimentsDataSubject = new BehaviorSubject<any>("");
-  shareSentimentsDataObservable = this.shareSentimentsDataSubject.asObservable();
-
-  private searchFiltersSubject = new Subject<SearchFilterModel>();
-  searchFiltersObservable = this.searchFiltersSubject.asObservable();
-
-  private tabSelectedSubject = new BehaviorSubject<number>(0);
-  tabSelectedObservable = this.tabSelectedSubject.asObservable();
-
-  private shareUpdateNoteSubject = new Subject<string>();
-  shareUpdateNoteObservable = this.shareUpdateNoteSubject.asObservable();
-
-  private shareLoadedItemsSubject = new BehaviorSubject<string>("");
-  shareLoadedItemsObservable = this.shareLoadedItemsSubject.asObservable();
-
-  private getSentimentDataSubject = new Subject<any>();
-  getSentimentDataObservable = this.getSentimentDataSubject.asObservable();
-
-  private getTagDataSubject = new Subject<any>();
-  getTagsDataObservable = this.getTagDataSubject.asObservable();
+    private personDetailItemsSubject = new BehaviorSubject<any>("");
+    personDetailItemsObservable = this.personDetailItemsSubject.asObservable();
 
 
-  constructor() { }
+    private shareEntityIdAndTypeSubject = new BehaviorSubject<any>("");
+    shareEntityIdAndTypeObservable = this.shareEntityIdAndTypeSubject.asObservable();
 
-  onHideShowLoader(showLoader: boolean) {
-    this.hideShowLoaderSubject.next(showLoader);
-  }
+    private shareUserProfileSubject = new BehaviorSubject<UserProfileModel>(null);
+    shareUserProfileObservable = this.shareUserProfileSubject.asObservable();
 
-  shareAgentInfo(agentInfo: AgentInfoModel) {
-    this.shareAgentInfoSubject.next(agentInfo);
-  }
+    private dataUpdatedSubject = new Subject<boolean>();
+    dataUpdatedObservable = this.dataUpdatedSubject.asObservable();
 
-  sendCurrentPagePath(pagePath: string) {
-    this.currentPagePathSubject.next(pagePath);
-  }
+    shareDataSubject = new BehaviorSubject<any>("");
+    shareDataObservable = this.shareDataSubject.asObservable();
 
-  setCurrentPageTitle(path: string) {
-    this.pageTitleSubject.next(path);
-  }
+    shareSentimentsDataSubject = new BehaviorSubject<any>("");
+    shareSentimentsDataObservable = this.shareSentimentsDataSubject.asObservable();
 
-  onHeaderRefreshClick() {
-    this.pageRefreshSubject.next(true);
-  }
+    private searchFiltersSubject = new Subject<SearchFilterModel>();
+    searchFiltersObservable = this.searchFiltersSubject.asObservable();
 
-  onHeaderFilterClick() {
-    this.filterSubject.next(true);
-  }
+    private tabSelectedSubject = new BehaviorSubject<number>(0);
+    tabSelectedObservable = this.tabSelectedSubject.asObservable();
 
-  onRecentProfileClick() {
-    this.recentProfileSubject.next();
-  }
+    private shareUpdateNoteSubject = new Subject<string>();
+    shareUpdateNoteObservable = this.shareUpdateNoteSubject.asObservable();
 
-  onInjectorCreated() {
-    this.injectorSubject.next();
-  }
+    private shareLoadedItemsSubject = new BehaviorSubject<string>("");
+    shareLoadedItemsObservable = this.shareLoadedItemsSubject.asObservable();
 
-  onAgentProfileEditClick(openDialog: any) {
-    this.editAgentProfileDialogSubject.next(openDialog);
-  }
+    private getSentimentDataSubject = new Subject<any>();
+    getSentimentDataObservable = this.getSentimentDataSubject.asObservable();
 
-  sendSideNavData(data: Array<any>) {
-    this.sideNavItemsSubject.next(data);
-  }
+    private getTagDataSubject = new Subject<any>();
+    getTagsDataObservable = this.getTagDataSubject.asObservable();
 
-  sendAgentDetailItems(data: Array<any>) {
-    this.agentDetailItemsSubject.next(data)
-  }
 
-  sendPersonDetailItems(data: Array<any>) {
-    this.personDetailItemsSubject.next(data)
-  }
+    constructor() { }
 
-  onShareEntityIdAndType(data: any) {
-    this.shareEntityIdAndTypeSubject.next(data);
-  }
+    onHideShowLoader(showLoader: boolean) {
+        this.hideShowLoaderSubject.next(showLoader);
+    }
 
-  shareUserProfile(data: UserProfileModel) {
-    this.shareUserProfileSubject.next(data);
-  }
+    shareAgentInfo(agentInfo: AgentInfoModel) {
+        this.shareAgentInfoSubject.next(agentInfo);
+    }
 
-  onDataUpdated() {
-    this.dataUpdatedSubject.next(true);
-  }
+    sendCurrentPagePath(pagePath: string) {
+        this.currentPagePathSubject.next(pagePath);
+    }
 
-  onDataShare(data: any) {
-    this.shareDataSubject.next(data);
-  }
+    setCurrentPageTitle(path: string) {
+        this.pageTitleSubject.next(path);
+    }
 
-  onSentimentsDataShare(data: any) {
-    this.shareSentimentsDataSubject.next(data);
-  }
+    onHeaderRefreshClick() {
+        this.pageRefreshSubject.next(true);
+    }
 
-  onSearchFilterApply(filterModel: SearchFilterModel) {
-    this.searchFiltersSubject.next(filterModel);
-  }
+    onHeaderFilterClick() {
+        this.filterSubject.next(true);
+    }
 
-  onTabSelected(index: number) {
-    this.tabSelectedSubject.next(index);
-  }
+    onRecentProfileClick() {
+        this.recentProfileSubject.next();
+    }
 
-  onShareUpdatedNote(note: string) {
-    this.shareUpdateNoteSubject.next(note);
-  }
+    onInjectorCreated() {
+        this.injectorSubject.next();
+    }
 
-  shareLoadedItemsTag(loadedItemsTag: string) {
-    this.shareLoadedItemsSubject.next(loadedItemsTag);
-  }
-  shareSentimentData(data: any) {
-    this.getSentimentDataSubject.next(data);
-  }
+    onAgentProfileEditClick(openDialog: any) {
+        this.editAgentProfileDialogSubject.next(openDialog);
+    }
 
-  reloadTagData(data:any){
-    this.getTagDataSubject.next(data);
-  }
+    sendSideNavData(data: Array<any>) {
+        this.sideNavItemsSubject.next(data);
+    }
+
+    sendAgentDetailItems(data: Array<any>) {
+        this.agentDetailItemsSubject.next(data);
+    }
+
+    sendPersonDetailItems(data: Array<any>) {
+        this.personDetailItemsSubject.next(data);
+    }
+
+    onShareEntityIdAndType(data: any) {
+        this.shareEntityIdAndTypeSubject.next(data);
+    }
+
+    shareUserProfile(data: UserProfileModel) {
+        this.shareUserProfileSubject.next(data);
+    }
+
+    onDataUpdated() {
+        this.dataUpdatedSubject.next(true);
+    }
+
+    onDataShare(data: any) {
+        this.shareDataSubject.next(data);
+    }
+
+    onSentimentsDataShare(data: any) {
+        this.shareSentimentsDataSubject.next(data);
+    }
+
+    onSearchFilterApply(filterModel: SearchFilterModel) {
+        this.searchFiltersSubject.next(filterModel);
+    }
+
+    onTabSelected(index: number) {
+        this.tabSelectedSubject.next(index);
+    }
+
+    onShareUpdatedNote(note: string) {
+        this.shareUpdateNoteSubject.next(note);
+    }
+
+    shareLoadedItemsTag(loadedItemsTag: string) {
+        this.shareLoadedItemsSubject.next(loadedItemsTag);
+    }
+    shareSentimentData(data: any) {
+        this.getSentimentDataSubject.next(data);
+    }
+
+    reloadTagData(data: any){
+        this.getTagDataSubject.next(data);
+    }
 }

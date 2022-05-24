@@ -3,47 +3,50 @@ import { BaseClass } from 'src/app/global/base-class';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ApiResponseCallback } from '../../../Interfaces/ApiResponseCallback';
 @Component({
-  selector: 'app-agent-detail-item-rearrange',
-  templateUrl: './agent-detail-item-rearrange.component.html',
-  styleUrls: ['./agent-detail-item-rearrange.component.css']
+    selector: 'app-agent-detail-item-rearrange',
+    templateUrl: './agent-detail-item-rearrange.component.html',
+    styleUrls: ['./agent-detail-item-rearrange.component.css']
 })
 export class AgentDetailItemRearrangeComponent extends BaseClass implements OnInit, ApiResponseCallback {
-  agentDetailItems = [];
-  public disableSave = true;
-  constructor(private injector: Injector) { super(injector) }
+    agentDetailItems = [];
+    public disableSave = true;
+    constructor(private injector: Injector) {
+        super(injector);
+    }
 
-  ngOnInit() {
-    getAgentDetailItems(this);
-  }
-  onSort(event: CdkDragDrop<any[]>, rearrangeItem: boolean) {
-    this.disableSave = rearrangeItem;
-    moveItemInArray(this.agentDetailItems, event.previousIndex, event.currentIndex);
+    ngOnInit() {
+        getAgentDetailItems(this);
+    }
+    onSort(event: CdkDragDrop<any[]>, rearrangeItem: boolean) {
+        this.disableSave = rearrangeItem;
+        moveItemInArray(this.agentDetailItems, event.previousIndex, event.currentIndex);
 
-  }
-  goBack() {
-    this.commonFunctions.backPress();
-  }
+    }
+    goBack() {
+        this.commonFunctions.backPress();
+    }
 
-  Save() {
-    let itemsInString = JSON.stringify(this.agentDetailItems);
-    this.myLocalStorage.setValue(this.constants.AGENT_DETAIL_ITEMS, itemsInString);
-    itemsInString = itemsInString.replace(/"/g, "'");
-    this.commonApis.updateBasicConfig(this.constants.AGENT_MODULE, itemsInString, this);
-    this.utils.getAgentDetailItems();
-  }
-  onSuccess(response: any) {
-    this.commonFunctions.backPress();
-  }
-  onError(errorCode: number, errorMsg: string) {
+    Save() {
+        let itemsInString = JSON.stringify(this.agentDetailItems);
+        this.myLocalStorage.setValue(this.constants.AGENT_DETAIL_ITEMS, itemsInString);
+        itemsInString = itemsInString.replace(/"/g, "'");
+        this.commonApis.updateBasicConfig(this.constants.AGENT_MODULE, itemsInString, this);
+        this.utils.getAgentDetailItems();
+    }
+    onSuccess(response: any) {
+        this.commonFunctions.backPress();
+    }
+    onError(errorCode: number, errorMsg: string) {
 
-  }
+    }
 }
 function getAgentDetailItems(self: AgentDetailItemRearrangeComponent) {
 
-  self.utils.getAgentDetailItems().subscribe(data => {
-    console.log("data " + JSON.stringify(data));
-    if (data)
-      self.agentDetailItems = data;
-    self.cdr.markForCheck();
-  });
+    self.utils.getAgentDetailItems().subscribe(data => {
+        console.log("data " + JSON.stringify(data));
+        if (data) {
+            self.agentDetailItems = data;
+        }
+        self.cdr.markForCheck();
+    });
 }

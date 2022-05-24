@@ -5,18 +5,17 @@ import { CommonFunctionsService } from '../../utils/common-functions.service';
 
 @Injectable()
 export class CanDeactivateGuard implements CanDeactivate<ComponentCanDeactivate> {
-    pressedCount: number = 0;
+    pressedCount = 0;
     constructor(private commonFunctions: CommonFunctionsService) { }
     canDeactivate(component: ComponentCanDeactivate
     ): boolean {
         if (!component.canDeactivate()) {
-            if (this.pressedCount == 1) {
+            if (this.pressedCount === 1) {
                 this.pressedCount = 0;
                 return true;
-            }
-            else {
+            } else {
                 this.commonFunctions.showSnackbar("Press back again to exit");
-                this.pressedCount == 1;
+                this.pressedCount === 1;
                 return false;
             }
 

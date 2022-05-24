@@ -8,300 +8,304 @@ import { SearchFilterModel } from '../../../models/search-filter-model';
 
 
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css'],
-  encapsulation: ViewEncapsulation.None,
+    selector: 'app-search',
+    templateUrl: './search.component.html',
+    styleUrls: ['./search.component.css'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class SearchComponent extends BaseClass implements OnInit, OnDestroy, AfterViewInit, ApiResponseCallback {
 
-  searchFilterModelSub: Subscription = null;
-  searchForm: FormGroup;
-  searchedUsers: Array<EntityModel> = [];
-  hideNoDataDiv: boolean = false;
-  emailId;
-  encryptedPassword;
-  searchString: string = "";
-  searchFor: string = "All";
-  public TOTAL_MATCH: string = "TotalMatch";
-  public filterChanged: boolean = false;
-  lastScrollPosition = 0;
-  deviceInfo = null;
-  totalRows: any = 0;
-  pageNum: number = 0;
-  moreDataAvailable: boolean = false;
-  totalAndCurrentRowsRatio: string = "";
-  filters: SearchFilterModel = null;
-  shareDataSubscription: Subscription;
+    searchFilterModelSub: Subscription = null;
+    searchForm: FormGroup;
+    searchedUsers: Array<EntityModel> = [];
+    hideNoDataDiv = false;
+    emailId;
+    encryptedPassword;
+    searchString = "";
+    searchFor = "All";
+    public TOTAL_MATCH = "TotalMatch";
+    public filterChanged = false;
+    lastScrollPosition = 0;
+    deviceInfo = null;
+    totalRows: any = 0;
+    pageNum = 0;
+    moreDataAvailable = false;
+    totalAndCurrentRowsRatio = "";
+    filters: SearchFilterModel = null;
+    shareDataSubscription: Subscription;
 
-  constructor(injector: Injector) {
-    super(injector);
-  }
-
-  ngOnInit() {
-    this.addValidation();
-    this.emailId = this.myLocalStorage.getValue(this.constants.EMAIL);
-    this.encryptedPassword = this.commonFunctions.getEncryptedPassword(this.myLocalStorage.getValue(this.constants.PASSWORD));
-    getData(this);
-    getSearchFilter(this);
-    //this.updateUI();
-  }
-
-  ngAfterViewInit(): void {
-    getTagFromEntityTagList(this);
-  }
-
-
-  onSubmit() {
-    if (!this.searchForm.valid) {
-      this.commonFunctions.showErrorSnackbar("Search field must contain atleast 3 characters");
+    constructor(injector: Injector) {
+        super(injector);
     }
-    else {
-      resetData(this);
-      this.makeServerRequest();
+
+    ngOnInit() {
+        this.addValidation();
+        this.emailId = this.myLocalStorage.getValue(this.constants.EMAIL);
+        this.encryptedPassword = this.commonFunctions.getEncryptedPassword(this.myLocalStorage.getValue(this.constants.PASSWORD));
+        getData(this);
+        getSearchFilter(this);
+    // this.updateUI();
     }
-  }
 
-  onLoadMoreClick() {
-    this.hitApi();
-  }
-
-  public hitApi() {
-    if (!this.searchForm.valid) {
-      this.commonFunctions.showErrorSnackbar("Search field must contain atleast 3 characters");
+    ngAfterViewInit(): void {
+        getTagFromEntityTagList(this);
     }
-    else {
-      this.makeServerRequest();
-    }
-  }
 
-  public makeServerRequest() {
-    this.pageNum++;
-    this.dataService.onHideShowLoader(true);
-    let selectedState = "All";
-    let type = this.myLocalStorage.getValue(this.constants.SELECTED_SEARCH_IN);
-    ({ selectedState, type } = this.setFilterForApiRequest(selectedState, type));
 
-    let searchString: string = this.searchForm.value.search;
-    searchString = searchString.replace(/#/g, '%23');
-    searchString = searchString.replace(/,/g, '%2c');
-    searchString = searchString.replace(/\s/g, '%2c');
-
-    this.apiHandler.GetSearchedData(type, selectedState, searchString, this.pageNum, this);
-  }
-
-  public makeServerRequestForSelectedTag() {
-    this.pageNum++;
-    this.dataService.onHideShowLoader(true);
-    let selectedState = "All";
-    let type = this.myLocalStorage.getValue(this.constants.SELECTED_SEARCH_IN);
-    ({ selectedState, type } = this.setFilterForApiRequest(selectedState, type));
-    this.searchString = this.searchString.replace(/#/g, '%23');
-    this.searchString = this.searchString.replace(/,/g, '%2c');
-    this.searchString = this.searchString.replace(/\s/g, '%2c');
-
-    this.apiHandler.GetSearchedData(type, selectedState, this.searchString, this.pageNum, this);
-  }
-
-  private setFilterForApiRequest(selectedState: string, type: string) {
-    if (this.filters) {
-      if (this.filters.selectedState)
-        selectedState = this.filters.selectedState;
-      let typeArray = [];
-      if (this.filters.agentCheck)
-        typeArray.push(this.constants.ENTITY_AGENT_PRESENTER);
-      if (this.filters.peopleCheck)
-        typeArray.push(this.constants.ENTITY_PERSON_PRESENTER);
-      if (this.filters.employeeCheck)
-        typeArray.push(this.constants.ENTITY_EMPLOYEE_PRESENTER);
-      if (this.filters.allCheck)
-        typeArray.push(this.constants.ENTITY_ALL_PRESENTER);
-      if (typeArray && typeArray.length > 0)
-        type = typeArray.join(",");
-    }
-    return { selectedState, type };
-  }
-
-  onSuccess(response: any) {
-    this.onApiResponse(response.profile);
-
-  }
-  onError(errorCode: number, errorMsg: string) {
-    //this.pageNum--;
-    this.onApiResponse([]);
-    //this.commonFunctions.showErrorSnackbar(errorMsg);
-  }
-
-  onApiResponse(newUsers: EntityModel[]) {
-    this.dataService.onHideShowLoader(false);
-    checkFilterChanged(this);
-    if (newUsers && newUsers.length > 0) {
-      newUsers.forEach(element => {
-        if (element.type != this.TOTAL_MATCH) {
-          this.commonFunctions.setFavoriteOnApisResponse(element);
-          this.searchedUsers.push(element);
+    onSubmit() {
+        if (!this.searchForm.valid) {
+            this.commonFunctions.showErrorSnackbar("Search field must contain atleast 3 characters");
+        } else {
+            resetData(this);
+            this.makeServerRequest();
         }
-        else {
-          this.totalRows = element.rowNum;
+    }
+
+    onLoadMoreClick() {
+        this.hitApi();
+    }
+
+    public hitApi() {
+        if (!this.searchForm.valid) {
+            this.commonFunctions.showErrorSnackbar("Search field must contain atleast 3 characters");
+        } else {
+            this.makeServerRequest();
         }
-      });
-
-    } else if (this.pageNum == 1) {
-      this.totalRows = 0;
     }
-    this.updateUI();
-  }
 
+    public makeServerRequest() {
+        this.pageNum++;
+        this.dataService.onHideShowLoader(true);
+        let selectedState = "All";
+        let type = this.myLocalStorage.getValue(this.constants.SELECTED_SEARCH_IN);
+        ({ selectedState, type } = this.setFilterForApiRequest(selectedState, type));
 
+        let searchString: string = this.searchForm.value.search;
+        searchString = searchString.replace(/#/g, '%23');
+        searchString = searchString.replace(/,/g, '%2c');
+        searchString = searchString.replace(/\s/g, '%2c');
 
-  getAddress(item: EntityModel) {
-    return this.commonFunctions.getAddress(item);
-  }
-
-  onItemClick(item: EntityModel) {
-    let navigatingPath: string = "";
-    sessionStorage.setItem(this.constants.ENTITY_INFO, JSON.stringify(item));
-    switch (item.type) {
-      case this.constants.ENTITY_AGENT_PRESENTER:
-        navigatingPath = this.paths.PATH_AGENT_DETAIL;
-
-        break;
-      case this.constants.ENTITY_PERSON_PRESENTER:
-        navigatingPath = this.paths.PATH_PERSON_DETAIL;
-
-        break;
-      default:
-        break;
+        this.apiHandler.GetSearchedData(type, selectedState, searchString, this.pageNum, this);
     }
-    if (navigatingPath) {
-      setData(this);
-      this.commonFunctions.navigateWithoutReplaceUrl(navigatingPath);
+
+    public makeServerRequestForSelectedTag() {
+        this.pageNum++;
+        this.dataService.onHideShowLoader(true);
+        let selectedState = "All";
+        let type = this.myLocalStorage.getValue(this.constants.SELECTED_SEARCH_IN);
+        ({ selectedState, type } = this.setFilterForApiRequest(selectedState, type));
+        this.searchString = this.searchString.replace(/#/g, '%23');
+        this.searchString = this.searchString.replace(/,/g, '%2c');
+        this.searchString = this.searchString.replace(/\s/g, '%2c');
+
+        this.apiHandler.GetSearchedData(type, selectedState, this.searchString, this.pageNum, this);
     }
-    else
-      this.commonFunctions.showErrorSnackbar("We are working on person ui");
-  }
 
-  checkEntityFavorite(item: EntityModel) {
-    return !this.commonFunctions.checkFavorite(item.entityId);
-  }
-  onStarClick(item: EntityModel, index: number) {
-    this.commonApis.setFavorite(item, this.apiHandler, this.cdr).asObservable().subscribe(data => {
-      this.updateUI();
-    });
-  }
-
-  private addValidation() {
-    this.searchForm = new FormGroup({
-      search: new FormControl(this.searchString, Validators.compose([Validators.required, Validators.minLength(3)])),
-
-    });
-  }
-
-  public updateUI() {
-    setData(this);
-    checkAndSetUi(this);
-    checkMoreDataAvailable(this);
-    updateRatioUI(this);
-    this.cdr.markForCheck();
-  }
-
-  ngOnDestroy(): void {
-    if (this.searchFilterModelSub && !this.searchFilterModelSub.closed) {
-      this.searchFilterModelSub.unsubscribe();
+    private setFilterForApiRequest(selectedState: string, type: string) {
+        if (this.filters) {
+            if (this.filters.selectedState) {
+                selectedState = this.filters.selectedState;
+            }
+            const typeArray = [];
+            if (this.filters.agentCheck) {
+                typeArray.push(this.constants.ENTITY_AGENT_PRESENTER);
+            }
+            if (this.filters.peopleCheck) {
+                typeArray.push(this.constants.ENTITY_PERSON_PRESENTER);
+            }
+            if (this.filters.employeeCheck) {
+                typeArray.push(this.constants.ENTITY_EMPLOYEE_PRESENTER);
+            }
+            if (this.filters.allCheck) {
+                typeArray.push(this.constants.ENTITY_ALL_PRESENTER);
+            }
+            if (typeArray && typeArray.length > 0) {
+                type = typeArray.join(",");
+            }
+        }
+        return { selectedState, type };
     }
-    if (this.shareDataSubscription && !this.shareDataSubscription.closed) {
-      this.shareDataSubscription.unsubscribe();
+
+    onSuccess(response: any) {
+        this.onApiResponse(response.profile);
+
     }
-  }
+    onError(errorCode: number, errorMsg: string) {
+    // this.pageNum--;
+        this.onApiResponse([]);
+    // this.commonFunctions.showErrorSnackbar(errorMsg);
+    }
+
+    onApiResponse(newUsers: EntityModel[]) {
+        this.dataService.onHideShowLoader(false);
+        checkFilterChanged(this);
+        if (newUsers && newUsers.length > 0) {
+            newUsers.forEach(element => {
+                if (element.type !== this.TOTAL_MATCH) {
+                    this.commonFunctions.setFavoriteOnApisResponse(element);
+                    this.searchedUsers.push(element);
+                } else {
+                    this.totalRows = element.rowNum;
+                }
+            });
+
+        } else if (this.pageNum === 1) {
+            this.totalRows = 0;
+        }
+        this.updateUI();
+    }
+
+
+
+    getAddress(item: EntityModel) {
+        return this.commonFunctions.getAddress(item);
+    }
+
+    onItemClick(item: EntityModel) {
+        let navigatingPath = "";
+        sessionStorage.setItem(this.constants.ENTITY_INFO, JSON.stringify(item));
+        switch (item.type) {
+            case this.constants.ENTITY_AGENT_PRESENTER:
+                navigatingPath = this.paths.PATH_AGENT_DETAIL;
+
+                break;
+            case this.constants.ENTITY_PERSON_PRESENTER:
+                navigatingPath = this.paths.PATH_PERSON_DETAIL;
+
+                break;
+            default:
+                break;
+        }
+        if (navigatingPath) {
+            setData(this);
+            this.commonFunctions.navigateWithoutReplaceUrl(navigatingPath);
+        } else {
+            this.commonFunctions.showErrorSnackbar("We are working on person ui");
+        }
+    }
+
+    checkEntityFavorite(item: EntityModel) {
+        return !this.commonFunctions.checkFavorite(item.entityId);
+    }
+    onStarClick(item: EntityModel, index: number) {
+        this.commonApis.setFavorite(item, this.apiHandler, this.cdr).asObservable().subscribe(data => {
+            this.updateUI();
+        });
+    }
+
+    private addValidation() {
+        this.searchForm = new FormGroup({
+            search: new FormControl(this.searchString, Validators.compose([Validators.required, Validators.minLength(3)])),
+
+        });
+    }
+
+    public updateUI() {
+        setData(this);
+        checkAndSetUi(this);
+        checkMoreDataAvailable(this);
+        updateRatioUI(this);
+        this.cdr.markForCheck();
+    }
+
+    ngOnDestroy(): void {
+        if (this.searchFilterModelSub && !this.searchFilterModelSub.closed) {
+            this.searchFilterModelSub.unsubscribe();
+        }
+        if (this.shareDataSubscription && !this.shareDataSubscription.closed) {
+            this.shareDataSubscription.unsubscribe();
+        }
+    }
 }
 
 
 
 function checkFilterChanged(context: SearchComponent) {
-  if (context.filterChanged) {
-    context.searchedUsers = [];
-    context.filterChanged = false;
-  }
+    if (context.filterChanged) {
+        context.searchedUsers = [];
+        context.filterChanged = false;
+    }
 }
 
 function getSearchFilter(context: SearchComponent) {
-  context.searchFilterModelSub = context.dataService.searchFiltersObservable.subscribe(data => {
-    context.filters = data;
-    context.filterChanged = true;
-    context.pageNum = 0;
-    if (data && context.searchForm.valid) {
-      context.hitApi();
-    }
-  });
+    context.searchFilterModelSub = context.dataService.searchFiltersObservable.subscribe(data => {
+        context.filters = data;
+        context.filterChanged = true;
+        context.pageNum = 0;
+        if (data && context.searchForm.valid) {
+            context.hitApi();
+        }
+    });
 }
 
 function resetData(context: SearchComponent) {
-  context.pageNum = 0;
-  context.searchedUsers = [];
-  context.totalRows = 0;
-  context.hideNoDataDiv = false;
-  context.moreDataAvailable = false;
+    context.pageNum = 0;
+    context.searchedUsers = [];
+    context.totalRows = 0;
+    context.hideNoDataDiv = false;
+    context.moreDataAvailable = false;
 }
 
 function setData(context: SearchComponent) {
-  if (context.searchedUsers && context.searchedUsers.length > 0) {
-    sessionStorage.setItem(context.constants.SEARCH_CURRENT_PAGE_NO, context.pageNum.toString());
-    sessionStorage.setItem(context.constants.SEARCHED_ENTITY_ARRAY, JSON.stringify(context.searchedUsers));
-    sessionStorage.setItem(context.constants.SEARCHED_STRING, context.searchForm.value.search);
-    sessionStorage.setItem(context.constants.SEARCH_MORE_DATA_AVAILABLE_FLAG, JSON.stringify(context.moreDataAvailable));
-    sessionStorage.setItem(context.constants.SEARCH_TOTAL_ROWS, context.totalRows);
-  }
+    if (context.searchedUsers && context.searchedUsers.length > 0) {
+        sessionStorage.setItem(context.constants.SEARCH_CURRENT_PAGE_NO, context.pageNum.toString());
+        sessionStorage.setItem(context.constants.SEARCHED_ENTITY_ARRAY, JSON.stringify(context.searchedUsers));
+        sessionStorage.setItem(context.constants.SEARCHED_STRING, context.searchForm.value.search);
+        sessionStorage.setItem(context.constants.SEARCH_MORE_DATA_AVAILABLE_FLAG, JSON.stringify(context.moreDataAvailable));
+        sessionStorage.setItem(context.constants.SEARCH_TOTAL_ROWS, context.totalRows);
+    }
 
 }
 
 function getData(context: SearchComponent) {
-  context.searchedUsers = JSON.parse(sessionStorage.getItem(context.constants.SEARCHED_ENTITY_ARRAY));
-  if (context.searchedUsers && context.searchedUsers.length > 0) {
-    context.pageNum = Number(sessionStorage.getItem(context.constants.SEARCH_CURRENT_PAGE_NO));
-    context.searchString = sessionStorage.getItem(context.constants.SEARCHED_STRING);
-    context.moreDataAvailable = JSON.parse(sessionStorage.getItem(context.constants.SEARCH_MORE_DATA_AVAILABLE_FLAG));
-    context.totalRows = Number(sessionStorage.getItem(context.constants.SEARCH_TOTAL_ROWS));
-    context.searchForm.get("search").setValue(context.searchString);
-    context.filters = JSON.parse(sessionStorage.getItem(context.constants.SEARCH_FILTERS));
-    if (!context.filters)
-      context.filters = new SearchFilterModel();
-    context.updateUI();
-  }
+    context.searchedUsers = JSON.parse(sessionStorage.getItem(context.constants.SEARCHED_ENTITY_ARRAY));
+    if (context.searchedUsers && context.searchedUsers.length > 0) {
+        context.pageNum = Number(sessionStorage.getItem(context.constants.SEARCH_CURRENT_PAGE_NO));
+        context.searchString = sessionStorage.getItem(context.constants.SEARCHED_STRING);
+        context.moreDataAvailable = JSON.parse(sessionStorage.getItem(context.constants.SEARCH_MORE_DATA_AVAILABLE_FLAG));
+        context.totalRows = Number(sessionStorage.getItem(context.constants.SEARCH_TOTAL_ROWS));
+        context.searchForm.get("search").setValue(context.searchString);
+        context.filters = JSON.parse(sessionStorage.getItem(context.constants.SEARCH_FILTERS));
+        if (!context.filters) {
+            context.filters = new SearchFilterModel();
+        }
+        context.updateUI();
+    }
 }
 
 function checkMoreDataAvailable(context: SearchComponent) {
-  if ((!context.searchedUsers && context.searchedUsers.length == 0) || context.searchedUsers.length >= context.totalRows)
-    context.moreDataAvailable = false;
-  else
-    context.moreDataAvailable = true;
+    if ((!context.searchedUsers && context.searchedUsers.length === 0) || context.searchedUsers.length >= context.totalRows) {
+        context.moreDataAvailable = false;
+    } else {
+        context.moreDataAvailable = true;
+    }
 }
 
 function checkAndSetUi(context: SearchComponent) {
-  if (!context.searchedUsers || context.searchedUsers.length == 0) {
-    resetData(context);
-  }
-  else {
-    context.hideNoDataDiv = true;
-  }
-  context.cdr.markForCheck();
+    if (!context.searchedUsers || context.searchedUsers.length === 0) {
+        resetData(context);
+    } else {
+        context.hideNoDataDiv = true;
+    }
+    context.cdr.markForCheck();
 }
 
 function updateRatioUI(context: SearchComponent) {
-  context.commonFunctions.showLoadedItemTagOnHeader(context.searchedUsers, context.totalRows);
-  //context.totalAndCurrentRowsRatio = context.commonFunctions.showMoreDataSnackbar(context.searchedUsers, context.totalRows);
-  context.cdr.markForCheck();
+    context.commonFunctions.showLoadedItemTagOnHeader(context.searchedUsers, context.totalRows);
+    // context.totalAndCurrentRowsRatio = context.commonFunctions.showMoreDataSnackbar(context.searchedUsers, context.totalRows);
+    context.cdr.markForCheck();
 }
 
 function getTagFromEntityTagList(context: SearchComponent) {
-  context.shareDataSubscription = context.dataService.shareDataObservable.subscribe(tag => {
-    if (tag) {
-      context.searchString = tag;
-      context.searchForm.get("search").setValue(context.searchString);
-      context.makeServerRequestForSelectedTag();
-    document.getElementById("searchButton").click();
-      context.cdr.markForCheck();
+    context.shareDataSubscription = context.dataService.shareDataObservable.subscribe(tag => {
+        if (tag) {
+            context.searchString = tag;
+            context.searchForm.get("search").setValue(context.searchString);
+            context.makeServerRequestForSelectedTag();
+            document.getElementById("searchButton").click();
+            context.cdr.markForCheck();
 
-      
-    }
-  });
+
+        }
+    });
 }

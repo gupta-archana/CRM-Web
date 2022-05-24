@@ -4,26 +4,26 @@ import { MyLocalStorageService } from '../../../services/my-local-storage.servic
 import { Constants } from '../../../Constants/Constants';
 
 @Component({
-  selector: 'app-email-noc',
-  templateUrl: './email-noc.component.html',
-  styleUrls: ['./email-noc.component.css']
+    selector: 'app-email-noc',
+    templateUrl: './email-noc.component.html',
+    styleUrls: ['./email-noc.component.css']
 })
 export class EmailNocComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<EmailNocComponent>,
-    private myLocalStorage: MyLocalStorageService, private constants: Constants) { }
+    constructor(public dialogRef: MatDialogRef<EmailNocComponent>,
+        private myLocalStorage: MyLocalStorageService, private constants: Constants) { }
 
-  isDontShowChecked: boolean = false;
-  ngOnInit() {
-  }
-  dontShowAgainChanged(event) {
-    this.myLocalStorage.setValue(this.constants.DONT_SHOW_EMAIL_NOC_DIALOG, event.target.checked);
-  }
-  onYesClick() {
-    this.dialogRef.close(true);
-  }
+    isDontShowChecked = false;
+    ngOnInit() {
+    }
+    dontShowAgainChanged(event) {
+        this.myLocalStorage.setValue(this.constants.DONT_SHOW_EMAIL_NOC_DIALOG, event.target.checked);
+    }
+    onYesClick() {
+        this.dialogRef.close(true);
+    }
 
-  onNoClick() {
-    this.dialogRef.close(false);
-  }
+    onNoClick() {
+        this.dialogRef.close(false);
+    }
 }

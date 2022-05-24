@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
-    "lint": "ng lint",
+    "lint": "eslint -c .eslintrc.js --ext .ts ./src",
     "e2e": "ng e2e",
     "build-prod": "ng build --configuration production",
     "deploy": "firebase deploy --token $FIREBASE_TOKEN --non-interactive"
@@ -67,13 +67,19 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^12.2.17",
+    "@angular-eslint/eslint-plugin": "^13.2.1",
     "@angular/cli": "^12.2.17",
     "@angular/compiler-cli": "^12.2.16",
     "@angular/language-service": "^12.2.16",
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
+    "@typescript-eslint/eslint-plugin": "^5.26.0",
+    "@typescript-eslint/eslint-plugin-tslint": "^5.26.0",
+    "@typescript-eslint/parser": "^5.26.0",
     "codelyzer": "^6.0.0",
+    "eslint": "^8.16.0",
+    "eslint-plugin-import": "^2.26.0",
     "firebase-tools": "^7.16.2",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
@@ -87,7 +93,6 @@
     "protractor": "~7.0.0",
     "puppeteer": "^1.18.1",
     "ts-node": "~5.0.1",
-    "tslint": "~6.1.0",
     "typescript": "^4.3.5"
   }
 }

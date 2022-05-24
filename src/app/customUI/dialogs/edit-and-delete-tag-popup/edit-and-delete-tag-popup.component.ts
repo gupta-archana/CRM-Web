@@ -6,49 +6,48 @@ import { DataServiceService } from '../../../services/data-service.service';
 import { ApiHandlerService } from '../../../utils/api-handler.service';
 
 @Component({
-  selector: 'app-edit-and-delete-tag-popup',
-  templateUrl: './edit-and-delete-tag-popup.component.html',
-  styleUrls: ['./edit-and-delete-tag-popup.component.css']
+    selector: 'app-edit-and-delete-tag-popup',
+    templateUrl: './edit-and-delete-tag-popup.component.html',
+    styleUrls: ['./edit-and-delete-tag-popup.component.css']
 })
 export class EditAndDeleteTagPopupComponent  implements OnInit {
 
-  tagModel:TagModel;
-  constructor(public dialogRef: MatDialogRef<EditAndDeleteTagPopupComponent>, private injector: Injector,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,public apiHandler: ApiHandlerService, private dataService : DataServiceService) {}
+    tagModel: TagModel;
+    constructor(public dialogRef: MatDialogRef<EditAndDeleteTagPopupComponent>, private injector: Injector,
+        @Inject(MAT_DIALOG_DATA) public data: DialogData, public apiHandler: ApiHandlerService, private dataService: DataServiceService) {}
 
-  ngOnInit() {
-    this.tagModel = JSON.parse(this.data.message);
-  }
+    ngOnInit() {
+        this.tagModel = JSON.parse(this.data.message);
+    }
 
-  onCancelClick() {
-    this.dialogRef.close(false);
-  }
+    onCancelClick() {
+        this.dialogRef.close(false);
+    }
 
-  
-  onSuccess(response: any) {
-    let self = this;
-    self.dataService.reloadTagData({data:'reload'})
-    this.dialogRef.close(response);
 
-  }
-  onError(errorCode: number, errorMsg: string) {
-    this.dialogRef.close(false);
-  }
-  onSaveChangesClick() {
-    console.log(this.tagModel)
-    this.apiHandler.updateTag(createRequestJson(this),this);
-  }
-  
-  deleteTag()
-  {
-    this.apiHandler.deleteTag(this.tagModel.tagID,this);
-  }
+    onSuccess(response: any) {
+        const self = this;
+        self.dataService.reloadTagData({data: 'reload'});
+        this.dialogRef.close(response);
+
+    }
+    onError(errorCode: number, errorMsg: string) {
+        this.dialogRef.close(false);
+    }
+    onSaveChangesClick() {
+        console.log(this.tagModel);
+        this.apiHandler.updateTag(createRequestJson(this), this);
+    }
+
+    deleteTag() {
+        this.apiHandler.deleteTag(this.tagModel.tagID, this);
+    }
 }
 function createRequestJson(context: EditAndDeleteTagPopupComponent) {
-  let finalJson = {
-    "tag": "",
-    "attr": context.tagModel
-  }
-  return finalJson;
+    const finalJson = {
+        "tag": "",
+        "attr": context.tagModel
+    };
+    return finalJson;
 }
 

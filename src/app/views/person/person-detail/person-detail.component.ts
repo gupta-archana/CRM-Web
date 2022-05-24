@@ -7,51 +7,51 @@ import { CommonApisService } from '../../../utils/common-apis.service';
 import { EntityDetailBaseClass } from '../../../global/entity-detail-base-class';
 
 @Component({
-  selector: 'app-person-detail',
-  templateUrl: './person-detail.component.html',
-  styleUrls: ['./person-detail.component.css']
+    selector: 'app-person-detail',
+    templateUrl: './person-detail.component.html',
+    styleUrls: ['./person-detail.component.css']
 })
 export class PersonDetailComponent extends EntityDetailBaseClass implements OnInit, OnDestroy {
-  personInfoSubscription: Subscription = null;
-  personMenuSub: Subscription = null;
-  personInfo: EntityModel;
-  personMenues: any[];
-  constructor(injector: Injector,
-    private router: Router) {
-    super(injector);
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.commonFunctions.showLoadedItemTagOnHeader([], 0, true);
-  }
-
-  ngOnInit() {
-    this.personInfo = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
-    this.addNewHistoryEntity(this.personInfo);
-    getMenues(this);
-  }
-  onPersonMenuClick(item) {
-    this.commonFunctions.onMenuItemClick(item, this.personInfo);
-  }
-
-  checkEntityFavorite() {
-    return !this.commonFunctions.checkFavorite(this.personInfo.entityId);
-  }
-  onStarClick() {
-    this.commonApis.setFavorite(this.personInfo, this.apiHandler, this.cdr);
-  }
-  ngOnDestroy(): void {
-    if (this.personMenuSub && !this.personMenuSub.closed) {
-      this.personMenuSub.unsubscribe();
+    personInfoSubscription: Subscription = null;
+    personMenuSub: Subscription = null;
+    personInfo: EntityModel;
+    personMenues: any[];
+    constructor(injector: Injector,
+        private router: Router) {
+        super(injector);
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+        this.commonFunctions.showLoadedItemTagOnHeader([], 0, true);
     }
 
-    if (this.personInfoSubscription && !this.personInfoSubscription.closed) {
-      this.personInfoSubscription.unsubscribe();
+    ngOnInit() {
+        this.personInfo = JSON.parse(sessionStorage.getItem(this.constants.ENTITY_INFO));
+        this.addNewHistoryEntity(this.personInfo);
+        getMenues(this);
     }
-  }
+    onPersonMenuClick(item) {
+        this.commonFunctions.onMenuItemClick(item, this.personInfo);
+    }
+
+    checkEntityFavorite() {
+        return !this.commonFunctions.checkFavorite(this.personInfo.entityId);
+    }
+    onStarClick() {
+        this.commonApis.setFavorite(this.personInfo, this.apiHandler, this.cdr);
+    }
+    ngOnDestroy(): void {
+        if (this.personMenuSub && !this.personMenuSub.closed) {
+            this.personMenuSub.unsubscribe();
+        }
+
+        if (this.personInfoSubscription && !this.personInfoSubscription.closed) {
+            this.personInfoSubscription.unsubscribe();
+        }
+    }
 }
 function getMenues(context: PersonDetailComponent) {
-  context.personMenuSub = context.utils.getPersonDetailItems().subscribe(success => {
-    context.personMenues = success;
-    context.cdr.markForCheck();
-  });
+    context.personMenuSub = context.utils.getPersonDetailItems().subscribe(success => {
+        context.personMenues = success;
+        context.cdr.markForCheck();
+    });
 
 }

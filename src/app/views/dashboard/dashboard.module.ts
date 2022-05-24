@@ -27,13 +27,13 @@ import { NotificationsNewComponent } from './notifications/notifications-new/not
 import { NotificationsDismissedComponent } from './notifications/notifications-dismissed/notifications-dismissed.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forChild(dashboardRoutes),
-    FormsModule, ReactiveFormsModule, ModulesModule
+    imports: [
+        CommonModule,
+        RouterModule.forChild(dashboardRoutes),
+        FormsModule, ReactiveFormsModule, ModulesModule
 
-  ],
-  providers: [AuthGuardService, CanDeactivateGuard],
-  declarations: [NavigationDrawerComponent, TopAgentsComponent, AgentWithAlertComponent, AgentWithPerformanceComponent, SearchComponent, NewsFeedsComponent, TabComponent, ProfileSettingComponent, AppSettingComponent, RecentProfilesComponent, AgentsProfileComponent, PersonsProfileComponent, FavoritesComponent, AgentUnderPlanComponent, NotificationsComponent, ChangePasswordComponent, NotificationsNewComponent, NotificationsDismissedComponent]
+    ],
+    providers: [AuthGuardService, CanDeactivateGuard],
+    declarations: [NavigationDrawerComponent, TopAgentsComponent, AgentWithAlertComponent, AgentWithPerformanceComponent, SearchComponent, NewsFeedsComponent, TabComponent, ProfileSettingComponent, AppSettingComponent, RecentProfilesComponent, AgentsProfileComponent, PersonsProfileComponent, FavoritesComponent, AgentUnderPlanComponent, NotificationsComponent, ChangePasswordComponent, NotificationsNewComponent, NotificationsDismissedComponent]
 })
 export class DashboardModule { }
