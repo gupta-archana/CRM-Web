@@ -3,238 +3,213 @@ import { DraggableContainer } from "./DraggableContainer";
 import { DraggableItem } from "./DraggableItem";
 
 @Injectable()
-export class DraggableService
-{
-	constructor(public zone: NgZone)
-	{
-	}
+export class DraggableService {
+    constructor(public zone: NgZone) { }
 
-	dragContainers:DraggableContainer[] = [];
-	registerDragContainer(container: DraggableContainer)
-	{
-		this.dragContainers.push(container);
-	}
+	 dragContainers: DraggableContainer[] = [];
+	 registerDragContainer(container: DraggableContainer) {
+		 this.dragContainers.push(container);
+	 }
 
-	unregisterDragContainer(container: DraggableContainer)
-	{
-		this.dragContainers.splice(this.dragContainers.indexOf(container), 1);
-	}
+    unregisterDragContainer(container: DraggableContainer) {
+        this.dragContainers.splice(this.dragContainers.indexOf(container), 1);
+    }
 
-	findContainer(callback)
-	{
-		return this.dragContainers.find(callback);
-	}
+    findContainer(callback) {
+        return this.dragContainers.find(callback);
+    }
 
-	findContainerByElement(element)
-	{
-		return this.dragContainers.find( container => {
-			if(container.hostElement.nativeElement == element)
-				return true;
-			return false;
-		});
-	}
+    findContainerByElement(element) {
+        return this.dragContainers.find( container => {
+            if(container.hostElement.nativeElement === element) {
+                return true;
+            }
+            return false;
+        });
+    }
 
-	isEmulatedDrag = false;
-	draggedItem: DraggableItem = null;
-	draggedItemContainer: DraggableContainer = null;
-	setDraggedItem(draggableItem: DraggableItem, container: DraggableContainer, isEmulated: boolean = false)
-	{
-		this.draggedItem = draggableItem;
-		this.draggedItemContainer = container;
+    isEmulatedDrag = false;
+    draggedItem: DraggableItem = null;
+    draggedItemContainer: DraggableContainer = null;
+    setDraggedItem(draggableItem: DraggableItem, container: DraggableContainer, isEmulated: boolean = false) {
+        this.draggedItem = draggableItem;
+        this.draggedItemContainer = container;
 
-		this.draggedItem.onDragStart();
-		this.isEmulatedDrag = isEmulated;
-	}
+        this.draggedItem.onDragStart();
+        this.isEmulatedDrag = isEmulated;
+    }
 
-	setDraggedItemContainer(container: DraggableContainer)
-	{
-		this.draggedItemContainer = container;
-	}
+    setDraggedItemContainer(container: DraggableContainer) {
+        this.draggedItemContainer = container;
+    }
 
-	clearDraggedItem()
-	{
-		if(this.draggedItem)
-		{
-			this.draggedItem.onDragEnd();
-		}
+    clearDraggedItem() {
+        if(this.draggedItem) {
+            this.draggedItem.onDragEnd();
+        }
 
-		this.draggedItem = null;
-		this.draggedItemContainer = null;
-		this.isEmulatedDrag = false;
-	}
+        this.draggedItem = null;
+        this.draggedItemContainer = null;
+        this.isEmulatedDrag = false;
+    }
 
-	emulatedGhostElement: HTMLElement = null;
-	emulatedDragOffset = {x: 0, y: 0 };
-	startEmulatedDrag(draggedItem:DraggableItem, container: DraggableContainer, x:number, y:number)
-	{
-		this.stopEmulatedDrag();
-		
+    emulatedGhostElement: HTMLElement = null;
+    emulatedDragOffset = {x: 0, y: 0 };
+    startEmulatedDrag(draggedItem: DraggableItem, container: DraggableContainer, x: number, y: number) {
+        this.stopEmulatedDrag();
 
-		let draggableRect = draggedItem.getPosition();
-		// Get the drag offset of the element relative to view port.
-		this.emulatedDragOffset.x = x - draggableRect.left;
-		this.emulatedDragOffset.y = y - draggableRect.top;
-		
 
-		// Create Ghost Element
-		let ghostElement = draggedItem.createGhost();
-		container.hostElement.nativeElement.appendChild(ghostElement);
-		this.emulatedGhostElement = ghostElement;
-	//	this.emulateDrag(x, y);
-	}
+        let draggableRect = draggedItem.getPosition();
+        // Get the drag offset of the element relative to view port.
+        this.emulatedDragOffset.x = x - draggableRect.left;
+        this.emulatedDragOffset.y = y - draggableRect.top;
 
-	stopEmulatedDrag()
-	{
-		
-		clearInterval(this.scrollTimer);
-		this.scrollTimer = null;
 
-		if(this.emulatedGhostElement)
-		{
-			this.emulatedGhostElement.parentElement.removeChild(this.emulatedGhostElement);
-			this.emulatedGhostElement = null;
-		}
-	}
+        // Create Ghost Element
+        let ghostElement = draggedItem.createGhost();
+        container.hostElement.nativeElement.appendChild(ghostElement);
+        this.emulatedGhostElement = ghostElement;
+        //	this.emulateDrag(x, y);
+    }
 
-	
-	emulateDrag(x, y)
-	{
-		if(!this.emulatedGhostElement)
-			return;
+    stopEmulatedDrag() {
 
-		
-		var left = x - this.emulatedDragOffset.x;
-		var top = y - this.emulatedDragOffset.y;
+        clearInterval(this.scrollTimer);
+        this.scrollTimer = null;
 
-		this.emulatedGhostElement.style.transform = "translate(" + (left)  + "px, " + (top) + "px)";
+        if(this.emulatedGhostElement) {
+            this.emulatedGhostElement.parentElement.removeChild(this.emulatedGhostElement);
+            this.emulatedGhostElement = null;
+        }
+    }
 
-		
-		
-	}
 
-	scrollTimer = null;
-	emulateScroll(x, y, scrollSensitivity=3, scrollDistance = 75, scrollSpeed=10)
-	{
-		if(!this.emulatedGhostElement)
-			return;
-			
-		if(this.scrollTimer)
-		{
-			clearInterval(this.scrollTimer);
-			this.scrollTimer = null;
-		}
+    emulateDrag(x, y) {
+        if(!this.emulatedGhostElement) {
+            return;
+        }
 
-		var scrollElement = this.getScrollElement();
 
-		if(!scrollElement)
-			return;
+        var left = x - this.emulatedDragOffset.x;
+        var top = y - this.emulatedDragOffset.y;
 
-		var scrollX = 0;
-		var scrollY = 0;
-		
-		if(scrollElement == document.documentElement || scrollElement == window)
-		{
-			if(y > scrollElement.clientHeight - scrollDistance)
-			{
-				scrollY += scrollSensitivity;
-			}
-			
-			if(y < scrollDistance)
-			{
-				scrollY -= scrollSensitivity;
-			}
+        this.emulatedGhostElement.style.transform = "translate(" + (left)  + "px, " + (top) + "px)";
 
-			if(x > scrollElement.clientWidth - scrollDistance)
-			{
-				scrollX += scrollSensitivity;
-			}
-			
-			if(x < scrollDistance)
-			{
-				scrollX -= scrollSensitivity;
-			}
 
-			
-		}else{
-			
-			let scrollRect:any = scrollElement.getBoundingClientRect();
-			
-			if(y > scrollRect.bottom - scrollDistance)
-			{
-				scrollY += scrollSensitivity;
-			}
-			
-			if(y < scrollRect.top + scrollDistance)
-			{
-				scrollY -= scrollSensitivity;
-			}
 
-			if(x > scrollRect.right - scrollDistance)
-			{
-				scrollX += scrollSensitivity;
-			}
-			
-			if(x < scrollRect.left + scrollDistance)
-			{
-				scrollX -= scrollSensitivity;
-			}
-		}
-		this.scrollElement(scrollElement, scrollX, scrollY);
-		if(!this.scrollTimer && (scrollX != 0 || scrollY != 0))
-		{
-			this.scrollTimer = setInterval(() => {
-				this.scrollElement(scrollElement, scrollX, scrollY);
-			}, scrollSpeed);
-		}
-		
-	}
-	
-	scrollElement(element, x, y)
-	{
-		element.scrollLeft += x;
-		element.scrollTop += y;
-	}
+    }
 
-	getScrollElement()
-	{
-		if(!this.emulatedGhostElement)
-			return window;
+    scrollTimer = null;
+    emulateScroll(x, y, scrollSensitivity=3, scrollDistance = 75, scrollSpeed=10) {
+        if(!this.emulatedGhostElement) {
+            return;
+        }
 
-		let scrollElement:any = this.emulatedGhostElement.parentNode;
-		do
-		{
-			if(scrollElement.scrollHeight == 0)
-				continue;
-			
-			if(scrollElement == document.documentElement || scrollElement == window)
-				return scrollElement;
+        if(this.scrollTimer) {
+            clearInterval(this.scrollTimer);
+            this.scrollTimer = null;
+        }
 
-			let computedStyle = getComputedStyle(scrollElement, null);
-			if(!computedStyle)
-				continue;
-			
-			
-			if((scrollElement.scrollHeight > scrollElement.clientHeight || scrollElement.scrollWidth > scrollElement.clientWidth)
-				&& (computedStyle.getPropertyValue("overflow") == "scroll"
-				|| computedStyle.getPropertyValue("overflow") == "hidden")
-			)
-			{
-				return scrollElement;
-			}
+        var scrollElement = this.getScrollElement();
 
-		} while (scrollElement = scrollElement.parentNode);
-		return window;
-	}
+        if(!scrollElement) {
+            return;
+        }
 
-	isTouchActive = false;
-	activateTouch()
-	{
-		this.isTouchActive = true;
-	}
+        var scrollX = 0;
+        var scrollY = 0;
 
-	deactivateTouch()
-	{
-		this.isTouchActive = false;
-	}
+        if(scrollElement === document.documentElement || scrollElement === window) {
+            if(y > scrollElement.clientHeight - scrollDistance) {
+                scrollY += scrollSensitivity;
+            }
+
+            if(y < scrollDistance) {
+                scrollY -= scrollSensitivity;
+            }
+
+            if(x > scrollElement.clientWidth - scrollDistance) {
+                scrollX += scrollSensitivity;
+            }
+
+            if(x < scrollDistance) {
+                scrollX -= scrollSensitivity;
+            }
+
+
+        }else{
+
+            let scrollRect: any = scrollElement.getBoundingClientRect();
+
+            if(y > scrollRect.bottom - scrollDistance) {
+                scrollY += scrollSensitivity;
+            }
+
+            if(y < scrollRect.top + scrollDistance) {
+                scrollY -= scrollSensitivity;
+            }
+
+            if(x > scrollRect.right - scrollDistance) {
+                scrollX += scrollSensitivity;
+            }
+
+            if(x < scrollRect.left + scrollDistance) {
+                scrollX -= scrollSensitivity;
+            }
+        }
+        this.scrollElement(scrollElement, scrollX, scrollY);
+        if(!this.scrollTimer && (scrollX !== 0 || scrollY !== 0)) {
+            this.scrollTimer = setInterval(() => {
+                this.scrollElement(scrollElement, scrollX, scrollY);
+            }, scrollSpeed);
+        }
+
+    }
+
+    scrollElement(element, x, y) {
+        element.scrollLeft += x;
+        element.scrollTop += y;
+    }
+
+    getScrollElement() {
+        if(!this.emulatedGhostElement) {
+            return window;
+        }
+
+        let scrollElement: any = this.emulatedGhostElement.parentNode;
+        do {
+            if(scrollElement.scrollHeight === 0) {
+                continue;
+            }
+
+            if(scrollElement === document.documentElement || scrollElement === window) {
+                return scrollElement;
+            }
+
+            let computedStyle = getComputedStyle(scrollElement, null);
+            if(!computedStyle) {
+                continue;
+            }
+
+
+            if((scrollElement.scrollHeight > scrollElement.clientHeight || scrollElement.scrollWidth > scrollElement.clientWidth)
+				&& (computedStyle.getPropertyValue("overflow") === "scroll"
+				|| computedStyle.getPropertyValue("overflow") === "hidden")
+            ) {
+                return scrollElement;
+            }
+
+        } while (scrollElement = scrollElement.parentNode);
+        return window;
+    }
+
+    isTouchActive = false;
+    activateTouch() {
+        this.isTouchActive = true;
+    }
+
+    deactivateTouch() {
+        this.isTouchActive = false;
+    }
 
 };

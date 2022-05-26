@@ -9,7 +9,8 @@
     "lint": "eslint -c .eslintrc.js --ext .ts ./src",
     "e2e": "ng e2e",
     "build-prod": "ng build --configuration production",
-    "deploy": "firebase deploy --token $FIREBASE_TOKEN --non-interactive"
+    "deploy": "firebase deploy --token $FIREBASE_TOKEN --non-interactive",
+    "postinstall": "ngcc --properties es2015 es5 browser module main --first-only --create-ivy-entry-points"
   },
   "private": true,
   "dependencies": {

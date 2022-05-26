@@ -44,7 +44,7 @@
               "node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.min.js",
               "node_modules/chart.js/dist/Chart.js"
             ],
-            "aot": false,
+            "aot": true,
             "vendorChunk": true,
             "extractLicenses": false,
             "buildOptimizer": false,
