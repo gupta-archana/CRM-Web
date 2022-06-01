@@ -610,7 +610,7 @@ function handleAddAndUpdateApiResponse(context: ApiHandlerService, apiResponseCa
     return {
         onSuccess(response: any) {
             context.dataService.onHideShowLoader(false);
-            const responseBody = response.Envelope.Body;
+            const responseBody = response.body ? response.body.Envelope.Body : response.Envelope.Body;
             if (responseBody.hasOwnProperty('Fault')) {
                 const errorCode = responseBody.Fault.code;
                 const msg = responseBody.Fault.message;

@@ -29,7 +29,7 @@
     "@angular/platform-browser-dynamic": "^12.2.16",
     "@angular/router": "^12.2.16",
     "@ng-bootstrap/ng-bootstrap": "^4.1.1",
-    "@ng-select/ng-select": "^2.20.5",
+    "@ng-select/ng-select": "^7.4.0",
     "@schematics/angular": "^9.1.13",
     "@types/jquery": "^3.5.1",
     "angular-ng-autocomplete": "^2.0.1",
