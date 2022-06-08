@@ -16,7 +16,7 @@ export class EntityAlertComponent extends BaseClass implements OnInit, ApiRespon
         super(injector);
     }
     pageNum = 0;
-    moreDataAvailable = false;
+    moreDataAvailable = true;
     totalAndCurrentRowsRatio = "";
     entityModel: EntityModel;
     totalRows: any = 0;
@@ -70,6 +70,10 @@ export class EntityAlertComponent extends BaseClass implements OnInit, ApiRespon
 
     onLoadMoreClick() {
         makeServerRequest(this);
+    }
+
+    parentMethod() {
+        this.renderUI();
     }
 }
 function makeServerRequest(context: EntityAlertComponent) {

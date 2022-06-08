@@ -5,16 +5,18 @@ import { Subscription } from 'rxjs';
 import { EntityModel } from '../../../models/entity-model';
 import { ApiResponseCallback } from '../../../Interfaces/ApiResponseCallback';
 import { Constants } from 'src/app/Constants/Constants';
+import { EntityAlertComponent } from '../entity-alert/entity-alert.component';
 
 @Component({
     selector: 'app-entity-alert-detail',
     templateUrl: './entity-alert-detail.component.html',
-    styleUrls: ['./entity-alert-detail.component.css']
+    styleUrls: ['./entity-alert-detail.component.css'],
+    providers: [EntityAlertComponent]
 })
 export class EntityAlertDetailComponent extends BaseClass implements OnInit, OnDestroy, ApiResponseCallback {
 
 
-    constructor(private injector: Injector) {
+    constructor(private injector: Injector, private comp: EntityAlertComponent) {
         super(injector);
     }
     openAlertModel: OpenAlertsModel = new OpenAlertsModel();
@@ -29,6 +31,11 @@ export class EntityAlertDetailComponent extends BaseClass implements OnInit, OnD
     }
     goBack() {
         this.commonFunctions.backPress();
+        sessionStorage.removeItem(this.constants.ENTITY_ALERTS_ARRAY);
+        sessionStorage.removeItem(this.constants.ENTITY_ALERTS_PAGE_NUMBER);
+        sessionStorage.removeItem(this.constants.ENTITY_ALERTS_TOTAL_ROWS);
+        sessionStorage.removeItem(this.constants.ENTITY_ALERTS_CURRENT_ENTITY_ID);
+        this.comp.parentMethod();
     }
 
     onSuccess(response: any) {

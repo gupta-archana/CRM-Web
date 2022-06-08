@@ -89,7 +89,7 @@ export class ApiService {
 
     hitPostApi(url, data, apiResponseCallback: ApiResponseCallback) {
         this.http
-            .post(url, data)
+            .post(url, data, { observe: 'response'})
             .pipe(
                 timeout(180000),
                 catchError((e) => {
@@ -102,8 +102,8 @@ export class ApiService {
             .subscribe(
                 (result) => {
                     if (result.status === 200) {
-                        const json = result.json();
-                        apiResponseCallback.onSuccess(json);
+                        // const json = result.json();
+                        apiResponseCallback.onSuccess(result);
                     } else {
                         apiResponseCallback.onError(result.status, result.statusText);
                     }
