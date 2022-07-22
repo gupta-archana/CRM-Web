@@ -14,7 +14,7 @@ const json2xml = require('json2xml');
 export class ApiHandlerService implements ApiResponseCallback {
 
     private APP_MODE: Array<string> = ["alfa", 'dvlp', "beta", "live"];
-    private ENABLE_APP_MODE = 0;
+    private ENABLE_APP_MODE = 2;
     private apiResponseCallback: ApiResponseCallback = null;
     private noteURL: string;
     private getnoteURL: string;
