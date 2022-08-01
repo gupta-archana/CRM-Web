@@ -11,17 +11,16 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { combineAll } from "rxjs/operators";
 import { SearchFilterModel } from "../../../models/search-filter-model";
 
+import { MyLocalStorageService } from '../../../services/my-local-storage.service';
+import { Subscription } from "rxjs";
+import { DataServiceService } from 'src/app/services/data-service.service';
+
 @Component({
     selector: "app-search-filter",
     templateUrl: "./search-filter.component.html",
     styleUrls: ["./search-filter.component.css"],
 })
-export class SearchFilterComponent
-    extends BaseClass
-    implements OnInit, OnDestroy {
-    constructor(inject: Injector) {
-        super(inject);
-    }
+export class SearchFilterComponent extends BaseClass implements OnInit, OnDestroy {
 
     @ViewChild("closeSearchFilter", { static: true })
         closeSearchFilter: ElementRef;
@@ -32,10 +31,21 @@ export class SearchFilterComponent
     filterForm: FormGroup;
     selectedState: any;
 
+    filterEventSubscription: Subscription;
+
     ALL_CHECK = "allCheck";
     AGENT_CHECK = "agentCheck";
     PEOPLE_CHECK = "peopleCheck";
     EMPLOYEE_CHECK = "employeeCheck";
+
+    constructor(inject: Injector, public myLocalStorage: MyLocalStorageService, public dataService: DataServiceService) {
+        super(inject);
+
+        this.filterEventSubscription = this.dataService.onFilterClicks().subscribe(()=> {
+            this.ngOnInit();
+        });
+    }
+
 
     ngOnInit() {
         this.searchFilterModel = new SearchFilterModel();
@@ -45,6 +55,21 @@ export class SearchFilterComponent
 
         addValidation(this);
         getStates(this);
+
+        if(!sessionStorage.getItem("search_filters")) {
+            if(this.myLocalStorage.getValue("selected_search_in") === "A") {
+                this.searchFilterModel.agentCheck = true;
+            } else if(this.myLocalStorage.getValue("selected_search_in") === "E") {
+                this.searchFilterModel.employeeCheck = true;
+            } else if(this.myLocalStorage.getValue("selected_search_in") === "P") {
+                this.searchFilterModel.peopleCheck = true;
+            } else if(this.myLocalStorage.getValue("selected_search_in") === "All") {
+                this.searchFilterModel.allCheck = true;
+                this.searchFilterModel.agentCheck = true;
+                this.searchFilterModel.employeeCheck = true;
+                this.searchFilterModel.peopleCheck = true;
+            }
+        }
     }
 
     onAllCheckChange(event) {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject, BehaviorSubject } from 'rxjs';
+import { Subject, BehaviorSubject, Observable } from 'rxjs';
 import { AgentInfoModel } from '../models/TopAgentsModel';
 import { UserProfileModel } from '../models/user-profile-model';
 import { SearchFilterModel } from '../models/search-filter-model';
@@ -80,6 +80,9 @@ export class DataServiceService {
 
     private getTagDataSubject = new Subject<any>();
     getTagsDataObservable = this.getTagDataSubject.asObservable();
+
+    //search filter
+    private filsearchSubject = new Subject<any>();
 
 
     constructor() { }
@@ -173,5 +176,14 @@ export class DataServiceService {
 
     reloadTagData(data: any){
         this.getTagDataSubject.next(data);
+    }
+
+
+    //search filter
+    onFilterSend() {
+        this.filsearchSubject.next();
+    }
+    onFilterClicks(): Observable<any>{
+        return this.filsearchSubject.asObservable();
     }
 }

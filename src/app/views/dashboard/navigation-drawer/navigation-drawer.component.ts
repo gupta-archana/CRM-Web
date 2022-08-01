@@ -111,6 +111,7 @@ export class NavigationDrawerComponent
 
     onFilterClick() {
         this.dataService.onHeaderFilterClick();
+        this.dataService.onFilterSend();
     }
 
     onRecentProfileClick() {
