@@ -85,6 +85,13 @@ export class Constants {
     ASSOCIATES_TOTAL_ROWS = "associates_total_rows";
     ASSOCIATES_CURRENT_ENTITY_ID = "associates_current_entity_id";
 
+    // Person session constants
+    PERSONS_ENTITY_ARRAY = 'persons_entity_array';
+    PERSONS_CURRENT_PAGE_NUMBER = 'persons_current_page_num';
+    PERSONS_TOTAL_ROWS = 'persons_total_rows';
+    PERSONS_SEARCHED_STRING = 'persons_searched_string';
+    PERSONS_MORE_DATA_AVAILABLE_FLAG = 'persons_more_data_available_flag';
+
     // person agents session constants
     PERSON_AGENTS_ARRAY = "person_agents_array";
     PERSON_AGENTS_PAGE_NUMBER = "person_agents_page_num";
@@ -156,6 +163,7 @@ export class Constants {
     ANNIVERSARY = "Anniversary";
     FAVOURITE = "Favourite";
     FOLLOWING = "Following";
+    PERSONS = "Persons";
     SEARCH = "Search";
     RECENT_PROFILE = "Recent Profiles";
     SETTINGS = "Settings";

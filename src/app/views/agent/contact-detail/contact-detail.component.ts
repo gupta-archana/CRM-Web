@@ -105,6 +105,20 @@ export class ContactDetailComponent extends BaseClass implements OnInit, ApiResp
     onSuccess(response: any) {
         this.entityContactModel = response.entitycontact[0];
         this.entityContactModel.name = this.entityModel.name;
+        this.entityContactModel.doNotCall = response.entitycontact[0].doNotCall == 'yes';
+        this.entityContactModel.internal = response.entitycontact[0].internal == 'yes'; 
+        
+
+        if(response.entitycontact[0].phone1 && !response.entitycontact[0].phone1.startsWith('+') && response.entitycontact[0].phone1.length == 10){
+            const phone1 = response.entitycontact[0].phone1;
+            this.entityContactModel.phone1 = "(" + phone1.substring(0, 3) + ")" + " " + phone1.substring(3, 6) + "-" + phone1.substring(6);
+        }   
+
+        if(response.entitycontact[0].phone2 && !response.entitycontact[0].phone2.startsWith('+') && response.entitycontact[0].phone2.length == 10){
+            const phone2 = response.entitycontact[0].phone2;
+            this.entityContactModel.phone2 = "(" + phone2.substring(0, 3) + ")" + " " + phone2.substring(3, 6) + "-" + phone2.substring(6);
+        }            
+        
         this.cdr.markForCheck();
     }
     onError(errorCode: number, errorMsg: string) {

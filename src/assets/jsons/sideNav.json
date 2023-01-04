@@ -1,42 +1,47 @@
 [
-{
-"title":"Search",
-"class":"agent-search",
-"img":"../../../../images/search-icon.svg"
-},
-{
-"title":"Top Agents",
-"class":"top-agent",
-"img":"../../../../images/top-agents.svg"
-},
-{
-"title":"Agents Performance",
-"class":"agent-performance",
-"img":"../../../../images/agent-performance.svg"
-},
-{
-"title":"Following",
-"class":"agent-fav",
-"img":"../../../../images/favourite-icon.svg"
-},
-{
-"title":"Agents Under Plan",
-"class":"agent-plan",
-"img":"../../../../images/agent-under-plan.svg"
-},
-{
-"title":"Recent Profiles",
-"class":"agent-profile",
-"img":"../../../../images/module-recentprofile.svg"
-},
-{
-"title":"Notifications",
-"class":"notifications",
-"img":"../../../../images/notification_icon.svg"
-},
-{
-"title":"Logout",
-"class":"logout",
-"img":"../../../../images/logout.svg"
-}
+    {
+        "title": "Search",
+        "class": "agent-search",
+        "img": "../../../../images/search-icon.svg"
+    },
+    {
+        "title": "Top Agents",
+        "class": "top-agent",
+        "img": "../../../../images/top-agents.svg"
+    },
+    {
+        "title": "Agents Performance",
+        "class": "agent-performance",
+        "img": "../../../../images/agent-performance.svg"
+    },
+    {
+        "title": "Following",
+        "class": "agent-fav",
+        "img": "../../../../images/favourite-icon.svg"
+    },
+    {
+        "title": "Agents Under Plan",
+        "class": "agent-plan",
+        "img": "../../../../images/agent-under-plan.svg"
+    },
+    {
+        "title": "Persons",
+        "class": "persons",
+        "img": "../../../../images/top-agents.svg"
+    },
+    {
+        "title": "Recent Profiles",
+        "class": "agent-profile",
+        "img": "../../../../images/module-recentprofile.svg"
+    },
+    {
+        "title": "Notifications",
+        "class": "notifications",
+        "img": "../../../../images/notification_icon.svg"
+    },
+    {
+        "title": "Logout",
+        "class": "logout",
+        "img": "../../../../images/logout.svg"
+    }
 ]

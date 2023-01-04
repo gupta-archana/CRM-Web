@@ -12,4 +12,6 @@ export class EntityContactModel {
     city = "";
     state = "";
     zip = "";
+    internal = false;
+    doNotCall = false;     
 }

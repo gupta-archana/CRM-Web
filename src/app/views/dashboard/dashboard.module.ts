@@ -25,6 +25,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { ChangePasswordComponent } from '../../customUI/dialogs/change-password/change-password.component';
 import { NotificationsNewComponent } from './notifications/notifications-new/notifications-new.component';
 import { NotificationsDismissedComponent } from './notifications/notifications-dismissed/notifications-dismissed.component';
+import { PersonsComponent } from './persons/persons.component';
 
 @NgModule({
     imports: [
@@ -34,6 +35,6 @@ import { NotificationsDismissedComponent } from './notifications/notifications-d
 
     ],
     providers: [AuthGuardService, CanDeactivateGuard],
-    declarations: [NavigationDrawerComponent, TopAgentsComponent, AgentWithAlertComponent, AgentWithPerformanceComponent, SearchComponent, NewsFeedsComponent, TabComponent, ProfileSettingComponent, AppSettingComponent, RecentProfilesComponent, AgentsProfileComponent, PersonsProfileComponent, FavoritesComponent, AgentUnderPlanComponent, NotificationsComponent, ChangePasswordComponent, NotificationsNewComponent, NotificationsDismissedComponent]
+    declarations: [NavigationDrawerComponent, TopAgentsComponent, AgentWithAlertComponent, AgentWithPerformanceComponent, SearchComponent, NewsFeedsComponent, TabComponent, ProfileSettingComponent, AppSettingComponent, RecentProfilesComponent, AgentsProfileComponent, PersonsProfileComponent, FavoritesComponent, AgentUnderPlanComponent, NotificationsComponent, ChangePasswordComponent, NotificationsNewComponent, NotificationsDismissedComponent, PersonsComponent]
 })
 export class DashboardModule { }

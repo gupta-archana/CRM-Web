@@ -143,7 +143,7 @@ import { ChartModule } from "primeng/chart";
         EditAndDeleteTagPopupComponent,
         ObjectiveSentimentComponent,
         AddObjectivePopupComponent,
-        ViewSentimentHistoryComponent,
+        ViewSentimentHistoryComponent     
     ],
     imports: [
         BrowserModule,

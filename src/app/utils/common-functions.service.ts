@@ -59,10 +59,10 @@ export class CommonFunctionsService {
 
     navigateWithReplaceUrl(path: string) {
         this.router.navigate([path], { replaceUrl: true });
-    // setTimeout(() => {
-    //   window.location.reload(true);
-    // }, 200);
-    //
+        // setTimeout(() => {
+        //   window.location.reload(true);
+        // }, 200);
+        //
     }
 
     navigateWithoutReplaceUrl(path: string) {
@@ -73,7 +73,7 @@ export class CommonFunctionsService {
         this.router.navigate([path], { queryParams: { param: params } });
     }
     getEncryptedPassword(pUnencrypted: string) {
-    // pUnencrypted = "TestingPassword"
+        // pUnencrypted = "TestingPassword"
         const passwordCeilingNumber = Math.ceil(pUnencrypted.length / 26);
         let tLength: number = passwordCeilingNumber + 3;
         const encryptedPass = new Array<any>(
@@ -173,14 +173,14 @@ export class CommonFunctionsService {
         let totalAndCurrentRowsRatio = "";
         if (data && data.length > 0) {
             totalAndCurrentRowsRatio =
-        "showing " + data.length + " out of " + currentAvailable;
+                "showing " + data.length + " out of " + currentAvailable;
         } else {
             totalAndCurrentRowsRatio = "No Data available";
         }
         return totalAndCurrentRowsRatio;
 
-    // this.snackBar.open(totalAndCurrentRowsRatio, null, CommonFunctionsService.config);
-    // this.showPermanentSnackbar(totalAndCurrentRowsRatio);
+        // this.snackBar.open(totalAndCurrentRowsRatio, null, CommonFunctionsService.config);
+        // this.showPermanentSnackbar(totalAndCurrentRowsRatio);
     }
 
     onMenuItemClick(item, entityModel: EntityModel) {
@@ -355,6 +355,51 @@ export class CommonFunctionsService {
         }
         this.dataService.shareLoadedItemsTag(tag);
     }
+
+    formatPhoneNumber(contactString: any) {
+        let origContactString = contactString;
+
+        let status = { isValid: false, formattedContactString: '' };
+
+        if (contactString == "") {
+            status.isValid = true;
+            return status;
+        }
+
+        if (contactString) {
+
+            if (contactString.startsWith('+')) {
+                status.isValid = true;
+                status.formattedContactString = contactString;
+            }
+            else {
+
+                if (contactString.startsWith('1')) {
+                    contactString = contactString.slice(1);
+                }
+
+                contactString = contactString.match(/[0-9]/g).join('');
+
+                if (contactString.length == 10) {
+                    contactString = "(" + contactString.substring(0, 3) + ")" + " " + contactString.substring(3, 6) + "-" + contactString.substring(6);
+                    status.isValid = true;
+                    status.formattedContactString = contactString;
+                }
+                else {
+                    status.isValid = false;
+                    status.formattedContactString = origContactString;
+                }
+            }
+        }
+
+        return status;
+    }
+
+    unFormatPhoneNumber(contactString: any) {
+        if (contactString.startsWith('+'))
+            return contactString;
+        return contactString ? contactString.match(/[0-9]/g).join('') : "";
+    }
 }
 function getRandomInt(min, max) {
     min = Math.ceil(min);
@@ -371,4 +416,4 @@ function createSnackbarConfig(context: CommonFunctionsService) {
     }
 }
 
-function showSnackbarOnScroll(text: string) {}
+function showSnackbarOnScroll(text: string) { }

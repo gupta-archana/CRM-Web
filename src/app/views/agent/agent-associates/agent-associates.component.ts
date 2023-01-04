@@ -81,6 +81,8 @@ export class AgentAssociatesComponent extends BaseClass implements OnInit, OnDes
 
 
     getAddress(item: AssociatesModel) {
+        this.personAddress = '';
+        
         if (item.city) {
             this.personAddress = item.city  + " ,   ";
         }

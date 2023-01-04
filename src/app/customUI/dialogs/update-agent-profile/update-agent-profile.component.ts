@@ -34,7 +34,7 @@ export class UpdateAgentProfileComponent
         super(injector);
     }
 
-    ngOnInit() {
+    ngOnInit() {        
         addValidation(this);
         registerDataSubscription(this);
     }
@@ -76,6 +76,16 @@ export class UpdateAgentProfileComponent
             this.agentProfileEditSubscription.unsubscribe();
         }
     }
+    validateContactNumber(formControlName: string, contactString: string) {
+        const status = this.commonFunctions.formatPhoneNumber(contactString);
+    
+        if (status.isValid) {
+          this.entityInfoForm.get(formControlName).setValue(status.formattedContactString);
+        }
+        else {
+          this.entityInfoForm.get(formControlName).setErrors({ incorrect: true });     
+        }
+      }    
 }
 function addValidation(context: UpdateAgentProfileComponent) {
     const re =
@@ -92,6 +102,8 @@ function addValidation(context: UpdateAgentProfileComponent) {
         state: new FormControl(""),
         email: new FormControl(""),
         city: new FormControl(""),
+        doNotCall: new FormControl(false),
+        internal: new FormControl(false)
     });
 }
 
@@ -132,6 +144,8 @@ function createRequestJson(context: UpdateAgentProfileComponent) {
 
     requestJson["entity"] = context.entitiyContactModel.entity;
     requestJson["entityID"] = context.entitiyContactModel.entityID;
+    requestJson['phone1'] = context.commonFunctions.unFormatPhoneNumber(context.entityInfoForm.get('phone1').value);
+    requestJson['phone2'] = context.commonFunctions.unFormatPhoneNumber(context.entityInfoForm.get('phone2').value);
     const finalJson = {
         EntityContact: "",
         attr: requestJson,

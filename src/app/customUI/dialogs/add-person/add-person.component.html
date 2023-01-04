@@ -1,0 +1,216 @@
+<div class="modal fade" id="addPersonModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" #closeAddPersonEntityModel
+          (click)="onCancelClick()">&times;</button>
+        <h4 class="modal-title">New Person Information</h4>
+      </div>
+      <form role="form" [formGroup]="addPersonEntityInfo">
+        <div class="modal-body">
+
+          <!--Title-->
+          <!--         
+          <div class="form-group">
+            <label for="title">Title</label>
+            <select class="form-control" id="title" formControlName="title" (change)="onTitleChanged($event)">
+              <option [value]="title" *ngFor="let title of titleList">{{title}}</option>
+            </select>
+          </div>
+          -->
+          <!--First Name-->
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" class="form-control" id="firstName" formControlName="firstName">
+            <!-- Error View -->
+            <div id="errorDiv" *ngIf="addPersonEntityInfo.get('firstName').hasError('required') && createClicked">
+              Name is required.
+            </div>
+          </div>
+
+          <!--Middle Name-->
+          <div class="form-group">
+            <label for="firstName">Middle Name</label>
+            <input type="text" class="form-control" id="firstName" formControlName="middleName">
+          </div>
+
+          <!--Last Name-->
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" class="form-control" id="lastName" formControlName="lastName">
+          </div>
+
+          <!--Disp Name-->
+          <div class="form-group">
+            <label for="dispName">Disp Name</label>
+            <input type="text" class="form-control" id="dispName" formControlName="dispName">
+          </div>
+
+        </div>
+
+        <mat-accordion>
+          <mat-expansion-panel [expanded]="contactsPanelOpenState">
+
+            <mat-expansion-panel-header (click)="clickContactsPanel()">
+              <mat-panel-title class="matExpansionPanelTitle">
+                Contact Details
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <!-- Phone -->
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input type="text" class="form-control" id="phone" formControlName="phone" (focusout)="validateContactNumber('phone', addPersonEntityInfo.get('phone').value)">
+              <!-- Error View -->
+              <div id="errorDiv" *ngIf="!addPersonEntityInfo.get('phone').valid && createClicked">
+                Invalid Phone Number.
+              </div>              
+            </div>
+
+            <!-- Mobile -->
+            <div class="form-group">
+              <label for="Mobile">Mobile</label>
+              <input type="text" class="form-control" id="mobile" formControlName="mobile" (focusout)="validateContactNumber('mobile', addPersonEntityInfo.get('mobile').value)">
+              <!-- Error View -->
+              <div id="errorDiv" *ngIf="!addPersonEntityInfo.get('mobile').valid && createClicked">
+                Invalid Mobile Number.
+              </div>              
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+              <label for="Email">Email</label>
+              <input type="text" class="form-control" id="email" formControlName="email">
+            </div>
+
+            <div class="form-group">
+              <!-- Error View -->
+              <div id="errorDiv" *ngIf=" !isValidContact && createClicked">
+                Contacts or Email is required.
+              </div>
+            </div>
+
+          </mat-expansion-panel>
+        </mat-accordion>
+
+        <mat-accordion>
+          <mat-expansion-panel [expanded]="addressPanelOpenState">
+
+            <mat-expansion-panel-header (click)="clickAddressPanel()">
+              <mat-panel-title class="matExpansionPanelTitle">
+                Address Details
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <!-- Address1 & Address2 -->
+            <div class="form-group">
+              <input type="text" class="form-control" id="addr1" formControlName="address1" placeholder="Address1">
+              <input type="text" class="form-control" id="addr2" formControlName="address2" placeholder="Address2">
+            </div>
+
+            <!-- City -->
+            <div class="form-group">
+              <label for="city">City</label>
+              <input type="text" class="form-control" id="city" formControlName="city" placeholder="Enter City">
+            </div>
+
+            <!-- State -->
+            <div class="form-group">
+              <label for="sel1">State</label>
+              <select class="form-control" id="state" formControlName="state" (change)="onStateChanged($event)">
+                <option [value]="i.stateID" *ngFor="let i of states">{{i.description}}</option>
+              </select>
+            </div>
+
+            <!-- ZIP || Pin Code -->
+            <div class="form-group">
+              <label for="pin code">Pin Code</label>
+              <input type="text" class="form-control" id="zip" placeholder="89120" formControlName="zip">
+            </div>
+
+          </mat-expansion-panel>
+        </mat-accordion>
+
+        <mat-accordion>
+          <mat-expansion-panel [expanded]="npnPanelOpenState">
+
+            <mat-expansion-panel-header (click)="clickNPNPanel()">
+              <mat-panel-title class="matExpansionPanelTitle">
+                NPN & ALTA UID
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <!-- NPN -->
+            <div class="form-group">
+              <label for="NPN">NPN</label>
+              <input type="text" class="form-control" id="NPN" formControlName="NPN">
+            </div>
+
+            <!-- ALTA UID -->
+            <div class="form-group">
+              <label for="altaUID">ALTA UID</label>
+              <input type="text" class="form-control" id="altaUID" formControlName="altaUID">
+            </div>
+
+          </mat-expansion-panel>
+        </mat-accordion>
+
+        <mat-accordion>
+          <mat-expansion-panel [expanded]="notesPanelOpenState">
+
+            <mat-expansion-panel-header (click)="clickNotesPanel()">
+              <mat-panel-title class="matExpansionPanelTitle">
+                Notes
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <!-- Phone -->
+            <div class="form-group">
+              <div class="form-group">
+                <textarea type="text" class="form-control" id="name" formControlName="notes"
+                  placeholder="Write your note here..." rows="5" cols="50" style="resize:none;"></textarea>
+              </div>
+            </div>
+
+          </mat-expansion-panel>
+        </mat-accordion>
+
+
+        <mat-accordion>
+          <mat-expansion-panel [expanded]="othersPanelOpenState">
+
+            <mat-expansion-panel-header (click)="clickOthersPanel()">
+              <mat-panel-title class="matExpansionPanelTitle">
+                Others
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <!--Do Not Contact & Our Employee -->
+            <div class="form-group checkbox">
+              <div class="col-xs-6 col-md-6 noPadding containerBoxCustom">
+                <label for="doNotContact">Do Not Contact
+                  <input id="doNotContact" type="checkbox" formControlName="doNotCall">
+                  <span class="checkmarkCustom"></span>
+                </label>
+              </div>
+
+              <div class=" col-xs-6 col-md-6 noPadding containerBoxCustom ">
+                <label for="internal">Our Employee
+                  <input id="internal" type="checkbox" formControlName="internal">
+                  <span class="checkmarkCustom"></span>
+                </label>
+              </div>
+            </div>
+
+          </mat-expansion-panel>
+        </mat-accordion>
+
+        <div class="modal-footer">
+          <a data-dismiss="modal" alt="Cancel" (click)="onCancelClick()"><span>Cancel</span></a>
+          <a alt="Save Changes" (click)="onSaveClick()">Create Person</a>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

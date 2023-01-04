@@ -32,6 +32,27 @@
           </div>
         </div>
       </div>
+
+      <div class="col-xs-12 col-md-6 cell-bg checkbox" *ngIf="entityContactModel.entity === 'P'">
+        <div class="col-xs-6 col-md-6 noPadding">
+          <div class="agent-contact">
+            <label class="containerBoxCustom"> Do Not Contact
+              <input type="checkbox" [(ngModel)]="entityContactModel.doNotCall" [disabled]="true">
+              <span class="checkmarkCustom"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="col-xs-6 col-md-6 noPadding">
+          <div class="agent-contact">
+            <label class="containerBoxCustom"> Our Employee
+              <input type="checkbox" [(ngModel)]="entityContactModel.internal" [disabled]="true">
+              <span class="checkmarkCustom"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+
       <div class="col-xs-12 col-md-6 cell-bg">
         <div class="agent-contact">
           <h4>Address</h4> <span class="ag-add">{{getAddress()}}</span>
@@ -44,7 +65,7 @@
 
       <div class="col-xs-12 col-md-6 cell-bg" *ngIf = "entityContactModel.entity === 'P'">
         <div class="agent-contact">
-          <h4>Contact Number 1</h4> <span>{{entityContactModel.phone1}}</span>
+          <h4>Contact Number</h4> <span>{{entityContactModel.phone1}}</span>
           <div class="clearfix"></div>
           <div class="ag-detail">
             <ul>
@@ -58,7 +79,7 @@
       <div class="clearfix"></div>
       <div class="col-xs-12 col-md-6 cell-bg" *ngIf = "entityContactModel.entity === 'A'">
         <div class="agent-contact">
-          <h4>Contact Number 2</h4> <span>{{entityContactModel.phone2}}</span>
+          <h4>Contact Number</h4> <span>{{entityContactModel.phone2}}</span>
           <div class="clearfix"></div>
           <div class="ag-detail">
             <ul>

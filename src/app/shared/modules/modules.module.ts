@@ -7,12 +7,14 @@ import { ShareVCardComponent } from "../../customUI/dialogs/share-v-card/share-v
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { UpdateUserProfileComponent } from "../../customUI/dialogs/update-user-profile/update-user-profile.component";
 import { SearchFilterComponent } from "../../customUI/dialogs/search-filter/search-filter.component";
+import { AddPersonComponent } from "src/app/customUI/dialogs/add-person/add-person.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { MatTabsModule } from "@angular/material/tabs";
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 // import { CurrencyMaskModule } from "ng2-currency-mask";
 import { DecimalPipe } from "@angular/common";
@@ -49,14 +51,17 @@ import { AutocompleteLibModule } from "angular-ng-autocomplete";
         MomentModule,
         ChartsModule,
         AutocompleteLibModule,
+        MatExpansionModule
     ],
     declarations: [
         UpdateAgentProfileComponent,
         RecentProfilesComponent,
         ShareVCardComponent,
         UpdateUserProfileComponent,
+        AddPersonComponent,
         SearchFilterComponent,
         EntityNameHeaderComponent,
+        
     ],
     exports: [
         UpdateAgentProfileComponent,
@@ -65,6 +70,7 @@ import { AutocompleteLibModule } from "angular-ng-autocomplete";
         NgxSmartModalModule,
         ShareVCardComponent,
         UpdateUserProfileComponent,
+        AddPersonComponent,
         SearchFilterComponent,
         FormsModule,
         ReactiveFormsModule,
@@ -77,6 +83,7 @@ import { AutocompleteLibModule } from "angular-ng-autocomplete";
         ChartsModule,
         EntityNameHeaderComponent,
         AutocompleteLibModule,
+        
     ],
     providers: [
     // { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig },

@@ -1,0 +1,68 @@
+<div class="container-fluid nospace searchFixed">
+  <div class="container">
+    <div class="row">
+      <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+        <div class="col-xs-9 search-box">
+          <div class="form-group">
+            <input type="text" class="form-control" formControlName="searchPerson" placeholder="Searching Persons">
+          </div>
+          <button type="submit" class="btn btn-default search-btn" id="searchButton"></button>
+        </div>
+      </form>
+      <div class="text-center" style="padding-right: 15px;padding-top: 45px;line-height: 18px;" data-toggle="modal"
+        data-target="#addPersonModal"><img src="images/add-icon.svg" alt=""><br><span class="edit-detail"><a
+            class="font-orange fontBold">New Person</a></span></div>
+    </div>
+    <div class="bottom-bord"></div>
+    <div class="clearfix paddingTop15"></div>
+  </div>
+</div>
+
+<div class="container-fluid nospace">
+  <div class="container app-bg2 paddingTop85">
+    <div class="serach-result">
+
+      <div class="row" *ngIf="hideNoDataDiv">
+        <ul>
+          <li *ngFor="let item of searchedPersons; let i = index;">
+            <div class="col-xs-12 col-md-6 cell-bg">
+              <div class="agent-detail ag-perform">
+                <div class="dp" (click)="onItemClick(item)">
+                  <img
+                    src="{{item.type=='A'?'../../../../../../images/baseline-business-24px.svg':'../../../../../../images/username.svg'}}"
+                    alt="" />
+                  <div class="dpProfile_wp proActiBg">{{item.stat}}</div>
+                </div>
+
+                <h4 class="topAgentsName"><a (click)="onItemClick(item)">{{item.name}}</a>
+                  <span (click)="onItemClick(item)"> ({{item.entityId}})</span>
+                  <div class="clearfix paddingTop10"></div>
+                  <span>{{getAddress(item)}}</span>
+                </h4>
+                <a class="favouritIconPosition"><img
+                    src="{{checkEntityFavorite(item)?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}"
+                    alt="" (click)="onStarClick(item)"></a>
+
+                <div class="clearfix"></div>
+              </div>
+            </div>
+
+          </li>
+        </ul>
+        <!-- <button (click)="topFunction()" id="myBtn" title="Go to top"><span
+            class="glyphicon glyphicon-arrow-up"></span></button> -->
+        <div class="row marginBottom20" *ngIf="moreDataAvailable">
+          <div class="col-xs-12 col-md-12 loadMoreWp">
+            <hr />
+            <div class="loadMore"><a (click)="onLoadMoreClick()" alt="Load More">Load More</a></div>
+          </div>
+        </div>
+        <!-- <div id="ratioView">{{totalAndCurrentRowsRatio}}</div> -->
+      </div>
+      <div class="serach-emp " *ngIf="!hideNoDataDiv">
+        <h2><em>It is Empty Here!</em></h2>
+        <p><em>Please use the search bar to search the Persons</em></p>
+      </div>
+    </div>
+  </div>
+  <app-add-person></app-add-person>

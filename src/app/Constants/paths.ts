@@ -8,6 +8,7 @@ export const PATH_AGENTS_WITH_ALERT = "agentWithAlerts";
 export const PATH_AGENTS_WITH_PERFORMANCE = "agentWithPerformance";
 export const PATH_AGENTS_UNDER_PLAN = "agentUnderPlan";
 export const PATH_SEARCH = "search";
+export const PATH_PERSONS = "persons";
 export const PATH_NEWS = "news";
 export const PATH_RECENT_RPOFILES = "recentProfiles";
 export const PATH_SETTING = "setting";

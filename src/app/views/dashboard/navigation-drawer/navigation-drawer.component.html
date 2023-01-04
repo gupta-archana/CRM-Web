@@ -11,8 +11,9 @@
           <h1 class="t-agent">{{headerTitle}}</h1>
         </div>
         <div class="col-xs-2 text-right toppad" *ngIf="showRefreshButton">
-          <img id = "refreshImage" src="../../../../images/refresh.svg" alt="" (click)="onRefreshClick()"></div>
-
+          <img id="refreshImage" src="../../../../images/refresh.svg" alt="" (click)="onRefreshClick()">
+        </div>
+        
         <div class="col-xs-2 text-right toppad" *ngIf="showFilterButton"><img src="../../../../images/filter.svg" alt=""
             (click)="onFilterClick()" data-toggle="modal" data-target="#filterPopup"><br><span
             class="edit-detail"><a>Filter</a></span></div>

@@ -30,7 +30,7 @@ export class NavigationDrawerComponent
     showRefreshButton = false;
     showFilterButton = false;
     showRecentProfileButton = false;
-    showLogoutButton = false;
+    showLogoutButton = false;    
     exit = false;
     called = false;
     functionCalled: any;
@@ -162,6 +162,9 @@ function navigateToSelectedPage(
         case context.constants.AGENTS_UNDER_PLAN:
             selectedNavBarItemPath = context.paths.PATH_AGENTS_UNDER_PLAN;
             break;
+        case context.constants.PERSONS:
+            selectedNavBarItemPath = context.paths.PATH_PERSONS;            
+            break;
         case context.constants.SEARCH:
             selectedNavBarItemPath = context.paths.PATH_SEARCH;
             break;
@@ -230,6 +233,10 @@ function changeHeaderTitle(path: string, context: NavigationDrawerComponent) {
                     context.headerTitle = context.constants.NEWS;
                     context.showRefreshButton = true;
                     break;
+                case context.paths.PATH_PERSONS:
+                    context.headerTitle = context.constants.PERSONS; 
+                    context.showRefreshButton = true;                 
+                    break;    
                 case context.paths.PATH_SEARCH:
                     context.headerTitle = context.constants.SEARCH;
                     context.showFilterButton = true;
@@ -274,6 +281,7 @@ function reasetHeaderButtons(context: NavigationDrawerComponent) {
     context.showFilterButton = false;
     context.showRecentProfileButton = false;
     context.showLogoutButton = false;
+
 }
 
 function printButtonStatus(context: NavigationDrawerComponent, from: any) {

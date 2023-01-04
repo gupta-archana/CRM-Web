@@ -23,6 +23,23 @@
             <!-- Error View End -->
           </div>
 
+
+          <div class="form-group checkbox" *ngIf="entitiyContactModel.entity === 'P'">
+            <div class="col-xs-6 col-md-6 noPadding containerBoxCustom">
+              <label for="doNotContact">Do Not Contact
+                <input id="doNotContact" type="checkbox" formControlName="doNotCall">
+                <span class="checkmarkCustom"></span>
+              </label>
+            </div>
+            <div class=" col-xs-6 col-md-6 noPadding containerBoxCustom ">
+              <label for="internal">Our Employee
+                <input id="internal" type="checkbox" formControlName="internal">
+                <span class="checkmarkCustom"></span>
+              </label>
+            </div>
+          </div>
+
+
           <div class="form-group">
             <label for="Address">Address</label>
             <input type="text" class="form-control" id="addr1" formControlName="addr1"
@@ -107,9 +124,12 @@
           </div>
 
           <div class="form-group" *ngIf = "entitiyContactModel.entity === 'P'">
-            <label for="Contact Number 1">Contact Number 1</label>
-            <input type="text" class="form-control" id="phone1" formControlName="phone1">
+            <label for="Contact Number 1">Contact Number</label>
+            <input type="text" class="form-control" id="phone1" formControlName="phone1" (focusout)="validateContactNumber('phone1', entityInfoForm.get('phone1').value)">
             <!-- Error View -->
+            <div id="errorDiv" *ngIf="!entityInfoForm.get('phone1').valid && submitClicked">
+              Invalid Phone Number.
+            </div>             
             <div id="errorDiv" id="errorDiv" *ngIf="entityInfoForm.get('phone1').hasError('required') && submitClicked">
               You entered not valid input.
             </div>
@@ -120,9 +140,12 @@
           </div>
 
           <div class="form-group" *ngIf = "entitiyContactModel.entity === 'A'">
-            <label for="Contact Number 2">Contact Number 2</label>
-            <input type="text" class="form-control" id="phone2" formControlName="phone2">
+            <label for="Contact Number 2">Contact Number</label>
+            <input type="text" class="form-control" id="phone2" formControlName="phone2" (focusout)="validateContactNumber('phone2', entityInfoForm.get('phone2').value)">
             <!-- Error View -->
+            <div id="errorDiv" *ngIf="!entityInfoForm.get('phone2').valid && submitClicked">
+              Invalid Phone Number.
+            </div>               
             <div id="errorDiv" *ngIf="entityInfoForm.get('phone2').hasError('required') && submitClicked">
               You entered not valid input.
             </div>

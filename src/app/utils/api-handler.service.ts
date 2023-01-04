@@ -100,6 +100,15 @@ export class ApiHandlerService implements ApiResponseCallback {
     }
 
     /**
+     * AddPersonEntity
+     */
+    public addPersonEntity(requestJson: any, apiResponseCallback: ApiResponseCallback) {
+        this.dataService.onHideShowLoader(true);
+        const url = this.api.getAddPersonEntityUrl(this.getAppMode());
+        this.apiService.hitPostApi(url, this.getRequestXml(requestJson), handleAddAndUpdateApiResponse(this, apiResponseCallback));
+    }
+
+    /**
    * ChangeShareableStatus
    */
     public ChangeShareableStatus(status: string, apiResponseCallback: ApiResponseCallback) {

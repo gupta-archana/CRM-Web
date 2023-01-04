@@ -165,6 +165,10 @@ export class API {
         return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=contactModify";
     }
 
+    getAddPersonEntityUrl(app_mode: string) {
+        return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=personNew";
+    }    
+
     getThirteenMonthActivityUrl(app_mode: string, agentId: string) {
         return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=Activity13MonthsGet&agentId=" + agentId;
     }

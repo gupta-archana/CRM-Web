@@ -26,6 +26,29 @@ body {
   background: #045395 url(../images/bg-art.png) no-repeat left bottom;
 }
 
+app-add-person .mat-expansion-panel-body{
+  padding: 0px 15px 16px !important;
+}
+
+.matExpansionPanelTitle{
+  font-family: "Open Sans", sans-serif;
+  font-size: 13px;
+  font-weight: bold;  
+  color: #000000;
+}
+
+app-add-person .mat-expansion-panel-header{
+  padding: 0px 15px;
+}
+
+.font-orange {
+  color: #F68933;
+}
+
+.font-orange:hover {
+  color: #F68933;
+}
+
 h1 a:link,
 a:link {
   color: #fff;
@@ -160,21 +183,21 @@ button.btn-login {
   font-size: 14px;
   font-weight: normal;
   border-radius: 30px;
-  width:100%;
+  width: 100%;
   padding: 10px 15px;
   margin-bottom: 15px;
-  border:0;
+  border: 0;
   text-align: left;
 }
 
-.btn-tags:hover{
-	background: #F68933;
-	color:#000;
+.btn-tags:hover {
+  background: #F68933;
+  color: #000;
 }
 
 
-.tagsContent h4{
-  color:rgba(0, 0, 0, 0.5);
+.tagsContent h4 {
+  color: rgba(0, 0, 0, 0.5);
   font-size: 14px;
   font-weight: normal;
   text-align: center;
@@ -318,9 +341,9 @@ form input[type="checkbox"] {
   text-align: center;
 }
 
-.agent-detail h4 span.textRight img{
-	float: initial;
-	margin-top: -6px;
+.agent-detail h4 span.textRight img {
+  float: initial;
+  margin-top: -6px;
 }
 
 .associatAgentName span {
@@ -461,10 +484,11 @@ ul.slide-menu li a {
   font-size: 15px;
   color: #000;
 }
-.noWrap
-{
+
+.noWrap {
   white-space: normal !important;
 }
+
 ul.slide-menu li.top-agent a {
   background: url(../images/top-agents.svg) no-repeat left;
   padding-left: 45px;
@@ -472,6 +496,11 @@ ul.slide-menu li.top-agent a {
 
 ul.slide-menu li.agent-plan a {
   background: url(../images/agent-plan.svg) no-repeat left;
+  padding-left: 45px;
+}
+
+ul.slide-menu li.persons a {
+  background: url(../images/top-agents.svg) no-repeat left;
   padding-left: 45px;
 }
 
@@ -963,14 +992,14 @@ ul.agent-details li.associates a {
 
 .serach-empName {
   background: #F2F2F2 url(../images/empty-page.svg) top no-repeat;
-  background-position-y:15px;
+  background-position-y: 15px;
   padding-top: 50px;
   text-align: center;
-  min-height:230px;
+  min-height: 230px;
 }
 
 .serach-empName {
-  padding-top:115px;
+  padding-top: 115px;
 }
 
 .serach-empName h2 {
@@ -988,16 +1017,16 @@ ul.agent-details li.associates a {
 
 
 .add-box {
- background:#fff;
+  background: #fff;
   margin-top: 20px;
-  position:fixed;
+  position: fixed;
   bottom: 0;
-  left:0;
-  padding:15px 15px 0px 15px;
-  width: 100%;  
-  -webkit-box-shadow:-4px -5px 8px -4px rgba(46, 61, 73, 0.3);
-  -moz-box-shadow:-4px -5px 8px -4px rgba(46, 61, 73, 0.3);
-  box-shadow: -4px -5px 8px -4px rgba(46, 61, 73, 0.3);   
+  left: 0;
+  padding: 15px 15px 0px 15px;
+  width: 100%;
+  -webkit-box-shadow: -4px -5px 8px -4px rgba(46, 61, 73, 0.3);
+  -moz-box-shadow: -4px -5px 8px -4px rgba(46, 61, 73, 0.3);
+  box-shadow: -4px -5px 8px -4px rgba(46, 61, 73, 0.3);
 }
 
 .add-box .form-group input[type="text"] {
@@ -1014,7 +1043,7 @@ ul.agent-details li.associates a {
   background-color: none;
   box-shadow: 0px;
   border: none;
-  background:none;  
+  background: none;
   position: absolute;
   top: 2px;
   right: 25px;
@@ -1027,11 +1056,11 @@ ul.agent-details li.associates a {
   background-color: none;
   box-shadow: 0px;
   /* border: none; */
-  background:none;  
+  background: none;
   position: unset;
   top: 2px;
-  right:15px;
-  padding:5px;
+  right: 15px;
+  padding: 5px;
   float: right;
 }
 
@@ -1447,7 +1476,7 @@ input:checked+.slider:before {
   color: #4c4c4c;
   font-weight: normal;
   margin-top: 5px;
- /* margin: 10px 0px; */
+  /* margin: 10px 0px; */
 
 }
 
@@ -1539,7 +1568,7 @@ input:checked+.slider:before {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  color:#000;
+  color: #000;
 }
 
 /* Hide the browser's default checkbox */
@@ -1556,8 +1585,8 @@ input:checked+.slider:before {
   position: absolute;
   top: 2px;
   left: 0;
-  height:16px;
-  width:16px;
+  height: 16px;
+  width: 16px;
   /* background-color: #eee; */
   border: solid 1px #F68933;
 }
@@ -1576,13 +1605,14 @@ input:checked+.slider:before {
 
 /* Style the checkmark/indicator */
 .containerBoxCustom .checkmarkCustom:after {
-  left:2px;
-  top:2px;
+  left: 2px;
+  top: 2px;
   width: 10px;
-  height: 10px; 
+  height: 10px;
   border-width: 2px 2px 2px 2px;
   background: #F68933;
 }
+
 /* Inner page Custom checkbox css end here */
 
 
@@ -1626,31 +1656,31 @@ input:checked+.slider:before {
   font-size: 12px;
   /* color: #a3a3a3; */
   font-weight: normal;
-  color:#000;
-  opacity:0.8;
-  margin:0px 0px 5px 0px;
+  color: #000;
+  opacity: 0.8;
+  margin: 0px 0px 5px 0px;
 }
 
 .passwordRequirements ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.passwordRequirements ul li{
-	background:url(../images/check-default.svg) no-repeat left;	
-	font-size: 12px;
-	font-weight: normal;
-    color:#000;
-    line-height: 18px;
-    /* opacity:0.8; */
-    color: #585858;
-    margin: 0;
-	padding:0px 0px 0px 25px;	
+.passwordRequirements ul li {
+  background: url(../images/check-default.svg) no-repeat left;
+  font-size: 12px;
+  font-weight: normal;
+  color: #000;
+  line-height: 18px;
+  /* opacity:0.8; */
+  color: #585858;
+  margin: 0;
+  padding: 0px 0px 0px 25px;
 }
 
-.passwordRequirements ul li.valid{
-	background:url(../images/check-green.svg) no-repeat left;		
+.passwordRequirements ul li.valid {
+  background: url(../images/check-green.svg) no-repeat left;
 }
 
 .modal-body label.rememberM {
@@ -2058,17 +2088,18 @@ input:-internal-autofill-selected {
   background-image: none !important;
   color: rgb(0, 0, 0) !important;
 }
-.objectivesWp{
-	margin:0px;
-	padding:0px;
-	text-align: right;
+
+.objectivesWp {
+  margin: 0px;
+  padding: 0px;
+  text-align: right;
 }
 
-.objectivesWp a{
-	font-size: 12px;
-	color:#F68933;
-	font-weight: bold;
-	
+.objectivesWp a {
+  font-size: 12px;
+  color: #F68933;
+  font-weight: bold;
+
 }
 
 .addNoteBtn,
@@ -2082,7 +2113,7 @@ input:-internal-autofill-selected {
   width: 100%;
   border-radius: 6px;
   border: 0;
-  border:solid 2px #F68933;
+  border: solid 2px #F68933;
 }
 
 
@@ -2101,16 +2132,16 @@ input:-internal-autofill-selected {
 .monthSelectorWp span {
   position: absolute;
   right: 0;
-  bottom:-8px;  
+  bottom: -8px;
 }
 
-.monthSelectorWp span a{
-	font-size: 14px;
-	color: #F68933;
-	font-weight:bold; 
-    padding-right: 6px;
-    padding-left: 12px;
-    background:#F2F2F2;	
+.monthSelectorWp span a {
+  font-size: 14px;
+  color: #F68933;
+  font-weight: bold;
+  padding-right: 6px;
+  padding-left: 12px;
+  background: #F2F2F2;
 }
 
 
@@ -2130,77 +2161,77 @@ input:-internal-autofill-selected {
 .yearSelectorWp span {
   position: absolute;
   left: 0;
-  bottom:-9px;
+  bottom: -9px;
   font-size: 16px;
-  font-weight:bold;
-  color:rgba(0, 0, 0, 0.5);
-  background:#fff;
-  padding-right:10px;  
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.5);
+  background: #fff;
+  padding-right: 10px;
 }
 
 
-.monthSelectorTable{
-	margin:0;
-	padding:0;
+.monthSelectorTable {
+  margin: 0;
+  padding: 0;
 }
 
-.monthSelectorTable table{
-	width:100%;
+.monthSelectorTable table {
+  width: 100%;
 }
 
-.monthSelectorTable table td{
-	width:50%;
-	font-size: 14px;
-  font-weight:normal;
-  color:rgba(0, 0, 0, 0.5);
+.monthSelectorTable table td {
+  width: 50%;
+  font-size: 14px;
+  font-weight: normal;
+  color: rgba(0, 0, 0, 0.5);
   padding: 10px 0px;
 }
 
-.monthSelectorTable table td.activeMonth{
-	font-size: 14px;
-  font-weight:bold;
-  color:#F68933;
+.monthSelectorTable table td.activeMonth {
+  font-size: 14px;
+  font-weight: bold;
+  color: #F68933;
 }
 
 .feedbackWp {
-	width: 50px;
-	position: relative;	
-	text-align: center;
-	margin: 0 auto;	
+  width: 50px;
+  position: relative;
+  text-align: center;
+  margin: 0 auto;
 }
 
 .feedback-detail {
   font-size: 10px;
-  color:#F68933;
+  color: #F68933;
   white-space: nowrap;
-  margin:0;
-  padding:0;
+  margin: 0;
+  padding: 0;
   text-align: center;
 }
 
 .feedbackNoWp {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    position: absolute;
-    top: -10px;
-    right:2px;
-    font-size:10px;
-    color:#F68933;
-    font-weight: bold;
-    padding: 1px 0px 0px 0px;
-    background:#fff;
-    border:solid 2px #F68933;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  position: absolute;
+  top: -10px;
+  right: 2px;
+  font-size: 10px;
+  color: #F68933;
+  font-weight: bold;
+  padding: 1px 0px 0px 0px;
+  background: #fff;
+  border: solid 2px #F68933;
 }
 
 .feedback-request {
-	margin:0;
-	padding:0;
+  margin: 0;
+  padding: 0;
 }
 
 .feedback-request img {
   float: left;
-  margin-right:10px;
+  margin-right: 10px;
   margin-bottom: 15px;
 }
 
@@ -2214,8 +2245,8 @@ input:-internal-autofill-selected {
 
 .feedback-request span {
   font-size: 10px;
-  font-weight: normal;  
-  color:rgba(0, 0, 0, 0.6)
+  font-weight: normal;
+  color: rgba(0, 0, 0, 0.6)
 }
 
 .emailIconBtn {
@@ -2230,51 +2261,52 @@ input:-internal-autofill-selected {
   color: #F68933;
 }
 
-.imgWidth{
-	width:20px;
+.imgWidth {
+  width: 20px;
 }
 
-.calenderPosition{
-	position: relative;	
+.calenderPosition {
+  position: relative;
 }
 
-.calenderPosition button.add-btn{
-	position: absolute;
-	right: 0px;
-	top: 26px;
-	width: 32px;
-	height: 32px;
-	padding: 0;
+.calenderPosition button.add-btn {
+  position: absolute;
+  right: 0px;
+  top: 26px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
 }
+
 .editTag-wp {
-	margin:0px;
-	padding:0px;
-	text-align: right;
-	margin-top: 8px;
+  margin: 0px;
+  padding: 0px;
+  text-align: right;
+  margin-top: 8px;
 }
 
-.editTag-wp a{
-	color:#F68933;
+.editTag-wp a {
+  color: #F68933;
 }
 
-.editTag-wp a span{
-	font-size: 11px;
+.editTag-wp a span {
+  font-size: 11px;
 }
 
-.editTag-wp a:hover{
-	opacity: 0.8;
+.editTag-wp a:hover {
+  opacity: 0.8;
 }
 
-.modal-header button.delete-btn{
-	font-size: 14px;
-	color:#F68933;
-	font-weight: normal;	
-	right: 10px;
-	top: 8px;
+.modal-header button.delete-btn {
+  font-size: 14px;
+  color: #F68933;
+  font-weight: normal;
+  right: 10px;
+  top: 8px;
 }
 
-.modal-header button.delete-btn:hover{
-	opacity: 0.8;
+.modal-header button.delete-btn:hover {
+  opacity: 0.8;
 }
 
 
@@ -2286,8 +2318,8 @@ input:-internal-autofill-selected {
 
 
 
-.opacity50{
-	color:rgba(0, 0, 0, 0.5)!important;
+.opacity50 {
+  color: rgba(0, 0, 0, 0.5) !important;
 }
 
 .paddingTop85 {
@@ -2297,6 +2329,7 @@ input:-internal-autofill-selected {
 .mb-5 {
   margin-bottom: 5px !important;
 }
+
 
 .nospace {
   padding: 0px;
@@ -2329,29 +2362,62 @@ input:-internal-autofill-selected {
   padding-top: 25px;
 }
 
+.paddingTop155 {
+  padding-top: 155px;
+}
+
 .paddingBottom5 {
   padding-bottom: 5px !important;
 }
+
 .pb-10 {
   padding-bottom: 10px;
 }
 
-.pr-0{padding-right:0px;}
-.pl-0{padding-left:0px;}
-.pr-35{padding-right:35px !important;}
-.pr-38{padding-right:38px !important;}
+.pr-0 {
+  padding-right: 0px;
+}
 
-.mt-0{margin-top:0px;}
-.mr-25{margin-right:25px;}
-.ml-25{margin-left:25px;}
+.pl-0 {
+  padding-left: 0px;
+}
 
-.bgWhite{background:#fff;}
-.bdr-top{ border-top:solid 1px #ccc;}
+.pr-35 {
+  padding-right: 35px !important;
+}
 
-.btmShadow{
-	-webkit-box-shadow: 0 8px 8px -4px rgba(46, 61, 73, .2);
-    -moz-box-shadow: 0 8px 8px -4px rgba(46, 61, 73, .2);
-    box-shadow: 0 8px 8px -4px rgba(46, 61, 73, .2);
+.pr-38 {
+  padding-right: 38px !important;
+}
+
+.mt-0 {
+  margin-top: 0px;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.mr-25 {
+  margin-right: 25px;
+}
+
+.ml-25 {
+  margin-left: 25px;
+}
+
+.bgWhite {
+  background: #fff;
+}
+
+.bdr-top {
+  border-top: solid 1px #ccc;
+}
+
+.btmShadow {
+  -webkit-box-shadow: 0 8px 8px -4px rgba(46, 61, 73, .2);
+  -moz-box-shadow: 0 8px 8px -4px rgba(46, 61, 73, .2);
+  box-shadow: 0 8px 8px -4px rgba(46, 61, 73, .2);
 }
 
 
@@ -2511,13 +2577,13 @@ input:-internal-autofill-selected {
   #filterPopup {
     margin-top: 20%;
   }
-  
+
   #editTagsPopup {
     margin-top: 20%;
   }
-  
+
   #addEventModal {
-    margin-top:5%;
+    margin-top: 5%;
   }
 
   .paddingTop85 {
