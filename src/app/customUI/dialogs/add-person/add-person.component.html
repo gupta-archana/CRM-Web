@@ -60,21 +60,23 @@
             <!-- Phone -->
             <div class="form-group">
               <label for="phone">Phone</label>
-              <input type="text" class="form-control" id="phone" formControlName="phone" (focusout)="validateContactNumber('phone', addPersonEntityInfo.get('phone').value)">
+              <input type="text" class="form-control" id="phone" formControlName="phone"
+                (focusout)="validateContactNumber('phone', addPersonEntityInfo.get('phone').value)">
               <!-- Error View -->
               <div id="errorDiv" *ngIf="!addPersonEntityInfo.get('phone').valid && createClicked">
                 Invalid Phone Number.
-              </div>              
+              </div>
             </div>
 
             <!-- Mobile -->
             <div class="form-group">
               <label for="Mobile">Mobile</label>
-              <input type="text" class="form-control" id="mobile" formControlName="mobile" (focusout)="validateContactNumber('mobile', addPersonEntityInfo.get('mobile').value)">
+              <input type="text" class="form-control" id="mobile" formControlName="mobile"
+                (focusout)="validateContactNumber('mobile', addPersonEntityInfo.get('mobile').value)">
               <!-- Error View -->
               <div id="errorDiv" *ngIf="!addPersonEntityInfo.get('mobile').valid && createClicked">
                 Invalid Mobile Number.
-              </div>              
+              </div>
             </div>
 
             <!-- Email -->
@@ -154,27 +156,6 @@
 
           </mat-expansion-panel>
         </mat-accordion>
-
-        <mat-accordion>
-          <mat-expansion-panel [expanded]="notesPanelOpenState">
-
-            <mat-expansion-panel-header (click)="clickNotesPanel()">
-              <mat-panel-title class="matExpansionPanelTitle">
-                Notes
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-
-            <!-- Phone -->
-            <div class="form-group">
-              <div class="form-group">
-                <textarea type="text" class="form-control" id="name" formControlName="notes"
-                  placeholder="Write your note here..." rows="5" cols="50" style="resize:none;"></textarea>
-              </div>
-            </div>
-
-          </mat-expansion-panel>
-        </mat-accordion>
-
 
         <mat-accordion>
           <mat-expansion-panel [expanded]="othersPanelOpenState">

@@ -22,7 +22,6 @@ export class AddPersonComponent extends BaseClass implements OnInit, ApiResponse
   createClicked: boolean;
   dispName: Array<any> = [];
   othersPanelOpenState: boolean = false;
-  notesPanelOpenState: boolean = false;
   addressPanelOpenState: boolean = false;
   contactsPanelOpenState: boolean = false;
   npnPanelOpenState: boolean = false;
@@ -78,17 +77,12 @@ export class AddPersonComponent extends BaseClass implements OnInit, ApiResponse
     this.createClicked = false;
     this.addressPanelOpenState = false;
     this.contactsPanelOpenState = false;
-    this.notesPanelOpenState = false;
     this.othersPanelOpenState = false;
     this.npnPanelOpenState = false;
   }
 
   clickOthersPanel() {
     this.othersPanelOpenState = !this.othersPanelOpenState;
-  }
-
-  clickNotesPanel() {
-    this.notesPanelOpenState = !this.notesPanelOpenState;
   }
 
   clickContactsPanel() {
@@ -110,7 +104,7 @@ export class AddPersonComponent extends BaseClass implements OnInit, ApiResponse
       this.addPersonEntityInfo.get(formControlName).setValue(status.formattedContactString);
     }
     else {
-      this.addPersonEntityInfo.get(formControlName).setErrors({ incorrect: true });     
+      this.addPersonEntityInfo.get(formControlName).setErrors({ incorrect: true });
     }
   }
 }

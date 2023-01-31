@@ -24,7 +24,6 @@ export class AgentsProfileComponent extends BaseClass implements OnInit, OnDestr
         getData(this);
         refreshContent(this);
         tabSelectedIndexSubscription(this);
-
     }
 
     checkEntityFavorite(item: EntityModel) {
@@ -58,7 +57,7 @@ export class AgentsProfileComponent extends BaseClass implements OnInit, OnDestr
 }
 function refreshContent(context: AgentsProfileComponent) {
     context.pageRefreshSubscription = context.dataService.pageRefreshObservable.subscribe(called => {
-    // if (called)
+        // if (called)
         getData(context);
     });
 }
@@ -66,18 +65,20 @@ function refreshContent(context: AgentsProfileComponent) {
 function getData(context: AgentsProfileComponent) {
     if (context.selectedIndex === 0) {
         context.recentProfileArray = JSON.parse(context.myLocalStorage.getValue(context.constants.ENTITY_ARRAY));
-        context.recentProfileArray = context.recentProfileArray.filter(t => t.type === 'A');
-        setHeaderContent(context);
+        if (context.recentProfileArray) {
+            context.recentProfileArray = context.recentProfileArray.filter(t => t.type === 'A');
+            setHeaderContent(context);
+        }
     }
 }
 function tabSelectedIndexSubscription(context: AgentsProfileComponent) {
     context.tabIndexSubscription = context.dataService.tabSelectedObservable.subscribe((index: number) => {
         context.selectedIndex = index;
         if (index === 0) {
-            if (context.recentProfileArray.length <= 0) {
-                getData(context);
-            } else {
+            if (context.recentProfileArray && context.recentProfileArray.length >= 1) {
                 setHeaderContent(context);
+            } else {
+                getData(context);
             }
         }
     });

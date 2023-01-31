@@ -111,6 +111,7 @@ function getData(context: PersonAgentsComponent) {
         context.personAgentsModels = dataArray;
         context.pageNum = Number(sessionStorage.getItem(context.constants.PERSON_AGENTS_PAGE_NUMBER));
         context.totalRows = sessionStorage.getItem(context.constants.PERSON_AGENTS_TOTAL_ROWS);
+        checkAndSetUi(context);
         updateRatioUI(context);
     } else {
         makeServerRequest(context);

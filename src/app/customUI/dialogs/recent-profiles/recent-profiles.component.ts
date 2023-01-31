@@ -21,7 +21,7 @@ export class RecentProfilesComponent
     recentProfileSubscription: Subscription = null;
 
     @ViewChild("closeRecentProfileModal", { static: true })
-        closeRecentProfileModal: ElementRef;
+    closeRecentProfileModal: ElementRef;
     mdlSampleIsOpen: any;
     constructor(private injector: Injector) {
         super(injector);
@@ -30,13 +30,11 @@ export class RecentProfilesComponent
     ngOnInit() {
         const self = this;
         this.recentProfileSubscription =
-      this.dataService.recentProfileObservable.subscribe((data) => {
-          this.recentProfileArray = JSON.parse(
-              this.myLocalStorage.getValue(this.constants.ENTITY_ARRAY)
-          );
-          this.openModal(true);
-          this.cdr.markForCheck();
-      });
+            this.dataService.recentProfileObservable.subscribe((data) => {
+                this.recentProfileArray = JSON.parse(this.myLocalStorage.getValue(this.constants.ENTITY_ARRAY));
+                this.openModal(true);
+                this.cdr.markForCheck();
+            });
     }
     onProfileClick(item) {
         this.closeRecentProfileModal.nativeElement.click();
@@ -51,10 +49,7 @@ export class RecentProfilesComponent
     }
 
     ngOnDestroy(): void {
-        if (
-            this.recentProfileSubscription &&
-      !this.recentProfileSubscription.closed
-        ) {
+        if (this.recentProfileSubscription && !this.recentProfileSubscription.closed) {
             this.recentProfileSubscription.unsubscribe();
         }
     }
