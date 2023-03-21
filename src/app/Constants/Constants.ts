@@ -163,7 +163,7 @@ export class Constants {
     ANNIVERSARY = "Anniversary";
     FAVOURITE = "Favourite";
     FOLLOWING = "Following";
-    PERSONS = "Persons";
+    PERSONS = "People";
     SEARCH = "Search";
     RECENT_PROFILE = "Recent Profiles";
     SETTINGS = "Settings";

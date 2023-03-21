@@ -105,6 +105,15 @@ export class PersonsComponent extends BaseClass implements OnInit, ApiResponseCa
     return this.commonFunctions.getAddress(item);
   }
 
+  getAgentName(item: EntityModel){   
+    if(!item.agentNameList) return '';
+    if(item.agentNameList.split(',').length > 1){
+        return item.agentNameList.split(',')[0] + '...';
+      }
+      else
+        return item.agentNameList.split(',')[0];
+  }
+
   checkEntityFavorite(item: EntityModel) {
     return !this.commonFunctions.checkFavorite(item.entityId);
   }

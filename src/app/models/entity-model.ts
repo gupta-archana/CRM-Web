@@ -22,4 +22,6 @@ export class EntityModel {
     nprPercentYTD: string;
     agentImg: string;
     email: string;
+    agentNameList: string;
+    noOfPeople: number;
 }

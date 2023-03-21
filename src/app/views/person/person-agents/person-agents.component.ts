@@ -52,6 +52,28 @@ export class PersonAgentsComponent extends BaseClass implements OnInit, OnDestro
         this.renderUI();
     }
 
+    getAddress(item: PersonAgentsModel){
+        let address = "";
+
+        if(item.city){
+            address = item.city + ", ";
+        }
+
+        if(item.state){
+            address = address ? address + item.state + ", " : item.state + ", "; 
+        }
+
+        // address = item.type == 'A' ? item.city + ", " + item.state : item.city + ", " + item.state + ", " + item.zip;
+        address = address.trim();
+        if (address.startsWith(",")) {
+            address = address.substring(1);
+        }
+        if (address.endsWith(",")) {
+            address = address.substr(0, address.length - 1);
+        }
+        return address;            
+        
+    }
     onLoadMoreClick() {
         makeServerRequest(this);
     }

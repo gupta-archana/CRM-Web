@@ -15,4 +15,6 @@ export class AssociatesModel {
     rowNum: string;
     stat: string;
     jobTitle: any;
+    agentNameList: string;
+    noOfPeople: number;
 }

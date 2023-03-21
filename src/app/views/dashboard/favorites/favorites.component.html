@@ -3,22 +3,62 @@
     <ul>
       <li *ngFor="let item of favorites;let i = index;">
         <div class="col-xs-12 col-md-6 cell-bg" *ngIf="item.favorite=='yes'">
-          <div class="agent-detail">
-            <div class="dp">
-              <img
-                src="{{item.type=='A'?'../../../../images/baseline-business-24px.svg':'../../../../images/ic_note_profile.svg'}}"
-                alt="" />
-              <div class="dpProfile_wp proActiBg">{{getTypeAnnotation(item)}}</div>
-            </div>
-
-            <h4 class="topAgentsName"><a (click)="onItemClick(item)">{{item.name}}</a><span (click)="onItemClick(item)">
-                ({{item.entityId}})</span>
-              <div class="clearfix paddingTop10"></div>
-              <span>{{getAddress(item)}}</span>
-            </h4>
-            <a class="favouritIconPosition"><img src="../../../../images/favourite-icon.svg" alt=""
-                (click)="onStarClick(item,i)"></a>
-
+          <div [ngSwitch]="item.type">
+            <ng-template ngSwitchCase="A">
+              <div class="agent-detail">
+                <div class="dp">
+                  <img
+                    src="{{item.type=='A'?'../../../../images/baseline-business-24px.svg':'../../../../images/ic_note_profile.svg'}}"
+                    alt="" />
+                  <div class="dpProfile_wp proActiBg">{{getTypeAnnotation(item)}}</div>
+                </div>
+    
+                <h4 class="topAgentsName"><a (click)="onItemClick(item)">{{item.name}}</a><span (click)="onItemClick(item)">
+                    ({{getAddress(item)}})</span>
+                  <div class="clearfix paddingTop10"></div>
+                  <span> People - {{item.noOfPeople}}</span>
+                </h4>
+                <a class="favouritIconPosition"><img src="../../../../images/favourite-icon.svg" alt=""
+                    (click)="onStarClick(item,i)"></a>
+              </div>
+            </ng-template>
+            <ng-template ngSwitchCase="P">
+              <div class="agent-detail">
+                <div class="dp">
+                  <img
+                    src="{{item.type=='A'?'../../../../images/baseline-business-24px.svg':'../../../../images/ic_note_profile.svg'}}"
+                    alt="" />
+                  <div class="dpProfile_wp proActiBg">{{getTypeAnnotation(item)}}</div>
+                </div>
+    
+                <h4 class="topAgentsName"><a (click)="onItemClick(item)">{{item.name}}</a><span (click)="onItemClick(item)">
+                    ({{getAddress(item)}})</span>
+                  <div class="clearfix paddingTop10"></div>
+                  <span>{{getAgentName(item)}}</span>
+                </h4>
+                <a class="favouritIconPosition"><img src="../../../../images/favourite-icon.svg" alt=""
+                    (click)="onStarClick(item,i)"></a>
+              </div>              
+            </ng-template>
+            <ng-template ngSwitchDefaultCase>
+              <div class="agent-detail">
+                <div class="dp">
+                  <img
+                    src="{{item.type=='A'?'../../../../images/baseline-business-24px.svg':'../../../../images/ic_note_profile.svg'}}"
+                    alt="" />
+                  <div class="dpProfile_wp proActiBg">{{getTypeAnnotation(item)}}</div>
+                </div>
+    
+                <h4 class="topAgentsName"><a (click)="onItemClick(item)">{{item.name}}</a><span (click)="onItemClick(item)">
+                    ({{item.entityId}})</span>
+                  <div class="clearfix paddingTop10"></div>
+                  <span>{{getAddress(item)}}</span>
+                </h4>
+                <a class="favouritIconPosition"><img src="../../../../images/favourite-icon.svg" alt=""
+                    (click)="onStarClick(item,i)"></a>
+    
+              </div>
+            </ng-template>
           </div>
         </div>
       </li>

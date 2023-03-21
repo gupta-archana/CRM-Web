@@ -58,6 +58,15 @@ export class FavoritesComponent extends BaseClass implements OnInit, ApiResponse
         return this.commonFunctions.getAddress(item);
     }
 
+    getAgentName(item: EntityModel){
+        if(!item.agentNameList) return '';
+        if(item.agentNameList.split(',').length > 1){
+            return item.agentNameList.split(',')[0] + '...';
+          }
+          else
+            return item.agentNameList.split(',')[0];        
+    }
+
     onStarClick(item: EntityModel, index: number) {
         const self = this;
         this.removeFavSubscription = this.commonApis.setFavorite(item, this.apiHandler, this.cdr).asObservable().subscribe(data => {

@@ -155,7 +155,13 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Aft
         this.updateUI();
     }
 
-
+    getAgentName(item: EntityModel){    
+        if(item.agentNameList.split(',').length > 1){
+          return item.agentNameList.split(',')[0] + '...';
+        }
+        else
+          return item.agentNameList.split(',')[0];
+    }
 
     getAddress(item: EntityModel) {
         return this.commonFunctions.getAddress(item);

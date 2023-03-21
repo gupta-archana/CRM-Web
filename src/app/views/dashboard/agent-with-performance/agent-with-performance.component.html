@@ -10,10 +10,9 @@
                 <div class="dpProfile_wp proActiBg">A</div>
               </div>
               <h4 class="topAgentsName"><a class="building-icon padding-left-twenty-five"
-                  (click)="onAgentClick(item)">{{item.name}}</a><span (click)="onAgentClick(item)"
-                  class="paddingLeft25">({{item.entityId}})</span>
+                  (click)="onAgentClick(item)">{{item.name}}</a><span (click)="onAgentClick(item)"> ({{getAddress(item)}})</span>
                 <div class="clearfix paddingTop10"></div>
-                <span class="location-icon padding-left-twenty-five">{{getAddress(item)}}</span>
+                <span> People - {{item.noOfPeople}}</span>
               </h4>
               <a class="favouritIconPosition"><img
                   src="{{checkEntityFavorite(item)?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}"

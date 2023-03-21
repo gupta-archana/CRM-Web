@@ -33,6 +33,15 @@ export class PersonsProfileComponent extends BaseClass implements OnInit, OnDest
         return this.commonFunctions.getAddress(item);
     }
 
+    getAgentName(item: EntityModel){
+        if(!item.agentNameList) return '';
+        if(item.agentNameList.split(',').length > 1){
+            return item.agentNameList.split(',')[0] + '...';
+          }
+          else
+            return item.agentNameList.split(',')[0];
+    }
+
     onItemClick(item: EntityModel) {
         sessionStorage.setItem(this.constants.ENTITY_INFO, JSON.stringify(item));
         this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_PERSON_DETAIL);

@@ -81,19 +81,34 @@ export class AgentAssociatesComponent extends BaseClass implements OnInit, OnDes
 
 
     getAddress(item: AssociatesModel) {
-        this.personAddress = '';
-        
-        if (item.city) {
-            this.personAddress = item.city  + " ,   ";
-        }
-        if (item.state) {
-            this.personAddress = this.personAddress + item.state + " ,   ";
-        }
-        if (item.zip) {
-            this.personAddress = this.personAddress + item.zip;
+        let address = "";
+
+        if(item.city){
+            address = item.city + ", ";
         }
 
-        return this.personAddress;
+        if(item.state){
+            address = address ? address + item.state + ", " : item.state; 
+        }
+
+        // address = item.type == 'A' ? item.city + ", " + item.state : item.city + ", " + item.state + ", " + item.zip;
+        address = address.trim();
+        if (address.startsWith(",")) {
+            address = address.substring(1);
+        }
+        if (address.endsWith(",")) {
+            address = address.substr(0, address.length - 1);
+        }
+        return address; 
+    }
+
+    getAgentName(item: AssociatesModel){
+        if(!item.agentNameList) return '';
+        if(item.agentNameList.split(',').length > 1){
+            return item.agentNameList.split(',')[0] + '...';
+          }
+          else
+            return item.agentNameList.split(',')[0];
     }
 
     onPersonClick(item: AssociatesModel) {
@@ -146,11 +161,12 @@ function makeServerRequest(context: AgentAssociatesComponent) {
 }
 
 function checkMoreDataAvailable(context: AgentAssociatesComponent) {
-    if (!context.associatesModels || context.associatesModels.length === context.totalRows) {
+
+    if ((!context.associatesModels && context.associatesModels.length === 0) || context.associatesModels.length >= context.totalRows) {
         context.moreDataAvailable = false;
     } else {
         context.moreDataAvailable = true;
-    }
+    }    
 }
 
 function updateRatioUI(context: AgentAssociatesComponent) {

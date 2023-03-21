@@ -9,9 +9,12 @@
           <button type="submit" class="btn btn-default search-btn" id="searchButton"></button>
         </div>
       </form>
-      <div class="text-center" style="padding-right: 15px;padding-top: 45px;line-height: 18px;" data-toggle="modal"
+      <div class="col-xs-3 text-center" style="padding-right: 15px;padding-top: 45px;line-height: 18px;" >
+        <div data-toggle="modal"
         data-target="#addPersonModal"><img src="images/add-icon.svg" alt=""><br><span class="edit-detail"><a
             class="font-orange fontBold">New Person</a></span></div>
+      </div>
+
     </div>
     <div class="bottom-bord"></div>
     <div class="clearfix paddingTop15"></div>
@@ -35,9 +38,9 @@
                 </div>
 
                 <h4 class="topAgentsName"><a (click)="onItemClick(item)">{{item.name}}</a>
-                  <span (click)="onItemClick(item)"> ({{item.entityId}})</span>
+                  <span (click)="onItemClick(item)"> ({{getAddress(item)}})</span>
                   <div class="clearfix paddingTop10"></div>
-                  <span>{{getAddress(item)}}</span>
+                  <span>{{getAgentName(item)}}</span>
                 </h4>
                 <a class="favouritIconPosition"><img
                     src="{{checkEntityFavorite(item)?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}"

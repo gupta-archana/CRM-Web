@@ -328,8 +328,21 @@ export class CommonFunctionsService {
     }
 
     getAddress(item: EntityModel) {
+
         let address = "";
-        address = item.city + ", " + item.state + ", " + item.zip;
+
+        if(item.city){
+            address = item.city + ", ";
+        }
+
+        if(item.state){
+            address = address ? address + item.state + ", " : item.state + ", "; 
+        }
+
+        if(item.zip && (item.type !== 'A' && item.type !== 'P')){
+            address = address ? address + item.zip : item.zip;
+        }
+    // address = item.type == 'A' ? item.city + ", " + item.state : item.city + ", " + item.state + ", " + item.zip;
         address = address.trim();
         if (address.startsWith(",")) {
             address = address.substring(1);
@@ -337,7 +350,7 @@ export class CommonFunctionsService {
         if (address.endsWith(",")) {
             address = address.substr(0, address.length - 1);
         }
-        return address;
+        return address;        
     }
 
     showLoadedItemTagOnHeader(
