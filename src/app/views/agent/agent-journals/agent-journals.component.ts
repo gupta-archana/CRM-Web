@@ -37,6 +37,7 @@ export class AgentJournalsComponent extends BaseClass implements OnInit {
                 this.agentJournalsModel.push(element);
             }
         });
+        this.agentJournalsModel.sort((a, b) => new Date(b.Timestamp).getTime() - new Date(a.Timestamp).getTime());
         this.renderUI();
     }
 
