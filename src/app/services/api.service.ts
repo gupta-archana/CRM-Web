@@ -149,4 +149,68 @@ export class ApiService {
             }
         );
     }
+
+    hitGetDoApi(url, apiResponseCallback: ApiResponseCallback) {
+        if (navigator.onLine) {
+            const self = this;
+            // var headers = new Headers();
+            // headers.set('Accept', 'text/json');
+            // headers.set('Content-Type', 'text/json');
+            // const options = new RequestOptions({
+            //   headers: headers,
+            //   responseType: ResponseContentType.Text,
+            // });
+            const headers = new HttpHeaders({ "Content-Type": "application/text"});
+            
+            const options = {
+                headers: headers            
+            };
+
+            // const options = {
+            //   headers: new HttpHeaders({
+            //     "Content-Type": "application/text",
+            //     responseType: "text",
+            //   }),
+            // };
+
+            this.http
+                .get(url, {headers: headers, observe: 'response'})
+            // .pipe(
+            //   timeout(180000),
+            //   catchError((e) => {
+            //     this.commonFunctions.showErrorSnackbar("Server Timeout");
+            //     this.dataService.onHideShowLoader(false);
+            //     return of(null);
+            //   })
+            // )
+                .subscribe(
+                    (result) => {
+                        if (result) {
+                            try {                                
+                                apiResponseCallback.onSuccess(result);
+                            } catch (error) {
+                                apiResponseCallback.onError(101, error.toString());
+                            }
+                        } else {
+                            apiResponseCallback.onError(500, "Error");
+                        }
+                    },
+                    function (error: Response) {
+                        if (error.status === 0) {
+                            apiResponseCallback.onError(
+                                error.status,
+                                self.constants.ERROR_NO_INTERNET_CONNECTON
+                            );
+                        } else {
+                            apiResponseCallback.onError(error.status, error.statusText);
+                        }
+                    }
+                );
+        } else {
+            apiResponseCallback.onError(
+                this.constants.NO_INTERNET_CONNECTION_ERROR_CODE,
+                this.constants.ERROR_NO_INTERNET_CONNECTON
+            );
+        }
+    }    
 }

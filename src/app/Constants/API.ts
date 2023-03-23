@@ -157,6 +157,10 @@ export class API {
         return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=ContactGet&entity=" + entityType + "&entityID=" + entityId;
     }
 
+    getAgentJournalsUrl(app_mode: string, entityID: string){
+        return this.getDoWebURL(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=AgentJournalsGet&AgentID=" + entityID;
+    }
+
     getAgentPerformanceUrl(app_mode: string, pageNum: number) {
         return this.getBaseUrl(app_mode) + "I1=" + this.email + "&I2=" + this.encryptedPassword + "&I3=agentsPerformanceGet&PageNum=" + pageNum + "&NoOfRows=" + this.numberOfRows;
     }
@@ -302,5 +306,11 @@ export class API {
         this.checkAndGetCredentials();
         this.getNumberOfRows();
         return this.API_BASE_URL + app_mode + "/act?I0=JSON&I4=CRM&";
+    }
+
+    private getDoWebURL(app_mode: string){
+        this.checkAndGetCredentials();
+        this.getNumberOfRows();
+        return this.API_BASE_URL + app_mode + "/doweb?I0=JSON&I4=CRM&";
     }
 }

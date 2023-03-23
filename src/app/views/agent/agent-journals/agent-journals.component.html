@@ -1,0 +1,49 @@
+<div class="container-fluid nospace">
+    <div class="container nav-bg">
+        <div class="row">
+            <div class="col-xs-2 toppad">
+                <img src="images/back-btn.svg" alt="" (click)="goBack()" />
+            </div>
+            <div class="col-xs-7 text-center">
+                <h1 class="t-agent">Journals</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-12 noPadding">
+                <app-entity-name-header
+                    [entityModel]="entityModel"
+                ></app-entity-name-header>
+            </div>
+        </div>
+    </div>
+
+    <div class="container app-bg5" *ngIf="hideNoDataDiv">
+        <div class="row">
+            <ul>
+                <li *ngFor="let item of agentJournalsModel">
+                    <div class="col-xz-12 col-md-6 cell-bg">
+                        <div class="agent-detail ag-perform">
+                            <h4>{{ item.FullName}}<span class="textRight">{{item.Timestamp | date : "MM-dd-yyyy"}}</span>
+                            </h4>
+                            <div class="clearfix"></div>
+                            <div class="paddingTop5"></div>
+                            <span>{{ item.OfficeName }}</span>
+                            <div class="paddingTop10"></div>
+                            <span [innerHTML]="getContent(item)"></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="serach-emp" *ngIf="!hideNoDataDiv">
+        <h2><em>It is Empty Here!</em></h2>
+        <p>
+            <em>{{ errorMsg }}</em>
+        </p>
+    </div>
+</div>

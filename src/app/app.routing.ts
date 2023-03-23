@@ -11,6 +11,7 @@ import { AgentObjectiveComponent } from "./views/agent/agent-objective/agent-obj
 import { DrawerItemsRearrangeComponent } from "./views/rearrange-items-layouts/drawer-items-rearrange/drawer-items-rearrange.component";
 import { AgentDetailItemRearrangeComponent } from "./views/rearrange-items-layouts/agent-detail-item-rearrange/agent-detail-item-rearrange.component";
 import { AgentNotesComponent } from "./views/agent/agent-notes/agent-notes.component";
+import { AgentJournalsComponent } from "./views/agent/agent-journals/agent-journals.component";
 import { AgentThirteenMonthActivityComponent } from "./views/agent/agent-thirteen-month-activity/agent-thirteen-month-activity.component";
 import { AgentAssociatesComponent } from "./views/agent/agent-associates/agent-associates.component";
 import { PersonAgentsComponent } from "./views/person/person-agents/person-agents.component";
@@ -65,6 +66,7 @@ const appRoutesArray: Routes = [
     { path: paths.PATH_CLAIMS, component: ClaimsComponent },
     { path: paths.PATH_CLAIM_DETAIL, component: ClaimsDetailComponent },
     { path: paths.PATH_AGENT_AUDITS, component: AuditsComponent },
+    { path: paths.PATH_AGENT_JOURNALS, component: AgentJournalsComponent},
     {
         path: paths.PATH_AGENT_AUDIT_QUEUED,
         component: AuditDetailQueuedComponent,

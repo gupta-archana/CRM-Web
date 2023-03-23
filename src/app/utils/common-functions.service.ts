@@ -233,6 +233,9 @@ export class CommonFunctionsService {
                 );
                 navigatingUrl = paths.PATH_PERSON_AGENTS;
                 break;
+            case this.constants.AGENT_DETAIL_JOURNAL:
+                navigatingUrl = paths.PATH_AGENT_JOURNALS;
+                break;
 
             default:
                 break;

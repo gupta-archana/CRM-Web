@@ -52,6 +52,7 @@ import { AutocompleteLibModule } from "angular-ng-autocomplete";
         ChartsModule,
         AutocompleteLibModule,
         MatExpansionModule
+             
     ],
     declarations: [
         UpdateAgentProfileComponent,
@@ -82,7 +83,7 @@ import { AutocompleteLibModule } from "angular-ng-autocomplete";
         MomentModule,
         ChartsModule,
         EntityNameHeaderComponent,
-        AutocompleteLibModule,
+        AutocompleteLibModule
         
     ],
     providers: [

@@ -381,6 +381,14 @@ export class ApiHandlerService implements ApiResponseCallback {
         this.apiService.hitGetApi(url, this);
     }
 
+    /* getAgentJournals **/
+    public getAgentJournals(entityID: string, apiResponseCallback: ApiResponseCallback){
+        this.dataService.onHideShowLoader(true);
+        this.apiResponseCallback = apiResponseCallback;
+        const url = this.api.getAgentJournalsUrl(this.getAppMode(),entityID);
+        this.apiService.hitGetDoApi(url, this);
+    }
+
     /**
    * getUserConfig
    */
@@ -594,21 +602,38 @@ export class ApiHandlerService implements ApiResponseCallback {
     }
     onSuccess(response: any) {
         this.dataService.onHideShowLoader(false);
-        const responseBody = response.Envelope.Body;
-        if (responseBody.hasOwnProperty('Fault')) {
-            const errorCode = responseBody.Fault.code;
-            const msg = responseBody.Fault.message;
-            this.apiResponseCallback.onError(errorCode, msg);
+        if(response.hasOwnProperty('Envelope')){
+            const responseBody =  response.Envelope.Body;
+            if (responseBody.hasOwnProperty('Fault')) {
+                const errorCode = responseBody.Fault.code;
+                const msg = responseBody.Fault.message;
+                this.apiResponseCallback.onError(errorCode, msg);
+            } else {
+                const data: Object[] = responseBody.dataset;
+                if (data && data.length > 0 && data.find(e => e["name"] === "sentiment")) {
+                    this.apiResponseCallback.onSuccess(data);
+                } else if (data && data.length > 0) {
+                    this.apiResponseCallback.onSuccess(data[0]);
+                } else {
+                    this.onError(200, this.constants.ERROR_NO_DATA_AVAILABLE);
+                }
+            }
         } else {
-            const data: Object[] = responseBody.dataset;
-            if (data && data.length > 0 && data.find(e => e["name"] === "sentiment")) {
-                this.apiResponseCallback.onSuccess(data);
-            } else if (data && data.length > 0) {
-                this.apiResponseCallback.onSuccess(data[0]);
+            const responseHeaders = response.headers;
+            const data: Object[] = response.body;
+            if(responseHeaders.get('X-Compass') == 'F'){
+                const errorCode = responseHeaders.get('x-CompassCode');
+                const errorMsg = responseHeaders.get('x-CompassMsg');
+                this.apiResponseCallback.onError(errorCode, errorMsg);
+            } else if (responseHeaders.get('X-Compass') == 'S'){
+                if(data && data.length > 0){
+                    this.apiResponseCallback.onSuccess(data);
+                }
             } else {
                 this.onError(200, this.constants.ERROR_NO_DATA_AVAILABLE);
-            }
+            }          
         }
+
     }
     onError(errorCode: number, errorMsg: string) {
         this.dataService.onHideShowLoader(false);

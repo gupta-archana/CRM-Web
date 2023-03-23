@@ -29,6 +29,7 @@ export const PATH_OPEN_ALERT_DETAIL = "openAlertDetail";
 export const PATH_CLAIMS = "claims";
 export const PATH_CLAIM_DETAIL = "claimDetail";
 export const PATH_AGENT_AUDITS = "agentAudits";
+export const PATH_AGENT_JOURNALS = "agentJournals";
 export const PATH_AGENT_AUDIT_QUEUED = "agentAuditQueued";
 export const PATH_AGENT_AUDIT_COMPLETED = "agentAuditCompleted";
 export const PATH_AGENT_COMPLIANCE = "agentCompliance";

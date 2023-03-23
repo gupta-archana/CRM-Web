@@ -678,6 +678,11 @@ ul.agent-details li.associates a {
   padding-left: 35px;
 }
 
+ul.agent-details li.journals a {
+  background: url(../images/note.svg) no-repeat left;
+  padding-left: 35px; 
+}
+
 .building-icon {
   background: url(../images/building-icon.svg) left no-repeat;
 }

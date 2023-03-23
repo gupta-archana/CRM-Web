@@ -83,6 +83,7 @@ import { DatePipe } from "@angular/common";
 import { ViewSentimentHistoryComponent } from "./customUI/dialogs/view-sentiment-history/view-sentiment-history.component";
 import { ChartsModule } from "ng2-charts";
 import { ChartModule } from "primeng/chart";
+import { AgentJournalsComponent } from './views/agent/agent-journals/agent-journals.component';
 
 // export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
 //   align: "left",
@@ -143,7 +144,8 @@ import { ChartModule } from "primeng/chart";
         EditAndDeleteTagPopupComponent,
         ObjectiveSentimentComponent,
         AddObjectivePopupComponent,
-        ViewSentimentHistoryComponent     
+        ViewSentimentHistoryComponent,
+        AgentJournalsComponent             
     ],
     imports: [
         BrowserModule,
@@ -185,6 +187,7 @@ import { ChartModule } from "primeng/chart";
         FormsModule,
         ChartsModule,
         ChartModule,
+
     ],
     entryComponents: [
     // See https://material.angular.io/components/dialog/overview#configuring-dialog-content-via-code-entrycomponents-code- for more info

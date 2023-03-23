@@ -121,6 +121,10 @@ export class Constants {
     AGENT_COMPLIANCE_ARRAY = "agent_compliance_array";
     AGENT_COMPLIANCE_CURRENT_ENTITY_ID = "agent_compliance_current_entity_id";
 
+    //agent journal session constants
+    AGENT_JOURNAL_ARRAY = "agent_journal_array";
+    AGENT_JOURNAL_ENTITY_ID = "agent_journal_entity_id";
+    
     // Error Messages
     ERROR_NO_INTERNET_CONNECTON = "Kindly check your internet connection";
     ERROR_INVALID_EMAIL = "Please enter a valid email address";
@@ -183,6 +187,7 @@ export class Constants {
     AGENT_DETAIL_SOCIAL = "Social";
     AGENT_DETAIL_EMAILS = "E-mail";
     AGENT_DETAIL_AUDITS = "Audits";
+    AGENT_DETAIL_JOURNAL = "Journals";
     NO_DATA_AVAILABLE = "No Data Available";
     // agent pages
     AGENT_DETAIL = "Agent Details";
