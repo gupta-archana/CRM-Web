@@ -31,9 +31,9 @@ export class AgentJournalsComponent extends BaseClass implements OnInit {
         this.commonFunctions.backPress();
     }
 
-    onSuccess(response: any) {
-        response.forEach((element: AgentJournalsModel) => {
-            if (element.Id) {
+    onSuccess(response: any) {        
+        response.agentJournals.forEach((element: AgentJournalsModel) => {
+            if (element.Id && element.Latest === true) {
                 this.agentJournalsModel.push(element);
             }
         });

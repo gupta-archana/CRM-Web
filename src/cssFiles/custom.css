@@ -57,6 +57,21 @@ ul {
   margin: 0;
 }
 
+.markdown ul {
+    list-style-type: disc;
+    padding: 0;
+    margin-left: 20px;
+}
+
+.markdown ol {
+    padding: 0;
+    margin-left: 20px;
+}
+
+.markdown a {
+    color: -webkit-link;
+}
+
 .padding-left-twenty-five {
   padding-left: 25px !important;
   background-size: 18px;

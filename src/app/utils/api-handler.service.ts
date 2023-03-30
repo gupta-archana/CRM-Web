@@ -619,14 +619,14 @@ export class ApiHandlerService implements ApiResponseCallback {
                 }
             }
         } else {
-            const responseHeaders = response.headers;
-            const data: Object[] = response.body;
+            const responseHeaders = response.headers;            
             if(responseHeaders.get('X-Compass') == 'F'){
                 const errorCode = responseHeaders.get('x-CompassCode');
                 const errorMsg = responseHeaders.get('x-CompassMsg');
                 this.apiResponseCallback.onError(errorCode, errorMsg);
             } else if (responseHeaders.get('X-Compass') == 'S'){
-                if(data && data.length > 0){
+                const data: Object = response.body.data;
+                if(data){
                     this.apiResponseCallback.onSuccess(data);
                 }
             } else {
