@@ -25,7 +25,8 @@ export class Constants {
     DONT_SHOW_DOWNLOAD_PDF_DIALOG = "dont_show_download_pdf_dialog";
     DONT_SHOW_ASSIGNED_TO_DIALOG = "dont_show_assigned_to_dialog";
     DONT_SHOW_DOWNLOAD_AUDIT_PDF_DIALOG = "dont_show_download_audit_pdf_dialog";
-
+    SERVER_URL = "server_url";
+    
     // User config constants
     GOOGLE_NEWS_FEED = "Google";
     DEFAULT_NUMBER_FO_ROWS = 10;

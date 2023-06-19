@@ -13,8 +13,8 @@ const json2xml = require('json2xml');
 })
 export class ApiHandlerService implements ApiResponseCallback {
 
-    private APP_MODE: Array<string> = ["alfa", 'dvlp', "beta", "live"];
-    private ENABLE_APP_MODE = 2;
+    private APP_MODE: Array<string> = ["alfa", 'dvlp', "beta", "live",""];
+    private ENABLE_APP_MODE = 4;
     private apiResponseCallback: ApiResponseCallback = null;
     private noteURL: string;
     private getnoteURL: string;
@@ -22,6 +22,16 @@ export class ApiHandlerService implements ApiResponseCallback {
     constructor(private apiService: ApiService, public dataService: DataServiceService, private constants: Constants,
         private api: API) {
 
+    }
+
+    public validateURL(url:string, apiResponseCallback: ApiResponseCallback){
+        this.apiResponseCallback = apiResponseCallback;
+        this.apiService.hitGetDoApi(url, this);
+    }
+
+    public modifyAgentJournal(requestJson:any, apiResponseCallback: ApiResponseCallback){
+        const url = this.api.getModifyAgentJournalUrl(this.APP_MODE[this.ENABLE_APP_MODE])
+        this.apiService.hitPostApi(url, requestJson, handleAddAndUpdateDoWebApiResponse(this, apiResponseCallback));
     }
 
     public getSideNavJson(apiResponseCallback: ApiResponseCallback) {
@@ -628,10 +638,12 @@ export class ApiHandlerService implements ApiResponseCallback {
                 const data: Object = response.body.data;
                 if(data){
                     this.apiResponseCallback.onSuccess(data);
-                }
-            } else {
-                this.onError(200, this.constants.ERROR_NO_DATA_AVAILABLE);
-            }          
+                } else {
+                    this.onError(200, this.constants.ERROR_NO_DATA_AVAILABLE);
+                }            
+            } else if(response.status = 200) {
+                this.apiResponseCallback.onSuccess(response);
+            }        
         }
 
     }
@@ -642,7 +654,7 @@ export class ApiHandlerService implements ApiResponseCallback {
 }
 function handleAddAndUpdateApiResponse(context: ApiHandlerService, apiResponseCallback: ApiResponseCallback) {
     return {
-        onSuccess(response: any) {
+        onSuccess(response: any) {            
             context.dataService.onHideShowLoader(false);
             const responseBody = response.body ? response.body.Envelope.Body : response.Envelope.Body;
             if (responseBody.hasOwnProperty('Fault')) {
@@ -662,5 +674,27 @@ function handleAddAndUpdateApiResponse(context: ApiHandlerService, apiResponseCa
     };
 }
 
+function handleAddAndUpdateDoWebApiResponse(context: ApiHandlerService, apiResponseCallback: ApiResponseCallback){
+    return {
+        onSuccess(response: any){
+            context.dataService.onHideShowLoader(false);
+            const responseHeaders = response.headers;            
+            if(responseHeaders.get('X-Compass') == 'F'){
+                const errorCode = responseHeaders.get('x-CompassCode');
+                const errorMsg = responseHeaders.get('x-CompassMsg');
+                apiResponseCallback.onError(errorCode, errorMsg);
+            } else if(responseHeaders.get('X-Compass') == 'S'){
+                const successCode = responseHeaders.get('x-CompassCode');
+                const successMsg = responseHeaders.get('x-CompassMsg');
+                apiResponseCallback.onSuccess(successMsg);
+            }
+        },
+        onError(errorCode: number, errorMsg: string) {
+            context.dataService.onHideShowLoader(false);
+            apiResponseCallback.onError(errorCode, errorMsg);
+        }
+    }
+
+}
 
 

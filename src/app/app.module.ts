@@ -84,6 +84,8 @@ import { ViewSentimentHistoryComponent } from "./customUI/dialogs/view-sentiment
 import { ChartsModule } from "ng2-charts";
 import { ChartModule } from "primeng/chart";
 import { AgentJournalsComponent } from './views/agent/agent-journals/agent-journals.component';
+import { ConfigServerComponent } from './views/config-server/config-server.component';
+import { EditAgentJournalsComponent } from './customUI/dialogs/edit-agent-journals/edit-agent-journals.component';
 
 // export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
 //   align: "left",
@@ -145,7 +147,9 @@ import { AgentJournalsComponent } from './views/agent/agent-journals/agent-journ
         ObjectiveSentimentComponent,
         AddObjectivePopupComponent,
         ViewSentimentHistoryComponent,
-        AgentJournalsComponent             
+        AgentJournalsComponent,
+        ConfigServerComponent,
+        EditAgentJournalsComponent             
     ],
     imports: [
         BrowserModule,

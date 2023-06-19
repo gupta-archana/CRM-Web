@@ -38,6 +38,9 @@ export class DataServiceService {
     private editAgentProfileDialogSubject = new Subject<any>();
     editAgentProfileDialogObservable = this.editAgentProfileDialogSubject.asObservable();
 
+    private editAgentJournalsDialogSubject = new Subject<any>();
+    editAgentJournalsDialogObservable = this.editAgentJournalsDialogSubject.asObservable();
+    
     private sideNavItemsSubject = new BehaviorSubject<any>("");
     sideNavItemsSubjectObservable = this.sideNavItemsSubject.asObservable();
 
@@ -121,6 +124,10 @@ export class DataServiceService {
 
     onAgentProfileEditClick(openDialog: any) {
         this.editAgentProfileDialogSubject.next(openDialog);
+    }
+
+    onAgentJournalsEditClick(openDialog: any){
+        this.editAgentJournalsDialogSubject.next(openDialog);
     }
 
     sendSideNavData(data: Array<any>) {

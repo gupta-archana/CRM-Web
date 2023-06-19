@@ -1,6 +1,7 @@
 'use strict';
 export const PATH_LOGIN = "login";
 export const PATH_FORGOT_PASSWORD = "forgot-password";
+export const PATH_CONFIG_SERVER = "config-server";
 
 // side nav items
 export const PATH_TOP_AGENTS = "topAgents";

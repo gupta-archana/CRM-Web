@@ -74,6 +74,10 @@ export class LoginComponent implements OnInit, ApiResponseCallback, CanComponent
     }
 
     onSubmit() {
+        if(!this.myLocalStorage.getValue(this.constants.SERVER_URL)) { 
+            this.commonFunctions.showErrorSnackbar('Please Configure the Server URL')
+            return;
+        }        
         this.commonFunctions.printLog(this.loginForm.value.email, true);
         if (!this.loginForm.valid) {
             this.commonFunctions.showErrorSnackbar("Invalid Credentials");

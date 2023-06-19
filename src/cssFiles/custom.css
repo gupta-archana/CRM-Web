@@ -69,7 +69,9 @@ ul {
 }
 
 .markdown a {
-    color: -webkit-link;
+  color: -webkit-link;
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .padding-left-twenty-five {

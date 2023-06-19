@@ -7,11 +7,12 @@
   transition: all 0.3s ease 0s;
 }
 
-body {
+body, html {
   font-family: 'Open Sans', sans-serif;
   padding: 0;
   margin: 0;
   background: #f2f2f2;
+  height: 100%;
 }
 
 .ng-select.ng-select-disabled>.ng-select-container {
@@ -23,6 +24,7 @@ body {
 .bg {
   padding: 0;
   margin: 0;
+  height: 100%;
   background: #045395 url(../images/bg-art.png) no-repeat left bottom;
 }
 
@@ -130,6 +132,17 @@ a {
 
 .box2 input[type="email"] {
   background: #fff url(../images/mail.svg) no-repeat left;
+  background-position: 6px;
+  padding: 20px 0px 20px 35px;
+  width: 310px;
+  height: 50px;
+  margin-bottom: 32px;
+  font-size: 12px;
+  color: #000;
+}
+
+.box2 input[type="url"] {
+  background: #fff url(../images/language.svg) no-repeat left;
   background-position: 6px;
   padding: 20px 0px 20px 35px;
   width: 310px;
@@ -2505,6 +2518,10 @@ input:-internal-autofill-selected {
     width: 100%;
   }
 
+  .box2 input[type="url"] {
+    width: 100%;
+  }  
+
   .input-group {
     width: 100%;
   }
@@ -2570,6 +2587,10 @@ input:-internal-autofill-selected {
   .box2 input[type="email"] {
     width: 100%;
   }
+
+  .box2 input[type="url"] {
+    width: 100%;
+  }  
 
   .input-group {
     width: 100%;

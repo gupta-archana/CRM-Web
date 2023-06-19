@@ -7,6 +7,9 @@
             <div class="col-xs-7 text-center">
                 <h1 class="t-agent">Journals</h1>
             </div>
+            <div *ngIf="showEditAgentJournalsbutton" class="col-xs-3 text-center tpad pl-0" data-toggle="modal" data-target="#myModal" (click)="onEditAgentJournalsClick()">
+                <img src="../../../../images/edit.svg" alt=""><br><span class="edit-detail"><a>Edit My Journals</a></span>
+            </div>
         </div>
     </div>
 
@@ -47,3 +50,4 @@
         </p>
     </div>
 </div>
+<app-edit-agent-journals></app-edit-agent-journals>

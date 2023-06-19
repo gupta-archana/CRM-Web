@@ -1,0 +1,25 @@
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" #closeEditAgentJournalsModel>&times;</button>
+                <h4 class="modal-title">Edit Agent Journals</h4>
+            </div>
+            <form role="form">
+                <div class="modal-body">
+                  <div class="clear paddingTop5"></div> 
+                  <div class="form-group">
+                    <textarea type="text" class="form-control" id="name" placeholder="Write your note here..."
+                      [(ngModel)]="agentJournalsContent" (change)="getFormattedContent()" [ngModelOptions]="{standalone: true}" rows="30" cols="50" style="resize:none;"
+                      required></textarea>
+                  </div>    
+                </div>
+                <div class="modal-footer">
+                  <a data-dismiss="modal" alt="Cancel"><span>Cancel</span></a>
+                  <a alt="Save Changes" (click)="onSaveClick()">Save Changes</a>
+                </div>
+              </form>
+        </div>
+    </div>
+</div>

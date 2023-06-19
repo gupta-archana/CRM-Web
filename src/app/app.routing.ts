@@ -30,6 +30,7 @@ import { AgentTagsComponent } from "./views/agent/agent-tags/agent-tags.componen
 import { SelectedTagAgentsComponent } from "./views/agent/selected-tag-agents/selected-tag-agents.component";
 import { EventsComponent } from "./views/agent/events/events.component";
 import { ViewSentimentHistoryComponent } from "./customUI/dialogs/view-sentiment-history/view-sentiment-history.component";
+import { ConfigServerComponent } from "./views/config-server/config-server.component";
 
 const appRoutesArray: Routes = [
     { path: "", component: AppComponent },
@@ -40,6 +41,7 @@ const appRoutesArray: Routes = [
     },
     { path: "", redirectTo: "", pathMatch: "full" },
     { path: paths.PATH_FORGOT_PASSWORD, component: ForgotPasswordComponent },
+    { path: paths.PATH_CONFIG_SERVER, component: ConfigServerComponent},
     { path: paths.PATH_AGENT_CONTACT_DETAIL, component: ContactDetailComponent },
     { path: paths.PATH_AGENT_OBJECTIVE, component: AgentObjectiveComponent },
     {
