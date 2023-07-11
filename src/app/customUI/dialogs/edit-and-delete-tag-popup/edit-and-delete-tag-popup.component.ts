@@ -35,12 +35,15 @@ export class EditAndDeleteTagPopupComponent  implements OnInit {
         this.dialogRef.close(false);
     }
     onSaveChangesClick() {
-        console.log(this.tagModel);
+        if(this.tagModel.name.startsWith('#')){
+            this.tagModel.name = this.tagModel.name.slice(1);
+        }        
+        console.log(this.tagModel);        
         this.apiHandler.updateTag(createRequestJson(this), this);
     }
 
     deleteTag() {
-        this.apiHandler.deleteTag(this.tagModel.tagID, this);
+        this.apiHandler.deleteTag(createRequestJson(this), this);
     }
 }
 function createRequestJson(context: EditAndDeleteTagPopupComponent) {

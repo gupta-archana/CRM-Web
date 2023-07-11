@@ -71,6 +71,7 @@ import { EditObjectiveComponent } from "./customUI/dialogs/edit-objective/edit-o
 import { EventsComponent } from "./views/agent/events/events.component";
 import { AddNewEventComponent } from "./customUI/dialogs/add-new-event/add-new-event.component";
 import { EditAndDeleteTagPopupComponent } from "./customUI/dialogs/edit-and-delete-tag-popup/edit-and-delete-tag-popup.component";
+import { AddTagPopupComponent } from "./customUI/dialogs/add-tag/add-tag.component";
 import { TooltipModule } from "ng2-tooltip-directive";
 import { NgSelectModule } from "@ng-select/ng-select";
 import { ObjectiveSentimentComponent } from "./customUI/dialogs/objective-sentiment/objective-sentiment.component";
@@ -143,6 +144,7 @@ import { EditAgentJournalsComponent } from './customUI/dialogs/edit-agent-journa
         EditObjectiveComponent,
         EventsComponent,
         AddNewEventComponent,
+        AddTagPopupComponent,
         EditAndDeleteTagPopupComponent,
         ObjectiveSentimentComponent,
         AddObjectivePopupComponent,

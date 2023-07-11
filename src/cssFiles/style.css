@@ -512,7 +512,7 @@ ul.slide-menu li.agent-plan a {
   padding-left: 45px;
 }
 
-ul.slide-menu li.person a {
+ul.slide-menu li.people a {
   background: url(../images/top-agents.svg) no-repeat left;
   padding-left: 45px;
 }
@@ -2342,6 +2342,10 @@ input:-internal-autofill-selected {
 
 .paddingTop85 {
   padding-top: 115px;
+}
+
+.paddingBottom65{
+  padding-bottom: 65px;
 }
 
 .mb-5 {

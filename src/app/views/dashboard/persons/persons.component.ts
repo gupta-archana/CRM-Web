@@ -1,11 +1,14 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, Injector, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+
 import { BaseClass } from 'src/app/global/base-class';
 import { ApiResponseCallback } from 'src/app/Interfaces/ApiResponseCallback';
 import { EntityContactModel } from 'src/app/models/entity-contact-model';
 import { EntityModel } from 'src/app/models/entity-model';
-
+import { MatDialog } from '@angular/material/dialog';
+import { AddTagPopupComponent } from 'src/app/customUI/dialogs/add-tag/add-tag.component';
+import { TagModel } from 'src/app/models/tag-model';
 
 @Component({
   selector: 'app-persons',
@@ -22,9 +25,17 @@ export class PersonsComponent extends BaseClass implements OnInit, ApiResponseCa
   hideNoDataDiv: boolean = false;
   entityContactModel: EntityContactModel = new EntityContactModel();
   public TOTAL_MATCH = "TotalMatch";
-  pageRefreshSubscription: Subscription = null;
+  pageRefreshSubscription: Subscription = null;  
+  
+  selectedItemTagModel: Array<TagModel> = [];
+  
+  isEnableToSelectItem:boolean = false;
 
-  constructor(injector: Injector) {
+  isEnableToSelectAction:boolean = true;
+  isEnableToTagAction:boolean = false;  
+  isEnableToUnTagAction:boolean = false;
+
+  constructor(injector: Injector, private dialog: MatDialog) {
     super(injector);
   }
 
@@ -33,7 +44,7 @@ export class PersonsComponent extends BaseClass implements OnInit, ApiResponseCa
       if (called) {
         refreshData(this);
       }
-    })
+    });    
     this.addValidation();
     getData(this);
   }
@@ -53,11 +64,33 @@ export class PersonsComponent extends BaseClass implements OnInit, ApiResponseCa
     }
   }
 
+  openAddTagDialog() {
+    this.dialog.open(AddTagPopupComponent,{
+      data: {
+        message: JSON.stringify(this.selectedItemTagModel)
+      }
+    }).afterClosed().subscribe(response => {      
+        if (response) {
+            this.OnTagDialogClose(response);
+        }
+    });
+  }
+
+  OnTagDialogClose(message: string) {
+    this.selectedItemTagModel = [];
+    this.isEnableToSelectAction = true;
+    this.isEnableToSelectItem = false;
+    this.isEnableToTagAction = false;
+    this.isEnableToUnTagAction = false;
+    this.cdr.markForCheck();
+  }
+
+  
   private addValidation() {
     this.searchForm = new FormGroup({
       searchPerson: new FormControl(this.searchString, Validators.compose([Validators.required, Validators.minLength(3)])),
     });
-  }
+  } 
 
   onAddNewClick() {
     this.dataService.onAgentProfileEditClick(this.entityContactModel);
@@ -126,7 +159,7 @@ export class PersonsComponent extends BaseClass implements OnInit, ApiResponseCa
 
   onLoadMoreClick() {
     this.hitApi();
-  }
+  }  
 
   public hitApi() {
     if (!this.searchForm.valid) {
@@ -151,9 +184,67 @@ export class PersonsComponent extends BaseClass implements OnInit, ApiResponseCa
     }
   }
 
-  onAddPersonClick(){
-
+  onSelectActionClick(){
+    this.isEnableToSelectItem = !this.isEnableToSelectItem;    
+    this.isEnableToSelectAction = !this.isEnableToSelectAction; 
+    this.isEnableToTagAction = false;
+    this.isEnableToUnTagAction = false;
+    this.selectedItemTagModel = [];
   }
+
+  onCheckMarkClick(item){    
+    /*
+    let itemIndex = this.selectedItems.findIndex((element)=> element.entityId == item.entityId);
+    if(itemIndex === -1){
+      this.selectedItems.push(item);
+    } else if(itemIndex >= 0){
+      this.selectedItems.splice(itemIndex, 1);      
+    }     */
+
+    let itemIndex = this.selectedItemTagModel.findIndex((tagModel)=> tagModel.entityID == item.entityId && tagModel.entity == item.type);    
+    itemIndex === -1 ? this.selectedItemTagModel.push(this.convertToTagModel(item)) : itemIndex >= 0 ? this.selectedItemTagModel.splice(itemIndex, 1):'';    
+    this.isEnableToTagAction = this.selectedItemTagModel.length > 0;  
+    this.isEnableToUnTagAction = (this.selectedItemTagModel.length > 0 && this.searchForm.value.searchPerson.startsWith("#"));  
+  }
+
+  isCheckMarkedItem(item){    
+    let itemIndex = this.selectedItemTagModel.findIndex((tagModel)=> tagModel.entityID == item.entityId && tagModel.entity == item.type);
+    return itemIndex >= 0 ? true : false;
+  }
+
+  onSelectAllClick(item){    
+    this.selectedItemTagModel = [];
+    this.isEnableToSelectAction = false;
+    this.searchedPersons.forEach((item)=> {
+      this.selectedItemTagModel.push(this.convertToTagModel(item))
+    });   
+    this.isEnableToSelectItem = true;
+    this.isEnableToTagAction = true;
+    this.isEnableToUnTagAction = (this.selectedItemTagModel.length > 0 && this.searchForm.value.searchPerson.startsWith("#"));     
+  }
+
+  onDeselectAllClick(){
+    this.selectedItemTagModel = [];
+    this.isEnableToTagAction = false;
+    this.isEnableToUnTagAction = false;
+  }
+
+  onUnTagActionClick(){
+    deleteTags(this);
+  }  
+
+  convertToTagModel(item){
+    const tagModel: TagModel = {
+      tagID: '',
+      entity: item.type,
+      entityID: item.entityId,
+      UID: this.myLocalStorage.getValue(this.constants.EMAIL),
+      name: this.searchForm.value.searchPerson.startsWith('#') ? this.searchForm.value.searchPerson.slice(1) :  this.searchForm.value.searchPerson,
+      private: "no"
+    }
+  
+    return tagModel;
+  }  
 
 }
 
@@ -185,8 +276,9 @@ function checkAndSetUi(context: PersonsComponent) {
   if (!context.searchedPersons || context.searchedPersons.length === 0) {
     resetData(context);
   } else {
-    context.hideNoDataDiv = true;
+    context.hideNoDataDiv = true;    
   }
+ 
   context.cdr.markForCheck();
 }
 
@@ -196,6 +288,12 @@ function resetData(context: PersonsComponent) {
   context.totalRows = 0;
   context.hideNoDataDiv = false;
   context.moreDataAvailable = false;
+
+  context.selectedItemTagModel = [];
+  context.isEnableToSelectAction = true;
+  context.isEnableToSelectItem = false;
+  context.isEnableToTagAction = false;
+  context.isEnableToUnTagAction = false;  
 }
 
 function checkMoreDataAvailable(context: PersonsComponent) {
@@ -232,4 +330,29 @@ function makeServerRequest(context: PersonsComponent) {
   searchString = searchString.replace(/\s/g, '%2c');
 
   context.apiHandler.GetSearchedData(type, selectedState, searchString, context.pageNumber, context);
+}
+
+function deleteTags(context: PersonsComponent){
+  
+  context.apiHandler.deleteTag(createJsonForDeleteTag(context), {
+    onSuccess(response) {
+      context.commonFunctions.showSnackbar("Tag" + " " + context.constants.DELETE_SUCCESS);     
+      refreshData(context);                       
+    }, onError(errorCode, errorMsg) {
+      context.commonFunctions.showErrorSnackbar(errorMsg);
+    }
+  });   
+}
+
+function createJsonForDeleteTag(context:PersonsComponent){
+  let finalJson = [];
+  context.selectedItemTagModel.forEach((item) => {
+    const itemJson = {
+            "tag": "",
+            "attr": item
+    }        
+    finalJson.push(itemJson);
+  });
+
+  return finalJson;
 }

@@ -5,6 +5,9 @@ import { BaseClass } from '../../../global/base-class';
 import { ApiResponseCallback } from '../../../Interfaces/ApiResponseCallback';
 import { EntityModel } from '../../../models/entity-model';
 import { SearchFilterModel } from '../../../models/search-filter-model';
+import { MatDialog } from '@angular/material/dialog';
+import { TagModel } from 'src/app/models/tag-model';
+import { AddTagPopupComponent } from 'src/app/customUI/dialogs/add-tag/add-tag.component';
 
 
 @Component({
@@ -34,7 +37,15 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Aft
     filters: SearchFilterModel = null;
     shareDataSubscription: Subscription;
 
-    constructor(injector: Injector) {
+    selectedItemTagModel: Array<TagModel> = [];
+  
+    isEnableToSelectItem:boolean = false;
+  
+    isEnableToSelectAction:boolean = true;
+    isEnableToTagAction:boolean = false;  
+    isEnableToUnTagAction:boolean = false;
+
+    constructor(injector: Injector,  private dialog: MatDialog) {
         super(injector);
     }
 
@@ -186,7 +197,7 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Aft
             setData(this);
             this.commonFunctions.navigateWithoutReplaceUrl(navigatingPath);
         } else {
-            this.commonFunctions.showErrorSnackbar("We are working on person ui");
+            this.commonFunctions.showErrorSnackbar("We are working on employee UI");
         }
     }
 
@@ -222,6 +233,91 @@ export class SearchComponent extends BaseClass implements OnInit, OnDestroy, Aft
             this.shareDataSubscription.unsubscribe();
         }
     }
+  
+    onSelectActionClick(){
+      this.isEnableToSelectItem = !this.isEnableToSelectItem;    
+      this.isEnableToSelectAction = !this.isEnableToSelectAction; 
+      this.isEnableToTagAction = false;
+      this.isEnableToUnTagAction = false;
+      this.selectedItemTagModel = [];      
+    }
+  
+    onCheckMarkClick(item){    
+      /*
+      let itemIndex = this.selectedItems.findIndex((element)=> element.entityId == item.entityId);
+      if(itemIndex === -1){
+        this.selectedItems.push(item);
+      } else if(itemIndex >= 0){
+        this.selectedItems.splice(itemIndex, 1);      
+      }     */
+  
+      let itemIndex = this.selectedItemTagModel.findIndex((tagModel)=> tagModel.entityID == item.entityId && tagModel.entity == item.type);    
+      itemIndex === -1 ? this.selectedItemTagModel.push(this.convertToTagModel(item)) : itemIndex >= 0 ? this.selectedItemTagModel.splice(itemIndex, 1):'';    
+      this.isEnableToTagAction = this.selectedItemTagModel.length > 0;  
+      this.isEnableToUnTagAction = (this.selectedItemTagModel.length > 0 && this.searchForm.value.search.startsWith("#"));  
+    }
+  
+    isCheckMarkedItem(item){    
+      let itemIndex = this.selectedItemTagModel.findIndex((tagModel)=> tagModel.entityID == item.entityId && tagModel.entity == item.type);
+      return itemIndex >= 0 ? true : false;
+    }
+  
+    onSelectAllClick(item){    
+      this.selectedItemTagModel = [];
+      this.isEnableToSelectAction = false;
+      this.searchedUsers.forEach((item)=> {
+        if(item.type !== 'E'){
+            this.selectedItemTagModel.push(this.convertToTagModel(item));
+        }        
+      });   
+      this.isEnableToSelectItem = true;
+      this.isEnableToTagAction = true;
+      this.isEnableToUnTagAction = (this.selectedItemTagModel.length > 0 && this.searchForm.value.search.startsWith("#"));     
+    }
+  
+    onDeselectAllClick(){
+      this.selectedItemTagModel = [];
+      this.isEnableToTagAction = false;
+      this.isEnableToUnTagAction = false;
+    }
+  
+    onUnTagActionClick(){
+      deleteTags(this);
+    }    
+
+    convertToTagModel(item){
+        const tagModel: TagModel = {
+          tagID: '',
+          entity: item.type,
+          entityID: item.entityId,
+          UID: this.myLocalStorage.getValue(this.constants.EMAIL),
+          name: this.searchForm.value.search.startsWith('#') ? this.searchForm.value.search.slice(1) :  this.searchForm.value.search,
+          private: "no"
+        }
+      
+        return tagModel;
+    }
+
+    openAddTagDialog() {
+        this.dialog.open(AddTagPopupComponent,{
+          data: {
+            message: JSON.stringify(this.selectedItemTagModel)
+          }
+        }).afterClosed().subscribe(response => {      
+            if (response) {
+                this.OnTagDialogClose(response);
+            }
+        });
+      }
+    
+      OnTagDialogClose(message: string) {
+        this.selectedItemTagModel = [];
+        this.isEnableToSelectAction = true;
+        this.isEnableToSelectItem = false;
+        this.isEnableToTagAction = false;
+        this.isEnableToUnTagAction = false;
+        this.cdr.markForCheck();
+    }    
 }
 
 
@@ -315,3 +411,37 @@ function getTagFromEntityTagList(context: SearchComponent) {
         }
     });
 }
+
+function deleteTags(context: SearchComponent){  
+    context.apiHandler.deleteTag(createJsonForDeleteTag(context), {
+      onSuccess(response) {
+        context.commonFunctions.showSnackbar("Tag" + " " + context.constants.DELETE_SUCCESS);     
+        refreshData(context);                       
+      }, onError(errorCode, errorMsg) {
+        context.commonFunctions.showErrorSnackbar(errorMsg);
+      }
+    });   
+}
+
+
+function createJsonForDeleteTag(context:SearchComponent){
+    let finalJson = [];
+    context.selectedItemTagModel.forEach((item) => {
+      const itemJson = {
+              "tag": "",
+              "attr": item
+      }        
+      finalJson.push(itemJson);
+    });
+  
+    return finalJson;
+}
+
+
+
+function refreshData(context: SearchComponent) {
+    resetData(context);
+    if (context.searchForm.valid) {
+      context.makeServerRequest();
+    }
+  }

@@ -106,7 +106,8 @@ function resetData(context: AgentJournalsComponent) {
 }
 
 function checkAndSetEditAgentJournals(context: AgentJournalsComponent){
-    context.email = context.myLocalStorage.getValue(context.constants.EMAIL);
+    //context.email = context.myLocalStorage.getValue(context.constants.EMAIL);
+    context.email = '';
     
     context.agentJournalsModel.forEach((agentJournalsModel:AgentJournalsModel) => {
         if(agentJournalsModel.Id && agentJournalsModel.Latest === true && agentJournalsModel.Username.toLowerCase() == context.email.toLowerCase()){

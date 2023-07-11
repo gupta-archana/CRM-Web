@@ -61,7 +61,6 @@ export class ConfigServerComponent extends BaseClass implements OnInit, ApiRespo
                 this.fullURL = this.configServerForm.value.url;
             }
 
-            
             try{
                 let url = new URL(this.fullURL);
                 const appName = url.hostname.toLowerCase().includes('alfa') ? "alfa" : url.hostname.toLowerCase().includes('beta') ? "beta" : "live";
@@ -115,7 +114,8 @@ export class ConfigServerComponent extends BaseClass implements OnInit, ApiRespo
 
     private setValueInFormControls(){
         if(this.myLocalStorage.getValue(this.constants.SERVER_URL)) {
-            this.configServerForm.get('url').setValue(this.myLocalStorage.getValue(this.constants.SERVER_URL));           
+            const url = new URL(this.myLocalStorage.getValue(this.constants.SERVER_URL));
+            this.configServerForm.get('url').setValue(url.hostname);           
         }
     }
 }

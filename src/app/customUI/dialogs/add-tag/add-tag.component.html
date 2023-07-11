@@ -1,0 +1,37 @@
+<mat-dialog-content class="mat-dialog-content">
+
+    <!-- Modal beginning here -->
+  
+    <!-- Modal content-->
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" (click)="onCancelClick()">&times;</button>
+      <h4 class="modal-title">Add Tag</h4>
+    </div>
+    <form role="form">
+      <div class="modal-body">
+        <div class="clear paddingTop10"></div>
+  
+  
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <input type="text" class="form-control opacity50" name="tagName" [(ngModel)]="tagName" placeholder="">
+            </div>
+  
+          </div>
+        </div>
+  
+  
+        <div class="clear paddingTop25"></div>
+      </div>
+      <div class="modal-footer">
+        <a data-dismiss="modal" alt="Cancel" (click)="onCancelClick()"><span>Cancel</span></a>
+        <a data-dismiss="modal" alt="Save Changes" (click)="onSaveChangesClick()"
+          [ngClass]="{'saveButton' : (tagName == undefined || tagName == '' || tagName == '#')}">Save
+          Changes</a>
+      </div>
+    </form>
+  
+    <!-- Modal End here -->
+  
+  </mat-dialog-content>

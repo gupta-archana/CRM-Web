@@ -13,8 +13,8 @@ const json2xml = require('json2xml');
 })
 export class ApiHandlerService implements ApiResponseCallback {
 
-    private APP_MODE: Array<string> = ["alfa", 'dvlp', "beta", "live",""];
-    private ENABLE_APP_MODE = 4;
+    private APP_MODE: Array<string> = ["","alfa", 'dvlp', "beta", "live"];
+    private ENABLE_APP_MODE = 3;
     private apiResponseCallback: ApiResponseCallback = null;
     private noteURL: string;
     private getnoteURL: string;
@@ -476,7 +476,8 @@ export class ApiHandlerService implements ApiResponseCallback {
     public createTags(requestJson: any, apiResponseCallback: ApiResponseCallback) {
         this.dataService.onHideShowLoader(true);
         const url = this.api.getCreateNewTagUrl(this.APP_MODE[this.ENABLE_APP_MODE]);
-        this.apiService.hitPostApi(url, this.getRequestXml(requestJson), handleAddAndUpdateApiResponse(this, apiResponseCallback));
+        const dataRequestXML = '<data>' + this.getRequestXml(requestJson) + '</data>';
+        this.apiService.hitPostApi(url, dataRequestXML, handleAddAndUpdateApiResponse(this, apiResponseCallback));
     }
 
     /**
@@ -565,11 +566,13 @@ export class ApiHandlerService implements ApiResponseCallback {
     /**
  * deleteNote
  */
-    public deleteTag(tagId: string, apiResponseCallback: ApiResponseCallback) {
+    public deleteTag(requestJson:any, apiResponseCallback: ApiResponseCallback) {
         this.dataService.onHideShowLoader(true);
-        const url = this.api.getDeleteTagUrl(this.getAppMode(), tagId);
+        const url = this.api.getDeleteTagUrl(this.getAppMode());
+        const dataRequestXML = '<data>' + this.getRequestXml(requestJson) + '</data>';
         // let url="https://compass.alliantnational.com:8118/do/action/WService=dev/get?I1=agupta@alliantnational.com&I2=a2NqPWphbmlVWndkZnhESnhzd0AxMjM0YURRZlBHQmpFcGN1bnh1Q01TSEhCeVJBemRqQW1pQlpPUmp1UG10cnJhbUJtZURyQWhOUmdBS2hkQmloanRzTG51cElJYVlyeFhnTmhXUm5zdG1NdGdJYXBZSmNucnR6VHhGSUl3QUtBREls&I3=EntityUntag&tagID="+tagId
-        this.apiService.hitGetApi(url, handleAddAndUpdateApiResponse(this, apiResponseCallback));
+        //this.apiService.hitGetApi(url, handleAddAndUpdateApiResponse(this, apiResponseCallback));
+        this.apiService.hitPostApi(url, dataRequestXML, handleAddAndUpdateApiResponse(this, apiResponseCallback));
     }
 
     public getViewSentimentHistory(stat: string, entity: any, entityId: any, objectiveFor: string, pageNum: any, apiResponseCallback: ApiResponseCallback) {
@@ -607,7 +610,7 @@ export class ApiHandlerService implements ApiResponseCallback {
     private getAppMode(): string {
         return this.APP_MODE[this.ENABLE_APP_MODE];
     }
-    private getRequestXml(requestJson: any): any {
+    public getRequestXml(requestJson: any): any {
         return json2xml(requestJson, { attributes_key: 'attr' });
     }
     onSuccess(response: any) {

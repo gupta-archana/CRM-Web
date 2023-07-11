@@ -1,4 +1,5 @@
-[{
+[
+  {
     "class": "agent-contact",
     "title": "Contact",
     "img": "../../../../images/contact.svg"
@@ -28,7 +29,6 @@
     "title": "13 Month Activity",
     "img": "../../../../images/ic_calender.svg"
   },
-
   {
     "class": "compliance",
     "title": "Compliance",
@@ -44,10 +44,14 @@
     "title": "Claims",
     "img": "../../../../images/ic_claims.svg"
   },
-
   {
     "class": "audits",
     "title": "Audits",
     "img": "../../../../images/ic_audits.svg"
+  },
+  {
+    "class": "journals",
+    "title": "Journals",
+    "img": "../../../../images/note.svg"
   }
 ]

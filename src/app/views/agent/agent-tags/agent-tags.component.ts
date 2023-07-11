@@ -50,7 +50,8 @@ export class AgentTagsComponent extends BaseClass implements OnInit, ApiResponse
 
     onTagClick(item: TagModel) {
     // let params = { selectedTag: item.name }
-        this.dataService.onDataShare(item.name);
+        const tagName = item.name.startsWith('#') ? (item.name) : ('#' + item.name)
+        this.dataService.onDataShare(tagName);
         this.commonFunctions.navigateWithReplaceUrl(this.paths.PATH_SEARCH);
     }
     createTagClick() {
@@ -114,15 +115,16 @@ function updateRatioUI(context: AgentTagsComponent) {
 }
 
 function createJsonForAddTag(context: AgentTagsComponent) {
-    if (!context.newTag.startsWith('#')) {
-        context.newTag = "#" + context.newTag;
+    if (context.newTag.startsWith('#')) {
+        context.newTag = context.newTag.slice(1);        
     }
     const requestBody = {
         tagID: "",
         entity: context.entityModel.type,
         entityID: context.entityModel.entityId,
         uid: context.myLocalStorage.getValue(context.constants.EMAIL),
-        name: context.newTag, private: "no"
+        name: context.newTag, 
+        private: "no"
     };
     const finalJson = {
         "tag": "",

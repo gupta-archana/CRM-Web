@@ -17,7 +17,7 @@
 </div>
 
 <div class="container-fluid nospace">
-  <div class="container app-bg2 paddingTop85">
+  <div class="container app-bg2 paddingTop85 paddingBottom65">
     <div class="serach-result">
 
       <div class="row" *ngIf="hideNoDataDiv">
@@ -26,7 +26,7 @@
             
             <div [ngSwitch]="item.type">
               <ng-template ngSwitchCase="A">
-                <div class="col-xs-12 col-md-6 cell-bg">
+                <div class="col-xs-12 col-md-6 cell-bg" [ngClass]="{'checkMarkedItem-bg' : isCheckMarkedItem(item)}">
                   <div class="agent-detail ag-perform">
                     <div class="dp" (click)="onItemClick(item)">
                       <img
@@ -40,16 +40,24 @@
                       <div class="clearfix paddingTop10"></div>
                       <span>Persons - {{item.noOfPeople}}</span>
                     </h4>
-                    <a class="favouritIconPosition"><img
-                        src="{{checkEntityFavorite(item)?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}"
-                        alt="" (click)="onStarClick(item)"></a>
-    
+                    <div class="icons">
+                      <div>
+                        <a class="favouritIconPosition"><img
+                          src="{{checkEntityFavorite(item)?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}"
+                          alt="" (click)="onStarClick(item)"></a>
+                      </div>
+                      <div *ngIf="isEnableToSelectItem">
+                        <a class="checkMarkIconPosition" >
+                          <img src="{{isCheckMarkedItem(item) ? '../../../../images/check.svg' : '../../../../images/check-default.svg'}}" alt="" height="20" width="22" (click)="onCheckMarkClick(item)">
+                        </a>                        
+                      </div>
+                    </div> 
                     <div class="clearfix"></div>
                   </div>
                 </div>
               </ng-template>
               <ng-template ngSwitchCase="P">
-                <div class="col-xs-12 col-md-6 cell-bg">
+                <div class="col-xs-12 col-md-6 cell-bg" [ngClass]="{'checkMarkedItem-bg' : isCheckMarkedItem(item)}">
                   <div class="agent-detail ag-perform">
                     <div class="dp" (click)="onItemClick(item)">
                       <img
@@ -63,16 +71,24 @@
                       <div class="clearfix paddingTop10"></div>
                       <span>{{getAgentName(item)}}</span>
                     </h4>
-                    <a class="favouritIconPosition"><img
-                        src="{{checkEntityFavorite(item)?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}"
-                        alt="" (click)="onStarClick(item)"></a>
-    
+                    <div class="icons">
+                      <div>
+                        <a class="favouritIconPosition" >
+                          <img src="{{checkEntityFavorite(item)?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}" alt="" (click)="onStarClick(item)">
+                        </a> 
+                      </div>
+                      <div *ngIf="isEnableToSelectItem" >
+                        <a class="checkMarkIconPosition">
+                          <img src="{{isCheckMarkedItem(item) ? '../../../../images/check.svg' : '../../../../images/check-default.svg'}}" alt="" height="20" width="22" (click)="onCheckMarkClick(item)">
+                        </a>
+                      </div>           
+                    </div>
                     <div class="clearfix"></div>
                   </div>
                 </div>
               </ng-template>
               <ng-template ngSwitchDefault>
-                <div class="col-xs-12 col-md-6 cell-bg">
+                <div class="col-xs-12 col-md-6 cell-bg" [ngClass]="{'checkMarkedItem-bg' : isCheckMarkedItem(item)}">
                   <div class="agent-detail ag-perform">
                     <div class="dp" (click)="onItemClick(item)">
                       <img
@@ -87,10 +103,9 @@
                       <span>{{getAddress(item)}}</span>
                     </h4>
                     <a class="favouritIconPosition"><img
-                        src="{{checkEntityFavorite(item)?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}"
-                        alt="" (click)="onStarClick(item)"></a>
-    
-                    <div class="clearfix"></div>
+                      src="{{checkEntityFavorite(item)?'../../../../images/favourite-icon.svg':'../../../../images/star.svg'}}"
+                      alt="" (click)="onStarClick(item)"></a>
+                  <div class="clearfix"></div>
                   </div>
                 </div>
               </ng-template>
@@ -99,8 +114,8 @@
         </ul>
         <!-- <button (click)="topFunction()" id="myBtn" title="Go to top"><span
             class="glyphicon glyphicon-arrow-up"></span></button> -->
-        <div class="row marginBottom20" *ngIf="moreDataAvailable">
-          <div class="col-xs-12 col-md-12 loadMoreWp">
+        <div class="row marginBottom10" *ngIf="moreDataAvailable">
+          <div class="col-xs-12 col-md-12 loadMoreWp mt-20">
             <hr />
             <div class="loadMore"><a (click)="onLoadMoreClick()" alt="Load More">Load More</a></div>
           </div>
@@ -114,3 +129,62 @@
       </div>
     </div>
   </div>
+
+
+
+  <div class="container actions-box" *ngIf="hideNoDataDiv">  
+    <div class="paddingTop5"></div>
+    <div class="bottom-bord"></div>
+    <div class="paddingTop10"></div>
+    <div class="row mb-5">
+      <div class="col-xs-2 text-center" *ngIf="isEnableToSelectAction">
+        <div (click)="onSelectActionClick()">
+          <img style="padding: 3px" src="../../../../images/check.svg" alt=""><br>
+          <span class="edit-detail">
+            <a class="font-orange fontBold">Select</a>
+          </span>
+        </div>
+      </div>
+      <div class="col-xs-2 text-center" *ngIf="!isEnableToSelectAction">
+        <div (click)="onSelectActionClick()">
+          <img style="padding: 5px" src="../../../../images/close-btn.svg" alt=""><br>
+          <span class="edit-detail">
+            <a class="font-orange fontBold">Deselect</a>
+          </span>
+        </div>
+      </div>    
+      <div class="col-xs-3 text-center">
+        <div (click)="onSelectAllClick()">
+          <img src="../../../../images/double_check.svg" alt=""><br>
+          <span class="edit-detail">
+            <a class="font-orange fontBold">Select All</a>
+          </span>
+        </div>        
+      </div>
+  
+      <div class="col-xs-3 text-center">
+        <div (click)="onDeselectAllClick()">
+          <img src="../../../../images/double_check_remove.svg" alt=""><br>
+          <span class="edit-detail">
+            <a class="font-orange fontBold">Deselect All</a>
+          </span>
+        </div>
+      </div> 
+      <div class="col-xs-2 text-center">
+        <div [ngClass]="{disable: !isEnableToTagAction}" data-toggle="modal"  (click)="openAddTagDialog()">
+          <img src="{{isEnableToTagAction ? '../../../../images/tag-fill.svg' : '../../../../images/tag-grey-fill.svg'}}" alt=""><br>
+          <span class="edit-detail">
+            <a class="fontBold" [ngClass]="{'font-grey' : !isEnableToTagAction,'font-orange' : isEnableToTagAction }">Tag</a>
+          </span>
+        </div>
+      </div>
+      <div class="col-xs-2 text-center">
+        <div [ngClass]="{disable: !isEnableToUnTagAction}"  (click)="onUnTagActionClick()">
+          <img src="{{isEnableToUnTagAction ? '../../../../images/tag.svg' : '../../../../images/tag-grey.svg'}}" alt=""><br>        
+          <span class="edit-detail">
+            <a class="fontBold" [ngClass]="{'font-grey' : !isEnableToUnTagAction,'font-orange' : isEnableToUnTagAction }">Un-Tag</a>
+          </span>
+        </div>
+      </div>       
+    </div>
+  </div>     

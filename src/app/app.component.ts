@@ -33,9 +33,12 @@ export class AppComponent extends BaseClass implements OnInit, OnDestroy {
             }
         });
         this.checkAndSetUserConfig();
+
+        /*
         if (!this.myLocalStorage.getValue(this.constants.SERVER_URL)) {
             this.commonFunctions.navigateWithReplaceUrl(this.paths.PATH_CONFIG_SERVER);
-        }
+        } */
+        
         const newUrl = location.pathname.substring(1, location.pathname.length);
         if (this.myLocalStorage.getValue(this.constants.LOGGED_IN) && newUrl === "") {
             const currentPath = localStorage.getItem("selected_home_screen") ? localStorage.getItem("selected_home_screen") : this.paths.PATH_SEARCH;
