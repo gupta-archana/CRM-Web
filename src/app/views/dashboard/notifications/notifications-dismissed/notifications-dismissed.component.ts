@@ -34,7 +34,7 @@ export class NotificationsDismissedComponent extends BaseClass implements OnInit
     onAgentClick(item: NotificationsModel) {
         this.entityModel.type = this.constants.ENTITY_AGENT_PRESENTER;
         this.entityModel.entityId = item.entityID;
-        this.entityModel.name = item.name ? item.name : '';
+        this.entityModel.name = item.entityName ? item.entityName : '';
         sessionStorage.setItem(this.constants.ENTITY_INFO, JSON.stringify(this.entityModel));
         this.commonFunctions.navigateWithoutReplaceUrl(this.paths.PATH_AGENT_DETAIL);
     }

@@ -8,9 +8,9 @@
             <div class="dp" (click)="onAgentClick(item)">
               <img src="../../../../images/baseline-business-24px.svg" alt="" />
             </div>
-            <h4 (click)="onAgentClick(item)">{{item.notification}}</h4> <span style="color:#000;">NETCO. Inc</span>
+            <h4 (click)="onAgentClick(item)">{{item.notification}}</h4> <span style="color:#000;">{{item.entityName}}</span>
             <br />
-            <span class="minTxt"><time>{{item.createDate | amTimeAgo}}</time></span>
+            <span class="minTxt"><time>{{item.createDate | date : "MM/dd/yy, h:mm" }}</time></span>
             <span class="textRight dismissBtn"><a (click)="onDismissClick(i,item.sysNotificationID)"
                 alt="">DISMISS</a></span>
           </div>

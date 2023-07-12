@@ -47,6 +47,10 @@ export class NotificationControlsComponent extends BaseClass implements OnInit, 
 
     }
 
+    goBack(){
+        this.commonFunctions.backPress();
+    }
+
 }
 
 function parseNotificationControls(context: NotificationControlsComponent) {
