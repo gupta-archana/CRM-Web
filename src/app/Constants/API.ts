@@ -10,15 +10,15 @@ export class API {
     AGENT_DETAIL_MENU = "../assets/jsons/agent_detail_menu.json";
     PERSON_DETAIL_MENU = "../assets/jsons/person_detail_menu.json";
     STATES_JSON_URL = "../assets/jsons/state.json";
-    private API_BASE_URL = "https://compassbeta.alliantnational.com:8118/do/action/WService=";
-    //private API_BASE_URL = "";
+    //private API_BASE_URL = "https://compassbeta.alliantnational.com:8118/do/action/WService=";
+    private API_BASE_URL = "";
     private numberOfRows: number;
     email = "";
     encryptedPassword = "";
 
     constructor(private commonFunctions: CommonFunctionsService, private myLocalStorage: MyLocalStorageService, private constants: Constants) {
         this.getNumberOfRows();
-        //this.getServerURL();
+        this.getServerURL();
     }
 
     private getServerURL(){
@@ -314,14 +314,14 @@ export class API {
     private getBaseUrl(app_mode: string) {
         this.checkAndGetCredentials();
         this.getNumberOfRows();
-        //this.getServerURL();
+        this.getServerURL();
         return this.API_BASE_URL + app_mode + "/act?I0=JSON&I4=CRM&";
     }
 
     private getDoWebURL(app_mode: string){
         this.checkAndGetCredentials();
         this.getNumberOfRows();
-        //this.getServerURL();
+        this.getServerURL();
         return this.API_BASE_URL + app_mode + "/doweb?I0=JSON&I4=CRM&";
     }
 }
